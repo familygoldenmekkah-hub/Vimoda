@@ -1,0 +1,14 @@
+{
+  "created": 1794575151,
+  "id": "202611132105509fd44c635c4f4810",
+  "request_id": "202611132105509fd44c635c4f4810",
+  "text": "Kem, Marti, Martika, Tahan, Seven Ta",
+  "usage": {
+    "completion_tokens": 16,
+    "prompt_tokens": 121,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 137
+  }
+}

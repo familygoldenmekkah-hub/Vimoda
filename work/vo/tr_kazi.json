@@ -1,0 +1,14 @@
+{
+  "created": 1794575111,
+  "id": "202611132105111cd946e4ab864fed",
+  "request_id": "202611132105111cd946e4ab864fed",
+  "text": "Kaolo, Kamu Bansi Matematika, Tahan Sebentar Sajah.",
+  "usage": {
+    "completion_tokens": 23,
+    "prompt_tokens": 180,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 203
+  }
+}

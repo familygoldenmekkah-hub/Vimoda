@@ -1,0 +1,14 @@
+{
+  "created": 1794576775,
+  "id": "202611132132550c08e6f374414cbb",
+  "request_id": "202611132132550c08e6f374414cbb",
+  "text": "Satru, Chamba Dua, Chamba Tiga, Senpi Saritas, Paripa Hassina.",
+  "usage": {
+    "completion_tokens": 27,
+    "prompt_tokens": 182,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 209
+  }
+}

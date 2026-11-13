@@ -1,0 +1,14 @@
+{
+  "created": 1794575151,
+  "id": "20261113210551a4630e13c3f14150",
+  "request_id": "20261113210551a4630e13c3f14150",
+  "text": "Kammo, Benji Matematika, Tang Saban ta",
+  "usage": {
+    "completion_tokens": 16,
+    "prompt_tokens": 111,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "total_tokens": 127
+  }
+}
