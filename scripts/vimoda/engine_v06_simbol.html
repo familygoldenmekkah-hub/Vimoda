@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+/*__FONTS__*/
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:#000;overflow:hidden;}
+#stage{position:relative;overflow:hidden;
+  background:radial-gradient(120% 95% at 50% 8%, #101B2E 0%, #080C18 52%, #05070F 100%);
+  font-family:'Poppins','DejaVu Sans',sans-serif;color:#E7EEF8;
+  -webkit-font-smoothing:antialiased;}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);will-change:transform;}
+#blobC{background:#0EA5E9;opacity:.30;}
+#blobV{background:#8B5CF6;opacity:.26;}
+#blobA{background:#F59E0B;opacity:.22;}
+#grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(148,163,184,.05) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(148,163,184,.05) 1px,transparent 1px);
+  background-size:80px 80px;}
+#world{position:absolute;inset:0;will-change:transform;transform-origin:50% 42%;}
+#particles span{position:absolute;will-change:transform,opacity;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#7DD3FC;}
+.sweep{position:absolute;top:-12%;left:0;width:42%;height:124%;pointer-events:none;opacity:0;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.14),transparent);
+  transform:translateX(-160%);}
+#grain{position:absolute;inset:0;pointer-events:none;opacity:.04;mix-blend-mode:overlay;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="180" height="180" filter="url(%23n)" opacity="0.6"/></svg>');}
+.scene{position:absolute;inset:0;will-change:transform,opacity;}
+.card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);
+  border-radius:26px;box-shadow:0 18px 60px rgba(0,0,0,.45);}
+.chip{display:inline-block;border-radius:999px;border:1px solid rgba(34,211,238,.45);
+  background:rgba(34,211,238,.09);color:#67E8F9;font-weight:600;letter-spacing:.28em;}
+.grad{background:linear-gradient(92deg,#22D3EE 0%,#A78BFA 52%,#FBBF24 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.vig{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(92% 92% at 50% 44%, transparent 60%, rgba(0,0,0,.5) 100%);}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;}
+#fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
+.center{text-align:center;}
+.ensub{color:#7E92AF;font-weight:500;}
+.ensub-b{color:#A7B6CE;font-weight:600;}
+.enchip{color:#64748B;font-weight:600;letter-spacing:.24em;}
+.enword{color:#7488A6;font-weight:600;letter-spacing:.22em;}
+.enpan{color:#64748B;font-weight:600;letter-spacing:.20em;}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="blob" id="blobC"></div>
+  <div class="blob" id="blobV"></div>
+  <div class="blob" id="blobA"></div>
+  <div id="grid"></div>
+  <div id="world">
+    <div id="particles"></div>
+
+    <!-- S0 HOOK: satu simbol, tiga wajah -->
+    <div class="scene" id="s0">
+      <div class="mono" id="h_7" style="position:absolute;font-weight:800;color:#FBBF24;">7</div>
+      <div class="mono" id="h_q" style="position:absolute;color:#F87171;font-weight:800;opacity:0;">?</div>
+      <div id="h_cards" style="position:absolute;"></div>
+      <div class="center" id="h_l1" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Satu simbol, tiga wajah.</div>
+      <div class="center ensub" id="h_l1_e">One symbol, three faces.</div>
+      <div class="center" id="h_l2" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Simbolnya sama. Artinya juga sama?</div>
+      <div class="center ensub" id="h_l2_e">Same symbol. Same meaning?</div>
+    </div>
+
+    <!-- S1 ANGKA -->
+    <div class="scene" id="s1">
+      <div class="center" id="a_chap" style="position:absolute;left:0;right:0;"><span class="chip" id="a_chap_t">BAGIAN 1 DARI 3</span></div>
+      <div class="center enchip" id="a_chap_e">PART 1 OF 3</div>
+      <div class="center" id="a_word" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="a_word_t">ANGKA</span></div>
+      <div class="center" id="a_def" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Itu simbol buat menulis bilangan.</div>
+      <div class="center ensub" id="a_def_e">A symbol for writing numbers.</div>
+      <div id="a_digits" style="position:absolute;"></div>
+      <div class="center" id="a_dlab" style="position:absolute;color:#94A3B8;font-weight:600;">CUMA 0 SAMPAI 9</div>
+      <div class="center enpan" id="a_dlab_e">JUST 0 THROUGH 9</div>
+      <div class="center" id="a_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Cuma lambang, bukan jumlah.</div>
+      <div class="center ensub-b" id="a_take_e">Just a symbol, not an amount.</div>
+    </div>
+
+    <!-- S2 BILANGAN -->
+    <div class="scene" id="s2">
+      <div class="center" id="b_chap" style="position:absolute;left:0;right:0;"><span class="chip" id="b_chap_t">BAGIAN 2 DARI 3</span></div>
+      <div class="center enchip" id="b_chap_e">PART 2 OF 3</div>
+      <div class="center" id="b_word" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="b_word_t">BILANGAN</span></div>
+      <div class="center" id="b_def" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Itu konsep jumlah atau nilai.</div>
+      <div class="center ensub" id="b_def_e">The idea of an amount or value.</div>
+      <div class="card" id="b_card" style="position:absolute;">
+        <div id="b_dots" style="position:absolute;"></div>
+        <div class="center mono" id="b_lab" style="position:absolute;font-weight:800;color:#FBBF24;">7 APEL</div>
+        <div class="center enword" id="b_lab_e" style="position:absolute;">SEVEN APPLES</div>
+      </div>
+      <div class="center" id="b_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Benda boleh ganti, nilai tetap 7.</div>
+      <div class="center ensub-b" id="b_take_e">Items change, the value stays 7.</div>
+    </div>
+
+    <!-- S3 NOMOR -->
+    <div class="scene" id="s3">
+      <div class="center" id="c_chap" style="position:absolute;left:0;right:0;"><span class="chip" id="c_chap_t">BAGIAN 3 DARI 3</span></div>
+      <div class="center enchip" id="c_chap_e">PART 3 OF 3</div>
+      <div class="center" id="c_word" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="c_word_t">NOMOR</span></div>
+      <div class="center" id="c_def" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Itu penanda, bukan jumlah.</div>
+      <div class="center ensub" id="c_def_e">A tag, not an amount.</div>
+      <div class="card" id="c_eqbox" style="position:absolute;">
+        <div class="center mono" id="c_morph" style="font-weight:800;">PUNGGUNG 10</div>
+      </div>
+      <div class="center" id="c_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Kaos 10 isinya tetap satu orang.</div>
+      <div class="center ensub-b" id="c_take_e">Jersey 10 still holds one person.</div>
+    </div>
+
+    <!-- S4 SIMBOL SAMA, MAKNA BEDA -->
+    <div class="scene" id="s4">
+      <div class="card" id="e_big" style="position:absolute;">
+        <div class="mono" id="e_big_t" style="font-weight:800;color:#FBBF24;">7</div>
+      </div>
+      <div id="e_chips" style="position:absolute;"></div>
+      <div class="center" id="e_line" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Simbol sama, makna ikut konteks.</div>
+      <div class="center ensub-b" id="e_line_e">Same symbol, meaning follows context.</div>
+    </div>
+
+    <!-- S5 CTA -->
+    <div class="scene" id="s5">
+      <div class="center" id="f_l1" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Nah, sekarang giliranmu.</div>
+      <div class="center ensub-b" id="f_l1_e">Now it is your turn.</div>
+      <div class="center" id="f_bigq" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Punggung 7 itu jumlah, nilai, atau identitas?</div>
+      <div class="center ensub" id="f_bigq_e">Is jersey 7 a count, a value, or an identity?</div>
+      <div class="center" id="f_cta2" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Tulis alasanmu di komentar.</div>
+      <div class="center ensub" id="f_cta2_e">Drop your reason in the comments.</div>
+      <div class="card" id="f_card" style="position:absolute;">
+        <div class="center" id="f_open" style="color:#94A3B8;font-weight:600;letter-spacing:.30em;">BUKA BROWSER KAMU</div>
+        <div class="center enchip" id="f_open_e">OPEN YOUR BROWSER</div>
+        <div class="center" id="f_url" style="font-weight:800;"><span class="grad" id="f_url_t">AKIOMIDA.COM</span></div>
+        <div id="f_bar" style="height:5px;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24);width:0;"></div>
+        <div class="center" id="f_sub" style="color:#CBD5E1;font-weight:500;">Belajar matematika jadi makin seru.</div>
+        <div class="center ensub2" id="f_sub_e" style="color:#7E92AF;font-weight:500;">Learning math just got more fun.</div>
+      </div>
+      <div class="center" id="f_brand" style="position:absolute;left:0;right:0;color:#64748B;font-weight:600;letter-spacing:.42em;">AKIOMIDA</div>
+    </div>
+
+    <div class="center" id="wm" style="position:absolute;color:#7C8BA1;font-weight:600;letter-spacing:.40em;opacity:.5;">AKIOMIDA</div>
+  </div>
+  <div class="vig"></div>
+  <div id="grain"></div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+</div>
+
+<script>
+const Q=new URLSearchParams(location.search);
+const ORIENT=Q.get('o')||'landscape';
+const W=ORIENT==='portrait'?1080:1920;
+const H=ORIENT==='portrait'?1920:1080;
+
+const P = ORIENT==='portrait' ? {
+  mx:84, wmY:200, wmSize:19,
+  h7Y:250, h7Size:170, h7BoxW:190, h7BoxH:190,
+  qX:660, qY:280, qSize:96,
+  cardY:520, cardH:190, cardW:288, cardGap:20,
+  cardDSize:54, cardLab:17, cardEn:11,
+  l1Y:790, l1Size:44, l1EY:856, l1ESize:25,
+  l2Y:960, l2Size:46, l2EY:1028, l2ESize:26,
+  chapY:236, chapSize:19, chapEY:280, chapESize:14,
+  wordY:330, wordSize:78,
+  defY:452, defSize:40, defEY:508, defESize:23,
+  digY:600, digH:110, digW:72, digGap:10, digSize:40,
+  dlabY:750, dlabSize:17, dlabEY:782, dlabESize:13,
+  takeY:920, takeSize:42, takeEY:982, takeESize:23,
+  card2Y:600, card2H:330, card2W:560, dotC:34, dotGap:12, labDy:250, labEDy:290, labSize:24, labESize:12,
+  take2Y:980, take2Size:42, take2EY:1042, take2ESize:23,
+  boxY:600, boxH:280, boxW:880, eqSize2:64, eqSize3:54,
+  take3Y:930, take3Size:42, take3EY:992, take3ESize:23,
+  bigY:240, bigH:190, bigW:190, bigDSize:120,
+  chY:490, chH:92, chW:280, chGap:20, chCtx:17, chEn:11, chMean:27,
+  lineY:660, lineSize:42, lineEY:724, lineESize:23,
+  fl1Y:250, fl1Size:46, fl1EY:318, fl1ESize:25,
+  bigqY:392, bigqSize:36, bigqEY:458, bigqESize:22,
+  cta2Y:528, cta2Size:36, cta2EY:592, cta2ESize:21,
+  cardY2:660, card2H2:360, cardW2:880,
+  openY:120, openEY:158, openESize:14, urlY:224, urlSize:76, barY:334, subY:370, fSubEY:406, fSubESize:16,
+  brandY:1076, brandSize:22
+} : {
+  mx:200, wmY:1006, wmSize:19,
+  h7Y:180, h7Size:170, h7BoxW:190, h7BoxH:190,
+  qX:1080, qY:215, qSize:96,
+  cardY:440, cardH:190, cardW:300, cardGap:30,
+  cardDSize:54, cardLab:17, cardEn:11,
+  l1Y:690, l1Size:44, l1EY:756, l1ESize:25,
+  l2Y:870, l2Size:46, l2EY:938, l2ESize:26,
+  chapY:150, chapSize:19, chapEY:194, chapESize:14,
+  wordY:244, wordSize:78,
+  defY:366, defSize:40, defEY:422, defESize:23,
+  digY:500, digH:116, digW:76, digGap:12, digSize:42,
+  dlabY:650, dlabSize:17, dlabEY:682, dlabESize:13,
+  takeY:780, takeSize:44, takeEY:844, takeESize:24,
+  card2Y:470, card2H:340, card2W:620, dotC:40, dotGap:14, labDy:262, labEDy:304, labSize:26, labESize:13,
+  take2Y:860, take2Size:44, take2EY:924, take2ESize:24,
+  boxY:470, boxH:270, boxW:1000, eqSize2:62, eqSize3:56,
+  take3Y:800, take3Size:44, take3EY:864, take3ESize:24,
+  bigY:170, bigH:180, bigW:180, bigDSize:112,
+  chY:400, chH:92, chW:300, chGap:24, chCtx:17, chEn:11, chMean:27,
+  lineY:560, lineSize:44, lineEY:624, lineESize:24,
+  fl1Y:170, fl1Size:46, fl1EY:238, fl1ESize:25,
+  bigqY:296, bigqSize:40, bigqEY:362, bigqESize:22,
+  cta2Y:428, cta2Size:34, cta2EY:486, cta2ESize:20,
+  cardY2:540, card2H2:380, cardW2:900,
+  openY:96, openEY:134, openESize:13, urlY:178, urlSize:94, barY:302, subY:328, fSubEY:366, fSubESize:15,
+  brandY:950, brandSize:23
+};
+
+const stage=document.getElementById('stage');
+stage.style.width=W+'px'; stage.style.height=H+'px';
+const MX=P.mx;
+function tx(el,y,size){
+  el.style.position='absolute';
+  el.style.left=MX+'px';el.style.right=MX+'px';
+  el.style.top=y+'px';el.style.fontSize=size+'px';
+}
+
+/* ---------- easing ---------- */
+const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
+const lerp=(a,b,p)=>a+(b-a)*p;
+const seg=(t,a,d)=>clamp((t-a)/d,0,1);
+const eoc=p=>{p=clamp(p,0,1);return 1-Math.pow(1-p,3);};
+const eoe=p=>{p=clamp(p,0,1);return p>=1?1:1-Math.pow(2,-10*p);};
+const eio=p=>{p=clamp(p,0,1);return p<0.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;};
+const backOS=(p,s=1.7)=>{p=clamp(p,0,1);const c=s;return 1+(c+1)*Math.pow(p-1,3)+c*Math.pow(p-1,2);};
+const smz=(t,a,b,f=.6)=>{return clamp((t-a)/f,0,1)*clamp((b-t)/f,0,1);};
+
+/* blobs */
+const blobC=document.getElementById('blobC');
+const blobV=document.getElementById('blobV');
+const blobA=document.getElementById('blobA');
+const BS=ORIENT==='portrait'?820:720;
+blobC.style.width=BS+'px';blobC.style.height=BS+'px';
+blobC.style.left=(-BS*0.28)+'px';blobC.style.top=(ORIENT==='portrait'?-BS*0.30:-BS*0.34)+'px';
+blobV.style.width=(BS*1.05)+'px';blobV.style.height=(BS*1.05)+'px';
+blobV.style.right=(-BS*0.32)+'px';blobV.style.bottom=(ORIENT==='portrait'?-BS*0.16:-BS*0.34)+'px';
+blobA.style.width=(BS*0.7)+'px';blobA.style.height=(BS*0.7)+'px';
+blobA.style.left=(W/2-BS*0.35)+'px';
+blobA.style.top=(ORIENT==='portrait'?H*0.34:H*0.42)+'px';
+
+/* partikel ambient: sedikit, lambat, tidak menyaingi fokus */
+const parts=document.getElementById('particles');
+const mulberry=(s)=>()=>{s|=0;s=s+0x6D2B79F5|0;let z=Math.imul(s^s>>>15,1|s);z=z+Math.imul(z^z>>>7,61|z)^z;return((z^z>>>14)>>>0)/4294967296;};
+const rnd=mulberry(20261114);
+const CH='0123456789+=/VX\u00BD\u00B0\u00D7';
+const NP=22, PA=[];
+for(let i=0;i<NP;i++){
+  const el=document.createElement('span');
+  el.textContent=CH[Math.floor(rnd()*CH.length)];
+  el.style.fontSize=(16+rnd()*26).toFixed(0)+'px';
+  el.style.fontWeight=(rnd()<.3?'700':'400');
+  parts.appendChild(el);
+  PA.push({el, x:rnd()*W, y0:rnd()*H, sp:6+rnd()*12, wf:.3+rnd()*.7, ph:rnd()*6.28, o:.14+rnd()*.18});
+}
+
+/* wm */
+const wm=document.getElementById('wm');
+wm.style.fontSize=P.wmSize+'px';
+if(ORIENT==='portrait'){wm.style.top=P.wmY+'px';wm.style.left='0';wm.style.right='0';}
+else{wm.style.top=P.wmY+'px';wm.style.right='70px';wm.style.left='auto';}
+
+/* ---------- S0 ---------- */
+const h7=document.getElementById('h_7');
+const HW=P.h7BoxW, HH=P.h7BoxH;
+h7.style.left=((W-HW)/2)+'px';h7.style.top=P.h7Y+'px';
+h7.style.width=HW+'px';h7.style.height=HH+'px';
+h7.style.fontSize=P.h7Size+'px';h7.style.lineHeight=HH+'px';
+h7.style.textAlign='center';
+h7.style.textShadow='0 0 34px rgba(251,191,36,.35)';
+const hQ=document.getElementById('h_q');
+hQ.style.left=P.qX+'px';hQ.style.top=P.qY+'px';hQ.style.fontSize=P.qSize+'px';
+/* tiga kartu konteks */
+const hCards=document.getElementById('h_cards');
+hCards.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
+const CW0=P.cardW, CH0=P.cardH, CG0=P.cardGap;
+const gw0=3*CW0+2*CG0, x0t=(W-gw0)/2;
+const H0C=[];
+for(let i=0;i<3;i++){
+  const el=document.createElement('div');
+  el.className='card';
+  el.style.cssText=`position:absolute;left:${x0t+i*(CW0+CG0)}px;top:${P.cardY}px;width:${CW0}px;height:${CH0}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;overflow:hidden;will-change:transform,opacity;`;
+  hCards.appendChild(el);
+  H0C.push(el);
+}
+/* kartu 1: tujuh titik apel */
+(()=>{
+  const d=document.createElement('div');
+  d.className='mono';
+  d.style.cssText=`font-weight:800;font-size:${P.cardDSize}px;color:#FBBF24;line-height:1;`;
+  d.textContent='7';
+  H0C[0].appendChild(d);
+  const row=document.createElement('div');
+  row.style.cssText='display:flex;gap:7px;';
+  for(let k=0;k<7;k++){
+    const dot=document.createElement('div');
+    dot.style.cssText='width:12px;height:12px;border-radius:50%;background:radial-gradient(120% 120% at 35% 30%,#FCD34D,#D97706);border:1px solid rgba(255,255,255,.3);';
+    row.appendChild(dot);
+  }
+  H0C[0].appendChild(row);
+})();
+/* kartu 2: papan tulis kapur */
+(()=>{
+  const d=document.createElement('div');
+  d.className='mono';
+  d.style.cssText=`font-weight:800;font-size:${P.cardDSize}px;color:#34D399;line-height:1;text-shadow:0 0 14px rgba(52,211,153,.45);`;
+  d.textContent='7';
+  H0C[1].appendChild(d);
+  const u=document.createElement('div');
+  u.style.cssText='width:56px;height:4px;border-radius:2px;background:rgba(52,211,153,.5);';
+  H0C[1].appendChild(u);
+})();
+/* kartu 3: tiket antrean */
+(()=>{
+  const d=document.createElement('div');
+  d.className='mono';
+  d.style.cssText=`font-weight:800;font-size:${P.cardDSize}px;color:#22D3EE;line-height:1;`;
+  d.textContent='7';
+  H0C[2].appendChild(d);
+  const u=document.createElement('div');
+  u.style.cssText='width:56px;border-top:2px dashed rgba(34,211,238,.55);';
+  H0C[2].appendChild(u);
+})();
+const LABS0=[['7 APEL','7 APPLES'],['7 DI PAPAN','ON A BOARD'],['7 ANTREAN','IN A QUEUE']];
+H0C.forEach((el,i)=>{
+  const lb=document.createElement('div');
+  lb.style.cssText=`font-size:${P.cardLab}px;font-weight:700;color:#E7EEF8;`;
+  lb.textContent=LABS0[i][0];
+  const le=document.createElement('div');
+  le.className='enword';
+  le.style.cssText=`font-size:${P.cardEn}px;`;
+  le.textContent=LABS0[i][1];
+  el.appendChild(lb);el.appendChild(le);
+  const sw=document.createElement('div');
+  sw.className='sweep';
+  el.appendChild(sw);
+});
+const SWEEPS0=H0C.map(el=>el.querySelector('.sweep'));
+const hL1=document.getElementById('h_l1');
+tx(hL1,P.l1Y,P.l1Size);
+const hL1E=document.getElementById('h_l1_e');
+tx(hL1E,P.l1EY,P.l1ESize);
+const hL2=document.getElementById('h_l2');
+tx(hL2,P.l2Y,P.l2Size);
+const hL2E=document.getElementById('h_l2_e');
+tx(hL2E,P.l2EY,P.l2ESize);
+
+/* ---------- S1 ---------- */
+const aChapT=document.getElementById('a_chap_t');
+const aChap=document.getElementById('a_chap');
+aChap.style.top=P.chapY+'px';aChapT.style.fontSize=P.chapSize+'px';aChapT.style.padding='9px 24px 9px 28px';
+const aChapE=document.getElementById('a_chap_e');
+tx(aChapE,P.chapEY,P.chapESize);
+const aWordT=document.getElementById('a_word_t');
+const aWord=document.getElementById('a_word');
+tx(aWord,P.wordY,P.wordSize);
+aWordT.style.textShadow='0 8px 44px rgba(167,139,250,.30)';
+const aDef=document.getElementById('a_def');
+tx(aDef,P.defY,P.defSize);
+const aDefE=document.getElementById('a_def_e');
+tx(aDefE,P.defEY,P.defESize);
+/* sepuluh ubin angka, ubin 7 disorot emas */
+const aDig=document.getElementById('a_digits');
+aDig.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
+const DGW=P.digW, DGH=P.digH, DGG=P.digGap;
+const gwD=10*DGW+9*DGG, x0d=(W-gwD)/2;
+const DT=[];
+for(let i=0;i<10;i++){
+  const el=document.createElement('div');
+  const hero=(i===7);
+  el.className='card';
+  el.style.cssText=`position:absolute;left:${x0d+i*(DGW+DGG)}px;top:${P.digY}px;width:${DGW}px;height:${DGH}px;display:flex;align-items:center;justify-content:center;opacity:0;overflow:hidden;will-change:transform,opacity;`;
+  if(hero){el.style.borderColor='rgba(251,191,36,.55)';el.style.background='rgba(251,191,36,.10)';}
+  const d=document.createElement('div');
+  d.className='mono';
+  d.style.cssText=`font-weight:800;font-size:${P.digSize}px;color:${hero?'#FBBF24':'#7DD3FC'};`;
+  d.textContent=String(i);
+  el.appendChild(d);
+  const sw=document.createElement('div');
+  sw.className='sweep';
+  el.appendChild(sw);
+  aDig.appendChild(el);
+  DT.push(el);
+}
+const DSWEEP=DT[7].querySelector('.sweep');
+const aDl=document.getElementById('a_dlab');
+tx(aDl,P.dlabY,P.dlabSize);
+const aDlE=document.getElementById('a_dlab_e');
+tx(aDlE,P.dlabEY,P.dlabESize);
+const aTake=document.getElementById('a_take');
+tx(aTake,P.takeY,P.takeSize);
+const aTakeE=document.getElementById('a_take_e');
+tx(aTakeE,P.takeEY,P.takeESize);
+
+/* ---------- S2 ---------- */
+const bChapT=document.getElementById('b_chap_t');
+const bChap=document.getElementById('b_chap');
+bChap.style.top=P.chapY+'px';bChapT.style.fontSize=P.chapSize+'px';bChapT.style.padding='9px 24px 9px 28px';
+const bChapE=document.getElementById('b_chap_e');
+tx(bChapE,P.chapEY,P.chapESize);
+const bWord=document.getElementById('b_word');
+tx(bWord,P.wordY,P.wordSize);
+const bDef=document.getElementById('b_def');
+tx(bDef,P.defY,P.defSize);
+const bDefE=document.getElementById('b_def_e');
+tx(bDefE,P.defEY,P.defESize);
+const bCard=document.getElementById('b_card');
+const CW2=P.card2W, CH2=P.card2H;
+bCard.style.left=((W-CW2)/2)+'px';bCard.style.top=P.card2Y+'px';
+bCard.style.width=CW2+'px';bCard.style.height=CH2+'px';
+bCard.style.overflow='hidden';
+const bDots=document.getElementById('b_dots');
+const DC2=P.dotC, DG2=P.dotGap;
+const spots2=[[0,0],[1,0],[2,0],[3,0],[0.5,1],[1.5,1],[2.5,1]];
+const D7=[];
+spots2.forEach(([cx,cy])=>{
+  const d=document.createElement('div');
+  const dx=(CW2-(4*DC2+3*DG2))/2+cx*(DC2+DG2);
+  const dy=(CH2*0.44-(2*DC2+DG2)/2)+cy*(DC2+DG2);
+  d.style.cssText=`position:absolute;left:${dx.toFixed(1)}px;top:${dy.toFixed(1)}px;width:${DC2}px;height:${DC2}px;border-radius:50%;opacity:0;will-change:transform,opacity;`;
+  bDots.appendChild(d);
+  D7.push(d);
+});
+const bLab=document.getElementById('b_lab');
+bLab.style.top=P.labDy+'px';bLab.style.left='0';bLab.style.right='0';bLab.style.fontSize=P.labSize+'px';
+const bLabE=document.getElementById('b_lab_e');
+bLabE.style.top=P.labEDy+'px';bLabE.style.left='0';bLabE.style.right='0';bLabE.style.fontSize=P.labESize+'px';
+const bCardSw=document.createElement('div');
+bCardSw.className='sweep';
+bCard.appendChild(bCardSw);
+const ITEMS2=[
+  {lab:'7 APEL', en:'SEVEN APPLES', bg:'radial-gradient(120% 120% at 35% 30%,#FCD34D,#D97706)', col:'#FBBF24', book:false},
+  {lab:'7 JERUK', en:'SEVEN ORANGES', bg:'radial-gradient(120% 120% at 35% 30%,#FDBA74,#EA580C)', col:'#FB923C', book:false},
+  {lab:'7 BUKU', en:'SEVEN BOOKS', bg:'linear-gradient(180deg,#93C5FD,#3B82F6)', col:'#7DD3FC', book:true}
+];
+const bTake=document.getElementById('b_take');
+tx(bTake,P.take2Y,P.take2Size);
+const bTakeE=document.getElementById('b_take_e');
+tx(bTakeE,P.take2EY,P.take2ESize);
+
+/* ---------- S3 ---------- */
+const cChapT=document.getElementById('c_chap_t');
+const cChap=document.getElementById('c_chap');
+cChap.style.top=P.chapY+'px';cChapT.style.fontSize=P.chapSize+'px';cChapT.style.padding='9px 24px 9px 28px';
+const cChapE=document.getElementById('c_chap_e');
+tx(cChapE,P.chapEY,P.chapESize);
+const cWord=document.getElementById('c_word');
+tx(cWord,P.wordY,P.wordSize);
+const cDef=document.getElementById('c_def');
+tx(cDef,P.defY,P.defSize);
+const cDefE=document.getElementById('c_def_e');
+tx(cDefE,P.defEY,P.defESize);
+const cBox=document.getElementById('c_eqbox');
+const BOXW=P.boxW;
+cBox.style.left=((W-BOXW)/2)+'px';cBox.style.top=P.boxY+'px';
+cBox.style.width=BOXW+'px';cBox.style.height=P.boxH+'px';
+cBox.style.background='rgba(34,211,238,.045)';
+const cMorph=document.getElementById('c_morph');
+cMorph.style.fontSize=P.eqSize2+'px';cMorph.style.position='absolute';
+cMorph.style.left='0';cMorph.style.right='0';
+cMorph.style.top=(P.boxH-P.eqSize2*1.1)/2+'px';
+cMorph.style.whiteSpace='nowrap';
+const cTake=document.getElementById('c_take');
+tx(cTake,P.take3Y,P.take3Size);
+const cTakeE=document.getElementById('c_take_e');
+tx(cTakeE,P.take3EY,P.take3ESize);
+
+/* ---------- S4 ---------- */
+const eBig=document.getElementById('e_big');
+const BW3=P.bigW, BH3=P.bigH;
+eBig.style.left=((W-BW3)/2)+'px';eBig.style.top=P.bigY+'px';
+eBig.style.width=BW3+'px';eBig.style.height=BH3+'px';
+eBig.style.borderColor='rgba(251,191,36,.5)';eBig.style.background='rgba(251,191,36,.08)';
+const eBigT=document.getElementById('e_big_t');
+eBigT.style.cssText+='position:absolute;left:0;right:0;top:50%;transform:translateY(-54%);text-align:center;font-size:'+P.bigDSize+'px;text-shadow:0 0 30px rgba(251,191,36,.30);';
+const eBigSw=document.createElement('div');
+eBigSw.className='sweep';
+eBig.appendChild(eBigSw);
+/* tiga chip konteks yang berubah jadi makna */
+const eChips=document.getElementById('e_chips');
+eChips.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
+const CHW=P.chW, CHH=P.chH, CHG=P.chGap;
+const gwC=3*CHW+2*CHG, x0c=(W-gwC)/2;
+const CHIPS4=[
+  {ctx:'7 APEL', en:'7 APPLES', mean:'JUMLAH', col:'#FBBF24', men:'THE COUNT'},
+  {ctx:'7 DI PAPAN', en:'ON A BOARD', mean:'TULISAN', col:'#22D3EE', men:'THE WRITING'},
+  {ctx:'NOMOR 7', en:'IN A QUEUE', mean:'IDENTITAS', col:'#A78BFA', men:'THE IDENTITY'}
+];
+const C4=[];
+CHIPS4.forEach((o,i)=>{
+  const el=document.createElement('div');
+  el.className='card';
+  el.style.cssText=`position:absolute;left:${x0c+i*(CHW+CHG)}px;top:${P.chY}px;width:${CHW}px;height:${CHH}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;overflow:hidden;will-change:transform,opacity;`;
+  const ctx=document.createElement('div');
+  ctx.style.cssText=`position:absolute;left:50%;top:0;transform:translateX(-50%);font-size:${P.chCtx}px;font-weight:700;color:#A9B8CE;white-space:nowrap;`;
+  ctx.textContent=o.ctx;
+  const mean=document.createElement('div');
+  mean.style.cssText=`position:absolute;left:50%;top:0;transform:translateX(-50%);font-size:${P.chMean}px;font-weight:800;color:${o.col};white-space:nowrap;opacity:0;`;
+  mean.textContent=o.mean;
+  const en=document.createElement('div');
+  en.className='enword';
+  en.style.cssText=`font-size:${P.chEn}px;`;
+  en.textContent=o.en;
+  el.appendChild(ctx);el.appendChild(mean);el.appendChild(en);
+  eChips.appendChild(el);
+  C4.push({el, ctx, mean, en, o});
+});
+const eLine=document.getElementById('e_line');
+tx(eLine,P.lineY,P.lineSize);
+const eLineE=document.getElementById('e_line_e');
+tx(eLineE,P.lineEY,P.lineESize);
+
+/* ---------- S5 ---------- */
+const fL1=document.getElementById('f_l1');
+tx(fL1,P.fl1Y,P.fl1Size);
+const fL1E=document.getElementById('f_l1_e');
+tx(fL1E,P.fl1EY,P.fl1ESize);
+const fBigq=document.getElementById('f_bigq');
+tx(fBigq,P.bigqY,P.bigqSize);
+const fBigqE=document.getElementById('f_bigq_e');
+tx(fBigqE,P.bigqEY,P.bigqESize);
+const fC2=document.getElementById('f_cta2');
+tx(fC2,P.cta2Y,P.cta2Size);
+const fC2E=document.getElementById('f_cta2_e');
+tx(fC2E,P.cta2EY,P.cta2ESize);
+const fCard=document.getElementById('f_card');
+const FW=P.cardW2, FH=P.card2H2;
+fCard.style.left=((W-FW)/2)+'px';fCard.style.top=P.cardY2+'px';
+fCard.style.width=FW+'px';fCard.style.height=FH+'px';
+fCard.style.borderColor='rgba(34,211,238,.4)';
+fCard.style.overflow='hidden';
+const fOpen=document.getElementById('f_open');
+fOpen.style.position='absolute';fOpen.style.top=P.openY+'px';fOpen.style.left='0';fOpen.style.right='0';
+fOpen.style.fontSize=Math.round(P.urlSize*0.28)+'px';
+const fOpenE=document.getElementById('f_open_e');
+fOpenE.style.position='absolute';fOpenE.style.top=P.openEY+'px';fOpenE.style.left='0';fOpenE.style.right='0';
+fOpenE.style.fontSize=P.openESize+'px';
+const fUrl=document.getElementById('f_url');
+fUrl.style.position='absolute';fUrl.style.top=P.urlY+'px';fUrl.style.left='0';fUrl.style.right='0';
+document.getElementById('f_url_t').style.fontSize=P.urlSize+'px';
+document.getElementById('f_url_t').style.textShadow='0 8px 40px rgba(34,211,238,.30)';
+const fBar=document.getElementById('f_bar');
+fBar.style.position='absolute';fBar.style.top=P.barY+'px';fBar.style.left=(FW*0.16)+'px';
+const fSub=document.getElementById('f_sub');
+fSub.style.position='absolute';fSub.style.top=P.subY+'px';fSub.style.left='0';fSub.style.right='0';
+fSub.style.fontSize=Math.round(P.urlSize*0.27)+'px';
+const fSubE=document.getElementById('f_sub_e');
+fSubE.style.position='absolute';fSubE.style.top=P.fSubEY+'px';fSubE.style.left='0';fSubE.style.right='0';
+fSubE.style.fontSize=P.fSubESize+'px';
+const fBrand=document.getElementById('f_brand');
+tx(fBrand,P.brandY,P.brandSize);
+const fCardSw=document.createElement('div');
+fCardSw.className='sweep';
+fCard.appendChild(fCardSw);
+
+const flash=document.getElementById('flash');
+const fade=document.getElementById('fade');
+const world=document.getElementById('world');
+const grain=document.getElementById('grain');
+
+/* ---------- animasi inti ---------- */
+function popA(el,t,ts,d=0.62,y=34,s0=0.86,ov=1.7){
+  const p=seg(t,ts,d);
+  const e=backOS(p,ov);
+  const land=Math.exp(-Math.pow((p-0.62)/0.14,2));
+  const sy=e*(1-0.07*land);
+  const sx=e*(1+0.05*land);
+  el.style.opacity=String(clamp(p*3,0,1));
+  el.style.transform=`translateY(${((1-e)*y).toFixed(2)}px) scale(${sx.toFixed(3)},${sy.toFixed(3)})`;
+}
+function fadeUp(el,t,ts,d=0.6,y=26){
+  const p=eoe(seg(t,ts,d));
+  el.style.opacity=p;
+  el.style.transform=`translateY(${(1-p)*y}px)`;
+}
+function followUp(el,t,ts,d=0.68,y=14){
+  const p=eoe(seg(t,ts,d));
+  el.style.opacity=p*0.95;
+  el.style.transform=`translateY(${(1-p)*y}px)`;
+}
+function headIn(el,t,ts,base=0.04){
+  const p=eoc(seg(t,ts,0.55));
+  el.style.opacity=p;
+  el.style.transform=`translateY(${(1-p)*26}px)`;
+  el.style.filter=`blur(${((1-p)*5).toFixed(2)}px)`;
+  el.style.letterSpacing=(base*(1-p)).toFixed(4)+'em';
+}
+function wipeChip(el,t,ts){
+  const p=eio(seg(t,ts,0.5));
+  el.style.clipPath=`inset(0 ${(100-100*p).toFixed(2)}% 0 0 round 999px)`;
+}
+function sweepAny(sw,t,tss,amp=0.85){
+  let p=-1;
+  for(const ts of tss){
+    const q=seg(t,ts,0.55);
+    if(q>0&&q<1){p=q;break;}
+  }
+  if(p<0){if(sw.style.opacity!=='0')sw.style.opacity='0';return;}
+  sw.style.opacity=String(amp*(1-Math.abs(p*2-1)));
+  sw.style.transform=`translateX(${lerp(-160,260,p).toFixed(1)}%)`;
+}
+
+/* kamera: push pelan per bab + napas + shake kecil saat impact */
+const CUTS=[6.0,14.4,25.2,34.8,43.2];
+const IMPACTS=[[0.5,0.5],[18.6,0.22],[20.4,0.22],[32.2,0.42],[45.3,0.28],[48.7,0.28]];
+function imp(t){
+  let a=0;
+  for(const [it,ia] of IMPACTS){
+    const d=t-it;
+    if(d>=0&&d<0.4)a=Math.max(a,ia*(1-d/0.4));
+  }
+  return a;
+}
+function camScale(t){
+  let base=1.0;
+  for(let i=0;i<CUTS.length+1;i++){
+    const a=i===0?0:CUTS[i-1];
+    const b=i===CUTS.length?52:CUTS[i];
+    if(t>=a&&t<b){
+      const p=(t-a)/(b-a);
+      base=0.992+0.036*eio(clamp(p*1.1,0,1));
+      break;
+    }
+  }
+  return base+imp(t)*0.015;
+}
+function slideScene(el,t,tIn,tOut){
+  /* push pan: bab baru masuk dari kanan sambil bab lama keluar ke kiri */
+  let x=0;
+  const pin=seg(t,tIn,0.6);
+  x=(1-eoc(pin))*W;
+  const pout=seg(t,tOut,0.6);
+  if(pout>0){ x=-eoc(pout)*W; }
+  el.style.transform=`translateX(${x.toFixed(1)}px)`;
+}
+
+/* timeline v06: momen muncul */
+function stageIdx(t){
+  let i=0;
+  for(const s of [29.0,30.6,32.2]){ if(t>=s) i++; }
+  return i;
+}
+const STAGE_TXT=[
+  {t:'PUNGGUNG 10', col:'#7DD3FC', g:0},
+  {t:'ISINYA 10 ORANG?', col:'#F87171', g:0},
+  {t:'RUMAH NO. 25', col:'#34D399', g:0},
+  {t:'CUMA PENANDA.', col:'', g:1}
+];
+
+/* ---------- RENDER PER FRAME ---------- */
+function renderFrame(t){
+  blobC.style.transform=`translate(${Math.sin(t*0.13)*70}px,${Math.cos(t*0.09)*54}px)`;
+  blobV.style.transform=`translate(${Math.cos(t*0.11)*64}px,${Math.sin(t*0.14)*46}px)`;
+  blobA.style.transform=`translate(${Math.sin(t*0.07)*40}px,${Math.cos(t*0.12)*36}px)`;
+  grain.style.backgroundPosition=`${(t*110)%180}px ${(t*83)%180}px`;
+
+  const cs=camScale(t), im=imp(t);
+  const shx=Math.sin(t*47)*6*im, shy=Math.sin(t*39+1.7)*4*im;
+  world.style.transform=`translate(${shx.toFixed(2)}px,${(shy+Math.sin(t*0.35)*5).toFixed(2)}px) scale(${cs.toFixed(4)})`;
+
+  const zone=0.5+0.3*(smz(t,0,6)+smz(t,34.8,43.2));
+  for(let i=0;i<NP;i++){
+    const p=PA[i];
+    const yy=((p.y0 - t*p.sp)%(H+140)+H+140)%(H+140)-70;
+    p.el.style.transform=`translate(${(p.x+Math.sin(t*p.wf+p.ph)*20).toFixed(1)}px,${yy.toFixed(1)}px)`;
+    p.el.style.opacity=(p.o*zone*(0.75+0.25*Math.sin(t*1.1+p.ph))).toFixed(3);
+  }
+
+  /* S0 0-6.6 */
+  const s0=document.getElementById('s0');
+  slideScene(s0,t,-3,5.7);
+  popA(h7,t,0.5,0.8,44,1.35,1.35);
+  hQ.style.opacity=String(clamp(backOS(seg(t,4.9,0.5),2.0),0,1));
+  hQ.style.transform=`translateY(${((1-clamp(backOS(seg(t,4.9,0.5),2.0),0,1))*28).toFixed(2)}px)`;
+  H0C.forEach((el,i)=>{
+    popA(el,t,1.0+i*0.45,0.6,36,0.84,1.7);
+    sweepAny(SWEEPS0[i],t,[1.62+i*0.45]);
+  });
+  fadeUp(hL1,t,3.0);
+  followUp(hL1E,t,3.18);
+  fadeUp(hL2,t,4.2,0.7,28);
+  followUp(hL2E,t,4.38);
+
+  /* S1 6.0-15.0 */
+  const s1=document.getElementById('s1');
+  slideScene(s1,t,6.0,14.1);
+  wipeChip(aChapT,t,6.7);
+  aChap.style.opacity=String(clamp(seg(t,6.7,0.3)*2,0,1));
+  followUp(aChapE,t,6.9);
+  headIn(aWord,t,7.2,0.10);
+  followUp(aDef,t,7.8);
+  followUp(aDefE,t,7.98);
+  DT.forEach((el,i)=>{
+    popA(el,t,8.4+i*0.08,0.5,24,0.8,2.0);
+    if(i===7)sweepAny(DSWEEP,t,[9.3]);
+  });
+  fadeUp(aDl,t,9.8,0.5,14);
+  followUp(aDlE,t,9.95);
+  fadeUp(aTake,t,11.4,0.7,26);
+  followUp(aTakeE,t,11.6);
+
+  /* S2 14.4-25.8 */
+  const s2=document.getElementById('s2');
+  slideScene(s2,t,14.4,24.9);
+  wipeChip(bChapT,t,15.1);
+  bChap.style.opacity=String(clamp(seg(t,15.1,0.3)*2,0,1));
+  followUp(bChapE,t,15.3);
+  headIn(bWord,t,15.6,0.10);
+  followUp(bDef,t,16.2);
+  followUp(bDefE,t,16.38);
+  popA(bCard,t,16.9,0.7,40,0.88,1.6);
+  bCard.style.transform+=' scaleY('+(1-imp(t)*0.05).toFixed(3)+')';
+  const st2=t<18.6?0:(t<20.4?1:2);
+  const it2=ITEMS2[st2];
+  D7.forEach((el,i)=>{
+    const base=backOS(seg(t,17.3+i*0.12,0.5),1.8);
+    const p=clamp(base*(1+0.20*imp(t)),0,1.25);
+    el.style.opacity=String(clamp(base,0,1));
+    el.style.transform=`scale(${p.toFixed(3)})`;
+    el.style.background=it2.bg;
+    if(it2.book){el.style.borderRadius='6px';el.style.borderLeft='4px solid rgba(255,255,255,.45)';}
+    else{el.style.borderRadius='50%';el.style.border='1px solid rgba(255,255,255,.35)';}
+  });
+  bLab.textContent=it2.lab;
+  bLab.style.color=it2.col;
+  bLabE.textContent=it2.en;
+  const lp=eoe(seg(t,17.9,0.5));
+  bLab.style.opacity=String(lp);
+  bLab.style.transform=`translateY(${((1-lp)*14).toFixed(2)}px) scale(${(1+0.30*imp(t)).toFixed(3)})`;
+  const lpe=eoe(seg(t,18.05,0.5));
+  bLabE.style.opacity=String(lpe*0.95);
+  bLabE.style.transform=`translateY(${((1-lpe)*10).toFixed(2)}px)`;
+  sweepAny(bCardSw,t,[17.1,18.75,20.55]);
+  fadeUp(bTake,t,21.9,0.7,26);
+  followUp(bTakeE,t,22.1);
+
+  /* S3 25.2-35.4 */
+  const s3=document.getElementById('s3');
+  slideScene(s3,t,25.2,34.5);
+  wipeChip(cChapT,t,25.9);
+  cChap.style.opacity=String(clamp(seg(t,25.9,0.3)*2,0,1));
+  followUp(cChapE,t,26.1);
+  headIn(cWord,t,26.4,0.10);
+  followUp(cDef,t,27.0);
+  followUp(cDefE,t,27.18);
+  popA(cBox,t,27.6,0.7,30,0.9,1.6);
+  const st=stageIdx(t);
+  const m=STAGE_TXT[st];
+  cMorph.textContent=m.t;
+  cMorph.className='center mono';
+  cMorph.style.color=m.col||'';
+  cMorph.classList.toggle('grad',st===3);
+  cMorph.style.fontSize=(m.g?P.eqSize3:P.eqSize2)+'px';
+  let mo=1, mty=0, msx=1, msy=1;
+  for(const s of [29.0,30.6,32.2]){
+    const pre=s-t;
+    if(pre>0&&pre<=0.12){
+      const q=1-pre/0.12;
+      mty=-9*q; msy=1-0.07*q; msx=1+0.04*q;
+    }
+    const d=t-s;
+    if(d>=0&&d<0.36){
+      const e=backOS(d/0.36,2.0);
+      mo=clamp((d/0.36)*2.4,0,1);
+      msy=e; msx=e*1.02;
+    }
+  }
+  cMorph.style.opacity=String(mo);
+  cMorph.style.transform=`translateY(${mty.toFixed(2)}px) scale(${msx.toFixed(3)},${msy.toFixed(3)})`;
+  const glowC=st===1?'rgba(248,113,113,':st===3?'rgba(167,139,250,':'rgba(34,211,238,';
+  cBox.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(28+16*Math.sin(t*3)).toFixed(0)}px ${glowC}${(0.09+0.04*Math.sin(t*3)).toFixed(3)})`;
+  fadeUp(cTake,t,33.4,0.7,24);
+  followUp(cTakeE,t,33.6);
+
+  /* S4 34.8-43.8 */
+  const s4=document.getElementById('s4');
+  slideScene(s4,t,34.8,42.9);
+  popA(eBig,t,35.5,0.8,40,1.3,1.4);
+  sweepAny(eBigSw,t,[36.3]);
+  C4.forEach((o,i)=>{
+    popA(o.el,t,36.7+i*0.25,0.55,26,0.85,1.8);
+    const fp=seg(t,37.8+i*1.0,0.55);
+    const q=1-Math.abs(fp*2-1);
+    o.ctx.style.opacity=String(clamp(fp*2,0,1));
+    o.mean.style.opacity=String(clamp(fp*2-1,0,1));
+    const sq=1-0.10*q;
+    o.ctx.style.transform=`translateX(-50%) scaleY(${sq.toFixed(3)})`;
+    o.mean.style.transform=`translateX(-50%) scaleY(${sq.toFixed(3)})`;
+    o.en.textContent=fp>=0.5?o.o.men:o.o.en;
+    o.el.style.boxShadow=q>0.01
+      ?`0 18px 60px rgba(0,0,0,.45), 0 0 ${(24*q).toFixed(0)}px ${o.o.col}${(0.30*q).toFixed(3)}`
+      :'0 18px 60px rgba(0,0,0,.45)';
+  });
+  fadeUp(eLine,t,41.0,0.7,26);
+  followUp(eLineE,t,41.2);
+
+  /* S5 43.2-52 */
+  const s5=document.getElementById('s5');
+  slideScene(s5,t,43.2,51.9);
+  headIn(fL1,t,43.9,0.03);
+  followUp(fL1E,t,44.1);
+  fadeUp(fBigq,t,45.3,0.7,26);
+  followUp(fBigqE,t,45.5);
+  fadeUp(fC2,t,46.8,0.6,22);
+  followUp(fC2E,t,46.98);
+  popA(fCard,t,47.8,0.8,40,0.88,1.5);
+  fCard.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(38+20*Math.sin(t*3.6)).toFixed(0)}px rgba(34,211,238,${(0.10+0.05*Math.sin(t*3.6)).toFixed(3)})`;
+  const up=eoe(seg(t,48.7,0.9));
+  const fUrlT=document.getElementById('f_url_t');
+  fUrlT.style.letterSpacing=lerp(0.30,0.06,up)+'em';
+  fUrlT.style.opacity=String(up);
+  fBar.style.width=(FW*0.68*eoe(seg(t,49.3,0.8)))+'px';
+  const per=[];for(let ts=48.2;ts<51.6;ts+=2.6)per.push(ts);
+  sweepAny(fCardSw,t,per,0.75);
+  fadeUp(fSub,t,49.9,0.6,18);
+  followUp(fSubE,t,50.05);
+  fadeUp(fBrand,t,50.6,0.7,14);
+  fBrand.style.letterSpacing=(0.42+0.14*(1-eoe(seg(t,50.6,0.8)))).toFixed(4)+'em';
+
+  flash.style.opacity=(im*0.14).toFixed(3);
+  fade.style.opacity=(seg(t,51.3,0.7)*0.94).toFixed(3);
+}
+
+renderFrame(0);
+window.renderFrame=renderFrame;
+window.__ready=true;
+</script>
+</body>
+</html>

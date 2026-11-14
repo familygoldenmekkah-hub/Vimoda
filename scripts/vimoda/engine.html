@@ -43,6 +43,9 @@ html,body{background:#000;overflow:hidden;}
 .enchip{color:#64748B;font-weight:600;letter-spacing:.24em;}
 .enword{color:#7488A6;font-weight:600;letter-spacing:.22em;}
 .enpan{color:#64748B;font-weight:600;letter-spacing:.20em;}
+.starclip{background:linear-gradient(180deg,#FDE68A,#D97706);
+  -webkit-clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);
+  clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);}
 </style>
 </head>
 <body>
@@ -54,86 +57,90 @@ html,body{background:#000;overflow:hidden;}
   <div id="world">
     <div id="particles"></div>
 
-    <!-- S0 HOOK: satu simbol, tiga wajah -->
+    <!-- S0 HOOK: kenapa simbolnya begini bentuknya? -->
     <div class="scene" id="s0">
-      <div class="mono" id="h_7" style="position:absolute;font-weight:800;color:#FBBF24;">7</div>
+      <div class="mono" id="h_1" style="position:absolute;font-weight:800;color:#FBBF24;">1</div>
       <div class="mono" id="h_q" style="position:absolute;color:#F87171;font-weight:800;opacity:0;">?</div>
       <div id="h_cards" style="position:absolute;"></div>
-      <div class="center" id="h_l1" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Satu simbol, tiga wajah.</div>
-      <div class="center ensub" id="h_l1_e">One symbol, three faces.</div>
-      <div class="center" id="h_l2" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Simbolnya sama. Artinya juga sama?</div>
-      <div class="center ensub" id="h_l2_e">Same symbol. Same meaning?</div>
+      <div class="center" id="h_l1" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Kenapa satu ditulis 1?</div>
+      <div class="center ensub" id="h_l1_e">Why is one written as 1?</div>
+      <div class="center" id="h_l2" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Siapa yang menentukan bentuk 7?</div>
+      <div class="center ensub" id="h_l2_e">Who decided the shape of 7?</div>
     </div>
 
-    <!-- S1 ANGKA -->
+    <!-- S1 GORESAN -->
     <div class="scene" id="s1">
       <div class="center" id="a_chap" style="position:absolute;left:0;right:0;"><span class="chip" id="a_chap_t">BAGIAN 1 DARI 3</span></div>
       <div class="center enchip" id="a_chap_e">PART 1 OF 3</div>
-      <div class="center" id="a_word" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="a_word_t">ANGKA</span></div>
-      <div class="center" id="a_def" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Itu simbol buat menulis bilangan.</div>
-      <div class="center ensub" id="a_def_e">A symbol for writing numbers.</div>
-      <div id="a_digits" style="position:absolute;"></div>
-      <div class="center" id="a_dlab" style="position:absolute;color:#94A3B8;font-weight:600;">CUMA 0 SAMPAI 9</div>
-      <div class="center enpan" id="a_dlab_e">JUST 0 THROUGH 9</div>
-      <div class="center" id="a_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Cuma lambang, bukan jumlah.</div>
-      <div class="center ensub-b" id="a_take_e">Just a symbol, not an amount.</div>
+      <div class="center" id="a_word" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="a_word_t">GORESAN</span></div>
+      <div class="center" id="a_def" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Cara paling tua mencatat jumlah.</div>
+      <div class="center ensub" id="a_def_e">The oldest way to count.</div>
+      <div class="card" id="a_card" style="position:absolute;">
+        <div id="a_marks" style="position:absolute;"></div>
+        <div class="center mono" id="a_tlab" style="position:absolute;font-weight:800;color:#FBBF24;">347 = 347 GORESAN</div>
+        <div class="center enpan" id="a_tlab_e" style="position:absolute;">347 = 347 MARKS</div>
+      </div>
+      <div class="center" id="a_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Semakin besar jumlah, semakin rumit.</div>
+      <div class="center ensub-b" id="a_take_e">Bigger counts, messier marks.</div>
     </div>
 
-    <!-- S2 BILANGAN -->
+    <!-- S2 DESIMAL -->
     <div class="scene" id="s2">
       <div class="center" id="b_chap" style="position:absolute;left:0;right:0;"><span class="chip" id="b_chap_t">BAGIAN 2 DARI 3</span></div>
       <div class="center enchip" id="b_chap_e">PART 2 OF 3</div>
-      <div class="center" id="b_word" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="b_word_t">BILANGAN</span></div>
-      <div class="center" id="b_def" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Itu konsep jumlah atau nilai.</div>
-      <div class="center ensub" id="b_def_e">The idea of an amount or value.</div>
-      <div class="card" id="b_card" style="position:absolute;">
-        <div id="b_dots" style="position:absolute;"></div>
-        <div class="center mono" id="b_lab" style="position:absolute;font-weight:800;color:#FBBF24;">7 APEL</div>
-        <div class="center enword" id="b_lab_e" style="position:absolute;">SEVEN APPLES</div>
-      </div>
-      <div class="center" id="b_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Benda boleh ganti, nilai tetap 7.</div>
-      <div class="center ensub-b" id="b_take_e">Items change, the value stays 7.</div>
+      <div class="center" id="b_word" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="b_word_t">DESIMAL</span></div>
+      <div class="center" id="b_def" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Sepuluh simbol: 0 sampai 9.</div>
+      <div class="center ensub" id="b_def_e">Ten symbols: 0 through 9.</div>
+      <div id="b_digits" style="position:absolute;"></div>
+      <div id="b_ntp" style="position:absolute;"></div>
+      <div class="center" id="b_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Simbol sama, posisi mengubah nilai.</div>
+      <div class="center ensub-b" id="b_take_e">Same symbol, position changes value.</div>
     </div>
 
-    <!-- S3 NOMOR -->
+    <!-- S3 SIMBOL -->
     <div class="scene" id="s3">
       <div class="center" id="c_chap" style="position:absolute;left:0;right:0;"><span class="chip" id="c_chap_t">BAGIAN 3 DARI 3</span></div>
       <div class="center enchip" id="c_chap_e">PART 3 OF 3</div>
-      <div class="center" id="c_word" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="c_word_t">NOMOR</span></div>
-      <div class="center" id="c_def" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Itu penanda, bukan jumlah.</div>
-      <div class="center ensub" id="c_def_e">A tag, not an amount.</div>
+      <div class="center" id="c_word" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="c_word_t">SIMBOL</span></div>
+      <div class="center" id="c_def" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Bukan bilangan itu sendiri.</div>
+      <div class="center ensub" id="c_def_e">Not the number itself.</div>
       <div class="card" id="c_eqbox" style="position:absolute;">
-        <div class="center mono" id="c_morph" style="font-weight:800;">PUNGGUNG 10</div>
+        <div class="center mono" id="c_morph" style="font-weight:800;">7</div>
       </div>
-      <div class="center" id="c_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Kaos 10 isinya tetap satu orang.</div>
-      <div class="center ensub-b" id="c_take_e">Jersey 10 still holds one person.</div>
+      <div class="center" id="c_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Bentuk beda, nilai tetap tujuh.</div>
+      <div class="center ensub-b" id="c_take_e">Different forms, same value.</div>
     </div>
 
-    <!-- S4 SIMBOL SAMA, MAKNA BEDA -->
+    <!-- S4 BATAS KESEPAKATAN -->
     <div class="scene" id="s4">
       <div class="card" id="e_big" style="position:absolute;">
-        <div class="mono" id="e_big_t" style="font-weight:800;color:#FBBF24;">7</div>
+        <div class="starclip" id="e_big_t"></div>
       </div>
-      <div id="e_chips" style="position:absolute;"></div>
-      <div class="center" id="e_line" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Simbol sama, makna ikut konteks.</div>
-      <div class="center ensub-b" id="e_line_e">Same symbol, meaning follows context.</div>
+      <div class="center" id="e_l1" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Ganti lambang? Boleh saja.</div>
+      <div class="center ensub" id="e_l1_e">Swap the symbol? Go ahead.</div>
+      <div class="card" id="e_eq" style="position:absolute;">
+        <div class="starclip" id="e_eq_s"></div>
+        <div class="mono" id="e_eq_t" style="font-weight:800;color:#FBBF24;"> + 2 = 9</div>
+      </div>
+      <div class="center" id="e_l2" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Lambang boleh ganti, hasil tidak.</div>
+      <div class="center ensub-b" id="e_l2_e">Symbols flex, results do not.</div>
     </div>
 
     <!-- S5 CTA -->
     <div class="scene" id="s5">
-      <div class="center" id="f_l1" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Nah, sekarang giliranmu.</div>
-      <div class="center ensub-b" id="f_l1_e">Now it is your turn.</div>
-      <div class="center" id="f_bigq" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">Punggung 7 itu jumlah, nilai, atau identitas?</div>
-      <div class="center ensub" id="f_bigq_e">Is jersey 7 a count, a value, or an identity?</div>
-      <div class="center" id="f_cta2" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Tulis alasanmu di komentar.</div>
-      <div class="center ensub" id="f_cta2_e">Drop your reason in the comments.</div>
+      <div class="center" id="f_l1" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Kalau seluruh manusia sepakat</div>
+      <div class="center ensub-b" id="f_l1_e">If every human on Earth agreed</div>
+      <div class="center" id="f_bigq" style="position:absolute;left:0;right:0;color:#CBD5E1;font-weight:600;">apakah 7 + 2 langsung jadi 10?</div>
+      <div class="center ensub" id="f_bigq_e">would 7 + 2 suddenly become 10?</div>
+      <div class="center" id="f_cta2" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Ceritain pendapatmu di komentar.</div>
+      <div class="center ensub" id="f_cta2_e">Tell us what you think in the comments.</div>
       <div class="card" id="f_card" style="position:absolute;">
         <div class="center" id="f_open" style="color:#94A3B8;font-weight:600;letter-spacing:.30em;">BUKA BROWSER KAMU</div>
         <div class="center enchip" id="f_open_e">OPEN YOUR BROWSER</div>
         <div class="center" id="f_url" style="font-weight:800;"><span class="grad" id="f_url_t">AKIOMIDA.COM</span></div>
         <div id="f_bar" style="height:5px;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24);width:0;"></div>
-        <div class="center" id="f_sub" style="color:#CBD5E1;font-weight:500;">Belajar matematika jadi makin seru.</div>
-        <div class="center ensub2" id="f_sub_e" style="color:#7E92AF;font-weight:500;">Learning math just got more fun.</div>
+        <div class="center" id="f_sub" style="color:#CBD5E1;font-weight:500;">Kebenaran butuh dasar dan alasan.</div>
+        <div class="center ensub2" id="f_sub_e" style="color:#7E92AF;font-weight:500;">Truth needs grounds and reasons.</div>
       </div>
       <div class="center" id="f_brand" style="position:absolute;left:0;right:0;color:#64748B;font-weight:600;letter-spacing:.42em;">AKIOMIDA</div>
     </div>
@@ -154,25 +161,28 @@ const H=ORIENT==='portrait'?1920:1080;
 
 const P = ORIENT==='portrait' ? {
   mx:84, wmY:200, wmSize:19,
-  h7Y:250, h7Size:170, h7BoxW:190, h7BoxH:190,
-  qX:660, qY:280, qSize:96,
+  h1Y:250, h1Size:150, h1BoxW:140, h1BoxH:190,
+  qX:640, qY:280, qSize:96,
   cardY:520, cardH:190, cardW:288, cardGap:20,
-  cardDSize:54, cardLab:17, cardEn:11,
+  cardGSize:42, cardLab:17, cardEn:11,
   l1Y:790, l1Size:44, l1EY:856, l1ESize:25,
   l2Y:960, l2Size:46, l2EY:1028, l2ESize:26,
   chapY:236, chapSize:19, chapEY:280, chapESize:14,
   wordY:330, wordSize:78,
   defY:452, defSize:40, defEY:508, defESize:23,
-  digY:600, digH:110, digW:72, digGap:10, digSize:40,
-  dlabY:750, dlabSize:17, dlabEY:782, dlabESize:13,
+  cardY1:600, cardH1:280, cardW1:640,
+  markY:64, markW:7, markH:60, markStep:17, gGap:36, strikeH:7, strikeW:70,
+  tlabY:180, tlabSize:22, tlabEY:214, tlabESize:12,
   takeY:920, takeSize:42, takeEY:982, takeESize:23,
-  card2Y:600, card2H:330, card2W:560, dotC:34, dotGap:12, labDy:250, labEDy:290, labSize:24, labESize:12,
-  take2Y:980, take2Size:42, take2EY:1042, take2ESize:23,
+  digY:600, digH:110, digW:72, digGap:10, digSize:40,
+  ntpY:760, ntpH:140, ntpW:240, ntpGap:20, ntpDSize:40, ntpLab:15, ntpEn:10,
+  take2Y:940, take2Size:42, take2EY:1002, take2ESize:23,
   boxY:600, boxH:280, boxW:880, eqSize2:64, eqSize3:54,
   take3Y:930, take3Size:42, take3EY:992, take3ESize:23,
-  bigY:240, bigH:190, bigW:190, bigDSize:120,
-  chY:490, chH:92, chW:280, chGap:20, chCtx:17, chEn:11, chMean:27,
-  lineY:660, lineSize:42, lineEY:724, lineESize:23,
+  bigY:240, bigH:190, bigW:190, bigStar:110,
+  l1Y4:480, l1Size4:42, l1EY4:544, l1ESize4:23,
+  eqY:610, eqH:130, eqW:500, eqStar:60, eqTSize:46,
+  l2Y:780, l2Size:42, l2EY:846, l2ESize:23,
   fl1Y:250, fl1Size:46, fl1EY:318, fl1ESize:25,
   bigqY:392, bigqSize:36, bigqEY:458, bigqESize:22,
   cta2Y:528, cta2Size:36, cta2EY:592, cta2ESize:21,
@@ -181,25 +191,28 @@ const P = ORIENT==='portrait' ? {
   brandY:1076, brandSize:22
 } : {
   mx:200, wmY:1006, wmSize:19,
-  h7Y:180, h7Size:170, h7BoxW:190, h7BoxH:190,
-  qX:1080, qY:215, qSize:96,
+  h1Y:180, h1Size:150, h1BoxW:140, h1BoxH:190,
+  qX:1060, qY:215, qSize:96,
   cardY:440, cardH:190, cardW:300, cardGap:30,
-  cardDSize:54, cardLab:17, cardEn:11,
+  cardGSize:42, cardLab:17, cardEn:11,
   l1Y:690, l1Size:44, l1EY:756, l1ESize:25,
   l2Y:870, l2Size:46, l2EY:938, l2ESize:26,
   chapY:150, chapSize:19, chapEY:194, chapESize:14,
   wordY:244, wordSize:78,
   defY:366, defSize:40, defEY:422, defESize:23,
+  cardY1:470, cardH1:280, cardW1:720,
+  markY:64, markW:7, markH:60, markStep:17, gGap:36, strikeH:7, strikeW:70,
+  tlabY:180, tlabSize:24, tlabEY:216, tlabESize:13,
+  takeY:800, takeSize:44, takeEY:864, takeESize:24,
   digY:500, digH:116, digW:76, digGap:12, digSize:42,
-  dlabY:650, dlabSize:17, dlabEY:682, dlabESize:13,
-  takeY:780, takeSize:44, takeEY:844, takeESize:24,
-  card2Y:470, card2H:340, card2W:620, dotC:40, dotGap:14, labDy:262, labEDy:304, labSize:26, labESize:13,
-  take2Y:860, take2Size:44, take2EY:924, take2ESize:24,
+  ntpY:680, ntpH:150, ntpW:260, ntpGap:24, ntpDSize:42, ntpLab:16, ntpEn:10,
+  take2Y:870, take2Size:44, take2EY:934, take2ESize:24,
   boxY:470, boxH:270, boxW:1000, eqSize2:62, eqSize3:56,
   take3Y:800, take3Size:44, take3EY:864, take3ESize:24,
-  bigY:170, bigH:180, bigW:180, bigDSize:112,
-  chY:400, chH:92, chW:300, chGap:24, chCtx:17, chEn:11, chMean:27,
-  lineY:560, lineSize:44, lineEY:624, lineESize:24,
+  bigY:170, bigH:180, bigW:180, bigStar:104,
+  l1Y4:420, l1Size4:44, l1EY4:486, l1ESize4:24,
+  eqY:560, eqH:140, eqW:560, eqStar:64, eqTSize:50,
+  l2Y:740, l2Size:44, l2EY:806, l2ESize:24,
   fl1Y:170, fl1Size:46, fl1EY:238, fl1ESize:25,
   bigqY:296, bigqSize:40, bigqEY:362, bigqESize:22,
   cta2Y:428, cta2Size:34, cta2EY:486, cta2ESize:20,
@@ -262,79 +275,48 @@ if(ORIENT==='portrait'){wm.style.top=P.wmY+'px';wm.style.left='0';wm.style.right
 else{wm.style.top=P.wmY+'px';wm.style.right='70px';wm.style.left='auto';}
 
 /* ---------- S0 ---------- */
-const h7=document.getElementById('h_7');
-const HW=P.h7BoxW, HH=P.h7BoxH;
-h7.style.left=((W-HW)/2)+'px';h7.style.top=P.h7Y+'px';
-h7.style.width=HW+'px';h7.style.height=HH+'px';
-h7.style.fontSize=P.h7Size+'px';h7.style.lineHeight=HH+'px';
-h7.style.textAlign='center';
-h7.style.textShadow='0 0 34px rgba(251,191,36,.35)';
+const h1=document.getElementById('h_1');
+const HW=P.h1BoxW, HH=P.h1BoxH;
+h1.style.left=((W-HW)/2)+'px';h1.style.top=P.h1Y+'px';
+h1.style.width=HW+'px';h1.style.height=HH+'px';
+h1.style.fontSize=P.h1Size+'px';h1.style.lineHeight=HH+'px';
+h1.style.textAlign='center';
+h1.style.textShadow='0 0 34px rgba(251,191,36,.35)';
 const hQ=document.getElementById('h_q');
 hQ.style.left=P.qX+'px';hQ.style.top=P.qY+'px';hQ.style.fontSize=P.qSize+'px';
-/* tiga kartu konteks */
+/* tiga kartu bentuk alternatif */
 const hCards=document.getElementById('h_cards');
 hCards.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
 const CW0=P.cardW, CH0=P.cardH, CG0=P.cardGap;
 const gw0=3*CW0+2*CG0, x0t=(W-gw0)/2;
+const SHAPES0=[
+  {glyph:'|', col:'#FBBF24', lab:'GORESAN', en:'TALLY', chalk:false},
+  {glyph:'\u25B3', col:'#34D399', lab:'SEGITIGA', en:'TRIANGLE', chalk:true},
+  {glyph:'\u25CB', col:'#22D3EE', lab:'LENGKUNG', en:'CURVE', chalk:false}
+];
 const H0C=[];
-for(let i=0;i<3;i++){
+SHAPES0.forEach((o,i)=>{
   const el=document.createElement('div');
   el.className='card';
   el.style.cssText=`position:absolute;left:${x0t+i*(CW0+CG0)}px;top:${P.cardY}px;width:${CW0}px;height:${CH0}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;overflow:hidden;will-change:transform,opacity;`;
-  hCards.appendChild(el);
-  H0C.push(el);
-}
-/* kartu 1: tujuh titik apel */
-(()=>{
   const d=document.createElement('div');
   d.className='mono';
-  d.style.cssText=`font-weight:800;font-size:${P.cardDSize}px;color:#FBBF24;line-height:1;`;
-  d.textContent='7';
-  H0C[0].appendChild(d);
-  const row=document.createElement('div');
-  row.style.cssText='display:flex;gap:7px;';
-  for(let k=0;k<7;k++){
-    const dot=document.createElement('div');
-    dot.style.cssText='width:12px;height:12px;border-radius:50%;background:radial-gradient(120% 120% at 35% 30%,#FCD34D,#D97706);border:1px solid rgba(255,255,255,.3);';
-    row.appendChild(dot);
-  }
-  H0C[0].appendChild(row);
-})();
-/* kartu 2: papan tulis kapur */
-(()=>{
-  const d=document.createElement('div');
-  d.className='mono';
-  d.style.cssText=`font-weight:800;font-size:${P.cardDSize}px;color:#34D399;line-height:1;text-shadow:0 0 14px rgba(52,211,153,.45);`;
-  d.textContent='7';
-  H0C[1].appendChild(d);
-  const u=document.createElement('div');
-  u.style.cssText='width:56px;height:4px;border-radius:2px;background:rgba(52,211,153,.5);';
-  H0C[1].appendChild(u);
-})();
-/* kartu 3: tiket antrean */
-(()=>{
-  const d=document.createElement('div');
-  d.className='mono';
-  d.style.cssText=`font-weight:800;font-size:${P.cardDSize}px;color:#22D3EE;line-height:1;`;
-  d.textContent='7';
-  H0C[2].appendChild(d);
-  const u=document.createElement('div');
-  u.style.cssText='width:56px;border-top:2px dashed rgba(34,211,238,.55);';
-  H0C[2].appendChild(u);
-})();
-const LABS0=[['7 APEL','7 APPLES'],['7 DI PAPAN','ON A BOARD'],['7 ANTREAN','IN A QUEUE']];
-H0C.forEach((el,i)=>{
+  d.style.cssText=`font-weight:800;font-size:${P.cardGSize}px;color:${o.col};line-height:1;`+(o.chalk?'text-shadow:0 0 14px rgba(52,211,153,.45);':'');
+  d.textContent=o.glyph;
+  el.appendChild(d);
   const lb=document.createElement('div');
   lb.style.cssText=`font-size:${P.cardLab}px;font-weight:700;color:#E7EEF8;`;
-  lb.textContent=LABS0[i][0];
+  lb.textContent=o.lab;
   const le=document.createElement('div');
   le.className='enword';
   le.style.cssText=`font-size:${P.cardEn}px;`;
-  le.textContent=LABS0[i][1];
+  le.textContent=o.en;
   el.appendChild(lb);el.appendChild(le);
   const sw=document.createElement('div');
   sw.className='sweep';
   el.appendChild(sw);
+  hCards.appendChild(el);
+  H0C.push(el);
 });
 const SWEEPS0=H0C.map(el=>el.querySelector('.sweep'));
 const hL1=document.getElementById('h_l1');
@@ -360,34 +342,43 @@ const aDef=document.getElementById('a_def');
 tx(aDef,P.defY,P.defSize);
 const aDefE=document.getElementById('a_def_e');
 tx(aDefE,P.defEY,P.defESize);
-/* sepuluh ubin angka, ubin 7 disorot emas */
-const aDig=document.getElementById('a_digits');
-aDig.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
-const DGW=P.digW, DGH=P.digH, DGG=P.digGap;
-const gwD=10*DGW+9*DGG, x0d=(W-gwD)/2;
-const DT=[];
-for(let i=0;i<10;i++){
-  const el=document.createElement('div');
-  const hero=(i===7);
-  el.className='card';
-  el.style.cssText=`position:absolute;left:${x0d+i*(DGW+DGG)}px;top:${P.digY}px;width:${DGW}px;height:${DGH}px;display:flex;align-items:center;justify-content:center;opacity:0;overflow:hidden;will-change:transform,opacity;`;
-  if(hero){el.style.borderColor='rgba(251,191,36,.55)';el.style.background='rgba(251,191,36,.10)';}
-  const d=document.createElement('div');
-  d.className='mono';
-  d.style.cssText=`font-weight:800;font-size:${P.digSize}px;color:${hero?'#FBBF24':'#7DD3FC'};`;
-  d.textContent=String(i);
-  el.appendChild(d);
-  const sw=document.createElement('div');
-  sw.className='sweep';
-  el.appendChild(sw);
-  aDig.appendChild(el);
-  DT.push(el);
+/* kartu goresan: 12 coretan dalam 3 kelompok + garis coret kelima */
+const aCard=document.getElementById('a_card');
+const CW1=P.cardW1, CH1=P.cardH1;
+aCard.style.left=((W-CW1)/2)+'px';aCard.style.top=P.cardY1+'px';
+aCard.style.width=CW1+'px';aCard.style.height=CH1+'px';
+aCard.style.overflow='hidden';
+aCard.style.background='rgba(251,191,36,.05)';
+const aMarks=document.getElementById('a_marks');
+const MW=P.markW, MH=P.markH, MS=P.markStep, GG=P.gGap;
+const gwM=75+GG+75+GG+(MS+MW);
+const mx0=(CW1-gwM)/2;
+const M7=[];
+let mi=0;
+for(let g=0;g<3;g++){
+  const n=g<2?5:2;
+  const gx=mx0+g*(75+GG);
+  for(let k=0;k<n;k++){
+    const bar=document.createElement('div');
+    bar.style.cssText=`position:absolute;left:${(gx+k*MS).toFixed(1)}px;top:${P.markY}px;width:${MW}px;height:${MH}px;border-radius:3px;background:linear-gradient(180deg,#FDE68A,#D97706);transform:rotate(-12deg);opacity:0;will-change:transform,opacity;`;
+    aMarks.appendChild(bar);
+    M7.push({el:bar, ts:8.4+mi*0.08, strike:null});
+    mi++;
+  }
+  if(g<2){
+    const st=document.createElement('div');
+    st.style.cssText=`position:absolute;left:${(gx+37-MW).toFixed(1)}px;top:${P.markY+26}px;width:${P.strikeW}px;height:${P.strikeH}px;border-radius:3px;background:rgba(253,230,138,.85);transform:rotate(-55deg);opacity:0;will-change:transform,opacity;`;
+    aMarks.appendChild(st);
+    M7[mi-1].strike={el:st, ts:8.4+(mi-1)*0.08+0.28};
+  }
 }
-const DSWEEP=DT[7].querySelector('.sweep');
-const aDl=document.getElementById('a_dlab');
-tx(aDl,P.dlabY,P.dlabSize);
-const aDlE=document.getElementById('a_dlab_e');
-tx(aDlE,P.dlabEY,P.dlabESize);
+const aTl=document.getElementById('a_tlab');
+aTl.style.top=P.tlabY+'px';aTl.style.left='0';aTl.style.right='0';aTl.style.fontSize=P.tlabSize+'px';
+const aTlE=document.getElementById('a_tlab_e');
+aTlE.style.top=P.tlabEY+'px';aTlE.style.left='0';aTlE.style.right='0';aTlE.style.fontSize=P.tlabESize+'px';
+const aCardSw=document.createElement('div');
+aCardSw.className='sweep';
+aCard.appendChild(aCardSw);
 const aTake=document.getElementById('a_take');
 tx(aTake,P.takeY,P.takeSize);
 const aTakeE=document.getElementById('a_take_e');
@@ -405,35 +396,68 @@ const bDef=document.getElementById('b_def');
 tx(bDef,P.defY,P.defSize);
 const bDefE=document.getElementById('b_def_e');
 tx(bDefE,P.defEY,P.defESize);
-const bCard=document.getElementById('b_card');
-const CW2=P.card2W, CH2=P.card2H;
-bCard.style.left=((W-CW2)/2)+'px';bCard.style.top=P.card2Y+'px';
-bCard.style.width=CW2+'px';bCard.style.height=CH2+'px';
-bCard.style.overflow='hidden';
-const bDots=document.getElementById('b_dots');
-const DC2=P.dotC, DG2=P.dotGap;
-const spots2=[[0,0],[1,0],[2,0],[3,0],[0.5,1],[1.5,1],[2.5,1]];
-const D7=[];
-spots2.forEach(([cx,cy])=>{
+/* sepuluh ubin angka, ubin 5 disorot emas */
+const bDig=document.getElementById('b_digits');
+bDig.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
+const DGW=P.digW, DGH=P.digH, DGG=P.digGap;
+const gwD=10*DGW+9*DGG, x0d=(W-gwD)/2;
+const DT=[];
+for(let i=0;i<10;i++){
+  const el=document.createElement('div');
+  const hero=(i===5);
+  el.className='card';
+  el.style.cssText=`position:absolute;left:${x0d+i*(DGW+DGG)}px;top:${P.digY}px;width:${DGW}px;height:${DGH}px;display:flex;align-items:center;justify-content:center;opacity:0;overflow:hidden;will-change:transform,opacity;`;
+  if(hero){el.style.borderColor='rgba(251,191,36,.55)';el.style.background='rgba(251,191,36,.10)';}
   const d=document.createElement('div');
-  const dx=(CW2-(4*DC2+3*DG2))/2+cx*(DC2+DG2);
-  const dy=(CH2*0.44-(2*DC2+DG2)/2)+cy*(DC2+DG2);
-  d.style.cssText=`position:absolute;left:${dx.toFixed(1)}px;top:${dy.toFixed(1)}px;width:${DC2}px;height:${DC2}px;border-radius:50%;opacity:0;will-change:transform,opacity;`;
-  bDots.appendChild(d);
-  D7.push(d);
-});
-const bLab=document.getElementById('b_lab');
-bLab.style.top=P.labDy+'px';bLab.style.left='0';bLab.style.right='0';bLab.style.fontSize=P.labSize+'px';
-const bLabE=document.getElementById('b_lab_e');
-bLabE.style.top=P.labEDy+'px';bLabE.style.left='0';bLabE.style.right='0';bLabE.style.fontSize=P.labESize+'px';
-const bCardSw=document.createElement('div');
-bCardSw.className='sweep';
-bCard.appendChild(bCardSw);
-const ITEMS2=[
-  {lab:'7 APEL', en:'SEVEN APPLES', bg:'radial-gradient(120% 120% at 35% 30%,#FCD34D,#D97706)', col:'#FBBF24', book:false},
-  {lab:'7 JERUK', en:'SEVEN ORANGES', bg:'radial-gradient(120% 120% at 35% 30%,#FDBA74,#EA580C)', col:'#FB923C', book:false},
-  {lab:'7 BUKU', en:'SEVEN BOOKS', bg:'linear-gradient(180deg,#93C5FD,#3B82F6)', col:'#7DD3FC', book:true}
+  d.className='mono';
+  d.style.cssText=`font-weight:800;font-size:${P.digSize}px;color:${hero?'#FBBF24':'#7DD3FC'};`;
+  d.textContent=String(i);
+  el.appendChild(d);
+  const sw=document.createElement('div');
+  sw.className='sweep';
+  el.appendChild(sw);
+  bDig.appendChild(el);
+  DT.push(el);
+}
+const DSWEEP=DT[5].querySelector('.sweep');
+/* tiga kartu nilai tempat: 5, 50, 500 (angka 5 selalu emas) */
+const bNtp=document.getElementById('b_ntp');
+bNtp.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
+const NW=P.ntpW, NH=P.ntpH, NG=P.ntpGap;
+const gwN=3*NW+2*NG, x0n=(W-gwN)/2;
+const NTPS=[
+  {num:[['5',1]], lab:'LIMA', en:'FIVE'},
+  {num:[['5',1],['0',0]], lab:'LIMA PULUH', en:'FIFTY'},
+  {num:[['5',1],['00',0]], lab:'LIMA RATUS', en:'FIVE HUNDRED'}
 ];
+const N3=[];
+NTPS.forEach((o,i)=>{
+  const el=document.createElement('div');
+  el.className='card';
+  el.style.cssText=`position:absolute;left:${x0n+i*(NW+NG)}px;top:${P.ntpY}px;width:${NW}px;height:${NH}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;opacity:0;overflow:hidden;will-change:transform,opacity;`;
+  const d=document.createElement('div');
+  d.className='mono';
+  d.style.cssText=`font-weight:800;font-size:${P.ntpDSize}px;line-height:1;`;
+  o.num.forEach(([tx2,hot])=>{
+    const sp=document.createElement('span');
+    sp.style.color=hot?'#FBBF24':'#64748B';
+    sp.textContent=tx2;
+    d.appendChild(sp);
+  });
+  const lb=document.createElement('div');
+  lb.style.cssText=`font-size:${P.ntpLab}px;font-weight:700;color:#E7EEF8;letter-spacing:.10em;`;
+  lb.textContent=o.lab;
+  const le=document.createElement('div');
+  le.className='enword';
+  le.style.cssText=`font-size:${P.ntpEn}px;`;
+  le.textContent=o.en;
+  el.appendChild(d);el.appendChild(lb);el.appendChild(le);
+  const sw=document.createElement('div');
+  sw.className='sweep';
+  el.appendChild(sw);
+  bNtp.appendChild(el);
+  N3.push({el, sw});
+});
 const bTake=document.getElementById('b_take');
 tx(bTake,P.take2Y,P.take2Size);
 const bTakeE=document.getElementById('b_take_e');
@@ -473,43 +497,32 @@ eBig.style.left=((W-BW3)/2)+'px';eBig.style.top=P.bigY+'px';
 eBig.style.width=BW3+'px';eBig.style.height=BH3+'px';
 eBig.style.borderColor='rgba(251,191,36,.5)';eBig.style.background='rgba(251,191,36,.08)';
 const eBigT=document.getElementById('e_big_t');
-eBigT.style.cssText+='position:absolute;left:0;right:0;top:50%;transform:translateY(-54%);text-align:center;font-size:'+P.bigDSize+'px;text-shadow:0 0 30px rgba(251,191,36,.30);';
+eBigT.style.cssText+=`position:absolute;left:50%;top:50%;width:${P.bigStar}px;height:${P.bigStar}px;transform:translate(-50%,-52%);`;
 const eBigSw=document.createElement('div');
 eBigSw.className='sweep';
 eBig.appendChild(eBigSw);
-/* tiga chip konteks yang berubah jadi makna */
-const eChips=document.getElementById('e_chips');
-eChips.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
-const CHW=P.chW, CHH=P.chH, CHG=P.chGap;
-const gwC=3*CHW+2*CHG, x0c=(W-gwC)/2;
-const CHIPS4=[
-  {ctx:'7 APEL', en:'7 APPLES', mean:'JUMLAH', col:'#FBBF24', men:'THE COUNT'},
-  {ctx:'7 DI PAPAN', en:'ON A BOARD', mean:'TULISAN', col:'#22D3EE', men:'THE WRITING'},
-  {ctx:'NOMOR 7', en:'IN A QUEUE', mean:'IDENTITAS', col:'#A78BFA', men:'THE IDENTITY'}
-];
-const C4=[];
-CHIPS4.forEach((o,i)=>{
-  const el=document.createElement('div');
-  el.className='card';
-  el.style.cssText=`position:absolute;left:${x0c+i*(CHW+CHG)}px;top:${P.chY}px;width:${CHW}px;height:${CHH}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;overflow:hidden;will-change:transform,opacity;`;
-  const ctx=document.createElement('div');
-  ctx.style.cssText=`position:absolute;left:50%;top:0;transform:translateX(-50%);font-size:${P.chCtx}px;font-weight:700;color:#A9B8CE;white-space:nowrap;`;
-  ctx.textContent=o.ctx;
-  const mean=document.createElement('div');
-  mean.style.cssText=`position:absolute;left:50%;top:0;transform:translateX(-50%);font-size:${P.chMean}px;font-weight:800;color:${o.col};white-space:nowrap;opacity:0;`;
-  mean.textContent=o.mean;
-  const en=document.createElement('div');
-  en.className='enword';
-  en.style.cssText=`font-size:${P.chEn}px;`;
-  en.textContent=o.en;
-  el.appendChild(ctx);el.appendChild(mean);el.appendChild(en);
-  eChips.appendChild(el);
-  C4.push({el, ctx, mean, en, o});
-});
-const eLine=document.getElementById('e_line');
-tx(eLine,P.lineY,P.lineSize);
-const eLineE=document.getElementById('e_line_e');
-tx(eLineE,P.lineEY,P.lineESize);
+const eL1=document.getElementById('e_l1');
+tx(eL1,P.l1Y4,P.l1Size4);
+const eL1E=document.getElementById('e_l1_e');
+tx(eL1E,P.l1EY4,P.l1ESize4);
+const eEq=document.getElementById('e_eq');
+const EQW=P.eqW, EQH=P.eqH;
+eEq.style.left=((W-EQW)/2)+'px';eEq.style.top=P.eqY+'px';
+eEq.style.width=EQW+'px';eEq.style.height=EQH+'px';
+eEq.style.borderColor='rgba(251,191,36,.5)';
+eEq.style.background='rgba(251,191,36,.08)';
+eEq.style.display='flex';eEq.style.alignItems='center';eEq.style.justifyContent='center';eEq.style.gap='18px';
+const eEqS=document.getElementById('e_eq_s');
+eEqS.style.cssText+=`position:relative;width:${P.eqStar}px;height:${P.eqStar}px;flex:0 0 auto;`;
+const eEqT=document.getElementById('e_eq_t');
+eEqT.style.fontSize=P.eqTSize+'px';
+const eEqSw=document.createElement('div');
+eEqSw.className='sweep';
+eEq.appendChild(eEqSw);
+const eL2=document.getElementById('e_l2');
+tx(eL2,P.l2Y,P.l2Size);
+const eL2E=document.getElementById('e_l2_e');
+tx(eL2E,P.l2EY,P.l2ESize);
 
 /* ---------- S5 ---------- */
 const fL1=document.getElementById('f_l1');
@@ -603,7 +616,7 @@ function sweepAny(sw,t,tss,amp=0.85){
 
 /* kamera: push pelan per bab + napas + shake kecil saat impact */
 const CUTS=[6.0,14.4,25.2,34.8,43.2];
-const IMPACTS=[[0.5,0.5],[18.6,0.22],[20.4,0.22],[32.2,0.42],[45.3,0.28],[48.7,0.28]];
+const IMPACTS=[[0.5,0.5],[21.0,0.15],[32.2,0.42],[40.2,0.28],[45.3,0.28],[48.7,0.28]];
 function imp(t){
   let a=0;
   for(const [it,ia] of IMPACTS){
@@ -635,17 +648,17 @@ function slideScene(el,t,tIn,tOut){
   el.style.transform=`translateX(${x.toFixed(1)}px)`;
 }
 
-/* timeline v06: momen muncul */
+/* timeline v07: momen muncul */
 function stageIdx(t){
   let i=0;
   for(const s of [29.0,30.6,32.2]){ if(t>=s) i++; }
   return i;
 }
 const STAGE_TXT=[
-  {t:'PUNGGUNG 10', col:'#7DD3FC', g:0},
-  {t:'ISINYA 10 ORANG?', col:'#F87171', g:0},
-  {t:'RUMAH NO. 25', col:'#34D399', g:0},
-  {t:'CUMA PENANDA.', col:'', g:1}
+  {t:'7', col:'#FBBF24', g:0},
+  {t:'VII', col:'#7DD3FC', g:0},
+  {t:'TUJUH', col:'#A78BFA', g:0},
+  {t:'NILAI SAMA.', col:'', g:1}
 ];
 
 /* ---------- RENDER PER FRAME ---------- */
@@ -670,19 +683,19 @@ function renderFrame(t){
   /* S0 0-6.6 */
   const s0=document.getElementById('s0');
   slideScene(s0,t,-3,5.7);
-  popA(h7,t,0.5,0.8,44,1.35,1.35);
+  popA(h1,t,0.5,0.8,44,1.35,1.35);
   hQ.style.opacity=String(clamp(backOS(seg(t,4.9,0.5),2.0),0,1));
   hQ.style.transform=`translateY(${((1-clamp(backOS(seg(t,4.9,0.5),2.0),0,1))*28).toFixed(2)}px)`;
   H0C.forEach((el,i)=>{
     popA(el,t,1.0+i*0.45,0.6,36,0.84,1.7);
     sweepAny(SWEEPS0[i],t,[1.62+i*0.45]);
   });
-  fadeUp(hL1,t,3.0);
-  followUp(hL1E,t,3.18);
-  fadeUp(hL2,t,4.2,0.7,28);
-  followUp(hL2E,t,4.38);
+  fadeUp(hL1,t,2.6);
+  followUp(hL1E,t,2.78);
+  fadeUp(hL2,t,3.9,0.7,28);
+  followUp(hL2E,t,4.08);
 
-  /* S1 6.0-15.0 */
+  /* S1 6.0-14.4 */
   const s1=document.getElementById('s1');
   slideScene(s1,t,6.0,14.1);
   wipeChip(aChapT,t,6.7);
@@ -691,16 +704,26 @@ function renderFrame(t){
   headIn(aWord,t,7.2,0.10);
   followUp(aDef,t,7.8);
   followUp(aDefE,t,7.98);
-  DT.forEach((el,i)=>{
-    popA(el,t,8.4+i*0.08,0.5,24,0.8,2.0);
-    if(i===7)sweepAny(DSWEEP,t,[9.3]);
+  popA(aCard,t,8.2,0.7,30,0.9,1.6);
+  M7.forEach((m,i)=>{
+    popA(m.el,t,m.ts,0.5,18,0.7,2.0);
+    if(m.strike){
+      const p=seg(t,m.strike.ts,0.35);
+      m.strike.el.style.opacity=String(p);
+      m.strike.el.style.transform=`rotate(-55deg) scaleX(${Math.max(p,0.001).toFixed(3)})`;
+    }
   });
-  fadeUp(aDl,t,9.8,0.5,14);
-  followUp(aDlE,t,9.95);
+  sweepAny(aCardSw,t,[9.9]);
+  const alp=eoe(seg(t,10.1,0.5));
+  aTl.style.opacity=String(alp);
+  aTl.style.transform=`translateY(${((1-alp)*14).toFixed(2)}px)`;
+  const alpe=eoe(seg(t,10.25,0.5));
+  aTlE.style.opacity=String(alpe*0.95);
+  aTlE.style.transform=`translateY(${((1-alpe)*10).toFixed(2)}px)`;
   fadeUp(aTake,t,11.4,0.7,26);
   followUp(aTakeE,t,11.6);
 
-  /* S2 14.4-25.8 */
+  /* S2 14.4-25.2 */
   const s2=document.getElementById('s2');
   slideScene(s2,t,14.4,24.9);
   wipeChip(bChapT,t,15.1);
@@ -709,33 +732,18 @@ function renderFrame(t){
   headIn(bWord,t,15.6,0.10);
   followUp(bDef,t,16.2);
   followUp(bDefE,t,16.38);
-  popA(bCard,t,16.9,0.7,40,0.88,1.6);
-  bCard.style.transform+=' scaleY('+(1-imp(t)*0.05).toFixed(3)+')';
-  const st2=t<18.6?0:(t<20.4?1:2);
-  const it2=ITEMS2[st2];
-  D7.forEach((el,i)=>{
-    const base=backOS(seg(t,17.3+i*0.12,0.5),1.8);
-    const p=clamp(base*(1+0.20*imp(t)),0,1.25);
-    el.style.opacity=String(clamp(base,0,1));
-    el.style.transform=`scale(${p.toFixed(3)})`;
-    el.style.background=it2.bg;
-    if(it2.book){el.style.borderRadius='6px';el.style.borderLeft='4px solid rgba(255,255,255,.45)';}
-    else{el.style.borderRadius='50%';el.style.border='1px solid rgba(255,255,255,.35)';}
+  DT.forEach((el,i)=>{
+    popA(el,t,16.8+i*0.08,0.5,24,0.8,2.0);
+    if(i===5)sweepAny(DSWEEP,t,[17.6]);
   });
-  bLab.textContent=it2.lab;
-  bLab.style.color=it2.col;
-  bLabE.textContent=it2.en;
-  const lp=eoe(seg(t,17.9,0.5));
-  bLab.style.opacity=String(lp);
-  bLab.style.transform=`translateY(${((1-lp)*14).toFixed(2)}px) scale(${(1+0.30*imp(t)).toFixed(3)})`;
-  const lpe=eoe(seg(t,18.05,0.5));
-  bLabE.style.opacity=String(lpe*0.95);
-  bLabE.style.transform=`translateY(${((1-lpe)*10).toFixed(2)}px)`;
-  sweepAny(bCardSw,t,[17.1,18.75,20.55]);
-  fadeUp(bTake,t,21.9,0.7,26);
-  followUp(bTakeE,t,22.1);
+  N3.forEach((o,i)=>{
+    popA(o.el,t,19.2+i*0.9,0.55,30,0.85,1.8);
+    sweepAny(o.sw,t,[19.8+i*0.9]);
+  });
+  fadeUp(bTake,t,22.8,0.7,26);
+  followUp(bTakeE,t,23.0);
 
-  /* S3 25.2-35.4 */
+  /* S3 25.2-34.8 */
   const s3=document.getElementById('s3');
   slideScene(s3,t,25.2,34.5);
   wipeChip(cChapT,t,25.9);
@@ -768,32 +776,22 @@ function renderFrame(t){
   }
   cMorph.style.opacity=String(mo);
   cMorph.style.transform=`translateY(${mty.toFixed(2)}px) scale(${msx.toFixed(3)},${msy.toFixed(3)})`;
-  const glowC=st===1?'rgba(248,113,113,':st===3?'rgba(167,139,250,':'rgba(34,211,238,';
+  const glowC=st===1?'rgba(125,211,252,':st===2?'rgba(167,139,250,':'rgba(251,191,36,';
   cBox.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(28+16*Math.sin(t*3)).toFixed(0)}px ${glowC}${(0.09+0.04*Math.sin(t*3)).toFixed(3)})`;
   fadeUp(cTake,t,33.4,0.7,24);
   followUp(cTakeE,t,33.6);
 
-  /* S4 34.8-43.8 */
+  /* S4 34.8-43.2 */
   const s4=document.getElementById('s4');
   slideScene(s4,t,34.8,42.9);
   popA(eBig,t,35.5,0.8,40,1.3,1.4);
   sweepAny(eBigSw,t,[36.3]);
-  C4.forEach((o,i)=>{
-    popA(o.el,t,36.7+i*0.25,0.55,26,0.85,1.8);
-    const fp=seg(t,37.8+i*1.0,0.55);
-    const q=1-Math.abs(fp*2-1);
-    o.ctx.style.opacity=String(clamp(fp*2,0,1));
-    o.mean.style.opacity=String(clamp(fp*2-1,0,1));
-    const sq=1-0.10*q;
-    o.ctx.style.transform=`translateX(-50%) scaleY(${sq.toFixed(3)})`;
-    o.mean.style.transform=`translateX(-50%) scaleY(${sq.toFixed(3)})`;
-    o.en.textContent=fp>=0.5?o.o.men:o.o.en;
-    o.el.style.boxShadow=q>0.01
-      ?`0 18px 60px rgba(0,0,0,.45), 0 0 ${(24*q).toFixed(0)}px ${o.o.col}${(0.30*q).toFixed(3)}`
-      :'0 18px 60px rgba(0,0,0,.45)';
-  });
-  fadeUp(eLine,t,41.0,0.7,26);
-  followUp(eLineE,t,41.2);
+  fadeUp(eL1,t,36.7,0.6,22);
+  followUp(eL1E,t,36.88);
+  popA(eEq,t,38.2,0.7,30,0.88,1.6);
+  sweepAny(eEqSw,t,[38.6]);
+  fadeUp(eL2,t,40.2,0.7,26);
+  followUp(eL2E,t,40.4);
 
   /* S5 43.2-52 */
   const s5=document.getElementById('s5');
