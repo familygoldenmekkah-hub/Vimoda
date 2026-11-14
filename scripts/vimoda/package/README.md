@@ -1,6 +1,6 @@
 # VIMODA
 
-Studio video animasi matematika oleh **Kaisar Motion**. Misi: membuat penonton jatuh cinta pada matematika lewat motion graphics yang punya hook kuat, ritme ketat, dan tutupan yang menggugah rasa ingin tahu.
+Studio video animasi matematika **AKIOMIDA**. Misi: membuat penonton jatuh cinta pada matematika lewat motion graphics yang punya hook kuat, ritme ketat, dan tutupan yang menggugah rasa ingin tahu.
 
 ## Aturan produksi (kunci studio, berlaku permanen)
 
@@ -11,12 +11,15 @@ Studio video animasi matematika oleh **Kaisar Motion**. Misi: membuat penonton j
 5. Nol typo di semua teks di layar, caption, dan dokumen.
 6. Label di dalam video adalah **AKIOMIDA**, bukan "Kaisar Motion". Gelar Kaisar Motion hanya dipakai di percakapan, tidak pernah ditulis di dalam video (watermark maupun footer).
 7. Tone penyampaian: ngobrol santai ala tongkrongan - hangat, menyapa "kamu", punya jiwa, mudah dicerna. Copy yang datar, dingin, atau kaku harus dihindari.
+8. Dua bahasa di layar: teks utama bahasa Indonesia, dan di bawahnya selalu ada subtitle bahasa Inggris yang lebih kecil (sekitar 55 sampai 60 persen ukuran teks Indonesia) namun tetap terbaca.
+9. Margin samping aman: teks tidak boleh mepet ujung kiri atau kanan meski kalimatnya panjang (batas aman 84 px di portrait, 200 px di landscape).
+10. Em dash dilarang keras di semua teks video, caption, dan dokumen; gunakan koma, titik, atau tanda hubung biasa.
 
 ## Katalog
 
 | No | Judul | Materi | Folder |
 |----|-------|--------|--------|
-| 01 | Bilangan: Diciptakan atau Ditemukan? | Blog Yuyanaka - artikel "Bilangan" (13 Nov 2026) | `01-bilangan-diciptakan-atau-ditemukan/` (revisi 1: label AKIOMIDA + tone tongkrongan) |
+| 01 | Bilangan: Diciptakan atau Ditemukan? | Blog Yuyanaka - artikel "Bilangan" (13 Nov 2026) | `01-bilangan-diciptakan-atau-ditemukan/` (revisi 2: subtitle Inggris + margin samping aman + tanpa emdash) |
 
 ## Isi tiap folder video
 
@@ -24,4 +27,4 @@ Studio video animasi matematika oleh **Kaisar Motion**. Misi: membuat penonton j
 - `portrait.mp4` - versi 9:16 (1080x1920, teks zona aman atas)
 - `thumbnail-landscape.jpg`, `thumbnail-portrait.jpg` - cover siap pakai (momen hook)
 - `caption.txt` - caption siap posting + hashtag
-- `naskah.md` - naskah ber-timecode lengkap + riwayat revisi
+- `naskah.md` - naskah ber-timecode lengkap (termasuk jadwal munculnya subtitle Inggris) + riwayat revisi

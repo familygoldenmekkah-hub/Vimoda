@@ -35,6 +35,13 @@ html,body{background:#000;overflow:hidden;}
 .zh{font-family:'Noto Sans SC','DejaVu Sans',sans-serif;font-weight:700;}
 .ar{font-family:'DejaVu Sans',sans-serif;}
 .center{text-align:center;}
+.ensub{color:#7E92AF;font-weight:500;}
+.ensub-b{color:#A7B6CE;font-weight:600;}
+.enchip{color:#64748B;font-weight:600;letter-spacing:.24em;}
+.blabe{color:#64748B;font-weight:600;letter-spacing:.20em;}
+.ebige{color:#7488A6;font-weight:600;letter-spacing:.24em;}
+.enchip2{color:#5B6B84;font-weight:600;letter-spacing:.30em;}
+.ensub2{color:#8CA0BC;font-weight:500;}
 </style>
 </head>
 <body>
@@ -52,15 +59,19 @@ html,body{background:#000;overflow:hidden;}
         <span class="mono grad" id="h_eq_t">2 + 2 = 4</span>
       </div>
       <div class="center" id="h_sub1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Selalu gitu. Gak pernah salah.</div>
+      <div class="center ensub" id="h_sub1_e">Every single time. It never fails.</div>
       <div class="center" id="h_sub2" style="position:absolute;left:0;right:0;font-weight:800;">
-        Bahkan <span class="grad">jauh sebelum kita ada,</span> angkanya udah setia.
+        Bahkan <span class="grad">jauh sebelum kita ada,</span><br class="ponly"> angkanya udah setia.
       </div>
+      <div class="center ensub" id="h_sub2_e">Numbers were already true, long before we existed.</div>
     </div>
 
     <!-- S1 DUNIA SEBELUM ANGKA -->
     <div class="scene" id="s1">
       <div class="center" id="a_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="a_chip_t">COBA BAYANGIN...</span></div>
+      <div class="center enchip" id="a_chip_e">TRY TO IMAGINE...</div>
       <div class="center" id="a_head" style="position:absolute;left:0;right:0;font-weight:800;">Dunia udah bisa <span class="grad">menghitung.</span></div>
+      <div class="center ensub-b" id="a_head_e">The world could already count.</div>
       <div id="a_trees" style="position:absolute;">
         <div class="tree" id="tr1"><div class="tri"></div><div class="trunk"></div></div>
         <div class="tree" id="tr2"><div class="tri"></div><div class="trunk"></div></div>
@@ -70,69 +81,89 @@ html,body{background:#000;overflow:hidden;}
         <div class="dotb" id="d1">1</div><div class="dotb" id="d2">2</div><div class="dotb" id="d3">3</div>
       </div>
       <div class="center" id="a_line1" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Tiga pohon ya tetap tiga pohon.</div>
+      <div class="center ensub" id="a_line1_e">Three trees are still three trees.</div>
       <div class="center" id="a_line2" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Setengah bagian ya tetap setengah bagian.</div>
+      <div class="center ensub" id="a_line2_e">Half a share is still half a share.</div>
     </div>
 
     <!-- S2 APA ITU BILANGAN -->
     <div class="scene" id="s2">
       <div class="center" id="b_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="b_chip_t">JADI BILANGAN ITU APA?</span></div>
+      <div class="center enchip" id="b_chip_e">SO WHAT ARE NUMBERS?</div>
       <div class="center" id="b_def" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Gampangnya: cara kita nyebut dunia.</div>
+      <div class="center ensub" id="b_def_e">Simply put: the way we name the world.</div>
       <div id="b_cards" style="position:absolute;">
         <div class="card bcard" id="bc1">
           <div class="bico" id="bi1"><div class="bk" id="bk1"></div><div class="bk" id="bk2"></div><div class="bk" id="bk3"></div></div>
           <div class="bval"><span class="grad">5</span> <span class="bsm">BUKU</span></div>
           <div class="blab">JUMLAH</div>
+          <div class="blabe">HOW MANY</div>
         </div>
         <div class="card bcard" id="bc2">
           <div class="bico" id="bi2"><div class="pod" id="p1"></div><div class="pod" id="p2">2</div><div class="pod" id="p3"></div></div>
           <div class="bval"><span class="grad">JUARA</span> <span class="bsm">KE-2</span></div>
           <div class="blab">URUTAN</div>
+          <div class="blabe">ORDER</div>
         </div>
         <div class="card bcard" id="bc3">
           <div class="bico" id="bi3"><div class="halfc"></div><div class="halfm"></div></div>
           <div class="bval"><span class="grad">1/2</span> <span class="bsm">BAGIAN</span></div>
           <div class="blab">SEBAGIAN</div>
+          <div class="blabe">FRACTION</div>
         </div>
         <div class="card bcard" id="bc4">
           <div class="bico" id="bi4"><div class="thermo"><div class="tmercury"></div></div></div>
           <div class="bval"><span class="grad">-5&deg;C</span> <span class="bsm">SUHU</span></div>
           <div class="blab">DI BAWAH NOL</div>
+          <div class="blabe">BELOW ZERO</div>
         </div>
       </div>
       <div class="center" id="b_punch" style="position:absolute;left:0;right:0;font-weight:800;">Empat tugas, <span class="grad">satu bahasa.</span></div>
+      <div class="center ensub-b" id="b_punch_e">Four jobs, one language.</div>
     </div>
 
     <!-- S3 SIMBOL BERUBAH -->
     <div class="scene" id="s3">
       <div class="center" id="c_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="c_chip_t">NIH, BAGIAN SERUNYA</span></div>
+      <div class="center enchip" id="c_chip_e">HERE COMES THE FUN PART</div>
       <div class="card" id="c_eqbox" style="position:absolute;">
         <div class="center mono" id="c_morph" style="font-weight:800;">2 + 2 = 4</div>
       </div>
       <div class="center" id="c_cap1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Tiap negara punya simbol sendiri...</div>
+      <div class="center ensub" id="c_cap1_e">Every country has its own symbols...</div>
       <div class="center" id="c_punch" style="position:absolute;left:0;right:0;font-weight:800;">...tapi hasilnya <span class="grad">sama aja.</span><br>Gak bisa dinego siapa pun.</div>
+      <div class="center ensub-b" id="c_punch_e">...but the result is always the same. No one can argue with it.</div>
     </div>
 
     <!-- S4 PERTANYAAN BESAR -->
     <div class="scene" id="s4">
       <div class="center" id="e_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="e_chip_t">NAH, SEKARANG KAMU...</span></div>
-      <div class="card" id="e_left" style="position:absolute;"><div class="center ebig" style="color:#22D3EE;">MENCIPTAKAN</div></div>
-      <div class="card" id="e_right" style="position:absolute;"><div class="center ebig" style="color:#A78BFA;">MENEMUKAN</div></div>
+      <div class="center enchip" id="e_chip_e">NOW IT IS YOUR TURN...</div>
+      <div class="card" id="e_left" style="position:absolute;"><div class="center ebig" style="color:#22D3EE;">MENCIPTAKAN</div><div class="center ebige">INVENTED</div></div>
+      <div class="card" id="e_right" style="position:absolute;"><div class="center ebig" style="color:#A78BFA;">MENEMUKAN</div><div class="center ebige">DISCOVERED</div></div>
       <div class="center" id="e_q" style="position:absolute;left:0;right:0;font-weight:800;" ><span class="grad" id="e_q_t">?</span></div>
       <div class="center" id="e_sub1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Kalau simbolnya buatan manusia,</div>
-      <div class="center" id="e_sub2" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">tapi kebenarannya udah ada dari dulu banget,</div>
+      <div class="center ensub" id="e_sub1_e">If the symbols are human-made,</div>
+      <div class="center" id="e_sub2" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">tapi kebenarannya udah ada dari dulu,</div>
+      <div class="center ensub" id="e_sub2_e">but the truth has been around forever,</div>
       <div class="center" id="e_v1" style="position:absolute;left:0;right:0;font-weight:700;">mungkin bilangan itu bukan ciptaan,</div>
       <div class="center" id="e_v2" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="e_v2_t">melainkan penemuan.</span></div>
+      <div class="center ensub-b" id="e_v2_e">not an invention, but a discovery.</div>
     </div>
 
     <!-- S5 CTA -->
     <div class="scene" id="s5">
       <div class="center" id="f_q" style="position:absolute;left:0;right:0;font-weight:800;">Jadi... kamu <span class="grad">tim yang mana?</span></div>
+      <div class="center ensub-b" id="f_q_e">So... which team are you on?</div>
       <div class="center" id="f_cta1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Ceritain jawabanmu di komentar, ya.</div>
+      <div class="center ensub" id="f_cta1_e">Drop your answer in the comments.</div>
       <div class="card" id="f_card" style="position:absolute;">
         <div class="center" id="f_open" style="color:#94A3B8;font-weight:600;letter-spacing:.30em;">BUKA BROWSER KAMU</div>
+        <div class="center enchip2" id="f_open_e">OPEN YOUR BROWSER</div>
         <div class="center" id="f_url" style="font-weight:800;"><span class="grad" id="f_url_t">AKIOMIDA.COM</span></div>
         <div id="f_bar" style="height:5px;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24);width:0;"></div>
         <div class="center" id="f_sub" style="color:#CBD5E1;font-weight:500;">Belajar matematika jadi makin seru.</div>
+        <div class="center ensub2" id="f_sub_e">Learning math just got more fun.</div>
       </div>
       <div class="center" id="f_brand" style="position:absolute;left:0;right:0;color:#64748B;font-weight:600;letter-spacing:.42em;">AKIOMIDA</div>
     </div>
@@ -151,43 +182,72 @@ const W=ORIENT==='portrait'?1080:1920;
 const H=ORIENT==='portrait'?1920:1080;
 
 const L = ORIENT==='portrait' ? {
+  mx:84,
   wmY:200, wmSize:19,
-  eqY:640, eqSize:132, sub1Y:800, sub1Size:44, sub2Y:886, sub2Size:47,
-  chipY:300, chipSize:25, headY:386, headSize:56,
-  treeY:520, treeW:150, treeH:185, treeGap:96, treePopY:26,
-  dotY:790, dotSize:56, dotFont:27,
-  line1Y:952, line2Y:1046, lineSize:42,
-  defY:372, defSize:43, cardY:452, cardW:412, cardH:330, cardGap:26,
-  cardIconH:76, cardVal:56, cardLab:21, punchY:1268, punchSize:45,
-  morphY:560, morphSize:96, eqboxY:452, eqboxH:230, cap1Y:756, cap1Size:44,
-  cpunchY:868, cpunchSize:46,
-  leftX:120, leftY:372, card2W:400, card2H:186, ebigSize:37,
-  qY:620, qSize:170, sub1Y2:856, sub2Y2:928, subSize:41,
-  v1Y:1078, v1Size:46, v2Y:1168, v2Size:66,
-  fqY:352, fqSize:60, cta1Y:448, cta1Size:41,
-  cardY2:540, card2H2:470, cardW2:880, openY:112, urlY:212, urlSize:74, barY:322, subY:358,
+  eqY:630, eqSize:132,
+  sub1Y:800, sub1Size:44, sub1EY:865, sub1ESize:24,
+  sub2Y:912, sub2Size:47, sub2EY:1048, sub2ESize:26,
+  chipY:300, chipSize:25, chipEY:357, chipESize:17,
+  headY:404, headSize:56, headEY:485, headESize:28,
+  treeY:540, treeW:150, treeH:185, treeGap:96, treePopY:26,
+  dotY:800, dotSize:56, dotFont:27,
+  line1Y:940, line1EY:996, line2Y:1056, line2EY:1112, lineSize:38, lineESize:22,
+  defY:396, defSize:43, defEY:459, defESize:24,
+  cardY:506, cardW:412, cardH:330, cardGap:26,
+  cardIconH:76, cardVal:56, cardLab:21, cardLabESize:14,
+  punchY:1252, punchSize:45, punchEY:1318, punchESize:25,
+  morphY:560, morphSize:96, eqboxY:452, eqboxH:230,
+  cap1Y:756, cap1Size:44, cap1EY:823, cap1ESize:24,
+  cpunchY:872, cpunchSize:46, cpunchEY:1006, cpunchESize:25,
+  leftX:120, leftY:400, card2W:400, card2H:186, ebigSize:37, ebigESize:17,
+  qY:630, qSize:170,
+  sub1Y2:860, sub1EY2:920, sub2Y2:990, sub2EY2:1050, subSize:41, subESize:23,
+  v1Y:1100, v1Size:44, v2Y:1180, v2Size:66, v2EY:1275, v2ESize:25,
+  fqY:352, fqSize:56, fqEY:434, fqESize:26,
+  cta1Y:494, cta1Size:41, cta1EY:554, cta1ESize:22,
+  cardY2:600, card2H2:470, cardW2:880,
+  openY:112, openEY:148, openESize:14, urlY:212, urlSize:74, barY:322, subY:358, fSubEY:392, fSubESize:16,
   brandY:1298, brandSize:24
 } : {
+  mx:200,
   wmY:1006, wmSize:19,
-  eqY:452, eqSize:148, sub1Y:626, sub1Size:46, sub2Y:706, sub2Size:52,
-  chipY:172, chipSize:25, headY:244, headSize:56,
-  treeY:380, treeW:170, treeH:210, treeGap:110, treePopY:26,
-  dotY:660, dotSize:58, dotFont:28,
-  line1Y:790, line2Y:852, lineSize:40,
-  defY:220, defSize:43, cardY:292, cardW:382, cardH:296, cardGap:34,
-  cardIconH:68, cardVal:52, cardLab:20, punchY:676, punchSize:46,
-  morphY:408, morphSize:116, eqboxY:300, eqboxH:252, cap1Y:592, cap1Size:44,
-  cpunchY:676, cpunchSize:48,
-  leftX:590, leftY:300, card2W:340, card2H:176, ebigSize:34,
-  qY:470, qSize:150, sub1Y2:700, sub2Y2:758, subSize:39,
-  v1Y:830, v1Size:44, v2Y:906, v2Size:60,
-  fqY:238, fqSize:58, cta1Y:326, cta1Size:40,
-  cardY2:398, card2H2:400, cardW2:900, openY:92, urlY:172, urlSize:94, barY:296, subY:322,
+  eqY:452, eqSize:148,
+  sub1Y:626, sub1Size:46, sub1EY:693, sub1ESize:25,
+  sub2Y:742, sub2Size:52, sub2EY:818, sub2ESize:27,
+  chipY:172, chipSize:25, chipEY:229, chipESize:17,
+  headY:272, headSize:56, headEY:353, headESize:28,
+  treeY:402, treeW:170, treeH:210, treeGap:110, treePopY:26,
+  dotY:668, dotSize:58, dotFont:28,
+  line1Y:768, line1EY:827, line2Y:880, line2EY:939, lineSize:40, lineESize:22,
+  defY:264, defSize:43, defEY:327, defESize:24,
+  cardY:380, cardW:382, cardH:296, cardGap:34,
+  cardIconH:68, cardVal:52, cardLab:20, cardLabESize:13,
+  punchY:726, punchSize:46, punchEY:793, punchESize:25,
+  morphY:408, morphSize:116, eqboxY:300, eqboxH:252,
+  cap1Y:592, cap1Size:44, cap1EY:659, cap1ESize:24,
+  cpunchY:706, cpunchSize:48, cpunchEY:844, cpunchESize:25,
+  leftX:590, leftY:300, card2W:340, card2H:176, ebigSize:34, ebigESize:15,
+  qY:470, qSize:150,
+  sub1Y2:640, sub1EY2:698, sub2Y2:748, sub2EY2:806, subSize:39, subESize:20,
+  v1Y:860, v1Size:44, v2Y:940, v2Size:60, v2EY:1027, v2ESize:21,
+  fqY:238, fqSize:58, fqEY:322, fqESize:24,
+  cta1Y:378, cta1Size:40, cta1EY:437, cta1ESize:21,
+  cardY2:482, card2H2:400, cardW2:900,
+  openY:92, openEY:128, openESize:13, urlY:172, urlSize:94, barY:296, subY:322, fSubEY:360, fSubESize:15,
   brandY:936, brandSize:23
 };
 
 const stage=document.getElementById('stage');
 stage.style.width=W+'px'; stage.style.height=H+'px';
+const isP=ORIENT==='portrait';
+/* Margin samping aman: teks tidak boleh mepet ujung kiri/kanan */
+const MX=L.mx;
+function tx(el,y,size){
+  el.style.position='absolute';
+  el.style.left=MX+'px';el.style.right=MX+'px';
+  el.style.top=y+'px';el.style.fontSize=size+'px';
+}
+document.querySelectorAll('.ponly').forEach(el=>{el.style.display=isP?'':'none';});
 
 /* ---------- deterministieke helper ---------- */
 const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
@@ -240,16 +300,24 @@ const hEq=document.getElementById('h_eq'); const hEqT=document.getElementById('h
 hEq.style.top=L.eqY+'px'; hEqT.style.fontSize=L.eqSize+'px';
 hEqT.style.textShadow='0 10px 60px rgba(34,211,238,.35)';
 const hS1=document.getElementById('h_sub1');
-hS1.style.top=L.sub1Y+'px';hS1.style.fontSize=L.sub1Size+'px';
+tx(hS1,L.sub1Y,L.sub1Size);
+const hS1E=document.getElementById('h_sub1_e');
+tx(hS1E,L.sub1EY,L.sub1ESize);
 const hS2=document.getElementById('h_sub2');
-hS2.style.top=L.sub2Y+'px';hS2.style.fontSize=L.sub2Size+'px';
+tx(hS2,L.sub2Y,L.sub2Size);hS2.style.lineHeight='1.4';
+const hS2E=document.getElementById('h_sub2_e');
+tx(hS2E,L.sub2EY,L.sub2ESize);
 
 /* ---------- S1 ---------- */
 const aChipT=document.getElementById('a_chip_t');
 const aChip=document.getElementById('a_chip');
 aChip.style.top=L.chipY+'px';aChipT.style.fontSize=L.chipSize+'px';aChipT.style.padding='12px 30px 12px 34px';
+const aChipE=document.getElementById('a_chip_e');
+tx(aChipE,L.chipEY,L.chipESize);
 const aHead=document.getElementById('a_head');
-aHead.style.top=L.headY+'px';aHead.style.fontSize=L.headSize+'px';
+tx(aHead,L.headY,L.headSize);
+const aHeadE=document.getElementById('a_head_e');
+tx(aHeadE,L.headEY,L.headESize);
 const aTrees=document.getElementById('a_trees');
 aTrees.style.left='0';aTrees.style.right='0';aTrees.style.top=L.treeY+'px';aTrees.style.height=(L.treeH+40)+'px';
 const TRW=L.treeW, TRG=L.treeGap;
@@ -270,19 +338,26 @@ aDots.style.left='0';aDots.style.right='0';aDots.style.top=L.dotY+'px';aDots.sty
   el.style.cssText+=`position:absolute;left:${startX+i*(TRW+TRG)+TRW/2-L.dotSize/2}px;top:0;width:${L.dotSize}px;height:${L.dotSize}px;border-radius:50%;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.5);color:#67E8F9;font-weight:700;font-size:${L.dotFont}px;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;`;
 });
 const aL1=document.getElementById('a_line1');
-aL1.style.top=L.line1Y+'px';aL1.style.fontSize=L.lineSize+'px';
+tx(aL1,L.line1Y,L.lineSize);
+const aL1E=document.getElementById('a_line1_e');
+tx(aL1E,L.line1EY,L.lineESize);
 const aL2=document.getElementById('a_line2');
-aL2.style.top=L.line2Y+'px';aL2.style.fontSize=L.lineSize+'px';
+tx(aL2,L.line2Y,L.lineSize);
+const aL2E=document.getElementById('a_line2_e');
+tx(aL2E,L.line2EY,L.lineESize);
 
 /* ---------- S2 ---------- */
 const bChipT=document.getElementById('b_chip_t');
 const bChip=document.getElementById('b_chip');
 bChip.style.top=L.chipY+'px';bChipT.style.fontSize=L.chipSize+'px';bChipT.style.padding='12px 30px 12px 34px';
+const bChipE=document.getElementById('b_chip_e');
+tx(bChipE,L.chipEY,L.chipESize);
 const bDef=document.getElementById('b_def');
-bDef.style.top=L.defY+'px';bDef.style.fontSize=L.defSize+'px';
+tx(bDef,L.defY,L.defSize);
+const bDefE=document.getElementById('b_def_e');
+tx(bDefE,L.defEY,L.defESize);
 const bCards=document.getElementById('b_cards');
 const CW=L.cardW,CH_=L.cardH,CG=L.cardGap;
-const isP=ORIENT==='portrait';
 const cols=isP?2:4, rows=isP?2:1;
 const gridW=cols*CW+(cols-1)*CG;
 const gx=(W-gridW)/2;
@@ -332,13 +407,18 @@ bcEls.forEach(id=>{
   const lb=el.querySelector('.blab');
   lb.style.cssText+=`font-size:${bLabSize}px;font-weight:700;letter-spacing:.24em;color:#67E8F9;background:rgba(34,211,238,.10);border:1px solid rgba(34,211,238,.35);border-radius:999px;padding:7px 16px;`;
 });
+document.querySelectorAll('.blabe').forEach(el=>{el.style.fontSize=L.cardLabESize+'px';el.style.paddingTop='4px';});
 const bPunch=document.getElementById('b_punch');
-bPunch.style.top=L.punchY+'px';bPunch.style.fontSize=L.punchSize+'px';
+tx(bPunch,L.punchY,L.punchSize);
+const bPunchE=document.getElementById('b_punch_e');
+tx(bPunchE,L.punchEY,L.punchESize);
 
 /* ---------- S3 ---------- */
 const cChipT=document.getElementById('c_chip_t');
 const cChip=document.getElementById('c_chip');
 cChip.style.top=L.chipY+'px';cChipT.style.fontSize=L.chipSize+'px';cChipT.style.padding='12px 30px 12px 34px';
+const cChipE=document.getElementById('c_chip_e');
+tx(cChipE,L.chipEY,L.chipESize);
 const cBox=document.getElementById('c_eqbox');
 const BOXW=isP?800:1000;
 cBox.style.left=((W-BOXW)/2)+'px';cBox.style.top=L.eqboxY+'px';
@@ -348,15 +428,20 @@ cBox.style.background='rgba(34,211,238,.045)';
 const cMorph=document.getElementById('c_morph');
 cMorph.style.fontSize=L.morphSize+'px';cMorph.style.position='relative';cMorph.style.whiteSpace='nowrap';
 const cCap=document.getElementById('c_cap1');
-cCap.style.top=L.cap1Y+'px';cCap.style.fontSize=L.cap1Size+'px';
+tx(cCap,L.cap1Y,L.cap1Size);
+const cCapE=document.getElementById('c_cap1_e');
+tx(cCapE,L.cap1EY,L.cap1ESize);
 const cPunch=document.getElementById('c_punch');
-cPunch.style.top=L.cpunchY+'px';cPunch.style.fontSize=L.cpunchSize+'px';
-cPunch.style.lineHeight='1.4';
+tx(cPunch,L.cpunchY,L.cpunchSize);cPunch.style.lineHeight='1.4';
+const cPunchE=document.getElementById('c_punch_e');
+tx(cPunchE,L.cpunchEY,L.cpunchESize);
 
 /* ---------- S4 ---------- */
 const eChipT=document.getElementById('e_chip_t');
 const eChip=document.getElementById('e_chip');
 eChip.style.top=L.chipY+'px';eChipT.style.fontSize=L.chipSize+'px';eChipT.style.padding='12px 30px 12px 34px';
+const eChipE=document.getElementById('e_chip_e');
+tx(eChipE,L.chipEY,L.chipESize);
 const eL=document.getElementById('e_left'), eR=document.getElementById('e_right');
 const E2W=L.card2W, E2H=L.card2H;
 eL.style.left=L.leftX+'px';eR.style.left=(L.leftX+E2W+ (isP?40:60))+'px';
@@ -364,27 +449,40 @@ eL.style.top=L.leftY+'px';eR.style.top=L.leftY+'px';
 eL.style.width=E2W+'px';eR.style.width=E2W+'px';
 eL.style.height=E2H+'px';eR.style.height=E2H+'px';
 eL.style.display='flex';eR.style.display='flex';
+eL.style.flexDirection='column';eR.style.flexDirection='column';
+eL.style.gap='8px';eR.style.gap='8px';
 eL.style.alignItems='center';eR.style.alignItems='center';
 eL.style.justifyContent='center';eR.style.justifyContent='center';
 eL.style.borderColor='rgba(34,211,238,.5)';eR.style.borderColor='rgba(167,139,250,.5)';
 document.querySelectorAll('.ebig').forEach(el=>{el.style.fontSize=L.ebigSize+'px';el.style.fontWeight='800';el.style.letterSpacing='.10em';});
+document.querySelectorAll('.ebige').forEach(el=>{el.style.fontSize=L.ebigESize+'px';});
 const eQ=document.getElementById('e_q');
 eQ.style.top=L.qY+'px';document.getElementById('e_q_t').style.fontSize=L.qSize+'px';
 const eS1=document.getElementById('e_sub1');
-eS1.style.top=L.sub1Y2+'px';eS1.style.fontSize=L.subSize+'px';
+tx(eS1,L.sub1Y2,L.subSize);
+const eS1E=document.getElementById('e_sub1_e');
+tx(eS1E,L.sub1EY2,L.subESize);
 const eS2=document.getElementById('e_sub2');
-eS2.style.top=L.sub2Y2+'px';eS2.style.fontSize=L.subSize+'px';
+tx(eS2,L.sub2Y2,L.subSize);
+const eS2E=document.getElementById('e_sub2_e');
+tx(eS2E,L.sub2EY2,L.subESize);
 const eV1=document.getElementById('e_v1');
-eV1.style.top=L.v1Y+'px';eV1.style.fontSize=L.v1Size+'px';
+tx(eV1,L.v1Y,L.v1Size);
 const eV2=document.getElementById('e_v2');
-eV2.style.top=L.v2Y+'px';document.getElementById('e_v2_t').style.fontSize=L.v2Size+'px';
+tx(eV2,L.v2Y,L.v2Size);
+const eV2E=document.getElementById('e_v2_e');
+tx(eV2E,L.v2EY,L.v2ESize);
 document.getElementById('e_v2_t').style.textShadow='0 10px 60px rgba(167,139,250,.35)';
 
 /* ---------- S5 ---------- */
 const fQ=document.getElementById('f_q');
-fQ.style.top=L.fqY+'px';fQ.style.fontSize=L.fqSize+'px';
+tx(fQ,L.fqY,L.fqSize);
+const fQE=document.getElementById('f_q_e');
+tx(fQE,L.fqEY,L.fqESize);
 const fC1=document.getElementById('f_cta1');
-fC1.style.top=L.cta1Y+'px';fC1.style.fontSize=L.cta1Size+'px';
+tx(fC1,L.cta1Y,L.cta1Size);
+const fC1E=document.getElementById('f_cta1_e');
+tx(fC1E,L.cta1EY,L.cta1ESize);
 const fCard=document.getElementById('f_card');
 const FW=L.cardW2, FH=L.card2H2;
 fCard.style.left=((W-FW)/2)+'px';fCard.style.top=L.cardY2+'px';
@@ -394,6 +492,9 @@ fCard.style.borderColor='rgba(34,211,238,.4)';
 const fOpen=document.getElementById('f_open');
 fOpen.style.position='absolute';fOpen.style.top=L.openY+'px';fOpen.style.left='0';fOpen.style.right='0';
 fOpen.style.fontSize=Math.round(L.urlSize*0.30)+'px';
+const fOpenE=document.getElementById('f_open_e');
+fOpenE.style.position='absolute';fOpenE.style.top=L.openEY+'px';fOpenE.style.left='0';fOpenE.style.right='0';
+fOpenE.style.fontSize=L.openESize+'px';
 const fUrl=document.getElementById('f_url');
 fUrl.style.position='absolute';fUrl.style.top=L.urlY+'px';fUrl.style.left='0';fUrl.style.right='0';
 document.getElementById('f_url_t').style.fontSize=L.urlSize+'px';
@@ -403,8 +504,11 @@ fBar.style.position='absolute';fBar.style.top=L.barY+'px';fBar.style.left=(FW*0.
 const fSub=document.getElementById('f_sub');
 fSub.style.position='absolute';fSub.style.top=L.subY+'px';fSub.style.left='0';fSub.style.right='0';
 fSub.style.fontSize=Math.round(L.urlSize*0.28)+'px';
+const fSubE=document.getElementById('f_sub_e');
+fSubE.style.position='absolute';fSubE.style.top=L.fSubEY+'px';fSubE.style.left='0';fSubE.style.right='0';
+fSubE.style.fontSize=L.fSubESize+'px';
 const fBrand=document.getElementById('f_brand');
-fBrand.style.top=L.brandY+'px';fBrand.style.fontSize=L.brandSize+'px';
+tx(fBrand,L.brandY,L.brandSize);
 
 const flash=document.getElementById('flash');
 const fade=document.getElementById('fade');
@@ -468,31 +572,41 @@ function renderFrame(t){
   hEq.style.transform=`scale(${lerp(1.55,1,clamp(pk,0,1))})`;
   hEq.style.transformOrigin='50% 50%';
   fadeUp(hS1,t,1.70,0.55,24);
+  fadeUp(hS1E,t,1.86,0.5,16);
   fadeUp(hS2,t,2.90,0.6,26);
+  fadeUp(hS2E,t,3.06,0.55,18);
   hEqT.style.opacity=1;
 
   /* S1 5.2-12.4 */
   const s1=document.getElementById('s1');
   sceneVis(s1,t,5.25,11.8);
   fadeUp(aChip,t,5.35,0.5,18);
+  fadeUp(aChipE,t,5.50,0.45,12);
   fadeUp(aHead,t,5.85,0.6,26);
+  fadeUp(aHeadE,t,6.01,0.55,18);
   ['tr1','tr2','tr3'].forEach((id,i)=>pop(document.getElementById(id),t,6.5+i*0.45,0.6,34,0.7));
   ['d1','d2','d3'].forEach((id,i)=>pop(document.getElementById(id),t,7.9+i*0.25,0.5,20,0.6));
   fadeUp(aL1,t,8.9,0.55,22);
+  fadeUp(aL1E,t,9.06,0.5,16);
   fadeUp(aL2,t,9.9,0.55,22);
+  fadeUp(aL2E,t,10.06,0.5,16);
 
   /* S2 12.4-22.0 */
   const s2=document.getElementById('s2');
   sceneVis(s2,t,12.45,21.35);
   fadeUp(bChip,t,12.55,0.5,18);
+  fadeUp(bChipE,t,12.70,0.45,12);
   fadeUp(bDef,t,13.0,0.55,22);
+  fadeUp(bDefE,t,13.16,0.5,16);
   bcEls.forEach((id,i)=>pop(document.getElementById(id),t,13.9+i*1.0,0.65,34,0.88));
   pop(bPunch,t,18.3,0.6,24,0.92);
+  pop(bPunchE,t,18.5,0.55,16,0.94);
 
   /* S3 22.0-31.6 */
   const s3=document.getElementById('s3');
   sceneVis(s3,t,22.05,30.95);
   fadeUp(cChip,t,22.15,0.5,18);
+  fadeUp(cChipE,t,22.30,0.45,12);
   fadeUp(cBox,t,22.5,0.65,30,0.92);
   const mi=morphIndex(t);
   const m=MORPH[mi];
@@ -508,12 +622,15 @@ function renderFrame(t){
   cMorph.style.transform=`scale(${ms})`;
   cBox.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(34+22*Math.sin(t*3.2)).toFixed(0)}px rgba(34,211,238,${(0.10+0.05*Math.sin(t*3.2)).toFixed(3)})`;
   fadeUp(cCap,t,24.4,0.55,22);
+  fadeUp(cCapE,t,24.56,0.5,16);
   pop(cPunch,t,29.55,0.6,24,0.92);
+  pop(cPunchE,t,29.75,0.55,16,0.94);
 
   /* S4 31.6-42.2 */
   const s4=document.getElementById('s4');
   sceneVis(s4,t,31.65,41.55);
   fadeUp(eChip,t,31.75,0.5,18);
+  fadeUp(eChipE,t,31.90,0.45,12);
   pop(eL,t,32.3,0.6,-46,0.9);
   pop(eR,t,32.55,0.6,46,0.9);
   fadeUp(eQ,t,33.3,0.6,20);
@@ -521,15 +638,20 @@ function renderFrame(t){
   eQ.style.transform=`translateY(0) scale(${qp.toFixed(3)})`;
   eQ.style.opacity=String(eoe(seg(t,33.3,0.6)));
   fadeUp(eS1,t,34.7,0.55,22);
+  fadeUp(eS1E,t,34.86,0.5,16);
   fadeUp(eS2,t,35.9,0.55,22);
+  fadeUp(eS2E,t,36.06,0.5,16);
   pop(eV1,t,38.2,0.6,24,0.92);
   pop(eV2,t,39.5,0.7,30,0.85);
+  pop(eV2E,t,39.7,0.6,16,0.9);
 
   /* S5 42.2-52.0 */
   const s5=document.getElementById('s5');
   sceneVis(s5,t,42.25,51.9,0.5,0.001);
   fadeUp(fQ,t,42.5,0.6,24);
+  fadeUp(fQE,t,42.66,0.55,18);
   fadeUp(fC1,t,43.9,0.55,22);
+  fadeUp(fC1E,t,44.06,0.5,16);
   pop(fCard,t,45.4,0.7,40,0.9);
   fCard.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(46+26*Math.sin(t*4)).toFixed(0)}px rgba(34,211,238,${(0.12+0.06*Math.sin(t*4)).toFixed(3)})`;
   const up=eoe(seg(t,46.3,0.9));
