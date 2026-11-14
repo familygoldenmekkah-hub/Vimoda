@@ -7,13 +7,13 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{background:#000;overflow:hidden;}
 #stage{position:relative;overflow:hidden;
-  background:radial-gradient(120% 95% at 50% 8%, #0E1628 0%, #080C18 52%, #05070F 100%);
+  background:radial-gradient(120% 95% at 50% 8%, #101B2E 0%, #080C18 52%, #05070F 100%);
   font-family:'Poppins','DejaVu Sans',sans-serif;color:#E7EEF8;
   -webkit-font-smoothing:antialiased;}
 .blob{position:absolute;border-radius:50%;filter:blur(90px);will-change:transform;}
 #blobC{background:#0EA5E9;opacity:.30;}
 #blobV{background:#8B5CF6;opacity:.26;}
-#blobA{background:#F59E0B;opacity:.20;}
+#blobA{background:#F59E0B;opacity:.22;}
 #grid{position:absolute;inset:0;
   background-image:linear-gradient(rgba(148,163,184,.055) 1px,transparent 1px),
                    linear-gradient(90deg,rgba(148,163,184,.055) 1px,transparent 1px);
@@ -27,21 +27,21 @@ html,body{background:#000;overflow:hidden;}
   background:rgba(34,211,238,.09);color:#67E8F9;font-weight:600;letter-spacing:.30em;}
 .grad{background:linear-gradient(92deg,#22D3EE 0%,#A78BFA 52%,#FBBF24 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;}
+.gradA{background:linear-gradient(92deg,#FBBF24 0%,#F59E0B 60%,#F97316 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
 .vig{position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(92% 92% at 50% 44%, transparent 58%, rgba(0,0,0,.52) 100%);}
 #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;}
 #fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;}
 .mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
-.zh{font-family:'Noto Sans SC','DejaVu Sans',sans-serif;font-weight:700;}
-.ar{font-family:'DejaVu Sans',sans-serif;}
 .center{text-align:center;}
 .ensub{color:#7E92AF;font-weight:500;}
 .ensub-b{color:#A7B6CE;font-weight:600;}
 .enchip{color:#64748B;font-weight:600;letter-spacing:.24em;}
-.blabe{color:#64748B;font-weight:600;letter-spacing:.20em;}
-.ebige{color:#7488A6;font-weight:600;letter-spacing:.24em;}
-.enchip2{color:#5B6B84;font-weight:600;letter-spacing:.30em;}
+.enword{color:#7488A6;font-weight:600;letter-spacing:.22em;}
+.enpan{color:#64748B;font-weight:600;letter-spacing:.20em;}
 .ensub2{color:#8CA0BC;font-weight:500;}
+.enchip2{color:#5B6B84;font-weight:600;letter-spacing:.30em;}
 </style>
 </head>
 <body>
@@ -53,110 +53,79 @@ html,body{background:#000;overflow:hidden;}
   <div id="world">
     <div id="particles"></div>
 
-    <!-- S0 HOOK -->
+    <!-- S0 HOOK: 20 KAMBING -->
     <div class="scene" id="s0">
       <div class="center" id="h_eq" style="position:absolute;left:0;right:0;font-weight:800;">
-        <span class="mono grad" id="h_eq_t">2 + 2 = 4</span>
+        <span class="mono grad" id="h_eq_t">20</span><span class="mono" id="h_qm" style="color:#F87171;">?</span>
       </div>
-      <div class="center" id="h_sub1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Selalu gitu. Gak pernah salah.</div>
-      <div class="center ensub" id="h_sub1_e">Every single time. It never fails.</div>
-      <div class="center" id="h_sub2" style="position:absolute;left:0;right:0;font-weight:800;">
-        Bahkan <span class="grad">jauh sebelum kita ada,</span><br class="ponly"> angkanya udah setia.
-      </div>
-      <div class="center ensub" id="h_sub2_e">Numbers were already true, long before we existed.</div>
+      <div class="center" id="h_kamb" style="position:absolute;left:0;right:0;color:#FBBF24;font-weight:700;">K A M B I N G</div>
+      <div id="h_sheep" style="position:absolute;"></div>
+      <div class="center" id="h_sub1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Kamu punya 20 ekor kambing.</div>
+      <div class="center ensub" id="h_sub1_e">You have twenty goats.</div>
+      <div class="center" id="h_sub2" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Gimana cara mastiin <br class="ponly">gak ada yang hilang?</div>
+      <div class="center ensub" id="h_sub2_e">How do you make sure none went missing?</div>
     </div>
 
-    <!-- S1 DUNIA SEBELUM ANGKA -->
+    <!-- S1 SEBELUM ADA ANGKA -->
     <div class="scene" id="s1">
-      <div class="center" id="a_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="a_chip_t">COBA BAYANGIN...</span></div>
-      <div class="center enchip" id="a_chip_e">TRY TO IMAGINE...</div>
-      <div class="center" id="a_head" style="position:absolute;left:0;right:0;font-weight:800;">Dunia udah bisa <span class="grad">menghitung.</span></div>
-      <div class="center ensub-b" id="a_head_e">The world could already count.</div>
-      <div id="a_trees" style="position:absolute;">
-        <div class="tree" id="tr1"><div class="tri"></div><div class="trunk"></div></div>
-        <div class="tree" id="tr2"><div class="tri"></div><div class="trunk"></div></div>
-        <div class="tree" id="tr3"><div class="tri"></div><div class="trunk"></div></div>
-      </div>
-      <div id="a_dots" style="position:absolute;">
-        <div class="dotb" id="d1">1</div><div class="dotb" id="d2">2</div><div class="dotb" id="d3">3</div>
-      </div>
-      <div class="center" id="a_line1" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Tiga pohon ya tetap tiga pohon.</div>
-      <div class="center ensub" id="a_line1_e">Three trees are still three trees.</div>
-      <div class="center" id="a_line2" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Setengah bagian ya tetap setengah bagian.</div>
-      <div class="center ensub" id="a_line2_e">Half a share is still half a share.</div>
+      <div class="center" id="a_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="a_chip_t">SEBELUM ADA ANGKA</span></div>
+      <div class="center enchip" id="a_chip_e">BEFORE NUMBERS EXISTED</div>
+      <div class="center" id="a_head" style="position:absolute;left:0;right:0;font-weight:800;">Semua dipegang <span class="grad">ingatan.</span></div>
+      <div class="center ensub-b" id="a_head_e">Memory did all the work.</div>
+      <div id="a_dots" style="position:absolute;"></div>
+      <div class="center" id="a_line1" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Ngitung di kepala itu rapuh.</div>
+      <div class="center ensub" id="a_line1_e">Counting in your head is fragile.</div>
+      <div class="center" id="a_line2" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Makin banyak, makin gampang lupa.</div>
+      <div class="center ensub" id="a_line2_e">The more you keep, the easier it slips.</div>
     </div>
 
-    <!-- S2 APA ITU BILANGAN -->
+    <!-- S2 ALAT MEMUTUSKAN -->
     <div class="scene" id="s2">
-      <div class="center" id="b_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="b_chip_t">JADI BILANGAN ITU APA?</span></div>
-      <div class="center enchip" id="b_chip_e">SO WHAT ARE NUMBERS?</div>
-      <div class="center" id="b_def" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Gampangnya: cara kita nyebut dunia.</div>
-      <div class="center ensub" id="b_def_e">Simply put: the way we name the world.</div>
+      <div class="center" id="b_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="b_chip_t">JADI, UNTUK APA?</span></div>
+      <div class="center enchip" id="b_chip_e">SO, WHAT ARE THEY FOR?</div>
+      <div class="center" id="b_def" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Bilangan itu alat buat <span class="grad" style="font-weight:700;">memutuskan.</span></div>
+      <div class="center ensub" id="b_def_e">Numbers are tools for deciding.</div>
       <div id="b_cards" style="position:absolute;">
-        <div class="card bcard" id="bc1">
-          <div class="bico" id="bi1"><div class="bk" id="bk1"></div><div class="bk" id="bk2"></div><div class="bk" id="bk3"></div></div>
-          <div class="bval"><span class="grad">5</span> <span class="bsm">BUKU</span></div>
-          <div class="blab">JUMLAH</div>
-          <div class="blabe">HOW MANY</div>
-        </div>
-        <div class="card bcard" id="bc2">
-          <div class="bico" id="bi2"><div class="pod" id="p1"></div><div class="pod" id="p2">2</div><div class="pod" id="p3"></div></div>
-          <div class="bval"><span class="grad">JUARA</span> <span class="bsm">KE-2</span></div>
-          <div class="blab">URUTAN</div>
-          <div class="blabe">ORDER</div>
-        </div>
-        <div class="card bcard" id="bc3">
-          <div class="bico" id="bi3"><div class="halfc"></div><div class="halfm"></div></div>
-          <div class="bval"><span class="grad">1/2</span> <span class="bsm">BAGIAN</span></div>
-          <div class="blab">SEBAGIAN</div>
-          <div class="blabe">FRACTION</div>
-        </div>
-        <div class="card bcard" id="bc4">
-          <div class="bico" id="bi4"><div class="thermo"><div class="tmercury"></div></div></div>
-          <div class="bval"><span class="grad">-5&deg;C</span> <span class="bsm">SUHU</span></div>
-          <div class="blab">DI BAWAH NOL</div>
-          <div class="blabe">BELOW ZERO</div>
-        </div>
+        <div class="card bcard" id="tc1"><div class="tico" id="ti1"></div><div class="tword grad">BERDAGANG</div><div class="enword tew">TRADE</div><div class="tdesc">hitung barang, pasang harga</div></div>
+        <div class="card bcard" id="tc2"><div class="tico" id="ti2"></div><div class="tword grad">MEMBANGUN</div><div class="enword tew">BUILD</div><div class="tdesc">ukur panjang, tentukan ukuran</div></div>
+        <div class="card bcard" id="tc3"><div class="tico" id="ti3"></div><div class="tword grad">MEMBAGI</div><div class="enword tew">SHARE</div><div class="tdesc">bagian adil buat semua</div></div>
       </div>
-      <div class="center" id="b_punch" style="position:absolute;left:0;right:0;font-weight:800;">Empat tugas, <span class="grad">satu bahasa.</span></div>
-      <div class="center ensub-b" id="b_punch_e">Four jobs, one language.</div>
+      <div class="center" id="b_punch" style="position:absolute;left:0;right:0;font-weight:800;">Tanpa bilangan? <span class="grad">Tinggal perkiraan.</span></div>
+      <div class="center ensub-b" id="b_punch_e">Without numbers? It is all guesswork.</div>
     </div>
 
-    <!-- S3 SIMBOL BERUBAH -->
+    <!-- S3 CONTOH NYATA: 10 ROTI -->
     <div class="scene" id="s3">
-      <div class="center" id="c_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="c_chip_t">NIH, BAGIAN SERUNYA</span></div>
-      <div class="center enchip" id="c_chip_e">HERE COMES THE FUN PART</div>
+      <div class="center" id="c_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="c_chip_t">NIH, CONTOH NYATA</span></div>
+      <div class="center enchip" id="c_chip_e">HERE IS A REAL CASE</div>
       <div class="card" id="c_eqbox" style="position:absolute;">
-        <div class="center mono" id="c_morph" style="font-weight:800;">2 + 2 = 4</div>
+        <div class="center mono" id="c_morph" style="font-weight:800;">10 ROTI, 5 ORANG</div>
+        <div id="c_persons" style="position:absolute;"></div>
+        <div id="c_breads" style="position:absolute;"></div>
       </div>
-      <div class="center" id="c_cap1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Tiap negara punya simbol sendiri...</div>
-      <div class="center ensub" id="c_cap1_e">Every country has its own symbols...</div>
-      <div class="center" id="c_punch" style="position:absolute;left:0;right:0;font-weight:800;">...tapi hasilnya <span class="grad">sama aja.</span><br>Gak bisa dinego siapa pun.</div>
-      <div class="center ensub-b" id="c_punch_e">...but the result is always the same. No one can argue with it.</div>
+      <div class="center" id="c_cap1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Dibagi rata: tiap orang kebagian 2.</div>
+      <div class="center ensub" id="c_cap1_e">Split evenly: everyone gets two.</div>
+      <div class="center" id="c_punch" style="position:absolute;left:0;right:0;font-weight:800;">Jumlahnya sama. <span class="grad">Tapi adil gak?</span></div>
+      <div class="center ensub-b" id="c_punch_e">Same total. But is it fair?</div>
     </div>
 
-    <!-- S4 PERTANYAAN BESAR -->
+    <!-- S4 RENUNGAN: TIMBANGAN -->
     <div class="scene" id="s4">
-      <div class="center" id="e_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="e_chip_t">NAH, SEKARANG KAMU...</span></div>
-      <div class="center enchip" id="e_chip_e">NOW IT IS YOUR TURN...</div>
-      <div class="card" id="e_left" style="position:absolute;"><div class="center ebig" style="color:#22D3EE;">MENCIPTAKAN</div><div class="center ebige">INVENTED</div></div>
-      <div class="card" id="e_right" style="position:absolute;"><div class="center ebig" style="color:#A78BFA;">MENEMUKAN</div><div class="center ebige">DISCOVERED</div></div>
-      <div class="center" id="e_q" style="position:absolute;left:0;right:0;font-weight:800;" ><span class="grad" id="e_q_t">?</span></div>
-      <div class="center" id="e_sub1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Kalau simbolnya buatan manusia,</div>
-      <div class="center ensub" id="e_sub1_e">If the symbols are human-made,</div>
-      <div class="center" id="e_sub2" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">tapi kebenarannya udah ada dari dulu,</div>
-      <div class="center ensub" id="e_sub2_e">but the truth has been around forever,</div>
-      <div class="center" id="e_v1" style="position:absolute;left:0;right:0;font-weight:700;">mungkin bilangan itu bukan ciptaan,</div>
-      <div class="center" id="e_v2" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="e_v2_t">melainkan penemuan.</span></div>
-      <div class="center ensub-b" id="e_v2_e">not an invention, but a discovery.</div>
+      <div class="center" id="e_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="e_chip_t">RENUNGAN SANTAI</span></div>
+      <div class="center enchip" id="e_chip_e">A GENTLE REMINDER</div>
+      <div id="e_scale" style="position:absolute;"></div>
+      <div class="center" id="e_v1" style="position:absolute;left:0;right:0;font-weight:700;color:#CBD5E1;">Bilangan bikin ukuranmu <span class="grad" style="font-weight:800;">jelas.</span></div>
+      <div class="center ensub" id="e_v1_e">Numbers make your measures clear.</div>
+      <div class="center" id="e_v2" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="e_v2_t">Adil itu kerja hati.</span></div>
+      <div class="center ensub-b" id="e_v2_e">Being fair is the heart's work.</div>
     </div>
 
     <!-- S5 CTA -->
     <div class="scene" id="s5">
-      <div class="center" id="f_q" style="position:absolute;left:0;right:0;font-weight:800;">Jadi... kamu <span class="grad">tim yang mana?</span></div>
-      <div class="center ensub-b" id="f_q_e">So... which team are you on?</div>
-      <div class="center" id="f_cta1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Ceritain jawabanmu di komentar, ya.</div>
-      <div class="center ensub" id="f_cta1_e">Drop your answer in the comments.</div>
+      <div class="center" id="f_q" style="position:absolute;left:0;right:0;font-weight:800;">Nah, sekarang <span class="grad">giliranmu.</span></div>
+      <div class="center ensub-b" id="f_q_e">Now it is your turn.</div>
+      <div class="center" id="f_cta1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Ceritain pendapatmu di komentar, ya.</div>
+      <div class="center ensub" id="f_cta1_e">Share your take in the comments.</div>
       <div class="card" id="f_card" style="position:absolute;">
         <div class="center" id="f_open" style="color:#94A3B8;font-weight:600;letter-spacing:.30em;">BUKA BROWSER KAMU</div>
         <div class="center enchip2" id="f_open_e">OPEN YOUR BROWSER</div>
@@ -184,25 +153,25 @@ const H=ORIENT==='portrait'?1920:1080;
 const L = ORIENT==='portrait' ? {
   mx:84,
   wmY:200, wmSize:19,
-  eqY:630, eqSize:132,
-  sub1Y:800, sub1Size:44, sub1EY:865, sub1ESize:24,
-  sub2Y:912, sub2Size:47, sub2EY:1048, sub2ESize:26,
+  eqY:470, eqSize:150, qmSize:64,
+  kambY:652, kambSize:28,
+  sheepY:712, sheepSize:56, sheepGapX:14, sheepRowH:82, sheepCols:10,
+  sub1Y:952, sub1Size:44, sub1EY:1017, sub1ESize:24,
+  sub2Y:1092, sub2Size:47, sub2EY:1248, sub2ESize:26,
   chipY:300, chipSize:25, chipEY:357, chipESize:17,
   headY:404, headSize:56, headEY:485, headESize:28,
-  treeY:540, treeW:150, treeH:185, treeGap:96, treePopY:26,
-  dotY:800, dotSize:56, dotFont:27,
-  line1Y:940, line1EY:996, line2Y:1056, line2EY:1112, lineSize:38, lineESize:22,
-  defY:396, defSize:43, defEY:459, defESize:24,
-  cardY:506, cardW:412, cardH:330, cardGap:26,
-  cardIconH:76, cardVal:56, cardLab:21, cardLabESize:14,
-  punchY:1252, punchSize:45, punchEY:1318, punchESize:25,
-  morphY:560, morphSize:96, eqboxY:452, eqboxH:230,
-  cap1Y:756, cap1Size:44, cap1EY:823, cap1ESize:24,
-  cpunchY:872, cpunchSize:46, cpunchEY:1006, cpunchESize:25,
-  leftX:120, leftY:400, card2W:400, card2H:186, ebigSize:37, ebigESize:17,
-  qY:630, qSize:170,
-  sub1Y2:860, sub1EY2:920, sub2Y2:990, sub2EY2:1050, subSize:41, subESize:23,
-  v1Y:1100, v1Size:44, v2Y:1180, v2Size:66, v2EY:1275, v2ESize:25,
+  dotY:642, dotSize:58, dotFont:26, dotGap:20,
+  line1Y:832, line1EY:892, line2Y:952, line2EY:1012, lineSize:38, lineESize:22,
+  defY:398, defSize:43, defEY:461, defESize:24,
+  cardY:520, cardW:408, cardH:252, cardGap:22, cardIconH:56,
+  wordSize:40, enwordSize:14, descSize:15,
+  punchY:1122, punchSize:45, punchEY:1182, punchESize:25,
+  eqboxY:520, eqboxH:402, boxW:880, eqSize2:64,
+  cap1Y:952, cap1Size:44, cap1EY:1017, cap1ESize:24,
+  punch2Y:1082, punch2Size:46, punch2EY:1152, punch2ESize:25,
+  beamY:640, beamW:640, arm:300, hang:76, panW:210, panH:88,
+  v1Y:942, v1Size:44, v1EY:1007, v1ESize:24,
+  v2Y:1082, v2Size:58, v2EY:1168, v2ESize:26,
   fqY:352, fqSize:56, fqEY:434, fqESize:26,
   cta1Y:494, cta1Size:41, cta1EY:554, cta1ESize:22,
   cardY2:600, card2H2:470, cardW2:880,
@@ -211,25 +180,25 @@ const L = ORIENT==='portrait' ? {
 } : {
   mx:200,
   wmY:1006, wmSize:19,
-  eqY:452, eqSize:148,
-  sub1Y:626, sub1Size:46, sub1EY:693, sub1ESize:25,
-  sub2Y:742, sub2Size:52, sub2EY:818, sub2ESize:27,
+  eqY:330, eqSize:170, qmSize:72,
+  kambY:542, kambSize:32,
+  sheepY:604, sheepSize:62, sheepGapX:16, sheepRowH:0, sheepCols:20,
+  sub1Y:742, sub1Size:46, sub1EY:809, sub1ESize:25,
+  sub2Y:888, sub2Size:48, sub2EY:958, sub2ESize:27,
   chipY:172, chipSize:25, chipEY:229, chipESize:17,
   headY:272, headSize:56, headEY:353, headESize:28,
-  treeY:402, treeW:170, treeH:210, treeGap:110, treePopY:26,
-  dotY:668, dotSize:58, dotFont:28,
-  line1Y:768, line1EY:827, line2Y:880, line2EY:939, lineSize:40, lineESize:22,
+  dotY:520, dotSize:58, dotFont:26, dotGap:24,
+  line1Y:702, line1EY:762, line2Y:832, line2EY:892, lineSize:40, lineESize:22,
   defY:264, defSize:43, defEY:327, defESize:24,
-  cardY:380, cardW:382, cardH:296, cardGap:34,
-  cardIconH:68, cardVal:52, cardLab:20, cardLabESize:13,
-  punchY:726, punchSize:46, punchEY:793, punchESize:25,
-  morphY:408, morphSize:116, eqboxY:300, eqboxH:252,
-  cap1Y:592, cap1Size:44, cap1EY:659, cap1ESize:24,
-  cpunchY:706, cpunchSize:48, cpunchEY:844, cpunchESize:25,
-  leftX:590, leftY:300, card2W:340, card2H:176, ebigSize:34, ebigESize:15,
-  qY:470, qSize:150,
-  sub1Y2:640, sub1EY2:698, sub2Y2:748, sub2EY2:806, subSize:39, subESize:20,
-  v1Y:860, v1Size:44, v2Y:940, v2Size:60, v2EY:1027, v2ESize:21,
+  cardY:400, cardW:400, cardH:300, cardGap:40, cardIconH:66,
+  wordSize:46, enwordSize:15, descSize:16,
+  punchY:782, punchSize:46, punchEY:848, punchESize:25,
+  eqboxY:264, eqboxH:332, boxW:1000, eqSize2:62,
+  cap1Y:646, cap1Size:44, cap1EY:711, cap1ESize:24,
+  punch2Y:776, punch2Size:48, punch2EY:844, punch2ESize:25,
+  beamY:432, beamW:660, arm:310, hang:78, panW:220, panH:92,
+  v1Y:702, v1Size:44, v1EY:767, v1ESize:24,
+  v2Y:850, v2Size:60, v2EY:936, v2ESize:26,
   fqY:238, fqSize:58, fqEY:322, fqESize:24,
   cta1Y:378, cta1Size:40, cta1EY:437, cta1ESize:21,
   cardY2:482, card2H2:400, cardW2:900,
@@ -249,16 +218,14 @@ function tx(el,y,size){
 }
 document.querySelectorAll('.ponly').forEach(el=>{el.style.display=isP?'':'none';});
 
-/* ---------- deterministieke helper ---------- */
+/* ---------- deterministic helpers ---------- */
 const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
 const lerp=(a,b,p)=>a+(b-a)*p;
 const seg=(t,a,d)=>clamp((t-a)/d,0,1);
 const eoc=p=>{p=clamp(p,0,1);return 1-Math.pow(1-p,3);};
 const eoe=p=>{p=clamp(p,0,1);return p>=1?1:1-Math.pow(2,-10*p);};
 const eob=p=>{p=clamp(p,0,1);const c=2.3;return 1+(c+1)*Math.pow(p-1,3)+c*Math.pow(p-1,2);};
-const smz=(t,a,b,f=.6)=>{ // smooth zone 1 inside [a,b]
-  return clamp((t-a)/f,0,1)*clamp((b-t)/f,0,1);
-};
+const smz=(t,a,b,f=.6)=>{return clamp((t-a)/f,0,1)*clamp((b-t)/f,0,1);};
 
 /* blobs */
 const blobC=document.getElementById('blobC');
@@ -276,7 +243,7 @@ blobA.style.top=(ORIENT==='portrait'?H*0.34:H*0.42)+'px';
 /* partikel digit */
 const parts=document.getElementById('particles');
 const mulberry=(s)=>()=>{s|=0;s=s+0x6D2B79F5|0;let z=Math.imul(s^s>>>15,1|s);z=z+Math.imul(z^z>>>7,61|z)^z;return((z^z>>>14)>>>0)/4294967296;};
-const rnd=mulberry(20261113);
+const rnd=mulberry(20261114);
 const CH='0123456789+=1/2\u00BD\u00B0\u00D7';
 const NP=34, P=[];
 for(let i=0;i<NP;i++){
@@ -297,8 +264,38 @@ else{wm.style.top=L.wmY+'px';wm.style.right='70px';wm.style.left='auto';wm.style
 
 /* ---------- S0 ---------- */
 const hEq=document.getElementById('h_eq'); const hEqT=document.getElementById('h_eq_t');
-hEq.style.top=L.eqY+'px'; hEqT.style.fontSize=L.eqSize+'px';
-hEqT.style.textShadow='0 10px 60px rgba(34,211,238,.35)';
+const hQm=document.getElementById('h_qm');
+hEq.style.top=L.eqY+'px'; hEqT.style.fontSize=L.eqSize+'px'; hQm.style.fontSize=L.qmSize+'px';
+hEqT.style.textShadow='0 10px 60px rgba(251,191,36,.35)';
+const hKamb=document.getElementById('h_kamb');
+tx(hKamb,L.kambY,L.kambSize);
+/* kambing */
+const hSheep=document.getElementById('h_sheep');
+const NS=20, SS=L.sheepSize, SGX=L.sheepGapX, SCOLS=L.sheepCols, SROWS=Math.ceil(NS/SCOLS);
+const rowW=SCOLS*SS+(SCOLS-1)*SGX;
+const shX0=(W-rowW)/2;
+const SHEEP=[];
+for(let i=0;i<NS;i++){
+  const r=Math.floor(i/SCOLS), c=i%SCOLS;
+  const wrap=document.createElement('div');
+  wrap.style.cssText=`position:absolute;left:${shX0+c*(SS+SGX)}px;top:${L.sheepY+r*L.sheepRowH}px;width:${SS}px;height:${SS*1.15}px;will-change:transform,opacity;`;
+  const body=document.createElement('div');
+  body.style.cssText=`position:absolute;left:0;bottom:0;width:100%;height:74%;border-radius:50% 50% 46% 46%;background:radial-gradient(120% 120% at 38% 30%, #F6EDD8 0%, #E3D2AC 58%, #C7B188 100%);box-shadow:0 6px 18px rgba(0,0,0,.35);`;
+  const head=document.createElement('div');
+  head.style.cssText=`position:absolute;right:${SS*0.06}px;top:${SS*0.02}px;width:${SS*0.34}px;height:${SS*0.34}px;border-radius:50%;background:linear-gradient(150deg,#A98B60,#7C6240);`;
+  const ear=document.createElement('div');
+  ear.style.cssText=`position:absolute;right:${SS*0.30}px;top:${SS*0.0}px;width:${SS*0.16}px;height:${SS*0.16}px;border-radius:50% 50% 50% 0;background:#8A6F4D;transform:rotate(-18deg);`;
+  wrap.appendChild(body);wrap.appendChild(head);wrap.appendChild(ear);
+  if(i%2===1){wrap.style.transform+=' scaleX(-1)';wrap.dataset.flip='1';}
+  hSheep.appendChild(wrap);
+  SHEEP.push(wrap);
+}
+hSheep.style.top='0px';hSheep.style.left='0px';hSheep.style.right='0px';
+const HOP=16;
+const qmEl=document.createElement('div');
+qmEl.style.cssText=`position:absolute;left:${shX0+(HOP%SCOLS)*(SS+SGX)}px;top:${L.sheepY+Math.floor(HOP/SCOLS)*L.sheepRowH}px;width:${SS}px;height:${SS*1.15}px;display:flex;align-items:center;justify-content:center;color:#F87171;font-weight:800;font-size:${Math.round(SS*0.9)}px;opacity:0;will-change:transform,opacity;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;`;
+qmEl.textContent='?';
+hSheep.appendChild(qmEl);
 const hS1=document.getElementById('h_sub1');
 tx(hS1,L.sub1Y,L.sub1Size);
 const hS1E=document.getElementById('h_sub1_e');
@@ -318,25 +315,19 @@ const aHead=document.getElementById('a_head');
 tx(aHead,L.headY,L.headSize);
 const aHeadE=document.getElementById('a_head_e');
 tx(aHeadE,L.headEY,L.headESize);
-const aTrees=document.getElementById('a_trees');
-aTrees.style.left='0';aTrees.style.right='0';aTrees.style.top=L.treeY+'px';aTrees.style.height=(L.treeH+40)+'px';
-const TRW=L.treeW, TRG=L.treeGap;
-const totW=3*TRW+2*TRG; const startX=(W-totW)/2;
-['tr1','tr2','tr3'].forEach((id,i)=>{
-  const el=document.getElementById(id);
-  el.style.position='absolute';el.style.left=(startX+i*(TRW+TRG))+'px';el.style.top='0';
-  el.style.width=TRW+'px';el.style.height=L.treeH+'px';el.style.willChange='transform,opacity';
-  const tri=el.querySelector('.tri');
-  tri.style.cssText=`position:absolute;left:0;bottom:14px;width:100%;height:${L.treeH-14}px;background:linear-gradient(180deg,#34D399 0%,#059669 55%,#065F46 100%);clip-path:polygon(50% 0,100% 100%,0 100%);filter:drop-shadow(0 10px 26px rgba(16,185,129,.35));`;
-  const tk=el.querySelector('.trunk');
-  tk.style.cssText=`position:absolute;left:${TRW*0.42}px;bottom:0;width:${TRW*0.16}px;height:16px;background:#78350F;border-radius:3px;`;
-});
 const aDots=document.getElementById('a_dots');
-aDots.style.left='0';aDots.style.right='0';aDots.style.top=L.dotY+'px';aDots.style.height=L.dotSize+'px';
-['d1','d2','d3'].forEach((id,i)=>{
-  const el=document.getElementById(id);
-  el.style.cssText+=`position:absolute;left:${startX+i*(TRW+TRG)+TRW/2-L.dotSize/2}px;top:0;width:${L.dotSize}px;height:${L.dotSize}px;border-radius:50%;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.5);color:#67E8F9;font-weight:700;font-size:${L.dotFont}px;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;`;
-});
+const ND=6, DS=L.dotSize, DG=L.dotGap;
+const dotsW=ND*DS+(ND-1)*DG;
+const dX0=(W-dotsW)/2;
+aDots.style.left='0';aDots.style.right='0';aDots.style.top=L.dotY+'px';aDots.style.height=DS+'px';
+const DOTS=[];
+for(let i=0;i<ND;i++){
+  const el=document.createElement('div');
+  el.style.cssText=`position:absolute;left:${dX0+i*(DS+DG)}px;top:0;width:${DS}px;height:${DS}px;border-radius:50%;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.5);color:#67E8F9;font-weight:700;font-size:${L.dotFont}px;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;`;
+  el.textContent=String(i+1);
+  aDots.appendChild(el);
+  DOTS.push(el);
+}
 const aL1=document.getElementById('a_line1');
 tx(aL1,L.line1Y,L.lineSize);
 const aL1E=document.getElementById('a_line1_e');
@@ -357,57 +348,63 @@ tx(bDef,L.defY,L.defSize);
 const bDefE=document.getElementById('b_def_e');
 tx(bDefE,L.defEY,L.defESize);
 const bCards=document.getElementById('b_cards');
-const CW=L.cardW,CH_=L.cardH,CG=L.cardGap;
-const cols=isP?2:4, rows=isP?2:1;
-const gridW=cols*CW+(cols-1)*CG;
-const gx=(W-gridW)/2;
-const bcEls=['bc1','bc2','bc3','bc4'];
-bcEls.forEach((id,i)=>{
-  const el=document.getElementById(id);
-  const r=Math.floor(i/cols), c=i%cols;
+const CW=L.cardW, CH_=L.cardH, CG=L.cardGap;
+const tEls=['tc1','tc2','tc3'];
+function cardPos(el,i){
   el.style.position='absolute';
-  el.style.left=(gx+c*(CW+CG))+'px';
-  el.style.top=(L.cardY+r*(CH_+CG))+'px';
+  let x, y;
+  if(isP){
+    if(i<2){const gw=2*CW+CG; x=(W-gw)/2+i*(CW+CG); y=L.cardY;}
+    else{x=(W-CW)/2; y=L.cardY+CH_+CG;}
+  } else {
+    const gw=3*CW+2*CG; x=(W-gw)/2+i*(CW+CG); y=L.cardY;
+  }
+  el.style.left=x+'px';el.style.top=y+'px';
   el.style.width=CW+'px';el.style.height=CH_+'px';
   el.style.display='flex';el.style.flexDirection='column';el.style.alignItems='center';
-  el.style.justifyContent='space-between';el.style.padding=(isP?'24px 18px 22px':'20px 16px 20px');
+  el.style.justifyContent='space-between';el.style.padding='20px 16px 18px';
   el.style.willChange='transform,opacity';
+}
+tEls.forEach((id,i)=>cardPos(document.getElementById(id),i));
+/* ikon kartu */
+const ICOH=L.cardIconH;
+/* 1: tumpukan koin */
+const ti1=document.getElementById('ti1');
+ti1.style.cssText=`position:relative;width:96px;height:${ICOH}px;`;
+[['#FBBF24',0],['#F59E0B',1],['#D97706',2]].forEach(([col,i])=>{
+  const c=document.createElement('div');
+  c.style.cssText=`position:absolute;left:${10+i*6}px;bottom:${i*14}px;width:${68-i*8}px;height:15px;border-radius:50%;background:linear-gradient(180deg,${col},#B45309);border:2px solid rgba(255,255,255,.25);box-shadow:0 4px 12px rgba(0,0,0,.35);`;
+  ti1.appendChild(c);
 });
-/* ikon buku */
-const bi1=document.getElementById('bi1');bi1.style.cssText+='position:relative;width:86px;height:'+L.cardIconH+'px;';
-['bk1','bk2','bk3'].forEach((id,i)=>{
+/* 2: penggaris */
+const ti2=document.getElementById('ti2');
+ti2.style.cssText=`position:relative;width:96px;height:${ICOH}px;`;
+const ruler=document.createElement('div');
+ruler.style.cssText=`position:absolute;left:0;top:${ICOH/2-11}px;width:92px;height:22px;border-radius:6px;background:linear-gradient(180deg,#22D3EE,#0E7490);transform:rotate(-7deg);box-shadow:0 6px 16px rgba(0,0,0,.35);`;
+for(let k=0;k<5;k++){
+  const tick=document.createElement('div');
+  tick.style.cssText=`position:absolute;left:${10+k*18}px;top:0;width:2px;height:${k%2?7:11}px;background:rgba(255,255,255,.85);`;
+  ruler.appendChild(tick);
+}
+ti2.appendChild(ruler);
+/* 3: roti dibagi */
+const ti3=document.getElementById('ti3');
+ti3.style.cssText=`position:relative;width:96px;height:${ICOH}px;`;
+const pie=document.createElement('div');
+pie.style.cssText=`position:absolute;left:10px;bottom:2px;width:${ICOH-10}px;height:${ICOH-10}px;border-radius:50%;background:conic-gradient(#A78BFA 0deg 300deg,rgba(167,139,250,.18) 300deg 360deg);box-shadow:0 6px 16px rgba(0,0,0,.35);`;
+const slice=document.createElement('div');
+slice.style.cssText=`position:absolute;right:2px;top:2px;width:24px;height:24px;border-radius:5px;background:#A78BFA;transform:rotate(38deg);box-shadow:0 4px 10px rgba(0,0,0,.35);`;
+ti3.appendChild(pie);ti3.appendChild(slice);
+/* teks kartu */
+tEls.forEach(id=>{
   const el=document.getElementById(id);
-  const col=['#22D3EE','#A78BFA','#FBBF24'][i];
-  el.style.cssText=`position:absolute;left:${14+i*4}px;bottom:${i*20}px;width:${58-i*8}px;height:16px;border-radius:5px;background:${col};opacity:.92;box-shadow:0 4px 14px rgba(0,0,0,.35);`;
+  const wd=el.querySelector('.tword');
+  wd.style.cssText+=`font-size:${L.wordSize}px;font-weight:800;letter-spacing:.04em;`;
+  const ew=el.querySelector('.tew');
+  ew.style.cssText+=`font-size:${L.enwordSize}px;`;
+  const ds=el.querySelector('.tdesc');
+  ds.style.cssText+=`font-size:${L.descSize}px;color:#94A3B8;font-weight:500;`;
 });
-/* podium */
-const bi2=document.getElementById('bi2');bi2.style.cssText+='position:relative;width:104px;height:'+L.cardIconH+'px;display:flex;align-items:flex-end;justify-content:center;gap:6px;';
-[['p1',30,'#475569'],['p2',58,'#FBBF24'],['p3',38,'#475569']].forEach(([id,h,col],i)=>{
-  const el=document.getElementById(id);
-  el.style.cssText=`width:30px;height:${h}px;border-radius:7px 7px 0 0;background:${col};color:#0B1020;font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;`;
-});
-/* setengah lingkaran */
-const bi3=document.getElementById('bi3');bi3.style.cssText+='position:relative;width:92px;height:'+L.cardIconH+'px;';
-const halfc=document.querySelector('.halfc');
-halfc.style.cssText=`position:absolute;left:0;bottom:0;width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,#22D3EE,#0EA5E9);opacity:.9;`;
-const halfm=document.querySelector('.halfm');
-halfm.style.cssText=`position:absolute;left:37px;bottom:0;width:37px;height:74px;border-radius:0 74px 74px 0;background:rgba(10,15,28,.85);border-left:2px solid rgba(255,255,255,.25);`;
-/* termometer */
-const bi4=document.getElementById('bi4');bi4.style.cssText+='position:relative;width:60px;height:'+L.cardIconH+'px;';
-const th=document.querySelector('.thermo');
-th.style.cssText=`position:absolute;left:14px;top:0;width:28px;height:${L.cardIconH-14}px;border-radius:99px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);overflow:hidden;`;
-const tm=document.querySelector('.tmercury');
-tm.style.cssText=`position:absolute;left:0;bottom:0;width:100%;height:26%;background:linear-gradient(180deg,#F87171,#DC2626);`;
-const bValSize=L.cardVal, bLabSize=L.cardLab;
-bcEls.forEach(id=>{
-  const el=document.getElementById(id);
-  const v=el.querySelector('.bval');
-  v.style.cssText+=`font-size:${bValSize}px;font-weight:800;`;
-  const s=el.querySelector('.bsm'); if(s){s.style.fontSize=Math.round(bValSize*0.42)+'px';s.style.fontWeight='600';s.style.color='#94A3B8';}
-  const lb=el.querySelector('.blab');
-  lb.style.cssText+=`font-size:${bLabSize}px;font-weight:700;letter-spacing:.24em;color:#67E8F9;background:rgba(34,211,238,.10);border:1px solid rgba(34,211,238,.35);border-radius:999px;padding:7px 16px;`;
-});
-document.querySelectorAll('.blabe').forEach(el=>{el.style.fontSize=L.cardLabESize+'px';el.style.paddingTop='4px';});
 const bPunch=document.getElementById('b_punch');
 tx(bPunch,L.punchY,L.punchSize);
 const bPunchE=document.getElementById('b_punch_e');
@@ -420,21 +417,80 @@ cChip.style.top=L.chipY+'px';cChipT.style.fontSize=L.chipSize+'px';cChipT.style.
 const cChipE=document.getElementById('c_chip_e');
 tx(cChipE,L.chipEY,L.chipESize);
 const cBox=document.getElementById('c_eqbox');
-const BOXW=isP?800:1000;
+const BOXW=L.boxW;
 cBox.style.left=((W-BOXW)/2)+'px';cBox.style.top=L.eqboxY+'px';
 cBox.style.width=BOXW+'px';cBox.style.height=L.eqboxH+'px';
-cBox.style.display='flex';cBox.style.alignItems='center';cBox.style.justifyContent='center';
+cBox.style.display='block';
 cBox.style.background='rgba(34,211,238,.045)';
 const cMorph=document.getElementById('c_morph');
-cMorph.style.fontSize=L.morphSize+'px';cMorph.style.position='relative';cMorph.style.whiteSpace='nowrap';
+cMorph.style.fontSize=L.eqSize2+'px';cMorph.style.position='absolute';
+cMorph.style.left='0';cMorph.style.right='0';cMorph.style.top='26px';
+cMorph.style.whiteSpace='nowrap';
+const cPersons=document.getElementById('c_persons');
+const cBreads=document.getElementById('c_breads');
+cPersons.style.cssText+='position:absolute;inset:0;';
+cBreads.style.cssText+='position:absolute;inset:0;';
+const INX=50, INNER=BOXW-2*INX;
+const personCX=[];
+const PER=[];
+for(let i=0;i<5;i++){
+  const px=INX+INNER*(i+0.5)/5;
+  personCX.push(px);
+  const wrap=document.createElement('div');
+  const ph=isP?70:64, pw=isP?56:50;
+  wrap.style.cssText=`position:absolute;left:${px-pw/2}px;bottom:${isP?22:20}px;width:${pw}px;height:${ph}px;opacity:0;will-change:transform,opacity;`;
+  const hd=document.createElement('div');
+  hd.style.cssText=`position:absolute;left:50%;top:0;transform:translateX(-50%);width:${pw*0.42}px;height:${pw*0.42}px;border-radius:50%;background:linear-gradient(160deg,#94A3B8,#64748B);`;
+  const bd=document.createElement('div');
+  bd.style.cssText=`position:absolute;left:2px;bottom:0;width:${pw-4}px;height:${ph-pw*0.42-6}px;border-radius:${pw*0.4}px ${pw*0.4}px 8px 8px;background:linear-gradient(160deg,#3B4C63,#243147);border:1px solid rgba(148,163,184,.25);`;
+  wrap.appendChild(hd);wrap.appendChild(bd);
+  cPersons.appendChild(wrap);
+  PER.push(wrap);
+}
+const NB=10, BRDS=isP?26:24, BSTEP=isP?30:28;
+const BRD_BASE=isP?108:100;
+const BRD=[];
+for(let i=0;i<NB;i++){
+  const el=document.createElement('div');
+  el.style.cssText=`position:absolute;width:${BRDS}px;height:${BRDS}px;border-radius:50%;background:radial-gradient(120% 120% at 35% 30%, #FCD34D 0%, #F59E0B 60%, #B45309 100%);border:1px solid rgba(255,255,255,.3);box-shadow:0 4px 12px rgba(0,0,0,.35);opacity:0;will-change:transform,opacity;`;
+  cBreads.appendChild(el);
+  BRD.push(el);
+}
+function slotPos(s,i){
+  /* s: 0 baris tengah, 1 dibagi rata, 2 tidak rata, 3 tetap seperti 2 */
+  if(s<=0){return {x:(BOXW/2)+(i-4.5)*44, y:BRD_BASE};}
+  const cnt = s===1 ? [2,2,2,2,2] : [4,3,2,1,0];
+  let p=0, rem=i;
+  while(rem>=cnt[p] && p<4){rem-=cnt[p];p++;}
+  if(cnt[p]===0){p=4;rem=0;}
+  return {x:personCX[p], y:BRD_BASE+rem*BSTEP};
+}
+function breadXY(i,t){
+  /* posisi roti ke-i: hasil {x,y} CSS absolut di dalam cBreads */
+  const st=stageIdx(t);
+  const curSt=st===3?2:st;
+  const cur=slotPos(curSt,i);
+  let bx=cur.x, by=cur.y;
+  if(st>0){
+    const Ts=SWAPS3[st-1];
+    const dp=t-Ts-i*0.03;
+    if(dp>=0&&dp<0.6){
+      const q=eob(clamp(dp/0.6,0,1));
+      const pvSt=st===1?0:(st===2?1:2);
+      const pv=slotPos(pvSt,i);
+      bx=lerp(pv.x,cur.x,q); by=lerp(pv.y,cur.y,q);
+    }
+  }
+  return {x:bx-BRDS/2, y:L.eqboxH-by-BRDS};
+}
 const cCap=document.getElementById('c_cap1');
 tx(cCap,L.cap1Y,L.cap1Size);
 const cCapE=document.getElementById('c_cap1_e');
 tx(cCapE,L.cap1EY,L.cap1ESize);
 const cPunch=document.getElementById('c_punch');
-tx(cPunch,L.cpunchY,L.cpunchSize);cPunch.style.lineHeight='1.4';
+tx(cPunch,L.punch2Y,L.punch2Size);
 const cPunchE=document.getElementById('c_punch_e');
-tx(cPunchE,L.cpunchEY,L.cpunchESize);
+tx(cPunchE,L.punch2EY,L.punch2ESize);
 
 /* ---------- S4 ---------- */
 const eChipT=document.getElementById('e_chip_t');
@@ -442,32 +498,60 @@ const eChip=document.getElementById('e_chip');
 eChip.style.top=L.chipY+'px';eChipT.style.fontSize=L.chipSize+'px';eChipT.style.padding='12px 30px 12px 34px';
 const eChipE=document.getElementById('e_chip_e');
 tx(eChipE,L.chipEY,L.chipESize);
-const eL=document.getElementById('e_left'), eR=document.getElementById('e_right');
-const E2W=L.card2W, E2H=L.card2H;
-eL.style.left=L.leftX+'px';eR.style.left=(L.leftX+E2W+ (isP?40:60))+'px';
-eL.style.top=L.leftY+'px';eR.style.top=L.leftY+'px';
-eL.style.width=E2W+'px';eR.style.width=E2W+'px';
-eL.style.height=E2H+'px';eR.style.height=E2H+'px';
-eL.style.display='flex';eR.style.display='flex';
-eL.style.flexDirection='column';eR.style.flexDirection='column';
-eL.style.gap='8px';eR.style.gap='8px';
-eL.style.alignItems='center';eR.style.alignItems='center';
-eL.style.justifyContent='center';eR.style.justifyContent='center';
-eL.style.borderColor='rgba(34,211,238,.5)';eR.style.borderColor='rgba(167,139,250,.5)';
-document.querySelectorAll('.ebig').forEach(el=>{el.style.fontSize=L.ebigSize+'px';el.style.fontWeight='800';el.style.letterSpacing='.10em';});
-document.querySelectorAll('.ebige').forEach(el=>{el.style.fontSize=L.ebigESize+'px';});
-const eQ=document.getElementById('e_q');
-eQ.style.top=L.qY+'px';document.getElementById('e_q_t').style.fontSize=L.qSize+'px';
-const eS1=document.getElementById('e_sub1');
-tx(eS1,L.sub1Y2,L.subSize);
-const eS1E=document.getElementById('e_sub1_e');
-tx(eS1E,L.sub1EY2,L.subESize);
-const eS2=document.getElementById('e_sub2');
-tx(eS2,L.sub2Y2,L.subSize);
-const eS2E=document.getElementById('e_sub2_e');
-tx(eS2E,L.sub2EY2,L.subESize);
+const eScale=document.getElementById('e_scale');
+const BX=W/2, BY=L.beamY, ARM=L.arm, HANG=L.hang, PW=L.panW, PH=L.panH;
+const fulcrum=document.createElement('div');
+fulcrum.style.cssText=`position:absolute;left:${BX-34}px;top:${BY+7}px;width:68px;height:82px;background:linear-gradient(180deg,#475569,#1E293B);clip-path:polygon(50% 0,100% 100%,0 100%);opacity:0;will-change:transform,opacity;`;
+const ground=document.createElement('div');
+ground.style.cssText=`position:absolute;left:${BX-170}px;top:${BY+88}px;width:340px;height:16px;border-radius:50%;background:rgba(0,0,0,.4);filter:blur(6px);opacity:0;will-change:opacity;`;
+const beam=document.createElement('div');
+beam.style.cssText=`position:absolute;left:${BX-L.beamW/2}px;top:${BY-9}px;width:${L.beamW}px;height:18px;border-radius:99px;background:linear-gradient(90deg,#334155,#64748B 50%,#334155);border:1px solid rgba(148,163,184,.35);box-shadow:0 8px 24px rgba(0,0,0,.4);transform-origin:50% 50%;opacity:0;will-change:transform,opacity;`;
+eScale.appendChild(ground);eScale.appendChild(fulcrum);eScale.appendChild(beam);
+eScale.style.left='0';eScale.style.top='0';eScale.style.width=W+'px';eScale.style.height=H+'px';
+const PANS=[];
+[['left','ANGKA','NUMBERS','#22D3EE'],['right','HATI','HEART','#A78BFA']].forEach(([side,idn,ide,ac],si)=>{
+  const s=si===0?-1:1;
+  const grp=document.createElement('div');
+  grp.style.cssText=`position:absolute;left:0;top:0;width:0;height:0;opacity:0;will-change:transform,opacity;`;
+  const chain=document.createElement('div');
+  chain.style.cssText=`position:absolute;left:0;top:0;width:3px;height:${HANG}px;background:rgba(148,163,184,.5);will-change:transform;`;
+  const pan=document.createElement('div');
+  pan.style.cssText=`position:absolute;left:${-PW/2}px;top:${HANG}px;width:${PW}px;height:${PH}px;border-radius:18px;background:rgba(255,255,255,.055);border:1px solid ${ac}66;box-shadow:0 14px 40px rgba(0,0,0,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;`;
+  if(si===0){
+    const num=document.createElement('div');
+    num.className='mono';
+    num.style.cssText=`font-weight:800;font-size:34px;color:${ac};`;
+    num.textContent='123';
+    pan.appendChild(num);
+  } else {
+    const hrt=document.createElement('div');
+    hrt.style.cssText=`position:relative;width:34px;height:30px;`;
+    const hsq=document.createElement('div');
+    hsq.style.cssText=`position:absolute;left:8px;top:8px;width:18px;height:18px;background:linear-gradient(140deg,#C4B5FD,#8B5CF6);transform:rotate(45deg);border-radius:3px;`;
+    const hc1=document.createElement('div');
+    hc1.style.cssText=`position:absolute;left:0;top:3px;width:18px;height:18px;background:#A78BFA;border-radius:50%;`;
+    const hc2=document.createElement('div');
+    hc2.style.cssText=`position:absolute;left:16px;top:3px;width:18px;height:18px;background:#A78BFA;border-radius:50%;`;
+    hrt.appendChild(hc1);hrt.appendChild(hc2);hrt.appendChild(hsq);
+    pan.appendChild(hrt);
+  }
+  const lb=document.createElement('div');
+  lb.style.cssText=`font-weight:800;font-size:15px;letter-spacing:.18em;color:${ac};`;
+  lb.textContent=idn;
+  pan.appendChild(lb);
+  const lbe=document.createElement('div');
+  lbe.className='enpan';
+  lbe.style.fontSize='12px';
+  lbe.textContent=ide;
+  pan.appendChild(lbe);
+  grp.appendChild(chain);grp.appendChild(pan);
+  eScale.appendChild(grp);
+  PANS.push({grp,chain,pan,s});
+});
 const eV1=document.getElementById('e_v1');
 tx(eV1,L.v1Y,L.v1Size);
+const eV1E=document.getElementById('e_v1_e');
+tx(eV1E,L.v1EY,L.v1ESize);
 const eV2=document.getElementById('e_v2');
 tx(eV2,L.v2Y,L.v2Size);
 const eV2E=document.getElementById('e_v2_e');
@@ -516,10 +600,11 @@ const world=document.getElementById('world');
 const grid=document.getElementById('grid');
 
 /* ---------- fungsi animasi elemen ---------- */
-function pop(el,t,ts,d=0.55,y=26,s0=0.94){
+function pop(el,t,ts,d=0.55,y=26,s0=0.94,flip=false){
   const p=eob(seg(t,ts,d));
+  const f=flip?' scaleX(-1)':'';
   el.style.opacity=clamp(p,0,1);
-  el.style.transform=`translateY(${(1-p)*y}px) scale(${lerp(s0,1,clamp(p,0,1))})`;
+  el.style.transform=`translateY(${(1-p)*y}px) scale(${lerp(s0,1,clamp(p,0,1))})${f}`;
 }
 function fadeUp(el,t,ts,d=0.6,y=30){
   const p=eoe(seg(t,ts,d));
@@ -533,18 +618,27 @@ function sceneVis(el,t,tIn,tOut,dIn=0.5,dOut=0.45){
   el.style.transform=`translateY(${(1-a)*30-(1-b)*40}px)`;
 }
 
-const SWAPS=[23.9,25.7,27.5,29.3];
-const MORPH=[
-  {t:'2 + 2 = 4',  c:'mono'},
-  {t:'II + II = IV', c:'mono'},
-  {t:'\u4E8C + \u4E8C = \u56DB', c:'zh'},
-  {t:'\u0662 + \u0662 = \u0664', c:'ar'},
-  {t:'2 + 2 = 4',  c:'mono grad'}
+/* timeline video 02 */
+const SWAPS3=[24.4,26.2,28.0];
+function stageIdx(t){
+  let i=0;
+  for(const s of SWAPS3){ if(t>=s) i++; }
+  return i;
+}
+const STAGE_TXT=[
+  {t:'10 ROTI, 5 ORANG', col:'#7DD3FC', cls:'mono'},
+  {t:'2 \u00B7 2 \u00B7 2 \u00B7 2 \u00B7 2', col:'#34D399', cls:'mono'},
+  {t:'4 \u00B7 3 \u00B7 2 \u00B7 1 \u00B7 0', col:'#F87171', cls:'mono'},
+  {t:'MASIH 10.', col:'', cls:'mono grad'}
 ];
-function morphIndex(t){
-  let idx=0;
-  for(let i=0;i<SWAPS.length;i++){ if(t>=SWAPS[i]) idx=i+1; }
-  return idx;
+function tilt(t){
+  if(t<32.9) return 0;
+  const a=eoc(seg(t,32.9,0.8))*-5;
+  const b=eoc(seg(t,34.9,0.9))*9;
+  const c=eob(seg(t,36.9,1.1))*-4;
+  let th=a+b+c;
+  if(t>38.4){th+=0.5*Math.sin(t*1.6)*clamp(seg(t,38.4,0.8),0,1);}
+  return th;
 }
 
 /* ---------- RENDER PER FRAME ---------- */
@@ -571,6 +665,28 @@ function renderFrame(t){
   hEq.style.opacity=clamp(pk,0,1);
   hEq.style.transform=`scale(${lerp(1.55,1,clamp(pk,0,1))})`;
   hEq.style.transformOrigin='50% 50%';
+  fadeUp(hKamb,t,0.95,0.55,18);
+  SHEEP.forEach((el,i)=>{
+    if(i===HOP){
+      const hp=seg(t,2.30,0.75);
+      if(hp<=0){pop(el,t,0.8+i*0.045,0.5,20,0.6,el.dataset.flip==='1');}
+      else{
+        const q=eoc(hp);
+        const dx=q*150, dy=-Math.sin(Math.min(hp,1)*Math.PI)*150+q*60;
+        el.style.opacity=String(1-eoc(seg(hp,0.45,0.55)));
+        el.style.transform=`translate(${dx}px,${dy}px) rotate(${q*14}deg)${el.dataset.flip==='1'?' scaleX(-1)':''}`;
+      }
+    } else {
+      pop(el,t,0.8+i*0.045,0.5,20,0.6,el.dataset.flip==='1');
+    }
+  });
+  const qmp=eob(seg(t,2.82,0.5));
+  qmEl.style.opacity=String(qmp);
+  qmEl.style.transform=`scale(${lerp(0.3,1,clamp(qmp,0,1))})`;
+  hQm.style.opacity=(t>=2.40&&t<4.6)?String(0.85+0.15*Math.sin(t*7)):'0';
+  const wob=seg(t,2.32,0.16);
+  const wob2=1-seg(t,2.52,0.2);
+  hEqT.style.letterSpacing=(wob>0&&wob2>0)?'0.04em':'0em';
   fadeUp(hS1,t,1.70,0.55,24);
   fadeUp(hS1E,t,1.86,0.5,16);
   fadeUp(hS2,t,2.90,0.6,26);
@@ -584,8 +700,17 @@ function renderFrame(t){
   fadeUp(aChipE,t,5.50,0.45,12);
   fadeUp(aHead,t,5.85,0.6,26);
   fadeUp(aHeadE,t,6.01,0.55,18);
-  ['tr1','tr2','tr3'].forEach((id,i)=>pop(document.getElementById(id),t,6.5+i*0.45,0.6,34,0.7));
-  ['d1','d2','d3'].forEach((id,i)=>pop(document.getElementById(id),t,7.9+i*0.25,0.5,20,0.6));
+  DOTS.forEach((el,i)=>{
+    const gp=eoc(seg(t,8.6+i*0.18,0.5));
+    const pp=eob(seg(t,6.5+i*0.22,0.5));
+    const vis=clamp(pp,0,1);
+    el.style.opacity=String(vis*(1-0.85*gp));
+    el.style.transform=`translateY(${(1-pp)*20}px) scale(${lerp(0.6,1,vis)*(1-0.12*gp)})`;
+    const gs=8.6+i*0.18;
+    el.firstChild.textContent = t>=gs ? '?' : String(i+1);
+    el.style.borderColor=gp>0.5?'rgba(100,116,139,.5)':'rgba(34,211,238,.5)';
+    el.style.color=gp>0.5?'#64748B':'#67E8F9';
+  });
   fadeUp(aL1,t,8.9,0.55,22);
   fadeUp(aL1E,t,9.06,0.5,16);
   fadeUp(aL2,t,9.9,0.55,22);
@@ -598,7 +723,7 @@ function renderFrame(t){
   fadeUp(bChipE,t,12.70,0.45,12);
   fadeUp(bDef,t,13.0,0.55,22);
   fadeUp(bDefE,t,13.16,0.5,16);
-  bcEls.forEach((id,i)=>pop(document.getElementById(id),t,13.9+i*1.0,0.65,34,0.88));
+  tEls.forEach((id,i)=>pop(document.getElementById(id),t,13.9+i*0.9,0.65,34,0.88));
   pop(bPunch,t,18.3,0.6,24,0.92);
   pop(bPunchE,t,18.5,0.55,16,0.94);
 
@@ -608,21 +733,34 @@ function renderFrame(t){
   fadeUp(cChip,t,22.15,0.5,18);
   fadeUp(cChipE,t,22.30,0.45,12);
   fadeUp(cBox,t,22.5,0.65,30,0.92);
-  const mi=morphIndex(t);
-  const m=MORPH[mi];
+  const st=stageIdx(t);
+  const m=STAGE_TXT[st];
   cMorph.textContent=m.t;
-  cMorph.className='center '+m.c;
-  cMorph.style.fontSize=L.morphSize+'px';
+  cMorph.className='center '+m.cls;
+  cMorph.style.color=m.col||'';
+  cMorph.style.fontSize=L.eqSize2+'px';
   let mo=1, ms=1;
-  const lastSwap=mi>0?SWAPS[mi-1]:-10;
-  const dp=t-lastSwap;
-  if(dp>=0&&dp<0.30){const q=dp/0.30; mo=q<0.5?lerp(1,0.18,q/0.5):lerp(0.18,1,(q-0.5)/0.5); ms=q<0.5?lerp(1,0.90,q/0.5):lerp(0.90,1.04,(q-0.5)/0.5);}
-  if(mi===MORPH.length-1){const gp=eob(seg(t,29.3,0.7)); ms=Math.max(ms,lerp(0.92,1,clamp(gp,0,1)));}
+  const lastSwap=st>0?SWAPS3[st-1]:-10;
+  const dp2=t-lastSwap;
+  if(dp2>=0&&dp2<0.30){const q=dp2/0.30; mo=q<0.5?lerp(1,0.18,q/0.5):lerp(0.18,1,(q-0.5)/0.5); ms=q<0.5?lerp(1,0.90,q/0.5):lerp(0.90,1.04,(q-0.5)/0.5);}
+  if(st===3){const gp=eob(seg(t,28.0,0.7)); ms=Math.max(ms,lerp(0.92,1,clamp(gp,0,1)));}
   cMorph.style.opacity=mo;
   cMorph.style.transform=`scale(${ms})`;
-  cBox.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(34+22*Math.sin(t*3.2)).toFixed(0)}px rgba(34,211,238,${(0.10+0.05*Math.sin(t*3.2)).toFixed(3)})`;
-  fadeUp(cCap,t,24.4,0.55,22);
-  fadeUp(cCapE,t,24.56,0.5,16);
+  const glowC=st===2?'rgba(248,113,113,':st===3?'rgba(251,191,36,':'rgba(34,211,238,';
+  cBox.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(34+22*Math.sin(t*3.2)).toFixed(0)}px ${glowC}${(0.10+0.05*Math.sin(t*3.2)).toFixed(3)})`;
+  PER.forEach((el,i)=>pop(el,t,24.4+i*0.1,0.5,18,0.8));
+  BRD.forEach((el,i)=>{
+    const pos=breadXY(i,t);
+    const bp=eob(seg(t,22.7+i*0.05,0.5));
+    el.style.opacity=String(clamp(bp,0,1));
+    el.style.transform=`translate(${pos.x}px,${pos.y}px) scale(${lerp(0.5,1,clamp(bp,0,1))})`;
+  });
+  const cpo=eoe(seg(t,24.4,0.55))*(1-eoc(seg(t,26.05,0.45)));
+  cCap.style.opacity=String(cpo);
+  cCap.style.transform=`translateY(${(1-eoe(seg(t,24.4,0.55)))*22}px)`;
+  const cpeo=eoe(seg(t,24.56,0.5))*(1-eoc(seg(t,26.05,0.45)));
+  cCapE.style.opacity=String(cpeo);
+  cCapE.style.transform=`translateY(${(1-eoe(seg(t,24.56,0.5)))*16}px)`;
   pop(cPunch,t,29.55,0.6,24,0.92);
   pop(cPunchE,t,29.75,0.55,16,0.94);
 
@@ -631,19 +769,29 @@ function renderFrame(t){
   sceneVis(s4,t,31.65,41.55);
   fadeUp(eChip,t,31.75,0.5,18);
   fadeUp(eChipE,t,31.90,0.45,12);
-  pop(eL,t,32.3,0.6,-46,0.9);
-  pop(eR,t,32.55,0.6,46,0.9);
-  fadeUp(eQ,t,33.3,0.6,20);
-  const qp=1+0.05*Math.sin(t*6);
-  eQ.style.transform=`translateY(0) scale(${qp.toFixed(3)})`;
-  eQ.style.opacity=String(eoe(seg(t,33.3,0.6)));
-  fadeUp(eS1,t,34.7,0.55,22);
-  fadeUp(eS1E,t,34.86,0.5,16);
-  fadeUp(eS2,t,35.9,0.55,22);
-  fadeUp(eS2E,t,36.06,0.5,16);
-  pop(eV1,t,38.2,0.6,24,0.92);
-  pop(eV2,t,39.5,0.7,30,0.85);
-  pop(eV2E,t,39.7,0.6,16,0.9);
+  const th=tilt(t);
+  const thR=th*Math.PI/180;
+  const beamP=eob(seg(t,32.3,0.6));
+  beam.style.opacity=String(clamp(beamP,0,1));
+  beam.style.transform=`rotate(${th.toFixed(3)}deg) scale(${lerp(0.9,1,clamp(beamP,0,1))})`;
+  const fulP=eob(seg(t,32.2,0.55));
+  fulcrum.style.opacity=String(clamp(fulP,0,1));
+  fulcrum.style.transform=`translateY(${(1-fulP)*20}px)`;
+  ground.style.opacity=String(clamp(0.9*fulP,0,1));
+  PANS.forEach((o,i)=>{
+    const ax=BX+Math.cos(thR)*o.s*ARM;
+    const ay=BY+Math.sin(thR)*o.s*ARM;
+    const pp=eob(seg(t,32.45+i*0.18,0.6));
+    o.grp.style.opacity=String(clamp(pp,0,1));
+    o.chain.style.transform=`translate(${(ax-1.5).toFixed(1)}px,${ay.toFixed(1)}px)`;
+    o.pan.style.left=(ax-PW/2)+'px';
+    o.pan.style.top=(ay+HANG)+'px';
+    o.pan.style.transform=`scale(${lerp(0.85,1,clamp(pp,0,1))})`;
+  });
+  fadeUp(eV1,t,34.7,0.55,22);
+  fadeUp(eV1E,t,34.86,0.5,16);
+  pop(eV2,t,38.4,0.7,30,0.85);
+  pop(eV2E,t,38.6,0.6,16,0.9);
 
   /* S5 42.2-52.0 */
   const s5=document.getElementById('s5');
@@ -662,7 +810,7 @@ function renderFrame(t){
   fadeUp(fBrand,t,49.2,0.7,16);
 
   /* flash momen */
-  const FS=[[0.30,.10],[22.5,.05],[29.3,.10],[39.5,.10],[46.3,.08]];
+  const FS=[[0.30,.10],[2.30,.06],[22.5,.05],[26.2,.07],[28.0,.10],[38.4,.08],[46.3,.08]];
   let fo=0;
   for(const [ft,fa] of FS){const d=t-ft; if(d>=0&&d<0.30){fo=Math.max(fo,fa*(1-d/0.30));}}
   flash.style.opacity=fo.toFixed(3);

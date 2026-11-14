@@ -1,0 +1,679 @@
+     1→     1→<!DOCTYPE html>
+     2→     2→<html>
+     3→     3→<head>
+     4→     4→<meta charset="utf-8">
+     5→     5→<style>
+     6→     6→/*__FONTS__*/
+     7→     7→*{margin:0;padding:0;box-sizing:border-box;}
+     8→     8→html,body{background:#000;overflow:hidden;}
+     9→     9→#stage{position:relative;overflow:hidden;
+    10→    10→  background:radial-gradient(120% 95% at 50% 8%, #0E1628 0%, #080C18 52%, #05070F 100%);
+    11→    11→  font-family:'Poppins','DejaVu Sans',sans-serif;color:#E7EEF8;
+    12→    12→  -webkit-font-smoothing:antialiased;}
+    13→    13→.blob{position:absolute;border-radius:50%;filter:blur(90px);will-change:transform;}
+    14→    14→#blobC{background:#0EA5E9;opacity:.30;}
+    15→    15→#blobV{background:#8B5CF6;opacity:.26;}
+    16→    16→#blobA{background:#F59E0B;opacity:.20;}
+    17→    17→#grid{position:absolute;inset:0;
+    18→    18→  background-image:linear-gradient(rgba(148,163,184,.055) 1px,transparent 1px),
+    19→    19→                   linear-gradient(90deg,rgba(148,163,184,.055) 1px,transparent 1px);
+    20→    20→  background-size:80px 80px;}
+    21→    21→#world{position:absolute;inset:0;will-change:transform;}
+    22→    22→#particles span{position:absolute;will-change:transform,opacity;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#7DD3FC;}
+    23→    23→.scene{position:absolute;inset:0;will-change:opacity,transform;}
+    24→    24→.card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);
+    25→    25→  border-radius:26px;box-shadow:0 18px 60px rgba(0,0,0,.45);}
+    26→    26→.chip{display:inline-block;border-radius:999px;border:1px solid rgba(34,211,238,.45);
+    27→    27→  background:rgba(34,211,238,.09);color:#67E8F9;font-weight:600;letter-spacing:.30em;}
+    28→    28→.grad{background:linear-gradient(92deg,#22D3EE 0%,#A78BFA 52%,#FBBF24 100%);
+    29→    29→  -webkit-background-clip:text;background-clip:text;color:transparent;}
+    30→    30→.vig{position:absolute;inset:0;pointer-events:none;
+    31→    31→  background:radial-gradient(92% 92% at 50% 44%, transparent 58%, rgba(0,0,0,.52) 100%);}
+    32→    32→#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;}
+    33→    33→#fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;}
+    34→    34→.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
+    35→    35→.zh{font-family:'Noto Sans SC','DejaVu Sans',sans-serif;font-weight:700;}
+    36→    36→.ar{font-family:'DejaVu Sans',sans-serif;}
+    37→    37→.center{text-align:center;}
+    38→    38→.ensub{color:#7E92AF;font-weight:500;}
+    39→    39→.ensub-b{color:#A7B6CE;font-weight:600;}
+    40→    40→.enchip{color:#64748B;font-weight:600;letter-spacing:.24em;}
+    41→    41→.blabe{color:#64748B;font-weight:600;letter-spacing:.20em;}
+    42→    42→.ebige{color:#7488A6;font-weight:600;letter-spacing:.24em;}
+    43→    43→.enchip2{color:#5B6B84;font-weight:600;letter-spacing:.30em;}
+    44→    44→.ensub2{color:#8CA0BC;font-weight:500;}
+    45→    45→</style>
+    46→    46→</head>
+    47→    47→<body>
+    48→    48→<div id="stage">
+    49→    49→  <div class="blob" id="blobC"></div>
+    50→    50→  <div class="blob" id="blobV"></div>
+    51→    51→  <div class="blob" id="blobA"></div>
+    52→    52→  <div id="grid"></div>
+    53→    53→  <div id="world">
+    54→    54→    <div id="particles"></div>
+    55→    55→
+    56→    56→    <!-- S0 HOOK -->
+    57→    57→    <div class="scene" id="s0">
+    58→    58→      <div class="center" id="h_eq" style="position:absolute;left:0;right:0;font-weight:800;">
+    59→    59→        <span class="mono grad" id="h_eq_t">2 + 2 = 4</span>
+    60→    60→      </div>
+    61→    61→      <div class="center" id="h_sub1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Selalu gitu. Gak pernah salah.</div>
+    62→    62→      <div class="center ensub" id="h_sub1_e">Every single time. It never fails.</div>
+    63→    63→      <div class="center" id="h_sub2" style="position:absolute;left:0;right:0;font-weight:800;">
+    64→    64→        Bahkan <span class="grad">jauh sebelum kita ada,</span><br class="ponly"> angkanya udah setia.
+    65→    65→      </div>
+    66→    66→      <div class="center ensub" id="h_sub2_e">Numbers were already true, long before we existed.</div>
+    67→    67→    </div>
+    68→    68→
+    69→    69→    <!-- S1 DUNIA SEBELUM ANGKA -->
+    70→    70→    <div class="scene" id="s1">
+    71→    71→      <div class="center" id="a_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="a_chip_t">COBA BAYANGIN...</span></div>
+    72→    72→      <div class="center enchip" id="a_chip_e">TRY TO IMAGINE...</div>
+    73→    73→      <div class="center" id="a_head" style="position:absolute;left:0;right:0;font-weight:800;">Dunia udah bisa <span class="grad">menghitung.</span></div>
+    74→    74→      <div class="center ensub-b" id="a_head_e">The world could already count.</div>
+    75→    75→      <div id="a_trees" style="position:absolute;">
+    76→    76→        <div class="tree" id="tr1"><div class="tri"></div><div class="trunk"></div></div>
+    77→    77→        <div class="tree" id="tr2"><div class="tri"></div><div class="trunk"></div></div>
+    78→    78→        <div class="tree" id="tr3"><div class="tri"></div><div class="trunk"></div></div>
+    79→    79→      </div>
+    80→    80→      <div id="a_dots" style="position:absolute;">
+    81→    81→        <div class="dotb" id="d1">1</div><div class="dotb" id="d2">2</div><div class="dotb" id="d3">3</div>
+    82→    82→      </div>
+    83→    83→      <div class="center" id="a_line1" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Tiga pohon ya tetap tiga pohon.</div>
+    84→    84→      <div class="center ensub" id="a_line1_e">Three trees are still three trees.</div>
+    85→    85→      <div class="center" id="a_line2" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Setengah bagian ya tetap setengah bagian.</div>
+    86→    86→      <div class="center ensub" id="a_line2_e">Half a share is still half a share.</div>
+    87→    87→    </div>
+    88→    88→
+    89→    89→    <!-- S2 APA ITU BILANGAN -->
+    90→    90→    <div class="scene" id="s2">
+    91→    91→      <div class="center" id="b_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="b_chip_t">JADI BILANGAN ITU APA?</span></div>
+    92→    92→      <div class="center enchip" id="b_chip_e">SO WHAT ARE NUMBERS?</div>
+    93→    93→      <div class="center" id="b_def" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Gampangnya: cara kita nyebut dunia.</div>
+    94→    94→      <div class="center ensub" id="b_def_e">Simply put: the way we name the world.</div>
+    95→    95→      <div id="b_cards" style="position:absolute;">
+    96→    96→        <div class="card bcard" id="bc1">
+    97→    97→          <div class="bico" id="bi1"><div class="bk" id="bk1"></div><div class="bk" id="bk2"></div><div class="bk" id="bk3"></div></div>
+    98→    98→          <div class="bval"><span class="grad">5</span> <span class="bsm">BUKU</span></div>
+    99→    99→          <div class="blab">JUMLAH</div>
+   100→   100→          <div class="blabe">HOW MANY</div>
+   101→   101→        </div>
+   102→   102→        <div class="card bcard" id="bc2">
+   103→   103→          <div class="bico" id="bi2"><div class="pod" id="p1"></div><div class="pod" id="p2">2</div><div class="pod" id="p3"></div></div>
+   104→   104→          <div class="bval"><span class="grad">JUARA</span> <span class="bsm">KE-2</span></div>
+   105→   105→          <div class="blab">URUTAN</div>
+   106→   106→          <div class="blabe">ORDER</div>
+   107→   107→        </div>
+   108→   108→        <div class="card bcard" id="bc3">
+   109→   109→          <div class="bico" id="bi3"><div class="halfc"></div><div class="halfm"></div></div>
+   110→   110→          <div class="bval"><span class="grad">1/2</span> <span class="bsm">BAGIAN</span></div>
+   111→   111→          <div class="blab">SEBAGIAN</div>
+   112→   112→          <div class="blabe">FRACTION</div>
+   113→   113→        </div>
+   114→   114→        <div class="card bcard" id="bc4">
+   115→   115→          <div class="bico" id="bi4"><div class="thermo"><div class="tmercury"></div></div></div>
+   116→   116→          <div class="bval"><span class="grad">-5&deg;C</span> <span class="bsm">SUHU</span></div>
+   117→   117→          <div class="blab">DI BAWAH NOL</div>
+   118→   118→          <div class="blabe">BELOW ZERO</div>
+   119→   119→        </div>
+   120→   120→      </div>
+   121→   121→      <div class="center" id="b_punch" style="position:absolute;left:0;right:0;font-weight:800;">Empat tugas, <span class="grad">satu bahasa.</span></div>
+   122→   122→      <div class="center ensub-b" id="b_punch_e">Four jobs, one language.</div>
+   123→   123→    </div>
+   124→   124→
+   125→   125→    <!-- S3 SIMBOL BERUBAH -->
+   126→   126→    <div class="scene" id="s3">
+   127→   127→      <div class="center" id="c_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="c_chip_t">NIH, BAGIAN SERUNYA</span></div>
+   128→   128→      <div class="center enchip" id="c_chip_e">HERE COMES THE FUN PART</div>
+   129→   129→      <div class="card" id="c_eqbox" style="position:absolute;">
+   130→   130→        <div class="center mono" id="c_morph" style="font-weight:800;">2 + 2 = 4</div>
+   131→   131→      </div>
+   132→   132→      <div class="center" id="c_cap1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Tiap negara punya simbol sendiri...</div>
+   133→   133→      <div class="center ensub" id="c_cap1_e">Every country has its own symbols...</div>
+   134→   134→      <div class="center" id="c_punch" style="position:absolute;left:0;right:0;font-weight:800;">...tapi hasilnya <span class="grad">sama aja.</span><br>Gak bisa dinego siapa pun.</div>
+   135→   135→      <div class="center ensub-b" id="c_punch_e">...but the result is always the same. No one can argue with it.</div>
+   136→   136→    </div>
+   137→   137→
+   138→   138→    <!-- S4 PERTANYAAN BESAR -->
+   139→   139→    <div class="scene" id="s4">
+   140→   140→      <div class="center" id="e_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="e_chip_t">NAH, SEKARANG KAMU...</span></div>
+   141→   141→      <div class="center enchip" id="e_chip_e">NOW IT IS YOUR TURN...</div>
+   142→   142→      <div class="card" id="e_left" style="position:absolute;"><div class="center ebig" style="color:#22D3EE;">MENCIPTAKAN</div><div class="center ebige">INVENTED</div></div>
+   143→   143→      <div class="card" id="e_right" style="position:absolute;"><div class="center ebig" style="color:#A78BFA;">MENEMUKAN</div><div class="center ebige">DISCOVERED</div></div>
+   144→   144→      <div class="center" id="e_q" style="position:absolute;left:0;right:0;font-weight:800;" ><span class="grad" id="e_q_t">?</span></div>
+   145→   145→      <div class="center" id="e_sub1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Kalau simbolnya buatan manusia,</div>
+   146→   146→      <div class="center ensub" id="e_sub1_e">If the symbols are human-made,</div>
+   147→   147→      <div class="center" id="e_sub2" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">tapi kebenarannya udah ada dari dulu,</div>
+   148→   148→      <div class="center ensub" id="e_sub2_e">but the truth has been around forever,</div>
+   149→   149→      <div class="center" id="e_v1" style="position:absolute;left:0;right:0;font-weight:700;">mungkin bilangan itu bukan ciptaan,</div>
+   150→   150→      <div class="center" id="e_v2" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="e_v2_t">melainkan penemuan.</span></div>
+   151→   151→      <div class="center ensub-b" id="e_v2_e">not an invention, but a discovery.</div>
+   152→   152→    </div>
+   153→   153→
+   154→   154→    <!-- S5 CTA -->
+   155→   155→    <div class="scene" id="s5">
+   156→   156→      <div class="center" id="f_q" style="position:absolute;left:0;right:0;font-weight:800;">Jadi... kamu <span class="grad">tim yang mana?</span></div>
+   157→   157→      <div class="center ensub-b" id="f_q_e">So... which team are you on?</div>
+   158→   158→      <div class="center" id="f_cta1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Ceritain jawabanmu di komentar, ya.</div>
+   159→   159→      <div class="center ensub" id="f_cta1_e">Drop your answer in the comments.</div>
+   160→   160→      <div class="card" id="f_card" style="position:absolute;">
+   161→   161→        <div class="center" id="f_open" style="color:#94A3B8;font-weight:600;letter-spacing:.30em;">BUKA BROWSER KAMU</div>
+   162→   162→        <div class="center enchip2" id="f_open_e">OPEN YOUR BROWSER</div>
+   163→   163→        <div class="center" id="f_url" style="font-weight:800;"><span class="grad" id="f_url_t">AKIOMIDA.COM</span></div>
+   164→   164→        <div id="f_bar" style="height:5px;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24);width:0;"></div>
+   165→   165→        <div class="center" id="f_sub" style="color:#CBD5E1;font-weight:500;">Belajar matematika jadi makin seru.</div>
+   166→   166→        <div class="center ensub2" id="f_sub_e">Learning math just got more fun.</div>
+   167→   167→      </div>
+   168→   168→      <div class="center" id="f_brand" style="position:absolute;left:0;right:0;color:#64748B;font-weight:600;letter-spacing:.42em;">AKIOMIDA</div>
+   169→   169→    </div>
+   170→   170→
+   171→   171→    <div class="center" id="wm" style="position:absolute;color:#7C8BA1;font-weight:600;letter-spacing:.40em;opacity:.5;">AKIOMIDA</div>
+   172→   172→  </div>
+   173→   173→  <div class="vig"></div>
+   174→   174→  <div id="flash"></div>
+   175→   175→  <div id="fade"></div>
+   176→   176→</div>
+   177→   177→
+   178→   178→<script>
+   179→   179→const Q=new URLSearchParams(location.search);
+   180→   180→const ORIENT=Q.get('o')||'landscape';
+   181→   181→const W=ORIENT==='portrait'?1080:1920;
+   182→   182→const H=ORIENT==='portrait'?1920:1080;
+   183→   183→
+   184→   184→const L = ORIENT==='portrait' ? {
+   185→   185→  mx:84,
+   186→   186→  wmY:200, wmSize:19,
+   187→   187→  eqY:630, eqSize:132,
+   188→   188→  sub1Y:800, sub1Size:44, sub1EY:865, sub1ESize:24,
+   189→   189→  sub2Y:912, sub2Size:47, sub2EY:1048, sub2ESize:26,
+   190→   190→  chipY:300, chipSize:25, chipEY:357, chipESize:17,
+   191→   191→  headY:404, headSize:56, headEY:485, headESize:28,
+   192→   192→  treeY:540, treeW:150, treeH:185, treeGap:96, treePopY:26,
+   193→   193→  dotY:800, dotSize:56, dotFont:27,
+   194→   194→  line1Y:940, line1EY:996, line2Y:1056, line2EY:1112, lineSize:38, lineESize:22,
+   195→   195→  defY:396, defSize:43, defEY:459, defESize:24,
+   196→   196→  cardY:506, cardW:412, cardH:330, cardGap:26,
+   197→   197→  cardIconH:76, cardVal:56, cardLab:21, cardLabESize:14,
+   198→   198→  punchY:1252, punchSize:45, punchEY:1318, punchESize:25,
+   199→   199→  morphY:560, morphSize:96, eqboxY:452, eqboxH:230,
+   200→   200→  cap1Y:756, cap1Size:44, cap1EY:823, cap1ESize:24,
+   201→   201→  cpunchY:872, cpunchSize:46, cpunchEY:1006, cpunchESize:25,
+   202→   202→  leftX:120, leftY:400, card2W:400, card2H:186, ebigSize:37, ebigESize:17,
+   203→   203→  qY:630, qSize:170,
+   204→   204→  sub1Y2:860, sub1EY2:920, sub2Y2:990, sub2EY2:1050, subSize:41, subESize:23,
+   205→   205→  v1Y:1100, v1Size:44, v2Y:1180, v2Size:66, v2EY:1275, v2ESize:25,
+   206→   206→  fqY:352, fqSize:56, fqEY:434, fqESize:26,
+   207→   207→  cta1Y:494, cta1Size:41, cta1EY:554, cta1ESize:22,
+   208→   208→  cardY2:600, card2H2:470, cardW2:880,
+   209→   209→  openY:112, openEY:148, openESize:14, urlY:212, urlSize:74, barY:322, subY:358, fSubEY:392, fSubESize:16,
+   210→   210→  brandY:1298, brandSize:24
+   211→   211→} : {
+   212→   212→  mx:200,
+   213→   213→  wmY:1006, wmSize:19,
+   214→   214→  eqY:452, eqSize:148,
+   215→   215→  sub1Y:626, sub1Size:46, sub1EY:693, sub1ESize:25,
+   216→   216→  sub2Y:742, sub2Size:52, sub2EY:818, sub2ESize:27,
+   217→   217→  chipY:172, chipSize:25, chipEY:229, chipESize:17,
+   218→   218→  headY:272, headSize:56, headEY:353, headESize:28,
+   219→   219→  treeY:402, treeW:170, treeH:210, treeGap:110, treePopY:26,
+   220→   220→  dotY:668, dotSize:58, dotFont:28,
+   221→   221→  line1Y:768, line1EY:827, line2Y:880, line2EY:939, lineSize:40, lineESize:22,
+   222→   222→  defY:264, defSize:43, defEY:327, defESize:24,
+   223→   223→  cardY:380, cardW:382, cardH:296, cardGap:34,
+   224→   224→  cardIconH:68, cardVal:52, cardLab:20, cardLabESize:13,
+   225→   225→  punchY:726, punchSize:46, punchEY:793, punchESize:25,
+   226→   226→  morphY:408, morphSize:116, eqboxY:300, eqboxH:252,
+   227→   227→  cap1Y:592, cap1Size:44, cap1EY:659, cap1ESize:24,
+   228→   228→  cpunchY:706, cpunchSize:48, cpunchEY:844, cpunchESize:25,
+   229→   229→  leftX:590, leftY:300, card2W:340, card2H:176, ebigSize:34, ebigESize:15,
+   230→   230→  qY:470, qSize:150,
+   231→   231→  sub1Y2:640, sub1EY2:698, sub2Y2:748, sub2EY2:806, subSize:39, subESize:20,
+   232→   232→  v1Y:860, v1Size:44, v2Y:940, v2Size:60, v2EY:1027, v2ESize:21,
+   233→   233→  fqY:238, fqSize:58, fqEY:322, fqESize:24,
+   234→   234→  cta1Y:378, cta1Size:40, cta1EY:437, cta1ESize:21,
+   235→   235→  cardY2:482, card2H2:400, cardW2:900,
+   236→   236→  openY:92, openEY:128, openESize:13, urlY:172, urlSize:94, barY:296, subY:322, fSubEY:360, fSubESize:15,
+   237→   237→  brandY:936, brandSize:23
+   238→   238→};
+   239→   239→
+   240→   240→const stage=document.getElementById('stage');
+   241→   241→stage.style.width=W+'px'; stage.style.height=H+'px';
+   242→   242→const isP=ORIENT==='portrait';
+   243→   243→/* Margin samping aman: teks tidak boleh mepet ujung kiri/kanan */
+   244→   244→const MX=L.mx;
+   245→   245→function tx(el,y,size){
+   246→   246→  el.style.position='absolute';
+   247→   247→  el.style.left=MX+'px';el.style.right=MX+'px';
+   248→   248→  el.style.top=y+'px';el.style.fontSize=size+'px';
+   249→   249→}
+   250→   250→document.querySelectorAll('.ponly').forEach(el=>{el.style.display=isP?'':'none';});
+   251→   251→
+   252→   252→/* ---------- deterministieke helper ---------- */
+   253→   253→const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
+   254→   254→const lerp=(a,b,p)=>a+(b-a)*p;
+   255→   255→const seg=(t,a,d)=>clamp((t-a)/d,0,1);
+   256→   256→const eoc=p=>{p=clamp(p,0,1);return 1-Math.pow(1-p,3);};
+   257→   257→const eoe=p=>{p=clamp(p,0,1);return p>=1?1:1-Math.pow(2,-10*p);};
+   258→   258→const eob=p=>{p=clamp(p,0,1);const c=2.3;return 1+(c+1)*Math.pow(p-1,3)+c*Math.pow(p-1,2);};
+   259→   259→const smz=(t,a,b,f=.6)=>{ // smooth zone 1 inside [a,b]
+   260→   260→  return clamp((t-a)/f,0,1)*clamp((b-t)/f,0,1);
+   261→   261→};
+   262→   262→
+   263→   263→/* blobs */
+   264→   264→const blobC=document.getElementById('blobC');
+   265→   265→const blobV=document.getElementById('blobV');
+   266→   266→const blobA=document.getElementById('blobA');
+   267→   267→const BS=ORIENT==='portrait'?820:720;
+   268→   268→blobC.style.width=BS+'px';blobC.style.height=BS+'px';
+   269→   269→blobC.style.left=(-BS*0.28)+'px';blobC.style.top=(ORIENT==='portrait'?-BS*0.30:-BS*0.34)+'px';
+   270→   270→blobV.style.width=(BS*1.05)+'px';blobV.style.height=(BS*1.05)+'px';
+   271→   271→blobV.style.right=(-BS*0.32)+'px';blobV.style.bottom=(ORIENT==='portrait'?-BS*0.16:-BS*0.34)+'px';
+   272→   272→blobA.style.width=(BS*0.7)+'px';blobA.style.height=(BS*0.7)+'px';
+   273→   273→blobA.style.left=(W/2-BS*0.35)+'px';
+   274→   274→blobA.style.top=(ORIENT==='portrait'?H*0.34:H*0.42)+'px';
+   275→   275→
+   276→   276→/* partikel digit */
+   277→   277→const parts=document.getElementById('particles');
+   278→   278→const mulberry=(s)=>()=>{s|=0;s=s+0x6D2B79F5|0;let z=Math.imul(s^s>>>15,1|s);z=z+Math.imul(z^z>>>7,61|z)^z;return((z^z>>>14)>>>0)/4294967296;};
+   279→   279→const rnd=mulberry(20261113);
+   280→   280→const CH='0123456789+=1/2\u00BD\u00B0\u00D7';
+   281→   281→const NP=34, P=[];
+   282→   282→for(let i=0;i<NP;i++){
+   283→   283→  const el=document.createElement('span');
+   284→   284→  el.textContent=CH[Math.floor(rnd()*CH.length)];
+   285→   285→  const size=16+rnd()*30;
+   286→   286→  el.style.fontSize=size.toFixed(0)+'px';
+   287→   287→  el.style.fontWeight=(rnd()<.3?'700':'400');
+   288→   288→  parts.appendChild(el);
+   289→   289→  P.push({el, x:rnd()*W, y0:rnd()*H, sp:10+rnd()*26, wf:.3+rnd()*.9, ph:rnd()*6.28, o:.25+rnd()*.4});
+   290→   290→}
+   291→   291→
+   292→   292→/* wm */
+   293→   293→const wm=document.getElementById('wm');
+   294→   294→wm.style.fontSize=L.wmSize+'px';
+   295→   295→if(ORIENT==='portrait'){wm.style.top=L.wmY+'px';wm.style.left='0';wm.style.right='0';}
+   296→   296→else{wm.style.top=L.wmY+'px';wm.style.right='70px';wm.style.left='auto';wm.style.bottom='auto';}
+   297→   297→
+   298→   298→/* ---------- S0 ---------- */
+   299→   299→const hEq=document.getElementById('h_eq'); const hEqT=document.getElementById('h_eq_t');
+   300→   300→hEq.style.top=L.eqY+'px'; hEqT.style.fontSize=L.eqSize+'px';
+   301→   301→hEqT.style.textShadow='0 10px 60px rgba(34,211,238,.35)';
+   302→   302→const hS1=document.getElementById('h_sub1');
+   303→   303→tx(hS1,L.sub1Y,L.sub1Size);
+   304→   304→const hS1E=document.getElementById('h_sub1_e');
+   305→   305→tx(hS1E,L.sub1EY,L.sub1ESize);
+   306→   306→const hS2=document.getElementById('h_sub2');
+   307→   307→tx(hS2,L.sub2Y,L.sub2Size);hS2.style.lineHeight='1.4';
+   308→   308→const hS2E=document.getElementById('h_sub2_e');
+   309→   309→tx(hS2E,L.sub2EY,L.sub2ESize);
+   310→   310→
+   311→   311→/* ---------- S1 ---------- */
+   312→   312→const aChipT=document.getElementById('a_chip_t');
+   313→   313→const aChip=document.getElementById('a_chip');
+   314→   314→aChip.style.top=L.chipY+'px';aChipT.style.fontSize=L.chipSize+'px';aChipT.style.padding='12px 30px 12px 34px';
+   315→   315→const aChipE=document.getElementById('a_chip_e');
+   316→   316→tx(aChipE,L.chipEY,L.chipESize);
+   317→   317→const aHead=document.getElementById('a_head');
+   318→   318→tx(aHead,L.headY,L.headSize);
+   319→   319→const aHeadE=document.getElementById('a_head_e');
+   320→   320→tx(aHeadE,L.headEY,L.headESize);
+   321→   321→const aTrees=document.getElementById('a_trees');
+   322→   322→aTrees.style.left='0';aTrees.style.right='0';aTrees.style.top=L.treeY+'px';aTrees.style.height=(L.treeH+40)+'px';
+   323→   323→const TRW=L.treeW, TRG=L.treeGap;
+   324→   324→const totW=3*TRW+2*TRG; const startX=(W-totW)/2;
+   325→   325→['tr1','tr2','tr3'].forEach((id,i)=>{
+   326→   326→  const el=document.getElementById(id);
+   327→   327→  el.style.position='absolute';el.style.left=(startX+i*(TRW+TRG))+'px';el.style.top='0';
+   328→   328→  el.style.width=TRW+'px';el.style.height=L.treeH+'px';el.style.willChange='transform,opacity';
+   329→   329→  const tri=el.querySelector('.tri');
+   330→   330→  tri.style.cssText=`position:absolute;left:0;bottom:14px;width:100%;height:${L.treeH-14}px;background:linear-gradient(180deg,#34D399 0%,#059669 55%,#065F46 100%);clip-path:polygon(50% 0,100% 100%,0 100%);filter:drop-shadow(0 10px 26px rgba(16,185,129,.35));`;
+   331→   331→  const tk=el.querySelector('.trunk');
+   332→   332→  tk.style.cssText=`position:absolute;left:${TRW*0.42}px;bottom:0;width:${TRW*0.16}px;height:16px;background:#78350F;border-radius:3px;`;
+   333→   333→});
+   334→   334→const aDots=document.getElementById('a_dots');
+   335→   335→aDots.style.left='0';aDots.style.right='0';aDots.style.top=L.dotY+'px';aDots.style.height=L.dotSize+'px';
+   336→   336→['d1','d2','d3'].forEach((id,i)=>{
+   337→   337→  const el=document.getElementById(id);
+   338→   338→  el.style.cssText+=`position:absolute;left:${startX+i*(TRW+TRG)+TRW/2-L.dotSize/2}px;top:0;width:${L.dotSize}px;height:${L.dotSize}px;border-radius:50%;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.5);color:#67E8F9;font-weight:700;font-size:${L.dotFont}px;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;`;
+   339→   339→});
+   340→   340→const aL1=document.getElementById('a_line1');
+   341→   341→tx(aL1,L.line1Y,L.lineSize);
+   342→   342→const aL1E=document.getElementById('a_line1_e');
+   343→   343→tx(aL1E,L.line1EY,L.lineESize);
+   344→   344→const aL2=document.getElementById('a_line2');
+   345→   345→tx(aL2,L.line2Y,L.lineSize);
+   346→   346→const aL2E=document.getElementById('a_line2_e');
+   347→   347→tx(aL2E,L.line2EY,L.lineESize);
+   348→   348→
+   349→   349→/* ---------- S2 ---------- */
+   350→   350→const bChipT=document.getElementById('b_chip_t');
+   351→   351→const bChip=document.getElementById('b_chip');
+   352→   352→bChip.style.top=L.chipY+'px';bChipT.style.fontSize=L.chipSize+'px';bChipT.style.padding='12px 30px 12px 34px';
+   353→   353→const bChipE=document.getElementById('b_chip_e');
+   354→   354→tx(bChipE,L.chipEY,L.chipESize);
+   355→   355→const bDef=document.getElementById('b_def');
+   356→   356→tx(bDef,L.defY,L.defSize);
+   357→   357→const bDefE=document.getElementById('b_def_e');
+   358→   358→tx(bDefE,L.defEY,L.defESize);
+   359→   359→const bCards=document.getElementById('b_cards');
+   360→   360→const CW=L.cardW,CH_=L.cardH,CG=L.cardGap;
+   361→   361→const cols=isP?2:4, rows=isP?2:1;
+   362→   362→const gridW=cols*CW+(cols-1)*CG;
+   363→   363→const gx=(W-gridW)/2;
+   364→   364→const bcEls=['bc1','bc2','bc3','bc4'];
+   365→   365→bcEls.forEach((id,i)=>{
+   366→   366→  const el=document.getElementById(id);
+   367→   367→  const r=Math.floor(i/cols), c=i%cols;
+   368→   368→  el.style.position='absolute';
+   369→   369→  el.style.left=(gx+c*(CW+CG))+'px';
+   370→   370→  el.style.top=(L.cardY+r*(CH_+CG))+'px';
+   371→   371→  el.style.width=CW+'px';el.style.height=CH_+'px';
+   372→   372→  el.style.display='flex';el.style.flexDirection='column';el.style.alignItems='center';
+   373→   373→  el.style.justifyContent='space-between';el.style.padding=(isP?'24px 18px 22px':'20px 16px 20px');
+   374→   374→  el.style.willChange='transform,opacity';
+   375→   375→});
+   376→   376→/* ikon buku */
+   377→   377→const bi1=document.getElementById('bi1');bi1.style.cssText+='position:relative;width:86px;height:'+L.cardIconH+'px;';
+   378→   378→['bk1','bk2','bk3'].forEach((id,i)=>{
+   379→   379→  const el=document.getElementById(id);
+   380→   380→  const col=['#22D3EE','#A78BFA','#FBBF24'][i];
+   381→   381→  el.style.cssText=`position:absolute;left:${14+i*4}px;bottom:${i*20}px;width:${58-i*8}px;height:16px;border-radius:5px;background:${col};opacity:.92;box-shadow:0 4px 14px rgba(0,0,0,.35);`;
+   382→   382→});
+   383→   383→/* podium */
+   384→   384→const bi2=document.getElementById('bi2');bi2.style.cssText+='position:relative;width:104px;height:'+L.cardIconH+'px;display:flex;align-items:flex-end;justify-content:center;gap:6px;';
+   385→   385→[['p1',30,'#475569'],['p2',58,'#FBBF24'],['p3',38,'#475569']].forEach(([id,h,col],i)=>{
+   386→   386→  const el=document.getElementById(id);
+   387→   387→  el.style.cssText=`width:30px;height:${h}px;border-radius:7px 7px 0 0;background:${col};color:#0B1020;font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;`;
+   388→   388→});
+   389→   389→/* setengah lingkaran */
+   390→   390→const bi3=document.getElementById('bi3');bi3.style.cssText+='position:relative;width:92px;height:'+L.cardIconH+'px;';
+   391→   391→const halfc=document.querySelector('.halfc');
+   392→   392→halfc.style.cssText=`position:absolute;left:0;bottom:0;width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,#22D3EE,#0EA5E9);opacity:.9;`;
+   393→   393→const halfm=document.querySelector('.halfm');
+   394→   394→halfm.style.cssText=`position:absolute;left:37px;bottom:0;width:37px;height:74px;border-radius:0 74px 74px 0;background:rgba(10,15,28,.85);border-left:2px solid rgba(255,255,255,.25);`;
+   395→   395→/* termometer */
+   396→   396→const bi4=document.getElementById('bi4');bi4.style.cssText+='position:relative;width:60px;height:'+L.cardIconH+'px;';
+   397→   397→const th=document.querySelector('.thermo');
+   398→   398→th.style.cssText=`position:absolute;left:14px;top:0;width:28px;height:${L.cardIconH-14}px;border-radius:99px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);overflow:hidden;`;
+   399→   399→const tm=document.querySelector('.tmercury');
+   400→   400→tm.style.cssText=`position:absolute;left:0;bottom:0;width:100%;height:26%;background:linear-gradient(180deg,#F87171,#DC2626);`;
+   401→   401→const bValSize=L.cardVal, bLabSize=L.cardLab;
+   402→   402→bcEls.forEach(id=>{
+   403→   403→  const el=document.getElementById(id);
+   404→   404→  const v=el.querySelector('.bval');
+   405→   405→  v.style.cssText+=`font-size:${bValSize}px;font-weight:800;`;
+   406→   406→  const s=el.querySelector('.bsm'); if(s){s.style.fontSize=Math.round(bValSize*0.42)+'px';s.style.fontWeight='600';s.style.color='#94A3B8';}
+   407→   407→  const lb=el.querySelector('.blab');
+   408→   408→  lb.style.cssText+=`font-size:${bLabSize}px;font-weight:700;letter-spacing:.24em;color:#67E8F9;background:rgba(34,211,238,.10);border:1px solid rgba(34,211,238,.35);border-radius:999px;padding:7px 16px;`;
+   409→   409→});
+   410→   410→document.querySelectorAll('.blabe').forEach(el=>{el.style.fontSize=L.cardLabESize+'px';el.style.paddingTop='4px';});
+   411→   411→const bPunch=document.getElementById('b_punch');
+   412→   412→tx(bPunch,L.punchY,L.punchSize);
+   413→   413→const bPunchE=document.getElementById('b_punch_e');
+   414→   414→tx(bPunchE,L.punchEY,L.punchESize);
+   415→   415→
+   416→   416→/* ---------- S3 ---------- */
+   417→   417→const cChipT=document.getElementById('c_chip_t');
+   418→   418→const cChip=document.getElementById('c_chip');
+   419→   419→cChip.style.top=L.chipY+'px';cChipT.style.fontSize=L.chipSize+'px';cChipT.style.padding='12px 30px 12px 34px';
+   420→   420→const cChipE=document.getElementById('c_chip_e');
+   421→   421→tx(cChipE,L.chipEY,L.chipESize);
+   422→   422→const cBox=document.getElementById('c_eqbox');
+   423→   423→const BOXW=isP?800:1000;
+   424→   424→cBox.style.left=((W-BOXW)/2)+'px';cBox.style.top=L.eqboxY+'px';
+   425→   425→cBox.style.width=BOXW+'px';cBox.style.height=L.eqboxH+'px';
+   426→   426→cBox.style.display='flex';cBox.style.alignItems='center';cBox.style.justifyContent='center';
+   427→   427→cBox.style.background='rgba(34,211,238,.045)';
+   428→   428→const cMorph=document.getElementById('c_morph');
+   429→   429→cMorph.style.fontSize=L.morphSize+'px';cMorph.style.position='relative';cMorph.style.whiteSpace='nowrap';
+   430→   430→const cCap=document.getElementById('c_cap1');
+   431→   431→tx(cCap,L.cap1Y,L.cap1Size);
+   432→   432→const cCapE=document.getElementById('c_cap1_e');
+   433→   433→tx(cCapE,L.cap1EY,L.cap1ESize);
+   434→   434→const cPunch=document.getElementById('c_punch');
+   435→   435→tx(cPunch,L.cpunchY,L.cpunchSize);cPunch.style.lineHeight='1.4';
+   436→   436→const cPunchE=document.getElementById('c_punch_e');
+   437→   437→tx(cPunchE,L.cpunchEY,L.cpunchESize);
+   438→   438→
+   439→   439→/* ---------- S4 ---------- */
+   440→   440→const eChipT=document.getElementById('e_chip_t');
+   441→   441→const eChip=document.getElementById('e_chip');
+   442→   442→eChip.style.top=L.chipY+'px';eChipT.style.fontSize=L.chipSize+'px';eChipT.style.padding='12px 30px 12px 34px';
+   443→   443→const eChipE=document.getElementById('e_chip_e');
+   444→   444→tx(eChipE,L.chipEY,L.chipESize);
+   445→   445→const eL=document.getElementById('e_left'), eR=document.getElementById('e_right');
+   446→   446→const E2W=L.card2W, E2H=L.card2H;
+   447→   447→eL.style.left=L.leftX+'px';eR.style.left=(L.leftX+E2W+ (isP?40:60))+'px';
+   448→   448→eL.style.top=L.leftY+'px';eR.style.top=L.leftY+'px';
+   449→   449→eL.style.width=E2W+'px';eR.style.width=E2W+'px';
+   450→   450→eL.style.height=E2H+'px';eR.style.height=E2H+'px';
+   451→   451→eL.style.display='flex';eR.style.display='flex';
+   452→   452→eL.style.flexDirection='column';eR.style.flexDirection='column';
+   453→   453→eL.style.gap='8px';eR.style.gap='8px';
+   454→   454→eL.style.alignItems='center';eR.style.alignItems='center';
+   455→   455→eL.style.justifyContent='center';eR.style.justifyContent='center';
+   456→   456→eL.style.borderColor='rgba(34,211,238,.5)';eR.style.borderColor='rgba(167,139,250,.5)';
+   457→   457→document.querySelectorAll('.ebig').forEach(el=>{el.style.fontSize=L.ebigSize+'px';el.style.fontWeight='800';el.style.letterSpacing='.10em';});
+   458→   458→document.querySelectorAll('.ebige').forEach(el=>{el.style.fontSize=L.ebigESize+'px';});
+   459→   459→const eQ=document.getElementById('e_q');
+   460→   460→eQ.style.top=L.qY+'px';document.getElementById('e_q_t').style.fontSize=L.qSize+'px';
+   461→   461→const eS1=document.getElementById('e_sub1');
+   462→   462→tx(eS1,L.sub1Y2,L.subSize);
+   463→   463→const eS1E=document.getElementById('e_sub1_e');
+   464→   464→tx(eS1E,L.sub1EY2,L.subESize);
+   465→   465→const eS2=document.getElementById('e_sub2');
+   466→   466→tx(eS2,L.sub2Y2,L.subSize);
+   467→   467→const eS2E=document.getElementById('e_sub2_e');
+   468→   468→tx(eS2E,L.sub2EY2,L.subESize);
+   469→   469→const eV1=document.getElementById('e_v1');
+   470→   470→tx(eV1,L.v1Y,L.v1Size);
+   471→   471→const eV2=document.getElementById('e_v2');
+   472→   472→tx(eV2,L.v2Y,L.v2Size);
+   473→   473→const eV2E=document.getElementById('e_v2_e');
+   474→   474→tx(eV2E,L.v2EY,L.v2ESize);
+   475→   475→document.getElementById('e_v2_t').style.textShadow='0 10px 60px rgba(167,139,250,.35)';
+   476→   476→
+   477→   477→/* ---------- S5 ---------- */
+   478→   478→const fQ=document.getElementById('f_q');
+   479→   479→tx(fQ,L.fqY,L.fqSize);
+   480→   480→const fQE=document.getElementById('f_q_e');
+   481→   481→tx(fQE,L.fqEY,L.fqESize);
+   482→   482→const fC1=document.getElementById('f_cta1');
+   483→   483→tx(fC1,L.cta1Y,L.cta1Size);
+   484→   484→const fC1E=document.getElementById('f_cta1_e');
+   485→   485→tx(fC1E,L.cta1EY,L.cta1ESize);
+   486→   486→const fCard=document.getElementById('f_card');
+   487→   487→const FW=L.cardW2, FH=L.card2H2;
+   488→   488→fCard.style.left=((W-FW)/2)+'px';fCard.style.top=L.cardY2+'px';
+   489→   489→fCard.style.width=FW+'px';fCard.style.height=FH+'px';
+   490→   490→fCard.style.position='absolute';
+   491→   491→fCard.style.borderColor='rgba(34,211,238,.4)';
+   492→   492→const fOpen=document.getElementById('f_open');
+   493→   493→fOpen.style.position='absolute';fOpen.style.top=L.openY+'px';fOpen.style.left='0';fOpen.style.right='0';
+   494→   494→fOpen.style.fontSize=Math.round(L.urlSize*0.30)+'px';
+   495→   495→const fOpenE=document.getElementById('f_open_e');
+   496→   496→fOpenE.style.position='absolute';fOpenE.style.top=L.openEY+'px';fOpenE.style.left='0';fOpenE.style.right='0';
+   497→   497→fOpenE.style.fontSize=L.openESize+'px';
+   498→   498→const fUrl=document.getElementById('f_url');
+   499→   499→fUrl.style.position='absolute';fUrl.style.top=L.urlY+'px';fUrl.style.left='0';fUrl.style.right='0';
+   500→   500→document.getElementById('f_url_t').style.fontSize=L.urlSize+'px';
+   501→   501→document.getElementById('f_url_t').style.textShadow='0 12px 70px rgba(34,211,238,.4)';
+   502→   502→const fBar=document.getElementById('f_bar');
+   503→   503→fBar.style.position='absolute';fBar.style.top=L.barY+'px';fBar.style.left=(FW*0.16)+'px';
+   504→   504→const fSub=document.getElementById('f_sub');
+   505→   505→fSub.style.position='absolute';fSub.style.top=L.subY+'px';fSub.style.left='0';fSub.style.right='0';
+   506→   506→fSub.style.fontSize=Math.round(L.urlSize*0.28)+'px';
+   507→   507→const fSubE=document.getElementById('f_sub_e');
+   508→   508→fSubE.style.position='absolute';fSubE.style.top=L.fSubEY+'px';fSubE.style.left='0';fSubE.style.right='0';
+   509→   509→fSubE.style.fontSize=L.fSubESize+'px';
+   510→   510→const fBrand=document.getElementById('f_brand');
+   511→   511→tx(fBrand,L.brandY,L.brandSize);
+   512→   512→
+   513→   513→const flash=document.getElementById('flash');
+   514→   514→const fade=document.getElementById('fade');
+   515→   515→const world=document.getElementById('world');
+   516→   516→const grid=document.getElementById('grid');
+   517→   517→
+   518→   518→/* ---------- fungsi animasi elemen ---------- */
+   519→   519→function pop(el,t,ts,d=0.55,y=26,s0=0.94){
+   520→   520→  const p=eob(seg(t,ts,d));
+   521→   521→  el.style.opacity=clamp(p,0,1);
+   522→   522→  el.style.transform=`translateY(${(1-p)*y}px) scale(${lerp(s0,1,clamp(p,0,1))})`;
+   523→   523→}
+   524→   524→function fadeUp(el,t,ts,d=0.6,y=30){
+   525→   525→  const p=eoe(seg(t,ts,d));
+   526→   526→  el.style.opacity=p;
+   527→   527→  el.style.transform=`translateY(${(1-p)*y}px)`;
+   528→   528→}
+   529→   529→function sceneVis(el,t,tIn,tOut,dIn=0.5,dOut=0.45){
+   530→   530→  const a=eoc(seg(t,tIn,dIn));
+   531→   531→  const b=1-eoc(seg(t,tOut,dOut));
+   532→   532→  el.style.opacity=Math.min(a,b);
+   533→   533→  el.style.transform=`translateY(${(1-a)*30-(1-b)*40}px)`;
+   534→   534→}
+   535→   535→
+   536→   536→const SWAPS=[23.9,25.7,27.5,29.3];
+   537→   537→const MORPH=[
+   538→   538→  {t:'2 + 2 = 4',  c:'mono'},
+   539→   539→  {t:'II + II = IV', c:'mono'},
+   540→   540→  {t:'\u4E8C + \u4E8C = \u56DB', c:'zh'},
+   541→   541→  {t:'\u0662 + \u0662 = \u0664', c:'ar'},
+   542→   542→  {t:'2 + 2 = 4',  c:'mono grad'}
+   543→   543→];
+   544→   544→function morphIndex(t){
+   545→   545→  let idx=0;
+   546→   546→  for(let i=0;i<SWAPS.length;i++){ if(t>=SWAPS[i]) idx=i+1; }
+   547→   547→  return idx;
+   548→   548→}
+   549→   549→
+   550→   550→/* ---------- RENDER PER FRAME ---------- */
+   551→   551→function renderFrame(t){
+   552→   552→  /* ambience */
+   553→   553→  blobC.style.transform=`translate(${Math.sin(t*0.13)*70}px,${Math.cos(t*0.09)*54}px)`;
+   554→   554→  blobV.style.transform=`translate(${Math.cos(t*0.11)*64}px,${Math.sin(t*0.14)*46}px)`;
+   555→   555→  blobA.style.transform=`translate(${Math.sin(t*0.07)*40}px,${Math.cos(t*0.12)*36}px)`;
+   556→   556→  grid.style.backgroundPosition=`${(t*5)%80}px ${(t*3)%80}px`;
+   557→   557→  world.style.transform=`translateY(${Math.sin(t*0.4)*7}px)`;
+   558→   558→
+   559→   559→  const zone=0.26+0.26*(smz(t,0,5.2)+smz(t,31.6,42.2));
+   560→   560→  for(let i=0;i<NP;i++){
+   561→   561→    const p=P[i];
+   562→   562→    const yy=((p.y0 - t*p.sp)%(H+140)+H+140)%(H+140)-70;
+   563→   563→    p.el.style.transform=`translate(${(p.x+Math.sin(t*p.wf+p.ph)*26).toFixed(1)}px,${yy.toFixed(1)}px)`;
+   564→   564→    p.el.style.opacity=(p.o*zone*(0.75+0.25*Math.sin(t*1.3+p.ph))).toFixed(3);
+   565→   565→  }
+   566→   566→
+   567→   567→  /* S0 HOOK 0.0-5.2 */
+   568→   568→  const s0=document.getElementById('s0');
+   569→   569→  sceneVis(s0,t,0.18,4.6);
+   570→   570→  const pk=eob(seg(t,0.30,0.75));
+   571→   571→  hEq.style.opacity=clamp(pk,0,1);
+   572→   572→  hEq.style.transform=`scale(${lerp(1.55,1,clamp(pk,0,1))})`;
+   573→   573→  hEq.style.transformOrigin='50% 50%';
+   574→   574→  fadeUp(hS1,t,1.70,0.55,24);
+   575→   575→  fadeUp(hS1E,t,1.86,0.5,16);
+   576→   576→  fadeUp(hS2,t,2.90,0.6,26);
+   577→   577→  fadeUp(hS2E,t,3.06,0.55,18);
+   578→   578→  hEqT.style.opacity=1;
+   579→   579→
+   580→   580→  /* S1 5.2-12.4 */
+   581→   581→  const s1=document.getElementById('s1');
+   582→   582→  sceneVis(s1,t,5.25,11.8);
+   583→   583→  fadeUp(aChip,t,5.35,0.5,18);
+   584→   584→  fadeUp(aChipE,t,5.50,0.45,12);
+   585→   585→  fadeUp(aHead,t,5.85,0.6,26);
+   586→   586→  fadeUp(aHeadE,t,6.01,0.55,18);
+   587→   587→  ['tr1','tr2','tr3'].forEach((id,i)=>pop(document.getElementById(id),t,6.5+i*0.45,0.6,34,0.7));
+   588→   588→  ['d1','d2','d3'].forEach((id,i)=>pop(document.getElementById(id),t,7.9+i*0.25,0.5,20,0.6));
+   589→   589→  fadeUp(aL1,t,8.9,0.55,22);
+   590→   590→  fadeUp(aL1E,t,9.06,0.5,16);
+   591→   591→  fadeUp(aL2,t,9.9,0.55,22);
+   592→   592→  fadeUp(aL2E,t,10.06,0.5,16);
+   593→   593→
+   594→   594→  /* S2 12.4-22.0 */
+   595→   595→  const s2=document.getElementById('s2');
+   596→   596→  sceneVis(s2,t,12.45,21.35);
+   597→   597→  fadeUp(bChip,t,12.55,0.5,18);
+   598→   598→  fadeUp(bChipE,t,12.70,0.45,12);
+   599→   599→  fadeUp(bDef,t,13.0,0.55,22);
+   600→   600→  fadeUp(bDefE,t,13.16,0.5,16);
+   601→   601→  bcEls.forEach((id,i)=>pop(document.getElementById(id),t,13.9+i*1.0,0.65,34,0.88));
+   602→   602→  pop(bPunch,t,18.3,0.6,24,0.92);
+   603→   603→  pop(bPunchE,t,18.5,0.55,16,0.94);
+   604→   604→
+   605→   605→  /* S3 22.0-31.6 */
+   606→   606→  const s3=document.getElementById('s3');
+   607→   607→  sceneVis(s3,t,22.05,30.95);
+   608→   608→  fadeUp(cChip,t,22.15,0.5,18);
+   609→   609→  fadeUp(cChipE,t,22.30,0.45,12);
+   610→   610→  fadeUp(cBox,t,22.5,0.65,30,0.92);
+   611→   611→  const mi=morphIndex(t);
+   612→   612→  const m=MORPH[mi];
+   613→   613→  cMorph.textContent=m.t;
+   614→   614→  cMorph.className='center '+m.c;
+   615→   615→  cMorph.style.fontSize=L.morphSize+'px';
+   616→   616→  let mo=1, ms=1;
+   617→   617→  const lastSwap=mi>0?SWAPS[mi-1]:-10;
+   618→   618→  const dp=t-lastSwap;
+   619→   619→  if(dp>=0&&dp<0.30){const q=dp/0.30; mo=q<0.5?lerp(1,0.18,q/0.5):lerp(0.18,1,(q-0.5)/0.5); ms=q<0.5?lerp(1,0.90,q/0.5):lerp(0.90,1.04,(q-0.5)/0.5);}
+   620→   620→  if(mi===MORPH.length-1){const gp=eob(seg(t,29.3,0.7)); ms=Math.max(ms,lerp(0.92,1,clamp(gp,0,1)));}
+   621→   621→  cMorph.style.opacity=mo;
+   622→   622→  cMorph.style.transform=`scale(${ms})`;
+   623→   623→  cBox.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(34+22*Math.sin(t*3.2)).toFixed(0)}px rgba(34,211,238,${(0.10+0.05*Math.sin(t*3.2)).toFixed(3)})`;
+   624→   624→  fadeUp(cCap,t,24.4,0.55,22);
+   625→   625→  fadeUp(cCapE,t,24.56,0.5,16);
+   626→   626→  pop(cPunch,t,29.55,0.6,24,0.92);
+   627→   627→  pop(cPunchE,t,29.75,0.55,16,0.94);
+   628→   628→
+   629→   629→  /* S4 31.6-42.2 */
+   630→   630→  const s4=document.getElementById('s4');
+   631→   631→  sceneVis(s4,t,31.65,41.55);
+   632→   632→  fadeUp(eChip,t,31.75,0.5,18);
+   633→   633→  fadeUp(eChipE,t,31.90,0.45,12);
+   634→   634→  pop(eL,t,32.3,0.6,-46,0.9);
+   635→   635→  pop(eR,t,32.55,0.6,46,0.9);
+   636→   636→  fadeUp(eQ,t,33.3,0.6,20);
+   637→   637→  const qp=1+0.05*Math.sin(t*6);
+   638→   638→  eQ.style.transform=`translateY(0) scale(${qp.toFixed(3)})`;
+   639→   639→  eQ.style.opacity=String(eoe(seg(t,33.3,0.6)));
+   640→   640→  fadeUp(eS1,t,34.7,0.55,22);
+   641→   641→  fadeUp(eS1E,t,34.86,0.5,16);
+   642→   642→  fadeUp(eS2,t,35.9,0.55,22);
+   643→   643→  fadeUp(eS2E,t,36.06,0.5,16);
+   644→   644→  pop(eV1,t,38.2,0.6,24,0.92);
+   645→   645→  pop(eV2,t,39.5,0.7,30,0.85);
+   646→   646→  pop(eV2E,t,39.7,0.6,16,0.9);
+   647→   647→
+   648→   648→  /* S5 42.2-52.0 */
+   649→   649→  const s5=document.getElementById('s5');
+   650→   650→  sceneVis(s5,t,42.25,51.9,0.5,0.001);
+   651→   651→  fadeUp(fQ,t,42.5,0.6,24);
+   652→   652→  fadeUp(fQE,t,42.66,0.55,18);
+   653→   653→  fadeUp(fC1,t,43.9,0.55,22);
+   654→   654→  fadeUp(fC1E,t,44.06,0.5,16);
+   655→   655→  pop(fCard,t,45.4,0.7,40,0.9);
+   656→   656→  fCard.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(46+26*Math.sin(t*4)).toFixed(0)}px rgba(34,211,238,${(0.12+0.06*Math.sin(t*4)).toFixed(3)})`;
+   657→   657→  const up=eoe(seg(t,46.3,0.9));
+   658→   658→  document.getElementById('f_url_t').style.letterSpacing=lerp(0.34,0.06,up)+'em';
+   659→   659→  document.getElementById('f_url_t').style.opacity=String(up);
+   660→   660→  fBar.style.width=(FW*0.68*eoe(seg(t,47.1,0.8)))+'px';
+   661→   661→  fadeUp(fSub,t,47.6,0.6,20);
+   662→   662→  fadeUp(fBrand,t,49.2,0.7,16);
+   663→   663→
+   664→   664→  /* flash momen */
+   665→   665→  const FS=[[0.30,.10],[22.5,.05],[29.3,.10],[39.5,.10],[46.3,.08]];
+   666→   666→  let fo=0;
+   667→   667→  for(const [ft,fa] of FS){const d=t-ft; if(d>=0&&d<0.30){fo=Math.max(fo,fa*(1-d/0.30));}}
+   668→   668→  flash.style.opacity=fo.toFixed(3);
+   669→   669→
+   670→   670→  fade.style.opacity=(seg(t,51.3,0.7)*0.94).toFixed(3);
+   671→   671→}
+   672→   672→
+   673→   673→renderFrame(0);
+   674→   674→window.renderFrame=renderFrame;
+   675→   675→window.__ready=true;
+   676→   676→</script>
+   677→   677→</body>
+   678→   678→</html>
+   679→   679→

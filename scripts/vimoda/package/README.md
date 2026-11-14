@@ -20,6 +20,7 @@ Studio video animasi matematika **AKIOMIDA**. Misi: membuat penonton jatuh cinta
 | No | Judul | Materi | Folder |
 |----|-------|--------|--------|
 | 01 | Bilangan: Diciptakan atau Ditemukan? | Blog Yuyanaka - artikel "Bilangan" (13 Nov 2026) | `01-bilangan-diciptakan-atau-ditemukan/` (revisi 2: subtitle Inggris + margin samping aman + tanpa emdash) |
+| 02 | Kenapa Manusia Butuh Bilangan? | Blog Yuyanaka - artikel "Mengapa Manusia Membutuhkan Bilangan?" (14 Nov 2026) | `02-kenapa-manusia-butuh-bilangan/` (aturan lengkap dipakai sejak rendering pertama) |
 
 ## Isi tiap folder video
 
@@ -27,4 +28,4 @@ Studio video animasi matematika **AKIOMIDA**. Misi: membuat penonton jatuh cinta
 - `portrait.mp4` - versi 9:16 (1080x1920, teks zona aman atas)
 - `thumbnail-landscape.jpg`, `thumbnail-portrait.jpg` - cover siap pakai (momen hook)
 - `caption.txt` - caption siap posting + hashtag
-- `naskah.md` - naskah ber-timecode lengkap (termasuk jadwal munculnya subtitle Inggris) + riwayat revisi
+- `naskah.md` - naskah ber-timecode lengkap (termasuk jadwal munculnya subtitle Inggris) + catatan produksi atau riwayat revisi
