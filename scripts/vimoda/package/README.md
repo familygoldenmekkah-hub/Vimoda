@@ -14,6 +14,7 @@ Studio video animasi matematika **AKIOMIDA**. Misi: membuat penonton jatuh cinta
 8. Dua bahasa di layar: teks utama bahasa Indonesia, dan di bawahnya selalu ada subtitle bahasa Inggris yang lebih kecil (sekitar 55 sampai 60 persen ukuran teks Indonesia) namun tetap terbaca.
 9. Margin samping aman: teks tidak boleh mepet ujung kiri atau kanan meski kalimatnya panjang (batas aman 84 px di portrait, 200 px di landscape).
 10. Em dash dilarang keras di semua teks video, caption, dan dokumen; gunakan koma, titik, atau tanda hubung biasa.
+11. Motion wajib berbahasa animasi profesional, bukan template kaku: anticipation sebelum momen besar, overshoot dan squash-stretch saat elemen mendarat, follow-through pada subtitle, kamera push pelan per adegan, plus efek filmis (film grain, light sweep, burst partikel, chromatic split saat impact, vignette). Gerakan bervariasi antar elemen supaya terasa hidup dan enak ditonton berulang.
 
 ## Katalog
 
@@ -23,6 +24,7 @@ Studio video animasi matematika **AKIOMIDA**. Misi: membuat penonton jatuh cinta
 | 02 | Kenapa Manusia Butuh Bilangan? | Blog Yuyanaka - artikel "Mengapa Manusia Membutuhkan Bilangan?" (14 Nov 2026) | `02-kenapa-manusia-butuh-bilangan/` (aturan lengkap dipakai sejak rendering pertama) |
 | 03 | Mengenali: Number Sense | Blog Yuyanaka - artikel "Mengenali" (13 Nov 2026) | `03-mengenali-number-sense/` (aturan lengkap dipakai sejak rendering pertama) |
 | 04 | Sejarah Sistem Bilangan | Blog Yuyanaka - artikel "Kompati" (14 Nov 2026) | `04-sejarah-sistem-bilangan/` (aturan lengkap dipakai sejak rendering pertama) |
+| 05 | Angka, Bilangan, dan Nomor | Blog Yuyanaka - artikel "Limpai" (14 Nov 2026) | `05-angka-bilangan-nomor/` (aturan lengkap + bahasa motion kelas bioskop: anticipation, squash-stretch, follow-through, kamera, efek filmis) |
 
 ## Isi tiap folder video
 
