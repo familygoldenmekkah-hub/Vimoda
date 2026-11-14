@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Musik & SFX prosedural untuk video 02 "Kenapa Manusia Butuh Bilangan?".
+"""Musik & SFX prosedural untuk video 03 "Mengenali: Number Sense".
 Output: /tmp/render/audio.wav (stereo 44100 Hz, 16-bit, 52.0 s)
 """
 import numpy as np
@@ -167,25 +167,26 @@ while tt < 51.5:
     tt += 1.2
 
 # ---------- momen kunci ----------
-add(0.30, boom(0.24))                      # hook: counter "20"
+add(0.30, boom(0.24))                      # hook: tanda tanya besar
 add(0.30, whoosh(0.5, True, 0.05))
-for i, tp in enumerate([0.8, 1.02, 1.24, 1.46, 1.68]):  # kambing muncul
-    add(tp, tick(1100 + i * 90, 0.045))
-add(2.30, whoosh(0.5, True, 0.07))         # kambing kabur
-add(2.30, tick(600, 0.06))
-add(2.82, tick(1150, 0.07))                # tanda tanya merah
-for i, td in enumerate([6.5, 6.72, 6.94, 7.16, 7.38, 7.6]):  # titik hitung
-    add(td, tick(1200 + i * 140, 0.055))
-add(8.6, whoosh(0.7, False, 0.05))         # ingatan memudar
-for i, tc in enumerate([13.9, 14.8, 15.7]):  # kartu keputusan
-    add(tc, sine([440.0, 523.25, 659.26][i], 0.4, a=0.004, d=0.24, harm=(1.0, 0.4)), 0.0, 0.10)
-add(18.3, boom(0.10))                      # punch "tinggal perkiraan"
-add(24.4, whoosh(0.5, True, 0.06))         # roti terbagi rata
-for ts in [24.4, 26.2, 28.0]:              # pergantian adegan roti
+candy_ts = [0.85, 0.99] + [1.1 + 0.05 * j for j in range(9)]  # permen muncul
+for i, tp in enumerate(candy_ts):
+    add(tp, tick(1050 + i * 45, 0.045))
+add(3.95, whoosh(0.5, True, 0.07))         # sorot tumpukan kanan
+add(4.00, tick(1000, 0.07))
+for i, td in enumerate([6.5, 6.7, 6.9, 7.1, 7.28, 7.46, 7.64, 7.82, 8.0, 8.18]):  # jejak kaki
+    add(td, tick(1150 + i * 80, 0.05))
+add(9.9, tick(520, 0.05))                  # pertanyaan jujur
+for i, tc in enumerate([13.9, 14.8]):      # kartu number sense
+    add(tc, sine([440.0, 523.25][i], 0.4, a=0.004, d=0.24, harm=(1.0, 0.4)), 0.0, 0.10)
+add(18.3, boom(0.10))                      # punch "makin tajam"
+add(24.4, whoosh(0.5, True, 0.06))         # tahap mengenali
+for ts in [24.4, 26.2, 28.0]:              # pergantian tahap
     add(ts, tick(900, 0.085))
     add(ts + 0.02, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
-add(26.2, tick(520, 0.08))                 # distribusi tidak adil
-add(28.0, boom(0.14))                      # "MASIH 10."
+for i in range(9):                         # menghitung satu per satu
+    add(26.35 + i * 0.165, tick(880 + i * 70, 0.06))
+add(28.0, boom(0.14))                      # "MENGENALI bukan MENGHITUNG"
 for tw in [4.6, 11.9, 21.5, 31.0, 41.9]:   # transisi antar adegan
     add(tw, whoosh(0.85, True, 0.12), 0.0)
 # riser 29.0 - 31.6
@@ -194,11 +195,13 @@ rn = int(rdur * SR)
 rx = noise_band(rdur, 500, 3600)
 ramp = np.linspace(0, 1, rn) ** 1.6
 add(29.0, rx * ramp, 0.0, 0.10)
-add(32.3, tick(820, 0.06))                 # timbangan muncul
-add(32.9, tick(430, 0.05))                 # beam mulai miring
-add(37.2, chime(660.0, 0.07))              # seimbang
-add(38.4, boom(0.22))                      # "Adil itu kerja hati."
-add(45.4, whoosh(0.6, True, 0.07))
+for i in range(5):                         # kartu 1 sampai 5 berbaris
+    add(32.4 + i * 0.25, tick(1000 + i * 60, 0.045))
+for i in range(5):                         # lima apel di atas kartu 5
+    add(37.0 + i * 0.13, tick(1400 + i * 120, 0.05))
+add(37.7, chime(660.0, 0.08))              # lima = satu jumlah
+add(38.4, boom(0.22))                      # "Bilangan hidup."
+add(45.6, whoosh(0.6, True, 0.07))
 add(46.3, chime(880.0, 0.13))
 add(46.9, chime(1318.5, 0.07))
 add(51.0, chime(440.0, 0.09))
