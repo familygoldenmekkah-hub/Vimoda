@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Musik & SFX prosedural untuk video 03 "Mengenali: Number Sense".
+"""Musik & SFX prosedural untuk video 04 "Sejarah Sistem Bilangan".
 Output: /tmp/render/audio.wav (stereo 44100 Hz, 16-bit, 52.0 s)
 """
 import numpy as np
@@ -167,26 +167,24 @@ while tt < 51.5:
     tt += 1.2
 
 # ---------- momen kunci ----------
-add(0.30, boom(0.24))                      # hook: tanda tanya besar
+add(0.30, boom(0.24))                      # hook: "1.000.000" menghantam
 add(0.30, whoosh(0.5, True, 0.05))
-candy_ts = [0.85, 0.99] + [1.1 + 0.05 * j for j in range(9)]  # permen muncul
-for i, tp in enumerate(candy_ts):
-    add(tp, tick(1050 + i * 45, 0.045))
-add(3.95, whoosh(0.5, True, 0.07))         # sorot tumpukan kanan
+for i in range(8):                         # paket goresan muncul
+    add(1.0 + i * 0.075, tick(1050 + i * 50, 0.04))
+add(3.95, whoosh(0.5, True, 0.07))         # goresan berguncang, "..."
 add(4.00, tick(1000, 0.07))
-for i, td in enumerate([6.5, 6.7, 6.9, 7.1, 7.28, 7.46, 7.64, 7.82, 8.0, 8.18]):  # jejak kaki
-    add(td, tick(1150 + i * 80, 0.05))
-add(9.9, tick(520, 0.05))                  # pertanyaan jujur
-for i, tc in enumerate([13.9, 14.8]):      # kartu number sense
-    add(tc, sine([440.0, 523.25][i], 0.4, a=0.004, d=0.24, harm=(1.0, 0.4)), 0.0, 0.10)
-add(18.3, boom(0.10))                      # punch "makin tajam"
-add(24.4, whoosh(0.5, True, 0.06))         # tahap mengenali
+for i, tc in enumerate([6.5, 7.3, 8.1]):   # kartu goresan, mesir, romawi
+    add(tc, sine([440.0, 523.25, 659.26][i], 0.4, a=0.004, d=0.24, harm=(1.0, 0.4)), 0.0, 0.10)
+add(9.9, tick(520, 0.05))                  # "perlu cara lebih praktis"
+for i, tc in enumerate([13.9, 14.6, 15.3]):  # kartu 5, 50, 500
+    add(tc, sine([440.0, 523.25, 659.26][i], 0.4, a=0.004, d=0.24, harm=(1.0, 0.4)), 0.0, 0.10)
+add(16.4, tick(760, 0.045))                # garis warisan peradaban
+add(18.3, boom(0.10))                      # punch "posisi mengubah nilai"
+add(24.4, whoosh(0.5, True, 0.06))         # tahap "50 atau 500?"
 for ts in [24.4, 26.2, 28.0]:              # pergantian tahap
     add(ts, tick(900, 0.085))
     add(ts + 0.02, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
-for i in range(9):                         # menghitung satu per satu
-    add(26.35 + i * 0.165, tick(880 + i * 70, 0.06))
-add(28.0, boom(0.14))                      # "MENGENALI bukan MENGHITUNG"
+add(28.0, boom(0.14))                      # "NOL ITU PAHLAWAN."
 for tw in [4.6, 11.9, 21.5, 31.0, 41.9]:   # transisi antar adegan
     add(tw, whoosh(0.85, True, 0.12), 0.0)
 # riser 29.0 - 31.6
@@ -195,12 +193,12 @@ rn = int(rdur * SR)
 rx = noise_band(rdur, 500, 3600)
 ramp = np.linspace(0, 1, rn) ** 1.6
 add(29.0, rx * ramp, 0.0, 0.10)
-for i in range(5):                         # kartu 1 sampai 5 berbaris
-    add(32.4 + i * 0.25, tick(1000 + i * 60, 0.045))
-for i in range(5):                         # lima apel di atas kartu 5
+for i in range(4):                         # ubin V, Arab, biner, modern
+    add(32.4 + i * 0.28, tick(1000 + i * 60, 0.045))
+for i in range(5):                         # lima titik jumlah sejati
     add(37.0 + i * 0.13, tick(1400 + i * 120, 0.05))
-add(37.7, chime(660.0, 0.08))              # lima = satu jumlah
-add(38.4, boom(0.22))                      # "Bilangan hidup."
+add(37.7, chime(660.0, 0.08))              # lima tetap lima
+add(38.4, boom(0.22))                      # "Jumlah lima tetap lima."
 add(45.6, whoosh(0.6, True, 0.07))
 add(46.3, chime(880.0, 0.13))
 add(46.9, chime(1318.5, 0.07))

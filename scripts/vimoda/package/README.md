@@ -22,6 +22,7 @@ Studio video animasi matematika **AKIOMIDA**. Misi: membuat penonton jatuh cinta
 | 01 | Bilangan: Diciptakan atau Ditemukan? | Blog Yuyanaka - artikel "Bilangan" (13 Nov 2026) | `01-bilangan-diciptakan-atau-ditemukan/` (revisi 2: subtitle Inggris + margin samping aman + tanpa emdash) |
 | 02 | Kenapa Manusia Butuh Bilangan? | Blog Yuyanaka - artikel "Mengapa Manusia Membutuhkan Bilangan?" (14 Nov 2026) | `02-kenapa-manusia-butuh-bilangan/` (aturan lengkap dipakai sejak rendering pertama) |
 | 03 | Mengenali: Number Sense | Blog Yuyanaka - artikel "Mengenali" (13 Nov 2026) | `03-mengenali-number-sense/` (aturan lengkap dipakai sejak rendering pertama) |
+| 04 | Sejarah Sistem Bilangan | Blog Yuyanaka - artikel "Kompati" (14 Nov 2026) | `04-sejarah-sistem-bilangan/` (aturan lengkap dipakai sejak rendering pertama) |
 
 ## Isi tiap folder video
 
