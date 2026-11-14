@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+/*__FONTS__*/
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:#000;overflow:hidden;}
+#stage{position:relative;overflow:hidden;
+  background:radial-gradient(120% 95% at 50% 8%, #101B2E 0%, #080C18 52%, #05070F 100%);
+  font-family:'Poppins','DejaVu Sans',sans-serif;color:#E7EEF8;
+  -webkit-font-smoothing:antialiased;}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);will-change:transform;}
+#blobC{background:#0EA5E9;opacity:.30;}
+#blobV{background:#8B5CF6;opacity:.26;}
+#blobA{background:#F59E0B;opacity:.22;}
+#grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(148,163,184,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(148,163,184,.055) 1px,transparent 1px);
+  background-size:80px 80px;}
+#world{position:absolute;inset:0;will-change:transform;transform-origin:50% 42%;}
+#particles span{position:absolute;will-change:transform,opacity;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#7DD3FC;}
+.burstp{position:absolute;left:0;top:0;width:7px;height:7px;border-radius:50%;opacity:0;pointer-events:none;will-change:transform,opacity;}
+.sweep{position:absolute;top:-12%;left:0;width:42%;height:124%;pointer-events:none;opacity:0;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
+  transform:translateX(-160%);border-radius:26px;overflow:hidden;}
+.ring{position:absolute;border-radius:50%;border:3px solid #FBBF24;opacity:0;pointer-events:none;will-change:transform,opacity;}
+#grain{position:absolute;inset:0;pointer-events:none;opacity:.055;mix-blend-mode:overlay;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="180" height="180" filter="url(%23n)" opacity="0.6"/></svg>');}
+.scene{position:absolute;inset:0;will-change:opacity,transform;}
+.card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);
+  border-radius:26px;box-shadow:0 18px 60px rgba(0,0,0,.45);}
+.chip{display:inline-block;border-radius:999px;border:1px solid rgba(34,211,238,.45);
+  background:rgba(34,211,238,.09);color:#67E8F9;font-weight:600;letter-spacing:.30em;}
+.grad{background:linear-gradient(92deg,#22D3EE 0%,#A78BFA 52%,#FBBF24 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.vig{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(92% 92% at 50% 44%, transparent 58%, rgba(0,0,0,.52) 100%);}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;}
+#fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
+.center{text-align:center;}
+.ensub{color:#7E92AF;font-weight:500;}
+.ensub-b{color:#A7B6CE;font-weight:600;}
+.enchip{color:#64748B;font-weight:600;letter-spacing:.24em;}
+.enword{color:#7488A6;font-weight:600;letter-spacing:.22em;}
+.enpan{color:#64748B;font-weight:600;letter-spacing:.20em;}
+.ensub2{color:#8CA0BC;font-weight:500;}
+.enchip2{color:#5B6B84;font-weight:600;letter-spacing:.30em;}
+.kin{display:inline-block;will-change:transform;}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="blob" id="blobC"></div>
+  <div class="blob" id="blobV"></div>
+  <div class="blob" id="blobA"></div>
+  <div id="grid"></div>
+  <div id="world">
+    <div id="particles"></div>
+    <div id="bursts"></div>
+    <div id="rings"></div>
+
+    <!-- S0 HOOK: TIGA TUJUH -->
+    <div class="scene" id="s0">
+      <div class="center" id="h_eq" style="position:absolute;left:0;right:0;font-weight:800;">
+        <span class="mono grad" id="h_eq_t">7&nbsp;&nbsp;7&nbsp;&nbsp;7</span>
+      </div>
+      <div class="mono" id="h_q" style="position:absolute;color:#F87171;font-weight:800;opacity:0;">?</div>
+      <div class="center" id="h_kamb" style="position:absolute;left:0;right:0;color:#FBBF24;font-weight:700;">TIGA TUJUH</div>
+      <div id="h_tiles" style="position:absolute;"></div>
+      <div class="center" id="h_sub1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Tiga-tiganya pakai simbol 7.</div>
+      <div class="center ensub" id="h_sub1_e">All three use the same symbol 7.</div>
+      <div class="center" id="h_sub2" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Tapi tunggu, fungsinya beda, lho.</div>
+      <div class="center ensub" id="h_sub2_e">But wait, they work differently.</div>
+    </div>
+
+    <!-- S1 ANGKA: SIMBOL -->
+    <div class="scene" id="s1">
+      <div class="center" id="a_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="a_chip_t">ANGKA ITU SIMBOL</span></div>
+      <div class="center enchip" id="a_chip_e">A DIGIT IS A SYMBOL</div>
+      <div class="center" id="a_head" style="position:absolute;left:0;right:0;font-weight:800;">Angka adalah <span class="grad kin" id="a_head_k">simbol.</span></div>
+      <div class="center ensub-b" id="a_head_e">A digit is a symbol.</div>
+      <div id="a_digits" style="position:absolute;"></div>
+      <div class="center" id="a_dlab" style="position:absolute;color:#94A3B8;font-weight:600;">SISTEM DESIMAL</div>
+      <div class="center enpan" id="a_dlab_e">THE DECIMAL SYSTEM</div>
+      <div class="center" id="a_line1" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Di sistem desimal ada sepuluh.</div>
+      <div class="center ensub" id="a_line1_e">The decimal system has ten.</div>
+      <div class="center" id="a_line2" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Cuma 0 sampai 9, selesai.</div>
+      <div class="center ensub" id="a_line2_e">Just 0 through 9, that is it.</div>
+    </div>
+
+    <!-- S2 BILANGAN: NILAI -->
+    <div class="scene" id="s2">
+      <div class="center" id="b_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="b_chip_t">BILANGAN ITU NILAI</span></div>
+      <div class="center enchip" id="b_chip_e">A NUMBER IS A VALUE</div>
+      <div class="center" id="b_def" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Konsep <span class="grad kin" id="b_def_k" style="font-weight:700;">jumlah atau nilai.</span></div>
+      <div class="center ensub" id="b_def_e">A concept of quantity or value.</div>
+      <div class="card" id="b_card" style="position:absolute;">
+        <div id="b_dots" style="position:absolute;"></div>
+        <div class="center mono" id="b_lab" style="position:absolute;font-weight:800;color:#FBBF24;">7 APEL</div>
+        <div class="center enword" id="b_lab_e" style="position:absolute;">SEVEN APPLES</div>
+      </div>
+      <div class="center" id="b_punch" style="position:absolute;left:0;right:0;font-weight:800;">Ganti benda sepuasnya, <span class="grad">nilai tetap.</span></div>
+      <div class="center ensub-b" id="b_punch_e">Swap the items, the value holds.</div>
+      <div class="center" id="b_hline" style="position:absolute;color:#8CA0BC;font-weight:500;">Dipakai buat jumlah, ukuran, urutan.</div>
+      <div class="center enpan" id="b_hline_e">Used for count, size, and order.</div>
+    </div>
+
+    <!-- S3 NOMOR: PENANDA -->
+    <div class="scene" id="s3">
+      <div class="center" id="c_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="c_chip_t">NOMOR ITU PENANDA</span></div>
+      <div class="center enchip" id="c_chip_e">NUMBERS AS IDENTITY</div>
+      <div class="card" id="c_eqbox" style="position:absolute;">
+        <div class="center mono" id="c_morph" style="font-weight:800;">PUNGGUNG 10</div>
+      </div>
+      <div class="center" id="c_cap1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Kaos nomor 10, isinya satu orang.</div>
+      <div class="center ensub" id="c_cap1_e">Jersey 10 still holds one person.</div>
+      <div class="center" id="c_cap2" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Rumah nomor 25 bukan isi 25 benda.</div>
+      <div class="center ensub" id="c_cap2_e">House 25 is not 25 things inside.</div>
+      <div class="center" id="c_punch" style="position:absolute;left:0;right:0;font-weight:800;">Nomor: <span class="grad">urutan, tanda, identitas.</span></div>
+      <div class="center ensub-b" id="c_punch_e">Tags, order, and identity.</div>
+    </div>
+
+    <!-- S4 KUNCI: KONTEKS -->
+    <div class="scene" id="s4">
+      <div class="center" id="e_chip" style="position:absolute;left:0;right:0;"><span class="chip" id="e_chip_t">KUNCI NYA KONTEKS</span></div>
+      <div class="center enchip" id="e_chip_e">CONTEXT IS THE KEY</div>
+      <div class="card" id="e_big" style="position:absolute;">
+        <div class="mono" id="e_big_t" style="font-weight:800;color:#FBBF24;">7</div>
+      </div>
+      <div id="e_chips" style="position:absolute;"></div>
+      <div class="center" id="e_v1" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Simbolnya <span class="grad kin" id="e_v1_k" style="font-weight:800;">sama persis.</span></div>
+      <div class="center ensub" id="e_v1_e">The symbol looks identical.</div>
+      <div class="center" id="e_v2" style="position:absolute;left:0;right:0;font-weight:800;"><span class="grad" id="e_v2_t">Maknanya ikut konteks.</span></div>
+      <div class="center ensub-b" id="e_v2_e">The meaning follows context.</div>
+      <div class="center" id="e_hline" style="position:absolute;color:#8CA0BC;font-weight:500;">Teliti: tahu apa yang dihitung.</div>
+      <div class="center enpan" id="e_hline_e">Be precise about what you count.</div>
+    </div>
+
+    <!-- S5 CTA -->
+    <div class="scene" id="s5">
+      <div class="center" id="f_q" style="position:absolute;left:0;right:0;font-weight:800;">Nah, <span class="grad kin" id="f_q_k">uji pemahamanmu.</span></div>
+      <div class="center ensub-b" id="f_q_e">Now test your understanding.</div>
+      <div class="center" id="f_cta1" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Punggung 7: jumlah, nilai, atau identitas?</div>
+      <div class="center ensub" id="f_cta1_e">Jersey 7: a count, a value, or an identity?</div>
+      <div class="center" id="f_cta2" style="position:absolute;left:0;right:0;color:#94A3B8;font-weight:500;">Bantah atau dukung, tulis di komentar.</div>
+      <div class="center ensub" id="f_cta2_e">Agree or push back, drop a comment.</div>
+      <div class="card" id="f_card" style="position:absolute;">
+        <div class="center" id="f_open" style="color:#94A3B8;font-weight:600;letter-spacing:.30em;">BUKA BROWSER KAMU</div>
+        <div class="center enchip2" id="f_open_e">OPEN YOUR BROWSER</div>
+        <div class="center" id="f_url" style="font-weight:800;"><span class="grad" id="f_url_t">AKIOMIDA.COM</span></div>
+        <div id="f_bar" style="height:5px;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24);width:0;"></div>
+        <div class="center" id="f_sub" style="color:#CBD5E1;font-weight:500;">Belajar matematika jadi makin seru.</div>
+        <div class="center ensub2" id="f_sub_e">Learning math just got more fun.</div>
+      </div>
+      <div class="center" id="f_brand" style="position:absolute;left:0;right:0;color:#64748B;font-weight:600;letter-spacing:.42em;">AKIOMIDA</div>
+    </div>
+
+    <div class="center" id="wm" style="position:absolute;color:#7C8BA1;font-weight:600;letter-spacing:.40em;opacity:.5;">AKIOMIDA</div>
+  </div>
+  <div class="vig"></div>
+  <div id="grain"></div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+</div>
+
+<script>
+const Q=new URLSearchParams(location.search);
+const ORIENT=Q.get('o')||'landscape';
+const W=ORIENT==='portrait'?1080:1920;
+const H=ORIENT==='portrait'?1920:1080;
+
+const L = ORIENT==='portrait' ? {
+  mx:84,
+  wmY:200, wmSize:19,
+  eqY:470, eqSize:150,
+  qX:872, qY:455, qSize:84,
+  kambY:640, kambSize:29,
+  tileY:700, tileH:150, tileW:264, tileGap:24,
+  tvisH:60, tlabSize:17, tlabEY:0, tlabESize:11,
+  sub1Y:970, sub1Size:44, sub1EY:1032, sub1ESize:24,
+  sub2Y:1095, sub2Size:47, sub2EY:1170, sub2ESize:26,
+  chipY:300, chipSize:25, chipEY:357, chipESize:17,
+  headY:404, headSize:48, headEY:478, headESize:28,
+  digY:560, digH:110, digW:72, digGap:10, digSize:40,
+  dlabY:700, dlabSize:18, dlabEY:734, dlabESize:13,
+  line1Y:900, line1EY:958, line2Y:1010, line2EY:1068, lineSize:38, lineESize:22,
+  defY:398, defSize:43, defEY:461, defESize:24,
+  cardY:520, cardH:330, cardW:560, dotC:34, dotGap:12,
+  labY:0, labDy:250, labEDy:290, labSize:24, labESize:12,
+  punchY:890, punchSize:44, punchEY:954, punchESize:25,
+  hlineY:1006, hlineSize:24, hlineEY:1046, hlineESize:15,
+  eqboxY:560, eqboxH:280, boxW:880, eqSize2:64, eqSize3:54,
+  capY:910, capSize:42, capEY:975, capESize:24,
+  punch2Y:1045, punch2Size:45, punch2EY:1113, punch2ESize:25,
+  bigY:540, bigH:200, bigW:200, bigDSize:96,
+  chY:770, chH:64, chW:240, chGap:20, chLab:18, chEn:11,
+  v1Y:860, v1Size:44, v1EY:922, v1ESize:24,
+  v2Y:940, v2Size:48, v2EY:1014, v2ESize:26,
+  hline2Y:1050, hline2Size:24, hline2EY:1090, hline2ESize:15,
+  fqY:340, fqSize:56, fqEY:422, fqESize:26,
+  cta1Y:480, cta1Size:38, cta1EY:540, cta1ESize:22,
+  cta2Y:596, cta2Size:36, cta2EY:652, cta2ESize:21,
+  cardY2:710, card2H2:470, cardW2:880,
+  openY:130, openEY:166, openESize:14, urlY:226, urlSize:74, barY:336, subY:372, fSubEY:406, fSubESize:16,
+  brandY:1298, brandSize:24
+} : {
+  mx:200,
+  wmY:1006, wmSize:19,
+  eqY:330, eqSize:170,
+  qX:1340, qY:322, qSize:88,
+  kambY:510, kambSize:32,
+  tileY:570, tileH:160, tileW:300, tileGap:30,
+  tvisH:66, tlabSize:18, tlabEY:0, tlabESize:11,
+  sub1Y:760, sub1Size:46, sub1EY:827, sub1ESize:25,
+  sub2Y:888, sub2Size:48, sub2EY:958, sub2ESize:27,
+  chipY:172, chipSize:25, chipEY:229, chipESize:17,
+  headY:272, headSize:56, headEY:353, headESize:28,
+  digY:410, digH:120, digW:76, digGap:12, digSize:42,
+  dlabY:560, dlabSize:18, dlabEY:594, dlabESize:13,
+  line1Y:724, line1EY:784, line2Y:840, line2EY:900, lineSize:40, lineESize:22,
+  defY:264, defSize:43, defEY:327, defESize:24,
+  cardY:380, cardH:340, cardW:620, dotC:40, dotGap:14,
+  labY:0, labDy:262, labEDy:304, labSize:26, labESize:13,
+  punchY:760, punchSize:46, punchEY:826, punchESize:25,
+  hlineY:880, hlineSize:24, hlineEY:920, hlineESize:15,
+  eqboxY:264, eqboxH:280, boxW:1000, eqSize2:62, eqSize3:56,
+  capY:620, capSize:44, capEY:685, capESize:24,
+  punch2Y:755, punch2Size:48, punch2EY:821, punch2ESize:25,
+  bigY:380, bigH:200, bigW:200, bigDSize:96,
+  chY:610, chH:64, chW:260, chGap:24, chLab:18, chEn:11,
+  v1Y:702, v1Size:44, v1EY:767, v1ESize:24,
+  v2Y:850, v2Size:60, v2EY:936, v2ESize:26,
+  hline2Y:980, hline2Size:24, hline2EY:1018, hline2ESize:15,
+  fqY:196, fqSize:58, fqEY:276, fqESize:24,
+  cta1Y:330, cta1Size:40, cta1EY:388, cta1ESize:21,
+  cta2Y:434, cta2Size:34, cta2EY:486, cta2ESize:20,
+  cardY2:530, card2H2:400, cardW2:900,
+  openY:92, openEY:128, openESize:13, urlY:172, urlSize:94, barY:296, subY:322, fSubEY:360, fSubESize:15,
+  brandY:948, brandSize:23
+};
+
+const stage=document.getElementById('stage');
+stage.style.width=W+'px'; stage.style.height=H+'px';
+const isP=ORIENT==='portrait';
+/* Margin samping aman: teks tidak boleh mepet ujung kiri/kanan */
+const MX=L.mx;
+function tx(el,y,size){
+  el.style.position='absolute';
+  el.style.left=MX+'px';el.style.right=MX+'px';
+  el.style.top=y+'px';el.style.fontSize=size+'px';
+}
+document.querySelectorAll('.ponly').forEach(el=>{el.style.display=isP?'':'none';});
+
+/* ---------- easing & helpers ---------- */
+const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
+const lerp=(a,b,p)=>a+(b-a)*p;
+const seg=(t,a,d)=>clamp((t-a)/d,0,1);
+const eoc=p=>{p=clamp(p,0,1);return 1-Math.pow(1-p,3);};
+const eoe=p=>{p=clamp(p,0,1);return p>=1?1:1-Math.pow(2,-10*p);};
+const eio=p=>{p=clamp(p,0,1);return p<0.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;};
+const backOS=(p,s=1.7)=>{p=clamp(p,0,1);const c=s;return 1+(c+1)*Math.pow(p-1,3)+c*Math.pow(p-1,2);};
+const smz=(t,a,b,f=.6)=>{return clamp((t-a)/f,0,1)*clamp((b-t)/f,0,1);};
+
+/* blobs */
+const blobC=document.getElementById('blobC');
+const blobV=document.getElementById('blobV');
+const blobA=document.getElementById('blobA');
+const BS=ORIENT==='portrait'?820:720;
+blobC.style.width=BS+'px';blobC.style.height=BS+'px';
+blobC.style.left=(-BS*0.28)+'px';blobC.style.top=(ORIENT==='portrait'?-BS*0.30:-BS*0.34)+'px';
+blobV.style.width=(BS*1.05)+'px';blobV.style.height=(BS*1.05)+'px';
+blobV.style.right=(-BS*0.32)+'px';blobV.style.bottom=(ORIENT==='portrait'?-BS*0.16:-BS*0.34)+'px';
+blobA.style.width=(BS*0.7)+'px';blobA.style.height=(BS*0.7)+'px';
+blobA.style.left=(W/2-BS*0.35)+'px';
+blobA.style.top=(ORIENT==='portrait'?H*0.34:H*0.42)+'px';
+
+/* partikel digit */
+const parts=document.getElementById('particles');
+const mulberry=(s)=>()=>{s|=0;s=s+0x6D2B79F5|0;let z=Math.imul(s^s>>>15,1|s);z=z+Math.imul(z^z>>>7,61|z)^z;return((z^z>>>14)>>>0)/4294967296;};
+const rnd=mulberry(20261114);
+const CH='0123456789+=/VX\u00BD\u00B0\u00D7';
+const NP=34, P=[];
+for(let i=0;i<NP;i++){
+  const el=document.createElement('span');
+  el.textContent=CH[Math.floor(rnd()*CH.length)];
+  const size=16+rnd()*30;
+  el.style.fontSize=size.toFixed(0)+'px';
+  el.style.fontWeight=(rnd()<.3?'700':'400');
+  parts.appendChild(el);
+  P.push({el, x:rnd()*W, y0:rnd()*H, sp:10+rnd()*26, wf:.3+rnd()*.9, ph:rnd()*6.28, o:.25+rnd()*.4});
+}
+
+/* wm */
+const wm=document.getElementById('wm');
+wm.style.fontSize=L.wmSize+'px';
+if(ORIENT==='portrait'){wm.style.top=L.wmY+'px';wm.style.left='0';wm.style.right='0';}
+else{wm.style.top=L.wmY+'px';wm.style.right='70px';wm.style.left='auto';wm.style.bottom='auto';}
+
+/* ---------- S0 ---------- */
+const hEq=document.getElementById('h_eq');
+const hEqT=document.getElementById('h_eq_t');
+hEq.style.top=L.eqY+'px'; hEqT.style.fontSize=L.eqSize+'px';
+hEqT.style.textShadow='0 10px 60px rgba(167,139,250,.45)';
+const hQ=document.getElementById('h_q');
+hQ.style.left=L.qX+'px';hQ.style.top=L.qY+'px';hQ.style.fontSize=L.qSize+'px';
+const hKamb=document.getElementById('h_kamb');
+tx(hKamb,L.kambY,L.kambSize);
+/* tiga kartu mini: apel, papan, tiket antrean */
+const hTiles=document.getElementById('h_tiles');
+hTiles.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
+const TW0=L.tileW, TH0=L.tileH, TG0=L.tileGap;
+const gw0=3*TW0+2*TG0, x0t=(W-gw0)/2;
+const H0T=[];
+for(let i=0;i<3;i++){
+  const el=document.createElement('div');
+  el.className='card';
+  el.style.cssText=`position:absolute;left:${x0t+i*(TW0+TG0)}px;top:${L.tileY}px;width:${TW0}px;height:${TH0}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;opacity:0;overflow:hidden;will-change:transform,opacity;`;
+  hTiles.appendChild(el);
+  H0T.push(el);
+}
+/* isi kartu 1: 7 titik apel (4+3) */
+(()=>{
+  const area=document.createElement('div');
+  area.style.cssText=`position:relative;width:${(4*18+3*8)}px;height:${L.tvisH}px;`;
+  const spots=[[0,0],[26,0],[52,0],[78,0],[13,26],[39,26],[65,26]];
+  spots.forEach(([dx,dy])=>{
+    const d=document.createElement('div');
+    d.style.cssText=`position:absolute;left:${dx}px;top:${dy}px;width:18px;height:18px;border-radius:50%;background:radial-gradient(120% 120% at 35% 30%,#FCD34D,#D97706);border:1px solid rgba(255,255,255,.35);`;
+    area.appendChild(d);
+  });
+  H0T[0].appendChild(area);
+})();
+/* isi kartu 2: papan tulis dengan 7 kapur */
+(()=>{
+  const p=document.createElement('div');
+  p.style.cssText=`position:relative;width:96px;height:${L.tvisH+6}px;border-radius:12px;background:rgba(52,211,153,.10);border:1px solid rgba(52,211,153,.40);display:flex;align-items:center;justify-content:center;`;
+  const t=document.createElement('div');
+  t.className='mono';
+  t.style.cssText='font-weight:800;font-size:40px;color:#34D399;text-shadow:0 0 14px rgba(52,211,153,.5);';
+  t.textContent='7';
+  p.appendChild(t);
+  H0T[1].appendChild(p);
+})();
+/* isi kartu 3: tiket antrean bernomor 7 */
+(()=>{
+  const p=document.createElement('div');
+  p.style.cssText=`position:relative;width:96px;height:${L.tvisH+6}px;border-radius:12px;background:rgba(251,191,36,.10);border:2px dashed rgba(251,191,36,.55);display:flex;align-items:center;justify-content:center;`;
+  const t=document.createElement('div');
+  t.className='mono';
+  t.style.cssText='font-weight:800;font-size:40px;color:#FBBF24;';
+  t.textContent='7';
+  p.appendChild(t);
+  H0T[2].appendChild(p);
+})();
+const LABS0=[['7 APEL','7 APPLES'],['7 DI PAPAN','ON THE BOARD'],['NOMOR 7','IN THE QUEUE']];
+H0T.forEach((el,i)=>{
+  const lb=document.createElement('div');
+  lb.style.cssText=`font-size:${L.tlabSize}px;font-weight:700;color:#E7EEF8;letter-spacing:.04em;`;
+  lb.textContent=LABS0[i][0];
+  const le=document.createElement('div');
+  le.className='enword';
+  le.style.cssText=`font-size:${L.tlabESize}px;`;
+  le.textContent=LABS0[i][1];
+  el.appendChild(lb);el.appendChild(le);
+  const sw=document.createElement('div');
+  sw.className='sweep';
+  el.appendChild(sw);
+  el.dataset.sw='1';
+});
+const SWEEPS0=H0T.map(el=>el.querySelector('.sweep'));
+const hS1=document.getElementById('h_sub1');
+tx(hS1,L.sub1Y,L.sub1Size);
+const hS1E=document.getElementById('h_sub1_e');
+tx(hS1E,L.sub1EY,L.sub1ESize);
+const hS2=document.getElementById('h_sub2');
+tx(hS2,L.sub2Y,L.sub2Size);
+const hS2E=document.getElementById('h_sub2_e');
+tx(hS2E,L.sub2EY,L.sub2ESize);
+
+/* ---------- S1 ---------- */
+const aChipT=document.getElementById('a_chip_t');
+const aChip=document.getElementById('a_chip');
+aChip.style.top=L.chipY+'px';aChipT.style.fontSize=L.chipSize+'px';aChipT.style.padding='12px 30px 12px 34px';
+const aChipE=document.getElementById('a_chip_e');
+tx(aChipE,L.chipEY,L.chipESize);
+const aHead=document.getElementById('a_head');
+tx(aHead,L.headY,L.headSize);
+const aHeadE=document.getElementById('a_head_e');
+tx(aHeadE,L.headEY,L.headESize);
+/* baris angka 0-9, angka 7 disorot emas */
+const aDig=document.getElementById('a_digits');
+aDig.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
+const DGW=L.digW, DGH=L.digH, DGG=L.digGap;
+const gwD=10*DGW+9*DGG, x0d=(W-gwD)/2;
+const DTILES=[];
+for(let i=0;i<10;i++){
+  const el=document.createElement('div');
+  const hero=(i===7);
+  el.className='card';
+  el.style.cssText=`position:absolute;left:${x0d+i*(DGW+DGG)}px;top:${L.digY}px;width:${DGW}px;height:${DGH}px;display:flex;align-items:center;justify-content:center;opacity:0;overflow:hidden;will-change:transform,opacity;`;
+  if(hero){el.style.borderColor='rgba(251,191,36,.55)';el.style.background='rgba(251,191,36,.10)';}
+  const d=document.createElement('div');
+  d.className='mono';
+  d.style.cssText=`font-weight:800;font-size:${L.digSize}px;color:${hero?'#FBBF24':'#7DD3FC'};`;
+  d.textContent=String(i);
+  el.appendChild(d);
+  const sw=document.createElement('div');
+  sw.className='sweep';
+  el.appendChild(sw);
+  aDig.appendChild(el);
+  DTILES.push(el);
+}
+const DSWEEP=DTILES[7].querySelector('.sweep');
+const aDl=document.getElementById('a_dlab');
+tx(aDl,L.dlabY,L.dlabSize);
+const aDlE=document.getElementById('a_dlab_e');
+tx(aDlE,L.dlabEY,L.dlabESize);
+const aL1=document.getElementById('a_line1');
+tx(aL1,L.line1Y,L.lineSize);
+const aL1E=document.getElementById('a_line1_e');
+tx(aL1E,L.line1EY,L.lineESize);
+const aL2=document.getElementById('a_line2');
+tx(aL2,L.line2Y,L.lineSize);
+const aL2E=document.getElementById('a_line2_e');
+tx(aL2E,L.line2EY,L.lineESize);
+
+/* ---------- S2 ---------- */
+const bChipT=document.getElementById('b_chip_t');
+const bChip=document.getElementById('b_chip');
+bChip.style.top=L.chipY+'px';bChipT.style.fontSize=L.chipSize+'px';bChipT.style.padding='12px 30px 12px 34px';
+const bChipE=document.getElementById('b_chip_e');
+tx(bChipE,L.chipEY,L.chipESize);
+const bDef=document.getElementById('b_def');
+tx(bDef,L.defY,L.defSize);
+const bDefE=document.getElementById('b_def_e');
+tx(bDefE,L.defEY,L.defESize);
+const bCard=document.getElementById('b_card');
+const CW2=L.cardW, CH2=L.cardH;
+bCard.style.left=((W-CW2)/2)+'px';bCard.style.top=L.cardY+'px';
+bCard.style.width=CW2+'px';bCard.style.height=CH2+'px';
+bCard.style.position='absolute';bCard.style.overflow='hidden';
+const bDots=document.getElementById('b_dots');
+const DC2=L.dotC, DG2=L.dotGap;
+const spots2=[[0,0],[1,0],[2,0],[3,0],[0.5,1],[1.5,1],[2.5,1]];
+const D7=[];
+spots2.forEach(([cx,cy])=>{
+  const d=document.createElement('div');
+  const dx=(CW2-(4*DC2+3*DG2))/2+cx*(DC2+DG2);
+  const dy=(CH2*0.46-(2*DC2+DG2)/2)+cy*(DC2+DG2);
+  d.style.cssText=`position:absolute;left:${dx.toFixed(1)}px;top:${dy.toFixed(1)}px;width:${DC2}px;height:${DC2}px;border-radius:50%;opacity:0;will-change:transform,opacity;`;
+  bDots.appendChild(d);
+  D7.push(d);
+});
+const bLab=document.getElementById('b_lab');
+bLab.style.top=L.labDy+'px';bLab.style.left='0';bLab.style.right='0';bLab.style.fontSize=L.labSize+'px';
+const bLabE=document.getElementById('b_lab_e');
+bLabE.style.top=L.labEDy+'px';bLabE.style.left='0';bLabE.style.right='0';bLabE.style.fontSize=L.labESize+'px';
+const bCardSw=document.createElement('div');
+bCardSw.className='sweep';
+bCard.appendChild(bCardSw);
+const ITEMS2=[
+  {lab:'7 APEL', en:'SEVEN APPLES', bg:'radial-gradient(120% 120% at 35% 30%,#FCD34D,#D97706)', col:'#FBBF24', book:false},
+  {lab:'7 JERUK', en:'SEVEN ORANGES', bg:'radial-gradient(120% 120% at 35% 30%,#FDBA74,#EA580C)', col:'#FB923C', book:false},
+  {lab:'7 BUKU', en:'SEVEN BOOKS', bg:'linear-gradient(180deg,#93C5FD,#3B82F6)', col:'#7DD3FC', book:true}
+];
+const bPunch=document.getElementById('b_punch');
+tx(bPunch,L.punchY,L.punchSize);
+const bPunchE=document.getElementById('b_punch_e');
+tx(bPunchE,L.punchEY,L.punchESize);
+const bHl=document.getElementById('b_hline');
+tx(bHl,L.hlineY,L.hlineSize);
+const bHlE=document.getElementById('b_hline_e');
+tx(bHlE,L.hlineEY,L.hlineESize);
+
+/* ---------- S3 ---------- */
+const cChipT=document.getElementById('c_chip_t');
+const cChip=document.getElementById('c_chip');
+cChip.style.top=L.chipY+'px';cChipT.style.fontSize=L.chipSize+'px';cChipT.style.padding='12px 30px 12px 34px';
+const cChipE=document.getElementById('c_chip_e');
+tx(cChipE,L.chipEY,L.chipESize);
+const cBox=document.getElementById('c_eqbox');
+const BOXW=L.boxW;
+cBox.style.left=((W-BOXW)/2)+'px';cBox.style.top=L.eqboxY+'px';
+cBox.style.width=BOXW+'px';cBox.style.height=L.eqboxH+'px';
+cBox.style.display='block';
+cBox.style.background='rgba(34,211,238,.045)';
+const cMorph=document.getElementById('c_morph');
+cMorph.style.fontSize=L.eqSize2+'px';cMorph.style.position='absolute';
+cMorph.style.left='0';cMorph.style.right='0';
+cMorph.style.top=(L.eqboxH-L.eqSize2*1.1)/2+'px';
+cMorph.style.whiteSpace='nowrap';
+const cCap=document.getElementById('c_cap1');
+tx(cCap,L.capY,L.capSize);
+const cCapE=document.getElementById('c_cap1_e');
+tx(cCapE,L.capEY,L.capESize);
+const cCap2=document.getElementById('c_cap2');
+tx(cCap2,L.capY,L.capSize);
+const cCap2E=document.getElementById('c_cap2_e');
+tx(cCap2E,L.capEY,L.capESize);
+const cPunch=document.getElementById('c_punch');
+tx(cPunch,L.punch2Y,L.punch2Size);
+const cPunchE=document.getElementById('c_punch_e');
+tx(cPunchE,L.punch2EY,L.punch2ESize);
+
+/* ---------- S4 ---------- */
+const eChipT=document.getElementById('e_chip_t');
+const eChip=document.getElementById('e_chip');
+eChip.style.top=L.chipY+'px';eChipT.style.fontSize=L.chipSize+'px';eChipT.style.padding='12px 30px 12px 34px';
+const eChipE=document.getElementById('e_chip_e');
+tx(eChipE,L.chipEY,L.chipESize);
+const eBig=document.getElementById('e_big');
+const BW3=L.bigW, BH3=L.bigH;
+eBig.style.left=((W-BW3)/2)+'px';eBig.style.top=L.bigY+'px';
+eBig.style.width=BW3+'px';eBig.style.height=BH3+'px';
+eBig.style.position='absolute';eBig.style.overflow='hidden';
+eBig.style.borderColor='rgba(251,191,36,.5)';eBig.style.background='rgba(251,191,36,.08)';
+const eBigT=document.getElementById('e_big_t');
+eBigT.style.cssText+='position:absolute;left:0;right:0;top:50%;transform:translateY(-54%);text-align:center;font-size:'+L.bigDSize+'px;text-shadow:0 0 30px rgba(251,191,36,.45);';
+const eBigSw=document.createElement('div');
+eBigSw.className='sweep';
+eBig.appendChild(eBigSw);
+/* cincin denyut */
+const ringsEl=document.getElementById('rings');
+const RCX=W/2, RCY=L.bigY+BH3/2;
+const RINGS=[];
+for(let i=0;i<2;i++){
+  const r=document.createElement('div');
+  r.className='ring';
+  const rs=BW3*1.1;
+  r.style.cssText+=`left:${RCX-rs/2}px;top:${RCY-rs/2}px;width:${rs}px;height:${rs}px;`;
+  ringsEl.appendChild(r);
+  RINGS.push(r);
+}
+/* tiga chip konteks */
+const eChips=document.getElementById('e_chips');
+eChips.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
+const CHW=L.chW, CHH=L.chH, CHG=L.chGap;
+const gwC=3*CHW+2*CHG, x0c=(W-gwC)/2;
+const CHIPS4=[
+  ['7 APEL','7 APPLES'],
+  ['7 DI PAPAN','7 ON THE BOARD'],
+  ['NOMOR 7','QUEUE NO. 7']
+];
+const C4=[];
+CHIPS4.forEach((o,i)=>{
+  const el=document.createElement('div');
+  el.className='card';
+  el.style.cssText=`position:absolute;left:${x0c+i*(CHW+CHG)}px;top:${L.chY}px;width:${CHW}px;height:${CHH}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;opacity:0;will-change:transform,opacity;`;
+  const lb=document.createElement('div');
+  lb.style.cssText=`font-size:${L.chLab}px;font-weight:700;color:#E7EEF8;`;
+  lb.textContent=o[0];
+  const le=document.createElement('div');
+  le.className='enword';
+  le.style.cssText=`font-size:${L.chEn}px;`;
+  le.textContent=o[1];
+  el.appendChild(lb);el.appendChild(le);
+  eChips.appendChild(el);
+  C4.push(el);
+});
+const eV1=document.getElementById('e_v1');
+tx(eV1,L.v1Y,L.v1Size);
+const eV1E=document.getElementById('e_v1_e');
+tx(eV1E,L.v1EY,L.v1ESize);
+const eV2=document.getElementById('e_v2');
+tx(eV2,L.v2Y,L.v2Size);
+const eV2E=document.getElementById('e_v2_e');
+tx(eV2E,L.v2EY,L.v2ESize);
+document.getElementById('e_v2_t').style.textShadow='0 10px 60px rgba(167,139,250,.35)';
+const eHl=document.getElementById('e_hline');
+tx(eHl,L.hline2Y,L.hline2Size);
+const eHlE=document.getElementById('e_hline_e');
+tx(eHlE,L.hline2EY,L.hline2ESize);
+
+/* ---------- S5 ---------- */
+const fQ=document.getElementById('f_q');
+tx(fQ,L.fqY,L.fqSize);
+const fQE=document.getElementById('f_q_e');
+tx(fQE,L.fqEY,L.fqESize);
+const fC1=document.getElementById('f_cta1');
+tx(fC1,L.cta1Y,L.cta1Size);
+const fC1E=document.getElementById('f_cta1_e');
+tx(fC1E,L.cta1EY,L.cta1ESize);
+const fC2=document.getElementById('f_cta2');
+tx(fC2,L.cta2Y,L.cta2Size);
+const fC2E=document.getElementById('f_cta2_e');
+tx(fC2E,L.cta2EY,L.cta2ESize);
+const fCard=document.getElementById('f_card');
+const FW=L.cardW2, FH=L.card2H2;
+fCard.style.left=((W-FW)/2)+'px';fCard.style.top=L.cardY2+'px';
+fCard.style.width=FW+'px';fCard.style.height=FH+'px';
+fCard.style.position='absolute';
+fCard.style.borderColor='rgba(34,211,238,.4)';
+fCard.style.overflow='hidden';
+const fOpen=document.getElementById('f_open');
+fOpen.style.position='absolute';fOpen.style.top=L.openY+'px';fOpen.style.left='0';fOpen.style.right='0';
+fOpen.style.fontSize=Math.round(L.urlSize*0.30)+'px';
+const fOpenE=document.getElementById('f_open_e');
+fOpenE.style.position='absolute';fOpenE.style.top=L.openEY+'px';fOpenE.style.left='0';fOpenE.style.right='0';
+fOpenE.style.fontSize=L.openESize+'px';
+const fUrl=document.getElementById('f_url');
+fUrl.style.position='absolute';fUrl.style.top=L.urlY+'px';fUrl.style.left='0';fUrl.style.right='0';
+document.getElementById('f_url_t').style.fontSize=L.urlSize+'px';
+document.getElementById('f_url_t').style.textShadow='0 12px 70px rgba(34,211,238,.4)';
+const fBar=document.getElementById('f_bar');
+fBar.style.position='absolute';fBar.style.top=L.barY+'px';fBar.style.left=(FW*0.16)+'px';
+const fSub=document.getElementById('f_sub');
+fSub.style.position='absolute';fSub.style.top=L.subY+'px';fSub.style.left='0';fSub.style.right='0';
+fSub.style.fontSize=Math.round(L.urlSize*0.28)+'px';
+const fSubE=document.getElementById('f_sub_e');
+fSubE.style.position='absolute';fSubE.style.top=L.fSubEY+'px';fSubE.style.left='0';fSubE.style.right='0';
+fSubE.style.fontSize=L.fSubESize+'px';
+const fBrand=document.getElementById('f_brand');
+tx(fBrand,L.brandY,L.brandSize);
+const fCardSw=document.createElement('div');
+fCardSw.className='sweep';
+fCard.appendChild(fCardSw);
+
+const flash=document.getElementById('flash');
+const fade=document.getElementById('fade');
+const world=document.getElementById('world');
+const grid=document.getElementById('grid');
+const grain=document.getElementById('grain');
+
+/* ---------- animasi inti ---------- */
+/* pop dengan overshoot + squash-stretch saat mendarat */
+function popA(el,t,ts,d=0.62,y=36,s0=0.86,ov=1.7){
+  const p=seg(t,ts,d);
+  const e=backOS(p,ov);
+  const land=Math.exp(-Math.pow((p-0.62)/0.14,2));
+  const sy=e*(1-0.07*land);
+  const sx=e*(1+0.05*land);
+  el.style.opacity=String(clamp(p*3,0,1));
+  el.style.transform=`translateY(${((1-e)*y).toFixed(2)}px) scale(${sx.toFixed(3)},${sy.toFixed(3)})`;
+}
+/* fade-up standar */
+function fadeUp(el,t,ts,d=0.6,y=30){
+  const p=eoe(seg(t,ts,d));
+  el.style.opacity=p;
+  el.style.transform=`translateY(${(1-p)*y}px)`;
+}
+/* subtitle Inggris: follow-through, datang belakangan dan lebih lembut */
+function followUp(el,t,ts,d=0.68,y=16){
+  const p=eoe(seg(t,ts,d));
+  el.style.opacity=p*0.95;
+  el.style.transform=`translateY(${(1-p)*y}px)`;
+}
+/* head besar: blur masuk + tracking menyempit */
+function headIn(el,t,ts,base=0.06){
+  const p=eoc(seg(t,ts,0.55));
+  el.style.opacity=p;
+  el.style.transform=`translateY(${(1-p)*30}px)`;
+  el.style.filter=`blur(${((1-p)*6).toFixed(2)}px)`;
+  el.style.letterSpacing=(base*(1-p)).toFixed(4)+'em';
+}
+/* kata kunci: denyut overshoot kecil */
+function kinetic(el,t,ts){
+  const p=seg(t,ts,0.45);
+  const e=backOS(p,2.2);
+  el.style.transform=`scale(${e.toFixed(3)})`;
+}
+/* chip: wipe reveal dari kiri */
+function wipeChip(el,t,ts){
+  const p=eio(seg(t,ts,0.5));
+  el.style.clipPath=`inset(0 ${(100-100*p).toFixed(2)}% 0 0 round 999px)`;
+}
+/* light sweep */
+function sweepAny(sw,t,tss,amp=0.9){
+  let p=-1;
+  for(const ts of tss){
+    const q=seg(t,ts,0.55);
+    if(q>0&&q<1){p=q;break;}
+  }
+  if(p<0){if(sw.style.opacity!=='0')sw.style.opacity='0';return;}
+  sw.style.opacity=String(amp*(1-Math.abs(p*2-1)));
+  sw.style.transform=`translateX(${lerp(-160,260,p).toFixed(1)}%)`;
+}
+/* kamera: push pelan per adegan + punch saat impact */
+const SCENES=[[0.18,5.2],[5.25,12.4],[12.45,22.0],[22.05,31.6],[31.65,42.2],[42.25,52.0]];
+function imp(t){
+  let a=0;
+  for(const [it,ia] of IMPACTS){
+    const d=t-it;
+    if(d>=0&&d<0.4)a=Math.max(a,ia*(1-d/0.4));
+  }
+  return a;
+}
+function camScale(t){
+  let base=1.0;
+  for(const [a,b] of SCENES){
+    if(t>=a&&t<b){
+      const p=(t-a)/(b-a);
+      base=0.990+0.044*eio(clamp(p*1.12,0,1));
+      break;
+    }
+  }
+  return base+imp(t)*0.016;
+}
+/* momen impact: shake + flash */
+const IMPACTS=[[0.30,0.55],[4.0,0.35],[15.4,0.22],[17.2,0.22],[28.0,0.5],[36.9,0.45],[38.4,0.4],[46.3,0.3]];
+/* chromatic split pada teks besar saat impact */
+function chroma(el,t,ts,amp=3,base='0 10px 60px rgba(167,139,250,.45)'){
+  const d=t-ts;
+  if(d<0||d>0.4){el.style.textShadow=base;return;}
+  const k=((1-d/0.4)*amp).toFixed(2);
+  el.style.textShadow=`${k}px 0 rgba(255,80,80,.75), -${k}px 0 rgba(80,220,255,.75), ${base}`;
+}
+/* burst partikel: 3 grup pool, round-robin */
+const bEl=document.getElementById('bursts');
+const BP=[];
+for(let g=0;g<3;g++){
+  const grp=[];
+  for(let i=0;i<14;i++){
+    const s=document.createElement('div');
+    s.className='burstp';
+    bEl.appendChild(s);
+    grp.push(s);
+  }
+  BP.push(grp);
+}
+function runBursts(t){
+  for(let e=0;e<BURST_EV.length;e++){
+    const ev=BURST_EV[e];
+    const age=t-ev.t;
+    const grp=BP[e%3];
+    if(age>=0&&age<0.6){
+      const p=age/0.6;
+      const rad=ev.spd*(0.30+0.70*eoc(p));
+      grp.forEach((s,i)=>{
+        const ang=(i/14)*6.283+ev.t*3.1;
+        const dx=Math.cos(ang+i*0.35)*rad;
+        const dy=Math.sin(ang*1.6+i*0.5)*rad*0.85;
+        s.style.background=ev.col;
+        s.style.boxShadow=`0 0 10px ${ev.col}`;
+        s.style.opacity=String(((1-p)*0.85).toFixed(3));
+        s.style.transform=`translate(${(ev.x+dx).toFixed(1)}px,${(ev.y+dy).toFixed(1)}px) scale(${(1-p*0.55).toFixed(2)})`;
+      });
+    } else {
+      grp.forEach(s=>{if(s.style.opacity!=='0')s.style.opacity='0';});
+    }
+  }
+}
+
+/* ---------- event visual ---------- */
+const EQCX=W/2, EQCY=L.eqY+L.eqSize*0.55;
+const QCX=L.qX+L.qSize*0.3, QCY=L.qY+L.qSize*0.55;
+const CARD2CY=L.cardY+CH2*0.46;
+const BOXCY=L.eqboxY+L.eqboxH/2;
+const BIG7CY=L.bigY+BH3/2;
+const URLCY=L.cardY2+L.urlY+L.urlSize*0.55;
+const BURST_EV=[
+  {t:0.30, x:EQCX, y:EQCY, col:'#7DD3FC', spd:ORIENT==='portrait'?200:230},
+  {t:4.0,  x:QCX,  y:QCY,  col:'#F87171', spd:150},
+  {t:15.4, x:W/2,  y:CARD2CY, col:'#FB923C', spd:170},
+  {t:17.2, x:W/2,  y:CARD2CY, col:'#7DD3FC', spd:170},
+  {t:28.0, x:W/2,  y:BOXCY, col:'#FBBF24', spd:220},
+  {t:36.9, x:RCX,  y:RCY,  col:'#FBBF24', spd:210},
+  {t:46.3, x:W/2,  y:URLCY, col:'#22D3EE', spd:190}
+];
+
+/* timeline video 05 */
+const SWAPS3=[24.4,26.2,28.0];
+function stageIdx(t){
+  let i=0;
+  for(const s of SWAPS3){ if(t>=s) i++; }
+  return i;
+}
+const STAGE_TXT=[
+  {t:'PUNGGUNG 10', col:'#7DD3FC', sz:0},
+  {t:'ISINYA 10 ORANG?', col:'#F87171', sz:0},
+  {t:'RUMAH NO. 25', col:'#34D399', sz:0},
+  {t:'CUMA PENANDA.', col:'', sz:1}
+];
+
+/* ---------- RENDER PER FRAME ---------- */
+function renderFrame(t){
+  /* ambience */
+  blobC.style.transform=`translate(${Math.sin(t*0.13)*70}px,${Math.cos(t*0.09)*54}px)`;
+  blobV.style.transform=`translate(${Math.cos(t*0.11)*64}px,${Math.sin(t*0.14)*46}px)`;
+  blobA.style.transform=`translate(${Math.sin(t*0.07)*40}px,${Math.cos(t*0.12)*36}px)`;
+  grid.style.backgroundPosition=`${(t*5)%80}px ${(t*3)%80}px`;
+
+  /* kamera: push pelan + napas + shake impact */
+  const cs=camScale(t), im=imp(t);
+  const shx=Math.sin(t*47)*7*im, shy=Math.sin(t*39+1.7)*5*im;
+  world.style.transform=`translate(${shx.toFixed(2)}px,${(shy+Math.sin(t*0.35)*6).toFixed(2)}px) scale(${cs.toFixed(4)})`;
+
+  const zone=0.26+0.26*(smz(t,0,5.2)+smz(t,31.6,42.2));
+  for(let i=0;i<NP;i++){
+    const p=P[i];
+    const yy=((p.y0 - t*p.sp)%(H+140)+H+140)%(H+140)-70;
+    p.el.style.transform=`translate(${(p.x+Math.sin(t*p.wf+p.ph)*26).toFixed(1)}px,${yy.toFixed(1)}px)`;
+    p.el.style.opacity=(p.o*zone*(0.75+0.25*Math.sin(t*1.3+p.ph))).toFixed(3);
+  }
+  grain.style.backgroundPosition=`${(t*120)%180}px ${(t*89)%180}px`;
+
+  /* S0 HOOK 0.0-5.2 */
+  const s0=document.getElementById('s0');
+  sceneVis(s0,t,0.18,4.6);
+  popA(hEq,t,0.30,0.75,50,1.45,1.4);
+  chroma(hEqT,t,0.30,4);
+  hQ.style.opacity=String(backOS(seg(t,4.0,0.45),2.0));
+  hQ.style.transform=`translateY(${((1-backOS(seg(t,4.0,0.45),2.0))*30).toFixed(2)}px)`;
+  fadeUp(hKamb,t,0.95,0.55,18);
+  H0T.forEach((el,i)=>{
+    popA(el,t,1.0+i*0.18,0.62,40,0.84,1.7);
+    sweepAny(SWEEPS0[i],t,[1.55+i*0.18]);
+  });
+  followUp(hS1,t,1.70);
+  followUp(hS1E,t,1.85);
+  followUp(hS2,t,2.90,0.72,26);
+  followUp(hS2E,t,3.05);
+
+  /* S1 5.2-12.4 */
+  const s1=document.getElementById('s1');
+  sceneVis(s1,t,5.25,11.8);
+  wipeChip(aChipT,t,5.35);
+  aChip.style.opacity=String(clamp(seg(t,5.35,0.3)*2,0,1));
+  aChip.style.transform=`translateY(${((1-eoc(seg(t,5.35,0.5)))*14).toFixed(2)}px)`;
+  followUp(aChipE,t,5.55);
+  headIn(aHead,t,5.85);
+  kinetic(document.getElementById('a_head_k'),t,6.15);
+  followUp(aHeadE,t,6.05);
+  DTILES.forEach((el,i)=>{
+    popA(el,t,6.5+i*0.07,0.5,26,0.8,2.0);
+    if(i===7)sweepAny(DSWEEP,t,[7.45]);
+  });
+  fadeUp(aDl,t,7.9,0.5,14);
+  followUp(aDlE,t,8.05);
+  followUp(aL1,t,8.9);
+  followUp(aL1E,t,9.05);
+  followUp(aL2,t,9.9);
+  followUp(aL2E,t,10.05);
+
+  /* S2 12.4-22.0 */
+  const s2=document.getElementById('s2');
+  sceneVis(s2,t,12.45,21.35);
+  wipeChip(bChipT,t,12.55);
+  bChip.style.opacity=String(clamp(seg(t,12.55,0.3)*2,0,1));
+  bChip.style.transform=`translateY(${((1-eoc(seg(t,12.55,0.5)))*14).toFixed(2)}px)`;
+  followUp(bChipE,t,12.75);
+  headIn(bDef,t,13.0,0.03);
+  kinetic(document.getElementById('b_def_k'),t,13.3);
+  followUp(bDefE,t,13.2);
+  popA(bCard,t,13.9,0.7,44,0.88,1.6);
+  const sw2=imp(t)*0.06;
+  bCard.style.transform+=' scaleY('+(1-sw2).toFixed(3)+')';
+  const st2=t<15.4?0:(t<17.2?1:2);
+  const it2=ITEMS2[st2];
+  D7.forEach((el,i)=>{
+    const p=backOS(seg(t,14.2+i*0.1,0.5),1.8)*(1+0.22*imp(t));
+    el.style.opacity=String(clamp(backOS(seg(t,14.2+i*0.1,0.5),1.8),0,1));
+    el.style.transform=`scale(${clamp(p,0,1.3).toFixed(3)})`;
+    el.style.background=it2.bg;
+    if(it2.book){el.style.borderRadius='6px';el.style.borderLeft='4px solid rgba(255,255,255,.45)';}
+    else{el.style.borderRadius='50%';el.style.border='1px solid rgba(255,255,255,.35)';}
+  });
+  bLab.textContent=it2.lab;
+  bLab.style.color=it2.col;
+  bLabE.textContent=it2.en;
+  const lp=eoe(seg(t,15.0,0.5));
+  bLab.style.opacity=String(lp);
+  bLab.style.transform=`translateY(${((1-lp)*16).toFixed(2)}px) scale(${(1+0.35*imp(t)).toFixed(3)})`;
+  const lpe=eoe(seg(t,15.15,0.5));
+  bLabE.style.opacity=String(lpe*0.95);
+  bLabE.style.transform=`translateY(${((1-lpe)*12).toFixed(2)}px)`;
+  sweepAny(bCardSw,t,[14.0,15.6,17.4]);
+  headIn(bPunch,t,18.3,0.02);
+  kinetic(bPunch.querySelector('.grad'),t,18.65);
+  followUp(bPunchE,t,18.5);
+  fadeUp(bHl,t,20.3,0.55,18);
+  followUp(bHlE,t,20.45);
+
+  /* S3 22.0-31.6 */
+  const s3=document.getElementById('s3');
+  sceneVis(s3,t,22.05,30.95);
+  wipeChip(cChipT,t,22.15);
+  cChip.style.opacity=String(clamp(seg(t,22.15,0.3)*2,0,1));
+  cChip.style.transform=`translateY(${((1-eoc(seg(t,22.15,0.5)))*14).toFixed(2)}px)`;
+  followUp(cChipE,t,22.35);
+  popA(cBox,t,22.5,0.7,34,0.9,1.6);
+  const st=stageIdx(t);
+  const m=STAGE_TXT[st];
+  cMorph.textContent=m.t;
+  cMorph.className='center mono';
+  cMorph.style.color=m.col||'';
+  cMorph.classList.toggle('grad',st===3);
+  cMorph.style.fontSize=(m.sz?L.eqSize3:L.eqSize2)+'px';
+  /* anticipation: remas sebelum swap, overshoot saat mendarat */
+  let mo=1, mty=0, msx=1, msy=1;
+  for(const s of SWAPS3){
+    const pre=s-t;
+    if(pre>0&&pre<=0.12){
+      const q=1-pre/0.12;
+      mty=-9*q; msy=1-0.07*q; msx=1+0.04*q;
+    }
+    const d=t-s;
+    if(d>=0&&d<0.36){
+      const e=backOS(d/0.36,2.0);
+      mo=clamp((d/0.36)*2.4,0,1);
+      msy=e; msx=e*1.02;
+    }
+  }
+  if(st===3){
+    const gp=seg(t,28.36,0.5);
+    msx=Math.max(msx,1+0.05*(1-gp)*0); 
+    msy=Math.max(msy,backOS(gp,1.4)*1.0);
+  }
+  cMorph.style.opacity=String(mo);
+  cMorph.style.transform=`translateY(${mty.toFixed(2)}px) scale(${msx.toFixed(3)},${msy.toFixed(3)})`;
+  const glowC=st===1?'rgba(248,113,113,':st===3?'rgba(251,191,36,':'rgba(34,211,238,';
+  cBox.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(34+22*Math.sin(t*3.2)).toFixed(0)}px ${glowC}${(0.10+0.05*Math.sin(t*3.2)).toFixed(3)})`;
+  if(st!==3){chroma(cMorph,t,SWAPS3[Math.max(st-1,0)],st>0?2.6:0,st==='0'?'none':'0 0 24px rgba(34,211,238,.0)');}
+  const cpo=eoe(seg(t,24.4,0.55))*(1-eoc(seg(t,25.85,0.4)));
+  cCap.style.opacity=String(cpo);
+  cCap.style.transform=`translateY(${(1-eoe(seg(t,24.4,0.55)))*22}px)`;
+  const cpeo=eoe(seg(t,24.56,0.55))*(1-eoc(seg(t,25.85,0.4)));
+  cCapE.style.opacity=String(cpeo*0.95);
+  cCapE.style.transform=`translateY(${(1-eoe(seg(t,24.56,0.55)))*14}px)`;
+  const cp2=eoe(seg(t,26.2,0.55))*(1-eoc(seg(t,27.75,0.4)));
+  cCap2.style.opacity=String(cp2);
+  cCap2.style.transform=`translateY(${(1-eoe(seg(t,26.2,0.55)))*22}px)`;
+  const cp2e=eoe(seg(t,26.36,0.55))*(1-eoc(seg(t,27.75,0.4)));
+  cCap2E.style.opacity=String(cp2e*0.95);
+  cCap2E.style.transform=`translateY(${(1-eoe(seg(t,26.36,0.55)))*14}px)`;
+  headIn(cPunch,t,29.55,0.02);
+  kinetic(cPunch.querySelector('.grad'),t,29.9);
+  followUp(cPunchE,t,29.75);
+
+  /* S4 31.6-42.2 */
+  const s4=document.getElementById('s4');
+  sceneVis(s4,t,31.65,41.55);
+  wipeChip(eChipT,t,31.75);
+  eChip.style.opacity=String(clamp(seg(t,31.75,0.3)*2,0,1));
+  eChip.style.transform=`translateY(${((1-eoc(seg(t,31.75,0.5)))*14).toFixed(2)}px)`;
+  followUp(eChipE,t,31.95);
+  popA(eBig,t,32.3,0.7,40,0.8,1.8);
+  const p7=seg(t,36.9,0.7);
+  eBigT.style.transform=`translateY(-54%) scale(${(1+0.10*backOS(p7,1.6)).toFixed(3)})`;
+  chroma(eBigT,t,36.9,3.5,'0 0 30px rgba(251,191,36,.45)');
+  sweepAny(eBigSw,t,[32.95]);
+  RINGS.forEach((r,i)=>{
+    const p=seg(t,36.9+i*0.18,0.8);
+    r.style.opacity=String((1-p)*0.7);
+    r.style.transform=`scale(${lerp(0.3,2.5,eoc(p)).toFixed(3)})`;
+    r.style.borderWidth=(3*(1-p)+1).toFixed(2)+'px';
+  });
+  C4.forEach((el,i)=>{
+    popA(el,t,33.0+i*0.35,0.55,28,0.85,1.8);
+    const g=imp(t-(0.2+i*0.3))*1.4;
+    el.style.boxShadow=g>0.01
+      ?`0 18px 60px rgba(0,0,0,.45), 0 0 ${(26*g).toFixed(0)}px rgba(251,191,36,${(0.35*g).toFixed(3)})`
+      :'0 18px 60px rgba(0,0,0,.45)';
+  });
+  followUp(eV1,t,34.7);
+  kinetic(document.getElementById('e_v1_k'),t,35.05);
+  followUp(eV1E,t,34.85);
+  popA(eV2,t,38.4,0.75,34,0.82,1.8);
+  followUp(eV2E,t,38.6);
+  fadeUp(eHl,t,40.3,0.55,16);
+  followUp(eHlE,t,40.45);
+
+  /* S5 42.2-52.0 */
+  const s5=document.getElementById('s5');
+  sceneVis(s5,t,42.25,51.9,0.5,0.001);
+  headIn(fQ,t,42.5,0.03);
+  kinetic(document.getElementById('f_q_k'),t,42.85);
+  followUp(fQE,t,42.7);
+  followUp(fC1,t,43.7);
+  followUp(fC1E,t,43.85);
+  followUp(fC2,t,44.6);
+  followUp(fC2E,t,44.75);
+  popA(fCard,t,45.6,0.8,44,0.88,1.5);
+  fCard.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(46+26*Math.sin(t*4)).toFixed(0)}px rgba(34,211,238,${(0.12+0.06*Math.sin(t*4)).toFixed(3)})`;
+  const up=eoe(seg(t,46.3,0.9));
+  const fUrlT=document.getElementById('f_url_t');
+  fUrlT.style.letterSpacing=lerp(0.34,0.06,up)+'em';
+  fUrlT.style.opacity=String(up);
+  chroma(fUrlT,t,46.3,3,'0 12px 70px rgba(34,211,238,.4)');
+  fBar.style.width=(FW*0.68*eoe(seg(t,46.9,0.8)))+'px';
+  const per=[];for(let ts=46.0;ts<51.6;ts+=2.6)per.push(ts);
+  sweepAny(fCardSw,t,per,0.8);
+  fadeUp(fSub,t,47.6,0.6,20);
+  followUp(fSubE,t,47.75);
+  fadeUp(fBrand,t,49.2,0.7,16);
+  fBrand.style.letterSpacing=(0.42+0.16*(1-eoe(seg(t,49.2,0.8)))).toFixed(4)+'em';
+
+  /* burst + flash + fade */
+  runBursts(t);
+  flash.style.opacity=(im*0.16).toFixed(3);
+  fade.style.opacity=(seg(t,51.3,0.7)*0.94).toFixed(3);
+}
+
+function sceneVis(el,t,tIn,tOut,dIn=0.5,dOut=0.45){
+  const a=eoc(seg(t,tIn,dIn));
+  const b=1-eoc(seg(t,tOut,dOut));
+  el.style.opacity=Math.min(a,b);
+  el.style.transform=`translateY(${(1-a)*30-(1-b)*40}px)`;
+}
+
+renderFrame(0);
+window.renderFrame=renderFrame;
+window.__ready=true;
+</script>
+</body>
+</html>

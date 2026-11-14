@@ -166,50 +166,58 @@ while tt < 51.5:
     add(tt, kick(0.14), 0.0)
     tt += 1.2
 
-# ---------- momen kunci ----------
-add(0.30, boom(0.24))                      # hook: "7 7 7" menghantam
-add(0.30, whoosh(0.5, True, 0.05))
-for i, tc in enumerate([1.0, 1.18, 1.36]):  # kartu apel, papan, antrean
+# ---------- momen kunci (v06: satu ide per layar, bab push-pan) ----------
+CUT_TRANSITIONS = [6.0, 14.4, 25.2, 34.8, 43.2]
+add(0.5, boom(0.24))                       # angka 7 pahlawan menghantam
+add(0.5, whoosh(0.5, True, 0.05))
+for i, tc in enumerate([1.0, 1.45, 1.9]):  # kartu apel, papan, antrean
     add(tc, sine([440.0, 523.25, 659.26][i], 0.4, a=0.004, d=0.24, harm=(1.0, 0.4)), 0.0, 0.10)
-add(3.95, whoosh(0.5, True, 0.07))         # tanda tanya merah
-add(4.00, tick(1100, 0.07))
-add(5.85, tick(760, 0.05))                 # head "angka adalah simbol"
+add(3.0, tick(760, 0.045))                 # "satu simbol, tiga wajah"
+add(4.2, tick(520, 0.05))                  # "artinya juga sama?"
+add(4.9, tick(1100, 0.07))                 # tanda tanya merah
+for tw in CUT_TRANSITIONS:                 # push-pan antar bab
+    add(tw, whoosh(0.85, True, 0.12), 0.0)
+add(6.7, tick(900, 0.05))                  # chip BAGIAN 1
+add(7.2, chime(660.0, 0.10))               # kata ANGKA
+add(7.8, tick(760, 0.045))                 # definisi
 for i in range(10):                        # angka 0 sampai 9 berjalan
-    add(6.5 + i * 0.07, tick(900 + i * 55, 0.045))
-add(9.9, tick(520, 0.05))                  # "cuma 0 sampai 9"
-add(13.9, boom(0.08))                      # kartu bilangan mendarat
+    add(8.4 + i * 0.08, tick(900 + i * 55, 0.045))
+add(9.8, tick(520, 0.045))                 # label 0 sampai 9
+add(11.4, boom(0.08))                      # takeaway "cuma lambang"
+add(15.1, tick(900, 0.05))                 # chip BAGIAN 2
+add(15.6, chime(587.33, 0.12))             # kata BILANGAN
+add(16.2, tick(760, 0.045))
+add(16.9, boom(0.08))                      # kartu bilangan mendarat
 for i in range(7):                         # tujuh apel satu per satu
-    add(14.2 + i * 0.1, tick(1000 + i * 90, 0.05))
-for ts in [15.4, 17.2]:                    # ganti jeruk, lalu buku
+    add(17.3 + i * 0.12, tick(1000 + i * 90, 0.05))
+for ts in [18.6, 20.4]:                    # ganti jeruk, lalu buku
     add(ts - 0.05, whoosh(0.35, True, 0.05))
     add(ts, tick(950, 0.07))
-add(18.3, boom(0.10))                      # punch "nilai tetap"
-add(20.3, tick(760, 0.045))                # garis jumlah, ukuran, urutan
-add(22.5, whoosh(0.5, True, 0.06))         # tahap "punggung 10"
-for ts in [24.4, 26.2, 28.0]:              # pergantian tahap
+add(21.9, boom(0.10))                      # takeaway "nilai tetap 7"
+add(25.9, tick(900, 0.05))                 # chip BAGIAN 3
+add(26.4, chime(523.25, 0.12))             # kata NOMOR
+add(27.0, tick(760, 0.045))
+add(27.6, tick(1050, 0.06))                # kotak penanda mendarat
+add(27.6, boom(0.06))
+for ts in [29.0, 30.6, 32.2]:              # pergantian tahap
     add(ts, tick(900, 0.085))
     add(ts + 0.02, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
-add(28.0, boom(0.14))                      # "CUMA PENANDA."
-for tw in [4.6, 11.9, 21.5, 31.0, 41.9]:   # transisi antar adegan
-    add(tw, whoosh(0.85, True, 0.12), 0.0)
-# riser 29.0 - 31.6
-rdur = 2.6
-rn = int(rdur * SR)
-rx = noise_band(rdur, 500, 3600)
-ramp = np.linspace(0, 1, rn) ** 1.6
-add(29.0, rx * ramp, 0.0, 0.10)
-add(32.3, tick(1050, 0.06))                # angka 7 besar mendarat
-add(32.3, boom(0.06))
-for i, tc in enumerate([33.0, 33.35, 33.7]):  # chip apel, papan, nomor
+add(32.2, boom(0.14))                      # "CUMA PENANDA."
+add(33.4, tick(700, 0.045))
+add(35.5, boom(0.06))                      # angka 7 kembali (match cut cerita)
+for i, tc in enumerate([36.7, 36.95, 37.2]):  # tiga chip konteks
     add(tc, tick(1100 + i * 90, 0.045))
-add(36.9, boom(0.08))                      # denyut konteks + cincin
-add(37.3, chime(660.0, 0.08))
-add(38.4, boom(0.22))                      # "Maknanya ikut konteks."
-add(40.3, tick(760, 0.045))                # garis ketelitian
-add(45.6, whoosh(0.6, True, 0.07))
-add(46.3, chime(880.0, 0.13))
-add(46.9, chime(1318.5, 0.07))
-add(51.0, chime(440.0, 0.09))
+for i, ts in enumerate([37.8, 38.8, 39.8]):   # flip jadi makna
+    add(ts - 0.05, whoosh(0.3, True, 0.04))
+    add(ts, tick(1200 + i * 50, 0.06))
+add(41.0, boom(0.10))                      # "makna ikut konteks"
+add(43.9, tick(760, 0.045))                # giliranmu
+add(45.3, boom(0.08))                      # pertanyaan besar
+add(46.8, tick(700, 0.045))
+add(47.8, whoosh(0.6, True, 0.07))
+add(48.7, chime(880.0, 0.13))
+add(49.3, chime(1318.5, 0.07))
+add(50.6, chime(440.0, 0.09))
 
 # ---------- master ----------
 mix = np.stack([mixL, mixR])

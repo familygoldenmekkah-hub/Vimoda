@@ -1,11 +1,15 @@
-Perhatikan deh: ada 7 apel di atas meja, angka 7 ditulis di papan, terus kamu dapet nomor antrean 7. Simbolnya sama semua, tapi fungsinya beda, lho.
+Coba perhatikan: ada 7 apel di atas meja, angka 7 di papan tulis, dan nomor antrean 7 di tanganmu. Simbolnya sama semua. Tapi artinya juga sama?
 
-Angka itu simbol: lambang buat nulis bilangan. Di sistem desimal cuma ada sepuluh, 0 sampai 9. Bilangan itu konsep nilainya: ada 7 apel, ganti jadi 7 jeruk atau 7 buku pun, nilai tujuhnya tetap tujuh. Dipakai buat jumlah, ukuran, sampai urutan. Nah, nomor beda lagi: dia penanda, bukan jumlah. Kaos punggung 10 isinya tetap satu orang, dan rumah nomor 25 bukan berisi 25 benda.
+Angka itu simbol: lambang buat menulis bilangan. Di sistem desimal cuma ada sepuluh, 0 sampai 9. Angka sendiri belum berarti jumlah.
 
-Jadi simbol yang sama bisa bermakna beda, tergantung konteks pemakaiannya. Di sinilah ketelitian penting: bukan cuma hasil hitungnya benar, tapi kita juga paham apa yang sedang dihitung.
+Bilangan baru konsep jumlah atau nilainya. Ada 7 apel, ganti jadi 7 jeruk atau 7 buku, nilai tujuhnya tetap tujuh.
+
+Nah, nomor beda lagi: dia penanda, bukan jumlah. Kaos punggung 10 isinya tetap satu orang, dan rumah nomor 25 bukan berisi 25 benda.
+
+Jadi simbol yang sama bisa bermakna beda, tergantung konteksnya. Simbolnya sama, maknanya ikut konteks.
 
 Sekarang uji: pemain bernomor punggung 7. Menurutmu 7 itu jumlah pemain, nilai matematika, atau identitas? Ceritain alasannya di komentar, ya.
 
 Buka browser kamu dan mampir ke AKIOMIDA.COM buat petualangan matematika yang makin seru.
 
-#matematika #bilangan #angka #nomor #edukasi #belajarmatematika #akiomida
+#matematika #angka #bilangan #nomor #edukasi #belajarmatematika #akiomida
