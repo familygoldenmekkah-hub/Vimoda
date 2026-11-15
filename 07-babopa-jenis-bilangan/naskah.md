@@ -1,4 +1,4 @@
-# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 4)
+# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 5, rombak total ala modeling)
 
 - Durasi: 52 detik | FPS: 30 | Musik & SFX: prosedural orisinal
 - Sumber materi: yuyanaka.blogspot.com/2026/11/babopa.html (artikel "Babopa", 14 Nov 2026)
@@ -25,6 +25,17 @@
 1. AKSI MENTOR KINI MEMPERAGAKAN MATERI, BUKAN REAKSI GENERIK: menggigil saat kartu -5 derajat (1.05), memangkuk jadi setengah tinggi saat kartu 1/2 (1.50), melebar sambil berputar satu putaran penuh saat kartu pi (1.95), memantul LIMA KALI menghitung lima buku (7.95), tenggelam melewati garis nol saat kelompok BULAT/negatif (17.60), berputar dua putaran tanpa henti saat IRASIONAL (23.15), dan TERBELAH DUA lalu menyatu menjadi satu bola penuh saat persamaan 1/2+1/2=1 (38.50-39.70) dengan kilat di titik menyatu.
 2. BUBBLE TOPIK-SPESIFIK: "dingin!" dipertahankan; "lengkap!" diganti "lima kelompok!" (21.30); "aman." diganti "jadi 1!" (40.40) yang merayakan hasil persamaan. Ucapan bubble wajib lahir dari materi, bukan template antar video.
 3. DESAIN UNTUK MATA MINUS: seluruh teks kunci dibesarkan (subtitle 30 ke 36 px, angka situasi 44 ke 50, angka kelompok 26 ke 30, label kelompok 17 ke 20, persamaan 54 ke 62, bubble 24 ke 30, judul 104 ke 112, dan seterusnya) dengan lebar kartu menyesuaikan agar tidak ada yang terpotong.
+
+## Rombak total revisi 5 (mandat kreator: benar-benar meniru modeling 60719beb, bukan sebatas aksi)
+
+Video dibangun ulang meniru DNA modeling secara utuh. Struktur lama (kartu-kartu kecil di atas panggung mini) diganti dunia cerita pixel layar penuh.
+
+1. DUNIA PIXEL LAYAR PENUH: langit malam biru tua berbintang, rumput hijau terang di atas tanah cokelat bergaris diagonal, papan kayu bersambung sebagai hiasan, dan barisan blok emas raksasa bertuliskan digit (1, 2, 3, 0, 5, 1/2, pi, -5 derajat, 7) mengisi dunia, ala game pixel pada modeling.
+2. TEKS BESAR NYAMAN: subtitle Indonesia 54 px (portrait) di atas pil hitam, boleh dua baris, Inggris 26 px di bawahnya; judul bab raksasa 110 px emas atau putih dengan bayangan tebal (1, 2, 3 SAJA?, EMPAT SITUASI, LIMA KELOMPOK, KELUARGA BILANGAN, ATURAN SATU, PILIH SATU?); nama tokoh di atas kepala ala game.
+3. TOKOH BERNAMA BERAKSI: bulatan emas diberi nama BABOPA; lima kelompok bilangan tampil sebagai tokoh ubin bernama (ASLI, CACAH, BULAT, RASIONAL, IRASIONAL) berdiri di rumput seperti para tokoh modeling.
+4. PANEL GELAP ALA UI GAME: pesan chat "BABOPA: dingin! / lima kelompok! / jadi 1!" dengan kepala hijau; panel ANGGOTA KELUARGA bergaya leaderboard berisi lima baris yang muncul satu per satu; panel persamaan 1/2 + 1/2 = 1; panel toko CTA dengan AKIOMIDA.COM gradien dan pil emas TULIS DI KOMEN.
+5. SATU IDE PER LAYAR: tiap bab hanya satu elemen konten besar; kartu teaser dan tokoh kelompok pergi saat bab berganti (dunia terus teredit seperti modeling); aksi mentor dari revisi 4 dipertahankan (menghitung memantul, tenggelam di garis nol, berputar saat pi, terbelah-dua saat 1/2+1/2=1).
+6. Narasi 16 beat, caption, dan audio tidak berubah.
 
 ## Desain (mewarisi standar video 06 revisi 5)
 
