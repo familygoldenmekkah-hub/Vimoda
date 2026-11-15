@@ -131,7 +131,9 @@ html,body{background:#000;overflow:hidden;}
       <div id="plat"></div>
       <div id="sheepA"></div>
       <div id="sheepB"></div>
-      <div id="shep"></div>
+      <div id="ballsh"></div>
+      <div id="ball"></div>
+      <div id="spark"></div>
       <div class="bubble center" id="bub" style="opacity:0;"></div>
     </div>
 
@@ -165,7 +167,7 @@ const P = ORIENT==='portrait' ? {
   qX:680, qY:250, qSize:110,
   cardY:520, cardH:210, cardW:288, cardGap:20,
   cardGSize:52, cardLab:20, cardEn:12,
-  platX:100, platW:520, groundY:1230, shepX:150, sheepX:470, sheepX2:560, bubX:118, bubY:1006,
+  platX:100, platW:520, groundY:1230, ballX:[170,215,170,255,200,240], sheepX:470, sheepX2:560, bubY:1006,
   chapY:200, chapSize:22,
   wordY:300, wordSize:88,
   cardY1:560, cardH1:310, cardW1:680,
@@ -179,14 +181,14 @@ const P = ORIENT==='portrait' ? {
   eqY:570, eqH:150, eqW:560, eqStar:70, eqTSize:54, eqLabY:762, eqLabSize:22,
   cardY2:380, card2H2:360, cardW2:900,
   openY:96, openEY:134, openESize:13, urlY:190, urlSize:84, barY:300,
-  subbarY:1300, subbarH:128, subIdSize:34, subEnSize:21, subbarMX:40
+  subbarY:1300, subbarH:128, subIdSize:32, subEnSize:21, subbarMX:130
 } : {
   mx:200, wmY:56, wmSize:18,
   h1Y:130, h1Size:170, h1BoxW:160, h1BoxH:210,
   qX:1160, qY:150, qSize:110,
   cardY:420, cardH:210, cardW:310, cardGap:30,
   cardGSize:52, cardLab:20, cardEn:12,
-  platX:240, platW:420, groundY:828, shepX:290, sheepX:520, sheepX2:590, bubX:258, bubY:620,
+  platX:240, platW:420, groundY:828, ballX:[300,350,300,360,320,360], sheepX:520, sheepX2:590, bubY:690,
   chapY:130, chapSize:22,
   wordY:228, wordSize:86,
   cardY1:470, cardH1:310, cardW1:760,
@@ -266,31 +268,43 @@ function pxBlock(parent,x,y,w,h,c,extra){
 function buildSheep(host,x,s){
   const el=document.createElement('div');
   el.style.cssText=`position:absolute;left:${x}px;top:${P.groundY}px;transform:scale(${s});transform-origin:0 100%;will-change:transform,opacity;opacity:0;`;
-  pxBlock(el,6,-18,8,18,'#1F2937');
-  pxBlock(el,30,-18,8,18,'#1F2937');
-  pxBlock(el,0,-40,44,24,'#F1F5F9');
-  pxBlock(el,6,-46,32,10,'#F8FAFC');
-  pxBlock(el,38,-52,16,16,'#334155');
-  pxBlock(el,46,-46,4,4,'#F8FAFC');
+  pxBlock(el,8,-14,9,14,'#334155','border-radius:4px;');
+  pxBlock(el,29,-14,9,14,'#334155','border-radius:4px;');
+  pxBlock(el,0,-38,46,26,'#F1F5F9','border-radius:46%;');
+  pxBlock(el,7,-44,30,11,'#F8FAFC','border-radius:46%;');
+  pxBlock(el,36,-50,17,17,'#334155','border-radius:50%;');
+  pxBlock(el,46,-42,4,4,'#94A3B8','border-radius:50%;');
   host.appendChild(el);
   return el;
 }
-function buildShepherd(host,x){
+/* karakter kita: bulatan emas tanpa wajah tanpa mata - unik, lucu, gemoy */
+function buildGoldBall(host,x){
   const el=document.createElement('div');
-  el.style.cssText=`position:absolute;left:${x}px;top:${P.groundY}px;will-change:transform;opacity:0;`;
-  pxBlock(el,26,-26,14,26,'#3A2A1E');
-  pxBlock(el,56,-26,14,26,'#3A2A1E');
-  pxBlock(el,18,-72,60,48,'#3B82F6');
-  pxBlock(el,18,-72,60,10,'#2563EB');
-  const armL=pxBlock(el,6,-70,12,40,'#3574C9','transform-origin:50% 0%;');
-  const armR=pxBlock(el,78,-70,12,40,'#3574C9','transform-origin:50% 0%;');
-  pxBlock(el,22,-116,52,44,'#E8B98A');
-  pxBlock(el,18,-120,60,14,'#5B3A1E');
-  const eyeL=pxBlock(el,34,-98,8,10,'#1F2937');
-  const eyeR=pxBlock(el,54,-98,8,10,'#1F2937');
-  const sweat=pxBlock(el,84,-112,10,14,'#7DD3FC','border-radius:0 0 60% 60%;opacity:0;');
+  el.style.cssText=`position:absolute;left:${x}px;top:${P.groundY}px;width:88px;height:88px;margin-left:-44px;transform-origin:50% 100%;will-change:transform,opacity,left;opacity:0;`;
+  const core=document.createElement('div');
+  core.style.cssText='position:absolute;left:0;top:-88px;width:88px;height:88px;border-radius:50%;background:radial-gradient(circle at 33% 27%, #FFF3C4 0%, #FCD34D 34%, #F59E0B 68%, #B45309 100%);box-shadow:inset -6px -10px 18px rgba(120,53,15,.35), 0 0 44px rgba(251,191,36,.28);';
+  el.appendChild(core);
+  const shine=document.createElement('div');
+  shine.style.cssText='position:absolute;left:16px;top:-78px;width:28px;height:16px;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px);transform:rotate(-24deg);';
+  el.appendChild(shine);
+  const sweat=document.createElement('div');
+  sweat.style.cssText='position:absolute;left:66px;top:-100px;width:11px;height:15px;background:#7DD3FC;border-radius:2px 2px 60% 60%;opacity:0;will-change:transform,opacity;';
+  el.appendChild(sweat);
   host.appendChild(el);
-  return {el,armL,armR,eyeL,eyeR,sweat};
+  return {el,core,shine,sweat};
+}
+function buildShadow(host,x){
+  const el=document.createElement('div');
+  el.style.cssText=`position:absolute;left:${x}px;top:${P.groundY-7}px;width:78px;height:15px;margin-left:-39px;border-radius:50%;background:radial-gradient(ellipse at center, rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 72%);filter:blur(2px);opacity:0;will-change:transform,opacity,margin-left;`;
+  host.appendChild(el);
+  return el;
+}
+function buildSpark(host){
+  const el=document.createElement('div');
+  el.className='starclip';
+  el.style.cssText=`position:absolute;left:0;top:0;width:30px;height:30px;opacity:0;will-change:transform,opacity;filter:drop-shadow(0 0 12px rgba(253,230,138,.8));`;
+  host.appendChild(el);
+  return el;
 }
 function buildPlatform(host){
   const el=document.createElement('div');
@@ -300,15 +314,37 @@ function buildPlatform(host){
   pxBlock(el,40,12,18,10,'#5A3E23');
   pxBlock(el,140,12,24,10,'#5A3E23');
   pxBlock(el,250,12,18,10,'#5A3E23');
+  /* rumput hias bergoyang + bunga pixel */
+  const deco=[];
+  const tuft=(x,y)=>{
+    const g=document.createElement('div');
+    g.style.cssText=`position:absolute;left:${x}px;top:${y}px;width:16px;height:14px;transform-origin:50% 100%;will-change:transform;`;
+    pxBlock(g,2,3,3,11,'#22C55E','border-radius:2px;');
+    pxBlock(g,7,0,3,14,'#16A34A','border-radius:2px;');
+    pxBlock(g,12,4,3,10,'#22C55E','border-radius:2px;');
+    el.appendChild(g);
+    deco.push({el:g, ph:deco.length*1.7});
+  };
+  tuft(66,-12); tuft(310,-12); tuft(452,-12);
+  const fl=document.createElement('div');
+  fl.style.cssText=`position:absolute;left:196px;top:-24px;width:12px;height:24px;transform-origin:50% 100%;will-change:transform;`;
+  pxBlock(fl,4,10,3,14,'#16A34A','border-radius:2px;');
+  pxBlock(fl,1,2,9,9,'#F472B6','border-radius:3px;');
+  pxBlock(fl,4,5,3,3,'#FDE68A','border-radius:50%;');
+  el.appendChild(fl);
+  deco.push({el:fl, ph:2.6});
   host.appendChild(el);
-  return el;
+  return {el, deco};
 }
-const shep=buildShepherd(document.getElementById('shep'),P.shepX);
+const BALL_XS=P.ballX;
+const ball=buildGoldBall(document.getElementById('ball'),BALL_XS[0]);
+const ballsh=buildShadow(document.getElementById('ballsh'),BALL_XS[0]);
+const spark=buildSpark(document.getElementById('spark'));
 const sheep1=buildSheep(document.getElementById('sheepA'),P.sheepX,0.85);
 const sheep2=buildSheep(document.getElementById('sheepB'),P.sheepX2,0.7);
 const plat=buildPlatform(document.getElementById('plat'));
 const bub=document.getElementById('bub');
-bub.style.left=P.bubX+'px';bub.style.top=P.bubY+'px';
+bub.style.left=(BALL_XS[0]+26)+'px';bub.style.top=P.bubY+'px';
 bub.style.fontSize=(ORIENT==='portrait'?24:22)+'px';
 bub.style.padding='10px 22px';
 /* skala dunia pixel: jangkar di garis tanah agar tokoh terasa hadir */
@@ -334,12 +370,12 @@ const SUBS=[
   [2.6,'Dan siapa yang menentukan bentuk angka 7?','And who decided the shape of 7?','#FFFFFF'],
   [6.7,'Dulu, manusia mencatat jumlah dengan goresan.','Long ago, people counted with marks.','#FFFFFF'],
   [9.6,'Coba bayangkan mencatat 347 satu per satu.','Imagine writing 347 marks, one by one.','#FFFFFF'],
-  [11.5,'Semakin besar jumlah, semakin rumit tulisannya.','The bigger the count, the messier the writing.','#FBBF24'],
+  [11.5,'Makin besar jumlah, makin rumit tulisannya.','The bigger the count, the messier the writing.','#FBBF24'],
   [14.5,'Solusinya: desimal, sepuluh simbol 0 sampai 9.','The fix: decimal, ten symbols 0 to 9.','#FFFFFF'],
-  [19.3,'Angka 5 tetap lima, jadi 50 dan 500 di posisi lain.','The 5 stays five, becoming 50 and 500 by position.','#FFFFFF'],
+  [19.3,'5 tetap lima, jadi 50 dan 500 di posisi lain.','The 5 stays five, becoming 50 and 500 by position.','#FFFFFF'],
   [22.9,'Simbolnya sama, posisi yang mengubah nilai.','Same symbol, position changes the value.','#FBBF24'],
   [25.3,'Simbol bukan bilangan: 7, VII, atau tujuh.','The symbol is not the number: 7, VII, or seven.','#FFFFFF'],
-  [32.3,'Bentuknya beda, nilai yang dimaksud tetap sama.','Different form, same intended value.','#FBBF24'],
+  [32.3,'Bentuk beda, nilai yang dimaksud tetap sama.','Different form, same intended value.','#FBBF24'],
   [34.9,'Bahkan boleh ganti 7 jadi lambang bintang.','You can even replace 7 with a star.','#FFFFFF'],
   [38.3,'Tetap mewakili tujuh: bintang + 2 tetap 9.','Still standing for seven: star + 2 is still 9.','#FFFFFF'],
   [43.3,'Kalau seluruh manusia sepakat 7 + 2 jadi 10?','If all humans agreed 7 + 2 becomes 10?','#FFFFFF'],
@@ -700,6 +736,9 @@ const STAGE_TXT=[
 ];
 const STAGE_LAB=['ANGKA','ANGKA ROMAWI','KATA','NILAI: TUJUH'];
 const BUBS=[[10.5,11.9,'lelah hitung...'],[21.3,22.7,'rapi!'],[40.4,41.8,'aman.']];
+const SCENE_T=[6.0,14.4,25.2,34.8,43.2];
+const HOPS=[[0.7,26],[6.4,18],[10.5,24],[14.9,18],[21.0,30],[22.9,16],[25.7,18],[32.2,22],[35.3,18],[40.2,20],[43.7,18],[48.7,32]];
+const SPARKS=[[21.0,22.2],[48.6,51.4]];
 
 /* ---------- RENDER PER FRAME ---------- */
 function renderFrame(t){
@@ -722,39 +761,63 @@ function renderFrame(t){
 
   renderSub(t);
 
-  /* panggung pixel: tokoh tetap hadir sepanjang video */
-  popA(plat,t,0.3,0.6,24,0.9,1.6);
-  popA(shep.el,t,0.8,0.7,30,0.9,1.6);
+  /* panggung pixel: bulatan emas + domba tetap hadir sepanjang video */
+  popA(plat.el,t,0.3,0.6,24,0.9,1.6);
+  plat.deco.forEach(d=>{ d.el.style.transform=`rotate(${(Math.sin(t*1.7+d.ph)*6).toFixed(2)}deg)`; });
   popA(sheep1,t,1.6,0.6,20,0.8,1.8);
   popA(sheep2,t,2.0,0.6,20,0.8,1.8);
   const sheepFade=1-seg(t,14.0,0.4);
   sheep1.style.opacity=String(parseFloat(sheep1.style.opacity||'0')*sheepFade);
   sheep2.style.opacity=String(parseFloat(sheep2.style.opacity||'0')*sheepFade);
-  const bob=Math.floor((t*3)%2)*-4;
-  const blink=(t%4.7)<0.12?0:1;
-  shep.eyeL.style.opacity=String(blink);
-  shep.eyeR.style.opacity=String(blink);
-  let slY=0, slR=0, aL=0, aR=0;
-  if(t>=8.4&&t<10.2) aR=-40+Math.sin(t*10)*30;
-  if(t>=10.2&&t<14.4){ slY=8; slR=-7; }
-  if(t>=14.4&&t<15.2){ const r=eio(seg(t,14.4,0.8)); slY=8*(1-r); slR=-7*(1-r); }
-  let hopY=0;
-  for(const hs of [20.1,21.0]){
-    const d=t-hs;
-    if(d>=0&&d<0.6) hopY=-26*Math.exp(-d*7)*Math.sin(d*18);
+  /* bulatan emas: menggelinding antar bab, napas squash-stretch, lompat di beat */
+  let sidx=0;
+  for(let k=0;k<SCENE_T.length;k++){ if(t>=SCENE_T[k]) sidx=k; }
+  let bx=BALL_XS[0];
+  if(sidx>0){
+    bx=lerp(BALL_XS[sidx-1],BALL_XS[sidx],eio(seg(t,SCENE_T[sidx]+0.25,0.9)));
   }
-  if(t>=38.2&&t<39.6){ const e=eoe(seg(t,38.2,0.3)); aL=22*e; aR=-22*e; }
-  if(t>=48.7) aR=-75*eoe(seg(t,48.7,0.4));
-  shep.el.style.transform=`translateY(${(bob+slY+hopY).toFixed(1)}px) rotate(${slR.toFixed(1)}deg)`;
-  shep.armL.style.transform=`rotate(${aL.toFixed(1)}deg)`;
-  shep.armR.style.transform=`rotate(${aR.toFixed(1)}deg)`;
+  const ep=seg(t,0.6,0.55), ef=eoe(ep);
+  const lq=Math.exp(-Math.pow((ep-0.94)/0.05,2));
+  const brs=Math.sin(t*9.4)*0.035;
+  let hy=0, hsq=0;
+  for(const [hs,hh] of HOPS){
+    const d=t-hs;
+    if(d>=0&&d<0.8){
+      const p=d/0.8;
+      hy-=hh*4*p*(1-p);
+      hsq+=0.16*Math.sin(p*Math.PI)-(p<0.14?(1-p/0.14)*0.12:0)-(p>0.82?((p-0.82)/0.18)*0.16:0);
+    }
+  }
+  let sway=0;
+  if(t>=11.5&&t<14.2) sway=Math.sin((t-11.5)*2.2)*7;
+  const wig=Math.sin(t*16)*6*seg(t,48.7,0.3);
+  const sy2=1+brs+hsq-lq*0.16, sx2=1-(brs+hsq)*0.75+lq*0.10;
+  ball.el.style.left=(bx+sway).toFixed(1)+'px';
+  ball.el.style.opacity=String(clamp(ep*3,0,1));
+  ball.el.style.transform=`translateY(${((1-ef)*-250+hy).toFixed(1)}px) rotate(${wig.toFixed(2)}deg) scale(${sx2.toFixed(3)},${sy2.toFixed(3)})`;
+  ballsh.style.left=bx.toFixed(1)+'px';
+  ballsh.style.opacity=String(clamp(ep*3,0,1)*clamp(0.42+hy*0.006,0.18,0.5));
+  ballsh.style.transform=`scaleX(${clamp(1+hy*0.004,0.8,1.08).toFixed(3)})`;
   const sweatOn=(t>=10.2&&t<12.2)?1:0;
-  shep.sweat.style.opacity=String(sweatOn*0.9);
-  shep.sweat.style.transform=`translateY(${(sweatOn?((t-10.2)*14)%26:0).toFixed(1)}px)`;
+  ball.sweat.style.opacity=String(sweatOn*0.9);
+  ball.sweat.style.transform=`translateY(${(sweatOn?((t-10.2)*16)%24:0).toFixed(1)}px)`;
+  let spo=0;
+  for(const [sa,sb] of SPARKS){
+    if(t>=sa&&t<sb) spo=smz(t,sa,sb,0.35)*(0.65+0.35*Math.sin(t*11));
+  }
+  spark.style.opacity=String(clamp(spo,0,1));
+  spark.style.left=(bx+36).toFixed(1)+'px';
+  spark.style.top=(P.groundY-152+Math.sin(t*3)*6).toFixed(1)+'px';
+  spark.style.transform=`rotate(${((t*40)%360).toFixed(0)}deg) scale(${(0.8+0.25*Math.sin(t*9)).toFixed(3)})`;
+  let sh1=0, sh2=0;
+  const sd=t-3.6; if(sd>=0&&sd<0.6) sh1=-56*(sd/0.6)*(1-sd/0.6);
+  const sd2=t-8.6; if(sd2>=0&&sd2<0.6) sh2=-56*(sd2/0.6)*(1-sd2/0.6);
   const bob1=Math.floor((t*2.6)%2)*-3;
-  sheep1.style.transform=`scale(0.85) translateY(${bob1}px)`;
+  sheep1.style.transform=`scale(0.85) translateY(${(bob1+sh1).toFixed(1)}px)`;
   const bob2=Math.floor((t*2.6+0.5)%2)*-3;
-  sheep2.style.transform=`scale(0.7) translateY(${bob2}px)`;
+  sheep2.style.transform=`scale(0.7) translateY(${(bob2+sh2).toFixed(1)}px)`;
+  if(ORIENT==='portrait') bub.style.left=(bx+sway+26).toFixed(1)+'px';
+  else bub.style.left='80px';
   /* gelembung reaksi */
   let bo=0, bs=1, btxt='';
   for(const [b0,b1,tx3] of BUBS){
