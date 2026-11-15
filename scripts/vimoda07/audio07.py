@@ -178,8 +178,7 @@ add(4.9, tick(1100, 0.07))                 # tanda tanya merah
 for tw in CUT_TRANSITIONS:                 # push-pan antar bab
     add(tw, whoosh(0.85, True, 0.12), 0.0)
 add(6.7, tick(900, 0.05))                  # chip BAGIAN 1
-for hb in (6.4, 10.5, 14.9, 25.7, 35.3, 40.2, 43.7):  # lompatan bulatan emas
-    add(hb, tick(240, 0.05))
+add(48.66, tick(240, 0.05))                # lompatan perayaan tunggal mentor
 add(7.2, chime(660.0, 0.10))               # kata SITUASI
 add(7.8, tick(760, 0.045))                 # definisi
 for i in range(4):                         # empat kartu situasi muncul

@@ -168,7 +168,7 @@ const P = ORIENT==='portrait' ? {
   qX:800, qY:250, qSize:88,
   cardY:520, cardH:210, cardW:288, cardGap:20,
   cardGSize:52, cardLab:20, cardEn:12,
-  platX:100, platW:520, groundY:1230, ballX:[170,215,170,255,200,240], sheepX:470, sheepX2:560, bubY:1006,
+  platX:100, platW:520, groundY:1230, ballX:[170,150,500,160,300,240], sheepX:470, sheepX2:560, bubY:1006,
   chapY:200, chapSize:22,
   wordY:300, wordSize:88,
   cardY1:560, cardH1:310, cardW1:680,
@@ -189,7 +189,7 @@ const P = ORIENT==='portrait' ? {
   qX:1330, qY:160, qSize:92,
   cardY:420, cardH:210, cardW:310, cardGap:30,
   cardGSize:52, cardLab:20, cardEn:12,
-  platX:240, platW:420, groundY:828, ballX:[300,350,300,360,320,360], sheepX:520, sheepX2:590, bubY:690,
+  platX:240, platW:420, groundY:828, ballX:[300,280,560,260,320,360], sheepX:520, sheepX2:590, bubY:690,
   chapY:130, chapSize:22,
   wordY:228, wordSize:86,
   cardY1:470, cardH1:310, cardW1:760,
@@ -722,7 +722,30 @@ const STAGE_TXT=[
 const STAGE_LAB=['ASLI: PENCACAH BENDA','CACAH: MULAI DARI NOL','BULAT: NEGATIF MASUK','RASIONAL: PECAHAN','IRASIONAL: AKAR 2, PI'];
 const BUBS=[[8.9,10.1,'dingin!'],[21.3,22.7,'lengkap!'],[40.4,41.8,'aman.']];
 const SCENE_T=[6.0,14.4,25.2,34.8,43.2];
-const HOPS=[[0.7,26],[6.4,18],[10.5,24],[14.9,18],[21.0,30],[22.9,16],[25.7,18],[32.2,22],[35.3,18],[40.2,20],[43.7,18],[48.7,32]];
+/* gestur mentor: setiap gerak menjawab konten
+   lean=menoleh ke objek, nod=mengangguk di simpulan, pulse=denyut konfirmasi,
+   shake=reaksi fisik (kejut/dingin), jump=lompatan bernada (maks 1-2 per video) */
+const GESTS=[
+  [1.7,0.9,'lean',8,1],
+  [4.9,0.7,'shake',9,0],
+  [8.2,0.9,'lean',7,1],
+  [8.9,1.2,'shake',4.5,0],
+  [11.5,0.8,'nod',0.10,0],
+  [16.4,0.55,'pulse',1.06,0],
+  [19.5,0.9,'lean',-7,0],
+  [23.0,0.8,'nod',0.09,0],
+  [27.9,0.5,'pulse',1.05,0],
+  [29.2,0.5,'pulse',1.05,0],
+  [30.5,0.5,'pulse',1.05,0],
+  [31.8,0.5,'pulse',1.06,0],
+  [32.3,0.9,'nod',0.12,0],
+  [36.3,1.0,'lean',7,1],
+  [38.6,0.8,'nod',0.09,0],
+  [40.6,0.8,'lean',-5,0],
+  [45.3,0.7,'shake',7,0],
+  [47.8,0.9,'lean',6,1],
+  [48.7,0.85,'jump',34,0]
+];
 const SPARKS=[[21.0,22.2],[48.6,51.4]];
 
 /* ---------- RENDER PER FRAME ---------- */
@@ -751,7 +774,7 @@ function renderFrame(t){
   plat.deco.forEach(d=>{ d.el.style.transform=`rotate(${(Math.sin(t*1.7+d.ph)*6).toFixed(2)}deg)`; });
   popA(tile1,t,1.6,0.6,20,0.8,1.8);
   popA(tile2,t,2.0,0.6,20,0.8,1.8);
-  /* bulatan emas: menggelinding antar bab, napas squash-stretch, lompat di beat */
+  /* bulatan emas mentor: menggelinding mendekati objek bahasan, gestur menjawab konten */
   let sidx=0;
   for(let k=0;k<SCENE_T.length;k++){ if(t>=SCENE_T[k]) sidx=k; }
   let bx=BALL_XS[0];
@@ -761,22 +784,23 @@ function renderFrame(t){
   const ep=seg(t,0.6,0.55), ef=eoe(ep);
   const lq=Math.exp(-Math.pow((ep-0.94)/0.05,2));
   const brs=Math.sin(t*9.4)*0.035;
-  let hy=0, hsq=0;
-  for(const [hs,hh] of HOPS){
-    const d=t-hs;
-    if(d>=0&&d<0.8){
-      const p=d/0.8;
-      hy-=hh*4*p*(1-p);
-      hsq+=0.16*Math.sin(p*Math.PI)-(p<0.14?(1-p/0.14)*0.12:0)-(p>0.82?((p-0.82)/0.18)*0.16:0);
+  let hy=0, hsq=0, gro=0, lrot=0;
+  for(const [gs,gd,gt,ga,gdir] of GESTS){
+    const d=t-gs;
+    if(d>=0&&d<gd){
+      const p=d/gd, w=Math.sin(p*Math.PI);
+      if(gt==='lean'){ lrot+=gdir*ga*w; }
+      else if(gt==='shake'){ lrot+=ga*Math.sin(p*11)*(1-p); }
+      else if(gt==='nod'){ hsq+=ga*w; hy-=6*w; }
+      else if(gt==='pulse'){ gro+=(ga-1)*w; }
+      else if(gt==='jump'){ hy-=ga*4*p*(1-p); hsq+=0.10*Math.sin(p*Math.PI); }
     }
   }
-  let sway=0;
-  if(t>=11.5&&t<14.2) sway=Math.sin((t-11.5)*2.2)*7;
   const wig=Math.sin(t*16)*6*seg(t,48.7,0.3);
-  const sy2=1+brs+hsq-lq*0.16, sx2=1-(brs+hsq)*0.75+lq*0.10;
-  ball.el.style.left=(bx+sway).toFixed(1)+'px';
+  const sy2=(1+brs+hsq-lq*0.16)*(1+gro), sx2=(1-(brs+hsq)*0.75+lq*0.10)*(1+gro);
+  ball.el.style.left=bx.toFixed(1)+'px';
   ball.el.style.opacity=String(clamp(ep*3,0,1));
-  ball.el.style.transform=`translateY(${((1-ef)*-250+hy).toFixed(1)}px) rotate(${wig.toFixed(2)}deg) scale(${sx2.toFixed(3)},${sy2.toFixed(3)})`;
+  ball.el.style.transform=`translateY(${((1-ef)*-250+hy).toFixed(1)}px) rotate(${(lrot+wig).toFixed(2)}deg) scale(${sx2.toFixed(3)},${sy2.toFixed(3)})`;
   ballsh.style.left=bx.toFixed(1)+'px';
   ballsh.style.opacity=String(clamp(ep*3,0,1)*clamp(0.42+hy*0.006,0.18,0.5));
   ballsh.style.transform=`scaleX(${clamp(1+hy*0.004,0.8,1.08).toFixed(3)})`;
@@ -798,7 +822,7 @@ function renderFrame(t){
   tile1.style.transform=`scale(0.85) translateY(${(bob1+sh1).toFixed(1)}px)`;
   const bob2=Math.floor((t*2.6+0.5)%2)*-3;
   tile2.style.transform=`scale(0.7) translateY(${(bob2+sh2).toFixed(1)}px)`;
-  if(ORIENT==='portrait') bub.style.left=(bx+sway+26).toFixed(1)+'px';
+  if(ORIENT==='portrait') bub.style.left=(bx+26).toFixed(1)+'px';
   else bub.style.left='80px';
   /* gelembung reaksi */
   let bo=0, bs=1, btxt='';
