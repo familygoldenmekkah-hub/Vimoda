@@ -187,7 +187,8 @@ for ts in [8.82, 9.42]:                    # garis coret kelima tiap kelompok
 add(9.9, tick(620, 0.05))                  # sweep kartu goresan
 add(10.1, whoosh(0.25, True, 0.04))        # count-up label 347
 add(10.1, tick(520, 0.045))                # label "347 = 347 GORESAN"
-add(11.4, boom(0.08))                      # takeaway "semakin rumit"
+add(10.5, tick(300, 0.06))                 # gelembung tokoh "lelah hitung..."
+add(11.4, boom(0.08))                      # beat "semakin rumit" di subtitle
 add(15.1, tick(900, 0.05))                 # chip BAGIAN 2
 add(15.6, chime(587.33, 0.12))             # kata DESIMAL
 add(16.2, tick(760, 0.045))
@@ -199,8 +200,10 @@ for i, tc in enumerate([19.2, 20.1, 21.0]):  # kartu 5, 50, 500
 add(21.0, boom(0.06))                      # kartu 500 mendarat
 for it in (20.35, 21.25):                  # tag anotasi +0 / +00
     add(it, tick(1150, 0.05))
-add(22.8, boom(0.10))                      # takeaway "posisi mengubah nilai"
+add(21.3, tick(340, 0.06))                 # gelembung tokoh "rapi!"
+add(22.8, boom(0.10))                      # beat "posisi mengubah nilai" di subtitle
 add(23.0, noise_band(0.10, 1000, 3000) * 0.55, 0.0, 0.05)  # marker sorot
+add(40.4, tick(340, 0.06))                 # gelembung tokoh "aman."
 add(25.9, tick(900, 0.05))                 # chip BAGIAN 3
 add(26.4, chime(523.25, 0.12))             # kata SIMBOL
 add(27.0, tick(760, 0.045))
