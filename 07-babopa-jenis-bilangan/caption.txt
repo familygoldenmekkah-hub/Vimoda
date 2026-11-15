@@ -1,0 +1,13 @@
+Selama ini kita mengira bilangan itu cuma 1, 2, 3, dan seterusnya. Padahal, matematika tidak sesempit itu.
+
+Coba bayangkan empat situasi: punya 5 buku, suhu 5 derajat di bawah nol, pizza yang dipotong menjadi dua bagian sama besar, dan keliling lingkaran yang dihitung dengan pi. Kelihatannya sederhana, tetapi semuanya membutuhkan jenis bilangan yang berbeda.
+
+Ada lima kelompok bilangan. Bilangan asli: 1, 2, 3, dan seterusnya. Bilangan cacah mulai dari 0. Bilangan bulat menampung bilangan negatif. Bilangan rasional bisa ditulis sebagai pecahan, seperti 1/2 dan 3/4. Dan bilangan irasional, seperti akar 2 dan pi, tidak bisa ditulis sebagai perbandingan dua bilangan bulat.
+
+Kalau bilangan asli saja sudah cukup untuk menghitung benda, kenapa masih perlu bilangan negatif, pecahan, bahkan irasional? Karena persoalan yang kita hadapi memang tidak selalu sama. Matematika berkembang bukan dengan asal menambah simbol, melainkan dengan mencari cara yang tepat untuk memahami beragam persoalan. Caranya bebas dipilih, tetapi hasilnya tetap harus sesuai aturan matematika.
+
+Menurutmu, apakah satu jenis bilangan sebenarnya cukup untuk menjelaskan semua hal? Pilih: cukup satu jenis, atau tiap persoalan butuh jenis bilangan berbeda? Tulis alasanmu di komentar. Jangan cuma menebak jawabannya!
+
+Mampir ke AKIOMIDA.COM untuk petualangan matematika berikutnya.
+
+#matematika #bilangan #pecahan #irasional #edukasi #belajarmatematika #akiomida

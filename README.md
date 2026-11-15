@@ -27,6 +27,7 @@ Studio video animasi matematika **AKIOMIDA**. Misi: membuat penonton jatuh cinta
 | 04 | Sejarah Sistem Bilangan | Blog Yuyanaka - artikel "Kompati" (14 Nov 2026) | `04-sejarah-sistem-bilangan/` (aturan lengkap dipakai sejak rendering pertama) |
 | 05 | Angka, Bilangan, dan Nomor | Blog Yuyanaka - artikel "Limpai" (14 Nov 2026) | `05-angka-bilangan-nomor/` (revisi 2: satu ide per layar, transisi push-pan per bab, match-cut angka 7, subtitle berjarak, burst dan cincin dihapus) |
 | 06 | Bagaimana Simbol Bilangan Diciptakan? | Blog Yuyanaka - artikel "Partoen" (14 Nov 2026) | `06-bagaimana-simbol-diciptakan/` (revisi 5: karakter bulatan emas tanpa wajah (hop/roll/squash/sparkle), subtitle aman rail sosmed + layout anti-timpa (flex); revisi 4: dunia pixel + subtitle bar permanen + gelembung reaksi; revisi 2-3: anti-tumpuk, storytelling aman fakta) |
+| 07 | Babopa: Bilangan Tidak Cuma 1, 2, 3? | Blog Yuyanaka - artikel "Babopa" (14 Nov 2026) | `07-babopa-jenis-bilangan/` (revisi 1: standar video 06 rev 5 dipakai sejak rendering pertama: bulatan emas, domba, subtitle flex anti-timpa, margin 130 px; hook 1,2,3 + kartu -5 derajat/1/2/pi; empat situasi; lima ubin kelompok; kotak keluarga bilangan 5 tahap; pi + 1/2 + 1/2 = 1; CTA pilihan jawaban) |
 
 ## Isi tiap folder video
 
