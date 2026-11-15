@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+/*__FONTS__*/
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:#000;overflow:hidden;}
+#stage{position:relative;overflow:hidden;font-family:'Poppins','DejaVu Sans',sans-serif;color:#E7EEF8;
+  -webkit-font-smoothing:antialiased;}
+/* langit malam ala modeling */
+#sky{position:absolute;inset:0;background:linear-gradient(180deg,#0A0E24 0%,#10173A 46%,#0B0F26 100%);}
+#stars i{position:absolute;border-radius:50%;background:#DDE7FF;will-change:opacity;}
+#world{position:absolute;inset:0;will-change:transform;transform-origin:50% 55%;}
+#particles span{position:absolute;will-change:transform,opacity;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#7DD3FC;}
+/* tanah: rumput + tanah cokelat bergaris diagonal */
+#dirt{position:absolute;left:0;right:0;will-change:opacity;}
+#grass{position:absolute;left:0;right:0;background:#3FA34D;box-shadow:inset 0 -7px 0 rgba(0,0,0,.28);}
+#soil{position:absolute;left:0;right:0;background:#241811;
+  background-image:repeating-linear-gradient(115deg,rgba(0,0,0,.20) 0 14px,transparent 14px 34px);}
+/* papan kayu */
+.plankseg{position:absolute;background:linear-gradient(180deg,#A96F35 0%,#8B5A2B 62%,#6E4420 100%);
+  border-radius:10px;box-shadow:0 5px 0 rgba(0,0,0,.30);will-change:opacity;}
+.plankleg{position:absolute;background:#5E3A1B;border-radius:3px;}
+/* blok digit raksasa ala modeling (kontekstual: angka) */
+.digblk{position:absolute;border-radius:22px;background:linear-gradient(160deg,#FFE28A 0%,#F2C230 58%,#D19A12 100%);
+  box-shadow:inset 0 -10px 0 rgba(146,98,8,.45),0 12px 0 rgba(0,0,0,.32),0 0 34px rgba(242,194,48,.14);
+  display:flex;align-items:center;justify-content:center;will-change:transform,opacity;}
+.digblk b{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#FFFFFF;font-weight:800;
+  text-shadow:0 4px 0 rgba(146,98,8,.85);}
+.chipd{position:absolute;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(125,211,252,.45);
+  color:#7DD3FC;font-weight:800;will-change:transform;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
+/* judul raksasa ala modeling */
+.bigtitle{position:absolute;left:0;right:0;text-align:center;font-weight:800;opacity:0;will-change:transform,opacity;white-space:nowrap;
+  text-shadow:0 6px 0 rgba(0,0,0,.55),0 14px 40px rgba(0,0,0,.6);}
+/* tokoh ubin: nama di atas kepala */
+.nmtag{position:absolute;left:0;right:0;text-align:center;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
+  font-weight:800;color:#FFFFFF;white-space:nowrap;will-change:transform,opacity;
+  text-shadow:2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000,0 6px 16px rgba(0,0,0,.6);}
+.gtile{position:absolute;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  will-change:transform,opacity;box-shadow:0 14px 34px rgba(0,0,0,.5);}
+.gtile .dg{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;line-height:1.06;white-space:nowrap;}
+.gtile .en{font-weight:600;letter-spacing:.16em;color:#8FA3BF;}
+/* panel gelap ala modeling (chat, keluarga, persamaan, toko) */
+.panel{position:absolute;background:rgba(13,19,40,.93);border-radius:20px;will-change:transform,opacity;
+  box-shadow:0 22px 60px rgba(0,0,0,.55);}
+.panel .hd{font-weight:800;color:#FCD34D;}
+.prow{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
+  border-radius:12px;background:rgba(255,255,255,.05);will-change:transform,opacity;}
+/* panel pesan */
+#chatp .who{font-weight:800;color:#4ADE80;}
+#chatp .msg{font-weight:700;color:#FFFFFF;}
+#chatp{border:2px solid rgba(74,222,128,.55);}
+/* subtitle besar ala modeling: pill hitam, teks raksasa */
+#subbar{position:absolute;border-radius:22px;background:rgba(4,7,14,.78);box-shadow:0 14px 44px rgba(0,0,0,.6);
+  padding:18px 40px;will-change:transform,opacity;left:50%;transform:translateX(-50%);}
+#sub_id{font-weight:800;color:#FFFFFF;text-shadow:0 3px 14px rgba(0,0,0,.85);line-height:1.16;}
+#sub_en{font-weight:600;color:#9FB0CE;white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.8);}
+/* pil emas CTA */
+.goldpill{position:absolute;border-radius:999px;background:linear-gradient(92deg,#F59E0B,#FBBF24);color:#1A1206;
+  font-weight:800;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;
+  box-shadow:0 10px 26px rgba(245,158,11,.35);}
+.vig{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(94% 94% at 50% 42%, transparent 58%, rgba(0,0,0,.52) 100%);}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;}
+#fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
+.center{text-align:center;}
+#grain{position:absolute;inset:0;pointer-events:none;opacity:.04;mix-blend-mode:overlay;
+  background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="180" height="180" filter="url(%23n)" opacity="0.6"/></svg>');}
+.starclip{background:linear-gradient(180deg,#FDE68A,#D97706);
+  -webkit-clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);
+  clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="sky"></div>
+  <div id="stars"></div>
+  <div id="world">
+    <div id="particles"></div>
+    <div id="dirt"><div id="soil"></div><div id="grass"></div></div>
+    <div id="planks"></div>
+    <div id="blocks"></div>
+
+    <!-- S0 HOOK -->
+    <div class="bigtitle" id="t0">1, 2, 3 SAJA?</div>
+    <div id="h_tiles"></div>
+    <div id="h_q" class="center mono" style="position:absolute;color:#F87171;font-weight:800;opacity:0;">?</div>
+
+    <!-- S1 SITUASI: properti dunia muncul berurutan -->
+    <div class="bigtitle" id="t1">EMPAT SITUASI</div>
+    <div id="a_props"></div>
+
+    <!-- S2 KELOMPOK: lima tokoh bernama -->
+    <div class="bigtitle" id="t2">LIMA KELOMPOK</div>
+    <div id="g_tiles"></div>
+
+    <!-- S3 KENAPA: panel keluarga ala leaderboard -->
+    <div class="bigtitle" id="t3">KELUARGA BILANGAN</div>
+    <div class="panel" id="fam">
+      <div class="hd center" id="fam_hd">KELUARGA BILANGAN</div>
+      <div id="fam_rows"></div>
+    </div>
+
+    <!-- S4 ATURAN: panel persamaan -->
+    <div class="bigtitle" id="t4">ATURAN SATU</div>
+    <div class="panel" id="eqp">
+      <div class="mono center" id="eq_t" style="font-weight:800;color:#FCD34D;">1/2 + 1/2 = 1</div>
+      <div class="center" id="eq_lab" style="color:#9FB0CE;font-weight:700;letter-spacing:.20em;">CARA BEBAS, HASIL SESUAI ATURAN</div>
+    </div>
+
+    <!-- S5 CTA: panel toko ala modeling -->
+    <div class="bigtitle" id="t5">PILIH SATU?</div>
+    <div class="panel center" id="cta">
+      <div id="f_open" style="color:#C9D6EE;font-weight:700;letter-spacing:.14em;">MENURUTMU, CUKUP SATU JENIS?</div>
+      <div id="f_open_e" style="color:#8FA3BF;font-weight:600;letter-spacing:.26em;">IS ONE KIND ENOUGH?</div>
+      <div id="f_url" class="mono" style="font-weight:800;">AKIOMIDA.COM</div>
+      <div id="f_bar" style="height:6px;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24);width:0;"></div>
+      <div class="goldpill" id="f_pill">TULIS DI KOMEN</div>
+    </div>
+
+    <!-- papan bawah tokoh: bola emas BABOPA + bayangan + kilat -->
+    <div id="ballsh"></div>
+    <div id="ball"></div>
+    <div id="spark" class="starclip" style="position:absolute;width:34px;height:34px;opacity:0;"></div>
+
+    <!-- panel pesan ala modeling -->
+    <div class="panel" id="chatp" style="opacity:0;">
+      <div class="who">&#9679; BABOPA</div>
+      <div class="msg" id="chatp_msg"></div>
+    </div>
+  </div>
+
+  <div id="subbar">
+    <div class="center" id="sub_id"></div>
+    <div class="center" id="sub_en"></div>
+  </div>
+
+  <div class="center" id="wm" style="position:absolute;color:#7C8BA1;font-weight:600;letter-spacing:.40em;opacity:.5;">AKIOMIDA</div>
+  <div class="vig"></div>
+  <div id="grain"></div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+</div>
+
+<script>
