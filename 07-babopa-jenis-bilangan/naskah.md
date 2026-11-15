@@ -1,4 +1,4 @@
-# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 15)
+# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Rombak Total Revisi 16)
 
 - Durasi: 52 detik | FPS: 30 | Musik & SFX: prosedural orisinal
 - Sumber materi: yuyanaka.blogspot.com/2026/11/babopa.html (artikel "Babopa", 14 Nov 2026)
@@ -31,6 +31,14 @@
 1. KARAKTER TANPA NAMA APA PUN: sisa label nama dihapus total, termasuk nama "Akiomida" pada karakter; Akiomida adalah nama studio/situs (AKIOMIDA.COM), bukan nama si bola emas. Header panel pesan yang menyebut nama tokoh dihapus (bubble pesan kini hanya berisi isi pesan), dan watermark nama di sudut bawah yang menempel sepanjang video dihapus.
 2. RITME TENANG, TEKS DAN ANIMASI SEIRAMA: overshoot pop semua elemen dipangkas (maksimal 10 persen, umumnya 6-8), durasi masuk diperpanjang (0.55-0.8 detik), goyangan ambient (blok digit, bola, percikan) diperkecil, guncangan kamera dipangkas dari 6 piksel ke 2.5 piksel, kilat dari 14 persen ke 7 persen, pop subtitle dari 5 persen ke 1.8 persen, wobble tanda tanya dihapus. Tidak ada lagi elemen yang berebut perhatian saat penjelasan dibaca; satu ide muncul, duduk tenang, dibaca tuntas.
 3. AKIOMIDA.COM HANYA DI AKHIR: panel toko muncul 40.9 hanya dengan pertanyaan; situs menyala perlahan 45.8-47.2 (fade 1.4 detik + naik 14 piksel, tanpa pop), pil TULIS DI KOMEN 47.5, bar gradien menyapu 48.6-50.4. Cue audio mengiringi (chime lembut 45.8, whoosh bar 48.6).
+
+## Rombak total revisi 16 (mandat kreator: desain lain sama sekali, dunia nyata, karakter hidup, watermark wajib)
+
+1. DUNIA BARU "KOTA BILANGAN" (bukan panggung modeling): gedung pastel berjendela, empat jendela kedai nyata di muka gedung (kedai buku 5 BUKU, kafe termometer -5 derajat, kedai pizza setengah lingkaran 1/2, kedai roti lingkaran pi), jalan raya beraspal dengan marka putus-putus dan tiga mobil yang lewat, trotoar berubin, pohon yang bergoyang, lampu jalan; waktu berjalan dari siang ke senja (langit berubah, bintang muncul, lampu jalan menyala, jendela gedung menghangat, kunang-kunang keluar).
+2. KARAKTER HIDUP: bola emas mentor dipertahankan dan kini punya LIMA TEMAN BOLA berwarna (Asli cyan, Cacah ungu, Bulat pink, Rasional hijau, Irasional emas) sebagai perwujudan kelompok bilangan. Semua bola BERMATA: berkedip natural, pupil menatap subjek yang sedang dibahas dan saling menatap. Teman-teman memantul masuk satu per satu ke alun-alun, melambaikan badan, melompat ke podium tangga untuk "foto keluarga bilangan", pamit menggelinding keluar layar saat bab aturan agar fokus tunggal, lalu kembali menggelinding masuk di penutup dan melompat kecil serempak merayakan.
+3. TIDAK PERNAH MENEMBUS OBJEK: lintasan mentor (tabel waypoint di trotoar) dihitung bebas dari semua elemen - jendela kedai berada di muka gedung DI ATAS kepala, papan tulis kafe berdiri di band depan kiri saat keluarga sudah pamit, teman-teman di band belakang, lampu jalan di sudut foreground bawah; bangku taman dihapus karena konflik lintasan.
+4. WATERMARK AKIOMIDA WAJIB SELALU TERLIHAT: pil gelap kecil di bawah layar sepanjang video, siang maupun senja; AKIOMIDA.COM tetap hanya menyala sekali di akhir dengan reveal tenang (45.8-47.2), pil TULIS DI KOMEN 47.5, bar gradien 48.6.
+5. NARASI TETAP: 16 beat subtitle, durasi baca, dan cue audio inti tidak berubah; yang diganti total adalah dunia, karakter, dan koreografinya.
 
 ## Studi wawasan 13 skill motion GitHub (2026-11-15)
 
