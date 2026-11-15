@@ -181,7 +181,7 @@ const P = ORIENT==='portrait' ? {
   eqY:570, eqH:150, eqW:560, eqStar:70, eqTSize:54, eqLabY:762, eqLabSize:22,
   cardY2:380, card2H2:360, cardW2:900,
   openY:96, openEY:134, openESize:13, urlY:190, urlSize:84, barY:300,
-  subbarY:1300, subbarH:128, subIdSize:32, subEnSize:21, subbarMX:130
+  subbarY:1300, subbarH:128, subIdSize:30, subEnSize:21, subbarMX:130
 } : {
   mx:200, wmY:56, wmSize:18,
   h1Y:130, h1Size:170, h1BoxW:160, h1BoxH:210,
@@ -359,20 +359,24 @@ const subId=document.getElementById('sub_id');
 const subEn=document.getElementById('sub_en');
 subbar.style.left=P.subbarMX+'px';subbar.style.right=P.subbarMX+'px';
 subbar.style.top=P.subbarY+'px';subbar.style.height=P.subbarH+'px';
-subId.style.position='absolute';subId.style.top=(ORIENT==='portrait'?20:16)+'px';
-subId.style.left='0';subId.style.right='0';
+/* susunan flex: Inggris selalu mengalir di bawah Indonesia, mustahil tertimpa walau teks patah baris */
+subbar.style.display='flex';subbar.style.flexDirection='column';
+subbar.style.alignItems='center';subbar.style.justifyContent='center';
+subbar.style.gap=(ORIENT==='portrait'?'7px':'4px');
+subbar.style.padding='0 20px';subbar.style.boxSizing='border-box';
+subId.style.maxWidth='100%';subEn.style.maxWidth='100%';
+subId.style.lineHeight='1.16';subEn.style.lineHeight='1.15';
+subId.style.textAlign='center';subEn.style.textAlign='center';
 subId.style.fontSize=P.subIdSize+'px';
-subEn.style.position='absolute';subEn.style.left='0';subEn.style.right='0';
-subEn.style.top=(ORIENT==='portrait'?66:58)+'px';
 subEn.style.fontSize=P.subEnSize+'px';
 const SUBS=[
   [0.5,'Kenapa satu ditulis 1?','Why is one written as 1?','#FFFFFF'],
   [2.6,'Dan siapa yang menentukan bentuk angka 7?','And who decided the shape of 7?','#FFFFFF'],
-  [6.7,'Dulu, manusia mencatat jumlah dengan goresan.','Long ago, people counted with marks.','#FFFFFF'],
+  [6.7,'Dulu, jumlah dicatat dengan goresan.','Long ago, people counted with marks.','#FFFFFF'],
   [9.6,'Coba bayangkan mencatat 347 satu per satu.','Imagine writing 347 marks, one by one.','#FFFFFF'],
   [11.5,'Makin besar jumlah, makin rumit tulisannya.','The bigger the count, the messier the writing.','#FBBF24'],
-  [14.5,'Solusinya: desimal, sepuluh simbol 0 sampai 9.','The fix: decimal, ten symbols 0 to 9.','#FFFFFF'],
-  [19.3,'5 tetap lima, jadi 50 dan 500 di posisi lain.','The 5 stays five, becoming 50 and 500 by position.','#FFFFFF'],
+  [14.5,'Solusinya: desimal, 10 simbol 0 sampai 9.','The fix: decimal, ten symbols 0 to 9.','#FFFFFF'],
+  [19.3,'Angka 5 tetap 5, jadi 50 dan 500.','The 5 stays five, becoming 50 and 500 by position.','#FFFFFF'],
   [22.9,'Simbolnya sama, posisi yang mengubah nilai.','Same symbol, position changes the value.','#FBBF24'],
   [25.3,'Simbol bukan bilangan: 7, VII, atau tujuh.','The symbol is not the number: 7, VII, or seven.','#FFFFFF'],
   [32.3,'Bentuk beda, nilai yang dimaksud tetap sama.','Different form, same intended value.','#FBBF24'],

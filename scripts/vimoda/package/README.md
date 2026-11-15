@@ -26,7 +26,7 @@ Studio video animasi matematika **AKIOMIDA**. Misi: membuat penonton jatuh cinta
 | 03 | Mengenali: Number Sense | Blog Yuyanaka - artikel "Mengenali" (13 Nov 2026) | `03-mengenali-number-sense/` (aturan lengkap dipakai sejak rendering pertama) |
 | 04 | Sejarah Sistem Bilangan | Blog Yuyanaka - artikel "Kompati" (14 Nov 2026) | `04-sejarah-sistem-bilangan/` (aturan lengkap dipakai sejak rendering pertama) |
 | 05 | Angka, Bilangan, dan Nomor | Blog Yuyanaka - artikel "Limpai" (14 Nov 2026) | `05-angka-bilangan-nomor/` (revisi 2: satu ide per layar, transisi push-pan per bab, match-cut angka 7, subtitle berjarak, burst dan cincin dihapus) |
-| 06 | Bagaimana Simbol Bilangan Diciptakan? | Blog Yuyanaka - artikel "Partoen" (14 Nov 2026) | `06-bagaimana-simbol-diciptakan/` (revisi 5: karakter bulatan emas tanpa wajah (hop/roll/squash/sparkle), subtitle aman rail sosmed di portrait; revisi 4: dunia pixel + subtitle bar permanen + gelembung reaksi; revisi 2-3: anti-tumpuk, storytelling aman fakta) |
+| 06 | Bagaimana Simbol Bilangan Diciptakan? | Blog Yuyanaka - artikel "Partoen" (14 Nov 2026) | `06-bagaimana-simbol-diciptakan/` (revisi 5: karakter bulatan emas tanpa wajah (hop/roll/squash/sparkle), subtitle aman rail sosmed + layout anti-timpa (flex); revisi 4: dunia pixel + subtitle bar permanen + gelembung reaksi; revisi 2-3: anti-tumpuk, storytelling aman fakta) |
 
 ## Isi tiap folder video
 
