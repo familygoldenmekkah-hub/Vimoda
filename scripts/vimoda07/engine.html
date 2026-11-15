@@ -6,134 +6,148 @@
 /*__FONTS__*/
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{background:#000;overflow:hidden;}
-#stage{position:relative;overflow:hidden;font-family:'Poppins','DejaVu Sans',sans-serif;color:#E7EEF8;
+#stage{position:relative;overflow:hidden;font-family:'Poppins','DejaVu Sans',sans-serif;color:#1B2437;
   -webkit-font-smoothing:antialiased;}
-/* langit malam ala modeling */
-#sky{position:absolute;inset:0;background:linear-gradient(180deg,#0A0E24 0%,#10173A 46%,#0B0F26 100%);}
-#stars i{position:absolute;border-radius:50%;background:#DDE7FF;will-change:opacity;}
-#world{position:absolute;inset:0;will-change:transform;transform-origin:50% 55%;}
-#particles span{position:absolute;will-change:transform,opacity;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#7DD3FC;}
-/* tanah: rumput + tanah cokelat bergaris diagonal */
-#dirt{position:absolute;left:0;right:0;will-change:opacity;}
-#grass{position:absolute;left:0;right:0;background:#3FA34D;box-shadow:inset 0 -7px 0 rgba(0,0,0,.28);}
-#soil{position:absolute;left:0;right:0;background:#241811;
-  background-image:repeating-linear-gradient(115deg,rgba(0,0,0,.20) 0 14px,transparent 14px 34px);}
-/* papan kayu */
-.plankseg{position:absolute;background:linear-gradient(180deg,#A96F35 0%,#8B5A2B 62%,#6E4420 100%);
-  border-radius:10px;box-shadow:0 5px 0 rgba(0,0,0,.30);will-change:opacity;}
-.plankleg{position:absolute;background:#5E3A1B;border-radius:3px;}
-/* blok digit raksasa ala modeling (kontekstual: angka) */
-.digblk{position:absolute;border-radius:22px;background:linear-gradient(160deg,#FFE28A 0%,#F2C230 58%,#D19A12 100%);
-  box-shadow:inset 0 -10px 0 rgba(146,98,8,.45),0 12px 0 rgba(0,0,0,.32),0 0 34px rgba(242,194,48,.14);
+/* langit kota: siang menuju senja (dua layer silang) */
+#skyday{position:absolute;inset:0;background:linear-gradient(180deg,#8ECDF8 0%,#B8E2FB 55%,#EAF6FF 100%);}
+#skydusk{position:absolute;inset:0;background:linear-gradient(180deg,#232B5E 0%,#4A3B75 52%,#C96A4B 86%,#E89255 100%);opacity:0;}
+#stars i{position:absolute;border-radius:50%;background:#FFF6D9;will-change:opacity;}
+/* dunia kota */
+#world{position:absolute;inset:0;will-change:transform;transform-origin:50% 60%;}
+.cloud{position:absolute;will-change:transform;opacity:.92;}
+.cloud b{position:absolute;border-radius:999px;background:#FFFFFF;box-shadow:0 10px 24px rgba(120,160,200,.25);}
+.bld{position:absolute;border-radius:14px 14px 0 0;will-change:opacity,transform;}
+.win{position:absolute;border-radius:6px;background:#39506B;will-change:background,box-shadow;}
+.awn{position:absolute;border-radius:10px 10px 0 0;will-change:transform,opacity;
+  background:repeating-linear-gradient(90deg,#E15B5B 0 26px,#FFFFFF 26px 52px);
+  box-shadow:0 6px 0 rgba(0,0,0,.14);}
+#road{position:absolute;left:0;right:0;background:#3E4653;}
+#roadmark{position:absolute;left:0;right:0;height:0;border-top:7px dashed #F2E85C;opacity:.85;}
+#curb{position:absolute;left:0;right:0;background:#DAE0E8;box-shadow:0 -5px 0 rgba(0,0,0,.10);}
+#walk{position:absolute;left:0;right:0;background:#C9CFD8;
+  background-image:linear-gradient(90deg,rgba(0,0,0,.055) 2px,transparent 2px),linear-gradient(rgba(0,0,0,.045) 2px,transparent 2px);
+  background-size:120px 60px;}
+#plaza{position:absolute;left:0;right:0;opacity:0;will-change:opacity;
+  background:#BFC6D2;background-image:radial-gradient(circle at 24px 24px,rgba(0,0,0,.05) 3px,transparent 4px);
+  background-size:96px 96px;}
+.tree{position:absolute;will-change:transform,opacity;}
+.tree .trunk{position:absolute;left:50%;bottom:0;width:16px;border-radius:6px;background:#7A5230;margin-left:-8px;}
+.tree .leaf{position:absolute;border-radius:50%;background:#4FA35C;box-shadow:inset -8px -10px 0 rgba(0,0,0,.12);}
+.lamp{position:absolute;will-change:transform,opacity;}
+.lamp .pole{position:absolute;left:50%;bottom:0;width:10px;margin-left:-5px;border-radius:4px;background:#4A5568;}
+.lamp .head{position:absolute;left:50%;width:34px;height:20px;margin-left:-17px;border-radius:8px;background:#4A5568;}
+.lamp .glow{position:absolute;left:50%;width:110px;height:110px;margin-left:-55px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,214,130,.85) 0%,rgba(255,214,130,0) 70%);opacity:0;will-change:opacity;}
+.bench{position:absolute;will-change:opacity;}
+.bench i{position:absolute;border-radius:8px;background:#8B5A2B;box-shadow:0 4px 0 rgba(0,0,0,.18);}
+.car{position:absolute;will-change:transform;}
+.car .body{position:absolute;left:0;top:0;border-radius:16px;box-shadow:inset 0 -10px 0 rgba(0,0,0,.18);}
+.car .top{position:absolute;border-radius:12px 12px 0 0;background:rgba(255,255,255,.28);}
+.car .wh{position:absolute;bottom:-7px;width:26px;height:26px;border-radius:50%;background:#22262E;border:5px solid #4A525F;}
+/* plak nomor pintu 1 2 3 (hook) */
+.plaque{position:absolute;border-radius:12px;background:linear-gradient(160deg,#FFE28A,#F2C230);
+  box-shadow:0 6px 0 rgba(0,0,0,.22),0 0 26px rgba(242,194,48,.25);
   display:flex;align-items:center;justify-content:center;will-change:transform,opacity;}
-.digblk b{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#FFFFFF;font-weight:800;
-  text-shadow:0 4px 0 rgba(146,98,8,.85);}
-.chipd{position:absolute;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(125,211,252,.45);
-  color:#7DD3FC;font-weight:800;will-change:transform;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
-/* judul raksasa ala modeling */
-.bigtitle{position:absolute;left:0;right:0;text-align:center;font-weight:800;opacity:0;will-change:transform,opacity;white-space:nowrap;
-  text-shadow:0 6px 0 rgba(0,0,0,.55),0 14px 40px rgba(0,0,0,.6);}
-/* tokoh ubin: nama di atas kepala */
-.nmtag{position:absolute;left:0;right:0;text-align:center;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
-  font-weight:800;color:#FFFFFF;white-space:nowrap;will-change:transform,opacity;
-  text-shadow:2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000,0 6px 16px rgba(0,0,0,.6);}
-.gtile{position:absolute;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  will-change:transform,opacity;box-shadow:0 14px 34px rgba(0,0,0,.5);}
-.gtile .dg{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;line-height:1.06;white-space:nowrap;}
-.gtile .en{font-weight:600;letter-spacing:.16em;color:#8FA3BF;}
-/* panel gelap ala modeling (chat, keluarga, persamaan, toko) */
-.panel{position:absolute;background:rgba(13,19,40,.93);border-radius:20px;will-change:transform,opacity;
-  box-shadow:0 22px 60px rgba(0,0,0,.55);}
-.panel .hd{font-weight:800;color:#FCD34D;}
-.prow{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
-  border-radius:12px;background:rgba(255,255,255,.05);will-change:transform,opacity;}
-/* panel pesan: tanpa header nama (karakter tidak boleh dinamai) */
-#chatp .msg{font-weight:700;color:#FFFFFF;}
-#chatp{border:2px solid rgba(74,222,128,.55);}
-/* subtitle besar ala modeling: pill hitam, teks raksasa */
-#subbar{position:absolute;border-radius:22px;background:rgba(4,7,14,.78);box-shadow:0 14px 44px rgba(0,0,0,.6);
-  padding:18px 40px;will-change:transform,opacity;left:50%;transform:translateX(-50%);}
-#sub_id{font-weight:800;color:#FFFFFF;text-shadow:0 3px 14px rgba(0,0,0,.85);line-height:1.16;}
-#sub_en{font-weight:600;color:#9FB0CE;white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.8);}
-/* pil emas CTA */
+.plaque b{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#FFF;font-weight:800;
+  text-shadow:0 3px 0 rgba(146,98,8,.8);}
+/* jendela kedai + chip situasi */
+.shopwin{position:absolute;border-radius:14px;background:#F7F3E9;border:6px solid #FFFFFF;
+  box-shadow:0 12px 30px rgba(30,45,80,.25);will-change:transform,opacity;overflow:hidden;}
+.chip{position:absolute;border-radius:9px;background:rgba(20,28,48,.82);color:#FFFFFF;font-weight:800;
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;will-change:transform,opacity;
+  box-shadow:0 5px 14px rgba(0,0,0,.3);text-align:center;}
+/* piringan angka kelompok di kaki teman */
+.gplate{position:absolute;border-radius:10px;background:rgba(255,255,255,.94);border:3px solid #35507A;
+  color:#1B2437;font-weight:800;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
+  display:flex;align-items:center;justify-content:center;will-change:transform,opacity;
+  box-shadow:0 5px 0 rgba(0,0,0,.15);white-space:nowrap;}
+/* podium tangga foto keluarga */
+.step{position:absolute;border-radius:10px;background:linear-gradient(180deg,#A96F35,#8B5A2B 62%,#6E4420);
+  box-shadow:0 6px 0 rgba(0,0,0,.22);will-change:transform,opacity;}
+/* papan tulis kafe + papan pengumuman kayu */
+.board{position:absolute;will-change:transform,opacity;}
+.board.wood{background:linear-gradient(180deg,#8B5A2B,#6E4420);border-radius:16px;
+  box-shadow:0 14px 34px rgba(0,0,0,.35),inset 0 0 0 4px #5E3A1B;}
+.board.slate{background:#2B3A46;border:8px solid #7A5230;border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,.3);}
+/* karakter bola (mentor emas + teman warna): tanpa nama, bermata */
+.bchar{position:absolute;will-change:transform,opacity;}
+.bchar .core{position:absolute;border-radius:50%;}
+.bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px);}
+.bchar .eyes{position:absolute;will-change:transform;}
+.bchar .eye{position:absolute;border-radius:50%;background:#FFFFFF;overflow:hidden;
+  box-shadow:0 0 0 2px rgba(30,40,60,.16);}
+.bchar .pupil{position:absolute;border-radius:50%;background:#1B2437;will-change:transform;}
+.bchar .blush{position:absolute;border-radius:50%;background:rgba(225,91,91,.34);filter:blur(1px);}
+.bsh{position:absolute;border-radius:50%;background:radial-gradient(ellipse at center,rgba(20,28,40,.42) 0%,rgba(20,28,40,0) 70%);
+  filter:blur(2px);will-change:transform,opacity;}
 .goldpill{position:absolute;border-radius:999px;background:linear-gradient(92deg,#F59E0B,#FBBF24);color:#1A1206;
   font-weight:800;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;
-  box-shadow:0 10px 26px rgba(245,158,11,.35);}
+  box-shadow:0 10px 26px rgba(245,158,11,.4);}
+#f_url{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
+#subbar{position:absolute;border-radius:22px;background:rgba(10,14,26,.82);box-shadow:0 14px 44px rgba(0,0,0,.5);
+  padding:18px 40px;will-change:transform,opacity;left:50%;transform:translateX(-50%);}
+#sub_id{font-weight:800;color:#FFFFFF;text-shadow:0 3px 14px rgba(0,0,0,.85);line-height:1.16;}
+#sub_en{font-weight:600;color:#A9B8D0;white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.8);}
+/* watermark AKIOMIDA: wajib selalu terlihat */
+#wm{position:absolute;left:0;right:0;text-align:center;color:#FFFFFF;font-weight:600;opacity:.55;
+  letter-spacing:.42em;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
+  text-shadow:0 2px 10px rgba(0,0,0,.6);pointer-events:none;}
+.starclip{background:linear-gradient(180deg,#FDE68A,#D97706);
+  -webkit-clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);
+  clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);}
 .vig{position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(94% 94% at 50% 42%, transparent 58%, rgba(0,0,0,.52) 100%);}
+  background:radial-gradient(94% 94% at 50% 42%, transparent 60%, rgba(10,16,30,.4) 100%);}
 #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;}
 #fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;}
 .mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
 .center{text-align:center;}
+.bigtitle{position:absolute;left:0;right:0;text-align:center;font-weight:800;opacity:0;will-change:transform,opacity;
+  white-space:nowrap;color:#FFFFFF;text-shadow:0 5px 0 rgba(24,38,66,.5),0 14px 40px rgba(24,38,66,.45);}
 #grain{position:absolute;inset:0;pointer-events:none;opacity:.04;mix-blend-mode:overlay;
   background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="180" height="180" filter="url(%23n)" opacity="0.6"/></svg>');}
-.starclip{background:linear-gradient(180deg,#FDE68A,#D97706);
-  -webkit-clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);
-  clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);}
 </style>
 </head>
 <body>
 <div id="stage">
-  <div id="sky"></div>
+  <div id="skyday"></div>
+  <div id="skydusk"></div>
   <div id="stars"></div>
   <div id="world">
-    <div id="particles"></div>
-    <div id="dirt"><div id="soil"></div><div id="grass"></div></div>
-    <div id="planks"></div>
-    <div id="blocks"></div>
+    <div id="clouds"></div>
+    <div id="town"></div>
+    <div id="roadwrap"><div id="road"></div><div id="roadmark"></div><div id="cars"></div></div>
+    <div id="curb"></div>
+    <div id="walk"></div>
+    <div id="plaza"></div>
+    <div id="streetprops"></div>
+    <div id="chars"></div>
+    <div id="fireflies"></div>
+  </div>
 
-    <!-- S0 HOOK -->
-    <div class="bigtitle" id="t0">1, 2, 3 SAJA?</div>
-    <div id="h_tiles"></div>
-    <div id="h_q" class="center mono" style="position:absolute;color:#F87171;font-weight:800;opacity:0;">?</div>
+  <div class="bigtitle" id="t0">1, 2, 3 SAJA?</div>
+  <div class="bigtitle" id="t1">EMPAT SITUASI</div>
+  <div class="bigtitle" id="t2">LIMA KELOMPOK</div>
+  <div class="bigtitle" id="t3">KELUARGA BILANGAN</div>
+  <div class="bigtitle" id="t4">ATURAN SATU</div>
+  <div class="bigtitle" id="t5">PILIH SATU?</div>
 
-    <!-- S1 SITUASI: properti dunia muncul berurutan -->
-    <div class="bigtitle" id="t1">EMPAT SITUASI</div>
-    <div id="a_props"></div>
-
-    <!-- S2 KELOMPOK: lima kelompok bilangan -->
-    <div class="bigtitle" id="t2">LIMA KELOMPOK</div>
-    <div id="g_tiles"></div>
-
-    <!-- S3 KENAPA: panel keluarga ala leaderboard -->
-    <div class="bigtitle" id="t3">KELUARGA BILANGAN</div>
-    <div class="panel" id="fam">
-      <div class="hd center" id="fam_hd">KELUARGA BILANGAN</div>
-      <div id="fam_rows"></div>
-    </div>
-
-    <!-- S4 ATURAN: panel persamaan -->
-    <div class="bigtitle" id="t4">ATURAN SATU</div>
-    <div class="panel" id="eqp">
-      <div class="mono center" id="eq_t" style="font-weight:800;color:#FCD34D;">1/2 + 1/2 = 1</div>
-      <div class="center" id="eq_lab" style="color:#9FB0CE;font-weight:700;letter-spacing:.20em;">CARA BEBAS, HASIL SESUAI ATURAN</div>
-    </div>
-
-    <!-- S5 CTA: panel toko ala modeling -->
-    <div class="bigtitle" id="t5">PILIH SATU?</div>
-    <div class="panel center" id="cta">
-      <div id="f_open" style="color:#C9D6EE;font-weight:700;letter-spacing:.14em;">MENURUTMU, CUKUP SATU JENIS?</div>
-      <div id="f_open_e" style="color:#8FA3BF;font-weight:600;letter-spacing:.26em;">IS ONE KIND ENOUGH?</div>
-      <div id="f_url" class="mono" style="font-weight:800;opacity:0;">AKIOMIDA.COM</div>
-      <div id="f_bar" style="height:6px;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24);width:0;"></div>
-      <div class="goldpill" id="f_pill">TULIS DI KOMEN</div>
-    </div>
-
-    <!-- papan bawah tokoh: bola emas mentor (tanpa nama) + bayangan + kilat -->
-    <div id="ballsh"></div>
-    <div id="ball"></div>
-    <div id="spark" class="starclip" style="position:absolute;width:34px;height:34px;opacity:0;"></div>
-
-    <!-- panel pesan ala modeling: hanya isi pesan, tanpa nama pengirim -->
-    <div class="panel" id="chatp" style="opacity:0;">
-      <div class="msg" id="chatp_msg"></div>
-    </div>
+  <!-- papan pengumuman CTA (AKIOMIDA.COM reveal lambat di akhir) -->
+  <div class="board wood center" id="cta" style="opacity:0;">
+    <div id="f_open" style="color:#FFE9C2;font-weight:800;letter-spacing:.14em;">MENURUTMU, CUKUP SATU JENIS?</div>
+    <div id="f_open_e" style="color:#D9B98F;font-weight:600;letter-spacing:.26em;">IS ONE KIND ENOUGH?</div>
+    <div id="f_url" class="center" style="font-weight:800;opacity:0;">AKIOMIDA.COM</div>
+    <div id="f_bar" style="height:6px;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24);width:0;"></div>
+    <div class="goldpill" id="f_pill">TULIS DI KOMEN</div>
   </div>
 
   <div id="subbar">
     <div class="center" id="sub_id"></div>
     <div class="center" id="sub_en"></div>
   </div>
+
+  <!-- watermark AKIOMIDA: wajib selalu terlihat -->
+  <div id="wm">AKIOMIDA</div>
 
   <div class="vig"></div>
   <div id="grain"></div>
@@ -147,49 +161,53 @@ const ORIENT=Q.get('o')||'landscape';
 const W=ORIENT==='portrait'?1080:1920;
 const H=ORIENT==='portrait'?1920:1080;
 
-/* v07 rombak total ala modeling 60719beb: dunia pixel layar penuh,
-   teks besar nyaman (subtitle raksasa, judul raksasa, tokoh bernama),
-   satu ide per layar, panel gelap ala UI game. */
+/* v07 rombak total revisi 16: dunia nyata "Kota Bilangan" - gedung, kedai,
+   jalan raya dengan mobil, trotoar, pohon, lampu; siang menuju senja.
+   Karakter: bola emas mentor + lima teman bola, bermata, berkedip, menatap
+   subjek; TIDAK PERNAH menembus objek (semua properti di atas atau di
+   belakang band trotoar). Watermark AKIOMIDA wajib selalu terlihat. */
 const P = ORIENT==='portrait' ? {
-  groundY:1230, grassH:26,
-  plankY:988, plankN:4, plankW:236, plankGap:22,
-  blkY1:150, blkS1:150, blkG1:18, blkY2:520, blkS2:130,
-  titleY:330, titleS0:110, titleSN:86,
-  WAY:[[0.55,180],[1.5,320],[6.7,230],[8.85,650],[10.0,230],[12.2,650],[14.6,110],[25.7,110],[26.6,980],[32.9,980],[33.8,170],[36.6,170],[40.2,260],[51.9,260]],
-  ttX:[180,540,110,980,170,260],
-  tw0:[447,1.0], twGap:28, tileS:130, tagS:30,
-  gtGap:12, gtS:132, gtTag:26, gtDg:40, gtEn:14,
-  propX:[330,750],
-  famX:120, famY:470, famW:840, famHd:74, famRow:74, famName:30, famMem:40,
-  eqX:100, eqY:470, eqW:880, eqH:206, eqSize:88,
-  ctaX:80, ctaY:480, ctaW:920, ctaH:540, ctaOpen:38, ctaOpenE:17, ctaUrl:94,
-  subTop:1272, subId:50, subEn:24, subMax:900,
-  chatX:70, chatY:640, chatW:470, chatWho:27, chatMsg:32,
-  ballD:110, qX:846, qY:560, qSize:132,
-  wmY:1852, wmSize:20
+  bldBot:1050, roadTop:1050, roadBot:1128, walkTop:1128, walkBot:1252,
+  groundY:1218, backY:1142,
+  shopY:744, shopH:256, shopW:200, shopX:[70,310,550,790], awnY:702, awnH:44,
+  plqY:592, plqS:66, plqX0:407, plqGap:82,
+  qx:712, qy:580, qSize:96,
+  titleY:300, titleS0:104, titleSN:82,
+  friendX:[170,355,540,725,910], friendD:88, irrD:80,
+  plateY:1162, plateW:150, plateH:52, plateFS:26, stepRise:26, stepW:150, stepH:34,
+  slateX:30, slateBot:1238, slateW:300, slateH:196, eqFS:46, labFS:17,
+  ctaX:80, ctaY:500, ctaW:920, ctaH:540, ctaOff:[64,124,196], ctaPillB:44,
+  openFS:36, openEFS:16, urlFS:92,
+  pillW:430, pillH:74, pillFS:32,
+  subTop:1272, subId:50, subEn:24, subMax:920,
+  ballD:110, wmY:1848, wmFS:20,
+  treeX:[36,1060], treeS:1.0, lampX:[80,1000], lampH:210,
+  carY:1062, carW:210, carH:64, carH2:52,
+  plazaY:1128
 } : {
-  groundY:828, grassH:22,
-  plankY:662, plankN:5, plankW:320, plankGap:24,
-  blkY1:60, blkS1:130, blkG1:16, blkY2:470, blkS2:110,
-  titleY:240, titleS0:94, titleSN:80,
-  WAY:[[0.55,300],[1.5,480],[6.7,560],[8.85,1020],[10.0,560],[12.2,1020],[14.6,470],[25.7,470],[26.6,1620],[32.9,1620],[33.8,300],[36.6,300],[40.2,480],[51.9,480]],
-  ttX:[300,900,470,1560,300,420],
-  tw0:[756,1.0], twGap:28, tileS:120, tagS:27,
-  gtGap:12, gtS:124, gtTag:24, gtDg:36, gtEn:13,
-  propX:[660,1120],
-  famX:460, famY:380, famW:1000, famHd:56, famRow:62, famName:24, famMem:30,
-  eqX:510, eqY:470, eqW:900, eqH:180, eqSize:76,
-  ctaX:530, ctaY:380, ctaW:860, ctaH:440, ctaOpen:32, ctaOpenE:15, ctaUrl:82,
+  bldBot:560, roadTop:560, roadBot:634, walkTop:634, walkBot:812,
+  groundY:800, backY:742,
+  shopY:388, shopH:150, shopW:230, shopX:[130,630,1130,1630], awnY:350, awnH:34,
+  plqY:330, plqS:56, plqX0:830, plqGap:74,
+  qx:1128, qy:340, qSize:84,
+  titleY:225, titleS0:88, titleSN:72,
+  friendX:[300,630,960,1290,1620], friendD:76, irrD:70,
+  plateY:760, plateW:140, plateH:46, plateFS:22, stepRise:22, stepW:140, stepH:30,
+  slateX:250, slateBot:820, slateW:330, slateH:164, eqFS:40, labFS:15,
+  ctaX:530, ctaY:320, ctaW:860, ctaH:340, ctaOff:[40,90,130], ctaPillB:30,
+  openFS:30, openEFS:14, urlFS:80,
+  pillW:400, pillH:66, pillFS:28,
   subTop:830, subId:50, subEn:24, subMax:1400,
-  chatX:80, chatY:470, chatW:440, chatWho:24, chatMsg:29,
-  ballD:96, qX:1420, qY:300, qSize:118,
-  wmY:1018, wmSize:20
+  ballD:96, wmY:1016, wmFS:18,
+  treeX:[110,1810], treeS:0.9, lampX:[120,1800], lampH:170,
+  carY:574, carW:190, carH:56, carH2:46,
+  plazaY:634
 };
 const MX=60;
 const stage=document.getElementById('stage');
 stage.style.width=W+'px';stage.style.height=H+'px';
 
-/* ---------- easing & util ---------- */
+/* ---------- util & easing ---------- */
 const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
 const lerp=(a,b,p)=>a+(b-a)*p;
 const seg=(t,a,d)=>clamp((t-a)/d,0,1);
@@ -202,296 +220,398 @@ function popA(el,t,t0,d,ov,op0,op1){
   el.style.opacity=String(o);
   el.style.transform=`scale(${s2.toFixed(3)})`;
 }
-const mulberry=(s)=>()=>{s|=0;s=s+0x6D2B79F5|0;let q=Math.imul(s^s>>>15,1|s);q=q+Math.imul(q^q>>>7,61|q)^q;return((q^q>>>14)>>>0)/4294967296;};
-const rnd=mulberry(20261115);
+/* RNG berbenih (deterministik antar render) */
+let _seed=20261115;
+const rnd=()=>{_seed|=0;_seed=_seed+0x6D2B79F5|0;let z=Math.imul(_seed^_seed>>>15,1|_seed);
+  z=z+Math.imul(z^z>>>7,61|z)^z;return((z^z>>>14)>>>0)/4294967296;};
 
-/* ---------- langit: bintang + partikel digit ---------- */
-const stars=document.getElementById('stars');
-stars.style.cssText='position:absolute;inset:0;';
+/* ---------- langit: bintang + awan ---------- */
+const starsEl=document.getElementById('stars');
 const ST=[];
-for(let i=0;i<46;i++){
+for(let i=0;i<64;i++){
   const s=document.createElement('i');
-  const sz=(2+rnd()*3).toFixed(0);
-  s.style.cssText=`left:${(rnd()*W).toFixed(0)}px;top:${(rnd()*(P.groundY-140)).toFixed(0)}px;width:${sz}px;height:${sz}px;`;
-  stars.appendChild(s);
-  ST.push({el:s,ph:rnd()*6.28,sp:.5+rnd()*1.2});
+  const sz=(rnd()*2.4+1.2).toFixed(1);
+  s.style.cssText+=`width:${sz}px;height:${sz}px;left:${(rnd()*W).toFixed(0)}px;top:${(rnd()*P.bldBot*0.72).toFixed(0)}px;opacity:0;`;
+  starsEl.appendChild(s);
+  ST.push({el:s,sp:rnd()*1.4+0.6,ph:rnd()*6.28});
 }
-const parts=document.getElementById('particles');
-const CH='0123456789+=/\u00BD\u00B0\u00D7';
-const NP=18, PA=[];
-for(let i=0;i<NP;i++){
-  const el=document.createElement('span');
-  el.textContent=CH[Math.floor(rnd()*CH.length)];
-  el.style.fontSize=(15+rnd()*22).toFixed(0)+'px';
-  el.style.fontWeight=(rnd()<.3?'700':'400');
-  parts.appendChild(el);
-  PA.push({el,x:rnd()*W,y0:rnd()*H,sp:5+rnd()*11,wf:.3+rnd()*.7,ph:rnd()*6.28,o:.13+rnd()*.15});
+const cloudsEl=document.getElementById('clouds');
+const CL=[];
+for(let i=0;i<3;i++){
+  const c=document.createElement('div');
+  c.className='cloud';
+  const cw=[260,200,320][i], ch=76;
+  c.style.cssText+=`left:${(rnd()*W*0.8).toFixed(0)}px;top:${[120,250,90][i]*(ORIENT==='portrait'?1:0.8)}px;width:${cw}px;height:${ch}px;`;
+  [[0,22,110,54],[70,0,120,64],[150,30,100,44]].forEach(([bx,by,bw,bh])=>{
+    const b=document.createElement('b');
+    b.style.cssText+=`left:${bx}px;top:${by}px;width:${bw}px;height:${bh}px;`;
+    c.appendChild(b);
+  });
+  cloudsEl.appendChild(c);
+  CL.push({el:c,x:parseFloat(c.style.left),y:parseFloat(c.style.top),sp:rnd()*7+5,w:cw});
 }
 
-/* ---------- tanah, papan kayu, blok digit ---------- */
-const dirt=document.getElementById('dirt');
-const soil=document.getElementById('soil'), grass=document.getElementById('grass');
-soil.style.cssText+=`top:${P.grassH}px;bottom:0;`;
-grass.style.cssText+=`top:0;height:${P.grassH}px;`;
-dirt.style.cssText+=`top:${P.groundY}px;bottom:0;`;
-const planks=document.getElementById('planks');
+/* ---------- kota: deretan gedung berjendela ---------- */
+const townEl=document.getElementById('town');
+const WINS=[]; /* jendela yang menyala saat senja */
 {
-  const total=P.plankN*P.plankW+(P.plankN-1)*P.plankGap;
-  const x0=(W-total)/2;
-  for(let i=0;i<P.plankN;i++){
-    const s=document.createElement('div');s.className='plankseg';
-    s.style.cssText+=`left:${x0+i*(P.plankW+P.plankGap)}px;top:${P.plankY}px;width:${P.plankW}px;height:26px;`;
-    const l1=document.createElement('div');l1.className='plankleg';
-    l1.style.cssText+=`left:22px;top:${P.plankY+26}px;width:16px;height:14px;`;
-    const l2=document.createElement('div');l2.className='plankleg';
-    l2.style.cssText+=`left:${P.plankW-38}px;top:${P.plankY+26}px;width:16px;height:14px;`;
-    s.appendChild(l1);s.appendChild(l2);planks.appendChild(s);
-  }
-  const chips=['1','0','5','+'];
-  for(let i=0;i<3;i++){
-    const c=document.createElement('div');c.className='chipd';
-    c.style.cssText+=`left:${x0+60+i*310}px;top:${P.plankY-20}px;width:22px;height:22px;`+
-      `display:flex;align-items:center;justify-content:center;font-size:13px;`;
-    c.textContent=chips[i];
-    planks.appendChild(c);
-  }
-}
-const blocks=document.getElementById('blocks');
-const BLK=[];
-const ROWS1=['1','2','3','0','5'];
-const ROWS2=['1/2','\u03C0','-5\u00B0','7'];
-function buildBlkRow(list,y,sz,gap,fs){
-  const total=list.length*sz+(list.length-1)*gap;
-  const x0=(W-total)/2;
-  list.forEach((g,i)=>{
-    const b=document.createElement('div');b.className='digblk';
-    b.style.cssText+=`left:${x0+i*(sz+gap)}px;top:${y}px;width:${sz}px;height:${sz}px;opacity:0;`;
-    const t=document.createElement('b');
-    t.style.fontSize=fs+'px';t.textContent=g;
-    b.appendChild(t);blocks.appendChild(b);
-    BLK.push({el:b,ph:i*0.7+((y===P.blkY1)?0:2.1),t0:y===P.blkY1?0.35:0.85});
+  const cols=ORIENT==='portrait'
+    ? [[0,200,'#F3E2C7',430],[200,200,'#E8D3F0',560],[400,220,'#D8ECF4',500],[620,200,'#F6D5D0',620],[820,260,'#E7EFE0',470]]
+    : [[0,300,'#F3E2C7',420],[300,340,'#E8D3F0',500],[640,300,'#D8ECF4',400],[940,360,'#F6D5D0',540],[1300,320,'#E7EFE0',430],[1620,300,'#EFD9B8',470]];
+  cols.forEach(([bx,bw,col,bh],bi)=>{
+    const b=document.createElement('div');
+    b.className='bld';
+    b.style.cssText+=`left:${bx}px;width:${bw}px;height:${bh}px;background:${col};
+      box-shadow:inset 0 -14px 0 rgba(0,0,0,.10);top:${P.bldBot-bh}px;`;
+    /* grid jendela */
+    const nx=Math.max(2,Math.floor(bw/110)), ny=Math.max(2,Math.floor(bh/190));
+    for(let i=0;i<nx;i++)for(let j=0;j<ny;j++){
+      const w=document.createElement('div');
+      w.className='win';
+      const wx=bx+22+i*((bw-44-(nx-1)*26)/nx)+i*26, wy=P.bldBot-bh+30+j*((bh-60-(ny-1)*40)/ny)+j*40;
+      w.style.cssText+=`left:${wx}px;top:${wy}px;width:${(bw-44-(nx-1)*26)/nx}px;height:${Math.min(64,(bh-60-(ny-1)*40)/ny)}px;`;
+      townEl.appendChild(w);
+      if((i+j*nx)%3===1)WINS.push(w);
+    }
+    townEl.appendChild(b);
   });
 }
-buildBlkRow(ROWS1,P.blkY1,P.blkS1,P.blkG1,Math.round(P.blkS1*0.42));
-buildBlkRow(ROWS2,P.blkY2,P.blkS2,P.blkG1,Math.round(P.blkS2*0.36));
-
-/* ---------- tokoh utama: bola emas mentor (tanpa nama, tanpa label) ---------- */
-function buildGoldBall(host,d){
-  const el=document.createElement('div');
-  el.style.cssText=`position:absolute;left:${P.ttX[0]}px;top:${P.groundY}px;width:${d}px;height:${d}px;margin-left:${-d/2}px;transform-origin:50% 100%;will-change:transform,opacity,left;opacity:0;`;
-  const core=document.createElement('div');
-  core.style.cssText=`position:absolute;left:0;top:${-d}px;width:${d}px;height:${d}px;border-radius:50%;background:radial-gradient(circle at 33% 27%, #FFF3C4 0%, #FCD34D 34%, #F59E0B 68%, #B45309 100%);box-shadow:inset -7px -11px 20px rgba(120,53,15,.35), 0 0 50px rgba(251,191,36,.30);`;
-  el.appendChild(core);
-  const shine=document.createElement('div');
-  shine.style.cssText=`position:absolute;left:${d*0.18}px;top:${-d*0.89}px;width:${d*0.32}px;height:${d*0.18}px;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px);transform:rotate(-24deg);`;
-  el.appendChild(shine);
-  const sweat=document.createElement('div');
-  sweat.style.cssText=`position:absolute;left:${d*0.75}px;top:${-d*1.14}px;width:12px;height:16px;background:#7DD3FC;border-radius:2px 2px 60% 60%;opacity:0;will-change:transform,opacity;`;
-  el.appendChild(sweat);
-  host.appendChild(el);
-  return {el,core,shine,sweat};
-}
-function buildShadow(host){
-  const d=P.ballD;
-  const el=document.createElement('div');
-  el.style.cssText=`position:absolute;left:${P.ttX[0]}px;top:${P.groundY-8}px;width:${d*0.72}px;height:15px;margin-left:${-d*0.36}px;border-radius:50%;background:radial-gradient(ellipse at center, rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 72%);filter:blur(2px);opacity:0;will-change:transform,opacity,margin-left;`;
-  host.appendChild(el);
-  return el;
-}
-function buildTag(host,x,y,txt,sz){
-  const el=document.createElement('div');
-  el.className='nmtag';
-  el.style.cssText+=`left:${x-70}px;top:${y}px;width:140px;font-size:${sz}px;opacity:0;`;
-  el.textContent=txt;
-  host.appendChild(el);
-  return el;
-}
-/* ubin tokoh (teaser dan lima kelompok) */
-function buildTile(host,x,s,glyph,col,en,ts,dgfs,enfs){
-  const el=document.createElement('div');
-  el.className='gtile';
-  el.style.cssText+=`left:${x}px;top:${P.groundY-s}px;width:${s}px;height:${s}px;opacity:0;`+
-    `background:rgba(13,19,40,.92);border:2px solid ${col};`;
-  const d=document.createElement('div');
-  d.className='dg';d.style.cssText=`font-size:${dgfs}px;color:${col};`;d.textContent=glyph;
-  el.appendChild(d);
-  if(en){
-    const e2=document.createElement('div');
-    e2.className='en';e2.style.cssText=`font-size:${enfs}px;`;e2.textContent=en;
-    el.appendChild(e2);
-  }
-  host.appendChild(el);
-  return el;
-}
-const ball=buildGoldBall(document.getElementById('ball'),P.ballD);
-const ballsh=buildShadow(document.getElementById('ballsh'));
-const spark=document.getElementById('spark');
-/* kembaran bola seragam untuk demo belah dua (1/2 dan 1/2+1/2=1) */
-const ballB=document.createElement('div');
-ballB.style.cssText=`position:absolute;left:${P.ttX[4]}px;top:${P.groundY-Math.round(P.ballD*0.52)}px;width:${Math.round(P.ballD*0.52)}px;height:${Math.round(P.ballD*0.52)}px;margin-left:${-Math.round(P.ballD*0.26)}px;border-radius:50%;background:radial-gradient(circle at 33% 27%, #FFF3C4 0%, #FCD34D 34%, #F59E0B 68%, #B45309 100%);box-shadow:0 0 30px rgba(251,191,36,.22);opacity:0;will-change:transform,opacity,left;`;
-document.getElementById('ball').appendChild(ballB);
-
-/* ---------- S0: tiga kartu teaser sebagai tokoh ---------- */
-const hTiles=document.getElementById('h_tiles');
-const hQ=document.getElementById('h_q');
-hQ.style.cssText+=`left:${P.qX}px;top:${P.qY}px;font-size:${P.qSize}px;text-shadow:0 8px 0 rgba(0,0,0,.4);`;
-const TEAS=[
-  {g:'-5\u00B0',c:'#7DD3FC',n:'NEGATIF'},
-  {g:'1/2',c:'#34D399',n:'PECAHAN'},
-  {g:'\u03C0',c:'#A78BFA',n:'IRASIONAL'}
-];
-const TW=[];
-TEAS.forEach((o,i)=>{
-  const x=P.tw0[0]+i*(P.tileS+P.twGap);
-  const el=buildTile(hTiles,x,P.tileS,o.g,o.c,null,P.tileS,Math.round(P.tileS*0.36),0);
-  TW.push({el,t0:1.0+i*0.45,ph:i});
+/* plak nomor pintu 1 2 3 (hook, di muka gedung tengah) */
+const plaquesEl=document.getElementById('town');
+const PLQ=[];
+['1','2','3'].forEach((g,i)=>{
+  const p=document.createElement('div');
+  p.className='plaque';
+  p.style.cssText+=`left:${P.plqX0+i*P.plqGap}px;top:${P.plqY}px;width:${P.plqS}px;height:${P.plqS+8}px;opacity:0;`;
+  const b=document.createElement('b');
+  b.style.fontSize=Math.round(P.plqS*0.62)+'px';b.textContent=g;
+  p.appendChild(b);plaquesEl.appendChild(p);
+  PLQ.push({el:p,t0:0.9+i*0.22});
 });
+/* tanda tanya merah (hook) */
+const hQ=document.createElement('div');
+hQ.className='center mono';
+hQ.style.cssText+=`position:absolute;left:${P.qx}px;top:${P.qy}px;color:#E15B5B;font-weight:800;
+  font-size:${P.qSize}px;opacity:0;text-shadow:0 6px 0 rgba(0,0,0,.25);`;
+hQ.textContent='?';
+townEl.appendChild(hQ);
 
-/* ---------- S1: empat properti dunia ---------- */
-const aProps=document.getElementById('a_props');
-function propHost(x,w){
-  const el=document.createElement('div');
-  el.style.cssText=`position:absolute;left:${x-Math.round(w/2)}px;top:${P.groundY}px;width:${w}px;opacity:0;will-change:transform,opacity;`;
-  aProps.appendChild(el);
-  return el;
-}
-function px(pel,px2,py,w,h,col,extra){
-  const b=document.createElement('div');
-  b.style.cssText=`position:absolute;left:${px2}px;top:${py}px;width:${w}px;height:${h}px;background:${col};${extra||''}`;
-  pel.appendChild(b);
-  return b;
-}
-function buildBuku(){
-  const el=propHost(P.propX[0],220);
-  for(let i=0;i<5;i++){
-    const c=i%2?'#7DD3FC':'#FBBF24';
-    px(el,40,0-i*34-0,140,30,c,'border-radius:6px;box-shadow:inset 0 -6px 0 rgba(0,0,0,.25);');
-    px(el,40,0-i*34+4,140,6,'#0B1026','border-radius:3px;');
-  }
-  const tg=buildTag(el,110,-176,'5 BUKU',P.tagS);
-  return {el,tg};
-}
-function buildTermo(){
-  const el=propHost(P.propX[1],180);
-  px(el,74,-150,32,120,'#DDE7FF','border-radius:16px;');
-  px(el,80,-186,20,44,'#F87171','border-radius:9px;');
-  px(el,60,-42,60,52,'#F87171','border-radius:50%;');
-  px(el,80,-120,20,40,'#F87171','border-radius:8px;');
-  const tg=buildTag(el,110,-206,'-5\u00B0',P.tagS);
-  return {el,tg};
-}
-function buildPizza(){
-  const el=propHost(P.propX[0],220);
-  px(el,30,-140,160,80,'#FBBF24','border-radius:0 0 160px 160px;');
-  px(el,30,-140,160,16,'#F59E0B','border-radius:0;');
-  for(let i=0;i<4;i++){ px(el,52+i*30,-108,20,20,'#F87171','border-radius:50%;'); }
-  px(el,104,-152,12,14,'#9FB0CE','border-radius:3px;');
-  const tg=buildTag(el,110,-186,'1/2',P.tagS);
-  return {el,tg};
-}
-function buildLingkaran(){
-  const el=propHost(P.propX[1],220);
-  const c2=px(el,30,-160,160,160,'#A78BFA','border-radius:50%;');
-  c2.style.background='radial-gradient(circle at 36% 30%, #DDD3FF 0%, #A78BFA 58%, #6D4FD1 100%)';
-  const g2=document.createElement('div');
-  g2.className='mono';
-  g2.style.cssText=`position:absolute;left:30px;top:-160px;width:160px;height:160px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:64px;color:#1A1206;`;
-  g2.textContent='\u03C0';
-  el.appendChild(g2);
-  const tg=buildTag(el,110,-206,'LINGKARAN',P.tagS);
-  return {el,tg};
-}
-const PROPS=[buildBuku(),buildTermo(),buildPizza(),buildLingkaran()];
-/* ---------- S2: lima tokoh kelompok ---------- */
-const gTiles=document.getElementById('g_tiles');
-const GROUPS=[
-  {name:'ASLI', ex:'1 2 3', en:'NATURAL', col:'#7DD3FC', t0:18.4},
-  {name:'CACAH', ex:'0 1 2', en:'WHOLE', col:'#7DD3FC', t0:19.0},
-  {name:'BULAT', ex:'-2 -1 0', en:'INTEGER', col:'#7DD3FC', t0:19.6},
-  {name:'RASIONAL', ex:'1/2 3/4', en:'RATIONAL', col:'#34D399', t0:20.0},
-  {name:'IRASIONAL', ex:'\u221A2 \u03C0', en:'IRRATIONAL', col:'#FBBF24', t0:23.5}
-];
-const GT=[];
+/* ---------- empat jendela kedai berisi situasi nyata ---------- */
+const SHOPS=[];
 {
-  const total=5*P.gtS+4*P.gtGap;
-  const x0=(W-total)/2;
-  GROUPS.forEach((o,i)=>{
-    const x=x0+i*(P.gtS+P.gtGap);
-    const dgfs=o.ex.length>5?Math.round(P.gtDg*0.7):P.gtDg;
-    const el=buildTile(gTiles,x,P.gtS,o.ex,o.col,o.en,P.gtS,dgfs,P.gtEn);
-    if(i===4){el.style.borderColor='rgba(251,191,36,.65)';el.style.background='rgba(251,191,36,.10)';
-      el.style.boxShadow='0 14px 34px rgba(0,0,0,.5),0 0 40px rgba(251,191,36,.25)';}
-    GT.push({el,t0:o.t0});
+  const defs=[
+    {x:P.shopX[0],t0:6.9,kind:'books'},
+    {x:P.shopX[1],t0:8.85,kind:'thermo'},
+    {x:P.shopX[2],t0:10.35,kind:'pizza'},
+    {x:P.shopX[3],t0:10.45,kind:'pi'}
+  ];
+  defs.forEach((d,i)=>{
+    const w=document.createElement('div');
+    w.className='shopwin';
+    w.style.cssText+=`left:${d.x}px;top:${P.shopY}px;width:${P.shopW}px;height:${P.shopH}px;opacity:0;`;
+    const awn=document.createElement('div');
+    awn.className='awn';
+    awn.style.cssText+=`left:${d.x-8}px;top:${P.awnY}px;width:${P.shopW+16}px;height:${P.awnH}px;opacity:0;`;
+    const chip=document.createElement('div');
+    chip.className='chip';
+    chip.style.cssText+=`left:${d.x+P.shopW*0.16}px;top:${P.shopY+P.shopH-40}px;width:${P.shopW*0.68}px;height:34px;
+      font-size:${ORIENT==='portrait'?20:16}px;line-height:34px;opacity:0;`;
+    townEl.appendChild(w);townEl.appendChild(awn);townEl.appendChild(chip);
+    const sit=document.createElement('div');
+    sit.className='sit';
+    w.appendChild(sit);
+    SHOPS.push({win:w,awn,sit,chip,t0:d.t0,kind:d.kind});
   });
+  /* isi situasi (dibangun sekali, muncul bersama jendela) */
+  const [bw,bh]=[P.shopW,P.shopH];
+  const S=SHOPS;
+  /* kedai buku: lima buku bertumpuk */
+  {
+    const cols=['#E15B5B','#5B8FE1','#4FA35C','#F2C230','#A78BFA'];
+    cols.forEach((c,i)=>{
+      const b=document.createElement('div');
+      b.style.cssText=`position:absolute;left:${bw*0.3-(i%2)*8}px;top:${bh-58-(i+1)*26}px;width:${bw*0.42-(i%2)*6}px;height:22px;
+        border-radius:4px;background:${c};box-shadow:inset 0 -5px 0 rgba(0,0,0,.2);`;
+      S[0].sit.appendChild(b);
+    });
+    S[0].chip.textContent='5 BUKU';
+  }
+  /* kafe dingin: termometer -5 derajat */
+  {
+    const tube=document.createElement('div');
+    tube.style.cssText=`position:absolute;left:${bw*0.42}px;top:${bh*0.12}px;width:${bw*0.18}px;height:${bh*0.62}px;
+      border-radius:99px;background:#FFFFFF;border:3px solid #B9C4D4;overflow:hidden;`;
+    const red=document.createElement('div');
+    red.style.cssText=`position:absolute;left:0;bottom:0;width:100%;height:38%;background:#E15B5B;`;
+    tube.appendChild(red);S[1].sit.appendChild(tube);
+    const bulb=document.createElement('div');
+    bulb.style.cssText=`position:absolute;left:${bw*0.42+bw*0.06}px;top:${bh*0.74}px;width:${bw*0.18}px;height:${bw*0.18}px;
+      border-radius:50%;background:#E15B5B;`;
+    S[1].sit.appendChild(bulb);
+    for(let i=0;i<4;i++){
+      const f=document.createElement('div');
+      f.style.cssText=`position:absolute;left:${bw*(0.16+i*0.06)}px;top:${bh*(0.16+i*0.1)}px;width:9px;height:9px;
+        border-radius:50%;background:#BFE3FF;`;
+      S[1].sit.appendChild(f);
+    }
+    S[1].chip.textContent='-5\u00B0';
+  }
+  /* kedai pizza: setengah lingkaran */
+  {
+    const half=document.createElement('div');
+    half.style.cssText=`position:absolute;left:${bw*0.24}px;top:${bh*0.24}px;width:${bw*0.52}px;height:${bw*0.52}px;
+      border-radius:50%;background:conic-gradient(from 90deg,#E8B25B 0deg 180deg,transparent 180deg 360deg);
+      border:3px solid #C98A2E;`;
+    S[2].sit.appendChild(half);
+    const ln=document.createElement('div');
+    ln.style.cssText=`position:absolute;left:${bw*0.5}px;top:${bh*0.24}px;width:3px;height:${bw*0.52}px;background:#C98A2E;`;
+    S[2].sit.appendChild(ln);
+    S[2].chip.textContent='1/2';
+  }
+  /* kedai roti: lingkaran dengan pi */
+  {
+    const cir=document.createElement('div');
+    cir.style.cssText=`position:absolute;left:${bw*0.22}px;top:${bh*0.2}px;width:${bw*0.56}px;height:${bw*0.56}px;
+      border-radius:50%;border:10px solid #5B8FE1;background:transparent;`;
+    S[3].sit.appendChild(cir);
+    const pi=document.createElement('div');
+    pi.className='mono';
+    pi.style.cssText=`position:absolute;left:${bw*0.22}px;top:${bh*0.2}px;width:${bw*0.56}px;height:${bw*0.56}px;
+      display:flex;align-items:center;justify-content:center;font-weight:800;color:#35507A;
+      font-size:${Math.round(bw*0.2)}px;`;
+    pi.textContent='\u03C0';
+    S[3].sit.appendChild(pi);
+    S[3].chip.textContent='LINGKARAN';
+  }
 }
 
-/* ---------- S3: panel keluarga ala leaderboard ---------- */
-const fam=document.getElementById('fam');
-fam.style.cssText+=`left:${P.famX}px;top:${P.famY}px;width:${P.famW}px;padding:0 0 18px 0;border:2px solid rgba(251,191,36,.55);`;
-const famHd=document.getElementById('fam_hd');
-famHd.style.cssText+=`height:${P.famHd}px;line-height:${P.famHd}px;font-size:34px;background:rgba(251,191,36,.10);border-radius:17px 17px 0 0;letter-spacing:.14em;`;
-famHd.textContent='ANGGOTA KELUARGA';
-const famRows=document.getElementById('fam_rows');
-const FROW=[];
-GROUPS.forEach((o,i)=>{
-  const r=document.createElement('div');
-  r.className='prow';
-  const ry=P.famHd+16+i*(P.famRow+12);
-  r.style.cssText+=`top:${ry}px;height:${P.famRow}px;margin:0 16px;padding:0 26px;`;
-  const nm=document.createElement('div');
-  nm.style.cssText=`font-size:${P.famName}px;font-weight:800;color:${o.col};letter-spacing:.10em;`;
-  nm.textContent=o.name;
-  const mem=document.createElement('div');
-  mem.className='mono';
-  mem.style.cssText=`font-size:${P.famMem}px;font-weight:800;color:#FFFFFF;`;
-  mem.textContent=o.ex;
-  r.appendChild(nm);r.appendChild(mem);
-  if(i===4){r.style.border='2px solid rgba(251,191,36,.5)';mem.style.color='#FCD34D';}
-  famRows.appendChild(r);
-  FROW.push({el:r,t0:[27.0,28.2,29.4,30.6,31.8][i]});
+/* ---------- jalan raya + mobil + trotoar + plaza ---------- */
+const road=document.getElementById('road');
+road.style.cssText+=`top:${P.roadTop}px;height:${P.roadBot-P.roadTop}px;`;
+const roadmark=document.getElementById('roadmark');
+roadmark.style.top=(P.roadTop+(P.roadBot-P.roadTop)/2-4)+'px';
+const curb=document.getElementById('curb');
+curb.style.cssText+=`top:${P.walkTop-8}px;height:8px;`;
+const walkEl=document.getElementById('walk');
+walkEl.style.cssText+=`top:${P.walkTop}px;height:${H-P.walkTop}px;`;
+const plaza=document.getElementById('plaza');
+plaza.style.cssText+=`top:${P.plazaY}px;height:${P.groundY+30-P.plazaY}px;`;
+const carsEl=document.getElementById('cars');
+const CARS=[];
+[['#E15B5B',P.carW,P.carH],['#5B8FE1',P.carW*0.9,P.carH2]].forEach(([col,cw,ch],i)=>{
+  const c=document.createElement('div');
+  c.className='car';
+  c.style.cssText+=`left:0;top:${P.carY+(i?P.carH-P.carH2-4:0)}px;width:${cw}px;height:${ch}px;opacity:0;`;
+  const body=document.createElement('div');
+  body.className='body';
+  body.style.cssText+=`width:100%;height:100%;background:${col};`;
+  c.appendChild(body);
+  const top=document.createElement('div');
+  top.className='top';
+  top.style.cssText+=`left:${cw*0.2}px;top:${-ch*0.36}px;width:${cw*0.55}px;height:${ch*0.4}px;background:${col};`;
+  c.appendChild(top);
+  [[cw*0.16],[cw*0.68]].forEach(([wx])=>{
+    const wh=document.createElement('div');
+    wh.className='wh';
+    wh.style.left=wx+'px';
+    c.appendChild(wh);
+  });
+  carsEl.appendChild(c);
+  CARS.push({el:c,w:cw,dir:1});
 });
 
-/* ---------- S4: panel persamaan ---------- */
-const eqp=document.getElementById('eqp');
-eqp.style.cssText+=`left:${P.eqX}px;top:${P.eqY}px;width:${P.eqW}px;height:${P.eqH}px;border:2px solid rgba(251,191,36,.55);`;
-const eqT=document.getElementById('eq_t');
-eqT.style.cssText+=`position:absolute;left:0;right:0;top:26px;font-size:${P.eqSize}px;text-shadow:0 6px 26px rgba(251,191,36,.30);`;
-const eqLab=document.getElementById('eq_lab');
-eqLab.style.cssText+=`position:absolute;left:0;right:0;bottom:24px;font-size:24px;`;
+/* ---------- pohon, lampu, bangku ---------- */
+const propsEl=document.getElementById('streetprops');
+const TREES=[];
+P.treeX.forEach((x,i)=>{
+  const t=document.createElement('div');
+  t.className='tree';
+  const s=P.treeS*(i?1.1:0.95), th=150*s, tw=120*s;
+  t.style.cssText+=`left:${x}px;top:${P.groundY-th}px;width:${tw}px;height:${th}px;transform-origin:50% 100%;`;
+  const trunk=document.createElement('div');
+  trunk.className='trunk';trunk.style.height=(th*0.42)+'px';
+  t.appendChild(trunk);
+  [[-8,0,tw*0.6],[tw*0.22,-34*s,tw*0.62],[tw*0.02,-64*s,tw*0.72]].forEach(([lx,ly,lw])=>{
+    const l=document.createElement('div');
+    l.className='leaf';
+    l.style.cssText+=`left:${lx}px;top:${ly}px;width:${lw}px;height:${lw*0.82}px;`;
+    t.appendChild(l);
+  });
+  propsEl.appendChild(t);
+  TREES.push({el:t,ph:i*2.1});
+});
+/* lampu jalan foreground: berdiri di sudut bawah layar (depan kamera),
+   sehingga tidak pernah dilintasi bola yang menggelinding di trotoar */
+const LAMPS=[];
+P.lampX.forEach((x,i)=>{
+  const l=document.createElement('div');
+  l.className='lamp';
+  l.style.cssText+=`left:${x}px;top:${H-P.lampH}px;width:40px;height:${P.lampH}px;`;
+  const pole=document.createElement('div');
+  pole.className='pole';pole.style.height=(P.lampH-14)+'px';
+  l.appendChild(pole);
+  const head=document.createElement('div');
+  head.className='head';head.style.top='0px';
+  l.appendChild(head);
+  const glow=document.createElement('div');
+  glow.className='glow';glow.style.top=(-70)+'px';
+  l.appendChild(glow);
+  propsEl.appendChild(l);
+  LAMPS.push({el:l,glow,ph:i*0.9});
+});
 
-/* ---------- S5: panel toko CTA ---------- */
+/* ---------- papan tulis kafe (S4) + podium tangga (S3) ---------- */
+const slate=document.createElement('div');
+slate.className='board slate center';
+slate.style.cssText+=`left:${P.slateX}px;top:${P.slateBot-P.slateH}px;width:${P.slateW}px;height:${P.slateH}px;opacity:0;`;
+const eqT=document.createElement('div');
+eqT.className='mono';
+eqT.style.cssText+=`margin-top:${Math.round(P.slateH*0.16)}px;font-weight:800;color:#FFF7D6;
+  font-size:${P.eqFS}px;text-shadow:0 0 18px rgba(255,247,214,.35);`;
+eqT.textContent='1/2+1/2=1';
+slate.appendChild(eqT);
+const eqLab=document.createElement('div');
+eqLab.style.cssText+=`margin-top:${Math.round(P.slateH*0.1)}px;color:#BFD3E0;font-weight:700;
+  letter-spacing:.14em;font-size:${P.labFS}px;`;
+eqLab.textContent='CARA BEBAS, HASIL SESUAI ATURAN';
+slate.appendChild(eqLab);
+propsEl.appendChild(slate);
+
+const STEPS=[];
+for(let i=0;i<5;i++){
+  const st=document.createElement('div');
+  st.className='step';
+  st.style.cssText+=`left:${P.friendX[i]-P.stepW/2}px;top:${P.backY-(i+1)*P.stepRise}px;
+    width:${P.stepW}px;height:${P.stepH}px;opacity:0;`;
+  propsEl.appendChild(st);
+  STEPS.push({el:st,t0:26.9+i*0.1});
+}
+
+/* ---------- papan pengumuman CTA ---------- */
 const cta=document.getElementById('cta');
-cta.style.cssText+=`left:${P.ctaX}px;top:${P.ctaY}px;width:${P.ctaW}px;height:${P.ctaH}px;border:2px solid rgba(167,139,250,.5);`;
+cta.style.cssText+=`left:${P.ctaX}px;top:${P.ctaY}px;width:${P.ctaW}px;height:${P.ctaH}px;`;
 const fOpen=document.getElementById('f_open');
-fOpen.style.cssText+=`position:absolute;left:40px;right:40px;top:64px;font-size:${P.ctaOpen}px;`;
+fOpen.style.cssText+=`position:absolute;left:40px;right:40px;top:${P.ctaOff[0]}px;font-size:${P.openFS}px;`;
 const fOpenE=document.getElementById('f_open_e');
-fOpenE.style.cssText+=`position:absolute;left:40px;right:40px;top:124px;font-size:${P.ctaOpenE}px;`;
+fOpenE.style.cssText+=`position:absolute;left:40px;right:40px;top:${P.ctaOff[1]}px;font-size:${P.openEFS}px;`;
 const fUrl=document.getElementById('f_url');
-fUrl.style.cssText+=`position:absolute;left:40px;right:40px;top:196px;font-size:${P.ctaUrl}px;
+fUrl.style.cssText+=`position:absolute;left:40px;right:40px;top:${P.ctaOff[2]}px;font-size:${P.urlFS}px;
   background:linear-gradient(92deg,#22D3EE 0%,#A78BFA 52%,#FBBF24 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;`;
 const fBar=document.getElementById('f_bar');
-fBar.style.cssText+=`position:absolute;left:40px;top:${196+Math.round(P.ctaUrl*1.32)}px;width:0;`;
+fBar.style.cssText+=`position:absolute;left:40px;top:${P.ctaOff[2]+Math.round(P.urlFS*1.32)}px;width:0;`;
 const fPill=document.getElementById('f_pill');
-fPill.style.cssText+=`left:${Math.round((P.ctaW-430)/2)}px;bottom:44px;width:430px;height:74px;font-size:34px;letter-spacing:.10em;`;
+fPill.style.cssText+=`left:${Math.round((P.ctaW-P.pillW)/2)}px;bottom:${P.ctaPillB}px;width:${P.pillW}px;height:${P.pillH}px;
+  font-size:${P.pillFS}px;letter-spacing:.10em;`;
 
-/* ---------- judul raksasa + panel pesan ---------- */
-const TITLES=[['t0',0.35],['t1',6.6],['t2',17.0],['t3',25.9],['t4',32.9],['t5',40.2]]
-  .map(([id,t0])=>({el:document.getElementById(id),t0:t0}));
-TITLES.forEach((o,i)=>{
-  o.el.style.top=(i===0?P.titleY:P.titleY+18)+'px';
-  o.el.style.fontSize=(i===0?P.titleS0:P.titleSN)+'px';
-  if(i===0||i===2||i===4)o.el.style.color='#FCD34D';
-  else o.el.style.color='#FFFFFF';
-  if(i>0)o.el.style.top=(P.titleY+8)+'px';
+/* ---------- karakter bola: mentor emas + lima teman (bermata) ---------- */
+function makeBall(host,cols,d,opts){
+  const el=document.createElement('div');
+  el.className='bchar';
+  el.style.cssText+=`width:${d}px;height:${d}px;margin-left:${-d/2}px;opacity:0;`;
+  const core=document.createElement('div');
+  core.style.cssText+=`left:0;top:0;width:${d}px;height:${d}px;
+    background:radial-gradient(circle at 33% 27%, ${cols[0]} 0%, ${cols[1]} 42%, ${cols[2]} 100%);
+    box-shadow:0 0 ${d*0.5}px ${opts&&opts.glow?cols[1]:'rgba(20,30,50,.0)'}55;`;
+  el.appendChild(core);
+  const shine=document.createElement('div');
+  shine.style.cssText+=`left:${d*0.18}px;top:${d*0.1}px;width:${d*0.3}px;height:${d*0.17}px;transform:rotate(-24deg);`;
+  el.appendChild(shine);
+  const eyes=document.createElement('div');
+  eyes.style.cssText+=`left:${d*0.22}px;top:${d*0.34}px;width:${d*0.56}px;height:${d*0.2}px;`;
+  const pupils=[];
+  [0,1].forEach(s=>{
+    const e=document.createElement('div');
+    e.className='eye';
+    e.style.cssText+=`${s?'right':'left'}:0;top:0;width:${d*0.2}px;height:${d*0.2}px;`;
+    const pu=document.createElement('div');
+    pu.className='pupil';
+    pu.style.cssText+=`left:${d*0.055}px;top:${d*0.05}px;width:${d*0.09}px;height:${d*0.09}px;`;
+    e.appendChild(pu);
+    eyes.appendChild(e);
+    pupils.push({el:pu,e});
+  });
+  el.appendChild(eyes);
+  const bl1=document.createElement('div');
+  bl1.className='blush';
+  bl1.style.cssText+=`left:${d*0.08}px;top:${d*0.58}px;width:${d*0.14}px;height:${d*0.08}px;`;
+  el.appendChild(bl1);
+  const bl2=document.createElement('div');
+  bl2.className='blush';
+  bl2.style.cssText+=`left:${d*0.78}px;top:${d*0.58}px;width:${d*0.14}px;height:${d*0.08}px;`;
+  el.appendChild(bl2);
+  host.appendChild(el);
+  return {el,core,eyes,pupils,d,ph:(opts&&opts.ph)||0};
+}
+const charsEl=document.getElementById('chars');
+const GROUPS=[
+  {name:'ASLI',ex:'1 2 3',c:['#CBE9FF','#38BDF8','#1D6FA5']},
+  {name:'CACAH',ex:'0 1 2',c:['#E2D9FF','#A78BFA','#5B3FA8']},
+  {name:'BULAT',ex:'-2 -1 0',c:['#FBD0E6','#F472B6','#B03A78']},
+  {name:'RASIONAL',ex:'1/2 3/4',c:['#C4F5DF','#34D399','#178F63']},
+  {name:'IRASIONAL',ex:'\u221A2 \u03C0',c:['#FDE9AE','#FBBF24','#A8720B']}
+];
+const FRIENDS=[];
+GROUPS.forEach((g,i)=>{
+  const d=i===4?P.irrD:P.friendD;
+  const f=makeBall(charsEl,g.c,d,{ph:i*1.3});
+  const sh=document.createElement('div');
+  sh.className='bsh';
+  sh.style.cssText+=`width:${d*0.8}px;height:13px;margin-left:${-d*0.4}px;top:-9px;`;
+  charsEl.appendChild(sh);
+  const pl=document.createElement('div');
+  pl.className='gplate';
+  pl.style.cssText+=`left:${P.friendX[i]-P.plateW/2}px;top:${P.plateY}px;width:${P.plateW}px;height:${P.plateH}px;
+    font-size:${P.plateFS}px;border-color:${g.c[2]};opacity:0;`;
+  pl.textContent=g.ex;
+  propsEl.appendChild(pl);
+  FRIENDS.push({ball:f,sh,pl,t0:[17.4,18.0,18.6,20.0,23.5][i],hopT0:[27.0,28.2,29.4,30.6,31.8][i]});
 });
-const CHATS=[[8.9,10.0,'dingin!'],[19.3,21.0,'lima kelompok!'],[39.3,40.9,'jadi 1!']];
-const chatp=document.getElementById('chatp');
-const chatMsg=document.getElementById('chatp_msg');
-chatp.style.cssText+=`left:${P.chatX}px;top:${P.chatY}px;width:${P.chatW}px;padding:20px 26px;`;
-chatMsg.style.fontSize=P.chatMsg+'px';
+/* bayangan mentor (di bawah mentor, di atas teman) */
+const msh=document.createElement('div');
+msh.className='bsh';
+msh.style.cssText+=`width:${P.ballD*0.8}px;height:15px;margin-left:${-P.ballD*0.4}px;top:-10px;`;
+charsEl.appendChild(msh);
+/* mentor ditambahkan terakhir agar berada di lapisan paling depan */
+const mentor=makeBall(charsEl,['#FFF3C4','#FCD34D','#B45309'],P.ballD,{ph:0,glow:true});
+/* kembaran bola emas untuk demo belah dua (1/2 dan 1/2+1/2=1) */
+const ballB=document.createElement('div');
+ballB.style.cssText+=`position:absolute;left:${P.ctaX}px;top:${P.groundY-Math.round(P.ballD*0.52)}px;
+  width:${Math.round(P.ballD*0.52)}px;height:${Math.round(P.ballD*0.52)}px;margin-left:${-Math.round(P.ballD*0.26)}px;
+  border-radius:50%;background:radial-gradient(circle at 33% 27%, #FFF3C4 0%, #FCD34D 34%, #F59E0B 68%, #B45309 100%);
+  box-shadow:0 0 30px rgba(251,191,36,.25);opacity:0;will-change:transform,opacity;`;
+charsEl.appendChild(ballB);
+/* percikan bintang emas */
+const spark=document.createElement('div');
+spark.className='starclip';
+spark.style.cssText+=`position:absolute;width:34px;height:34px;opacity:0;`;
+charsEl.appendChild(spark);
 
-/* ---------- narasi (16 beat, durasi proporsional panjang teks agar terbaca tuntas) ---------- */
+/* ---------- kunang-kunang senja (S5) ---------- */
+const firefliesEl=document.getElementById('fireflies');
+const FF=[];
+for(let i=0;i<12;i++){
+  const f=document.createElement('div');
+  f.style.cssText+=`position:absolute;border-radius:50%;width:7px;height:7px;background:#FFE9A8;
+    box-shadow:0 0 12px rgba(255,233,168,.9);opacity:0;will-change:transform,opacity;`;
+  firefliesEl.appendChild(f);
+  FF.push({el:f,x:rnd()*W,y:P.groundY-40-rnd()*220,sp:rnd()*1.4+0.5,ph:rnd()*6.28,amp:rnd()*22+8});
+}
+
+/* subjudul + watermark */
+const subbar=document.getElementById('subbar');
+const subId=document.getElementById('sub_id');
+const subEn=document.getElementById('sub_en');
+subId.style.fontSize=P.subId+'px';
+subEn.style.fontSize=P.subEn+'px';
+subEn.style.marginTop='6px';
+subbar.style.top=P.subTop+'px';
+subbar.style.maxWidth=P.subMax+'px';
+subbar.style.width='max-content';
+const wm=document.getElementById('wm');
+wm.style.cssText+=`top:${P.wmY}px;font-size:${P.wmFS}px;left:50%;transform:translateX(-50%);
+  width:max-content;padding:9px 30px;background:rgba(14,22,42,.46);border-radius:999px;`;
+/* ---------- narasi (16 beat, tetap sama - dunianya yang berganti) ---------- */
 const SUBS=[
   [0.50,'Bilangan itu cuma 1, 2, 3?','Is counting only 1, 2, 3?','#FFFFFF'],
   [2.98,'Padahal, matematika tidak sesempit itu.','Math is not that narrow.','#FFFFFF'],
@@ -510,15 +630,6 @@ const SUBS=[
   [47.52,'Tulis alasanmu di komentar.','Write your reason in the comments.','#FBBF24'],
   [50.07,'Jangan cuma menebak.','Do not just guess.','#FFFFFF']
 ];
-const subbar=document.getElementById('subbar');
-const subId=document.getElementById('sub_id');
-const subEn=document.getElementById('sub_en');
-subId.style.fontSize=P.subId+'px';
-subEn.style.fontSize=P.subEn+'px';
-subEn.style.marginTop='6px';
-subbar.style.top=P.subTop+'px';
-subbar.style.maxWidth=P.subMax+'px';
-subbar.style.width='max-content';
 let subIdx=-1;
 function renderSub(t){
   let i=0;
@@ -536,31 +647,33 @@ function renderSub(t){
   subbar.style.transform=`translateX(-50%) scale(${pop.toFixed(3)})`;
 }
 
-/* ---------- beat, masterplan gerakan & gestur bersih (tanpa gepeng) ---------- */
+/* ---------- judul bab ---------- */
+const TITLES=[['t0',0.35],['t1',6.6],['t2',17.0],['t3',25.9],['t4',32.9],['t5',40.2]]
+  .map(([id,t0])=>({el:document.getElementById(id),t0:t0}));
+TITLES.forEach((o,i)=>{
+  o.el.style.top=(i===0?P.titleY:P.titleY+14)+'px';
+  o.el.style.fontSize=(i===0?P.titleS0:P.titleSN)+'px';
+  if(i===0||i===2||i===4)o.el.style.color='#FFE9A8';
+});
+
+/* ---------- beat, masterplan mentor, tatapan, gestur ---------- */
 const SCENE_T=[6.6,17.0,25.9,32.9,40.2];
 const IMP=[0.6,6.6,17.0,25.9,32.9,40.2,13.76,23.47,29.65,44.14,49.0];
 const SPARKS=[[39.3,40.2],[47.5,51.2]];
-const SPLIT=[[10.0,11.3],[38.6,39.8]];
+const SPLIT=[[10.4,11.35],[38.6,39.8]];
 const GESTS=[
-  [1.3,0.8,'nod',3,0],
-  [4.9,0.7,'tilt',7,0],
-  [7.0,1.7,'count',22,0],
-  [8.9,0.6,'shiver',5,0],
-  [15.8,0.5,'tilt',3,0],
-  [16.7,0.5,'tilt',-3,0],
-  [17.6,0.9,'sink',34,0],
-  [19.6,0.6,'tilt',3,0],
-  [23.5,1.3,'spin',720,0],
-  [27.0,0.5,'pulse',1.05,0],
-  [28.2,0.5,'pulse',1.05,0],
-  [29.4,0.5,'pulse',1.05,0],
-  [30.6,0.5,'pulse',1.05,0],
-  [31.8,0.5,'pulse',1.05,0],
-  [33.2,0.9,'nod',3,0],
-  [40.6,0.8,'tilt',-4,0],
-  [44.3,0.7,'tilt',5,0],
-  [47.6,0.8,'lean',4,0],
-  [49.0,0.85,'jump',34,0]
+  [1.3,0.8,'nod',3],
+  [4.9,0.7,'shiver',5],
+  [7.0,1.7,'count',18],
+  [8.9,0.6,'shiver',4],
+  [17.6,0.9,'nod',3],
+  [19.6,0.6,'tilt',3],
+  [23.5,1.3,'spin',720],
+  [27.0,0.5,'tilt',3],
+  [33.2,0.9,'nod',3],
+  [44.3,0.7,'tilt',5],
+  [47.6,0.8,'lean',4],
+  [49.0,0.85,'jump',34]
 ];
 function imp(t){
   let a=0;
@@ -570,119 +683,203 @@ function imp(t){
   }
   return a;
 }
+const WAY = ORIENT==='portrait'
+  ? [[0.55,120],[2.4,430],[6.6,430],[6.9,170],[8.8,410],[10.0,410],[10.05,650],[11.4,650],[12.2,860],[14.0,860],[15.2,540],[51.9,540]]
+  : [[0.55,210],[2.4,760],[6.6,760],[6.9,300],[8.8,730],[10.0,730],[10.05,1160],[11.4,1160],[12.2,1530],[14.0,1530],[15.2,960],[51.9,960]];
+/* titik tatapan mentor (fungsi murni dari P) */
+const LOOK=[
+  [0.8,P.plqX0+P.plqGap,P.plqY+30],
+  [2.6,W/2,P.groundY-560],
+  [6.9,P.shopX[0]+P.shopW/2,P.shopY+P.shopH*0.45],
+  [8.8,P.shopX[1]+P.shopW/2,P.shopY+P.shopH*0.45],
+  [10.4,P.shopX[2]+P.shopW/2,P.shopY+P.shopH*0.45],
+  [12.2,P.shopX[3]+P.shopW/2,P.shopY+P.shopH*0.45],
+  [15.5,W/2,P.backY-40],
+  [17.6,P.friendX[0],P.backY-55],
+  [20.0,P.friendX[3],P.backY-55],
+  [23.6,P.friendX[4],P.backY-55],
+  [27.0,P.friendX[0],P.backY-45],
+  [31.8,P.friendX[4],P.backY-45],
+  [36.7,P.slateX+P.slateW/2,P.slateBot-P.slateH*0.5],
+  [41.2,W/2,P.ctaY+P.ctaH*0.5],
+  [45.9,W/2,P.ctaY+P.ctaH*0.35],
+  [50.3,W/2,P.ctaY+P.ctaH*0.5]
+];
+function lookAt(t){
+  let a=LOOK[0];
+  for(let k=0;k<LOOK.length-1;k++){
+    if(t>=LOOK[k][0]&&t<LOOK[k+1][0]){
+      const p=eio(seg(t,LOOK[k][0],LOOK[k+1][0]-LOOK[k][0]));
+      return [lerp(LOOK[k][1],LOOK[k+1][1],p),lerp(LOOK[k][2],LOOK[k+1][2],p)];
+    }
+  }
+  return [LOOK[LOOK.length-1][1],LOOK[LOOK.length-1][2]];
+}
+const blinkK=(t,ph)=>{const c=(t+ph)%3.9;return c<0.1?0.12:1;};
+function setEyes(ch,t,lx,ly,headX,headY){
+  const k=blinkK(t,ch.ph);
+  ch.eyes.style.transform=`scaleY(${k.toFixed(3)})`;
+  let dx=lx-headX, dy=ly-headY;
+  const m=Math.hypot(dx,dy)||1;
+  const r=(ch.d*0.045)/m;
+  dx*=r;dy*=r*k;
+  ch.pupils.forEach(pu=>{ pu.el.style.transform=`translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px)`; });
+}
+/* lompatan arka (naik lalu mendarat) */
+function hopY(p,h){ return -h*Math.sin(Math.PI*clamp(p,0,1)); }
+
+/* mobil: tiga lewat di jalan (di belakang trotoar, tak pernah bertemu bola) */
+const PASSES=[[2.6,4.4,1,0],[9.2,11.2,-1,1],[14.6,16.4,1,0]];
 
 /* ---------- RENDER PER FRAME ---------- */
 const world=document.getElementById('world');
 const flash=document.getElementById('flash');
 const fade=document.getElementById('fade');
-let _roll=0, _lbx=null;
+const skydusk=document.getElementById('skydusk');
+let _roll=0;
 function renderFrame(t){
-  /* bintang + partikel + blok dunia */
+  const dk=seg(t,34.0,9.0);
+  skydusk.style.opacity=dk.toFixed(3);
+  /* bintang */
   for(const s of ST){
-    s.el.style.opacity=(0.35+0.5*(0.5+0.5*Math.sin(t*s.sp+s.ph))).toFixed(3);
+    s.el.style.opacity=(dk*(0.35+0.5*(0.5+0.5*Math.sin(t*s.sp+s.ph)))).toFixed(3);
   }
-  const zone=0.5+0.3*(smz(t,0,6.6)+smz(t,34.8,43.2));
-  for(let i=0;i<NP;i++){
-    const p=PA[i];
-    const yy=((p.y0-t*p.sp)%(H+140)+H+140)%(H+140)-70;
-    p.el.style.transform=`translate(${(p.x+Math.sin(t*p.wf+p.ph)*20).toFixed(1)}px,${yy.toFixed(1)}px)`;
-    p.el.style.opacity=(p.o*zone*(0.75+0.25*Math.sin(t*1.1+p.ph))).toFixed(3);
+  /* awan drift */
+  for(const c of CL){
+    c.x+=c.sp*(1/30);
+    if(c.x>W+c.w)c.x=-c.w-40;
+    c.el.style.transform=`translateX(${c.x.toFixed(1)}px)`;
+    c.el.style.opacity=(0.92*(1-dk*0.8)).toFixed(3);
   }
-  for(const b of BLK){
-    const o=clamp(seg(t,b.t0,0.5)*(1-seg(t,25.6,0.4))*0.95,0,0.95);
-    b.el.style.opacity=o.toFixed(3);
-    b.el.style.transform=`translateY(${(Math.sin(t*0.4+b.ph)*3).toFixed(1)}px)`;
-  }
-
-  /* judul raksasa */
-  for(let i=0;i<TITLES.length;i++){
-    const o=TITLES[i];
-    const tEnd=i+1<TITLES.length?TITLES[i+1].t0:51.4;
-    const oin=seg(t,o.t0,0.35)*(1-seg(t,tEnd-0.25,0.3));
-    const sc=1+0.035*Math.sin(clamp(seg(t,o.t0,0.7),0,1)*Math.PI);
-    o.el.style.opacity=oin.toFixed(3);
-    o.el.style.transform=`scale(${sc.toFixed(3)})`;
-  }
-
-  /* S0: kartu teaser + tanda tanya (pergi saat S1 mulai); pop tenang tanpa goyang */
-  for(const w of TW){
-    popA(w.el,t,w.t0,0.7,10,0.8,6.4);
-  }
-  popA(hQ,t,4.9,0.8,10,0.8,6.4);
-
-  /* S1: properti dunia berpasangan (pasangan 1 pergi di 10.15, pasangan 2 di 14.0) */
-  const pOut=1-seg(t,10.15,0.3), pOut2=1-seg(t,14.0,0.3);
-  [[0,6.9],[1,8.85],[2,10.35],[3,10.45]].forEach(([i,t0])=>{
-    const pr=PROPS[i];
-    const oin=seg(t,t0,0.55);
-    const o=oin*(i<2?pOut:pOut2);
-    pr.el.style.opacity=o.toFixed(3);
-    pr.el.style.transform=`translateY(${((1-eio(oin))*40).toFixed(1)}px)`;
-    pr.tg.style.opacity=o.toFixed(3);
+  /* kota & plaza: satu ide per layar */
+  const plazaK=seg(t,16.6,0.6)*(1-seg(t,32.5,0.6))+seg(t,40.0,0.6);
+  const pk=clamp(plazaK,0,1);
+  plaza.style.opacity=(pk*0.9).toFixed(3);
+  const townDim=1-0.62*pk;
+  townEl.style.opacity=townDim.toFixed(3);
+  TREES.forEach(tr=>{ tr.el.style.opacity=(1-0.5*pk).toFixed(3);
+    tr.el.style.transform=`rotate(${(Math.sin(t*0.9+tr.ph)*1.2).toFixed(2)}deg)`; });
+  /* lampu jalan: menyala saat senja */
+  LAMPS.forEach(l=>{
+    l.glow.style.opacity=(dk*(0.55+0.2*Math.sin(t*2+l.ph))).toFixed(3);
   });
-
-  /* S2: lima kelompok (pergi saat panel keluarga muncul) */
-  for(const g of GT){
-    popA(g.el,t,g.t0,0.7,8,0.8,25.8);
+  /* jendela menyala hangat saat senja */
+  if(WINS.length){
+    const warm=dk*0.85;
+    const r=Math.round(lerp(57,255,warm)), g=Math.round(lerp(80,217,warm)), b=Math.round(lerp(107,138,warm));
+    const col=`rgb(${r},${g},${b})`;
+    for(const w of WINS){ w.style.background=col; }
   }
-
-  /* S3: panel keluarga + baris (pergi saat S4) */
-  popA(fam,t,26.0,0.8,6,0.8,32.75);
-  for(const r of FROW){
-    const oin=seg(t,r.t0,0.55);
-    r.el.style.opacity=oin.toFixed(3);
-    r.el.style.transform=`translateX(${((1-eio(oin))*-46).toFixed(1)}px)`;
-  }
-
-  /* S4: panel persamaan (pergi saat S5) */
-  popA(eqp,t,36.7,0.75,6,0.8,40.1);
-
-  /* S5: panel toko; AKIOMIDA.COM hanya muncul sekali di akhir, reveal tenang */
-  popA(cta,t,40.9,0.8,6,0.8,51.6);
-  const uo=seg(t,45.8,1.4);
-  fUrl.style.opacity=uo.toFixed(3);
-  fUrl.style.transform=`translateY(${((1-eio(uo))*14).toFixed(1)}px)`;
-  fBar.style.width=(seg(t,48.6,1.8)*Math.max(0,P.ctaW-80)).toFixed(0)+'px';
-  popA(fPill,t,47.5,0.7,6,0.8,51.6);
-
-  /* panel pesan */
-  let cOn=false;
-  for(const [b0,b1,tx3] of CHATS){
-    if(t>=b0&&t<b1){
-      cOn=true;
-      if(chatMsg.textContent!==tx3)chatMsg.textContent=tx3;
+  /* mobil lewat */
+  for(const [p0,p1,dir,ci] of PASSES){
+    const c=CARS[ci];
+    const p=seg(t,p0,p1-p0);
+    const on=t>=p0&&t<=p1?1:0;
+    c.el.style.opacity=on;
+    if(on){
+      const x=dir>0?lerp(-c.w-60,W+60,p):lerp(W+60,-c.w-60,p);
+      c.el.style.transform=`translateX(${x.toFixed(1)}px)`;
     }
   }
-  const co=cOn?Math.min(seg(t,chatT0(CHATS,t),0.25),1-seg(t,chatT1(CHATS,t)-0.14,0.14)):0;
-  chatp.style.opacity=co.toFixed(3);
-  chatp.style.transform=`scale(${(0.94+0.06*co).toFixed(3)})`;
+  /* plak 1 2 3 + tanda tanya (hook) */
+  for(const p of PLQ){ popA(p.el,t,p.t0,0.5,8,0,6.5); }
+  popA(hQ,t,4.9,0.7,9,0,6.5);
 
-  /* bola mentor: masterplan gerakan - tabel waypoint, menggelinding antar stasiun
-     (rotasi = jarak/jari-jari), gestur bersih tanpa deformasi, skala selalu seragam */
-  let bx=P.WAY[P.WAY.length-1][1];
-  for(let k=0;k<P.WAY.length-1;k++){
-    const [w0,x0]=P.WAY[k], [w1,x1]=P.WAY[k+1];
+  /* jendela kedai (pasangan 1 pergi 10.15, pasangan 2 pergi 14.0) */
+  const pOut=1-seg(t,10.15,0.3), pOut2=1-seg(t,14.0,0.3);
+  SHOPS.forEach((s,i)=>{
+    const o=seg(t,s.t0,0.45)*(i<2?pOut:pOut2);
+    s.win.style.opacity=o.toFixed(3);
+    s.win.style.transform=`translateY(${((1-eio(seg(t,s.t0,0.45)))*26).toFixed(1)}px)`;
+    s.awn.style.opacity=o.toFixed(3);
+    s.chip.style.opacity=(seg(t,s.t0+0.25,0.35)*(i<2?pOut:pOut2)).toFixed(3);
+  });
+
+  /* papan tulis kafe (S4): keluarga sudah pamit, papan berdiri sendiri di depan */
+  popA(slate,t,36.7,0.6,6,0,40.15);
+  /* podium tangga (S3): muncul sebelum teman melompat, pergi saat keluarga pamit */
+  for(const st of STEPS){ popA(st.el,t,st.t0,0.45,6,0,34.4); }
+
+  /* teman bola: pantul masuk (S2), lompat ke podium (S3), pamit menggelinding
+     keluar saat S4 agar fokus ke aturan, kembali menggelinding masuk di S5 */
+  FRIENDS.forEach((f,i)=>{
+    const d=f.ball.d, fx=P.friendX[i];
+    const stepTop=P.backY-(i+1)*P.stepRise;
+    const downT0=33.2+i*0.1, outT0=33.9+i*0.08, inT0=40.5+i*0.1;
+    const exitX=i<3?-120:W+120, inEdge=exitX;
+    let y=P.backY, x=fx, vis=0, lrot=0, arc=0, rot=0, idleY=0;
+    const pIn=seg(t,f.t0,0.85);
+    if(pIn>0&&t<outT0+0.9){
+      vis=1;
+      const land=eoe(clamp(pIn*1.3,0,1));
+      y=P.backY-170*(1-land);
+      if(pIn>0.62&&pIn<1){ arc=-16*Math.sin(Math.PI*seg(pIn,0.62,0.38)); }
+      if(t>f.t0+0.85&&t<f.t0+1.75){ lrot=Math.sin(seg(t,f.t0+0.85,0.9)*Math.PI*3)*7; }
+    }
+    if(t>=f.hopT0&&t<downT0){
+      const p=seg(t,f.hopT0,0.55);
+      y=lerp(P.backY,stepTop,eio(clamp(p*1.4,0,1)))+hopY(Math.min(p*1.5,1),64);
+    }else if(t>=downT0&&t<outT0){
+      const p=seg(t,downT0,0.55);
+      y=lerp(stepTop,P.backY,eio(clamp(p*1.4,0,1)))+hopY(Math.min(p*1.5,1),56);
+    }
+    if(t>=outT0&&t<outT0+1.0){
+      const p=seg(t,outT0,0.85);
+      x=lerp(fx,exitX,eio(p));
+      rot=(x-fx)/(d/2)*(180/Math.PI)*0.5;
+      vis=1-seg(t,outT0+0.55,0.4);
+    }else if(t>=inT0){
+      const p=seg(t,inT0,0.85);
+      x=lerp(inEdge,fx,eio(p));
+      rot=(x-fx)/(d/2)*(180/Math.PI)*0.5;
+      vis=seg(t,inT0+0.05,0.3);
+      if(t>inT0+0.9&&t<inT0+1.8){ lrot=Math.sin(seg(t,inT0+0.9,0.9)*Math.PI*3)*7; }
+    }
+    /* perayaan S5: semua melompat kecil serempak */
+    if(t>=49.0&&t<49.9){ arc+=-30*Math.sin(Math.PI*seg(t,49.0+i*0.06,0.55)); }
+    /* idle napas halus saat berdiri di posisi */
+    if(vis>0.9&&x===fx) idleY=-Math.abs(Math.sin(t*2.1+i*1.3))*3;
+    f.ball.el.style.opacity=String(clamp(vis,0,1));
+    f.ball.el.style.left=x.toFixed(1)+'px';
+    f.ball.el.style.top=(y-idleY+arc).toFixed(1)+'px';
+    f.ball.el.style.transform=`rotate(${(lrot+rot).toFixed(2)}deg)`;
+    f.sh.style.opacity=(clamp(vis,0,1)*0.5).toFixed(2);
+    f.sh.style.left=x.toFixed(1)+'px';
+    f.sh.style.top=(P.backY-8)+'px';
+    f.sh.style.transform=`scaleX(${clamp(1+(y-P.backY)*0.002,0.6,1.15).toFixed(3)})`;
+    /* piringan: muncul saat teman datang, ikut pamit, kembali saat S5 */
+    const pO=seg(t,f.t0+0.3,0.5)*(1-seg(t,33.6,0.5))+seg(t,40.9+i*0.1,0.4);
+    f.pl.style.opacity=clamp(pO,0,1).toFixed(3);
+    /* mata: menatap mentor, atau ke pemirsa saat jadi bintang */
+    const active=(t>=f.t0&&t<f.t0+2.4)||(t>=f.hopT0&&t<f.hopT0+1.3)||
+      (t>=inT0&&t<inT0+1.9)||(t>=48.9&&t<50.2);
+    const hx=x, hy=y-d*0.55;
+    if(active){ setEyes(f.ball,t,hx,hy-60,hx,hy); }
+    else{ setEyes(f.ball,t,mx,hMentor,hx,hy); }
+  });
+
+  /* mentor: menggelinding di trotoar antar stasiun (tidak menembus apa pun) */
+  let bx=WAY[WAY.length-1][1];
+  for(let k=0;k<WAY.length-1;k++){
+    const [w0,x0]=WAY[k],[w1,x1]=WAY[k+1];
     if(t>=w0&&t<w1){ bx=lerp(x0,x1,eio(seg(t,w0,w1-w0))); break; }
   }
-  if(t>=P.WAY[P.WAY.length-1][0]) bx=P.WAY[P.WAY.length-1][1];
-  if(_lbx===null)_lbx=bx;
-  _roll+=(bx-_lbx)/(P.ballD/2)*(180/Math.PI);
-  _lbx=bx;
+  if(t>=WAY[WAY.length-1][0])bx=WAY[WAY.length-1][1];
+  if(_mxPrev===null)_mxPrev=bx;
+  _roll+=(bx-_mxPrev)/(P.ballD/2)*(180/Math.PI);
+  _mxPrev=bx;
   const ep=seg(t,0.6,0.55), ef=eoe(ep);
-  const brs=Math.sin(t*9.4)*0.02;
-  let hy=0, gro=0, lrot=0, drot=0, dyy=0, sinkA=0, txj=0;
-  for(const [gs,gd,gt,ga,gdir] of GESTS){
-    const d=t-gs;
-    if(d>=0&&d<gd){
-      const p=d/gd, w=Math.sin(p*Math.PI);
-      if(gt==='tilt'||gt==='lean'){ lrot+=(gt==='lean'?gdir:1)*ga*w; }
+  let hy2=0, lrot=0, drot=0, txj=0;
+  for(const [gs,gd,gt,ga] of GESTS){
+    const d2=t-gs;
+    if(d2>=0&&d2<gd){
+      const p=d2/gd, w=Math.sin(p*Math.PI);
+      if(gt==='tilt'||gt==='lean'){ lrot+=(gt==='lean'?ga:ga)*w; }
       else if(gt==='nod'){ lrot+=ga*Math.sin(p*2*Math.PI); }
-      else if(gt==='pulse'){ gro+=(ga-1)*w; }
-      else if(gt==='jump'){ hy-=ga*4*p*(1-p); }
       else if(gt==='spin'){ drot+=ga*eio(p); }
-      else if(gt==='count'){ hy-=ga*Math.abs(Math.sin(p*5*Math.PI))*(1-p*0.2); }
+      else if(gt==='count'){ hy2-=ga*Math.abs(Math.sin(p*5*Math.PI))*(1-p*0.2); }
       else if(gt==='shiver'){ txj=ga*Math.sin(p*40)*(1-p); }
-      else if(gt==='sink'){ dyy+=ga*w; sinkA=w; }
+      else if(gt==='jump'){ hy2-=ga*4*p*(1-p); }
     }
   }
   /* belah dua seragam (pizza 1/2 dan 1/2+1/2=1) */
@@ -696,39 +893,69 @@ function renderFrame(t){
       bboff=lerp(0,96,sp2);
     }
   }
-  const uni=(1+brs)*(1+gro);
-  ball.el.style.left=bx.toFixed(1)+'px';
-  ball.el.style.opacity=String(clamp(ep*3,0,1));
-  ball.el.style.transform=`translateY(${((1-ef)*-260+hy+dyy).toFixed(1)}px) translateX(${txj.toFixed(1)}px) rotate(${(_roll+lrot+drot).toFixed(2)}deg) scale(${(uni*bsa).toFixed(3)})`;
-  ballsh.style.left=bx.toFixed(1)+'px';
-  ballsh.style.opacity=String(clamp(ep*3,0,1)*clamp(0.42+hy*0.006,0.18,0.5)*(1-0.5*sinkA)*bsa);
-  ballsh.style.transform=`scaleX(${clamp((1+hy*0.004)*bsa,0.4,1.08).toFixed(3)})`;
-  const sweatOn=((t>=4.9&&t<5.7)||(t>=8.85&&t<9.7))?1:0;
-  ball.sweat.style.opacity=String(sweatOn*0.9);
-  ball.sweat.style.transform=`translateY(${(sweatOn?(t*16)%24:0).toFixed(1)}px)`;
+  const uni=1;
+  mx=bx;
+  hMentor=P.groundY-P.ballD*0.55;
+  mentor.el.style.left=bx.toFixed(1)+'px';
+  mentor.el.style.opacity=String(clamp(ep*3,0,1));
+  mentor.el.style.top=(P.groundY-P.ballD+hy2).toFixed(1)+'px';
+  mentor.el.style.transform=`translateX(${txj.toFixed(1)}px) rotate(${(_roll+lrot+drot).toFixed(2)}deg) scale(${(uni*bsa).toFixed(3)})`;
+  setEyes(mentor,t,...lookAt(t),bx,P.groundY-P.ballD*0.55);
+  msh.style.left=bx.toFixed(1)+'px';
+  msh.style.top=(P.groundY-10)+'px';
+  msh.style.opacity=String(clamp(ep*3,0,1)*clamp(0.42+hy2*0.006,0.18,0.5)*bsa);
+  msh.style.transform=`scaleX(${clamp((1+hy2*0.004)*bsa,0.4,1.08).toFixed(3)})`;
   ballB.style.left=(bx+bboff).toFixed(1)+'px';
+  ballB.style.top=(P.groundY-Math.round(P.ballD*0.52)+hy2)+'px';
   ballB.style.opacity=String(clamp(bbo,0,1));
   ballB.style.transform=`rotate(${(_roll*0.5).toFixed(1)}deg)`;
+  /* percikan bintang */
   let spo=0;
   for(const [sa,sb] of SPARKS){
     if(t>=sa&&t<sb) spo=smz(t,sa,sb,0.35)*(0.65+0.2*Math.sin(t*7));
   }
   spark.style.opacity=String(clamp(spo,0,1));
-  spark.style.left=(bx+58).toFixed(1)+'px';
-  spark.style.top=(P.groundY-168+Math.sin(t*2)*4).toFixed(1)+'px';
+  spark.style.left=(bx+62).toFixed(1)+'px';
+  spark.style.top=(P.groundY-150+Math.sin(t*2)*4).toFixed(1)+'px';
   spark.style.transform=`rotate(${((t*28)%360).toFixed(0)}deg) scale(${(0.8+0.15*Math.sin(t*7)).toFixed(3)})`;
+
+  /* kunang-kunang senja */
+  const fz=seg(t,40.5,1.0)*(1-seg(t,51.2,0.6));
+  for(const f of FF){
+    const ox=Math.sin(t*f.sp+f.ph)*f.amp, oy=Math.cos(t*f.sp*0.8+f.ph)*f.amp*0.6;
+    f.el.style.transform=`translate(${(f.x+ox).toFixed(1)}px,${(f.y+oy).toFixed(1)}px)`;
+    f.el.style.opacity=(fz*(0.35+0.65*(0.5+0.5*Math.sin(t*2.2+f.ph)))).toFixed(3);
+  }
+
+  /* judul bab */
+  for(let i=0;i<TITLES.length;i++){
+    const o=TITLES[i];
+    const tEnd=i+1<TITLES.length?TITLES[i+1].t0:51.4;
+    const oin=seg(t,o.t0,0.35)*(1-seg(t,tEnd-0.25,0.3));
+    const sc=1+0.035*Math.sin(clamp(seg(t,o.t0,0.7),0,1)*Math.PI);
+    o.el.style.opacity=oin.toFixed(3);
+    o.el.style.transform=`scale(${sc.toFixed(3)})`;
+  }
+
+  /* CTA: papan pengumuman; AKIOMIDA.COM hanya menyala di akhir, reveal tenang */
+  popA(cta,t,40.9,0.7,6,0,51.6);
+  const uo=seg(t,45.8,1.4);
+  fUrl.style.opacity=uo.toFixed(3);
+  fUrl.style.transform=`translateY(${((1-eio(uo))*14).toFixed(1)}px)`;
+  fBar.style.width=(seg(t,48.6,1.8)*Math.max(0,P.ctaW-80)).toFixed(0)+'px';
+  popA(fPill,t,47.5,0.6,6,0,51.6);
 
   renderSub(t);
 
-  /* kamera: guncangan beat tenang (ritme tidak saling balapan) */
+  /* kamera tenang */
   const im=imp(t);
   const shx=Math.sin(t*47)*2.5*im, shy=Math.sin(t*39+1.7)*1.8*im;
-  world.style.transform=`translate(${shx.toFixed(2)}px,${(shy+Math.sin(t*0.35)*3).toFixed(2)}px) scale(${(1+im*0.005).toFixed(4)})`;
+  world.style.transform=`translate(${shx.toFixed(2)}px,${(shy+Math.sin(t*0.35)*3).toFixed(2)}px)`;
   flash.style.opacity=(im*0.07).toFixed(3);
   fade.style.opacity=String(clamp(1-seg(t,0.05,0.5),0,1)*0.96+clamp(seg(t,51.4,0.6),0,1));
 }
-function chatT0(list,t){ for(const [b0] of list){ if(t>=b0&&t<b0+0.4) return b0; } return 0; }
-function chatT1(list,t){ for(const [b0,b1] of list){ if(t>=b0-0.4&&t<b1) return b1; } return 52; }
+/* state mentor lintas frame */
+let mx=WAY[0][1], hMentor=P.groundY-P.ballD*0.55, _mxPrev=null;
 renderFrame(0);
 window.__ready=true;
 </script>

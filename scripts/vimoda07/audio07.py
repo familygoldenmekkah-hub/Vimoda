@@ -175,6 +175,7 @@ add(0.5, whoosh(0.5, True, 0.05))
 for i, tc in enumerate([1.0, 1.45, 1.9]):  # kartu negatif, pecahan, irasional
     add(tc, sine([440.0, 523.25, 659.26][i], 0.4, a=0.004, d=0.24, harm=(1.0, 0.4)), 0.0, 0.10)
 add(2.98, tick(760, 0.045))                # "matematika tidak sesempit itu"
+add(2.6, whoosh(0.8, False, 0.045))        # mobil pertama lewat di jalan
 add(3.9, tick(520, 0.05))
 add(4.9, tick(1100, 0.07))                 # tanda tanya merah
 for tw in CUT_TRANSITIONS:                 # perpindahan antar bab
@@ -187,14 +188,19 @@ for i in range(5):                         # bola menghitung 5 buku
 add(8.85, tick(300, 0.06))                 # termometer + panel "dingin!"
 add(8.9, tick(980, 0.05))
 add(10.15, tick(520, 0.045))               # pasangan 1 berlalu
+add(9.2, whoosh(0.8, False, 0.045))        # mobil kedua lewat
 add(10.35, tick(620, 0.05))                # pizza muncul
 add(10.5, whoosh(0.3, True, 0.04))         # bola terbelah dua (1/2)
 add(10.45, tick(640, 0.05))                # lingkaran pi muncul
 add(12.2, tick(760, 0.05))                 # bola berputar mulus
 add(13.76, boom(0.08))                     # beat emas "jenis berbeda"
+add(14.6, whoosh(0.8, False, 0.04))        # mobil ketiga lewat
 add(17.0, tick(900, 0.05))                 # bab kelompok
 add(17.21, chime(587.33, 0.12))
+add(17.4, tick(600, 0.05))                 # teman bola pertama memantul mendarat
+add(17.44, tick(680, 0.045))
 add(18.0, tick(760, 0.045))
+add(18.6, tick(620, 0.05))                 # teman ketiga mendarat
 for i, tc in enumerate([18.4, 19.0, 19.6]):  # ubin asli, cacah, bulat
     add(tc, tick(640 + i * 90, 0.05))
 add(19.95, whoosh(0.3, True, 0.04))
@@ -218,7 +224,8 @@ for ts in [27.0, 28.2, 29.4, 30.6, 31.8]:  # lima baris keluarga
     add(ts + 0.02, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
 add(29.7, boom(0.14))                      # beat emas "persoalan tidak selalu sama"
 add(32.0, tick(700, 0.045))
-add(33.5, boom(0.06))
+add(33.3, tick(500, 0.05))                 # keluarga turun podium & pamit
+add(33.9, whoosh(0.5, False, 0.045))
 add(35.5, tick(760, 0.045))                # "matematika tumbuh mencari cara"
 add(36.7, whoosh(0.35, True, 0.05))        # panel persamaan 1/2+1/2=1
 add(36.7, tick(1200, 0.06))
@@ -228,6 +235,9 @@ add(38.95, tick(620, 0.05))
 add(39.3, chime(1318.5, 0.10))             # menyatu jadi satu
 add(39.4, boom(0.10))                      # "cara bebas, hasil sesuai aturan"
 add(40.9, tick(760, 0.045))                # panel toko CTA
+add(40.6, whoosh(0.6, True, 0.05))         # keluarga kembali menggelinding masuk
+add(41.0, tick(640, 0.045))
+add(41.4, tick(700, 0.04))
 add(44.2, boom(0.08))                      # pertanyaan besar
 add(44.3, tick(700, 0.045))
 add(45.8, chime(523.25, 0.06))             # AKIOMIDA.COM reveal tenang di akhir

@@ -6,134 +6,148 @@
 /*__FONTS__*/
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{background:#000;overflow:hidden;}
-#stage{position:relative;overflow:hidden;font-family:'Poppins','DejaVu Sans',sans-serif;color:#E7EEF8;
+#stage{position:relative;overflow:hidden;font-family:'Poppins','DejaVu Sans',sans-serif;color:#1B2437;
   -webkit-font-smoothing:antialiased;}
-/* langit malam ala modeling */
-#sky{position:absolute;inset:0;background:linear-gradient(180deg,#0A0E24 0%,#10173A 46%,#0B0F26 100%);}
-#stars i{position:absolute;border-radius:50%;background:#DDE7FF;will-change:opacity;}
-#world{position:absolute;inset:0;will-change:transform;transform-origin:50% 55%;}
-#particles span{position:absolute;will-change:transform,opacity;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#7DD3FC;}
-/* tanah: rumput + tanah cokelat bergaris diagonal */
-#dirt{position:absolute;left:0;right:0;will-change:opacity;}
-#grass{position:absolute;left:0;right:0;background:#3FA34D;box-shadow:inset 0 -7px 0 rgba(0,0,0,.28);}
-#soil{position:absolute;left:0;right:0;background:#241811;
-  background-image:repeating-linear-gradient(115deg,rgba(0,0,0,.20) 0 14px,transparent 14px 34px);}
-/* papan kayu */
-.plankseg{position:absolute;background:linear-gradient(180deg,#A96F35 0%,#8B5A2B 62%,#6E4420 100%);
-  border-radius:10px;box-shadow:0 5px 0 rgba(0,0,0,.30);will-change:opacity;}
-.plankleg{position:absolute;background:#5E3A1B;border-radius:3px;}
-/* blok digit raksasa ala modeling (kontekstual: angka) */
-.digblk{position:absolute;border-radius:22px;background:linear-gradient(160deg,#FFE28A 0%,#F2C230 58%,#D19A12 100%);
-  box-shadow:inset 0 -10px 0 rgba(146,98,8,.45),0 12px 0 rgba(0,0,0,.32),0 0 34px rgba(242,194,48,.14);
+/* langit kota: siang menuju senja (dua layer silang) */
+#skyday{position:absolute;inset:0;background:linear-gradient(180deg,#8ECDF8 0%,#B8E2FB 55%,#EAF6FF 100%);}
+#skydusk{position:absolute;inset:0;background:linear-gradient(180deg,#232B5E 0%,#4A3B75 52%,#C96A4B 86%,#E89255 100%);opacity:0;}
+#stars i{position:absolute;border-radius:50%;background:#FFF6D9;will-change:opacity;}
+/* dunia kota */
+#world{position:absolute;inset:0;will-change:transform;transform-origin:50% 60%;}
+.cloud{position:absolute;will-change:transform;opacity:.92;}
+.cloud b{position:absolute;border-radius:999px;background:#FFFFFF;box-shadow:0 10px 24px rgba(120,160,200,.25);}
+.bld{position:absolute;border-radius:14px 14px 0 0;will-change:opacity,transform;}
+.win{position:absolute;border-radius:6px;background:#39506B;will-change:background,box-shadow;}
+.awn{position:absolute;border-radius:10px 10px 0 0;will-change:transform,opacity;
+  background:repeating-linear-gradient(90deg,#E15B5B 0 26px,#FFFFFF 26px 52px);
+  box-shadow:0 6px 0 rgba(0,0,0,.14);}
+#road{position:absolute;left:0;right:0;background:#3E4653;}
+#roadmark{position:absolute;left:0;right:0;height:0;border-top:7px dashed #F2E85C;opacity:.85;}
+#curb{position:absolute;left:0;right:0;background:#DAE0E8;box-shadow:0 -5px 0 rgba(0,0,0,.10);}
+#walk{position:absolute;left:0;right:0;background:#C9CFD8;
+  background-image:linear-gradient(90deg,rgba(0,0,0,.055) 2px,transparent 2px),linear-gradient(rgba(0,0,0,.045) 2px,transparent 2px);
+  background-size:120px 60px;}
+#plaza{position:absolute;left:0;right:0;opacity:0;will-change:opacity;
+  background:#BFC6D2;background-image:radial-gradient(circle at 24px 24px,rgba(0,0,0,.05) 3px,transparent 4px);
+  background-size:96px 96px;}
+.tree{position:absolute;will-change:transform,opacity;}
+.tree .trunk{position:absolute;left:50%;bottom:0;width:16px;border-radius:6px;background:#7A5230;margin-left:-8px;}
+.tree .leaf{position:absolute;border-radius:50%;background:#4FA35C;box-shadow:inset -8px -10px 0 rgba(0,0,0,.12);}
+.lamp{position:absolute;will-change:transform,opacity;}
+.lamp .pole{position:absolute;left:50%;bottom:0;width:10px;margin-left:-5px;border-radius:4px;background:#4A5568;}
+.lamp .head{position:absolute;left:50%;width:34px;height:20px;margin-left:-17px;border-radius:8px;background:#4A5568;}
+.lamp .glow{position:absolute;left:50%;width:110px;height:110px;margin-left:-55px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,214,130,.85) 0%,rgba(255,214,130,0) 70%);opacity:0;will-change:opacity;}
+.bench{position:absolute;will-change:opacity;}
+.bench i{position:absolute;border-radius:8px;background:#8B5A2B;box-shadow:0 4px 0 rgba(0,0,0,.18);}
+.car{position:absolute;will-change:transform;}
+.car .body{position:absolute;left:0;top:0;border-radius:16px;box-shadow:inset 0 -10px 0 rgba(0,0,0,.18);}
+.car .top{position:absolute;border-radius:12px 12px 0 0;background:rgba(255,255,255,.28);}
+.car .wh{position:absolute;bottom:-7px;width:26px;height:26px;border-radius:50%;background:#22262E;border:5px solid #4A525F;}
+/* plak nomor pintu 1 2 3 (hook) */
+.plaque{position:absolute;border-radius:12px;background:linear-gradient(160deg,#FFE28A,#F2C230);
+  box-shadow:0 6px 0 rgba(0,0,0,.22),0 0 26px rgba(242,194,48,.25);
   display:flex;align-items:center;justify-content:center;will-change:transform,opacity;}
-.digblk b{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#FFFFFF;font-weight:800;
-  text-shadow:0 4px 0 rgba(146,98,8,.85);}
-.chipd{position:absolute;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(125,211,252,.45);
-  color:#7DD3FC;font-weight:800;will-change:transform;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
-/* judul raksasa ala modeling */
-.bigtitle{position:absolute;left:0;right:0;text-align:center;font-weight:800;opacity:0;will-change:transform,opacity;white-space:nowrap;
-  text-shadow:0 6px 0 rgba(0,0,0,.55),0 14px 40px rgba(0,0,0,.6);}
-/* tokoh ubin: nama di atas kepala */
-.nmtag{position:absolute;left:0;right:0;text-align:center;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
-  font-weight:800;color:#FFFFFF;white-space:nowrap;will-change:transform,opacity;
-  text-shadow:2px 2px 0 #000,-2px 2px 0 #000,2px -2px 0 #000,-2px -2px 0 #000,0 6px 16px rgba(0,0,0,.6);}
-.gtile{position:absolute;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  will-change:transform,opacity;box-shadow:0 14px 34px rgba(0,0,0,.5);}
-.gtile .dg{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;line-height:1.06;white-space:nowrap;}
-.gtile .en{font-weight:600;letter-spacing:.16em;color:#8FA3BF;}
-/* panel gelap ala modeling (chat, keluarga, persamaan, toko) */
-.panel{position:absolute;background:rgba(13,19,40,.93);border-radius:20px;will-change:transform,opacity;
-  box-shadow:0 22px 60px rgba(0,0,0,.55);}
-.panel .hd{font-weight:800;color:#FCD34D;}
-.prow{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
-  border-radius:12px;background:rgba(255,255,255,.05);will-change:transform,opacity;}
-/* panel pesan: tanpa header nama (karakter tidak boleh dinamai) */
-#chatp .msg{font-weight:700;color:#FFFFFF;}
-#chatp{border:2px solid rgba(74,222,128,.55);}
-/* subtitle besar ala modeling: pill hitam, teks raksasa */
-#subbar{position:absolute;border-radius:22px;background:rgba(4,7,14,.78);box-shadow:0 14px 44px rgba(0,0,0,.6);
-  padding:18px 40px;will-change:transform,opacity;left:50%;transform:translateX(-50%);}
-#sub_id{font-weight:800;color:#FFFFFF;text-shadow:0 3px 14px rgba(0,0,0,.85);line-height:1.16;}
-#sub_en{font-weight:600;color:#9FB0CE;white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.8);}
-/* pil emas CTA */
+.plaque b{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#FFF;font-weight:800;
+  text-shadow:0 3px 0 rgba(146,98,8,.8);}
+/* jendela kedai + chip situasi */
+.shopwin{position:absolute;border-radius:14px;background:#F7F3E9;border:6px solid #FFFFFF;
+  box-shadow:0 12px 30px rgba(30,45,80,.25);will-change:transform,opacity;overflow:hidden;}
+.chip{position:absolute;border-radius:9px;background:rgba(20,28,48,.82);color:#FFFFFF;font-weight:800;
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;will-change:transform,opacity;
+  box-shadow:0 5px 14px rgba(0,0,0,.3);text-align:center;}
+/* piringan angka kelompok di kaki teman */
+.gplate{position:absolute;border-radius:10px;background:rgba(255,255,255,.94);border:3px solid #35507A;
+  color:#1B2437;font-weight:800;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
+  display:flex;align-items:center;justify-content:center;will-change:transform,opacity;
+  box-shadow:0 5px 0 rgba(0,0,0,.15);white-space:nowrap;}
+/* podium tangga foto keluarga */
+.step{position:absolute;border-radius:10px;background:linear-gradient(180deg,#A96F35,#8B5A2B 62%,#6E4420);
+  box-shadow:0 6px 0 rgba(0,0,0,.22);will-change:transform,opacity;}
+/* papan tulis kafe + papan pengumuman kayu */
+.board{position:absolute;will-change:transform,opacity;}
+.board.wood{background:linear-gradient(180deg,#8B5A2B,#6E4420);border-radius:16px;
+  box-shadow:0 14px 34px rgba(0,0,0,.35),inset 0 0 0 4px #5E3A1B;}
+.board.slate{background:#2B3A46;border:8px solid #7A5230;border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,.3);}
+/* karakter bola (mentor emas + teman warna): tanpa nama, bermata */
+.bchar{position:absolute;will-change:transform,opacity;}
+.bchar .core{position:absolute;border-radius:50%;}
+.bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px);}
+.bchar .eyes{position:absolute;will-change:transform;}
+.bchar .eye{position:absolute;border-radius:50%;background:#FFFFFF;overflow:hidden;
+  box-shadow:0 0 0 2px rgba(30,40,60,.16);}
+.bchar .pupil{position:absolute;border-radius:50%;background:#1B2437;will-change:transform;}
+.bchar .blush{position:absolute;border-radius:50%;background:rgba(225,91,91,.34);filter:blur(1px);}
+.bsh{position:absolute;border-radius:50%;background:radial-gradient(ellipse at center,rgba(20,28,40,.42) 0%,rgba(20,28,40,0) 70%);
+  filter:blur(2px);will-change:transform,opacity;}
 .goldpill{position:absolute;border-radius:999px;background:linear-gradient(92deg,#F59E0B,#FBBF24);color:#1A1206;
   font-weight:800;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;
-  box-shadow:0 10px 26px rgba(245,158,11,.35);}
+  box-shadow:0 10px 26px rgba(245,158,11,.4);}
+#f_url{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
+#subbar{position:absolute;border-radius:22px;background:rgba(10,14,26,.82);box-shadow:0 14px 44px rgba(0,0,0,.5);
+  padding:18px 40px;will-change:transform,opacity;left:50%;transform:translateX(-50%);}
+#sub_id{font-weight:800;color:#FFFFFF;text-shadow:0 3px 14px rgba(0,0,0,.85);line-height:1.16;}
+#sub_en{font-weight:600;color:#A9B8D0;white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.8);}
+/* watermark AKIOMIDA: wajib selalu terlihat */
+#wm{position:absolute;left:0;right:0;text-align:center;color:#FFFFFF;font-weight:600;opacity:.55;
+  letter-spacing:.42em;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
+  text-shadow:0 2px 10px rgba(0,0,0,.6);pointer-events:none;}
+.starclip{background:linear-gradient(180deg,#FDE68A,#D97706);
+  -webkit-clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);
+  clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);}
 .vig{position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(94% 94% at 50% 42%, transparent 58%, rgba(0,0,0,.52) 100%);}
+  background:radial-gradient(94% 94% at 50% 42%, transparent 60%, rgba(10,16,30,.4) 100%);}
 #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;}
 #fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;}
 .mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;}
 .center{text-align:center;}
+.bigtitle{position:absolute;left:0;right:0;text-align:center;font-weight:800;opacity:0;will-change:transform,opacity;
+  white-space:nowrap;color:#FFFFFF;text-shadow:0 5px 0 rgba(24,38,66,.5),0 14px 40px rgba(24,38,66,.45);}
 #grain{position:absolute;inset:0;pointer-events:none;opacity:.04;mix-blend-mode:overlay;
   background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="180" height="180" filter="url(%23n)" opacity="0.6"/></svg>');}
-.starclip{background:linear-gradient(180deg,#FDE68A,#D97706);
-  -webkit-clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);
-  clip-path:polygon(50% 0%,61.8% 35.2%,98.2% 35.2%,68.2% 57.2%,79.2% 91.2%,50% 70.2%,20.8% 91.2%,31.8% 57.2%,1.8% 35.2%,38.2% 35.2%);}
 </style>
 </head>
 <body>
 <div id="stage">
-  <div id="sky"></div>
+  <div id="skyday"></div>
+  <div id="skydusk"></div>
   <div id="stars"></div>
   <div id="world">
-    <div id="particles"></div>
-    <div id="dirt"><div id="soil"></div><div id="grass"></div></div>
-    <div id="planks"></div>
-    <div id="blocks"></div>
+    <div id="clouds"></div>
+    <div id="town"></div>
+    <div id="roadwrap"><div id="road"></div><div id="roadmark"></div><div id="cars"></div></div>
+    <div id="curb"></div>
+    <div id="walk"></div>
+    <div id="plaza"></div>
+    <div id="streetprops"></div>
+    <div id="chars"></div>
+    <div id="fireflies"></div>
+  </div>
 
-    <!-- S0 HOOK -->
-    <div class="bigtitle" id="t0">1, 2, 3 SAJA?</div>
-    <div id="h_tiles"></div>
-    <div id="h_q" class="center mono" style="position:absolute;color:#F87171;font-weight:800;opacity:0;">?</div>
+  <div class="bigtitle" id="t0">1, 2, 3 SAJA?</div>
+  <div class="bigtitle" id="t1">EMPAT SITUASI</div>
+  <div class="bigtitle" id="t2">LIMA KELOMPOK</div>
+  <div class="bigtitle" id="t3">KELUARGA BILANGAN</div>
+  <div class="bigtitle" id="t4">ATURAN SATU</div>
+  <div class="bigtitle" id="t5">PILIH SATU?</div>
 
-    <!-- S1 SITUASI: properti dunia muncul berurutan -->
-    <div class="bigtitle" id="t1">EMPAT SITUASI</div>
-    <div id="a_props"></div>
-
-    <!-- S2 KELOMPOK: lima kelompok bilangan -->
-    <div class="bigtitle" id="t2">LIMA KELOMPOK</div>
-    <div id="g_tiles"></div>
-
-    <!-- S3 KENAPA: panel keluarga ala leaderboard -->
-    <div class="bigtitle" id="t3">KELUARGA BILANGAN</div>
-    <div class="panel" id="fam">
-      <div class="hd center" id="fam_hd">KELUARGA BILANGAN</div>
-      <div id="fam_rows"></div>
-    </div>
-
-    <!-- S4 ATURAN: panel persamaan -->
-    <div class="bigtitle" id="t4">ATURAN SATU</div>
-    <div class="panel" id="eqp">
-      <div class="mono center" id="eq_t" style="font-weight:800;color:#FCD34D;">1/2 + 1/2 = 1</div>
-      <div class="center" id="eq_lab" style="color:#9FB0CE;font-weight:700;letter-spacing:.20em;">CARA BEBAS, HASIL SESUAI ATURAN</div>
-    </div>
-
-    <!-- S5 CTA: panel toko ala modeling -->
-    <div class="bigtitle" id="t5">PILIH SATU?</div>
-    <div class="panel center" id="cta">
-      <div id="f_open" style="color:#C9D6EE;font-weight:700;letter-spacing:.14em;">MENURUTMU, CUKUP SATU JENIS?</div>
-      <div id="f_open_e" style="color:#8FA3BF;font-weight:600;letter-spacing:.26em;">IS ONE KIND ENOUGH?</div>
-      <div id="f_url" class="mono" style="font-weight:800;opacity:0;">AKIOMIDA.COM</div>
-      <div id="f_bar" style="height:6px;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24);width:0;"></div>
-      <div class="goldpill" id="f_pill">TULIS DI KOMEN</div>
-    </div>
-
-    <!-- papan bawah tokoh: bola emas mentor (tanpa nama) + bayangan + kilat -->
-    <div id="ballsh"></div>
-    <div id="ball"></div>
-    <div id="spark" class="starclip" style="position:absolute;width:34px;height:34px;opacity:0;"></div>
-
-    <!-- panel pesan ala modeling: hanya isi pesan, tanpa nama pengirim -->
-    <div class="panel" id="chatp" style="opacity:0;">
-      <div class="msg" id="chatp_msg"></div>
-    </div>
+  <!-- papan pengumuman CTA (AKIOMIDA.COM reveal lambat di akhir) -->
+  <div class="board wood center" id="cta" style="opacity:0;">
+    <div id="f_open" style="color:#FFE9C2;font-weight:800;letter-spacing:.14em;">MENURUTMU, CUKUP SATU JENIS?</div>
+    <div id="f_open_e" style="color:#D9B98F;font-weight:600;letter-spacing:.26em;">IS ONE KIND ENOUGH?</div>
+    <div id="f_url" class="center" style="font-weight:800;opacity:0;">AKIOMIDA.COM</div>
+    <div id="f_bar" style="height:6px;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24);width:0;"></div>
+    <div class="goldpill" id="f_pill">TULIS DI KOMEN</div>
   </div>
 
   <div id="subbar">
     <div class="center" id="sub_id"></div>
     <div class="center" id="sub_en"></div>
   </div>
+
+  <!-- watermark AKIOMIDA: wajib selalu terlihat -->
+  <div id="wm">AKIOMIDA</div>
 
   <div class="vig"></div>
   <div id="grain"></div>
