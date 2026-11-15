@@ -1,4 +1,4 @@
-# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 3)
+# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 4)
 
 - Durasi: 52 detik | FPS: 30 | Musik & SFX: prosedural orisinal
 - Sumber materi: yuyanaka.blogspot.com/2026/11/babopa.html (artikel "Babopa", 14 Nov 2026)
@@ -20,18 +20,24 @@
 3. POSISI MENGIKUTI OBJEK BAHASAN: bola menggelinding mendekati kartu situasi, ubin kelompok, kotak keluarga bilangan, kartu pi, lalu kartu CTA; tidak lagi berdiri di satu titik dengan jadwal lompatan seragam.
 4. JADWAL 12 LOMPATAN TEMPLATE DIHAPUS; gerakan berlebih ala template tidak ada lagi, yang tersisa gerak bermakna.
 
+## Perbaikan revisi 4 (umpan balik kreator: aksi visualisasi malas dan tidak selaras topik; pasar banyak ditonton mata minus)
+
+1. AKSI MENTOR KINI MEMPERAGAKAN MATERI, BUKAN REAKSI GENERIK: menggigil saat kartu -5 derajat (1.05), memangkuk jadi setengah tinggi saat kartu 1/2 (1.50), melebar sambil berputar satu putaran penuh saat kartu pi (1.95), memantul LIMA KALI menghitung lima buku (7.95), tenggelam melewati garis nol saat kelompok BULAT/negatif (17.60), berputar dua putaran tanpa henti saat IRASIONAL (23.15), dan TERBELAH DUA lalu menyatu menjadi satu bola penuh saat persamaan 1/2+1/2=1 (38.50-39.70) dengan kilat di titik menyatu.
+2. BUBBLE TOPIK-SPESIFIK: "dingin!" dipertahankan; "lengkap!" diganti "lima kelompok!" (21.30); "aman." diganti "jadi 1!" (40.40) yang merayakan hasil persamaan. Ucapan bubble wajib lahir dari materi, bukan template antar video.
+3. DESAIN UNTUK MATA MINUS: seluruh teks kunci dibesarkan (subtitle 30 ke 36 px, angka situasi 44 ke 50, angka kelompok 26 ke 30, label kelompok 17 ke 20, persamaan 54 ke 62, bubble 24 ke 30, judul 104 ke 112, dan seterusnya) dengan lebar kartu menyesuaikan agar tidak ada yang terpotong.
+
 ## Desain (mewarisi standar video 06 revisi 5)
 
-1. DUNIA CERITA PIXEL + BULATAN EMAS: karakter bulatan emas tanpa wajah tanpa mata (menggelinding antar bab mendekati objek bahasan, gestur mentor menoleh/mengangguk/denyut/menggigil, bayangan dinamis, sparkle, droplet keringat) berdiri di panggung bergaya garis bilangan (strip biru sian bertanda skala) sepanjang video, didampingi dua ubin angka mungil bertuliskan 0 (sian) dan pi (violet) yang ikut hop; hiasan tanah berupa chip angka 1, 0, 5 dan simbol + yang bergoyang lembut, bukan rumput dan bunga. Panggung tidak ikut push-pan antar bab.
+1. DUNIA CERITA PIXEL + BULATAN EMAS: karakter bulatan emas tanpa wajah tanpa mata (menggelinding antar bab mendekati objek bahasan, aksi mentor memperagakan materi: menggigil, menghitung memantul, tenggelam di garis nol, berputar saat pi, terbelah-dua saat 1/2+1/2=1, bayangan dinamis, sparkle, droplet keringat) berdiri di panggung bergaya garis bilangan (strip biru sian bertanda skala) sepanjang video, didampingi dua ubin angka mungil bertuliskan 0 (sian) dan pi (violet) yang ikut hop; hiasan tanah berupa chip angka 1, 0, 5 dan simbol + yang bergoyang lembut, bukan rumput dan bunga. Panggung tidak ikut push-pan antar bab.
 2. SUBTITLE BAR PERMANEN ANTI-TIMPA: layout flex (Inggris selalu di bawah Indonesia), margin samping portrait 130 px (aman rail like/comment), font ID 30 px; 16 beat narasi, beat simpulan disorot emas.
-3. GELEMBUNG REAKSI: "dingin!" (8.9-10.1 saat suhu -5 derajat), "lengkap!" (21.3-22.7 saat irasional), "aman." (40.4-41.8 saat aturan); masing-masing dengan sfx pop.
+3. GELEMBUNG REAKSI: "dingin!" (8.9-10.1 saat suhu -5 derajat), "lima kelompok!" (21.3-22.7 saat lima kelompok terkumpul), "jadi 1!" (40.4-41.8 saat persamaan terpenuhi); masing-masing dengan sfx pop.
 4. AUDIO: pad chord + arpeggio + kick-hat (12.4-42.2), boom di beat emas (0.5, 11.4, 22.9, 32.3, 45.3), chime di kata bab dan sorotan, tick mengikuti munculnya kartu/ubin/tahap, whoosh push-pan antar bab.
 
 ## 0.0 - 6.0 | HOOK
 - Panggung pixel: bulatan emas jatuh memantul mendarat (0.6-1.2); ubin angka 0 dan pi menyusul (1.6, 2.0) dan sesekali hop.
 - 0.50 - Teks besar "1, 2, 3" menghantam (boom; punch kamera). Sub: "Bilangan itu cuma 1, 2, 3?"
 - 1.00-2.50 - Tiga kartu teaser: -5 derajat NEGATIF, 1/2 PECAHAN, pi IRASIONAL + light sweep. Sub 2.6: "Padahal, matematika tidak sesempit itu."
-- 4.90 - Tanda tanya merah memantul di samping "1, 2, 3"; mentor terkejut bergidik (1.70 menoleah ke kartu teaser, 4.90 kejutan).
+- 4.90 - Tanda tanya merah memantul di samping "1, 2, 3"; mentor memperagakan tiap kartu: menggigil saat -5 derajat (1.05), memangkuk setengah tinggi saat 1/2 (1.50), melebar sambil berputar saat pi (1.95), menoleah (1.70), terkejut (4.90).
 
 ## 6.0 - 14.4 | BAGIAN 1: SITUASI
 - 6.70 - Chip "BAGIAN 1 DARI 3" masuk miring lalu melurus. Sub: "Punya 5 buku, suhu 5 derajat di bawah nol."
@@ -39,15 +45,15 @@
 - 7.80-9.60 - Empat kartu situasi: 5 BUKU, -5 derajat SUHU, 1/2 PIZZA, pi LINGKARAN (masing-masing sweep). Sub 9.6: "Pizza dibagi dua, lingkaran dengan pi."
 - 8.90 - Gelembung "dingin!" dari bulatan emas.
 - 10.30 - Label "EMPAT SITUASI, EMPAT KEBUTUHAN" / EN "four situations, four different needs"; 11.2 label "BEDA PERSOALAN, BEDA JENIS BILANGAN".
-- 11.50 - Sub emas: "Semuanya butuh jenis bilangan berbeda." (boom; mentor mengangguk setuju, 8.20 menoleh ke kartu situasi, 8.90 menggigil saat suhu -5 derajat)
+- 11.50 - Sub emas: "Semuanya butuh jenis bilangan berbeda." (boom; mentor memantul lima kali menghitung lima buku (7.95), menggigil saat suhu -5 derajat (8.90), mengangguk setuju (11.50))
 
 ## 14.4 - 25.2 | BAGIAN 2: KELOMPOK
 - 15.10 - Chip "BAGIAN 2 DARI 3". Sub: "Kenal lima kelompok bilangan."
 - 15.60 - Kata besar "KELOMPOK" (chime).
 - 15.80-17.20 - Tiga ubin kelompok: ASLI (1 2 3), CACAH (0 1 2), BULAT (-2 -1 0).
 - 19.30 - Sub: "Rasional: bisa ditulis sebagai pecahan."; 19.50 ubin RASIONAL (1/2 3/4) + sweep + chime.
-- 21.30 - Gelembung "lengkap!".
-- 22.90 - Sub emas: "Irasional: akar 2 dan pi." (boom); 23.00 ubin IRASIONAL (akar 2, pi) emas + sweep; mentor menyapa ubin (16.40 denyut konfirmasi, 19.50 menoleh ke rasional, 23.00 mengangguk).
+- 21.30 - Gelembung "lima kelompok!".
+- 22.90 - Sub emas: "Irasional: akar 2 dan pi." (boom); 23.00 ubin IRASIONAL (akar 2, pi) emas + sweep; mentor menyapa ubin (16.40 denyut konfirmasi, 17.60 TENGGELAM melewati garis nol saat kelompok negatif, 19.50 menoleh ke rasional, 23.15 berputar dua putaran tanpa henti saat irasional).
 - 24.00 - Takeaway "Tiap jenis punya tugasnya." + marker sorot.
 
 ## 25.2 - 34.8 | BAGIAN 3: KENAPA?
@@ -61,7 +67,7 @@
 - 35.50 - Kartu besar pi emas mendarat (boom). Sub: "Matematika tumbuh mencari cara yang tepat."
 - 38.20 - Kartu persamaan "1/2 + 1/2 = 1" (chime). Sub 38.3: "Cara bebas, hasil tetap menurut aturan."
 - 39.00 - Label "CARA BEBAS, HASIL SESUAI ATURAN".
-- 40.40 - Gelembung "aman." dari bulatan emas; mentor menoleh ke kartu pi (36.30), mengangguk di persamaan (38.60), lalu tenang kembali (40.60).
+- 40.40 - Gelembung "jadi 1!" dari bulatan emas; mentor menoleh ke kartu pi (36.30), TERBELAH DUA lalu menyatu menjadi satu bola penuh saat persamaan 1/2+1/2=1 (38.50-39.70, kilat 39.30), lalu tenang kembali (40.60).
 
 ## 43.2 - 52.0 | CTA
 - 43.30 - Sub: "Jadi, cukup satu jenis bilangan untuk semua?"; 45.30 boom pertanyaan.

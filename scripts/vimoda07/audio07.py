@@ -224,6 +224,17 @@ add(47.8, whoosh(0.6, True, 0.07))
 add(48.7, chime(880.0, 0.13))
 add(49.3, chime(1318.5, 0.07))
 add(50.6, chime(440.0, 0.09))
+# demo mentor revisi 4 (aksi memperagakan materi)
+add(1.50, tick(440, 0.05))                              # bola memangkuk: kartu 1/2
+add(1.98, tick(700, 0.05))                              # bola melebar berputar: kartu pi
+for _i in range(5):
+    add(7.98 + _i * 0.28, tick(320 + _i * 50, 0.05))    # bola memantul menghitung 5 buku
+add(17.62, whoosh(0.5, False, 0.07))                    # bola tenggelam di bawah garis nol
+add(23.15, tick(760, 0.05))                             # bola berputar: irasional
+add(23.60, tick(980, 0.05))
+add(38.55, tick(500, 0.05))                             # bola terbelah dua
+add(38.95, tick(620, 0.05))
+add(39.30, chime(1318.5, 0.10))                         # menyatu jadi satu: 1/2+1/2=1
 
 # ---------- master ----------
 mix = np.stack([mixL, mixR])
