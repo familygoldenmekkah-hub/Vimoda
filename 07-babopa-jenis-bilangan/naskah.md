@@ -1,4 +1,4 @@
-# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 6)
+# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 15)
 
 - Durasi: 52 detik | FPS: 30 | Musik & SFX: prosedural orisinal
 - Sumber materi: yuyanaka.blogspot.com/2026/11/babopa.html (artikel "Babopa", 14 Nov 2026)
@@ -25,6 +25,22 @@
 1. AKSI MENTOR KINI MEMPERAGAKAN MATERI, BUKAN REAKSI GENERIK: menggigil saat kartu -5 derajat (1.05), memangkuk jadi setengah tinggi saat kartu 1/2 (1.50), melebar sambil berputar satu putaran penuh saat kartu pi (1.95), memantul LIMA KALI menghitung lima buku (7.95), tenggelam melewati garis nol saat kelompok BULAT/negatif (17.60), berputar dua putaran tanpa henti saat IRASIONAL (23.15), dan TERBELAH DUA lalu menyatu menjadi satu bola penuh saat persamaan 1/2+1/2=1 (38.50-39.70) dengan kilat di titik menyatu.
 2. BUBBLE TOPIK-SPESIFIK: "dingin!" dipertahankan; "lengkap!" diganti "lima kelompok!" (21.30); "aman." diganti "jadi 1!" (40.40) yang merayakan hasil persamaan. Ucapan bubble wajib lahir dari materi, bukan template antar video.
 3. DESAIN UNTUK MATA MINUS: seluruh teks kunci dibesarkan (subtitle 30 ke 36 px, angka situasi 44 ke 50, angka kelompok 26 ke 30, label kelompok 17 ke 20, persamaan 54 ke 62, bubble 24 ke 30, judul 104 ke 112, dan seterusnya) dengan lebar kartu menyesuaikan agar tidak ada yang terpotong.
+
+## Revisi 15 (arahan kreator: masih ada label nama; teks dan animasi saling balapan; AKIOMIDA.COM terlalu cepat)
+
+1. KARAKTER TANPA NAMA APA PUN: sisa label nama dihapus total, termasuk nama "Akiomida" pada karakter; Akiomida adalah nama studio/situs (AKIOMIDA.COM), bukan nama si bola emas. Header panel pesan yang menyebut nama tokoh dihapus (bubble pesan kini hanya berisi isi pesan), dan watermark nama di sudut bawah yang menempel sepanjang video dihapus.
+2. RITME TENANG, TEKS DAN ANIMASI SEIRAMA: overshoot pop semua elemen dipangkas (maksimal 10 persen, umumnya 6-8), durasi masuk diperpanjang (0.55-0.8 detik), goyangan ambient (blok digit, bola, percikan) diperkecil, guncangan kamera dipangkas dari 6 piksel ke 2.5 piksel, kilat dari 14 persen ke 7 persen, pop subtitle dari 5 persen ke 1.8 persen, wobble tanda tanya dihapus. Tidak ada lagi elemen yang berebut perhatian saat penjelasan dibaca; satu ide muncul, duduk tenang, dibaca tuntas.
+3. AKIOMIDA.COM HANYA DI AKHIR: panel toko muncul 40.9 hanya dengan pertanyaan; situs menyala perlahan 45.8-47.2 (fade 1.4 detik + naik 14 piksel, tanpa pop), pil TULIS DI KOMEN 47.5, bar gradien menyapu 48.6-50.4. Cue audio mengiringi (chime lembut 45.8, whoosh bar 48.6).
+
+## Studi wawasan 13 skill motion GitHub (2026-11-15)
+
+Sebelum benah revisi 15 dilanjutkan, 13 tools/skill dari GitHub dipelajari totalitas:
+HyperFrames, Remotion, Remotion Skills, GSAP, GSAP Skills, OpenMontage, Lemo-Opuscar,
+Video Shotcraft, Motionmaxxing, MCP for Blender, Blender Skills, Dream Loop, dan keluarga
+skill Animate. Rangkuman, pelajaran, dan pemetaannya ke pipeline ada di
+package/wawasan-motion.md. Delapan prinsip kerajinan hasil studi (determinisme,
+beat-sheet induk, token easing, stagger disiplin, tata shot establish-develop-payoff,
+caption craft, gaya terkunci, loop kritik) dikukuhkan menjadi aturan produksi no. 20.
 
 ## Revisi 6 (arahan kreator setelah menonton di HP)
 
