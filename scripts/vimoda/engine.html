@@ -62,9 +62,9 @@ html,body{background:#000;overflow:hidden;}
       <div class="mono" id="h_1" style="position:absolute;font-weight:800;color:#FBBF24;">1</div>
       <div class="mono" id="h_q" style="position:absolute;color:#F87171;font-weight:800;opacity:0;">?</div>
       <div id="h_cards" style="position:absolute;"></div>
-      <div class="center" id="h_l1" style="position:absolute;left:0;right:0;font-weight:600;color:#CBD5E1;">Kenapa satu ditulis 1?</div>
+      <div class="center" id="h_l1" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Kenapa satu ditulis 1?</div>
       <div class="center ensub" id="h_l1_e">Why is one written as 1?</div>
-      <div class="center" id="h_l2" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Siapa yang menentukan bentuk 7?</div>
+      <div class="center" id="h_l2" style="position:absolute;left:0;right:0;font-weight:700;color:#F1F5FB;">Siapa menentukan bentuk 7?</div>
       <div class="center ensub" id="h_l2_e">Who decided the shape of 7?</div>
     </div>
 
@@ -79,9 +79,10 @@ html,body{background:#000;overflow:hidden;}
         <div id="a_marks" style="position:absolute;"></div>
         <div class="center mono" id="a_tlab" style="position:absolute;font-weight:800;color:#FBBF24;">347 = 347 GORESAN</div>
         <div class="center enpan" id="a_tlab_e" style="position:absolute;">347 = 347 MARKS</div>
+        <div class="center" id="a_tsub" style="position:absolute;color:#7E92AF;font-weight:600;letter-spacing:.18em;">TIAP 5 DICORET</div>
       </div>
-      <div class="center" id="a_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Semakin besar jumlah, semakin rumit.</div>
-      <div class="center ensub-b" id="a_take_e">Bigger counts, messier marks.</div>
+      <div class="center" id="a_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Makin banyak, makin rumit.</div>
+      <div class="center ensub-b" id="a_take_e">More to count, more mess.</div>
     </div>
 
     <!-- S2 DESIMAL -->
@@ -94,6 +95,7 @@ html,body{background:#000;overflow:hidden;}
       <div id="b_digits" style="position:absolute;"></div>
       <div id="b_ntp" style="position:absolute;"></div>
       <div class="center" id="b_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Simbol sama, posisi mengubah nilai.</div>
+      <div id="b_marker" style="position:absolute;height:10px;border-radius:99px;background:rgba(251,191,36,.45);"></div>
       <div class="center ensub-b" id="b_take_e">Same symbol, position changes value.</div>
     </div>
 
@@ -106,9 +108,10 @@ html,body{background:#000;overflow:hidden;}
       <div class="center ensub" id="c_def_e">Not the number itself.</div>
       <div class="card" id="c_eqbox" style="position:absolute;">
         <div class="center mono" id="c_morph" style="font-weight:800;">7</div>
+        <div class="center" id="c_stagelab" style="position:absolute;font-weight:600;letter-spacing:.22em;">ANGKA</div>
       </div>
-      <div class="center" id="c_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Bentuk beda, nilai tetap tujuh.</div>
-      <div class="center ensub-b" id="c_take_e">Different forms, same value.</div>
+      <div class="center" id="c_take" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Simbolnya beda, bilangannya tujuh.</div>
+      <div class="center ensub-b" id="c_take_e">Different symbol, still seven.</div>
     </div>
 
     <!-- S4 BATAS KESEPAKATAN -->
@@ -122,6 +125,7 @@ html,body{background:#000;overflow:hidden;}
         <div class="starclip" id="e_eq_s"></div>
         <div class="mono" id="e_eq_t" style="font-weight:800;color:#FBBF24;"> + 2 = 9</div>
       </div>
+      <div class="center" id="e_eqlab" style="position:absolute;left:0;right:0;color:#FBBF24;font-weight:700;letter-spacing:.22em;">NILAINYA TETAP 9</div>
       <div class="center" id="e_l2" style="position:absolute;left:0;right:0;font-weight:700;color:#E7EEF8;">Lambang boleh ganti, hasil tidak.</div>
       <div class="center ensub-b" id="e_l2_e">Symbols flex, results do not.</div>
     </div>
@@ -159,66 +163,69 @@ const ORIENT=Q.get('o')||'landscape';
 const W=ORIENT==='portrait'?1080:1920;
 const H=ORIENT==='portrait'?1920:1080;
 
+/* v08 (revisi 2 video 06): semua kunci posisi unik (prefix per scene) agar
+   tidak ada key duplikat; font dibesarkan untuk pembaca mata minus;
+   label penjelas ditambah agar penjelasan tidak hampa. */
 const P = ORIENT==='portrait' ? {
   mx:84, wmY:200, wmSize:19,
-  h1Y:250, h1Size:150, h1BoxW:140, h1BoxH:190,
-  qX:640, qY:280, qSize:96,
-  cardY:520, cardH:190, cardW:288, cardGap:20,
-  cardGSize:42, cardLab:17, cardEn:11,
-  l1Y:790, l1Size:44, l1EY:856, l1ESize:25,
-  l2Y:960, l2Size:46, l2EY:1028, l2ESize:26,
-  chapY:236, chapSize:19, chapEY:280, chapESize:14,
-  wordY:330, wordSize:78,
-  defY:452, defSize:40, defEY:508, defESize:23,
-  cardY1:600, cardH1:280, cardW1:640,
-  markY:64, markW:7, markH:60, markStep:17, gGap:36, strikeH:7, strikeW:70,
-  tlabY:180, tlabSize:22, tlabEY:214, tlabESize:12,
-  takeY:920, takeSize:42, takeEY:982, takeESize:23,
-  digY:600, digH:110, digW:72, digGap:10, digSize:40,
-  ntpY:760, ntpH:140, ntpW:240, ntpGap:20, ntpDSize:40, ntpLab:15, ntpEn:10,
-  take2Y:940, take2Size:42, take2EY:1002, take2ESize:23,
-  boxY:600, boxH:280, boxW:880, eqSize2:64, eqSize3:54,
-  take3Y:930, take3Size:42, take3EY:992, take3ESize:23,
-  bigY:240, bigH:190, bigW:190, bigStar:110,
-  l1Y4:480, l1Size4:42, l1EY4:544, l1ESize4:23,
-  eqY:610, eqH:130, eqW:500, eqStar:60, eqTSize:46,
-  l2Y:780, l2Size:42, l2EY:846, l2ESize:23,
-  fl1Y:250, fl1Size:46, fl1EY:318, fl1ESize:25,
-  bigqY:392, bigqSize:36, bigqEY:458, bigqESize:22,
-  cta2Y:528, cta2Size:36, cta2EY:592, cta2ESize:21,
-  cardY2:660, card2H2:360, cardW2:880,
-  openY:120, openEY:158, openESize:14, urlY:224, urlSize:76, barY:334, subY:370, fSubEY:406, fSubESize:16,
-  brandY:1076, brandSize:22
+  h1Y:230, h1Size:170, h1BoxW:160, h1BoxH:210,
+  qX:680, qY:250, qSize:110,
+  cardY:530, cardH:210, cardW:288, cardGap:20,
+  cardGSize:52, cardLab:20, cardEn:12,
+  hL1Y:800, hL1Size:52, hL1EY:880, hL1ESize:28,
+  hL2Y:970, hL2Size:52, hL2EY:1046, hL2ESize:28,
+  chapY:210, chapSize:22, chapEY:266, chapESize:15,
+  wordY:310, wordSize:88,
+  defY:436, defSize:46, defEY:500, defESize:26,
+  cardY1:580, cardH1:310, cardW1:680,
+  markY:80, markW:9, markH:78, markStep:20, gGap:44, strikeH:8, strikeW:84,
+  tlabY:190, tlabSize:26, tlabEY:232, tlabESize:13, tsubY:262, tsubSize:14,
+  aTakeY:950, aTakeSize:48, aTakeEY:1022, aTakeESize:27,
+  digY:580, digH:120, digW:80, digGap:10, digSize:46,
+  ntpY:740, ntpH:160, ntpW:280, ntpGap:20, ntpDSize:50, ntpLab:17, ntpEn:11, tagSize:28,
+  bTakeY:940, bTakeSize:46, bTakeEY:1020, bTakeESize:26, markBarW:420,
+  boxY:580, boxH:310, boxW:880, eqSize2:76, eqSize3:64, morphTop:90, stagLabY:214, stagLabSize:20,
+  cTakeY:940, cTakeSize:46, cTakeEY:1004, cTakeESize:26,
+  bigY:200, bigH:220, bigW:220, bigStar:130,
+  eL1Y:460, eL1Size:46, eL1EY:526, eL1ESize:26,
+  eqY:600, eqH:150, eqW:560, eqStar:70, eqTSize:54, eqLabY:790, eqLabSize:22,
+  eL2Y:850, eL2Size:46, eL2EY:918, eL2ESize:26,
+  fL1Y:240, fL1Size:50, fL1EY:312, fL1ESize:28,
+  bigqY:384, bigqSize:44, bigqEY:452, bigqESize:27,
+  cta2Y:524, cta2Size:40, cta2EY:584, cta2ESize:24,
+  cardY2:640, card2H2:390, cardW2:900,
+  openY:112, openEY:152, openESize:14, urlY:210, urlSize:84, barY:322, subY:352, fSubEY:392, fSubESize:15,
+  brandY:1090, brandSize:24
 } : {
-  mx:200, wmY:1006, wmSize:19,
-  h1Y:180, h1Size:150, h1BoxW:140, h1BoxH:190,
-  qX:1060, qY:215, qSize:96,
-  cardY:440, cardH:190, cardW:300, cardGap:30,
-  cardGSize:42, cardLab:17, cardEn:11,
-  l1Y:690, l1Size:44, l1EY:756, l1ESize:25,
-  l2Y:870, l2Size:46, l2EY:938, l2ESize:26,
-  chapY:150, chapSize:19, chapEY:194, chapESize:14,
-  wordY:244, wordSize:78,
-  defY:366, defSize:40, defEY:422, defESize:23,
-  cardY1:470, cardH1:280, cardW1:720,
-  markY:64, markW:7, markH:60, markStep:17, gGap:36, strikeH:7, strikeW:70,
-  tlabY:180, tlabSize:24, tlabEY:216, tlabESize:13,
-  takeY:800, takeSize:44, takeEY:864, takeESize:24,
-  digY:500, digH:116, digW:76, digGap:12, digSize:42,
-  ntpY:680, ntpH:150, ntpW:260, ntpGap:24, ntpDSize:42, ntpLab:16, ntpEn:10,
-  take2Y:870, take2Size:44, take2EY:934, take2ESize:24,
-  boxY:470, boxH:270, boxW:1000, eqSize2:62, eqSize3:56,
-  take3Y:800, take3Size:44, take3EY:864, take3ESize:24,
-  bigY:170, bigH:180, bigW:180, bigStar:104,
-  l1Y4:420, l1Size4:44, l1EY4:486, l1ESize4:24,
-  eqY:560, eqH:140, eqW:560, eqStar:64, eqTSize:50,
-  l2Y:740, l2Size:44, l2EY:806, l2ESize:24,
-  fl1Y:170, fl1Size:46, fl1EY:238, fl1ESize:25,
-  bigqY:296, bigqSize:40, bigqEY:362, bigqESize:22,
-  cta2Y:428, cta2Size:34, cta2EY:486, cta2ESize:20,
-  cardY2:540, card2H2:380, cardW2:900,
-  openY:96, openEY:134, openESize:13, urlY:178, urlSize:94, barY:302, subY:328, fSubEY:366, fSubESize:15,
-  brandY:950, brandSize:23
+  mx:200, wmY:1010, wmSize:19,
+  h1Y:130, h1Size:170, h1BoxW:160, h1BoxH:210,
+  qX:1160, qY:150, qSize:110,
+  cardY:420, cardH:210, cardW:310, cardGap:30,
+  cardGSize:52, cardLab:20, cardEn:12,
+  hL1Y:670, hL1Size:52, hL1EY:744, hL1ESize:28,
+  hL2Y:850, hL2Size:52, hL2EY:918, hL2ESize:28,
+  chapY:130, chapSize:22, chapEY:184, chapESize:15,
+  wordY:228, wordSize:86,
+  defY:348, defSize:46, defEY:410, defESize:26,
+  cardY1:470, cardH1:310, cardW1:760,
+  markY:80, markW:9, markH:78, markStep:20, gGap:44, strikeH:8, strikeW:84,
+  tlabY:190, tlabSize:28, tlabEY:234, tlabESize:14, tsubY:266, tsubSize:14,
+  aTakeY:830, aTakeSize:48, aTakeEY:900, aTakeESize:27,
+  digY:490, digH:130, digW:84, digGap:12, digSize:48,
+  ntpY:660, ntpH:170, ntpW:290, ntpGap:24, ntpDSize:52, ntpLab:18, ntpEn:11, tagSize:30,
+  bTakeY:866, bTakeSize:48, bTakeEY:940, bTakeESize:26, markBarW:520,
+  boxY:470, boxH:300, boxW:1100, eqSize2:74, eqSize3:64, morphTop:78, stagLabY:208, stagLabSize:21,
+  cTakeY:820, cTakeSize:48, cTakeEY:890, cTakeESize:26,
+  bigY:130, bigH:220, bigW:220, bigStar:130,
+  eL1Y:390, eL1Size:46, eL1EY:456, eL1ESize:26,
+  eqY:520, eqH:150, eqW:600, eqStar:70, eqTSize:54, eqLabY:706, eqLabSize:22,
+  eL2Y:760, eL2Size:46, eL2EY:828, eL2ESize:26,
+  fL1Y:140, fL1Size:50, fL1EY:212, fL1ESize:28,
+  bigqY:276, bigqSize:44, bigqEY:344, bigqESize:27,
+  cta2Y:420, cta2Size:40, cta2EY:480, cta2ESize:24,
+  cardY2:540, card2H2:390, cardW2:950,
+  openY:108, openEY:148, openESize:13, urlY:206, urlSize:88, barY:318, subY:348, fSubEY:388, fSubESize:15,
+  brandY:985, brandSize:24
 };
 
 const stage=document.getElementById('stage');
@@ -298,7 +305,7 @@ const H0C=[];
 SHAPES0.forEach((o,i)=>{
   const el=document.createElement('div');
   el.className='card';
-  el.style.cssText=`position:absolute;left:${x0t+i*(CW0+CG0)}px;top:${P.cardY}px;width:${CW0}px;height:${CH0}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;overflow:hidden;will-change:transform,opacity;`;
+  el.style.cssText=`position:absolute;left:${x0t+i*(CW0+CG0)}px;top:${P.cardY}px;width:${CW0}px;height:${CH0}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;opacity:0;overflow:hidden;will-change:transform,opacity;`;
   const d=document.createElement('div');
   d.className='mono';
   d.style.cssText=`font-weight:800;font-size:${P.cardGSize}px;color:${o.col};line-height:1;`+(o.chalk?'text-shadow:0 0 14px rgba(52,211,153,.45);':'');
@@ -320,18 +327,18 @@ SHAPES0.forEach((o,i)=>{
 });
 const SWEEPS0=H0C.map(el=>el.querySelector('.sweep'));
 const hL1=document.getElementById('h_l1');
-tx(hL1,P.l1Y,P.l1Size);
+tx(hL1,P.hL1Y,P.hL1Size);
 const hL1E=document.getElementById('h_l1_e');
-tx(hL1E,P.l1EY,P.l1ESize);
+tx(hL1E,P.hL1EY,P.hL1ESize);
 const hL2=document.getElementById('h_l2');
-tx(hL2,P.l2Y,P.l2Size);
+tx(hL2,P.hL2Y,P.hL2Size);
 const hL2E=document.getElementById('h_l2_e');
-tx(hL2E,P.l2EY,P.l2ESize);
+tx(hL2E,P.hL2EY,P.hL2ESize);
 
 /* ---------- S1 ---------- */
 const aChapT=document.getElementById('a_chap_t');
 const aChap=document.getElementById('a_chap');
-aChap.style.top=P.chapY+'px';aChapT.style.fontSize=P.chapSize+'px';aChapT.style.padding='9px 24px 9px 28px';
+aChap.style.top=P.chapY+'px';aChapT.style.fontSize=P.chapSize+'px';aChapT.style.padding='11px 26px 11px 30px';
 const aChapE=document.getElementById('a_chap_e');
 tx(aChapE,P.chapEY,P.chapESize);
 const aWordT=document.getElementById('a_word_t');
@@ -351,23 +358,23 @@ aCard.style.overflow='hidden';
 aCard.style.background='rgba(251,191,36,.05)';
 const aMarks=document.getElementById('a_marks');
 const MW=P.markW, MH=P.markH, MS=P.markStep, GG=P.gGap;
-const gwM=75+GG+75+GG+(MS+MW);
+const gwM=89+GG+89+GG+(MS+MW);
 const mx0=(CW1-gwM)/2;
 const M7=[];
 let mi=0;
 for(let g=0;g<3;g++){
   const n=g<2?5:2;
-  const gx=mx0+g*(75+GG);
+  const gx=mx0+g*(89+GG);
   for(let k=0;k<n;k++){
     const bar=document.createElement('div');
-    bar.style.cssText=`position:absolute;left:${(gx+k*MS).toFixed(1)}px;top:${P.markY}px;width:${MW}px;height:${MH}px;border-radius:3px;background:linear-gradient(180deg,#FDE68A,#D97706);transform:rotate(-12deg);opacity:0;will-change:transform,opacity;`;
+    bar.style.cssText=`position:absolute;left:${(gx+k*MS).toFixed(1)}px;top:${P.markY}px;width:${MW}px;height:${MH}px;border-radius:4px;background:linear-gradient(180deg,#FDE68A,#D97706);transform:rotate(-12deg);opacity:0;will-change:transform,opacity;`;
     aMarks.appendChild(bar);
     M7.push({el:bar, ts:8.4+mi*0.08, strike:null});
     mi++;
   }
   if(g<2){
     const st=document.createElement('div');
-    st.style.cssText=`position:absolute;left:${(gx+37-MW).toFixed(1)}px;top:${P.markY+26}px;width:${P.strikeW}px;height:${P.strikeH}px;border-radius:3px;background:rgba(253,230,138,.85);transform:rotate(-55deg);opacity:0;will-change:transform,opacity;`;
+    st.style.cssText=`position:absolute;left:${(gx+44-MW).toFixed(1)}px;top:${P.markY+32}px;width:${P.strikeW}px;height:${P.strikeH}px;border-radius:4px;background:rgba(253,230,138,.85);transform:rotate(-55deg);opacity:0;will-change:transform,opacity;`;
     aMarks.appendChild(st);
     M7[mi-1].strike={el:st, ts:8.4+(mi-1)*0.08+0.28};
   }
@@ -376,18 +383,20 @@ const aTl=document.getElementById('a_tlab');
 aTl.style.top=P.tlabY+'px';aTl.style.left='0';aTl.style.right='0';aTl.style.fontSize=P.tlabSize+'px';
 const aTlE=document.getElementById('a_tlab_e');
 aTlE.style.top=P.tlabEY+'px';aTlE.style.left='0';aTlE.style.right='0';aTlE.style.fontSize=P.tlabESize+'px';
+const aTsub=document.getElementById('a_tsub');
+aTsub.style.top=P.tsubY+'px';aTsub.style.left='0';aTsub.style.right='0';aTsub.style.fontSize=P.tsubSize+'px';
 const aCardSw=document.createElement('div');
 aCardSw.className='sweep';
 aCard.appendChild(aCardSw);
 const aTake=document.getElementById('a_take');
-tx(aTake,P.takeY,P.takeSize);
+tx(aTake,P.aTakeY,P.aTakeSize);
 const aTakeE=document.getElementById('a_take_e');
-tx(aTakeE,P.takeEY,P.takeESize);
+tx(aTakeE,P.aTakeEY,P.aTakeESize);
 
 /* ---------- S2 ---------- */
 const bChapT=document.getElementById('b_chap_t');
 const bChap=document.getElementById('b_chap');
-bChap.style.top=P.chapY+'px';bChapT.style.fontSize=P.chapSize+'px';bChapT.style.padding='9px 24px 9px 28px';
+bChap.style.top=P.chapY+'px';bChapT.style.fontSize=P.chapSize+'px';bChapT.style.padding='11px 26px 11px 30px';
 const bChapE=document.getElementById('b_chap_e');
 tx(bChapE,P.chapEY,P.chapESize);
 const bWord=document.getElementById('b_word');
@@ -420,21 +429,22 @@ for(let i=0;i<10;i++){
   DT.push(el);
 }
 const DSWEEP=DT[5].querySelector('.sweep');
-/* tiga kartu nilai tempat: 5, 50, 500 (angka 5 selalu emas) */
+/* tiga kartu nilai tempat: 5, 50, 500 (angka 5 selalu emas) + tag anotasi +0/+00 */
 const bNtp=document.getElementById('b_ntp');
 bNtp.style.cssText+='position:absolute;left:0;top:0;width:100%;height:100%;';
 const NW=P.ntpW, NH=P.ntpH, NG=P.ntpGap;
 const gwN=3*NW+2*NG, x0n=(W-gwN)/2;
 const NTPS=[
-  {num:[['5',1]], lab:'LIMA', en:'FIVE'},
-  {num:[['5',1],['0',0]], lab:'LIMA PULUH', en:'FIFTY'},
-  {num:[['5',1],['00',0]], lab:'LIMA RATUS', en:'FIVE HUNDRED'}
+  {num:[['5',1]], lab:'LIMA', en:'FIVE', tag:null},
+  {num:[['5',1],['0',0]], lab:'LIMA PULUH', en:'FIFTY', tag:'+0'},
+  {num:[['5',1],['00',0]], lab:'LIMA RATUS', en:'FIVE HUNDRED', tag:'+00'}
 ];
-const N3=[];
+const N3=[], TAGS=[];
 NTPS.forEach((o,i)=>{
+  const cx=x0n+i*(NW+NG)+NW/2;
   const el=document.createElement('div');
   el.className='card';
-  el.style.cssText=`position:absolute;left:${x0n+i*(NW+NG)}px;top:${P.ntpY}px;width:${NW}px;height:${NH}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;opacity:0;overflow:hidden;will-change:transform,opacity;`;
+  el.style.cssText=`position:absolute;left:${x0n+i*(NW+NG)}px;top:${P.ntpY}px;width:${NW}px;height:${NH}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;opacity:0;overflow:hidden;will-change:transform,opacity;`;
   const d=document.createElement('div');
   d.className='mono';
   d.style.cssText=`font-weight:800;font-size:${P.ntpDSize}px;line-height:1;`;
@@ -457,16 +467,28 @@ NTPS.forEach((o,i)=>{
   el.appendChild(sw);
   bNtp.appendChild(el);
   N3.push({el, sw});
+  if(o.tag){
+    const tg=document.createElement('div');
+    tg.className='mono';
+    tg.style.cssText=`position:absolute;left:${(cx-40).toFixed(0)}px;top:${P.ntpY-48}px;width:80px;text-align:center;font-weight:800;font-size:${P.tagSize}px;color:#FBBF24;opacity:0;will-change:transform,opacity;text-shadow:0 0 18px rgba(251,191,36,.4);`;
+    tg.textContent=o.tag;
+    bNtp.appendChild(tg);
+    TAGS.push({el:tg, ts:19.2+i*0.9+0.35});
+  }
 });
 const bTake=document.getElementById('b_take');
-tx(bTake,P.take2Y,P.take2Size);
+tx(bTake,P.bTakeY,P.bTakeSize);
+const bMark=document.getElementById('b_marker');
+bMark.style.top=P.bTakeY+P.bTakeSize+18+'px';
+bMark.style.left=((W-P.markBarW)/2)+'px';
+bMark.style.width=P.markBarW+'px';
 const bTakeE=document.getElementById('b_take_e');
-tx(bTakeE,P.take2EY,P.take2ESize);
+tx(bTakeE,P.bTakeEY,P.bTakeESize);
 
 /* ---------- S3 ---------- */
 const cChapT=document.getElementById('c_chap_t');
 const cChap=document.getElementById('c_chap');
-cChap.style.top=P.chapY+'px';cChapT.style.fontSize=P.chapSize+'px';cChapT.style.padding='9px 24px 9px 28px';
+cChap.style.top=P.chapY+'px';cChapT.style.fontSize=P.chapSize+'px';cChapT.style.padding='11px 26px 11px 30px';
 const cChapE=document.getElementById('c_chap_e');
 tx(cChapE,P.chapEY,P.chapESize);
 const cWord=document.getElementById('c_word');
@@ -483,12 +505,15 @@ cBox.style.background='rgba(34,211,238,.045)';
 const cMorph=document.getElementById('c_morph');
 cMorph.style.fontSize=P.eqSize2+'px';cMorph.style.position='absolute';
 cMorph.style.left='0';cMorph.style.right='0';
-cMorph.style.top=(P.boxH-P.eqSize2*1.1)/2+'px';
+cMorph.style.top=P.morphTop+'px';
 cMorph.style.whiteSpace='nowrap';
+const cStage=document.getElementById('c_stagelab');
+cStage.style.top=P.stagLabY+'px';cStage.style.left='0';cStage.style.right='0';
+cStage.style.fontSize=P.stagLabSize+'px';
 const cTake=document.getElementById('c_take');
-tx(cTake,P.take3Y,P.take3Size);
+tx(cTake,P.cTakeY,P.cTakeSize);
 const cTakeE=document.getElementById('c_take_e');
-tx(cTakeE,P.take3EY,P.take3ESize);
+tx(cTakeE,P.cTakeEY,P.cTakeESize);
 
 /* ---------- S4 ---------- */
 const eBig=document.getElementById('e_big');
@@ -502,16 +527,16 @@ const eBigSw=document.createElement('div');
 eBigSw.className='sweep';
 eBig.appendChild(eBigSw);
 const eL1=document.getElementById('e_l1');
-tx(eL1,P.l1Y4,P.l1Size4);
+tx(eL1,P.eL1Y,P.eL1Size);
 const eL1E=document.getElementById('e_l1_e');
-tx(eL1E,P.l1EY4,P.l1ESize4);
+tx(eL1E,P.eL1EY,P.eL1ESize);
 const eEq=document.getElementById('e_eq');
 const EQW=P.eqW, EQH=P.eqH;
 eEq.style.left=((W-EQW)/2)+'px';eEq.style.top=P.eqY+'px';
 eEq.style.width=EQW+'px';eEq.style.height=EQH+'px';
 eEq.style.borderColor='rgba(251,191,36,.5)';
 eEq.style.background='rgba(251,191,36,.08)';
-eEq.style.display='flex';eEq.style.alignItems='center';eEq.style.justifyContent='center';eEq.style.gap='18px';
+eEq.style.display='flex';eEq.style.alignItems='center';eEq.style.justifyContent='center';eEq.style.gap='20px';
 const eEqS=document.getElementById('e_eq_s');
 eEqS.style.cssText+=`position:relative;width:${P.eqStar}px;height:${P.eqStar}px;flex:0 0 auto;`;
 const eEqT=document.getElementById('e_eq_t');
@@ -519,16 +544,18 @@ eEqT.style.fontSize=P.eqTSize+'px';
 const eEqSw=document.createElement('div');
 eEqSw.className='sweep';
 eEq.appendChild(eEqSw);
+const eEqLab=document.getElementById('e_eqlab');
+tx(eEqLab,P.eqLabY,P.eqLabSize);
 const eL2=document.getElementById('e_l2');
-tx(eL2,P.l2Y,P.l2Size);
+tx(eL2,P.eL2Y,P.eL2Size);
 const eL2E=document.getElementById('e_l2_e');
-tx(eL2E,P.l2EY,P.l2ESize);
+tx(eL2E,P.eL2EY,P.eL2ESize);
 
 /* ---------- S5 ---------- */
 const fL1=document.getElementById('f_l1');
-tx(fL1,P.fl1Y,P.fl1Size);
+tx(fL1,P.fL1Y,P.fL1Size);
 const fL1E=document.getElementById('f_l1_e');
-tx(fL1E,P.fl1EY,P.fl1ESize);
+tx(fL1E,P.fL1EY,P.fL1ESize);
 const fBigq=document.getElementById('f_bigq');
 tx(fBigq,P.bigqY,P.bigqSize);
 const fBigqE=document.getElementById('f_bigq_e');
@@ -599,9 +626,10 @@ function headIn(el,t,ts,base=0.04){
   el.style.filter=`blur(${((1-p)*5).toFixed(2)}px)`;
   el.style.letterSpacing=(base*(1-p)).toFixed(4)+'em';
 }
-function wipeChip(el,t,ts){
+function wipeChip(el,t,ts,rot=6){
   const p=eio(seg(t,ts,0.5));
   el.style.clipPath=`inset(0 ${(100-100*p).toFixed(2)}% 0 0 round 999px)`;
+  el.style.transform=`rotate(${((1-p)*-rot).toFixed(2)}deg)`;
 }
 function sweepAny(sw,t,tss,amp=0.85){
   let p=-1;
@@ -639,16 +667,21 @@ function camScale(t){
   return base+imp(t)*0.015;
 }
 function slideScene(el,t,tIn,tOut){
-  /* push pan: bab baru masuk dari kanan sambil bab lama keluar ke kiri */
-  let x=0;
+  /* push pan: bab masuk dari kanan; bab lama keluar ke kiri sambil pudar
+     agar teks lama tidak pernah menimpa teks baru */
+  let x=0, op=1;
   const pin=seg(t,tIn,0.6);
   x=(1-eoc(pin))*W;
   const pout=seg(t,tOut,0.6);
-  if(pout>0){ x=-eoc(pout)*W; }
+  if(pout>0){
+    x=-eoc(pout)*W;
+    op=1-eoc(clamp(pout*1.8,0,1));
+  }
   el.style.transform=`translateX(${x.toFixed(1)}px)`;
+  el.style.opacity=op.toFixed(3);
 }
 
-/* timeline v07: momen muncul */
+/* timeline v08: momen muncul */
 function stageIdx(t){
   let i=0;
   for(const s of [29.0,30.6,32.2]){ if(t>=s) i++; }
@@ -660,6 +693,7 @@ const STAGE_TXT=[
   {t:'TUJUH', col:'#A78BFA', g:0},
   {t:'NILAI SAMA.', col:'', g:1}
 ];
+const STAGE_LAB=['ANGKA','ANGKA ROMAWI','KATA','NILAI: TUJUH'];
 
 /* ---------- RENDER PER FRAME ---------- */
 function renderFrame(t){
@@ -715,11 +749,17 @@ function renderFrame(t){
   });
   sweepAny(aCardSw,t,[9.9]);
   const alp=eoe(seg(t,10.1,0.5));
+  const cnt=Math.floor(eio(seg(t,10.1,0.45))*347);
+  aTl.textContent = t<10.55 ? `${cnt} = ${cnt} GORESAN` : '347 = 347 GORESAN';
   aTl.style.opacity=String(alp);
   aTl.style.transform=`translateY(${((1-alp)*14).toFixed(2)}px)`;
+  aTlE.textContent = t<10.55 ? `${cnt} = ${cnt} MARKS` : '347 = 347 MARKS';
   const alpe=eoe(seg(t,10.25,0.5));
   aTlE.style.opacity=String(alpe*0.95);
   aTlE.style.transform=`translateY(${((1-alpe)*10).toFixed(2)}px)`;
+  const asub=eoe(seg(t,11.0,0.5));
+  aTsub.style.opacity=String(asub*0.95);
+  aTsub.style.transform=`translateY(${((1-asub)*10).toFixed(2)}px)`;
   fadeUp(aTake,t,11.4,0.7,26);
   followUp(aTakeE,t,11.6);
 
@@ -740,8 +780,15 @@ function renderFrame(t){
     popA(o.el,t,19.2+i*0.9,0.55,30,0.85,1.8);
     sweepAny(o.sw,t,[19.8+i*0.9]);
   });
+  TAGS.forEach((o,i)=>{
+    const p=seg(t,o.ts,0.9);
+    const pin=eoe(seg(t,o.ts,0.3));
+    o.el.style.opacity=String(pin*(1-Math.pow(p,2)));
+    o.el.style.transform=`translateY(${((1-pin)*16-p*34).toFixed(2)}px)`;
+  });
   fadeUp(bTake,t,22.8,0.7,26);
-  followUp(bTakeE,t,23.0);
+  bMark.style.transform=`scaleX(${eio(seg(t,23.0,0.7)).toFixed(3)})`;
+  followUp(bTakeE,t,23.1);
 
   /* S3 25.2-34.8 */
   const s3=document.getElementById('s3');
@@ -776,6 +823,17 @@ function renderFrame(t){
   }
   cMorph.style.opacity=String(mo);
   cMorph.style.transform=`translateY(${mty.toFixed(2)}px) scale(${msx.toFixed(3)},${msy.toFixed(3)})`;
+  /* label tahap: ANGKA / ANGKA ROMAWI / KATA / NILAI: TUJUH */
+  const slp=eoe(seg(t,27.9,0.4));
+  let slo=slp, slty=0;
+  for(const s of [29.0,30.6,32.2]){
+    const d=t-s;
+    if(d>=0&&d<0.3){slo=slp*eio(d/0.3); slty=(1-eio(d/0.3))*8;}
+  }
+  cStage.textContent=STAGE_LAB[st];
+  cStage.style.color=st===3?'#FBBF24':'#94A3B8';
+  cStage.style.opacity=String(slo*0.95);
+  cStage.style.transform=`translateY(${slty.toFixed(2)}px)`;
   const glowC=st===1?'rgba(125,211,252,':st===2?'rgba(167,139,250,':'rgba(251,191,36,';
   cBox.style.boxShadow=`0 18px 60px rgba(0,0,0,.45), 0 0 ${(28+16*Math.sin(t*3)).toFixed(0)}px ${glowC}${(0.09+0.04*Math.sin(t*3)).toFixed(3)})`;
   fadeUp(cTake,t,33.4,0.7,24);
@@ -790,6 +848,7 @@ function renderFrame(t){
   followUp(eL1E,t,36.88);
   popA(eEq,t,38.2,0.7,30,0.88,1.6);
   sweepAny(eEqSw,t,[38.6]);
+  fadeUp(eEqLab,t,39.0,0.6,18);
   fadeUp(eL2,t,40.2,0.7,26);
   followUp(eL2E,t,40.4);
 
