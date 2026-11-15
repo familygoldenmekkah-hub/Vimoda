@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Musik & SFX prosedural untuk video 07 "Babopa: Bilangan Tidak Cuma 1, 2, 3?".
+Revisi 6: cue diselaraskan ke beat narasi baru (durasi proporsional panjang teks)
+dan masterplan gerakan bola (menggelinding antar stasiun, tanpa gepeng).
 Output: /tmp/render/audio.wav (stereo 44100 Hz, 16-bit, 52.0 s)
 """
 import numpy as np
@@ -105,16 +107,16 @@ def chime(f=880.0, level=0.12):
     return sine(f, 1.6, a=0.002, d=0.5, harm=(1.0, 0.45, 0.18)) * level / 0.12 * 1.0
 
 
-# ---------- PAD / chord progress ----------
+# ---------- PAD / chord progress (batas bab mengikuti scene baru) ----------
 A2, C3, E3, F2, G2, B2, D3, C4 = 110.0, 130.81, 164.81, 87.31, 98.0, 123.47, 146.83, 261.63
 SEG = [
     (0.0, 5.2, (A2, C3, E3)),
-    (5.2, 12.4, (F2, A2, C3)),
-    (12.4, 22.0, (C3 - 0, E3, 196.0)),
-    (22.0, 31.6, (G2, B2, D3)),
-    (31.6, 42.2, (A2, C3, E3)),
-    (42.2, 47.2, (F2, A2, C3)),
-    (47.2, 52.0, (C3, E3, 196.0)),
+    (5.2, 12.8, (F2, A2, C3)),
+    (12.8, 23.4, (C3 - 0, E3, 196.0)),
+    (23.4, 32.8, (G2, B2, D3)),
+    (32.8, 40.2, (A2, C3, E3)),
+    (40.2, 47.4, (F2, A2, C3)),
+    (47.4, 52.0, (C3, E3, 196.0)),
 ]
 for (t0, t1, notes) in SEG:
     dur = t1 - t0 + 1.0
@@ -142,12 +144,12 @@ for (t0, t1, notes) in SEG:
     sub = np.sin(2 * np.pi * notes[0] / 2 * t) * e * 0.075
     add(t0, sub, 0.0)
 
-# ---------- arpeggio 12.4 - 42.2 ----------
+# ---------- arpeggio 12.8 - 40.2 ----------
 SCALE = [220.0, 261.63, 329.63, 392.0, 440.0, 523.25]
 step = 0.30
-tt = 12.4
+tt = 12.8
 k = 0
-while tt < 42.0:
+while tt < 40.0:
     f = SCALE[(k * 3 + (k % 5)) % len(SCALE)]
     s = sine(f, 0.30, a=0.004, d=0.16, harm=(1.0, 0.35))
     pan = 0.35 * np.sin(k * 1.1)
@@ -156,85 +158,83 @@ while tt < 42.0:
     tt += step
 
 # ---------- kick & hat ----------
-tt = 12.4
-while tt < 42.0:
+tt = 12.8
+while tt < 40.0:
     add(tt, kick(), 0.0)
     add(tt + 0.3, noise_band(0.05, 5000, 9000) * 0.9, 0.15, 0.05)
     tt += 0.6
-tt = 42.2
+tt = 40.2
 while tt < 51.5:
     add(tt, kick(0.14), 0.0)
     tt += 1.2
 
-# ---------- momen kunci (video 07: babopa, keluarga bilangan) ----------
-CUT_TRANSITIONS = [6.0, 14.4, 25.2, 34.8, 43.2]
+# ---------- momen kunci (diselaraskan beat narasi revisi 6) ----------
+CUT_TRANSITIONS = [6.4, 17.0, 25.9, 32.9, 40.2]
 add(0.5, boom(0.24))                       # 1, 2, 3 pahlawan menghantam
 add(0.5, whoosh(0.5, True, 0.05))
 for i, tc in enumerate([1.0, 1.45, 1.9]):  # kartu negatif, pecahan, irasional
     add(tc, sine([440.0, 523.25, 659.26][i], 0.4, a=0.004, d=0.24, harm=(1.0, 0.4)), 0.0, 0.10)
-add(2.6, tick(760, 0.045))                 # "matematika tidak sesempit itu"
-add(3.9, tick(520, 0.05))                  # "siapa yang menentukan bentuk 7?"
+add(2.98, tick(760, 0.045))                # "matematika tidak sesempit itu"
+add(3.9, tick(520, 0.05))
 add(4.9, tick(1100, 0.07))                 # tanda tanya merah
-for tw in CUT_TRANSITIONS:                 # push-pan antar bab
+for tw in CUT_TRANSITIONS:                 # perpindahan antar bab
     add(tw, whoosh(0.85, True, 0.12), 0.0)
-add(6.7, tick(900, 0.05))                  # chip BAGIAN 1
-add(48.66, tick(240, 0.05))                # lompatan perayaan tunggal mentor
-add(7.2, chime(660.0, 0.10))               # kata SITUASI
-add(7.8, tick(760, 0.045))                 # definisi
-for i in range(4):                         # empat kartu situasi muncul
-    add(7.8 + i * 0.45, tick(700 + i * 130, 0.05))
-add(9.9, tick(620, 0.05))                  # sweep kartu goresan
-add(10.3, whoosh(0.3, True, 0.04))         # label EMPAT SITUASI
-add(10.3, tick(520, 0.045))                # label takeaway
-add(8.9, tick(300, 0.06))                  # gelembung tokoh "dingin!"
-add(11.4, boom(0.08))                      # beat emas "jenis berbeda" 
-add(15.1, tick(900, 0.05))                 # chip BAGIAN 2
-add(15.6, chime(587.33, 0.12))             # kata KELOMPOK
-add(16.2, tick(760, 0.045))
-for i in range(3):                         # ubin asli, cacah, bulat
-    add(15.8 + i * 0.35, tick(640 + i * 90, 0.05))
-add(19.5, tick(700, 0.05))                 # ubin rasional
-add(23.0, tick(760, 0.05))                 # ubin irasional
-add(19.45, whoosh(0.3, True, 0.04))
-add(19.5, chime(660.0, 0.08))              # sorot rasional
-add(22.95, whoosh(0.3, True, 0.04))
-add(23.0, chime(880.0, 0.08))              # sorot irasional
-add(23.0, boom(0.06))                      # ubin irasional mendarat
-add(22.9, boom(0.10))                      # beat emas "irasional" di subtitle
-add(23.0, noise_band(0.10, 1000, 3000) * 0.55, 0.0, 0.05)  # marker sorot
-add(25.9, tick(900, 0.05))                 # chip BAGIAN 3
-add(26.4, chime(523.25, 0.12))             # kata KENAPA?
+add(6.52, tick(900, 0.05))                 # narasi "punya 5 buku"
+add(6.9, tick(700, 0.05))                  # properti buku muncul
+add(7.1, chime(660.0, 0.10))               # judul EMPAT SITUASI
+for i in range(5):                         # bola menghitung 5 buku
+    add(7.1 + i * 0.32, tick(320 + i * 50, 0.05))
+add(8.85, tick(300, 0.06))                 # termometer + panel "dingin!"
+add(8.9, tick(980, 0.05))
+add(10.15, tick(520, 0.045))               # pasangan 1 berlalu
+add(10.35, tick(620, 0.05))                # pizza muncul
+add(10.5, whoosh(0.3, True, 0.04))         # bola terbelah dua (1/2)
+add(10.45, tick(640, 0.05))                # lingkaran pi muncul
+add(12.2, tick(760, 0.05))                 # bola berputar mulus
+add(13.76, boom(0.08))                     # beat emas "jenis berbeda"
+add(17.0, tick(900, 0.05))                 # bab kelompok
+add(17.21, chime(587.33, 0.12))
+add(18.0, tick(760, 0.045))
+for i, tc in enumerate([18.4, 19.0, 19.6]):  # ubin asli, cacah, bulat
+    add(tc, tick(640 + i * 90, 0.05))
+add(19.95, whoosh(0.3, True, 0.04))
+add(20.0, tick(700, 0.05))                 # ubin rasional
+add(20.0, chime(660.0, 0.08))
+add(19.3, tick(880, 0.05))                 # panel pesan "lima kelompok!"
+add(23.45, whoosh(0.3, True, 0.04))
+add(23.5, tick(760, 0.05))                 # ubin irasional
+add(23.5, chime(880.0, 0.08))
+add(23.5, boom(0.10))
+add(23.47, boom(0.06))                     # beat emas "irasional"
+add(23.5, noise_band(0.10, 1000, 3000) * 0.55, 0.0, 0.05)
+add(17.7, whoosh(0.5, False, 0.07))        # bola tenggelam di garis nol
+add(26.0, tick(900, 0.05))                 # panel keluarga
+add(26.3, chime(523.25, 0.12))
 add(27.0, tick(760, 0.045))
-add(27.6, tick(1050, 0.06))                # kotak "1, 2, 3" mendarat
-add(27.6, boom(0.06))
-for ts in [27.9, 29.2, 30.5, 31.8]:        # keluarga tumbuh: 0, negatif, pecahan, irasional
+add(27.3, tick(1050, 0.06))
+add(27.3, boom(0.06))
+for ts in [27.0, 28.2, 29.4, 30.6, 31.8]:  # lima baris keluarga
     add(ts, tick(900, 0.085))
     add(ts + 0.02, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
-add(32.3, boom(0.14))                      # beat emas "persoalan tidak selalu sama"
-add(33.4, tick(700, 0.045))
-add(35.5, boom(0.06))                      # pi pahlawan mendarat
-add(36.7, tick(760, 0.045))                # "matematika tumbuh mencari cara"
-add(38.2, whoosh(0.35, True, 0.05))        # chip "1/2 + 1/2 = 1"
-add(38.2, tick(1200, 0.06))
-add(40.2, boom(0.10))                      # "cara bebas, hasil sesuai aturan"
-add(43.9, tick(760, 0.045))                # "kalau seluruh manusia sepakat"
-add(45.3, boom(0.08))                      # pertanyaan besar 7 + 2 = 10
-add(46.8, tick(700, 0.045))
-add(47.8, whoosh(0.6, True, 0.07))
-add(48.7, chime(880.0, 0.13))
-add(49.3, chime(1318.5, 0.07))
-add(50.6, chime(440.0, 0.09))
-# demo mentor revisi 4 (aksi memperagakan materi)
-add(1.50, tick(440, 0.05))                              # bola memangkuk: kartu 1/2
-add(1.98, tick(700, 0.05))                              # bola melebar berputar: kartu pi
-for _i in range(5):
-    add(7.98 + _i * 0.28, tick(320 + _i * 50, 0.05))    # bola memantul menghitung 5 buku
-add(17.62, whoosh(0.5, False, 0.07))                    # bola tenggelam di bawah garis nol
-add(23.15, tick(760, 0.05))                             # bola berputar: irasional
-add(23.60, tick(980, 0.05))
-add(38.55, tick(500, 0.05))                             # bola terbelah dua
+add(29.7, boom(0.14))                      # beat emas "persoalan tidak selalu sama"
+add(32.0, tick(700, 0.045))
+add(33.5, boom(0.06))
+add(35.5, tick(760, 0.045))                # "matematika tumbuh mencari cara"
+add(36.7, whoosh(0.35, True, 0.05))        # panel persamaan 1/2+1/2=1
+add(36.7, tick(1200, 0.06))
+add(36.9, boom(0.06))
+add(38.6, tick(500, 0.05))                 # bola terbelah dua
 add(38.95, tick(620, 0.05))
-add(39.30, chime(1318.5, 0.10))                         # menyatu jadi satu: 1/2+1/2=1
+add(39.3, chime(1318.5, 0.10))             # menyatu jadi satu
+add(39.4, boom(0.10))                      # "cara bebas, hasil sesuai aturan"
+add(40.9, tick(760, 0.045))                # panel toko CTA
+add(44.2, boom(0.08))                      # pertanyaan besar
+add(44.3, tick(700, 0.045))
+add(47.5, whoosh(0.6, True, 0.07))
+add(47.55, chime(880.0, 0.13))             # pil TULIS DI KOMEN
+add(48.2, chime(1318.5, 0.07))
+add(48.95, tick(240, 0.05))                # lompatan perayaan
+add(50.2, chime(440.0, 0.09))
 
 # ---------- master ----------
 mix = np.stack([mixL, mixR])

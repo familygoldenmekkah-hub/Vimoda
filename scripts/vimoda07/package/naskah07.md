@@ -1,4 +1,4 @@
-# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 5, rombak total ala modeling)
+# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 6)
 
 - Durasi: 52 detik | FPS: 30 | Musik & SFX: prosedural orisinal
 - Sumber materi: yuyanaka.blogspot.com/2026/11/babopa.html (artikel "Babopa", 14 Nov 2026)
@@ -25,6 +25,15 @@
 1. AKSI MENTOR KINI MEMPERAGAKAN MATERI, BUKAN REAKSI GENERIK: menggigil saat kartu -5 derajat (1.05), memangkuk jadi setengah tinggi saat kartu 1/2 (1.50), melebar sambil berputar satu putaran penuh saat kartu pi (1.95), memantul LIMA KALI menghitung lima buku (7.95), tenggelam melewati garis nol saat kelompok BULAT/negatif (17.60), berputar dua putaran tanpa henti saat IRASIONAL (23.15), dan TERBELAH DUA lalu menyatu menjadi satu bola penuh saat persamaan 1/2+1/2=1 (38.50-39.70) dengan kilat di titik menyatu.
 2. BUBBLE TOPIK-SPESIFIK: "dingin!" dipertahankan; "lengkap!" diganti "lima kelompok!" (21.30); "aman." diganti "jadi 1!" (40.40) yang merayakan hasil persamaan. Ucapan bubble wajib lahir dari materi, bukan template antar video.
 3. DESAIN UNTUK MATA MINUS: seluruh teks kunci dibesarkan (subtitle 30 ke 36 px, angka situasi 44 ke 50, angka kelompok 26 ke 30, label kelompok 17 ke 20, persamaan 54 ke 62, bubble 24 ke 30, judul 104 ke 112, dan seterusnya) dengan lebar kartu menyesuaikan agar tidak ada yang terpotong.
+
+## Revisi 6 (arahan kreator setelah menonton di HP)
+
+1. TOKOH TIDAK DINAMAI: semua name tag di atas kepala dihapus (BABOPA dan kelima ubin); identitas kelompok cukup lewat panel ANGGOTA KELUARGA dan narasi. Label situasi properti (5 BUKU, -5 derajat, 1/2, LINGKARAN) dipertahankan karena menjeraskan konten.
+2. TANPA GERAKAN GEPENG: squash/stretch dihapus total; skala bola selalu seragam. Demo pecahan kini membelah bola menjadi dua bola utuh seukuran (pizza 1/2 dan 1/2+1/2=1), bukan memipihkannya.
+3. SUBTITLE NAIK dari zona deskripsi sosmed: portrait mulai y 1272 (bawah bar 1462, aman dari overlay TikTok), landscape y 830; lebar pil dibatasi 900/1400 dan teks maksimal dua baris.
+4. ANTI TERTIMPA: blok digit dunia memudar saat panel konten naik (25.6); panel keluarga turun ke y 470 dengan jarak dari judul; tiap elemen konten pergi sebelum elemen berikutnya muncul, jadi penjelasan selalu terbaca tuntas.
+5. BEAT NARASI DI-RE-TIME: durasi tiap beat proporsional panjang teks (13.5 karakter/detik, minimum 1.7 detik, dikalibrasi ke 52 detik) sehingga tidak ada penjelasan tertimpa lanjutannya; musik, whoosh antar bab, boom emas, tick demo, dan chime disinkronkan ke waktu baru.
+6. MASTERPLAN GERAKAN: tabel waypoint per orientasi; bola menggelinding antar stasiun dengan rotasi fisik (jarak dibagi jari-jari), parkir sebelum bab berganti, lalu satu gestur bersih per beat (menghitung memantul, menggigil translasi, membelah dua, berputar mulus, tenggelam, melompat). Tidak ada gerakan improvisasi.
 
 ## Rombak total revisi 5 (mandat kreator: benar-benar meniru modeling 60719beb, bukan sebatas aksi)
 

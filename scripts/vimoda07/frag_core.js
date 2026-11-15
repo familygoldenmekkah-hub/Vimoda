@@ -11,31 +11,33 @@ const P = ORIENT==='portrait' ? {
   plankY:988, plankN:4, plankW:236, plankGap:22,
   blkY1:150, blkS1:150, blkG1:18, blkY2:520, blkS2:130,
   titleY:330, titleS0:110, titleSN:86,
+  WAY:[[0.55,180],[1.5,320],[6.7,230],[8.85,650],[10.0,230],[12.2,650],[14.6,110],[25.7,110],[26.6,980],[32.9,980],[33.8,170],[36.6,170],[40.2,260],[51.9,260]],
   ttX:[180,540,110,980,170,260],
   tw0:[447,1.0], twGap:28, tileS:130, tagS:30,
   gtGap:12, gtS:132, gtTag:26, gtDg:40, gtEn:14,
   propX:[330,750],
-  famX:120, famY:440, famW:840, famHd:74, famRow:78, famName:30, famMem:40,
+  famX:120, famY:470, famW:840, famHd:74, famRow:74, famName:30, famMem:40,
   eqX:100, eqY:470, eqW:880, eqH:206, eqSize:88,
-  ctaX:80, ctaY:330, ctaW:920, ctaH:540, ctaOpen:38, ctaOpenE:17, ctaUrl:94,
-  subTop:1390, subId:54, subEn:26, subMax:940,
+  ctaX:80, ctaY:480, ctaW:920, ctaH:540, ctaOpen:38, ctaOpenE:17, ctaUrl:94,
+  subTop:1272, subId:50, subEn:24, subMax:900,
   chatX:70, chatY:640, chatW:470, chatWho:27, chatMsg:32,
   ballD:110, qX:846, qY:560, qSize:132,
   wmY:1852, wmSize:20
 } : {
   groundY:828, grassH:22,
   plankY:662, plankN:5, plankW:320, plankGap:24,
-  blkY1:118, blkS1:130, blkG1:16, blkY2:470, blkS2:110,
-  titleY:308, titleS0:94, titleSN:80,
+  blkY1:60, blkS1:130, blkG1:16, blkY2:470, blkS2:110,
+  titleY:240, titleS0:94, titleSN:80,
+  WAY:[[0.55,300],[1.5,480],[6.7,560],[8.85,1020],[10.0,560],[12.2,1020],[14.6,470],[25.7,470],[26.6,1620],[32.9,1620],[33.8,300],[36.6,300],[40.2,480],[51.9,480]],
   ttX:[300,900,470,1560,300,420],
   tw0:[756,1.0], twGap:28, tileS:120, tagS:27,
   gtGap:12, gtS:124, gtTag:24, gtDg:36, gtEn:13,
   propX:[660,1120],
-  famX:460, famY:340, famW:1000, famHd:64, famRow:70, famName:26, famMem:34,
-  eqX:510, eqY:268, eqW:900, eqH:180, eqSize:76,
-  ctaX:530, ctaY:208, ctaW:860, ctaH:470, ctaOpen:32, ctaOpenE:15, ctaUrl:82,
-  subTop:880, subId:50, subEn:24, subMax:1560,
-  chatX:380, chatY:480, chatW:440, chatWho:24, chatMsg:29,
+  famX:460, famY:380, famW:1000, famHd:56, famRow:62, famName:24, famMem:30,
+  eqX:510, eqY:470, eqW:900, eqH:180, eqSize:76,
+  ctaX:530, ctaY:380, ctaW:860, ctaH:440, ctaOpen:32, ctaOpenE:15, ctaUrl:82,
+  subTop:830, subId:50, subEn:24, subMax:1400,
+  chatX:80, chatY:470, chatW:440, chatWho:24, chatMsg:29,
   ballD:96, qX:1420, qY:300, qSize:118,
   wmY:1018, wmSize:20
 };
@@ -180,10 +182,9 @@ function buildTile(host,x,s,glyph,col,en,ts,dgfs,enfs){
 const ball=buildGoldBall(document.getElementById('ball'),P.ballD);
 const ballsh=buildShadow(document.getElementById('ballsh'));
 const spark=document.getElementById('spark');
-const babopaTag=buildTag(document.getElementById('ball'),P.ttX[0],P.groundY-P.ballD-58,'BABOPA',P.tagS);
-/* kembaran bola setengah untuk demo 1/2 + 1/2 = 1 */
+/* kembaran bola seragam untuk demo belah dua (1/2 dan 1/2+1/2=1) */
 const ballB=document.createElement('div');
-ballB.style.cssText=`position:absolute;left:${P.ttX[4]}px;top:${P.groundY-Math.round(P.ballD*0.44)}px;width:${Math.round(P.ballD*0.44)}px;height:${Math.round(P.ballD*0.44)}px;margin-left:${-Math.round(P.ballD*0.22)}px;border-radius:50%;background:radial-gradient(circle at 33% 27%, #FFF3C4 0%, #FCD34D 34%, #F59E0B 68%, #B45309 100%);box-shadow:0 0 30px rgba(251,191,36,.22);opacity:0;will-change:transform,opacity,left;`;
+ballB.style.cssText=`position:absolute;left:${P.ttX[4]}px;top:${P.groundY-Math.round(P.ballD*0.52)}px;width:${Math.round(P.ballD*0.52)}px;height:${Math.round(P.ballD*0.52)}px;margin-left:${-Math.round(P.ballD*0.26)}px;border-radius:50%;background:radial-gradient(circle at 33% 27%, #FFF3C4 0%, #FCD34D 34%, #F59E0B 68%, #B45309 100%);box-shadow:0 0 30px rgba(251,191,36,.22);opacity:0;will-change:transform,opacity,left;`;
 document.getElementById('ball').appendChild(ballB);
 
 /* ---------- S0: tiga kartu teaser sebagai tokoh ---------- */
@@ -199,8 +200,7 @@ const TW=[];
 TEAS.forEach((o,i)=>{
   const x=P.tw0[0]+i*(P.tileS+P.twGap);
   const el=buildTile(hTiles,x,P.tileS,o.g,o.c,null,P.tileS,Math.round(P.tileS*0.36),0);
-  const tg=buildTag(hTiles,x,P.groundY-P.tileS-46,o.n,Math.round(P.tagS*0.87));
-  TW.push({el,tg,t0:1.0+i*0.45,ph:i});
+  TW.push({el,t0:1.0+i*0.45,ph:i});
 });
 
 /* ---------- S1: empat properti dunia ---------- */
