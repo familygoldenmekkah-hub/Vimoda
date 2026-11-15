@@ -10,7 +10,7 @@
 
 1. KARAKTER BARU - BULATAN EMAS: penggembala diganti bulatan emas (diameter 88 px, gradien emas + kilau lembut) TANPA WAJAH TANPA MATA. Ekspresi murni lewat gerak: napas squash-stretch (1,5 Hz), 12 lompatan parabola dengan anticipation dan landing squash tepat di beat musik (0.7, 6.4, 10.5, 14.9, 21.0, 22.9, 25.7, 32.2, 35.3, 40.2, 43.7, 48.7), menggelinding ke posisi baru tiap ganti bab, bergoyang lelah saat count-up 347, bergetar heboh + sparkle bintang di CTA, droplet keringat di puncak count-up, dan bayangan elips yang mengecil saat melayang.
 2. DOMBA LEBIH GEMOY: badan wol membulat, tanpa wajah, hop kecil bergantian (3.6, 8.6); panggung ditambah rumput hias dan bunga pixel yang bergoyang.
-3. SUBTITLE ANTI-KEPOTONG (PORTRAIT): margin samping bar diperbesar 40 menjadi 130 px dari tiap ujung (lebar bar 820 dari 1080) agar tidak tertutup rail like/comment sosmed; font ID 32 px; tiga kalimat terpanjang diringkas agar tetap satu baris.
+3. SUBTITLE ANTI-KEPOTONG + ANTI-TIMPA (PORTRAIT): margin samping bar diperbesar 40 menjadi 130 px dari tiap ujung (lebar bar 820 dari 1080) agar tidak tertutup rail like/comment sosmed. Susunan teks diubah ke flex kolom: terjemahan Inggris selalu mengalir di bawah narasi Indonesia, mustahil tertimpa walau teks patah baris. Font ID 30 px; tiga kalimat terpanjang diringkas ("Dulu, jumlah dicatat dengan goresan.", "Solusinya: desimal, 10 simbol 0 sampai 9.", "Angka 5 tetap 5, jadi 50 dan 500.") agar tetap satu baris rapi.
 4. GELEMBUNG REAKSI LANDSCAPE pindah ke kolom kiri yang bebas (sebelumnya menimpa baris ubin angka); posisi roll bulatan di bab simbol disesuaikan agar tidak menyentuh sudut kotak morf.
 5. SFX: tujuh tick lembut mengikuti lompatan bulatan.
 
@@ -23,7 +23,7 @@
 
 ## Warisan revisi sebelumnya (tetap berlaku)
 
-- Revisi 3: kalimat storytelling tanpa klaim berlebihan ("Dulu, manusia mencatat jumlah dengan goresan." dan seterusnya, kini hidup di subtitle bar).
+- Revisi 3: kalimat storytelling tanpa klaim berlebihan ("Dulu, jumlah dicatat dengan goresan." dan seterusnya, kini hidup di subtitle bar).
 - Revisi 2: kunci layout unik anti-tumpuk (audit otomatis), font besar untuk mata minus, label penjelas ("TIAP 5 DICORET", label tahap morf, "NILAINYA TETAP 9"), count-up 347, tag +0/+00, chip rotasi stiker, marker sorot, scene lama pudar saat push-pan.
 
 ## 0.0 - 6.0 | HOOK
@@ -33,7 +33,7 @@
 - 4.90 - Tanda tanya merah memantul di samping angka 1.
 
 ## 6.0 - 14.4 | BAGIAN 1: GORESAN
-- 6.70 - Chip "BAGIAN 1 DARI 3" masuk miring lalu melurus. Sub: "Dulu, manusia mencatat jumlah dengan goresan."
+- 6.70 - Chip "BAGIAN 1 DARI 3" masuk miring lalu melurus. Sub: "Dulu, jumlah dicatat dengan goresan."
 - 7.20 - Kata besar "GORESAN" (gradien, blur-in, chime).
 - 8.20 - Kartu goresan mendarat; 8.40-9.40 dua belas goresan muncul, garis coret kelompok 1-2; domba ikut berdenyut.
 - 9.60 - Sub: "Coba bayangkan mencatat 347 satu per satu."
@@ -42,10 +42,10 @@
 - 14.00 - Domba pergi menjelang ganti bab.
 
 ## 14.4 - 25.2 | BAGIAN 2: DESIMAL
-- 15.10 - Chip "BAGIAN 2 DARI 3". Sub: "Solusinya: desimal, sepuluh simbol 0 sampai 9."
+- 15.10 - Chip "BAGIAN 2 DARI 3". Sub: "Solusinya: desimal, 10 simbol 0 sampai 9."
 - 15.60 - Kata besar "DESIMAL" (chime).
 - 16.80-17.50 - Sepuluh ubin angka 0-9 berjalan; ubin 5 emas + light sweep.
-- 19.20 / 20.10 / 21.00 - Kartu 5 LIMA, 50 LIMA PULUH, 500 LIMA RATUS; tag +0 dan +00 melayang; bulatan emas melompat dua kali (sparkle menyala). Sub 19.3: "Angka 5 tetap lima, jadi 50 dan 500 di posisi lain." Gelembung 21.3: "rapi!"
+- 19.20 / 20.10 / 21.00 - Kartu 5 LIMA, 50 LIMA PULUH, 500 LIMA RATUS; tag +0 dan +00 melayang; bulatan emas melompat dua kali (sparkle menyala). Sub 19.3: "Angka 5 tetap 5, jadi 50 dan 500." Gelembung 21.3: "rapi!"
 - 22.80 - Simpulan di scene: "Simbol sama, posisi mengubah nilai." + marker sorot emas. Sub emas 22.9: "Simbolnya sama, posisi yang mengubah nilai." (boom)
 
 ## 25.2 - 34.8 | BAGIAN 3: SIMBOL
