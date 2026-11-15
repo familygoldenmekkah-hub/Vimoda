@@ -6,7 +6,7 @@
 - Label di dalam video: AKIOMIDA (wm atas), footer penutup diganti kartu CTA.
 - Dua bahasa di layar: narasi bahasa Indonesia di subtitle bar, terjemahan Inggris kecil di dalam bar yang sama.
 
-## Perbaikan revisi 4 (umpan balik Kaisar: "ada model animasi, subtitle jelas, hidup bukan hampa")
+## Perbaikan revisi 4 (umpan balik kreator: "ada model animasi, subtitle jelas, hidup bukan hampa")
 
 Mengadopsi pola video referensi (dunia game pixel + subtitle box permanen):
 
