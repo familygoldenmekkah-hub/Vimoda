@@ -47,8 +47,7 @@ html,body{background:#000;overflow:hidden;}
 .panel .hd{font-weight:800;color:#FCD34D;}
 .prow{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
   border-radius:12px;background:rgba(255,255,255,.05);will-change:transform,opacity;}
-/* panel pesan */
-#chatp .who{font-weight:800;color:#4ADE80;}
+/* panel pesan: tanpa header nama (karakter tidak boleh dinamai) */
 #chatp .msg{font-weight:700;color:#FFFFFF;}
 #chatp{border:2px solid rgba(74,222,128,.55);}
 /* subtitle besar ala modeling: pill hitam, teks raksasa */
@@ -92,7 +91,7 @@ html,body{background:#000;overflow:hidden;}
     <div class="bigtitle" id="t1">EMPAT SITUASI</div>
     <div id="a_props"></div>
 
-    <!-- S2 KELOMPOK: lima tokoh bernama -->
+    <!-- S2 KELOMPOK: lima kelompok bilangan -->
     <div class="bigtitle" id="t2">LIMA KELOMPOK</div>
     <div id="g_tiles"></div>
 
@@ -115,19 +114,18 @@ html,body{background:#000;overflow:hidden;}
     <div class="panel center" id="cta">
       <div id="f_open" style="color:#C9D6EE;font-weight:700;letter-spacing:.14em;">MENURUTMU, CUKUP SATU JENIS?</div>
       <div id="f_open_e" style="color:#8FA3BF;font-weight:600;letter-spacing:.26em;">IS ONE KIND ENOUGH?</div>
-      <div id="f_url" class="mono" style="font-weight:800;">AKIOMIDA.COM</div>
+      <div id="f_url" class="mono" style="font-weight:800;opacity:0;">AKIOMIDA.COM</div>
       <div id="f_bar" style="height:6px;border-radius:99px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24);width:0;"></div>
       <div class="goldpill" id="f_pill">TULIS DI KOMEN</div>
     </div>
 
-    <!-- papan bawah tokoh: bola emas BABOPA + bayangan + kilat -->
+    <!-- papan bawah tokoh: bola emas mentor (tanpa nama) + bayangan + kilat -->
     <div id="ballsh"></div>
     <div id="ball"></div>
     <div id="spark" class="starclip" style="position:absolute;width:34px;height:34px;opacity:0;"></div>
 
-    <!-- panel pesan ala modeling -->
+    <!-- panel pesan ala modeling: hanya isi pesan, tanpa nama pengirim -->
     <div class="panel" id="chatp" style="opacity:0;">
-      <div class="who">&#9679; BABOPA</div>
       <div class="msg" id="chatp_msg"></div>
     </div>
   </div>
@@ -137,7 +135,6 @@ html,body{background:#000;overflow:hidden;}
     <div class="center" id="sub_en"></div>
   </div>
 
-  <div class="center" id="wm" style="position:absolute;color:#7C8BA1;font-weight:600;letter-spacing:.40em;opacity:.5;">AKIOMIDA</div>
   <div class="vig"></div>
   <div id="grain"></div>
   <div id="flash"></div>

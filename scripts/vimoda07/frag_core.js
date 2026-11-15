@@ -131,7 +131,7 @@ function buildBlkRow(list,y,sz,gap,fs){
 buildBlkRow(ROWS1,P.blkY1,P.blkS1,P.blkG1,Math.round(P.blkS1*0.42));
 buildBlkRow(ROWS2,P.blkY2,P.blkS2,P.blkG1,Math.round(P.blkS2*0.36));
 
-/* ---------- tokoh utama: bulatan emas BABOPA ---------- */
+/* ---------- tokoh utama: bola emas mentor (tanpa nama, tanpa label) ---------- */
 function buildGoldBall(host,d){
   const el=document.createElement('div');
   el.style.cssText=`position:absolute;left:${P.ttX[0]}px;top:${P.groundY}px;width:${d}px;height:${d}px;margin-left:${-d/2}px;transform-origin:50% 100%;will-change:transform,opacity,left;opacity:0;`;

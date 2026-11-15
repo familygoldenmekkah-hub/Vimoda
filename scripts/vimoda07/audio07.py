@@ -230,9 +230,13 @@ add(39.4, boom(0.10))                      # "cara bebas, hasil sesuai aturan"
 add(40.9, tick(760, 0.045))                # panel toko CTA
 add(44.2, boom(0.08))                      # pertanyaan besar
 add(44.3, tick(700, 0.045))
+add(45.8, chime(523.25, 0.06))             # AKIOMIDA.COM reveal tenang di akhir
+add(45.8, whoosh(0.5, True, 0.03))
 add(47.5, whoosh(0.6, True, 0.07))
 add(47.55, chime(880.0, 0.13))             # pil TULIS DI KOMEN
 add(48.2, chime(1318.5, 0.07))
+add(48.6, whoosh(0.5, True, 0.05))         # bar gradien menyapu
+add(48.65, tick(700, 0.045))
 add(48.95, tick(240, 0.05))                # lompatan perayaan
 add(50.2, chime(440.0, 0.09))
 
