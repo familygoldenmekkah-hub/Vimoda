@@ -1,4 +1,4 @@
-# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 1)
+# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 2)
 
 - Durasi: 52 detik | FPS: 30 | Musik & SFX: prosedural orisinal
 - Sumber materi: yuyanaka.blogspot.com/2026/11/babopa.html (artikel "Babopa", 14 Nov 2026)
@@ -6,15 +6,22 @@
 - Label di dalam video: AKIOMIDA (wm atas), penutup kartu CTA AKIOMIDA.COM.
 - Dua bahasa di layar: narasi bahasa Indonesia di subtitle bar, terjemahan Inggris kecil di dalam bar yang sama.
 
+## Perbaikan revisi 2 (umpan balik kreator: hiasan dunia harus sesuai konteks, tidak selalu karakter hidup dengan domba)
+
+1. DUA DOMBA DIGANTI DUA UBIN ANGKA: pendamping bulatan emas kini ubin mungil bertuliskan 0 (sian) dan pi (violet), tetap hop bergantian dan hadir sepanjang video tanpa pergi di 14.0 (sebelumnya domba pergi menjelang bab kelompok).
+2. TANAH GARIS BILANGAN: strip rumput hijau diganti strip biru sian bergaya garis bilangan dengan tanda garis skala tiap 40 px.
+3. RUMPUT DAN BUNGA DIGANTI CHIP ANGKA: tiga chip digit 1, 0, 5 dan satu chip simbol + di tepi panggung dengan goyangan lembut yang sama, menyesuaikan tema keluarga bilangan.
+4. Partikel latar tetap bertema angka sejak awal (0-9, +, =, /, 1/2, derajat, kali).
+
 ## Desain (mewarisi standar video 06 revisi 5)
 
-1. DUNIA CERITA PIXEL + BULATAN EMAS: karakter bulatan emas tanpa wajah tanpa mata (squash-stretch, 12 lompatan di beat, roll antar bab, bayangan dinamis, sparkle, droplet keringat) berdiri di panggung tanah-rumput sepanjang video dengan dua domba bulat tanpa wajah; domba pergi menjelang bab kelompok bilangan (cerita: dari menghitung benda ke jenis bilangan). Panggung tidak ikut push-pan antar bab.
+1. DUNIA CERITA PIXEL + BULATAN EMAS: karakter bulatan emas tanpa wajah tanpa mata (squash-stretch, 12 lompatan di beat, roll antar bab, bayangan dinamis, sparkle, droplet keringat) berdiri di panggung bergaya garis bilangan (strip biru sian bertanda skala) sepanjang video, didampingi dua ubin angka mungil bertuliskan 0 (sian) dan pi (violet) yang ikut hop; hiasan tanah berupa chip angka 1, 0, 5 dan simbol + yang bergoyang lembut, bukan rumput dan bunga. Panggung tidak ikut push-pan antar bab.
 2. SUBTITLE BAR PERMANEN ANTI-TIMPA: layout flex (Inggris selalu di bawah Indonesia), margin samping portrait 130 px (aman rail like/comment), font ID 30 px; 16 beat narasi, beat simpulan disorot emas.
 3. GELEMBUNG REAKSI: "dingin!" (8.9-10.1 saat suhu -5 derajat), "lengkap!" (21.3-22.7 saat irasional), "aman." (40.4-41.8 saat aturan); masing-masing dengan sfx pop.
 4. AUDIO: pad chord + arpeggio + kick-hat (12.4-42.2), boom di beat emas (0.5, 11.4, 22.9, 32.3, 45.3), chime di kata bab dan sorotan, tick mengikuti munculnya kartu/ubin/tahap, whoosh push-pan antar bab.
 
 ## 0.0 - 6.0 | HOOK
-- Panggung pixel: bulatan emas jatuh memantul mendarat (0.6-1.2); domba menyusul (1.6, 2.0) dan sesekali hop.
+- Panggung pixel: bulatan emas jatuh memantul mendarat (0.6-1.2); ubin angka 0 dan pi menyusul (1.6, 2.0) dan sesekali hop.
 - 0.50 - Teks besar "1, 2, 3" menghantam (boom; punch kamera). Sub: "Bilangan itu cuma 1, 2, 3?"
 - 1.00-2.50 - Tiga kartu teaser: -5 derajat NEGATIF, 1/2 PECAHAN, pi IRASIONAL + light sweep. Sub 2.6: "Padahal, matematika tidak sesempit itu."
 - 4.90 - Tanda tanya merah memantul di samping "1, 2, 3".
@@ -26,7 +33,6 @@
 - 8.90 - Gelembung "dingin!" dari bulatan emas.
 - 10.30 - Label "EMPAT SITUASI, EMPAT KEBUTUHAN" / EN "four situations, four different needs"; 11.2 label "BEDA PERSOALAN, BEDA JENIS BILANGAN".
 - 11.50 - Sub emas: "Semuanya butuh jenis bilangan berbeda." (boom; bulatan bergoyang lelah)
-- 14.00 - Domba pergi menjelang ganti bab.
 
 ## 14.4 - 25.2 | BAGIAN 2: KELOMPOK
 - 15.10 - Chip "BAGIAN 2 DARI 3". Sub: "Kenal lima kelompok bilangan."

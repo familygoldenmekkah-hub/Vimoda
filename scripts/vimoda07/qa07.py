@@ -48,13 +48,21 @@ for f in ("caption07.txt", "naskah07.md"):
             ok = False
     print(f"{f}: bersih tanpa em dash dan label lama ({len(t)} karakter)")
 
-# 3) ffprobe kedua final
+# 3) ffprobe kedua final (wajib ada; kosong = gagal)
 for o in ("portrait", "landscape"):
+    fp = BASE / o / "final.mp4"
+    if not fp.exists() or fp.stat().st_size == 0:
+        print(f"FINAL HILANG: {fp}")
+        ok = False
+        continue
     r = subprocess.run(
         ["ffprobe", "-v", "error", "-show_entries",
          "format=duration,size", "-show_entries", "stream=codec_type,width,height",
-         "-of", "default=noprint_wrappers=1", str(BASE / o / "final.mp4")],
+         "-of", "default=noprint_wrappers=1", str(fp)],
         capture_output=True, text=True)
+    if "duration" not in r.stdout:
+        print(f"FFPROBE GAGAL untuk {o}: {r.stderr.strip()[:120]}")
+        ok = False
     print(f"--- {o} ---")
     print(r.stdout.strip())
 

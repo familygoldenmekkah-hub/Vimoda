@@ -266,15 +266,16 @@ function pxBlock(parent,x,y,w,h,c,extra){
   parent.appendChild(d);
   return d;
 }
-function buildSheep(host,x,s){
+/* ubin angka pendamping: hiasan dunia kontekstual (keluarga bilangan) */
+function buildNumTile(host,x,s,glyph,col){
   const el=document.createElement('div');
   el.style.cssText=`position:absolute;left:${x}px;top:${P.groundY}px;transform:scale(${s});transform-origin:0 100%;will-change:transform,opacity;opacity:0;`;
-  pxBlock(el,8,-14,9,14,'#334155','border-radius:4px;');
-  pxBlock(el,29,-14,9,14,'#334155','border-radius:4px;');
-  pxBlock(el,0,-38,46,26,'#F1F5F9','border-radius:46%;');
-  pxBlock(el,7,-44,30,11,'#F8FAFC','border-radius:46%;');
-  pxBlock(el,36,-50,17,17,'#334155','border-radius:50%;');
-  pxBlock(el,46,-42,4,4,'#94A3B8','border-radius:50%;');
+  pxBlock(el,0,-44,48,44,'rgba(255,255,255,.07)','border-radius:9px;border:1px solid '+col+';');
+  const g=document.createElement('div');
+  g.className='mono';
+  g.style.cssText=`position:absolute;left:0;top:-44px;width:48px;height:44px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:21px;color:${col};`;
+  g.textContent=glyph;
+  el.appendChild(g);
   host.appendChild(el);
   return el;
 }
@@ -311,29 +312,27 @@ function buildPlatform(host){
   const el=document.createElement('div');
   el.style.cssText=`position:absolute;left:${P.platX}px;top:${P.groundY}px;width:${P.platW}px;height:32px;opacity:0;will-change:opacity,transform;`;
   pxBlock(el,0,0,P.platW,22,'#6B4A2B');
-  pxBlock(el,0,0,P.platW,10,'#4ADE80');
+  pxBlock(el,0,0,P.platW,10,'#38BDF8');
+  for(let tk=24;tk<P.platW;tk+=40){ pxBlock(el,tk,2,3,6,'#0C4A6E'); }
   pxBlock(el,40,12,18,10,'#5A3E23');
   pxBlock(el,140,12,24,10,'#5A3E23');
   pxBlock(el,250,12,18,10,'#5A3E23');
-  /* rumput hias bergoyang + bunga pixel */
+  /* chip angka & simbol hias bergoyang: hiasan sesuai konteks bilangan */
   const deco=[];
-  const tuft=(x,y)=>{
+  const chip=(x,y,glyph,col)=>{
     const g=document.createElement('div');
-    g.style.cssText=`position:absolute;left:${x}px;top:${y}px;width:16px;height:14px;transform-origin:50% 100%;will-change:transform;`;
-    pxBlock(g,2,3,3,11,'#22C55E','border-radius:2px;');
-    pxBlock(g,7,0,3,14,'#16A34A','border-radius:2px;');
-    pxBlock(g,12,4,3,10,'#22C55E','border-radius:2px;');
+    g.style.cssText=`position:absolute;left:${x}px;top:${y}px;width:16px;height:18px;transform-origin:50% 100%;will-change:transform;`;
+    pxBlock(g,0,0,16,18,'rgba(255,255,255,.06)','border-radius:5px;border:1px solid '+col+';');
+    const s2=document.createElement('div');
+    s2.className='mono';
+    s2.style.cssText=`position:absolute;left:0;top:0;width:16px;height:18px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:10px;color:${col};`;
+    s2.textContent=glyph;
+    g.appendChild(s2);
     el.appendChild(g);
     deco.push({el:g, ph:deco.length*1.7});
   };
-  tuft(66,-12); tuft(310,-12); tuft(452,-12);
-  const fl=document.createElement('div');
-  fl.style.cssText=`position:absolute;left:196px;top:-24px;width:12px;height:24px;transform-origin:50% 100%;will-change:transform;`;
-  pxBlock(fl,4,10,3,14,'#16A34A','border-radius:2px;');
-  pxBlock(fl,1,2,9,9,'#F472B6','border-radius:3px;');
-  pxBlock(fl,4,5,3,3,'#FDE68A','border-radius:50%;');
-  el.appendChild(fl);
-  deco.push({el:fl, ph:2.6});
+  chip(66,-18,'1','#7DD3FC'); chip(310,-18,'0','#7DD3FC'); chip(452,-18,'5','#FBBF24');
+  chip(196,-18,'+','#FBBF24');
   host.appendChild(el);
   return {el, deco};
 }
@@ -341,8 +340,8 @@ const BALL_XS=P.ballX;
 const ball=buildGoldBall(document.getElementById('ball'),BALL_XS[0]);
 const ballsh=buildShadow(document.getElementById('ballsh'),BALL_XS[0]);
 const spark=buildSpark(document.getElementById('spark'));
-const sheep1=buildSheep(document.getElementById('sheepA'),P.sheepX,0.85);
-const sheep2=buildSheep(document.getElementById('sheepB'),P.sheepX2,0.7);
+const tile1=buildNumTile(document.getElementById('sheepA'),P.sheepX,0.85,'0','#7DD3FC');
+const tile2=buildNumTile(document.getElementById('sheepB'),P.sheepX2,0.7,'\u03C0','#A78BFA');
 const plat=buildPlatform(document.getElementById('plat'));
 const bub=document.getElementById('bub');
 bub.style.left=(BALL_XS[0]+26)+'px';bub.style.top=P.bubY+'px';
@@ -747,14 +746,11 @@ function renderFrame(t){
 
   renderSub(t);
 
-  /* panggung pixel: bulatan emas + domba tetap hadir sepanjang video */
+  /* panggung pixel: bulatan emas + ubin angka tetap hadir sepanjang video */
   popA(plat.el,t,0.3,0.6,24,0.9,1.6);
   plat.deco.forEach(d=>{ d.el.style.transform=`rotate(${(Math.sin(t*1.7+d.ph)*6).toFixed(2)}deg)`; });
-  popA(sheep1,t,1.6,0.6,20,0.8,1.8);
-  popA(sheep2,t,2.0,0.6,20,0.8,1.8);
-  const sheepFade=1-seg(t,14.0,0.4);
-  sheep1.style.opacity=String(parseFloat(sheep1.style.opacity||'0')*sheepFade);
-  sheep2.style.opacity=String(parseFloat(sheep2.style.opacity||'0')*sheepFade);
+  popA(tile1,t,1.6,0.6,20,0.8,1.8);
+  popA(tile2,t,2.0,0.6,20,0.8,1.8);
   /* bulatan emas: menggelinding antar bab, napas squash-stretch, lompat di beat */
   let sidx=0;
   for(let k=0;k<SCENE_T.length;k++){ if(t>=SCENE_T[k]) sidx=k; }
@@ -799,9 +795,9 @@ function renderFrame(t){
   const sd=t-3.6; if(sd>=0&&sd<0.6) sh1=-56*(sd/0.6)*(1-sd/0.6);
   const sd2=t-8.6; if(sd2>=0&&sd2<0.6) sh2=-56*(sd2/0.6)*(1-sd2/0.6);
   const bob1=Math.floor((t*2.6)%2)*-3;
-  sheep1.style.transform=`scale(0.85) translateY(${(bob1+sh1).toFixed(1)}px)`;
+  tile1.style.transform=`scale(0.85) translateY(${(bob1+sh1).toFixed(1)}px)`;
   const bob2=Math.floor((t*2.6+0.5)%2)*-3;
-  sheep2.style.transform=`scale(0.7) translateY(${(bob2+sh2).toFixed(1)}px)`;
+  tile2.style.transform=`scale(0.7) translateY(${(bob2+sh2).toFixed(1)}px)`;
   if(ORIENT==='portrait') bub.style.left=(bx+sway+26).toFixed(1)+'px';
   else bub.style.left='80px';
   /* gelembung reaksi */
