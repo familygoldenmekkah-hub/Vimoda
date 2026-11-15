@@ -1,4 +1,4 @@
-# Naskah Video 06 - Bagaimana Simbol Bilangan Diciptakan? (Revisi 2)
+# Naskah Video 06 - Bagaimana Simbol Bilangan Diciptakan? (Revisi 3)
 
 - Durasi: 52 detik | FPS: 30 | Musik & SFX: prosedural orisinal
 - Sumber materi: yuyanaka.blogspot.com/2026/11/partoen.html (artikel "Partoen", 14 Nov 2026)
@@ -7,7 +7,15 @@
 - Label di dalam video: AKIOMIDA (watermark atas pada portrait, pojok kanan bawah pada landscape, footer penutup).
 - Dua bahasa di layar: teks utama bahasa Indonesia, subtitle bahasa Inggris di bawahnya dengan jarak lega (tidak menempel).
 
-## Perbaikan revisi 2 (umpan balik Kaisar)
+## Perbaikan revisi 3 (umpan balik kreator)
+
+Gaya storytelling-imajinatif dipertahankan, tapi kalimat yang "ditarik-tarik" diganti agar tidak menyesatkan dan tetap mudah dipahami:
+
+1. "Cara paling tua mencatat jumlah." (klaim melampau; goresan hanya salah satu cara tertua) menjadi "Dulu, jumlah dicatat dengan goresan." / EN "Long ago, people counted with marks." Selaras dengan kalimat pembuka caption.
+2. "Makin banyak, makin rumit." (abstrak) menjadi "Ribuan goresan? Mustahil dibaca." / EN "Thousands of marks? Unreadable." Konkret, gaya pertanyaan retoris, tanpa klaim baru.
+3. "Bukan bilangan itu sendiri." (kriptik) menjadi "Satu ide, banyak cara menulisnya." / EN "One idea, many ways to write it." Menyiapkan morf 7/VII/TUJUH dengan jelas.
+
+## Perbaikan revisi 2 (umpan balik kreator)
 
 1. BUG TERTIMPA: kunci posisi `l2Y` tadinya terdefinisi dua kali di tabel layout, membuat baris kedua hook jatuh ke slot bab 4 dan menimpa baris pertama. Kini semua kunci posisi diberi prefix unik per scene dan ada audit otomatis kunci duplikat (nol duplikat di kedua orientasi).
 2. ANTI-TUMPUK TRANSISI: saat push-pan, scene lama kini pudar selesai dalam 0,33 detik pertama keluar, jadi teks lama tidak pernah menyilang teks baru.
@@ -34,10 +42,10 @@
 ## 6.0 - 14.4 | BAGIAN 1: GORESAN
 - 6.70 - Chip "BAGIAN 1 DARI 3" masuk miring lalu melurus / EN: "PART 1 OF 3"
 - 7.20 - Kata besar "GORESAN" (88 px, gradien, blur-in, chime).
-- 7.80 - "Cara paling tua mencatat jumlah." (46 px) / EN: "The oldest way to count."
+- 7.80 - "Dulu, jumlah dicatat dengan goresan." (46 px) / EN: "Long ago, people counted with marks."
 - 8.20 - Kartu goresan mendarat; 8.40-9.40 dua belas goresan muncul satu per satu dalam 3 kelompok; garis coret kelima muncul di kelompok 1 dan 2.
 - 9.90 - Light sweep kartu; 10.10 label menghitung naik 0 sampai 347 lalu menjadi "347 = 347 GORESAN" / EN: "347 = 347 MARKS"; 11.00 label kecil "TIAP 5 DICORET".
-- 11.40 - Simpulan: "Makin banyak, makin rumit." / EN: "More to count, more mess." (boom kecil)
+- 11.40 - Simpulan: "Ribuan goresan? Mustahil dibaca." / EN: "Thousands of marks? Unreadable." (boom kecil)
 
 ## 14.4 - 25.2 | BAGIAN 2: DESIMAL
 - 15.10 - Chip "BAGIAN 2 DARI 3" / EN: "PART 2 OF 3"
@@ -50,7 +58,7 @@
 ## 25.2 - 34.8 | BAGIAN 3: SIMBOL
 - 25.90 - Chip "BAGIAN 3 DARI 3" / EN: "PART 3 OF 3"
 - 26.40 - Kata besar "SIMBOL" (chime).
-- 27.00 - "Bukan bilangan itu sendiri." / EN: "Not the number itself."
+- 27.00 - "Satu ide, banyak cara menulisnya." / EN: "One idea, many ways to write it."
 - 27.60 - Kotak bercahaya: "7" (emas); 27.90 label tahap "ANGKA".
 - 29.00 / 30.60 / 32.20 - Swap dengan anticipation (remas sebelum ganti): "VII" (sian, label "ANGKA ROMAWI"), "TUJUH" (violet, label "KATA"), "NILAI SAMA." (gradien, label "NILAI: TUJUH" emas, boom).
 - 33.40 - Simpulan: "Simbolnya beda, bilangannya tujuh." / EN: "Different symbol, still seven."
