@@ -1,4 +1,4 @@
-# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 17)
+# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 18)
 
 - Durasi: 52 detik | FPS: 30 | Musik & SFX: prosedural orisinal
 - Sumber materi: yuyanaka.blogspot.com/2026/11/babopa.html (artikel "Babopa", 14 Nov 2026)
@@ -39,6 +39,12 @@
 3. TIDAK PERNAH MENEMBUS OBJEK: lintasan mentor (tabel waypoint di trotoar) dihitung bebas dari semua elemen - jendela kedai berada di muka gedung DI ATAS kepala, papan tulis kafe berdiri di band depan kiri saat keluarga sudah pamit, teman-teman di band belakang, lampu jalan di sudut foreground bawah; bangku taman dihapus karena konflik lintasan.
 4. WATERMARK AKIOMIDA WAJIB SELALU TERLIHAT: pil gelap kecil di bawah layar sepanjang video, siang maupun senja; AKIOMIDA.COM tetap hanya menyala sekali di akhir dengan reveal tenang (45.8-47.2), pil TULIS DI KOMEN 47.5, bar gradien 48.6.
 5. NARASI TETAP: 16 beat subtitle, durasi baca, dan cue audio inti tidak berubah; yang diganti total adalah dunia, karakter, dan koreografinya.
+
+## Revisi 18 (mandat kreator: watermark masih menutupi - turunkan; kalimat intimidasi dibuang)
+
+1. WATERMARK TURUN: pil AKIOMIDA di y 1345 menimpa ujung bawah pil subjudul yang bisa menjulang hingga ~1380 saat subjudul dua baris. Kini watermark di y 1460 (portrait) / 950 (landscape) - jelas di bawah subjudul, tetap di atas zona UI bawah sosmed.
+2. KALIMAT INTIMIDASI DIBUANG: penutup "Jangan cuma menebak." terasa menyerang penonton, bukan soft selling. Diganti penutup hangat "Terima kasih sudah menonton." (emas). Pelajaran permanen (aturan no. 25): tidak ada kalimat menyuruh negatif/menyerang ("jangan..."), semua copy selalu ajakan lembut dan ramah.
+3. Selebihnya sama dengan Revisi 17: bola mentor bulat sejati tanpa mata sebagai satu-satunya karakter, ubin kelompok + panel keluarga, zona aman subjudul.
 
 ## Revisi 17 (mandat kreator: bola harus bulat bukan kotak, tanpa mata, karakter tambahan dihapus, label masuk zona aman sosmed)
 
@@ -124,7 +130,7 @@ Video dibangun ulang meniru DNA modeling secara utuh. Struktur lama (kartu-kartu
 ## 43.2 - 52.0 | CTA
 - 43.30 - Sub: "Jadi, cukup satu jenis bilangan untuk semua?"; 45.30 boom pertanyaan.
 - 47.80 - Kartu CTA "MENURUTMU, CUKUP SATU JENIS?" / EN "IS ONE KIND ENOUGH?"; sub 46.9: "Pilih satu, atau tiap persoalan beda?"
-- 48.70 - "AKIOMIDA.COM" terbentang (chime) + underline gradien; sub emas 48.6: "Tulis alasanmu di komentar."; 50.4: "Jangan cuma menebak."
+- 48.70 - "AKIOMIDA.COM" terbentang (chime) + underline gradien; sub emas 48.6: "Tulis alasanmu di komentar."; 50.4: "Terima kasih sudah menonton." (emas)
 - Bulatan emas terkejut di pertanyaan besar (45.30), menoleh ke kartu CTA (47.80), lalu SATU lompatan perayaan + sparkle bintang (48.70); fade out 51.3-52.0.
 
 ## Label kunci di layar
