@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+/*__FONTS__*/
+*{box-sizing:border-box}
+body{margin:0;background:#0B1220;font-family:'Poppins','Noto Sans',sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:relative;overflow:hidden}
+#world{position:absolute;inset:0}
+#flash{position:absolute;inset:0;background:#FFFFFF;opacity:0;pointer-events:none}
+#fade{position:absolute;inset:0;background:#0B1220;opacity:0;pointer-events:none}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+/* MENARA LIVO: potongan menara lift kaca bersalju - langit dingin, siluet kota,
+   salju turun, shaft lift tembus basement, termometer raksasa, garis bilangan
+   di kener dinding. Latar episode ini BERBEDA TOTAL dari Rumah Bulina (aturan 26).
+   Karakter: HANYA bola emas mentor, bulat sejati, tanpa mata (aturan 23). */
+#skyday{position:absolute;inset:0;background:linear-gradient(180deg,#A8C8E2 0%,#C4DAEC 55%,#DCE9F2 100%)}
+#skynight{position:absolute;inset:0;background:linear-gradient(180deg,#0E1930 0%,#16233E 55%,#1D2C4C 100%);opacity:0}
+#skyline{position:absolute;left:0;width:100%}
+#snow{position:absolute;inset:0}
+#frostday{position:absolute;inset:0;background:rgba(226,238,248,.34)}
+#frostnight{position:absolute;inset:0;background:rgba(14,24,44,.42);opacity:0}
+#ceiling{position:absolute;left:0;top:0;width:100%}
+#ceiling .cl{position:absolute;background:#1B2A42;border-radius:0 0 10px 10px}
+#ceiling .lamp{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,214,130,.55),rgba(255,214,130,0) 70%);opacity:0}
+#floorplank{position:absolute;left:0;width:100%;background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 3px,transparent 3px 190px),linear-gradient(180deg,#2B3850 0,#1F2A3E 100%)}
+#baseboard{position:absolute;left:0;width:100%;background:#3A4A66}
+#rail{position:absolute;left:0;top:0;width:100%}
+#rail .rline{position:absolute;height:5px;border-radius:3px;background:rgba(220,232,244,.85)}
+#rail .rtick{position:absolute;width:4px;border-radius:2px;background:rgba(220,232,244,.85);opacity:.35;will-change:opacity}
+#rail .rnum{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#DCE8F4;opacity:.35;will-change:opacity}
+#shaft{position:absolute;will-change:opacity}
+#shaft .glass{position:absolute;background:linear-gradient(180deg,rgba(20,32,54,.88),rgba(14,22,40,.92));border:8px solid #33506E;border-radius:12px;box-shadow:0 14px 34px rgba(4,10,20,.5)}
+#shaft .guide{position:absolute;width:7px;background:rgba(120,160,200,.35);border-radius:4px}
+#shaft .beam{position:absolute;background:#33506E;border-radius:3px}
+#shaft .plate{position:absolute;display:flex;align-items:center;justify-content:center;background:#0F1B30;border:3px solid #44648C;border-radius:8px;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#BFD2E6;will-change:opacity,box-shadow}
+#shaft .cut{position:absolute;left:0;width:100%;background:repeating-linear-gradient(45deg,#243448 0 14px,#1C2A3C 14px 28px);opacity:0}
+#thermo{position:absolute;will-change:opacity}
+#thermo .tframe{position:absolute;background:rgba(240,246,252,.16);border:6px solid #44648C;border-radius:14px}
+#thermo .tube{position:absolute;background:rgba(248,252,255,.92);border:5px solid #44648C;border-radius:26px;overflow:hidden}
+#thermo .mercury{position:absolute;background:linear-gradient(180deg,#E15B5B,#B42E2E);width:100%}
+#thermo .bulb{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F08A7A,#B42E2E 75%)}
+#thermo .tmark{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#DCE8F4}
+#thermo .tline{position:absolute;height:3px;background:rgba(220,232,244,.7)}
+#thermo .frost{position:absolute;border-radius:50%;border:3px solid rgba(170,215,245,.75);opacity:0}
+#acuan{position:absolute;left:0;width:100%;will-change:opacity}
+#acuan .aline{position:absolute;left:0;width:100%;height:0;border-top:4px dashed rgba(233,177,91,.85)}
+#acuan .alab{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#E9B15B;letter-spacing:.08em}
+#liftcar{position:absolute;will-change:transform,opacity}
+#liftcar .body{position:absolute;background:linear-gradient(180deg,#F2B24A,#D98F2E);border-radius:12px;box-shadow:0 10px 24px rgba(4,10,20,.45)}
+#liftcar .roof{position:absolute;background:#8B5A2B00;background:#B4771F;border-radius:8px}
+#liftcar .cwin{position:absolute;background:linear-gradient(180deg,#14223A,#0E1830);border-radius:8px;border:4px solid #B4771F;overflow:hidden}
+#liftcar .cable{position:absolute;width:5px;background:rgba(200,215,230,.5)}
+.panelN{position:absolute;background:linear-gradient(180deg,#22304E,#18233B);border-radius:16px;box-shadow:0 16px 38px rgba(4,10,20,.5);will-change:transform,opacity}
+.tapeC{position:absolute;background:rgba(150,200,230,.45);border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.pHd{font-weight:800;color:#FFFFFF;letter-spacing:.10em;text-align:center}
+.pRow{display:flex;align-items:center;opacity:0}
+.pDot{border-radius:50%;flex:none}
+.pName{font-weight:800;color:#FFFFFF;flex:none}
+.pEx{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#BFD2E6}
+.pNote{display:flex;align-items:center;justify-content:center;background:rgba(242,178,74,.24);border:2px solid rgba(242,178,74,.55);border-radius:10px;color:#F2C96B;font-weight:800;letter-spacing:.05em;text-align:center;opacity:0;will-change:opacity}
+.hookChip{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:14px;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#FFFFFF;box-shadow:0 10px 24px rgba(4,10,20,.45);will-change:transform,opacity}
+.stamp{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(92deg,#2BB3A6 0%,#8A6FC6 52%,#E9B45C 100%);color:#0B1220;font-weight:800;letter-spacing:.06em;box-shadow:0 12px 26px rgba(4,10,20,.45);will-change:transform,opacity}
+.cmpChip{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(180deg,#22304E,#18233B);border:3px solid #44648C;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#FFFFFF;box-shadow:0 10px 24px rgba(4,10,20,.5);will-change:transform,opacity}
+.cmpTrail{position:absolute;border-radius:10px;background:linear-gradient(90deg,rgba(139,111,198,0),rgba(139,111,198,.55));opacity:0}
+.eqchip{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(180deg,#22304E,#18233B);border:3px solid #44648C;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#FFFFFF;box-shadow:0 10px 24px rgba(4,10,20,.5);will-change:transform,opacity}
+.ckmark{position:absolute}
+.ckmark .a{position:absolute;background:#2BB3A6;border-radius:2px}
+.ckmark .b{position:absolute;background:#2BB3A6;border-radius:2px}
+.xxmark{position:absolute}
+.xxmark .a{position:absolute;background:#E15B5B;border-radius:2px}
+.xxmark .b{position:absolute;background:#E15B5B;border-radius:2px}
+.qmark{position:absolute;color:#F2B24A;font-weight:800;text-shadow:0 5px 0 rgba(0,0,0,.25);will-change:transform,opacity}
+.title{position:absolute;left:0;width:100%;text-align:center;font-weight:800;color:#22304E;letter-spacing:.04em;text-shadow:0 5px 0 rgba(255,255,255,.38),0 12px 26px rgba(10,20,40,.22);will-change:transform,opacity}
+#pil{position:absolute;border-radius:999px;background:linear-gradient(92deg,#2BB3A6 0%,#8A6FC6 52%,#E9B45C 100%);color:#0B1220;font-weight:800;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+#endcard{position:absolute;left:0;width:100%;opacity:0;will-change:transform,opacity}
+#f_url{font-weight:800;text-align:center}
+#f_bar{height:7px;border-radius:4px;background:linear-gradient(90deg,#2BB3A6,#8A6FC6,#E9B45C)}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(10,16,28,.86);border-radius:20px;padding:18px 32px;text-align:center;box-shadow:0 14px 34px rgba(4,10,20,.5);will-change:transform,opacity}
+#sub_id{font-weight:800;color:#FFFFFF;line-height:1.26}
+#sub_en{color:#B9C7DC;font-weight:600}
+#wm{position:absolute;font-weight:800;letter-spacing:.34em;color:#F4EDE0;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;border:1.5px solid rgba(244,237,224,.42);will-change:transform}
+.bchar{position:absolute;will-change:transform,opacity}
+.bchar .core{position:absolute;border-radius:100%}
+.bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px)}
+.bsh{position:absolute;border-radius:50%;background:rgba(4,10,20,.4);filter:blur(2px)}
+.snowp{position:absolute;border-radius:50%;background:rgba(255,255,255,.9);will-change:transform,opacity}
+.spark{position:absolute;width:34px;height:34px;opacity:0}
+.spark .sa{position:absolute;background:#FFE9A8;border-radius:3px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="world">
+    <div id="skyday"></div>
+    <div id="skynight"></div>
+    <div id="skyline"></div>
+    <div id="snow"></div>
+    <div id="frostday"></div>
+    <div id="frostnight"></div>
+    <div id="ceiling"></div>
+    <div id="floorplank"></div>
+    <div id="baseboard"></div>
+    <div id="rail"></div>
+    <div id="shaft"></div>
+    <div id="thermo"></div>
+    <div id="acuan"><div class="aline"></div><div class="alab">ACUAN 0</div></div>
+    <div id="props"></div>
+    <div id="chars"></div>
+  </div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+  <div id="liftcar"><div class="cable"></div><div class="body"></div><div class="roof"></div><div class="cwin"></div></div>
+  <div id="eqchip" class="eqchip">4 - 9 = -5</div>
+  <div id="qchip" class="eqchip">2 - 5 = ?</div>
+  <div id="qm" class="qmark">?</div>
+  <div id="pil">JAWAB DI KOMEN</div>
+  <div id="endcard">
+    <div id="f_url">AKIOMIDA.COM</div>
+    <div id="f_bar"></div>
+  </div>
+  <div class="title" id="t0">APA KESAMAANNYA?</div>
+  <div class="title" id="t1">BILANGAN BULAT</div>
+  <div class="title" id="t2">KENAPA MINUS?</div>
+  <div class="title" id="t3">MANA LEBIH BESAR?</div>
+  <div class="title" id="t4">BUKAN PECAHAN</div>
+  <div class="title" id="t5">UJI LIFT</div>
+  <div id="subbar"><div id="sub_id"></div><div id="sub_en"></div></div>
+  <div id="wm">AKIOMIDA</div>
+</div>
+<script>
+const Q=new URLSearchParams(location.search);
+const ORIENT=Q.get('o')||'landscape';
+const W=ORIENT==='portrait'?1080:1920;
+const H=ORIENT==='portrait'?1920:1080;
+
+/* v09 "Huyuan" - DUNIA BARU: MENARA LIVO, potongan menara lift kaca bersalju:
+   langit dingin berubah siang ke malam bersalju, siluet kota berjendela nyala,
+   shaft lift tembus basement dengan plak lantai +3 sampai -3, termometer raksasa,
+   garis bilangan besar di kener dinding, garis acuan 0 putus-putus melintang.
+   Latar BERBEDA TOTAL dari Rumah Bulina dan Kota Bilangan (aturan 26).
+   Karakter: HANYA bola emas mentor, bulat sejati, tanpa mata (aturan 23).
+   Subjudul zona aman dan maksimal dua baris (aturan 27); watermark AKIOMIDA di
+   tepi paling bawah tanpa menutupi konten (aturan 24); penutup bersih (aturan 28). */
+const P = ORIENT==='portrait' ? {
+  floorY:1080, bbY:1064, ceilH:110,
+  railY:1000, railC:720, railSp:56, railHalf:280, tickFS:24, tickH:16,
+  shaftX:50, shaftW:290, shaftTop:560, shaftBot:1160,
+  carX:95, carW:200, carH:150,
+  floor0:900, floorSp:80,
+  plateW:74, plateH:36, plateFS:24,
+  thermoX:730, thermoY:470, thermoW:220, thermoH:410,
+  acuanY:903,
+  panelX:400, panelY:470, panelW:610, panelH:360,
+  chipX0:430, chipSp:78, chipW:96, chipH:88, chipFS:36, chipY:495,
+  stampY:656, stampW:470, stampH:62, stampFS:28,
+  eqX:400, eqY:830, eqW:300, eqH:64, eqFS:34,
+  qcX:400, qcY:830, qcW:300, qcH:64,
+  qmX:352, qmY:1075, qmFS:76,
+  pilX:325, pilY:980, pilW:430, pilH:70, pilFS:30,
+  ecY:830, barW:420,
+  titleY:300, titleS0:80, titleSN:74,
+  subTop:1170, subId:40, subEn:22, subMax:880,
+  ballD:110, groundY:1120, wmY:1800, wmFS:20,
+  snowN:16, snowZone:[0,120,1080,1020]
+} : {
+  floorY:508, bbY:494, ceilH:70,
+  railY:460, railC:960, railSp:80, railHalf:400, tickFS:22, tickH:14,
+  shaftX:140, shaftW:300, shaftTop:290, shaftBot:735,
+  carX:185, carW:180, carH:120,
+  floor0:550, floorSp:55,
+  plateW:64, plateH:32, plateFS:22,
+  thermoX:520, thermoY:250, thermoW:180, thermoH:290,
+  acuanY:553,
+  panelX:760, panelY:250, panelW:1020, panelH:290,
+  chipX0:790, chipSp:140, chipW:120, chipH:104, chipFS:44, chipY:285,
+  stampY:428, stampW:560, stampH:58, stampFS:26,
+  eqX:760, eqY:560, eqW:300, eqH:60, eqFS:30,
+  qcX:460, qcY:590, qcW:280, qcH:64,
+  qmX:452, qmY:565, qmFS:58,
+  pilX:760, pilY:620, pilW:400, pilH:65, pilFS:28,
+  ecY:400, barW:520,
+  titleY:150, titleS0:88, titleSN:72,
+  subTop:740, subId:38, subEn:20, subMax:1360,
+  ballD:96, groundY:660, wmY:1010, wmFS:18,
+  snowN:14, snowZone:[0,80,1920,500]
+};
+const MX=60;
+const stage=document.getElementById('stage');
+stage.style.width=W+'px';stage.style.height=H+'px';
+
+/* ---------- util & easing ---------- */
+const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
+const lerp=(a,b,p)=>a+(b-a)*p;
+const seg=(t,a,d)=>clamp((t-a)/d,0,1);
+const eio=p=>p<0.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+const eoe=p=>1-Math.pow(1-p,3);
+const smz=(t,a,b,f)=>f?clamp((t-a)/f,0,1)*clamp((b-t)/f,0,1):(t>=a&&t<b?1:0);
+function popA(el,t,t0,d,ov,op0,op1){
+  const o=clamp(seg(t,t0,0.3)*(1-seg(t,op1,0.35)),0,1);
+  const s2=1+(ov/100)*Math.sin(clamp(seg(t,t0,d),0,1)*Math.PI)*(1-seg(t,op1,0.35));
+  el.style.opacity=String(o);
+  el.style.transform=`scale(${s2.toFixed(3)})`;
+}
+let _seed=20261116;
+const rnd=()=>{_seed|=0;_seed=_seed+0x6D2B79F5|0;let z=Math.imul(_seed^_seed>>>15,1|_seed);
+  z=z+Math.imul(z^z>>>7,61|z)^z;return((z^z>>>14)>>>0)/4294967296;};
+
+/* ---------- langit, siluet kota, salju, plafond, lantai ---------- */
+const floorEl=document.getElementById('floorplank');
+floorEl.style.cssText+=`top:${P.floorY}px;height:${H-P.floorY}px;`;
+const bbEl=document.getElementById('baseboard');
+bbEl.style.cssText+=`top:${P.bbY}px;height:${P.floorY-P.bbY}px;`;
+const ceilEl=document.getElementById('ceiling');
+ceilEl.style.cssText+=`height:${P.ceilH}px;`;
+const LAMPS=[];
+{
+  const band=document.createElement('div');
+  band.className='cl';
+  band.style.cssText+=`left:0;top:0;width:100%;height:${Math.round(P.ceilH*0.42)}px;`;
+  ceilEl.appendChild(band);
+  const nl=ORIENT==='portrait'?3:5;
+  for(let i=0;i<nl;i++){
+    const lx=lerp(W*0.14,W*0.86,i/(nl-1));
+    const lp=document.createElement('div');
+    lp.className='lamp';
+    const lw=Math.round(P.ceilH*1.6);
+    lp.style.cssText+=`left:${lx-lw/2}px;top:${Math.round(P.ceilH*0.2)}px;width:${lw}px;height:${lw}px;`;
+    ceilEl.appendChild(lp);
+    LAMPS.push(lp);
+  }
+}
+/* siluet kota: balok bangunan + jendela kecil yang menyala saat malam */
+const fdEl=document.getElementById('frostday');
+fdEl.style.cssText+=`height:${P.floorY}px;`;
+const fnEl=document.getElementById('frostnight');
+fnEl.style.cssText+=`height:${P.floorY}px;`;
+const skyEl=document.getElementById('skyline');
+const CITYWIN=[];
+{
+  const base=ORIENT==='portrait'?P.floorY:P.floorY;
+  const bh0=ORIENT==='portrait'?150:110;
+  let x=-20;
+  let k=0;
+  while(x<W+40){
+    const bw=90+rnd()*130;
+    const bh=bh0+rnd()*bh0*1.4;
+    const b=document.createElement('div');
+    b.style.cssText+=`position:absolute;left:${x}px;top:${base-bh}px;width:${bw}px;height:${bh}px;background:#7C93AE;opacity:.38;`;
+    skyEl.appendChild(b);
+    const nw=Math.floor(bw/26), nr=Math.floor(bh/34);
+    for(let r=0;r<nr;r++)for(let c=0;c<nw;c++){
+      if(rnd()<0.42){
+        const wn=document.createElement('div');
+        wn.style.cssText+=`position:absolute;left:${x+10+c*26}px;top:${base-bh+12+r*34}px;width:9px;height:13px;background:#FFD98A;opacity:0;border-radius:2px;`;
+        skyEl.appendChild(wn);
+        CITYWIN.push({el:wn,ph:rnd()*6.28});
+      }
+    }
+    x+=bw+14+rnd()*40;
+    k++;
+  }
+}
+/* salju di balik kaca */
+const snowEl=document.getElementById('snow');
+const SNOW=[];
+for(let i=0;i<P.snowN;i++){
+  const f=document.createElement('div');
+  f.className='snowp';
+  const sz=(rnd()*9+4).toFixed(1);
+  f.style.cssText+=`width:${sz}px;height:${sz}px;opacity:${(rnd()*0.35+0.3).toFixed(2)};`;
+  snowEl.appendChild(f);
+  SNOW.push({el:f,x:lerp(P.snowZone[0],P.snowZone[2],rnd()),y0:lerp(P.snowZone[1],P.snowZone[3],rnd()),
+    sp:rnd()*26+16,ph:rnd()*6.28,amp:rnd()*22+8});
+}
+
+/* ---------- garis bilangan besar di kener dinding ---------- */
+const railEl=document.getElementById('rail');
+const TICKS=[];
+{
+  const ln=document.createElement('div');
+  ln.className='rline';
+  ln.style.cssText+=`left:${P.railC-P.railHalf-20}px;top:${P.railY}px;width:${P.railHalf*2+40}px;`;
+  railEl.appendChild(ln);
+  for(let v=-5;v<=5;v++){
+    const tx=P.railC+v*P.railSp;
+    const tk=document.createElement('div');
+    tk.className='rtick';
+    tk.style.cssText+=`left:${tx-2}px;top:${P.railY-P.tickH}px;height:${P.tickH+5}px;`;
+    railEl.appendChild(tk);
+    const nm=document.createElement('div');
+    nm.className='rnum';
+    nm.style.cssText+=`left:${tx-(v<0?26:14)}px;top:${P.railY+8}px;font-size:${P.tickFS}px;`;
+    nm.textContent=String(v);
+    railEl.appendChild(nm);
+    TICKS.push({tk,nm,v});
+  }
+  const zt=document.createElement('div');
+  zt.className='rtick';
+  zt.style.cssText+=`left:${P.railC-3}px;top:${P.railY-P.tickH-6}px;height:${P.tickH+11}px;background:#E9B15B;`;
+  railEl.appendChild(zt);
+}
+
+/* ---------- shaft lift: kaca, panduan, plak lantai +3 sampai -3 ---------- */
+const shaftEl=document.getElementById('shaft');
+const PLATES=[];
+{
+  const sh=document.createElement('div');
+  sh.className='glass';
+  sh.style.cssText+=`left:${P.shaftX}px;top:${P.shaftTop}px;width:${P.shaftW}px;height:${P.shaftBot-P.shaftTop}px;`;
+  shaftEl.appendChild(sh);
+  const g1=document.createElement('div');
+  g1.className='guide';
+  g1.style.cssText+=`left:${P.shaftX+22}px;top:${P.shaftTop+10}px;height:${P.shaftBot-P.shaftTop-20}px;`;
+  shaftEl.appendChild(g1);
+  const g2=document.createElement('div');
+  g2.className='guide';
+  g2.style.cssText+=`left:${P.shaftX+P.shaftW-29}px;top:${P.shaftTop+10}px;height:${P.shaftBot-P.shaftTop-20}px;`;
+  shaftEl.appendChild(g2);
+  for(let f=3;f>=-3;f--){
+    const py=P.floor0-f*P.floorSp;
+    const pl=document.createElement('div');
+    pl.className='plate';
+    pl.style.cssText+=`left:${P.shaftX+10}px;top:${py-P.plateH/2}px;width:${P.plateW}px;height:${P.plateH}px;font-size:${P.plateFS}px;`;
+    pl.textContent=f>0?('+'+f):String(f);
+    shaftEl.appendChild(pl);
+    const beam=document.createElement('div');
+    beam.className='beam';
+    beam.style.cssText+=`left:${P.shaftX+P.plateW+18}px;top:${py+P.plateH/2-2}px;width:${P.shaftW-P.plateW-36}px;height:4px;`;
+    shaftEl.appendChild(beam);
+    PLATES.push({el:pl,f,py});
+  }
+  /* tanah terpotong: bagian bawah tanah ditandai arsiran */
+  const cutTop=P.floorY;
+  if(P.shaftBot>cutTop){
+    const cut=document.createElement('div');
+    cut.className='cut';
+    cut.style.cssText+=`top:${cutTop}px;height:${P.shaftBot-cutTop}px;border-radius:0 0 12px 12px;`;
+    shaftEl.appendChild(cut);
+    const cl=document.createElement('div');
+    cl.className='beam';
+    cl.style.cssText+=`left:${P.shaftX-6}px;top:${cutTop-4}px;width:${P.shaftW+12}px;height:8px;background:#54718F;border-radius:4px;`;
+    shaftEl.appendChild(cl);
+  }
+}
+
+/* ---------- termometer raksasa ---------- */
+const thermoEl=document.getElementById('thermo');
+thermoEl.style.cssText=`left:${P.thermoX}px;top:${P.thermoY}px;width:${P.thermoW}px;height:${P.thermoH}px;`;
+let tParts={};
+{
+  const fr=document.createElement('div');
+  fr.className='tframe';
+  fr.style.cssText+=`left:0;top:0;width:${P.thermoW}px;height:${P.thermoH}px;`;
+  thermoEl.appendChild(fr);
+  const tubeW=ORIENT==='portrait'?50:40;
+  const tubeX=Math.round(P.thermoW*0.42);
+  const tubeTop=Math.round(P.thermoH*0.10);
+  const tubeBot=Math.round(P.thermoH*0.74);
+  const tube=document.createElement('div');
+  tube.className='tube';
+  tube.style.cssText+=`left:${tubeX}px;top:${tubeTop}px;width:${tubeW}px;height:${tubeBot-tubeTop}px;`;
+  thermoEl.appendChild(tube);
+  const merc=document.createElement('div');
+  merc.className='mercury';
+  merc.style.cssText+=`left:${Math.round(tubeW*0.24)}px;width:${Math.round(tubeW*0.52)}px;`;
+  tube.appendChild(merc);
+  const bulbR=Math.round(tubeW*0.72);
+  const bulb=document.createElement('div');
+  bulb.className='bulb';
+  bulb.style.cssText+=`left:${tubeX+tubeW/2-bulbR/2}px;top:${tubeBot-bulbR*0.34}px;width:${bulbR}px;height:${bulbR}px;`;
+  thermoEl.appendChild(bulb);
+  const frost=document.createElement('div');
+  frost.className='frost';
+  frost.style.cssText+=`left:${tubeX+tubeW/2-bulbR/2-7}px;top:${tubeBot-bulbR*0.34-7}px;width:${bulbR+14}px;height:${bulbR+14}px;`;
+  thermoEl.appendChild(frost);
+  const zeroY=tubeTop+(tubeBot-tubeTop)*0.62;
+  const kDeg=(tubeBot-tubeTop)*0.0689;
+  const yOf=tv=>zeroY-tv*kDeg;
+  const marks=[[-5,'-5'],[0,'0'],[4,'+4']];
+  marks.forEach(([tv,lb])=>{
+    const my=yOf(tv);
+    const mln=document.createElement('div');
+    mln.className='tline';
+    mln.style.cssText+=`left:${tubeX-26}px;top:${my}px;width:26px;`;
+    thermoEl.appendChild(mln);
+    const mlb=document.createElement('div');
+    mlb.className='tmark';
+    mlb.style.cssText+=`left:${tubeX-64}px;top:${my-13}px;font-size:${ORIENT==='portrait'?24:21}px;`;
+    mlb.textContent=lb;
+    thermoEl.appendChild(mlb);
+  });
+  tParts={merc,tube,tubeTop,tubeBot,yOf,bulbR,frost,tubeX,tubeW};
+}
+
+/* ---------- garis acuan 0 ---------- */
+const acuanEl=document.getElementById('acuan');
+acuanEl.style.cssText+=`top:${P.acuanY}px;`;
+{
+  const al=document.createElement('div');
+  al.className='aline';
+  al.style.cssText+=`top:0;left:${P.shaftX+P.shaftW+18}px;width:${W-P.shaftX-P.shaftW-90}px;`;
+  acuanEl.querySelector('.aline').replaceWith(al);
+  const ab=acuanEl.querySelector('.alab');
+  ab.style.cssText+=`left:${W-84}px;top:-30px;font-size:${ORIENT==='portrait'?22:19}px;`;
+}
+
+/* ---------- lift car ---------- */
+const carEl=document.getElementById('liftcar');
+{
+  const cable=carEl.querySelector('.cable');
+  cable.style.cssText+=`left:${P.carX+P.carW/2-2}px;top:-2000px;height:2000px;`;
+  const body=carEl.querySelector('.body');
+  body.style.cssText+=`left:0;top:0;width:${P.carW}px;height:${P.carH}px;`;
+  const roof=carEl.querySelector('.roof');
+  roof.style.cssText+=`left:-8px;top:-12px;width:${P.carW+16}px;height:14px;`;
+  const cwin=carEl.querySelector('.cwin');
+  cwin.style.cssText+=`left:${Math.round(P.carW*0.16)}px;top:${Math.round(P.carH*0.22)}px;width:${Math.round(P.carW*0.68)}px;height:${Math.round(P.carH*0.52)}px;`;
+}
+const carF2Y=f=>P.floor0-f*P.floorSp+6-P.carH;   /* posisi atas mobil per lantai */
+
+/* ---------- panel-panel konten (satu ide per layar) ---------- */
+const propsEl=document.getElementById('props');
+/* hook: tujuh chip angka */
+const CHIP_VALS=['-5','-3','-1','0','2','4','6'];
+const CHIP_COLS=['#2BB3A6','#5B8FE1','#8A6FC6','#E15B5B','#4FA35C','#F2C230','#38BDF8'];
+const CHIPS=CHIP_VALS.map((v,i)=>{
+  const c=document.createElement('div');
+  c.className='hookChip';
+  c.style.cssText+=`left:${P.chipX0+i*P.chipSp}px;top:${P.chipY+(i%2?18:0)}px;width:${P.chipW}px;height:${P.chipH}px;
+    font-size:${P.chipFS}px;background:${CHIP_COLS[i]};opacity:0;`;
+  c.textContent=v;
+  propsEl.appendChild(c);
+  return {el:c,t0:0.9+i*0.12,ph:i*0.9};
+});
+const stamp=document.createElement('div');
+stamp.className='stamp';
+stamp.style.cssText+=`left:${P.panelX+P.panelW/2-P.stampW/2}px;top:${P.stampY}px;width:${P.stampW}px;height:${P.stampH}px;font-size:${P.stampFS}px;opacity:0;`;
+stamp.textContent='SEMUA BILANGAN BULAT';
+propsEl.appendChild(stamp);
+
+/* panel 1: tiga kelompok bilangan bulat */
+const panel1=document.createElement('div');
+panel1.className='panelN';
+panel1.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
+const p1Hd=document.createElement('div');
+p1Hd.className='pHd';
+p1Hd.style.cssText+=`font-size:${ORIENT==='portrait'?26:24}px;padding-top:${Math.round(P.panelH*0.07)}px;`;
+p1Hd.textContent='TIGA KELOMPOK';
+panel1.appendChild(p1Hd);
+const P1ROWS=[];
+[['NEGATIF','... -3 -2 -1','#5B8FE1',7.5],['NOL','0','#F2C230',8.5],['POSITIF','1 2 3 4 5 ...','#8A6FC6',9.5]].forEach(([nm,ex,col,t0])=>{
+  const r=document.createElement('div');
+  r.className='pRow';
+  r.style.cssText+=`height:${ORIENT==='portrait'?64:54}px;padding:0 ${Math.round(P.panelW*0.08)}px;`;
+  const dot=document.createElement('div');
+  dot.className='pDot';
+  dot.style.cssText+=`width:${ORIENT==='portrait'?26:22}px;height:${ORIENT==='portrait'?26:22}px;background:${col};margin-right:14px;`;
+  r.appendChild(dot);
+  const n=document.createElement('div');
+  n.className='pName';
+  n.style.cssText+=`font-size:${ORIENT==='portrait'?30:26}px;width:${ORIENT==='portrait'?190:170}px;`;
+  n.textContent=nm;
+  r.appendChild(n);
+  const e=document.createElement('div');
+  e.className='pEx';
+  e.style.cssText+=`font-size:${ORIENT==='portrait'?28:24}px;`;
+  e.textContent=ex;
+  r.appendChild(e);
+  panel1.appendChild(r);
+  P1ROWS.push({el:r,t0});
+});
+const p1Note=document.createElement('div');
+p1Note.className='pNote';
+p1Note.style.cssText+=`height:${ORIENT==='portrait'?52:44}px;margin:${Math.round(P.panelH*0.04)}px ${Math.round(P.panelW*0.08)}px 0;font-size:${ORIENT==='portrait'?21:18}px;`;
+p1Note.textContent='NEGATIF KE KIRI, POSITIF KE KANAN';
+panel1.appendChild(p1Note);
+propsEl.appendChild(panel1);
+
+/* panel perbandingan: rantai urutan */
+const chainP=document.createElement('div');
+chainP.className='panelN';
+chainP.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${Math.round(P.panelH*0.72)}px;opacity:0;`;
+const chEx=document.createElement('div');
+chEx.className='pEx';
+chEx.style.cssText+=`width:100%;text-align:center;font-size:${ORIENT==='portrait'?46:42}px;padding-top:${Math.round(P.panelH*0.13)}px;color:#FFFFFF;`;
+chEx.textContent='-5 < -2 < 0 < 2 < 5';
+chainP.appendChild(chEx);
+const chCap=document.createElement('div');
+chCap.className='pHd';
+chCap.style.cssText+=`font-size:${ORIENT==='portrait'?20:18}px;padding-top:10px;color:#F2C96B;`;
+chCap.textContent='MAKIN KANAN MAKIN BESAR';
+chainP.appendChild(chCap);
+propsEl.appendChild(chainP);
+
+/* panel 4: cek anggota bulat vs bukan */
+const panel4=document.createElement('div');
+panel4.className='panelN';
+panel4.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
+const p4Hd=document.createElement('div');
+p4Hd.className='pHd';
+p4Hd.style.cssText+=`font-size:${ORIENT==='portrait'?26:24}px;padding-top:${Math.round(P.panelH*0.06)}px;`;
+p4Hd.textContent='ANGGOTA BILANGAN BULAT';
+panel4.appendChild(p4Hd);
+const P4ROWS=[];
+[['8    -12    0','BULAT',true,41.3],['1/2    -3/4    2,5','BUKAN BULAT',false,41.9]].forEach(([ex,lb,isCk,t0],i)=>{
+  const r=document.createElement('div');
+  r.className='pRow';
+  r.style.cssText+=`height:${ORIENT==='portrait'?78:60}px;padding:0 ${Math.round(P.panelW*0.07)}px;`;
+  const mk=document.createElement('div');
+  mk.className=isCk?'ckmark':'xxmark';
+  const ms=ORIENT==='portrait'?30:24;
+  if(isCk){
+    mk.style.cssText+=`width:${ms}px;height:${ms}px;margin-right:16px;flex:none;position:relative;`;
+    mk.innerHTML=`<div class="a" style="left:${ms*0.08}px;top:${ms*0.5}px;width:${ms*0.42}px;height:${ms*0.16}px;transform:rotate(45deg)"></div>
+      <div class="b" style="left:${ms*0.36}px;top:${ms*0.22}px;width:${ms*0.62}px;height:${ms*0.16}px;transform:rotate(-52deg)"></div>`;
+  }else{
+    mk.style.cssText+=`width:${ms}px;height:${ms}px;margin-right:16px;flex:none;position:relative;`;
+    mk.innerHTML=`<div class="a" style="left:0;top:${ms*0.42}px;width:${ms}px;height:${ms*0.16}px;transform:rotate(45deg)"></div>
+      <div class="b" style="left:0;top:${ms*0.42}px;width:${ms}px;height:${ms*0.16}px;transform:rotate(-45deg)"></div>`;
+  }
+  r.appendChild(mk);
+  const e=document.createElement('div');
+  e.className='pEx';
+  e.style.cssText+=`font-size:${ORIENT==='portrait'?34:28}px;color:#FFFFFF;flex:1;`;
+  e.textContent=ex;
+  r.appendChild(e);
+  const tg=document.createElement('div');
+  tg.className='pName';
+  tg.style.cssText+=`font-size:${ORIENT==='portrait'?19:17}px;color:${isCk?'#7CD6CB':'#F0A0A0'};`;
+  tg.textContent=lb;
+  r.appendChild(tg);
+  panel4.appendChild(r);
+  P4ROWS.push({el:r,t0});
+});
+const p4Note=document.createElement('div');
+p4Note.className='pNote';
+p4Note.style.cssText+=`height:${ORIENT==='portrait'?48:42}px;margin:6px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?21:18}px;`;
+p4Note.textContent='TANPA PECAHAN, TANPA DESIMAL';
+panel4.appendChild(p4Note);
+propsEl.appendChild(panel4);
+
+/* chip perbandingan di atas garis bilangan */
+const cmpS=ORIENT==='portrait'?1:0.9;
+function mkCmp(v){
+  const c=document.createElement('div');
+  c.className='cmpChip';
+  const cw=Math.round(110*cmpS), chh=Math.round(74*cmpS);
+  c.style.cssText+=`width:${cw}px;height:${chh}px;font-size:${Math.round(40*cmpS)}px;opacity:0;`;
+  c.textContent=v;
+  propsEl.appendChild(c);
+  return c;
+}
+const cmp5=mkCmp('-5');
+const cmp2=mkCmp('-2');
+const trail=document.createElement('div');
+trail.className='cmpTrail';
+propsEl.appendChild(trail);
+
+/* ---------- karakter: HANYA bola emas mentor, bulat sejati, tanpa mata ---------- */
+const charsEl=document.getElementById('chars');
+function makeBall(cols,d,glow){
+  const el=document.createElement('div');
+  el.className='bchar';
+  el.style.cssText+=`width:${d}px;height:${d}px;margin-left:${-d/2}px;opacity:0;`;
+  const core=document.createElement('div');
+  core.className='core';
+  core.style.cssText+=`left:0;top:0;width:${d}px;height:${d}px;
+    background:radial-gradient(circle at 33% 27%, ${cols[0]} 0%, ${cols[1]} 42%, ${cols[2]} 100%);`;
+  if(glow)core.style.boxShadow=`0 0 ${Math.round(d*0.55)}px rgba(251,191,36,.5)`;
+  el.appendChild(core);
+  const shine=document.createElement('div');
+  shine.className='shine';
+  shine.style.cssText+=`left:${d*0.18}px;top:${d*0.1}px;width:${d*0.3}px;height:${d*0.17}px;transform:rotate(-24deg);`;
+  el.appendChild(shine);
+  charsEl.appendChild(el);
+  return {el,d};
+}
+const mentor=makeBall(['#FFF3C4','#FCD34D','#B45309'],P.ballD,true);
+const carM=makeBall(['#FFF3C4','#FCD34D','#B45309'],Math.round(P.carH*0.48),true);
+stage.appendChild(carM.el);
+const msh=document.createElement('div');
+msh.className='bsh';
+msh.style.cssText+=`width:${P.ballD*0.8}px;height:15px;margin-left:${-P.ballD*0.4}px;top:-10px;`;
+charsEl.appendChild(msh);
+const spark=document.createElement('div');
+spark.className='spark';
+spark.style.cssText+=`position:absolute;`;
+{
+  const sa=document.createElement('div');
+  sa.className='sa';
+  sa.style.cssText+=`left:13px;top:0;width:8px;height:34px;`;
+  spark.appendChild(sa);
+  const sb=document.createElement('div');
+  sb.className='sa';
+  sb.style.cssText+=`left:0;top:13px;width:34px;height:8px;`;
+  spark.appendChild(sb);
+  const sc=document.createElement('div');
+  sc.className='sa';
+  sc.style.cssText+=`left:13px;top:13px;width:8px;height:8px;`;
+  spark.appendChild(sc);
+}
+charsEl.appendChild(spark);
+
+/* ---------- elemen teks mengambang: chip persamaan, tanda tanya, pil ---------- */
+const eqchip=document.getElementById('eqchip');
+eqchip.style.cssText+=`left:${P.eqX}px;top:${P.eqY}px;width:${P.eqW}px;height:${P.eqH}px;font-size:${P.eqFS}px;opacity:0;`;
+const qchip=document.getElementById('qchip');
+qchip.style.cssText+=`left:${P.qcX}px;top:${P.qcY}px;width:${P.qcW}px;height:${P.qcH}px;font-size:${P.eqFS}px;opacity:0;`;
+const qm=document.getElementById('qm');
+qm.style.cssText+=`left:${P.qmX}px;top:${P.qmY}px;font-size:${P.qmFS}px;opacity:0;`;
+const pil=document.getElementById('pil');
+pil.style.cssText+=`left:${P.pilX}px;top:${P.pilY}px;width:${P.pilW}px;height:${P.pilH}px;font-size:${P.pilFS}px;letter-spacing:.1em;`;
+
+/* ---------- endcard penutup bersih (aturan 28) ---------- */
+const endcard=document.getElementById('endcard');
+endcard.style.cssText+=`top:${P.ecY}px;`;
+const fUrl=document.getElementById('f_url');
+fUrl.style.cssText+=`font-size:${ORIENT==='portrait'?92:80}px;
+  background:linear-gradient(92deg,#2BB3A6 0%,#8A6FC6 52%,#E9B45C 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;`;
+const fBar=document.getElementById('f_bar');
+fBar.style.cssText+=`display:block;margin:16px auto 0;width:0;`;
+
+/* ---------- subjudul + watermark ---------- */
+const subbar=document.getElementById('subbar');
+const subId=document.getElementById('sub_id');
+const subEn=document.getElementById('sub_en');
+subId.style.fontSize=P.subId+'px';
+subEn.style.fontSize=P.subEn+'px';
+subEn.style.marginTop='5px';
+subbar.style.top=P.subTop+'px';
+subbar.style.maxWidth=P.subMax+'px';
+subbar.style.width='max-content';
+const wm=document.getElementById('wm');
+wm.style.cssText+=`top:${P.wmY}px;font-size:${P.wmFS}px;left:50%;transform:translateX(-50%);
+  width:max-content;padding:9px 30px;background:rgba(10,16,28,.55);border-radius:999px;`;
+/* ---------- narasi huyuan: 16 beat soft selling (aturan 25) ---------- */
+const SUBS=[
+  [0.50,'Coba perhatikan angka angka ini.','Take a look at these numbers.','#FFFFFF'],
+  [2.98,'Minus, nol, dan positif. Semuanya bilangan bulat.','Minus, zero, positive. All are integers.','#FFFFFF'],
+  [6.60,'Bilangan bulat: negatif, nol, dan positif, tanpa pecahan.','Integers: negative, zero, positive, no fractions.','#FFFFFF'],
+  [10.80,'Negatif menerus ke kiri, positif menerus ke kanan.','Negatives continue left, positives continue right.','#FFFFFF'],
+  [14.50,'Dan nol bukan positif, juga bukan negatif.','And zero is not positive, nor negative.','#FBBF24'],
+  [18.00,'Untuk apa tanda minus dibutuhkan?','Why do we need the minus sign?','#FFFFFF'],
+  [20.40,'Suhu 4 derajat turun 9 derajat, menjadi minus 5.','From 4 degrees, falling 9 degrees makes minus 5.','#FFFFFF'],
+  [24.00,'Di gedung, ruang bawah tanah ditulis minus 1 dan minus 2.','In a building, basements are written minus 1, minus 2.','#FFFFFF'],
+  [28.20,'Minus artinya posisi di bawah titik acuan.','Minus means a position below the reference point.','#FBBF24'],
+  [31.30,'Mana yang lebih besar, minus 2 atau minus 5?','Which one is bigger, minus 2 or minus 5?','#FFFFFF'],
+  [34.00,'Minus 2. Posisinya lebih ke kanan di garis.','Minus 2. It sits further right on the line.','#FFFFFF'],
+  [37.20,'Makin ke kanan makin besar, makin ke kiri makin kecil.','Further right is bigger, further left is smaller.','#FBBF24'],
+  [41.20,'Pecahan dan desimal bukan bilangan bulat.','Fractions and decimals are not integers.','#FFFFFF'],
+  [44.20,'Uji lift: dari lantai 2 turun 5 lantai.','Lift quiz: start at floor 2, go down 5 floors.','#FBBF24'],
+  [47.10,'Berhenti di mana? Tulis di komentar.','Where does it stop? Write it below.','#FBBF24'],
+  [50.07,'Terima kasih sudah menonton.','Thanks for watching.','#FFE9A8']
+];
+let subIdx=-1;
+function renderSub(t){
+  let i=0;
+  for(let k=0;k<SUBS.length;k++){ if(t>=SUBS[k][0]-0.001) i=k; }
+  const nxt=i+1<SUBS.length?SUBS[i+1][0]:52.4;
+  const o=clamp(Math.min(seg(t,SUBS[i][0],0.25), 1-seg(t,nxt-0.14,0.14)),0,1);
+  if(i!==subIdx){
+    subIdx=i;
+    subId.textContent=SUBS[i][1];
+    subId.style.color=SUBS[i][3];
+    subEn.textContent=SUBS[i][2];
+  }
+  subbar.style.opacity=(o*0.98).toFixed(3);
+  const pop=1+0.018*Math.sin(clamp(seg(t,SUBS[i][0],0.45),0,1)*Math.PI);
+  subbar.style.transform=`translateX(-50%) scale(${pop.toFixed(3)})`;
+}
+
+/* ---------- judul bab (rata tengah, aturan 28) ---------- */
+const TITLES=[['t0',0.35],['t1',6.6],['t2',17.3],['t3',32.7],['t4',40.6],['t5',44.3]]
+  .map(([id,t0])=>({el:document.getElementById(id),t0:t0}));
+TITLES.forEach((o,i)=>{
+  o.el.style.top=(i===0?P.titleY:P.titleY+14)+'px';
+  o.el.style.fontSize=(i===0?P.titleS0:P.titleSN)+'px';
+  if(i===0||i===2||i===4)o.el.style.color='#B45309';
+});
+
+/* ---------- beat, masterplan mentor (lantai depan, tak menembus properti) ---------- */
+const IMP=[0.6,3.0,6.6,14.5,17.3,28.2,32.7,37.2,40.6,44.3];
+const SPARKS=[[3.0,5.0],[47.5,49.6]];
+const GESTS=[
+  [1.3,0.8,'nod',3],
+  [7.8,0.7,'tilt',5],
+  [11.0,0.7,'nod',3],
+  [14.6,0.8,'nod',3],
+  [20.6,1.0,'shiver',5],
+  [24.5,0.7,'nod',3],
+  [28.3,0.8,'nod',3],
+  [34.8,0.7,'tilt',5],
+  [38.1,0.9,'nod',3],
+  [42.7,0.7,'tilt',4]
+];
+function imp(t){
+  let a=0;
+  for(const bt of IMP){
+    const d=t-bt;
+    if(d>=0&&d<0.5){ const p=d/0.5; a=Math.max(a,(1-p)*0.85); }
+  }
+  return a;
+}
+const WAY = ORIENT==='portrait'
+  ? [[0.55,200],[6.6,705],[17.3,800],[24.0,260],[32.7,560],[34.0,560],[37.2,880],[41.2,640],[44.2,215]]
+  : [[0.55,290],[6.6,1270],[17.3,1350],[24.0,290],[32.7,760],[34.0,760],[37.2,1500],[41.2,1000],[44.2,290]];
+
+/* ---------- RENDER PER FRAME ---------- */
+const world=document.getElementById('world');
+const flash=document.getElementById('flash');
+const fade=document.getElementById('fade');
+const skyN=document.getElementById('skynight');
+const frostN=document.getElementById('frostnight');
+let _roll=0,_mxPrev=null;
+function renderFrame(t){
+  /* malam bersalju: langit gelap, jendela kota menyala, lampu plafond hangat */
+  const nk=seg(t,36.0,8.0);
+  /* konten latihan keluar layar di 49.8 (aturan 28): shaft, termometer, acuan, mobil */
+  const exo=1-seg(t,49.8,0.5);
+  skyN.style.opacity=nk.toFixed(3);
+  frostN.style.opacity=nk.toFixed(3);
+  for(const w of CITYWIN){ w.el.style.opacity=(nk*(0.55+0.35*Math.sin(t*1.3+w.ph))).toFixed(3); }
+  for(const l of LAMPS){ l.style.opacity=(0.25+nk*0.75).toFixed(3); }
+  /* salju jatuh di balik kaca */
+  for(const s of SNOW){
+    const yy=P.snowZone[1]+((s.y0-P.snowZone[1]+t*s.sp)% (P.snowZone[3]-P.snowZone[1]));
+    const xx=s.x+Math.sin(t*0.9+s.ph)*s.amp;
+    s.el.style.transform=`translate(${xx.toFixed(1)}px,${yy.toFixed(1)}px)`;
+    s.el.style.opacity=(0.35+0.3*Math.sin(t+s.ph)).toFixed(3);
+  }
+  /* chip hook: tujuh bilangan contoh */
+  for(const c of CHIPS){
+    const o=clamp(seg(t,c.t0,0.3)*(1-seg(t,6.4,0.35)),0,1);
+    c.el.style.opacity=o.toFixed(3);
+    const bob=Math.sin(t*1.6+c.ph)*5*(1-seg(t,6.4,0.35));
+    const sc=1+0.07*Math.sin(clamp(seg(t,c.t0,0.6),0,1)*Math.PI)*(1-seg(t,6.4,0.35));
+    c.el.style.transform=`translateY(${bob.toFixed(1)}px) scale(${sc.toFixed(3)})`;
+  }
+  popA(stamp,t,3.0,0.55,7,0,6.4);
+  /* panel 1: tiga kelompok */
+  popA(panel1,t,7.0,0.6,5,0,17.0);
+  for(const r of P1ROWS){ r.el.style.opacity=seg(t,r.t0,0.45).toFixed(3); }
+  p1Note.textContent = t>=14.5 ? 'NOL BUKAN POSITIF, BUKAN NEGATIF' : 'NEGATIF KE KIRI, POSITIF KE KANAN';
+  popA(p1Note,t,10.8,0.5,5,0,17.0);
+  /* termometer: suhu 4 turun 9 menjadi minus 5 */
+  popA(thermoEl,t,18.2,0.6,5,0,32.7);
+  const tv=4-9*eio(seg(t,20.4,1.4));
+  const my=tParts.yOf(tv);
+  const mbY=tParts.tubeBot;
+  tParts.merc.style.top=(my).toFixed(1)+'px';
+  tParts.merc.style.height=Math.max(0,mbY-my).toFixed(1)+'px';
+  tParts.frost.style.opacity=(tv<-0.2?smz(t,21.8,1.0,0.5)*(0.65+0.2*Math.sin(t*2.6)):0).toFixed(3);
+  popA(eqchip,t,21.9,0.5,6,0,24.6);
+  /* plak lantai menyala bergantian (+3, 0, -1, -2) saat narasi gedung */
+  const GLOW_T={3:24.2,0:24.6,'-1':25.0,'-2':25.4,'-3':47.4};
+  for(const pl of PLATES){
+    const gt=GLOW_T[String(pl.f)];
+    let g=0;
+    if(gt>0){ const d=t-gt; if(d>=0&&d<1.4){ g=Math.max(0,Math.sin(Math.min(d/1.4,1)*Math.PI)); } }
+    pl.el.style.boxShadow=g>0.02?`0 0 ${Math.round(16*g+6)}px rgba(242,178,74,${(0.75*g).toFixed(2)})`:'none';
+    pl.el.style.borderColor=g>0.02?`rgba(242,178,74,${(0.5+0.5*g).toFixed(2)})`:'#44648C';
+    pl.el.style.color=g>0.02?'#FFE9A8':'#BFD2E6';
+  }
+  /* mobil lift: demo 1 ke -1 (25.6), kembali 0 (29.5), uji: ke 2 (44.4) lalu turun ke -3 (45.9) */
+  let cf=0;
+  if(t>=25.6&&t<26.8) cf=lerp(0,-1,eio(seg(t,25.6,1.2)));
+  else if(t>=26.8&&t<29.5) cf=-1;
+  else if(t>=29.5&&t<30.3) cf=lerp(-1,0,eio(seg(t,29.5,0.8)));
+  else if(t>=44.8&&t<45.3) cf=lerp(0,2,eio(seg(t,44.8,0.5)));
+  else if(t>=45.3&&t<45.9) cf=2;
+  else if(t>=45.9&&t<47.4) cf=lerp(2,-3,eio(seg(t,45.9,1.5)));
+  else if(t>=47.4) cf=-3;
+  const carY=carF2Y(cf);
+  carEl.style.left=P.carX+'px';
+  carEl.style.top=carY.toFixed(1)+'px';
+  carEl.style.opacity=exo.toFixed(3);
+  /* uji lift: mentor naik ke mobil 45.0-45.5, lalu ikut turun sampai penutup */
+  popA(qchip,t,44.5,0.5,6,0,49.8);
+  popA(qm,t,47.5,0.5,8,0,49.8);
+  popA(pil,t,47.7,0.6,6,0,49.8);
+  /* garis bilangan menyala dari kiri ke kanan */
+  for(const tk of TICKS){
+    const lo=seg(t,33.0+(tk.v+5)*0.08,0.3);
+    const bright=(0.35+0.65*lo)*exo;
+    tk.tk.style.opacity=bright.toFixed(3);
+    tk.nm.style.opacity=bright.toFixed(3);
+  }
+  /* chip perbandingan: -5 diam, -2 meluncur ke kanan */
+  const cy5=P.railY-Math.round(74*cmpS)-22;
+  const x5=P.railC+(-5)*P.railSp, x2=P.railC+(-2)*P.railSp, x2b=P.railC+1*P.railSp;
+  popA(cmp5,t,33.6,0.5,7,0,40.5);
+  cmp5.style.left=(x5-Math.round(55*cmpS))+'px';
+  cmp5.style.top=cy5+'px';
+  const slide=eio(seg(t,34.6,1.0));
+  const co=clamp(seg(t,33.9,0.3)*(1-seg(t,40.5,0.35)),0,1);
+  cmp2.style.opacity=co.toFixed(3);
+  cmp2.style.left=(lerp(x2,x2b,slide)-Math.round(55*cmpS))+'px';
+  cmp2.style.top=cy5+'px';
+  cmp2.style.transform=`scale(${(1+0.07*Math.sin(clamp(seg(t,33.9,0.6),0,1)*Math.PI)).toFixed(3)})`;
+  trail.style.opacity=(slide>0&&slide<1?0.8:0).toFixed(3);
+  trail.style.left=(x2-Math.round(55*cmpS)).toFixed(0)+'px';
+  trail.style.top=(cy5+Math.round(20*cmpS))+'px';
+  trail.style.width=Math.max(0,((x2b-x2)*slide)).toFixed(0)+'px';
+  trail.style.height=Math.round(8*cmpS)+'px';
+  popA(chainP,t,38.0,0.55,5,0,40.6);
+  /* panel 4: anggota bulat vs bukan */
+  popA(panel4,t,40.9,0.55,5,0,44.0);
+  for(const r of P4ROWS){ r.el.style.opacity=seg(t,r.t0,0.4).toFixed(3); }
+  popA(p4Note,t,42.6,0.45,5,0,44.0);
+  /* shaft, garis acuan dan termometer ikut menutup scene latihan */
+  shaftEl.style.opacity=exo.toFixed(3);
+  acuanEl.style.opacity=exo.toFixed(3);
+  /* mentor: menggelinding antar stasiun, naik lift saat uji */
+  let bx=WAY[WAY.length-1][1];
+  for(let k=0;k<WAY.length-1;k++){
+    const [w0,x0]=WAY[k],[w1,x1]=WAY[k+1];
+    if(t>=w0&&t<w1){ bx=lerp(x0,x1,eio(seg(t,w0,w1-w0))); break; }
+  }
+  if(t>=WAY[WAY.length-1][0])bx=WAY[WAY.length-1][1];
+  if(_mxPrev===null)_mxPrev=bx;
+  _roll+=(bx-_mxPrev)/(P.ballD/2)*(180/Math.PI);
+  _mxPrev=bx;
+  const ep=seg(t,0.6,0.55);
+  let hy2=0, lrot=0, drot=0, txj=0, mys=1;
+  for(const [gs,gd,gt,ga] of GESTS){
+    const d2=t-gs;
+    if(d2>=0&&d2<gd){
+      const p=d2/gd, w=Math.sin(p*Math.PI);
+      if(gt==='tilt'||gt==='lean'){ lrot+=ga*w; }
+      else if(gt==='nod'){ lrot+=ga*Math.sin(p*2*Math.PI); }
+      else if(gt==='shiver'){ txj=ga*Math.sin(p*40)*(1-p); }
+      else if(gt==='spin'){ drot+=ga*eio(p); }
+      else if(gt==='count'){ hy2-=ga*Math.abs(Math.sin(p*5*Math.PI))*(1-p*0.2); }
+    }
+  }
+  const mFade=1-seg(t,44.3,0.35);
+  let mx=bx, myv=P.groundY-P.ballD, onAir=0;
+  const bsa=1;
+  mentor.el.style.left=mx.toFixed(1)+'px';
+  mentor.el.style.opacity=String(clamp(ep*3,0,1)*exo*mFade);
+  mentor.el.style.top=(myv+hy2).toFixed(1)+'px';
+  mentor.el.style.transform=`translateX(${txj.toFixed(1)}px) rotate(${(_roll+lrot+drot).toFixed(2)}deg) scale(${bsa.toFixed(3)})`;
+  msh.style.left=mx.toFixed(1)+'px';
+  msh.style.top=(P.groundY-10)+'px';
+  msh.style.opacity=String(clamp(ep*3,0,1)*exo*mFade*clamp(0.42+hy2*0.006,0.18,0.5)*bsa);
+  msh.style.transform=`scaleX(${clamp((1+hy2*0.004)*bsa,0.4,1.08).toFixed(3)})`;
+  /* mentor di dalam lift: bola mini mengikuti mobil */
+  const cmTop=carF2Y(cf)+P.carH*0.48-carM.d/2;
+  carM.el.style.left=(P.carX+P.carW/2).toFixed(1)+'px';
+  carM.el.style.top=cmTop.toFixed(1)+'px';
+  carM.el.style.opacity=String(seg(t,44.45,0.35)*exo);
+  carM.el.style.transform=`rotate(${(_roll*0.25).toFixed(2)}deg)`;
+  /* percikan bintang */
+  let spo=0;
+  for(const [sa,sb] of SPARKS){
+    if(t>=sa&&t<sb) spo=smz(t,sa,sb,0.35)*(0.65+0.2*Math.sin(t*7));
+  }
+  spark.style.opacity=String(clamp(spo,0,1));
+  const spx=t>=44.45?P.carX+P.carW/2+62:mx+62;
+  const spy=t>=44.45?cmTop:(P.groundY-150)+Math.sin(t*2)*4;
+  spark.style.left=spx.toFixed(1)+'px';
+  spark.style.top=spy.toFixed(1)+'px';
+  spark.style.transform=`rotate(${((t*28)%360).toFixed(0)}deg) scale(${(0.8+0.15*Math.sin(t*7)).toFixed(3)})`;
+  /* judul bab (judul terakhir ikut keluar saat penutup agar endcard sendirian) */
+  for(let i=0;i<TITLES.length;i++){
+    const o=TITLES[i];
+    const tEnd=i+1<TITLES.length?TITLES[i+1].t0:50.2;
+    const oin=seg(t,o.t0,0.35)*(1-seg(t,tEnd-0.25,0.3));
+    const sc=1+0.035*Math.sin(clamp(seg(t,o.t0,0.7),0,1)*Math.PI);
+    o.el.style.opacity=oin.toFixed(3);
+    o.el.style.transform=`scale(${sc.toFixed(3)})`;
+  }
+  /* endcard penutup bersih: AKIOMIDA.COM muncul SENDIRIAN di layar yang tenang */
+  const eci=eio(seg(t,50.2,0.7));
+  endcard.style.opacity=eci.toFixed(3);
+  endcard.style.transform=`translateY(${((1-eci)*16).toFixed(1)}px) scale(${(0.94+0.06*eci).toFixed(3)})`;
+  fBar.style.width=(seg(t,50.9,0.5)*P.barW).toFixed(0)+'px';
+  renderSub(t);
+  /* kamera tenang */
+  const im=imp(t);
+  const shx=Math.sin(t*47)*2.5*im, shy=Math.sin(t*39+1.7)*1.8*im;
+  world.style.transform=`translate(${shx.toFixed(2)}px,${(shy+Math.sin(t*0.35)*3).toFixed(2)}px)`;
+  flash.style.opacity=(im*0.07).toFixed(3);
+  fade.style.opacity=String(clamp(1-seg(t,0.05,0.5),0,1)*0.96+clamp(seg(t,51.4,0.6),0,1));
+}
+renderFrame(0);
+window.__ready=true;
+</script>
+</body>
+</html>

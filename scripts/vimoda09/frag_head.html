@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+/*__FONTS__*/
+*{box-sizing:border-box}
+body{margin:0;background:#0B1220;font-family:'Poppins','Noto Sans',sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:relative;overflow:hidden}
+#world{position:absolute;inset:0}
+#flash{position:absolute;inset:0;background:#FFFFFF;opacity:0;pointer-events:none}
+#fade{position:absolute;inset:0;background:#0B1220;opacity:0;pointer-events:none}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+/* MENARA LIVO: potongan menara lift kaca bersalju - langit dingin, siluet kota,
+   salju turun, shaft lift tembus basement, termometer raksasa, garis bilangan
+   di kener dinding. Latar episode ini BERBEDA TOTAL dari Rumah Bulina (aturan 26).
+   Karakter: HANYA bola emas mentor, bulat sejati, tanpa mata (aturan 23). */
+#skyday{position:absolute;inset:0;background:linear-gradient(180deg,#A8C8E2 0%,#C4DAEC 55%,#DCE9F2 100%)}
+#skynight{position:absolute;inset:0;background:linear-gradient(180deg,#0E1930 0%,#16233E 55%,#1D2C4C 100%);opacity:0}
+#skyline{position:absolute;left:0;width:100%}
+#snow{position:absolute;inset:0}
+#frostday{position:absolute;inset:0;background:rgba(226,238,248,.34)}
+#frostnight{position:absolute;inset:0;background:rgba(14,24,44,.42);opacity:0}
+#ceiling{position:absolute;left:0;top:0;width:100%}
+#ceiling .cl{position:absolute;background:#1B2A42;border-radius:0 0 10px 10px}
+#ceiling .lamp{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,214,130,.55),rgba(255,214,130,0) 70%);opacity:0}
+#floorplank{position:absolute;left:0;width:100%;background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 3px,transparent 3px 190px),linear-gradient(180deg,#2B3850 0,#1F2A3E 100%)}
+#baseboard{position:absolute;left:0;width:100%;background:#3A4A66}
+#rail{position:absolute;left:0;top:0;width:100%}
+#rail .rline{position:absolute;height:5px;border-radius:3px;background:rgba(220,232,244,.85)}
+#rail .rtick{position:absolute;width:4px;border-radius:2px;background:rgba(220,232,244,.85);opacity:.35;will-change:opacity}
+#rail .rnum{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#DCE8F4;opacity:.35;will-change:opacity}
+#shaft{position:absolute;will-change:opacity}
+#shaft .glass{position:absolute;background:linear-gradient(180deg,rgba(20,32,54,.88),rgba(14,22,40,.92));border:8px solid #33506E;border-radius:12px;box-shadow:0 14px 34px rgba(4,10,20,.5)}
+#shaft .guide{position:absolute;width:7px;background:rgba(120,160,200,.35);border-radius:4px}
+#shaft .beam{position:absolute;background:#33506E;border-radius:3px}
+#shaft .plate{position:absolute;display:flex;align-items:center;justify-content:center;background:#0F1B30;border:3px solid #44648C;border-radius:8px;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#BFD2E6;will-change:opacity,box-shadow}
+#shaft .cut{position:absolute;left:0;width:100%;background:repeating-linear-gradient(45deg,#243448 0 14px,#1C2A3C 14px 28px);opacity:0}
+#thermo{position:absolute;will-change:opacity}
+#thermo .tframe{position:absolute;background:rgba(240,246,252,.16);border:6px solid #44648C;border-radius:14px}
+#thermo .tube{position:absolute;background:rgba(248,252,255,.92);border:5px solid #44648C;border-radius:26px;overflow:hidden}
+#thermo .mercury{position:absolute;background:linear-gradient(180deg,#E15B5B,#B42E2E);width:100%}
+#thermo .bulb{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F08A7A,#B42E2E 75%)}
+#thermo .tmark{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#DCE8F4}
+#thermo .tline{position:absolute;height:3px;background:rgba(220,232,244,.7)}
+#thermo .frost{position:absolute;border-radius:50%;border:3px solid rgba(170,215,245,.75);opacity:0}
+#acuan{position:absolute;left:0;width:100%;will-change:opacity}
+#acuan .aline{position:absolute;left:0;width:100%;height:0;border-top:4px dashed rgba(233,177,91,.85)}
+#acuan .alab{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#E9B15B;letter-spacing:.08em}
+#liftcar{position:absolute;will-change:transform,opacity}
+#liftcar .body{position:absolute;background:linear-gradient(180deg,#F2B24A,#D98F2E);border-radius:12px;box-shadow:0 10px 24px rgba(4,10,20,.45)}
+#liftcar .roof{position:absolute;background:#8B5A2B00;background:#B4771F;border-radius:8px}
+#liftcar .cwin{position:absolute;background:linear-gradient(180deg,#14223A,#0E1830);border-radius:8px;border:4px solid #B4771F;overflow:hidden}
+#liftcar .cable{position:absolute;width:5px;background:rgba(200,215,230,.5)}
+.panelN{position:absolute;background:linear-gradient(180deg,#22304E,#18233B);border-radius:16px;box-shadow:0 16px 38px rgba(4,10,20,.5);will-change:transform,opacity}
+.tapeC{position:absolute;background:rgba(150,200,230,.45);border-radius:3px;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.pHd{font-weight:800;color:#FFFFFF;letter-spacing:.10em;text-align:center}
+.pRow{display:flex;align-items:center;opacity:0}
+.pDot{border-radius:50%;flex:none}
+.pName{font-weight:800;color:#FFFFFF;flex:none}
+.pEx{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#BFD2E6}
+.pNote{display:flex;align-items:center;justify-content:center;background:rgba(242,178,74,.24);border:2px solid rgba(242,178,74,.55);border-radius:10px;color:#F2C96B;font-weight:800;letter-spacing:.05em;text-align:center;opacity:0;will-change:opacity}
+.hookChip{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:14px;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#FFFFFF;box-shadow:0 10px 24px rgba(4,10,20,.45);will-change:transform,opacity}
+.stamp{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(92deg,#2BB3A6 0%,#8A6FC6 52%,#E9B45C 100%);color:#0B1220;font-weight:800;letter-spacing:.06em;box-shadow:0 12px 26px rgba(4,10,20,.45);will-change:transform,opacity}
+.cmpChip{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(180deg,#22304E,#18233B);border:3px solid #44648C;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#FFFFFF;box-shadow:0 10px 24px rgba(4,10,20,.5);will-change:transform,opacity}
+.cmpTrail{position:absolute;border-radius:10px;background:linear-gradient(90deg,rgba(139,111,198,0),rgba(139,111,198,.55));opacity:0}
+.eqchip{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(180deg,#22304E,#18233B);border:3px solid #44648C;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#FFFFFF;box-shadow:0 10px 24px rgba(4,10,20,.5);will-change:transform,opacity}
+.ckmark{position:absolute}
+.ckmark .a{position:absolute;background:#2BB3A6;border-radius:2px}
+.ckmark .b{position:absolute;background:#2BB3A6;border-radius:2px}
+.xxmark{position:absolute}
+.xxmark .a{position:absolute;background:#E15B5B;border-radius:2px}
+.xxmark .b{position:absolute;background:#E15B5B;border-radius:2px}
+.qmark{position:absolute;color:#F2B24A;font-weight:800;text-shadow:0 5px 0 rgba(0,0,0,.25);will-change:transform,opacity}
+.title{position:absolute;left:0;width:100%;text-align:center;font-weight:800;color:#22304E;letter-spacing:.04em;text-shadow:0 5px 0 rgba(255,255,255,.38),0 12px 26px rgba(10,20,40,.22);will-change:transform,opacity}
+#pil{position:absolute;border-radius:999px;background:linear-gradient(92deg,#2BB3A6 0%,#8A6FC6 52%,#E9B45C 100%);color:#0B1220;font-weight:800;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+#endcard{position:absolute;left:0;width:100%;opacity:0;will-change:transform,opacity}
+#f_url{font-weight:800;text-align:center}
+#f_bar{height:7px;border-radius:4px;background:linear-gradient(90deg,#2BB3A6,#8A6FC6,#E9B45C)}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(10,16,28,.86);border-radius:20px;padding:18px 32px;text-align:center;box-shadow:0 14px 34px rgba(4,10,20,.5);will-change:transform,opacity}
+#sub_id{font-weight:800;color:#FFFFFF;line-height:1.26}
+#sub_en{color:#B9C7DC;font-weight:600}
+#wm{position:absolute;font-weight:800;letter-spacing:.34em;color:#F4EDE0;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;border:1.5px solid rgba(244,237,224,.42);will-change:transform}
+.bchar{position:absolute;will-change:transform,opacity}
+.bchar .core{position:absolute;border-radius:100%}
+.bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px)}
+.bsh{position:absolute;border-radius:50%;background:rgba(4,10,20,.4);filter:blur(2px)}
+.snowp{position:absolute;border-radius:50%;background:rgba(255,255,255,.9);will-change:transform,opacity}
+.spark{position:absolute;width:34px;height:34px;opacity:0}
+.spark .sa{position:absolute;background:#FFE9A8;border-radius:3px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="world">
+    <div id="skyday"></div>
+    <div id="skynight"></div>
+    <div id="skyline"></div>
+    <div id="snow"></div>
+    <div id="frostday"></div>
+    <div id="frostnight"></div>
+    <div id="ceiling"></div>
+    <div id="floorplank"></div>
+    <div id="baseboard"></div>
+    <div id="rail"></div>
+    <div id="shaft"></div>
+    <div id="thermo"></div>
+    <div id="acuan"><div class="aline"></div><div class="alab">ACUAN 0</div></div>
+    <div id="props"></div>
+    <div id="chars"></div>
+  </div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+  <div id="liftcar"><div class="cable"></div><div class="body"></div><div class="roof"></div><div class="cwin"></div></div>
+  <div id="eqchip" class="eqchip">4 - 9 = -5</div>
+  <div id="qchip" class="eqchip">2 - 5 = ?</div>
+  <div id="qm" class="qmark">?</div>
+  <div id="pil">JAWAB DI KOMEN</div>
+  <div id="endcard">
+    <div id="f_url">AKIOMIDA.COM</div>
+    <div id="f_bar"></div>
+  </div>
+  <div class="title" id="t0">APA KESAMAANNYA?</div>
+  <div class="title" id="t1">BILANGAN BULAT</div>
+  <div class="title" id="t2">KENAPA MINUS?</div>
+  <div class="title" id="t3">MANA LEBIH BESAR?</div>
+  <div class="title" id="t4">BUKAN PECAHAN</div>
+  <div class="title" id="t5">UJI LIFT</div>
+  <div id="subbar"><div id="sub_id"></div><div id="sub_en"></div></div>
+  <div id="wm">AKIOMIDA</div>
+</div>
+<script>
