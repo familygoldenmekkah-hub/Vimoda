@@ -5,18 +5,24 @@ Produksi: tim AKIOMIDA. Durasi 52.0 s, 30 fps, 2 orientasi (portrait 1080x1920, 
 
 ## Premis
 
-Dunia yang sama dengan video 07: Kota Bilangan (gedung berjendela, empat kedai berawning merah-putih, jalan raya berisi mobil, trotoar, pohon, lampu jalan; siang bergeser ke senja). Satu-satunya karakter adalah bola emas mentor yang bulat sempurna dan tanpa mata: menggelinding antar stasiun, mengangguk, berputar, melompat kecil di akhir. Bahan bulina diajarkan lewat properti dunia: plak nomor pintu, jendela kedai berisi buku, siswa, apel, dan hitungan tanpa batas; keranjang kosong; panel perbandingan; papan nilai tempat; kelereng latihan di papan pengumuman.
+Dunia BARU khusus episode ini: RUMAH BULINA, ruang bermain hangat (revisi 2; aturan 26 melarang memakai ulang latar episode lain). Dinding krem berwainscot, papan kayu berseam, karpet hijau teal tempat mentor menggelinding, jendela kayu dengan langit yang bergeser siang ke senja, rak berisi toples kelereng, pot tanaman, dan balok angka 1 2 3, bendera bunting melengkung, lampu tidur yang menyala saat senja, debu cahaya melayang. Satu-satunya karakter adalah bola emas mentor yang bulat sempurna dan tanpa mata: menggelinding di lantai depan, mengangguk, berputar, melompat kecil di akhir. Bahan bulina diajarkan lewat properti rumah: balok 1 2 3 di rak, empat bingkai gambar anak (buku, siswa, apel, tanpa batas), keranjang anyaman kosong, sticky notes, chart kertas di dinding, papan kapur di kaki easel, poster latihan, dan kelereng warna di lantai.
+
+## Revisi 2 (mandat kreator: dunia tiap episode jangan mirip; teks sampai terpotong-potong)
+
+1. DUNIA DIROBAK TOTAL: Kota Bilangan (gedung, kedai, jalan raya, mobil) diganti Rumah Bulina karena tampilan antar episode terasa sama. Semua komponen latar baru; tidak ada satu pun aset kota yang tersisa.
+2. TEKS DIPERBAIKI: subjudul portrait pecah 3 baris dan landscape terpotong di tepi pil. Kini font subjudul 40 px (portrait) dan 38 px (landscape) dengan lebar pil 880/1360 px, diuji pada kalimat terpanjang 44 karakter: portrait maksimal dua baris rapi, landscape satu baris penuh.
+3. TATA LETAK: mentor kini berada di depan karpet (sempat tertutup lantai karena urutan lapisan); jendela, bingkai, chart, dan easel dipetakan ulang agar tidak satu pun menimpa judul bab atau satu sama lain; setiap elemen teks diaudit zoom pada frame terburuk sebelum render (aturan 27).
 
 ## Struktur enam bab
 
 | Bab | Waktu | Judul di layar | Isi |
 |---|---|---|---|
-| Hook | 0.0-6.6 | MULAI DARI 1? | Plak nomor pintu 1, 2, 3 menyala bergantian; mentor menggelinding masuk; mobil pertama lewat |
-| 1 Asli | 6.6-17.0 | BILANGAN ASLI | Empat jendela kedai: 3 buku (6.9), 5 siswa (8.85), 12 apel dengan hitungan cepat (10.35), angka 1 2 3 4 5 ... tanpa batas (10.45); pasangan jendela pergi 13.4 dan 16.6 |
-| 2 Kenapa nol | 17.0-25.9 | KENAPA NOL? | Keranjang kosong dengan tag 0 APEL (19.9); chip 0 PESAN BARU dan 0 PESERTA (23.47); mentor berputar penuh |
-| 3 Cacah | 25.9-32.9 | BILANGAN CACAH | Panel gelap ASLI vs CACAH: baris ASLI (1 2 3 4 5 ...) titik biru muda, baris CACAH (0 1 2 3 4 5 ...) titik ungu; catatan emas menyala 29.65 lalu berganti teks di 32.86 |
-| 4 Peran nol | 32.9-40.2 | PERAN NOL | Papan tulis kafe: angka 10 dengan label NOL MENJAGA POSISI: 1 PULUHAN + 0 SATUAN |
-| 5 Latihan | 40.2-52.0 | LATIHAN KELERENG | Papan pengumuman: 8 KELERENG, SEMUA DIBERIKAN.; delapan kelereng warna muncul 44.25 lalu meluncur keluar satu per satu 45.55-47.0; tanda tanya emas besar (47.3); AKIOMIDA.COM reveal 45.8, bar gradien 48.6, pil TULIS DI KOMEN 47.5; langit senja, lampu jalan dan kunang-kunang menyala |
+| Hook | 0.0-6.6 | MULAI DARI 1? | Balok angka 1, 2, 3 di rak menyala bergantian; mentor menggelinding masuk ke karpet |
+| 1 Asli | 6.6-17.0 | BILANGAN ASLI | Empat bingkai gambar di dinding: 3 buku (6.9), 5 siswa (8.85), 12 apel (10.35), angka 1 2 3 4 5 ... tanpa batas (10.45); pasangan bingkai pergi 13.4 dan 16.6 |
+| 2 Kenapa nol | 17.0-25.9 | KENAPA NOL? | Keranjang anyaman kosong dengan tag 0 (19.9); sticky notes 0 PESAN BARU dan 0 PESERTA (23.47); mentor berputar penuh |
+| 3 Cacah | 25.9-32.9 | BILANGAN CACAH | Chart kertas di dinding: baris ASLI (1 2 3 4 5 ...) titik biru muda, baris CACAH (0 1 2 3 4 5 ...) titik ungu; catatan stabilo menyala 29.65 lalu berganti teks di 32.86 |
+| 4 Peran nol | 32.9-40.2 | PERAN NOL | Papan kapur di kaki easel: angka 10 dengan label 1 PULUHAN + 0 SATUAN |
+| 5 Latihan | 40.2-52.0 | LATIHAN KELERENG | Poster latihan di dinding: 8 KELERENG, SEMUA DIBERIKAN.; delapan kelereng warna muncul di lantai 44.25 lalu meluncur keluar satu per satu 45.55-47.0; tanda tanya emas besar (47.3); AKIOMIDA.COM reveal 45.8, bar gradien 48.6, pil TULIS DI KOMEN 47.5; senja di jendela, lampu tidur dan debu cahaya menyala |
 
 ## Narasi 16 beat (subjudul dua bahasa, soft selling)
 
@@ -50,9 +56,10 @@ Dunia yang sama dengan video 07: Kota Bilangan (gedung berjendela, empat kedai b
 ## Merek dan ketaatan aturan
 
 - Watermark AKIOMIDA dalam pil gelap kecil selalu terlihat di tepi paling bawah (portrait y 1800, landscape y 1010) tanpa menutupi konten apa pun.
-- Subjudul di zona aman sosmed: portrait y 1170 (maks 760 px), landscape y 740 (maks 1300 px); dua bahasa, satu pil.
+- Subjudul di zona aman sosmed: portrait y 1170 (pil maks 880 px, font 40 px), landscape y 740 (pil maks 1360 px, font 38 px); dua bahasa, satu pil; diuji pada kalimat terpanjang agar tidak pernah lebih dari dua baris dan tidak terpotong (aturan 27).
+- Dunia unik per episode (aturan 26): Rumah Bulina hanya untuk episode ini; episode berikutnya wajib mengusung konsep visual berbeda lagi.
 - Satu karakter: bola emas bulat sempurna tanpa mata (aturan 23); kelereng adalah properti latihan dengan fungsi naratif jelas, bukan karakter.
 - Soft selling penuh (aturan 25): semua kalimat berupa ajakan hangat; penutup "Terima kasih sudah menonton."; tidak ada kalimat menyuruh negatif.
 - Tanpa nama tokoh, tanpa squash-stretch, satu ide per layar, dunia memudar saat panel naik, kamera tenang dengan getar halus pada beat emas.
-- CTA: papan pengumuman di zona tengah; AKIOMIDA.COM hanya menyala di akhir dengan reveal lambat; bar gradien menyapu; pil ajakan TULIS DI KOMEN.
-- Audio: pad chord per bab, arpeggio, kick dan hat, tick menghitung (plak, apel, kelereng), whoosh mobil dan perpindahan bab, boom pada beat emas 13.76/29.65/44.14, chime reveal.
+- CTA: poster latihan di zona tengah dinding dengan selotip sudut; AKIOMIDA.COM hanya menyala di akhir dengan reveal lambat; bar gradien menyapu; pil ajakan TULIS DI KOMEN.
+- Audio: pad chord per bab, arpeggio, kick dan hat, tick menghitung (balok, apel, kelereng), whoosh perpindahan bab dan kelereng meluncur, boom pada beat emas 13.76/29.65/44.14, chime reveal.

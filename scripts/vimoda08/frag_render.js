@@ -40,13 +40,12 @@ const TITLES=[['t0',0.35],['t1',6.6],['t2',17.0],['t3',25.9],['t4',32.9],['t5',4
 TITLES.forEach((o,i)=>{
   o.el.style.top=(i===0?P.titleY:P.titleY+14)+'px';
   o.el.style.fontSize=(i===0?P.titleS0:P.titleSN)+'px';
-  if(i===0||i===2||i===4)o.el.style.color='#FFE9A8';
+  if(i===0||i===2||i===4)o.el.style.color='#B45309';
 });
 
-/* ---------- beat, masterplan mentor ---------- */
+/* ---------- beat, masterplan mentor (lantai depan, tak menembus properti) ---------- */
 const IMP=[0.6,6.6,17.0,25.9,32.9,40.2,13.76,29.65,44.14,49.0];
 const SPARKS=[[38.8,40.0],[47.3,51.2]];
-const SPLIT=[];
 const GESTS=[
   [1.3,0.8,'nod',3],
   [4.9,0.7,'shiver',5],
@@ -69,91 +68,53 @@ function imp(t){
   return a;
 }
 const WAY = ORIENT==='portrait'
-  ? [[0.55,120],[2.4,430],[6.6,430],[6.9,170],[8.8,410],[10.0,410],[10.05,650],[11.4,650],[12.2,860],[14.0,860],[15.2,540],[51.9,540]]
-  : [[0.55,210],[2.4,760],[6.6,760],[6.9,300],[8.8,730],[10.0,730],[10.05,1160],[11.4,1160],[12.2,1530],[14.0,1530],[15.2,960],[51.9,960]];
-
-/* mobil: tiga lewat di jalan (di belakang trotoar, tak pernah bertemu bola) */
-const PASSES=[[2.6,4.4,1,0],[9.2,11.2,-1,1],[14.6,16.4,1,0]];
+  ? [[0.55,540],[9.0,660],[13.76,540],[19.9,440],[25.9,540],[51.9,540]]
+  : [[0.55,960],[9.0,1100],[13.76,960],[19.9,820],[25.9,960],[51.9,960]];
 
 /* ---------- RENDER PER FRAME ---------- */
 const world=document.getElementById('world');
 const flash=document.getElementById('flash');
 const fade=document.getElementById('fade');
-const skydusk=document.getElementById('skydusk');
 let _roll=0,_mxPrev=null;
 function renderFrame(t){
+  /* senja: langit jendela berubah, lampu menyala, dinding menghangat */
   const dk=seg(t,34.0,9.0);
-  skydusk.style.opacity=dk.toFixed(3);
-  /* bintang */
-  for(const s of ST){
-    s.el.style.opacity=(dk*(0.35+0.5*(0.5+0.5*Math.sin(t*s.sp+s.ph)))).toFixed(3);
+  for(const d of winDusks){ d.style.opacity=dk.toFixed(3); }
+  lampGlow.style.opacity=(dk*(0.75+0.15*Math.sin(t*2.2))).toFixed(3);
+  /* bendera bunting berayun lembut */
+  for(const f of FLAGS){
+    f.el.style.transform=`rotate(${(Math.sin(t*0.8+f.ph)*3.5).toFixed(2)}deg)`;
   }
-  /* awan drift */
-  for(const c of CL){
-    c.x+=c.sp*(1/30);
-    if(c.x>W+c.w)c.x=-c.w-40;
-    c.el.style.transform=`translateX(${c.x.toFixed(1)}px)`;
-    c.el.style.opacity=(0.92*(1-dk*0.8)).toFixed(3);
+  /* debu cahaya melayang saat senja */
+  const fz=seg(t,38.0,1.2)*(1-seg(t,51.2,0.6));
+  for(const f of DUST){
+    const ox=Math.sin(t*f.sp+f.ph)*f.amp, oy=Math.cos(t*f.sp*0.8+f.ph)*f.amp*0.7;
+    f.el.style.transform=`translate(${(f.x+ox).toFixed(1)}px,${(f.y+oy).toFixed(1)}px)`;
+    f.el.style.opacity=(fz*(0.30+0.55*(0.5+0.5*Math.sin(t*2.4+f.ph)))).toFixed(3);
   }
-  /* kota & plaza */
-  const plazaK=seg(t,16.6,0.6)*(1-seg(t,32.5,0.6))+seg(t,40.0,0.6);
-  const pk=clamp(plazaK,0,1);
-  plaza.style.opacity=(pk*0.9).toFixed(3);
-  const townDim=1-0.62*pk;
-  townEl.style.opacity=townDim.toFixed(3);
-  TREES.forEach(tr=>{ tr.el.style.opacity=(1-0.5*pk).toFixed(3);
-    tr.el.style.transform=`rotate(${(Math.sin(t*0.9+tr.ph)*1.2).toFixed(2)}deg)`; });
-  /* lampu jalan menyala saat senja */
-  LAMPS.forEach(l=>{
-    l.glow.style.opacity=(dk*(0.55+0.2*Math.sin(t*2+l.ph))).toFixed(3);
-  });
-  /* jendela menyala hangat saat senja */
-  if(WINS.length){
-    const warm=dk*0.85;
-    const r=Math.round(lerp(57,255,warm)), g=Math.round(lerp(80,217,warm)), b=Math.round(lerp(107,138,warm));
-    const col=`rgb(${r},${g},${b})`;
-    for(const w of WINS){ w.style.background=col; }
-  }
-  /* mobil lewat */
-  for(const [p0,p1,dir,ci] of PASSES){
-    const c=CARS[ci];
-    const p=seg(t,p0,p1-p0);
-    const on=t>=p0&&t<=p1?1:0;
-    c.el.style.opacity=on;
-    if(on){
-      const x=dir>0?lerp(-c.w-60,W+60,p):lerp(W+60,-c.w-60,p);
-      c.el.style.transform=`translateX(${x.toFixed(1)}px)`;
-    }
-  }
-  /* plak 1 2 3 (hook) */
-  for(const p of PLQ){ popA(p.el,t,p.t0,0.5,8,0,6.5); }
-
-  /* jendela kedai (pasangan 1 pergi 13.4, pasangan 2 pergi 16.6) */
+  /* balok angka 1 2 3 di rak (hook) */
+  for(const b of BLOCKS){ popA(b.el,t,b.t0,0.5,10,0,6.5); }
+  /* bingkai gambar (pasangan pertama pergi 13.4, kedua 16.6) */
   const pOut=1-seg(t,13.4,0.35), pOut2=1-seg(t,16.6,0.4);
-  SHOPS.forEach((s,i)=>{
-    const o=seg(t,s.t0,0.45)*(i<2?pOut:pOut2);
-    s.win.style.opacity=o.toFixed(3);
-    s.win.style.transform=`translateY(${((1-eio(seg(t,s.t0,0.45)))*26).toFixed(1)}px)`;
-    s.awn.style.opacity=o.toFixed(3);
-    s.chip.style.opacity=(seg(t,s.t0+0.25,0.35)*(i<2?pOut:pOut2)).toFixed(3);
+  FRAMES.forEach((f,i)=>{
+    const o=seg(t,f.t0,0.45)*(i<2?pOut:pOut2);
+    f.win.style.opacity=o.toFixed(3);
+    f.win.style.transform=`translateY(${((1-eio(seg(t,f.t0,0.45)))*22).toFixed(1)}px)`;
+    f.tag.style.opacity=(seg(t,f.tag0,0.35)*(i<2?pOut:pOut2)).toFixed(3);
   });
-
-  /* keranjang kosong + dua situasi nol (S3) */
-  popA(zb,t,19.9,0.55,6,0,25.9);
-  for(const z of ZCHIPS){ popA(z.el,t,z.t0,0.5,7,0,25.9); }
-
-  /* panel ASLI vs CACAH (S4) + catatan emas yang berganti */
-  popA(famEl,t,25.9,0.55,5,0,32.9);
-  for(const r of CMP_ROWS){
+  /* keranjang kosong + sticky notes (bab NOL) */
+  popA(basket,t,19.9,0.55,6,0,25.9);
+  for(const s of STICKS){ popA(s.el,t,s.t0,0.5,7,0,25.9); }
+  /* chart kertas (bab CACAH) + catatan stabilo yang berganti */
+  popA(chart,t,25.9,0.55,5,0,32.9);
+  for(const r of CH_ROWS){
     r.el.style.opacity=seg(t,r.t0,0.45).toFixed(3);
   }
-  famNote.textContent = t>=32.86 ? 'NOL TIDAK MASUK ASLI' : 'SEMUA ASLI ADA DI CACAH';
-  popA(famNote,t,29.65,0.5,5,0,32.9);
-
-  /* papan tulis kafe (S5) */
-  popA(slate,t,36.7,0.6,6,0,40.15);
-
-  /* mentor: menggelinding di trotoar antar stasiun */
+  chNote.textContent = t>=32.86 ? 'NOL TIDAK MASUK ASLI' : 'SEMUA ASLI ADA DI CACAH';
+  popA(chNote,t,29.65,0.5,5,0,32.9);
+  /* papan kapur easel (bab PERAN NOL) */
+  popA(easel,t,36.7,0.6,6,0,40.15);
+  /* mentor: menggelinding di lantai depan */
   let bx=WAY[WAY.length-1][1];
   for(let k=0;k<WAY.length-1;k++){
     const [w0,x0]=WAY[k],[w1,x1]=WAY[k+1];
@@ -186,10 +147,8 @@ function renderFrame(t){
   msh.style.top=(P.groundY-10)+'px';
   msh.style.opacity=String(clamp(ep*3,0,1)*clamp(0.42+hy2*0.006,0.18,0.5)*bsa);
   msh.style.transform=`scaleX(${clamp((1+hy2*0.004)*bsa,0.4,1.08).toFixed(3)})`;
-  ballB.style.opacity='0';
   /* percikan bintang */
   let spo=0;
-  for(const sa in []) void sa;
   for(const [sa,sb] of SPARKS){
     if(t>=sa&&t<sb) spo=smz(t,sa,sb,0.35)*(0.65+0.2*Math.sin(t*7));
   }
@@ -197,25 +156,15 @@ function renderFrame(t){
   spark.style.left=(bx+62).toFixed(1)+'px';
   spark.style.top=(P.groundY-150+Math.sin(t*2)*4).toFixed(1)+'px';
   spark.style.transform=`rotate(${((t*28)%360).toFixed(0)}deg) scale(${(0.8+0.15*Math.sin(t*7)).toFixed(3)})`;
-
-  /* kelereng latihan: muncul satu per satu, lalu diberikan satu per satu */
+  /* kelereng latihan: muncul, lalu diberikan satu per satu ke kanan */
   MARBLES.forEach((m,i)=>{
     const inO=seg(t,44.25+i*0.06,0.3);
     const xp=seg(t,45.55+i*0.15,0.42);
     const op=clamp(inO*(1-xp),0,1);
     m.el.style.opacity=op.toFixed(3);
-    m.el.style.transform=`translate(${(320*eio(xp)).toFixed(1)}px,${(70*xp).toFixed(1)}px) rotate(${(xp*160).toFixed(0)}deg) scale(${(0.7+0.3*inO).toFixed(3)})`;
+    m.el.style.transform=`translate(${(320*eio(xp)).toFixed(1)}px,${(-40*xp).toFixed(1)}px) rotate(${(xp*160).toFixed(0)}deg) scale(${(0.7+0.3*inO).toFixed(3)})`;
   });
   popA(qmark,t,47.3,0.5,8,0,51.6);
-
-  /* kunang-kunang senja */
-  const fz=seg(t,40.5,1.0)*(1-seg(t,51.2,0.6));
-  for(const f of FF){
-    const ox=Math.sin(t*f.sp+f.ph)*f.amp, oy=Math.cos(t*f.sp*0.8+f.ph)*f.amp*0.6;
-    f.el.style.transform=`translate(${(f.x+ox).toFixed(1)}px,${(f.y+oy).toFixed(1)}px)`;
-    f.el.style.opacity=(fz*(0.35+0.65*(0.5+0.5*Math.sin(t*2.2+f.ph)))).toFixed(3);
-  }
-
   /* judul bab */
   for(let i=0;i<TITLES.length;i++){
     const o=TITLES[i];
@@ -225,17 +174,14 @@ function renderFrame(t){
     o.el.style.opacity=oin.toFixed(3);
     o.el.style.transform=`scale(${sc.toFixed(3)})`;
   }
-
-  /* CTA: AKIOMIDA.COM hanya menyala di akhir, reveal tenang */
+  /* CTA poster: AKIOMIDA.COM reveal tenang */
   popA(cta,t,40.9,0.7,6,0,51.6);
   const uo=seg(t,45.8,1.4);
   fUrl.style.opacity=uo.toFixed(3);
   fUrl.style.transform=`translateY(${((1-eio(uo))*14).toFixed(1)}px)`;
   fBar.style.width=(seg(t,48.6,1.8)*Math.max(0,P.ctaW-80)).toFixed(0)+'px';
   popA(fPill,t,47.5,0.6,6,0,51.6);
-
   renderSub(t);
-
   /* kamera tenang */
   const im=imp(t);
   const shx=Math.sin(t*47)*2.5*im, shy=Math.sin(t*39+1.7)*1.8*im;
