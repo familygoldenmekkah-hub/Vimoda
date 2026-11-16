@@ -3,47 +3,48 @@ const ORIENT=Q.get('o')||'landscape';
 const W=ORIENT==='portrait'?1080:1920;
 const H=ORIENT==='portrait'?1920:1080;
 
-/* v07 rombak total revisi 16: dunia nyata "Kota Bilangan" - gedung, kedai,
-   jalan raya dengan mobil, trotoar, pohon, lampu; siang menuju senja.
-   Karakter: bola emas mentor + lima teman bola, bermata, berkedip, menatap
-   subjek; TIDAK PERNAH menembus objek (semua properti di atas atau di
-   belakang band trotoar). Watermark AKIOMIDA wajib selalu terlihat. */
+/* v07 revisi 17: dunia nyata "Kota Bilangan" - gedung, kedai, jalan raya
+   dengan mobil, trotoar, pohon, lampu; siang menuju senja.
+   Karakter: HANYA bola emas mentor, BULAT SEJATI, tanpa mata.
+   Karakter tambahan dihapus (tidak berguna) -> kelompok & keluarga tampil
+   sebagai papan/ubin. Semua label dalam zona aman sosmed. Watermark
+   AKIOMIDA wajib selalu terlihat. */
 const P = ORIENT==='portrait' ? {
-  bldBot:1050, roadTop:1050, roadBot:1128, walkTop:1128, walkBot:1252,
-  groundY:1218, backY:1142,
-  shopY:744, shopH:256, shopW:200, shopX:[70,310,550,790], awnY:702, awnH:44,
-  plqY:592, plqS:66, plqX0:407, plqGap:82,
-  qx:712, qy:580, qSize:96,
+  bldBot:950, roadTop:950, roadBot:1028, walkTop:1032, walkBot:1152,
+  groundY:1120, backY:1050,
+  shopY:560, shopH:256, shopW:200, shopX:[70,310,550,790], awnY:518, awnH:44,
+  plqY:420, plqS:66, plqX0:407, plqGap:82,
+  qx:716, qy:430, qSize:96,
   titleY:300, titleS0:104, titleSN:82,
-  friendX:[170,355,540,725,910], friendD:88, irrD:80,
-  plateY:1162, plateW:150, plateH:52, plateFS:26, stepRise:26, stepW:150, stepH:34,
-  slateX:30, slateBot:1238, slateW:300, slateH:196, eqFS:46, labFS:17,
-  ctaX:80, ctaY:500, ctaW:920, ctaH:540, ctaOff:[64,124,196], ctaPillB:44,
+  tileY:470, tileW:172, tileGap:16, tileH:330, tileFS:30, tileEx:34, tileEn:14,
+  famX:150, famY:430, famW:780, famHd:54, famRow:74, famName:30, famMem:26,
+  slateX:30, slateBot:1140, slateW:300, slateH:196, eqFS:46, labFS:17,
+  ctaX:80, ctaY:430, ctaW:920, ctaH:540, ctaOff:[64,124,196], ctaPillB:44,
   openFS:36, openEFS:16, urlFS:92,
   pillW:430, pillH:74, pillFS:32,
-  subTop:1272, subId:50, subEn:24, subMax:920,
-  ballD:110, wmY:1848, wmFS:20,
+  subTop:1170, subId:50, subEn:24, subMax:760,
+  ballD:110, wmY:1345, wmFS:20,
   treeX:[36,1060], treeS:1.0, lampX:[80,1000], lampH:210,
-  carY:1062, carW:210, carH:64, carH2:52,
-  plazaY:1128
+  carY:962, carW:210, carH:64, carH2:52,
+  plazaY:1032
 } : {
-  bldBot:560, roadTop:560, roadBot:634, walkTop:634, walkBot:812,
-  groundY:800, backY:742,
-  shopY:388, shopH:150, shopW:230, shopX:[130,630,1130,1630], awnY:350, awnH:34,
-  plqY:330, plqS:56, plqX0:830, plqGap:74,
-  qx:1128, qy:340, qSize:84,
-  titleY:225, titleS0:88, titleSN:72,
-  friendX:[300,630,960,1290,1620], friendD:76, irrD:70,
-  plateY:760, plateW:140, plateH:46, plateFS:22, stepRise:22, stepW:140, stepH:30,
-  slateX:250, slateBot:820, slateW:330, slateH:164, eqFS:40, labFS:15,
-  ctaX:530, ctaY:320, ctaW:860, ctaH:340, ctaOff:[40,90,130], ctaPillB:30,
+  bldBot:430, roadTop:430, roadBot:505, walkTop:508, walkBot:630,
+  groundY:660, backY:600,
+  shopY:270, shopH:150, shopW:230, shopX:[130,630,1130,1630], awnY:234, awnH:34,
+  plqY:238, plqS:56, plqX0:870, plqGap:74,
+  qx:1100, qy:248, qSize:84,
+  titleY:150, titleS0:88, titleSN:72,
+  tileY:250, tileW:300, tileGap:24, tileH:210, tileFS:24, tileEx:30, tileEn:13,
+  famX:560, famY:240, famW:800, famHd:40, famRow:46, famName:24, famMem:22,
+  slateX:250, slateBot:680, slateW:330, slateH:164, eqFS:40, labFS:15,
+  ctaX:530, ctaY:240, ctaW:860, ctaH:320, ctaOff:[40,90,130], ctaPillB:30,
   openFS:30, openEFS:14, urlFS:80,
   pillW:400, pillH:66, pillFS:28,
-  subTop:830, subId:50, subEn:24, subMax:1400,
-  ballD:96, wmY:1016, wmFS:18,
+  subTop:740, subId:50, subEn:24, subMax:1300,
+  ballD:96, wmY:920, wmFS:18,
   treeX:[110,1810], treeS:0.9, lampX:[120,1800], lampH:170,
-  carY:574, carW:190, carH:56, carH2:46,
-  plazaY:634
+  carY:442, carW:190, carH:56, carH2:46,
+  plazaY:508
 };
 const MX=60;
 const stage=document.getElementById('stage');
@@ -105,7 +106,6 @@ const WINS=[]; /* jendela yang menyala saat senja */
     b.className='bld';
     b.style.cssText+=`left:${bx}px;width:${bw}px;height:${bh}px;background:${col};
       box-shadow:inset 0 -14px 0 rgba(0,0,0,.10);top:${P.bldBot-bh}px;`;
-    /* grid jendela */
     const nx=Math.max(2,Math.floor(bw/110)), ny=Math.max(2,Math.floor(bh/190));
     for(let i=0;i<nx;i++)for(let j=0;j<ny;j++){
       const w=document.createElement('div');
@@ -119,7 +119,6 @@ const WINS=[]; /* jendela yang menyala saat senja */
   });
 }
 /* plak nomor pintu 1 2 3 (hook, di muka gedung tengah) */
-const plaquesEl=document.getElementById('town');
 const PLQ=[];
 ['1','2','3'].forEach((g,i)=>{
   const p=document.createElement('div');
@@ -127,7 +126,7 @@ const PLQ=[];
   p.style.cssText+=`left:${P.plqX0+i*P.plqGap}px;top:${P.plqY}px;width:${P.plqS}px;height:${P.plqS+8}px;opacity:0;`;
   const b=document.createElement('b');
   b.style.fontSize=Math.round(P.plqS*0.62)+'px';b.textContent=g;
-  p.appendChild(b);plaquesEl.appendChild(p);
+  p.appendChild(b);townEl.appendChild(p);
   PLQ.push({el:p,t0:0.9+i*0.22});
 });
 /* tanda tanya merah (hook) */
@@ -164,7 +163,6 @@ const SHOPS=[];
     w.appendChild(sit);
     SHOPS.push({win:w,awn,sit,chip,t0:d.t0,kind:d.kind});
   });
-  /* isi situasi (dibangun sekali, muncul bersama jendela) */
   const [bw,bh]=[P.shopW,P.shopH];
   const S=SHOPS;
   /* kedai buku: lima buku bertumpuk */
@@ -262,7 +260,7 @@ const CARS=[];
   CARS.push({el:c,w:cw,dir:1});
 });
 
-/* ---------- pohon, lampu, bangku ---------- */
+/* ---------- pohon + lampu foreground ---------- */
 const propsEl=document.getElementById('streetprops');
 const TREES=[];
 P.treeX.forEach((x,i)=>{
@@ -282,8 +280,6 @@ P.treeX.forEach((x,i)=>{
   propsEl.appendChild(t);
   TREES.push({el:t,ph:i*2.1});
 });
-/* lampu jalan foreground: berdiri di sudut bawah layar (depan kamera),
-   sehingga tidak pernah dilintasi bola yang menggelinding di trotoar */
 const LAMPS=[];
 P.lampX.forEach((x,i)=>{
   const l=document.createElement('div');
@@ -302,7 +298,7 @@ P.lampX.forEach((x,i)=>{
   LAMPS.push({el:l,glow,ph:i*0.9});
 });
 
-/* ---------- papan tulis kafe (S4) + podium tangga (S3) ---------- */
+/* ---------- papan tulis kafe (S4) ---------- */
 const slate=document.createElement('div');
 slate.className='board slate center';
 slate.style.cssText+=`left:${P.slateX}px;top:${P.slateBot-P.slateH}px;width:${P.slateW}px;height:${P.slateH}px;opacity:0;`;
@@ -319,15 +315,71 @@ eqLab.textContent='CARA BEBAS, HASIL SESUAI ATURAN';
 slate.appendChild(eqLab);
 propsEl.appendChild(slate);
 
-const STEPS=[];
-for(let i=0;i<5;i++){
-  const st=document.createElement('div');
-  st.className='step';
-  st.style.cssText+=`left:${P.friendX[i]-P.stepW/2}px;top:${P.backY-(i+1)*P.stepRise}px;
-    width:${P.stepW}px;height:${P.stepH}px;opacity:0;`;
-  propsEl.appendChild(st);
-  STEPS.push({el:st,t0:26.9+i*0.1});
-}
+/* ---------- ubin kelima kelompok (S2): papan toko, tanpa karakter ---------- */
+const GROUPS=[
+  ['ASLI','1 2 3','NATURAL','#38BDF8',18.4],
+  ['CACAH','0 1 2','WHOLE','#A78BFA',19.0],
+  ['BULAT','-2 -1 0','INTEGER','#F472B6',19.6],
+  ['RASIONAL','1/2 3/4','RATIONAL','#34D399',20.0],
+  ['IRASIONAL','\u221A2 \u03C0','IRRATIONAL','#FBBF24',23.5]
+];
+const tileX0=(W-(5*P.tileW+4*P.tileGap))/2;
+const TILES=[];
+GROUPS.forEach(([name,ex,en,col,t0],i)=>{
+  const tl=document.createElement('div');
+  tl.className='tile';
+  tl.style.cssText+=`left:${tileX0+i*(P.tileW+P.tileGap)}px;top:${P.tileY}px;width:${P.tileW}px;height:${P.tileH}px;
+    border-top:8px solid ${col};opacity:0;`;
+  const nm=document.createElement('div');
+  nm.style.cssText+=`margin-top:${Math.round(P.tileH*0.09)}px;font-weight:800;color:#16324F;
+    font-size:${P.tileFS}px;letter-spacing:.06em;`;
+  nm.textContent=name;
+  tl.appendChild(nm);
+  const exd=document.createElement('div');
+  exd.className='mono';
+  exd.style.cssText+=`margin-top:${Math.round(P.tileH*0.14)}px;font-weight:800;color:#35507A;
+    font-size:${P.tileEx}px;`;
+  exd.textContent=ex;
+  tl.appendChild(exd);
+  const endiv=document.createElement('div');
+  endiv.style.cssText+=`margin-top:${Math.round(P.tileH*0.12)}px;color:#7C8BA5;font-weight:700;
+    font-size:${P.tileEn}px;letter-spacing:.18em;`;
+  endiv.textContent=en;
+  tl.appendChild(endiv);
+  propsEl.appendChild(tl);
+  TILES.push({el:tl,t0});
+});
+
+/* ---------- daftar keluarga bilangan (S3): panel, tanpa karakter ---------- */
+const famEl=document.createElement('div');
+famEl.className='fam';
+famEl.style.cssText+=`left:${P.famX}px;top:${P.famY}px;width:${P.famW}px;height:${P.famHd+5*P.famRow+30}px;opacity:0;`;
+const famHd=document.createElement('div');
+famHd.style.cssText+=`text-align:center;font-weight:800;color:#FFE9A8;letter-spacing:.12em;
+  font-size:${P.famHd}px;`;
+famHd.textContent='KELUARGA BILANGAN';
+famEl.appendChild(famHd);
+const FAM_ROWS=[];
+GROUPS.forEach(([name,ex,,col],i)=>{
+  const r=document.createElement('div');
+  r.style.cssText+=`display:flex;align-items:center;height:${P.famRow}px;opacity:0;`;
+  const dot=document.createElement('div');
+  dot.style.cssText+=`width:${Math.round(P.famName*0.6)}px;height:${Math.round(P.famName*0.6)}px;border-radius:50%;
+    background:${col};margin-right:16px;flex:none;`;
+  r.appendChild(dot);
+  const nm=document.createElement('div');
+  nm.style.cssText+=`font-weight:800;color:#FFFFFF;font-size:${P.famName}px;flex:1;`;
+  nm.textContent=name;
+  r.appendChild(nm);
+  const exs=document.createElement('div');
+  exs.className='mono';
+  exs.style.cssText+=`font-weight:800;color:#C7D6EC;font-size:${P.famMem}px;`;
+  exs.textContent=ex;
+  r.appendChild(exs);
+  famEl.appendChild(r);
+  FAM_ROWS.push({el:r,t0:[27.0,28.2,29.4,30.6,31.8][i]});
+});
+propsEl.appendChild(famEl);
 
 /* ---------- papan pengumuman CTA ---------- */
 const cta=document.getElementById('cta');
@@ -346,84 +398,36 @@ const fPill=document.getElementById('f_pill');
 fPill.style.cssText+=`left:${Math.round((P.ctaW-P.pillW)/2)}px;bottom:${P.ctaPillB}px;width:${P.pillW}px;height:${P.pillH}px;
   font-size:${P.pillFS}px;letter-spacing:.10em;`;
 
-/* ---------- karakter bola: mentor emas + lima teman (bermata) ---------- */
-function makeBall(host,cols,d,opts){
+/* ---------- karakter: HANYA bola emas mentor, bulat sejati, tanpa mata ---------- */
+const charsEl=document.getElementById('chars');
+function makeBall(cols,d,glow){
   const el=document.createElement('div');
   el.className='bchar';
   el.style.cssText+=`width:${d}px;height:${d}px;margin-left:${-d/2}px;opacity:0;`;
   const core=document.createElement('div');
+  core.className='core';
   core.style.cssText+=`left:0;top:0;width:${d}px;height:${d}px;
-    background:radial-gradient(circle at 33% 27%, ${cols[0]} 0%, ${cols[1]} 42%, ${cols[2]} 100%);
-    box-shadow:0 0 ${d*0.5}px ${opts&&opts.glow?cols[1]:'rgba(20,30,50,.0)'}55;`;
+    background:radial-gradient(circle at 33% 27%, ${cols[0]} 0%, ${cols[1]} 42%, ${cols[2]} 100%);`;
+  if(glow)core.style.boxShadow=`0 0 ${Math.round(d*0.55)}px rgba(251,191,36,.5)`;
   el.appendChild(core);
   const shine=document.createElement('div');
+  shine.className='shine';
   shine.style.cssText+=`left:${d*0.18}px;top:${d*0.1}px;width:${d*0.3}px;height:${d*0.17}px;transform:rotate(-24deg);`;
   el.appendChild(shine);
-  const eyes=document.createElement('div');
-  eyes.style.cssText+=`left:${d*0.22}px;top:${d*0.34}px;width:${d*0.56}px;height:${d*0.2}px;`;
-  const pupils=[];
-  [0,1].forEach(s=>{
-    const e=document.createElement('div');
-    e.className='eye';
-    e.style.cssText+=`${s?'right':'left'}:0;top:0;width:${d*0.2}px;height:${d*0.2}px;`;
-    const pu=document.createElement('div');
-    pu.className='pupil';
-    pu.style.cssText+=`left:${d*0.055}px;top:${d*0.05}px;width:${d*0.09}px;height:${d*0.09}px;`;
-    e.appendChild(pu);
-    eyes.appendChild(e);
-    pupils.push({el:pu,e});
-  });
-  el.appendChild(eyes);
-  const bl1=document.createElement('div');
-  bl1.className='blush';
-  bl1.style.cssText+=`left:${d*0.08}px;top:${d*0.58}px;width:${d*0.14}px;height:${d*0.08}px;`;
-  el.appendChild(bl1);
-  const bl2=document.createElement('div');
-  bl2.className='blush';
-  bl2.style.cssText+=`left:${d*0.78}px;top:${d*0.58}px;width:${d*0.14}px;height:${d*0.08}px;`;
-  el.appendChild(bl2);
-  host.appendChild(el);
-  return {el,core,eyes,pupils,d,ph:(opts&&opts.ph)||0};
+  charsEl.appendChild(el);
+  return {el,d};
 }
-const charsEl=document.getElementById('chars');
-const GROUPS=[
-  {name:'ASLI',ex:'1 2 3',c:['#CBE9FF','#38BDF8','#1D6FA5']},
-  {name:'CACAH',ex:'0 1 2',c:['#E2D9FF','#A78BFA','#5B3FA8']},
-  {name:'BULAT',ex:'-2 -1 0',c:['#FBD0E6','#F472B6','#B03A78']},
-  {name:'RASIONAL',ex:'1/2 3/4',c:['#C4F5DF','#34D399','#178F63']},
-  {name:'IRASIONAL',ex:'\u221A2 \u03C0',c:['#FDE9AE','#FBBF24','#A8720B']}
-];
-const FRIENDS=[];
-GROUPS.forEach((g,i)=>{
-  const d=i===4?P.irrD:P.friendD;
-  const f=makeBall(charsEl,g.c,d,{ph:i*1.3});
-  const sh=document.createElement('div');
-  sh.className='bsh';
-  sh.style.cssText+=`width:${d*0.8}px;height:13px;margin-left:${-d*0.4}px;top:-9px;`;
-  charsEl.appendChild(sh);
-  const pl=document.createElement('div');
-  pl.className='gplate';
-  pl.style.cssText+=`left:${P.friendX[i]-P.plateW/2}px;top:${P.plateY}px;width:${P.plateW}px;height:${P.plateH}px;
-    font-size:${P.plateFS}px;border-color:${g.c[2]};opacity:0;`;
-  pl.textContent=g.ex;
-  propsEl.appendChild(pl);
-  FRIENDS.push({ball:f,sh,pl,t0:[17.4,18.0,18.6,20.0,23.5][i],hopT0:[27.0,28.2,29.4,30.6,31.8][i]});
-});
-/* bayangan mentor (di bawah mentor, di atas teman) */
+const mentor=makeBall(['#FFF3C4','#FCD34D','#B45309'],P.ballD,true);
 const msh=document.createElement('div');
 msh.className='bsh';
 msh.style.cssText+=`width:${P.ballD*0.8}px;height:15px;margin-left:${-P.ballD*0.4}px;top:-10px;`;
 charsEl.appendChild(msh);
-/* mentor ditambahkan terakhir agar berada di lapisan paling depan */
-const mentor=makeBall(charsEl,['#FFF3C4','#FCD34D','#B45309'],P.ballD,{ph:0,glow:true});
-/* kembaran bola emas untuk demo belah dua (1/2 dan 1/2+1/2=1) */
 const ballB=document.createElement('div');
-ballB.style.cssText+=`position:absolute;left:${P.ctaX}px;top:${P.groundY-Math.round(P.ballD*0.52)}px;
+ballB.style.cssText+=`position:absolute;left:0;top:${P.groundY-Math.round(P.ballD*0.52)}px;
   width:${Math.round(P.ballD*0.52)}px;height:${Math.round(P.ballD*0.52)}px;margin-left:${-Math.round(P.ballD*0.26)}px;
   border-radius:50%;background:radial-gradient(circle at 33% 27%, #FFF3C4 0%, #FCD34D 34%, #F59E0B 68%, #B45309 100%);
   box-shadow:0 0 30px rgba(251,191,36,.25);opacity:0;will-change:transform,opacity;`;
 charsEl.appendChild(ballB);
-/* percikan bintang emas */
 const spark=document.createElement('div');
 spark.className='starclip';
 spark.style.cssText+=`position:absolute;width:34px;height:34px;opacity:0;`;
@@ -440,7 +444,7 @@ for(let i=0;i<12;i++){
   FF.push({el:f,x:rnd()*W,y:P.groundY-40-rnd()*220,sp:rnd()*1.4+0.5,ph:rnd()*6.28,amp:rnd()*22+8});
 }
 
-/* subjudul + watermark */
+/* subjudul + watermark (zona aman sosmed) */
 const subbar=document.getElementById('subbar');
 const subId=document.getElementById('sub_id');
 const subEn=document.getElementById('sub_en');

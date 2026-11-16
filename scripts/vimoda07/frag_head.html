@@ -56,14 +56,11 @@ html,body{background:#000;overflow:hidden;}
 .chip{position:absolute;border-radius:9px;background:rgba(20,28,48,.82);color:#FFFFFF;font-weight:800;
   font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;will-change:transform,opacity;
   box-shadow:0 5px 14px rgba(0,0,0,.3);text-align:center;}
-/* piringan angka kelompok di kaki teman */
-.gplate{position:absolute;border-radius:10px;background:rgba(255,255,255,.94);border:3px solid #35507A;
-  color:#1B2437;font-weight:800;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
-  display:flex;align-items:center;justify-content:center;will-change:transform,opacity;
-  box-shadow:0 5px 0 rgba(0,0,0,.15);white-space:nowrap;}
-/* podium tangga foto keluarga */
-.step{position:absolute;border-radius:10px;background:linear-gradient(180deg,#A96F35,#8B5A2B 62%,#6E4420);
-  box-shadow:0 6px 0 rgba(0,0,0,.22);will-change:transform,opacity;}
+/* ubin kelompok (papan toko) + daftar keluarga */
+.tile{position:absolute;border-radius:14px;background:rgba(255,255,255,.95);will-change:transform,opacity;
+  box-shadow:0 10px 26px rgba(30,45,80,.22);text-align:center;}
+.fam{position:absolute;border-radius:22px;background:rgba(13,20,38,.9);will-change:transform,opacity;
+  box-shadow:0 14px 40px rgba(0,0,0,.4);padding:20px 30px;}
 /* papan tulis kafe + papan pengumuman kayu */
 .board{position:absolute;will-change:transform,opacity;}
 .board.wood{background:linear-gradient(180deg,#8B5A2B,#6E4420);border-radius:16px;
@@ -74,11 +71,6 @@ html,body{background:#000;overflow:hidden;}
 .bchar{position:absolute;will-change:transform,opacity;}
 .bchar .core{position:absolute;border-radius:50%;}
 .bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px);}
-.bchar .eyes{position:absolute;will-change:transform;}
-.bchar .eye{position:absolute;border-radius:50%;background:#FFFFFF;overflow:hidden;
-  box-shadow:0 0 0 2px rgba(30,40,60,.16);}
-.bchar .pupil{position:absolute;border-radius:50%;background:#1B2437;will-change:transform;}
-.bchar .blush{position:absolute;border-radius:50%;background:rgba(225,91,91,.34);filter:blur(1px);}
 .bsh{position:absolute;border-radius:50%;background:radial-gradient(ellipse at center,rgba(20,28,40,.42) 0%,rgba(20,28,40,0) 70%);
   filter:blur(2px);will-change:transform,opacity;}
 .goldpill{position:absolute;border-radius:999px;background:linear-gradient(92deg,#F59E0B,#FBBF24);color:#1A1206;

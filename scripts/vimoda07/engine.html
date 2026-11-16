@@ -56,14 +56,11 @@ html,body{background:#000;overflow:hidden;}
 .chip{position:absolute;border-radius:9px;background:rgba(20,28,48,.82);color:#FFFFFF;font-weight:800;
   font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;will-change:transform,opacity;
   box-shadow:0 5px 14px rgba(0,0,0,.3);text-align:center;}
-/* piringan angka kelompok di kaki teman */
-.gplate{position:absolute;border-radius:10px;background:rgba(255,255,255,.94);border:3px solid #35507A;
-  color:#1B2437;font-weight:800;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
-  display:flex;align-items:center;justify-content:center;will-change:transform,opacity;
-  box-shadow:0 5px 0 rgba(0,0,0,.15);white-space:nowrap;}
-/* podium tangga foto keluarga */
-.step{position:absolute;border-radius:10px;background:linear-gradient(180deg,#A96F35,#8B5A2B 62%,#6E4420);
-  box-shadow:0 6px 0 rgba(0,0,0,.22);will-change:transform,opacity;}
+/* ubin kelompok (papan toko) + daftar keluarga */
+.tile{position:absolute;border-radius:14px;background:rgba(255,255,255,.95);will-change:transform,opacity;
+  box-shadow:0 10px 26px rgba(30,45,80,.22);text-align:center;}
+.fam{position:absolute;border-radius:22px;background:rgba(13,20,38,.9);will-change:transform,opacity;
+  box-shadow:0 14px 40px rgba(0,0,0,.4);padding:20px 30px;}
 /* papan tulis kafe + papan pengumuman kayu */
 .board{position:absolute;will-change:transform,opacity;}
 .board.wood{background:linear-gradient(180deg,#8B5A2B,#6E4420);border-radius:16px;
@@ -74,11 +71,6 @@ html,body{background:#000;overflow:hidden;}
 .bchar{position:absolute;will-change:transform,opacity;}
 .bchar .core{position:absolute;border-radius:50%;}
 .bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px);}
-.bchar .eyes{position:absolute;will-change:transform;}
-.bchar .eye{position:absolute;border-radius:50%;background:#FFFFFF;overflow:hidden;
-  box-shadow:0 0 0 2px rgba(30,40,60,.16);}
-.bchar .pupil{position:absolute;border-radius:50%;background:#1B2437;will-change:transform;}
-.bchar .blush{position:absolute;border-radius:50%;background:rgba(225,91,91,.34);filter:blur(1px);}
 .bsh{position:absolute;border-radius:50%;background:radial-gradient(ellipse at center,rgba(20,28,40,.42) 0%,rgba(20,28,40,0) 70%);
   filter:blur(2px);will-change:transform,opacity;}
 .goldpill{position:absolute;border-radius:999px;background:linear-gradient(92deg,#F59E0B,#FBBF24);color:#1A1206;
@@ -161,47 +153,48 @@ const ORIENT=Q.get('o')||'landscape';
 const W=ORIENT==='portrait'?1080:1920;
 const H=ORIENT==='portrait'?1920:1080;
 
-/* v07 rombak total revisi 16: dunia nyata "Kota Bilangan" - gedung, kedai,
-   jalan raya dengan mobil, trotoar, pohon, lampu; siang menuju senja.
-   Karakter: bola emas mentor + lima teman bola, bermata, berkedip, menatap
-   subjek; TIDAK PERNAH menembus objek (semua properti di atas atau di
-   belakang band trotoar). Watermark AKIOMIDA wajib selalu terlihat. */
+/* v07 revisi 17: dunia nyata "Kota Bilangan" - gedung, kedai, jalan raya
+   dengan mobil, trotoar, pohon, lampu; siang menuju senja.
+   Karakter: HANYA bola emas mentor, BULAT SEJATI, tanpa mata.
+   Karakter tambahan dihapus (tidak berguna) -> kelompok & keluarga tampil
+   sebagai papan/ubin. Semua label dalam zona aman sosmed. Watermark
+   AKIOMIDA wajib selalu terlihat. */
 const P = ORIENT==='portrait' ? {
-  bldBot:1050, roadTop:1050, roadBot:1128, walkTop:1128, walkBot:1252,
-  groundY:1218, backY:1142,
-  shopY:744, shopH:256, shopW:200, shopX:[70,310,550,790], awnY:702, awnH:44,
-  plqY:592, plqS:66, plqX0:407, plqGap:82,
-  qx:712, qy:580, qSize:96,
+  bldBot:950, roadTop:950, roadBot:1028, walkTop:1032, walkBot:1152,
+  groundY:1120, backY:1050,
+  shopY:560, shopH:256, shopW:200, shopX:[70,310,550,790], awnY:518, awnH:44,
+  plqY:420, plqS:66, plqX0:407, plqGap:82,
+  qx:716, qy:430, qSize:96,
   titleY:300, titleS0:104, titleSN:82,
-  friendX:[170,355,540,725,910], friendD:88, irrD:80,
-  plateY:1162, plateW:150, plateH:52, plateFS:26, stepRise:26, stepW:150, stepH:34,
-  slateX:30, slateBot:1238, slateW:300, slateH:196, eqFS:46, labFS:17,
-  ctaX:80, ctaY:500, ctaW:920, ctaH:540, ctaOff:[64,124,196], ctaPillB:44,
+  tileY:470, tileW:172, tileGap:16, tileH:330, tileFS:30, tileEx:34, tileEn:14,
+  famX:150, famY:430, famW:780, famHd:54, famRow:74, famName:30, famMem:26,
+  slateX:30, slateBot:1140, slateW:300, slateH:196, eqFS:46, labFS:17,
+  ctaX:80, ctaY:430, ctaW:920, ctaH:540, ctaOff:[64,124,196], ctaPillB:44,
   openFS:36, openEFS:16, urlFS:92,
   pillW:430, pillH:74, pillFS:32,
-  subTop:1272, subId:50, subEn:24, subMax:920,
-  ballD:110, wmY:1848, wmFS:20,
+  subTop:1170, subId:50, subEn:24, subMax:760,
+  ballD:110, wmY:1345, wmFS:20,
   treeX:[36,1060], treeS:1.0, lampX:[80,1000], lampH:210,
-  carY:1062, carW:210, carH:64, carH2:52,
-  plazaY:1128
+  carY:962, carW:210, carH:64, carH2:52,
+  plazaY:1032
 } : {
-  bldBot:560, roadTop:560, roadBot:634, walkTop:634, walkBot:812,
-  groundY:800, backY:742,
-  shopY:388, shopH:150, shopW:230, shopX:[130,630,1130,1630], awnY:350, awnH:34,
-  plqY:330, plqS:56, plqX0:830, plqGap:74,
-  qx:1128, qy:340, qSize:84,
-  titleY:225, titleS0:88, titleSN:72,
-  friendX:[300,630,960,1290,1620], friendD:76, irrD:70,
-  plateY:760, plateW:140, plateH:46, plateFS:22, stepRise:22, stepW:140, stepH:30,
-  slateX:250, slateBot:820, slateW:330, slateH:164, eqFS:40, labFS:15,
-  ctaX:530, ctaY:320, ctaW:860, ctaH:340, ctaOff:[40,90,130], ctaPillB:30,
+  bldBot:430, roadTop:430, roadBot:505, walkTop:508, walkBot:630,
+  groundY:660, backY:600,
+  shopY:270, shopH:150, shopW:230, shopX:[130,630,1130,1630], awnY:234, awnH:34,
+  plqY:238, plqS:56, plqX0:870, plqGap:74,
+  qx:1100, qy:248, qSize:84,
+  titleY:150, titleS0:88, titleSN:72,
+  tileY:250, tileW:300, tileGap:24, tileH:210, tileFS:24, tileEx:30, tileEn:13,
+  famX:560, famY:240, famW:800, famHd:40, famRow:46, famName:24, famMem:22,
+  slateX:250, slateBot:680, slateW:330, slateH:164, eqFS:40, labFS:15,
+  ctaX:530, ctaY:240, ctaW:860, ctaH:320, ctaOff:[40,90,130], ctaPillB:30,
   openFS:30, openEFS:14, urlFS:80,
   pillW:400, pillH:66, pillFS:28,
-  subTop:830, subId:50, subEn:24, subMax:1400,
-  ballD:96, wmY:1016, wmFS:18,
+  subTop:740, subId:50, subEn:24, subMax:1300,
+  ballD:96, wmY:920, wmFS:18,
   treeX:[110,1810], treeS:0.9, lampX:[120,1800], lampH:170,
-  carY:574, carW:190, carH:56, carH2:46,
-  plazaY:634
+  carY:442, carW:190, carH:56, carH2:46,
+  plazaY:508
 };
 const MX=60;
 const stage=document.getElementById('stage');
@@ -263,7 +256,6 @@ const WINS=[]; /* jendela yang menyala saat senja */
     b.className='bld';
     b.style.cssText+=`left:${bx}px;width:${bw}px;height:${bh}px;background:${col};
       box-shadow:inset 0 -14px 0 rgba(0,0,0,.10);top:${P.bldBot-bh}px;`;
-    /* grid jendela */
     const nx=Math.max(2,Math.floor(bw/110)), ny=Math.max(2,Math.floor(bh/190));
     for(let i=0;i<nx;i++)for(let j=0;j<ny;j++){
       const w=document.createElement('div');
@@ -277,7 +269,6 @@ const WINS=[]; /* jendela yang menyala saat senja */
   });
 }
 /* plak nomor pintu 1 2 3 (hook, di muka gedung tengah) */
-const plaquesEl=document.getElementById('town');
 const PLQ=[];
 ['1','2','3'].forEach((g,i)=>{
   const p=document.createElement('div');
@@ -285,7 +276,7 @@ const PLQ=[];
   p.style.cssText+=`left:${P.plqX0+i*P.plqGap}px;top:${P.plqY}px;width:${P.plqS}px;height:${P.plqS+8}px;opacity:0;`;
   const b=document.createElement('b');
   b.style.fontSize=Math.round(P.plqS*0.62)+'px';b.textContent=g;
-  p.appendChild(b);plaquesEl.appendChild(p);
+  p.appendChild(b);townEl.appendChild(p);
   PLQ.push({el:p,t0:0.9+i*0.22});
 });
 /* tanda tanya merah (hook) */
@@ -322,7 +313,6 @@ const SHOPS=[];
     w.appendChild(sit);
     SHOPS.push({win:w,awn,sit,chip,t0:d.t0,kind:d.kind});
   });
-  /* isi situasi (dibangun sekali, muncul bersama jendela) */
   const [bw,bh]=[P.shopW,P.shopH];
   const S=SHOPS;
   /* kedai buku: lima buku bertumpuk */
@@ -420,7 +410,7 @@ const CARS=[];
   CARS.push({el:c,w:cw,dir:1});
 });
 
-/* ---------- pohon, lampu, bangku ---------- */
+/* ---------- pohon + lampu foreground ---------- */
 const propsEl=document.getElementById('streetprops');
 const TREES=[];
 P.treeX.forEach((x,i)=>{
@@ -440,8 +430,6 @@ P.treeX.forEach((x,i)=>{
   propsEl.appendChild(t);
   TREES.push({el:t,ph:i*2.1});
 });
-/* lampu jalan foreground: berdiri di sudut bawah layar (depan kamera),
-   sehingga tidak pernah dilintasi bola yang menggelinding di trotoar */
 const LAMPS=[];
 P.lampX.forEach((x,i)=>{
   const l=document.createElement('div');
@@ -460,7 +448,7 @@ P.lampX.forEach((x,i)=>{
   LAMPS.push({el:l,glow,ph:i*0.9});
 });
 
-/* ---------- papan tulis kafe (S4) + podium tangga (S3) ---------- */
+/* ---------- papan tulis kafe (S4) ---------- */
 const slate=document.createElement('div');
 slate.className='board slate center';
 slate.style.cssText+=`left:${P.slateX}px;top:${P.slateBot-P.slateH}px;width:${P.slateW}px;height:${P.slateH}px;opacity:0;`;
@@ -477,15 +465,71 @@ eqLab.textContent='CARA BEBAS, HASIL SESUAI ATURAN';
 slate.appendChild(eqLab);
 propsEl.appendChild(slate);
 
-const STEPS=[];
-for(let i=0;i<5;i++){
-  const st=document.createElement('div');
-  st.className='step';
-  st.style.cssText+=`left:${P.friendX[i]-P.stepW/2}px;top:${P.backY-(i+1)*P.stepRise}px;
-    width:${P.stepW}px;height:${P.stepH}px;opacity:0;`;
-  propsEl.appendChild(st);
-  STEPS.push({el:st,t0:26.9+i*0.1});
-}
+/* ---------- ubin kelima kelompok (S2): papan toko, tanpa karakter ---------- */
+const GROUPS=[
+  ['ASLI','1 2 3','NATURAL','#38BDF8',18.4],
+  ['CACAH','0 1 2','WHOLE','#A78BFA',19.0],
+  ['BULAT','-2 -1 0','INTEGER','#F472B6',19.6],
+  ['RASIONAL','1/2 3/4','RATIONAL','#34D399',20.0],
+  ['IRASIONAL','\u221A2 \u03C0','IRRATIONAL','#FBBF24',23.5]
+];
+const tileX0=(W-(5*P.tileW+4*P.tileGap))/2;
+const TILES=[];
+GROUPS.forEach(([name,ex,en,col,t0],i)=>{
+  const tl=document.createElement('div');
+  tl.className='tile';
+  tl.style.cssText+=`left:${tileX0+i*(P.tileW+P.tileGap)}px;top:${P.tileY}px;width:${P.tileW}px;height:${P.tileH}px;
+    border-top:8px solid ${col};opacity:0;`;
+  const nm=document.createElement('div');
+  nm.style.cssText+=`margin-top:${Math.round(P.tileH*0.09)}px;font-weight:800;color:#16324F;
+    font-size:${P.tileFS}px;letter-spacing:.06em;`;
+  nm.textContent=name;
+  tl.appendChild(nm);
+  const exd=document.createElement('div');
+  exd.className='mono';
+  exd.style.cssText+=`margin-top:${Math.round(P.tileH*0.14)}px;font-weight:800;color:#35507A;
+    font-size:${P.tileEx}px;`;
+  exd.textContent=ex;
+  tl.appendChild(exd);
+  const endiv=document.createElement('div');
+  endiv.style.cssText+=`margin-top:${Math.round(P.tileH*0.12)}px;color:#7C8BA5;font-weight:700;
+    font-size:${P.tileEn}px;letter-spacing:.18em;`;
+  endiv.textContent=en;
+  tl.appendChild(endiv);
+  propsEl.appendChild(tl);
+  TILES.push({el:tl,t0});
+});
+
+/* ---------- daftar keluarga bilangan (S3): panel, tanpa karakter ---------- */
+const famEl=document.createElement('div');
+famEl.className='fam';
+famEl.style.cssText+=`left:${P.famX}px;top:${P.famY}px;width:${P.famW}px;height:${P.famHd+5*P.famRow+30}px;opacity:0;`;
+const famHd=document.createElement('div');
+famHd.style.cssText+=`text-align:center;font-weight:800;color:#FFE9A8;letter-spacing:.12em;
+  font-size:${P.famHd}px;`;
+famHd.textContent='KELUARGA BILANGAN';
+famEl.appendChild(famHd);
+const FAM_ROWS=[];
+GROUPS.forEach(([name,ex,,col],i)=>{
+  const r=document.createElement('div');
+  r.style.cssText+=`display:flex;align-items:center;height:${P.famRow}px;opacity:0;`;
+  const dot=document.createElement('div');
+  dot.style.cssText+=`width:${Math.round(P.famName*0.6)}px;height:${Math.round(P.famName*0.6)}px;border-radius:50%;
+    background:${col};margin-right:16px;flex:none;`;
+  r.appendChild(dot);
+  const nm=document.createElement('div');
+  nm.style.cssText+=`font-weight:800;color:#FFFFFF;font-size:${P.famName}px;flex:1;`;
+  nm.textContent=name;
+  r.appendChild(nm);
+  const exs=document.createElement('div');
+  exs.className='mono';
+  exs.style.cssText+=`font-weight:800;color:#C7D6EC;font-size:${P.famMem}px;`;
+  exs.textContent=ex;
+  r.appendChild(exs);
+  famEl.appendChild(r);
+  FAM_ROWS.push({el:r,t0:[27.0,28.2,29.4,30.6,31.8][i]});
+});
+propsEl.appendChild(famEl);
 
 /* ---------- papan pengumuman CTA ---------- */
 const cta=document.getElementById('cta');
@@ -504,84 +548,36 @@ const fPill=document.getElementById('f_pill');
 fPill.style.cssText+=`left:${Math.round((P.ctaW-P.pillW)/2)}px;bottom:${P.ctaPillB}px;width:${P.pillW}px;height:${P.pillH}px;
   font-size:${P.pillFS}px;letter-spacing:.10em;`;
 
-/* ---------- karakter bola: mentor emas + lima teman (bermata) ---------- */
-function makeBall(host,cols,d,opts){
+/* ---------- karakter: HANYA bola emas mentor, bulat sejati, tanpa mata ---------- */
+const charsEl=document.getElementById('chars');
+function makeBall(cols,d,glow){
   const el=document.createElement('div');
   el.className='bchar';
   el.style.cssText+=`width:${d}px;height:${d}px;margin-left:${-d/2}px;opacity:0;`;
   const core=document.createElement('div');
+  core.className='core';
   core.style.cssText+=`left:0;top:0;width:${d}px;height:${d}px;
-    background:radial-gradient(circle at 33% 27%, ${cols[0]} 0%, ${cols[1]} 42%, ${cols[2]} 100%);
-    box-shadow:0 0 ${d*0.5}px ${opts&&opts.glow?cols[1]:'rgba(20,30,50,.0)'}55;`;
+    background:radial-gradient(circle at 33% 27%, ${cols[0]} 0%, ${cols[1]} 42%, ${cols[2]} 100%);`;
+  if(glow)core.style.boxShadow=`0 0 ${Math.round(d*0.55)}px rgba(251,191,36,.5)`;
   el.appendChild(core);
   const shine=document.createElement('div');
+  shine.className='shine';
   shine.style.cssText+=`left:${d*0.18}px;top:${d*0.1}px;width:${d*0.3}px;height:${d*0.17}px;transform:rotate(-24deg);`;
   el.appendChild(shine);
-  const eyes=document.createElement('div');
-  eyes.style.cssText+=`left:${d*0.22}px;top:${d*0.34}px;width:${d*0.56}px;height:${d*0.2}px;`;
-  const pupils=[];
-  [0,1].forEach(s=>{
-    const e=document.createElement('div');
-    e.className='eye';
-    e.style.cssText+=`${s?'right':'left'}:0;top:0;width:${d*0.2}px;height:${d*0.2}px;`;
-    const pu=document.createElement('div');
-    pu.className='pupil';
-    pu.style.cssText+=`left:${d*0.055}px;top:${d*0.05}px;width:${d*0.09}px;height:${d*0.09}px;`;
-    e.appendChild(pu);
-    eyes.appendChild(e);
-    pupils.push({el:pu,e});
-  });
-  el.appendChild(eyes);
-  const bl1=document.createElement('div');
-  bl1.className='blush';
-  bl1.style.cssText+=`left:${d*0.08}px;top:${d*0.58}px;width:${d*0.14}px;height:${d*0.08}px;`;
-  el.appendChild(bl1);
-  const bl2=document.createElement('div');
-  bl2.className='blush';
-  bl2.style.cssText+=`left:${d*0.78}px;top:${d*0.58}px;width:${d*0.14}px;height:${d*0.08}px;`;
-  el.appendChild(bl2);
-  host.appendChild(el);
-  return {el,core,eyes,pupils,d,ph:(opts&&opts.ph)||0};
+  charsEl.appendChild(el);
+  return {el,d};
 }
-const charsEl=document.getElementById('chars');
-const GROUPS=[
-  {name:'ASLI',ex:'1 2 3',c:['#CBE9FF','#38BDF8','#1D6FA5']},
-  {name:'CACAH',ex:'0 1 2',c:['#E2D9FF','#A78BFA','#5B3FA8']},
-  {name:'BULAT',ex:'-2 -1 0',c:['#FBD0E6','#F472B6','#B03A78']},
-  {name:'RASIONAL',ex:'1/2 3/4',c:['#C4F5DF','#34D399','#178F63']},
-  {name:'IRASIONAL',ex:'\u221A2 \u03C0',c:['#FDE9AE','#FBBF24','#A8720B']}
-];
-const FRIENDS=[];
-GROUPS.forEach((g,i)=>{
-  const d=i===4?P.irrD:P.friendD;
-  const f=makeBall(charsEl,g.c,d,{ph:i*1.3});
-  const sh=document.createElement('div');
-  sh.className='bsh';
-  sh.style.cssText+=`width:${d*0.8}px;height:13px;margin-left:${-d*0.4}px;top:-9px;`;
-  charsEl.appendChild(sh);
-  const pl=document.createElement('div');
-  pl.className='gplate';
-  pl.style.cssText+=`left:${P.friendX[i]-P.plateW/2}px;top:${P.plateY}px;width:${P.plateW}px;height:${P.plateH}px;
-    font-size:${P.plateFS}px;border-color:${g.c[2]};opacity:0;`;
-  pl.textContent=g.ex;
-  propsEl.appendChild(pl);
-  FRIENDS.push({ball:f,sh,pl,t0:[17.4,18.0,18.6,20.0,23.5][i],hopT0:[27.0,28.2,29.4,30.6,31.8][i]});
-});
-/* bayangan mentor (di bawah mentor, di atas teman) */
+const mentor=makeBall(['#FFF3C4','#FCD34D','#B45309'],P.ballD,true);
 const msh=document.createElement('div');
 msh.className='bsh';
 msh.style.cssText+=`width:${P.ballD*0.8}px;height:15px;margin-left:${-P.ballD*0.4}px;top:-10px;`;
 charsEl.appendChild(msh);
-/* mentor ditambahkan terakhir agar berada di lapisan paling depan */
-const mentor=makeBall(charsEl,['#FFF3C4','#FCD34D','#B45309'],P.ballD,{ph:0,glow:true});
-/* kembaran bola emas untuk demo belah dua (1/2 dan 1/2+1/2=1) */
 const ballB=document.createElement('div');
-ballB.style.cssText+=`position:absolute;left:${P.ctaX}px;top:${P.groundY-Math.round(P.ballD*0.52)}px;
+ballB.style.cssText+=`position:absolute;left:0;top:${P.groundY-Math.round(P.ballD*0.52)}px;
   width:${Math.round(P.ballD*0.52)}px;height:${Math.round(P.ballD*0.52)}px;margin-left:${-Math.round(P.ballD*0.26)}px;
   border-radius:50%;background:radial-gradient(circle at 33% 27%, #FFF3C4 0%, #FCD34D 34%, #F59E0B 68%, #B45309 100%);
   box-shadow:0 0 30px rgba(251,191,36,.25);opacity:0;will-change:transform,opacity;`;
 charsEl.appendChild(ballB);
-/* percikan bintang emas */
 const spark=document.createElement('div');
 spark.className='starclip';
 spark.style.cssText+=`position:absolute;width:34px;height:34px;opacity:0;`;
@@ -598,7 +594,7 @@ for(let i=0;i<12;i++){
   FF.push({el:f,x:rnd()*W,y:P.groundY-40-rnd()*220,sp:rnd()*1.4+0.5,ph:rnd()*6.28,amp:rnd()*22+8});
 }
 
-/* subjudul + watermark */
+/* subjudul + watermark (zona aman sosmed) */
 const subbar=document.getElementById('subbar');
 const subId=document.getElementById('sub_id');
 const subEn=document.getElementById('sub_en');
@@ -656,8 +652,7 @@ TITLES.forEach((o,i)=>{
   if(i===0||i===2||i===4)o.el.style.color='#FFE9A8';
 });
 
-/* ---------- beat, masterplan mentor, tatapan, gestur ---------- */
-const SCENE_T=[6.6,17.0,25.9,32.9,40.2];
+/* ---------- beat, masterplan mentor ---------- */
 const IMP=[0.6,6.6,17.0,25.9,32.9,40.2,13.76,23.47,29.65,44.14,49.0];
 const SPARKS=[[39.3,40.2],[47.5,51.2]];
 const SPLIT=[[10.4,11.35],[38.6,39.8]];
@@ -666,10 +661,9 @@ const GESTS=[
   [4.9,0.7,'shiver',5],
   [7.0,1.7,'count',18],
   [8.9,0.6,'shiver',4],
-  [17.6,0.9,'nod',3],
-  [19.6,0.6,'tilt',3],
+  [18.5,0.8,'nod',3],
   [23.5,1.3,'spin',720],
-  [27.0,0.5,'tilt',3],
+  [26.4,0.8,'nod',3],
   [33.2,0.9,'nod',3],
   [44.3,0.7,'tilt',5],
   [47.6,0.8,'lean',4],
@@ -686,47 +680,6 @@ function imp(t){
 const WAY = ORIENT==='portrait'
   ? [[0.55,120],[2.4,430],[6.6,430],[6.9,170],[8.8,410],[10.0,410],[10.05,650],[11.4,650],[12.2,860],[14.0,860],[15.2,540],[51.9,540]]
   : [[0.55,210],[2.4,760],[6.6,760],[6.9,300],[8.8,730],[10.0,730],[10.05,1160],[11.4,1160],[12.2,1530],[14.0,1530],[15.2,960],[51.9,960]];
-/* titik tatapan mentor (fungsi murni dari P) */
-const LOOK=[
-  [0.8,P.plqX0+P.plqGap,P.plqY+30],
-  [2.6,W/2,P.groundY-560],
-  [6.9,P.shopX[0]+P.shopW/2,P.shopY+P.shopH*0.45],
-  [8.8,P.shopX[1]+P.shopW/2,P.shopY+P.shopH*0.45],
-  [10.4,P.shopX[2]+P.shopW/2,P.shopY+P.shopH*0.45],
-  [12.2,P.shopX[3]+P.shopW/2,P.shopY+P.shopH*0.45],
-  [15.5,W/2,P.backY-40],
-  [17.6,P.friendX[0],P.backY-55],
-  [20.0,P.friendX[3],P.backY-55],
-  [23.6,P.friendX[4],P.backY-55],
-  [27.0,P.friendX[0],P.backY-45],
-  [31.8,P.friendX[4],P.backY-45],
-  [36.7,P.slateX+P.slateW/2,P.slateBot-P.slateH*0.5],
-  [41.2,W/2,P.ctaY+P.ctaH*0.5],
-  [45.9,W/2,P.ctaY+P.ctaH*0.35],
-  [50.3,W/2,P.ctaY+P.ctaH*0.5]
-];
-function lookAt(t){
-  let a=LOOK[0];
-  for(let k=0;k<LOOK.length-1;k++){
-    if(t>=LOOK[k][0]&&t<LOOK[k+1][0]){
-      const p=eio(seg(t,LOOK[k][0],LOOK[k+1][0]-LOOK[k][0]));
-      return [lerp(LOOK[k][1],LOOK[k+1][1],p),lerp(LOOK[k][2],LOOK[k+1][2],p)];
-    }
-  }
-  return [LOOK[LOOK.length-1][1],LOOK[LOOK.length-1][2]];
-}
-const blinkK=(t,ph)=>{const c=(t+ph)%3.9;return c<0.1?0.12:1;};
-function setEyes(ch,t,lx,ly,headX,headY){
-  const k=blinkK(t,ch.ph);
-  ch.eyes.style.transform=`scaleY(${k.toFixed(3)})`;
-  let dx=lx-headX, dy=ly-headY;
-  const m=Math.hypot(dx,dy)||1;
-  const r=(ch.d*0.045)/m;
-  dx*=r;dy*=r*k;
-  ch.pupils.forEach(pu=>{ pu.el.style.transform=`translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px)`; });
-}
-/* lompatan arka (naik lalu mendarat) */
-function hopY(p,h){ return -h*Math.sin(Math.PI*clamp(p,0,1)); }
 
 /* mobil: tiga lewat di jalan (di belakang trotoar, tak pernah bertemu bola) */
 const PASSES=[[2.6,4.4,1,0],[9.2,11.2,-1,1],[14.6,16.4,1,0]];
@@ -736,7 +689,7 @@ const world=document.getElementById('world');
 const flash=document.getElementById('flash');
 const fade=document.getElementById('fade');
 const skydusk=document.getElementById('skydusk');
-let _roll=0;
+let _roll=0,_mxPrev=null;
 function renderFrame(t){
   const dk=seg(t,34.0,9.0);
   skydusk.style.opacity=dk.toFixed(3);
@@ -759,7 +712,7 @@ function renderFrame(t){
   townEl.style.opacity=townDim.toFixed(3);
   TREES.forEach(tr=>{ tr.el.style.opacity=(1-0.5*pk).toFixed(3);
     tr.el.style.transform=`rotate(${(Math.sin(t*0.9+tr.ph)*1.2).toFixed(2)}deg)`; });
-  /* lampu jalan: menyala saat senja */
+  /* lampu jalan menyala saat senja */
   LAMPS.forEach(l=>{
     l.glow.style.opacity=(dk*(0.55+0.2*Math.sin(t*2+l.ph))).toFixed(3);
   });
@@ -795,68 +748,15 @@ function renderFrame(t){
     s.chip.style.opacity=(seg(t,s.t0+0.25,0.35)*(i<2?pOut:pOut2)).toFixed(3);
   });
 
-  /* papan tulis kafe (S4): keluarga sudah pamit, papan berdiri sendiri di depan */
+  /* papan tulis kafe (S4) */
   popA(slate,t,36.7,0.6,6,0,40.15);
-  /* podium tangga (S3): muncul sebelum teman melompat, pergi saat keluarga pamit */
-  for(const st of STEPS){ popA(st.el,t,st.t0,0.45,6,0,34.4); }
 
-  /* teman bola: pantul masuk (S2), lompat ke podium (S3), pamit menggelinding
-     keluar saat S4 agar fokus ke aturan, kembali menggelinding masuk di S5 */
-  FRIENDS.forEach((f,i)=>{
-    const d=f.ball.d, fx=P.friendX[i];
-    const stepTop=P.backY-(i+1)*P.stepRise;
-    const downT0=33.2+i*0.1, outT0=33.9+i*0.08, inT0=40.5+i*0.1;
-    const exitX=i<3?-120:W+120, inEdge=exitX;
-    let y=P.backY, x=fx, vis=0, lrot=0, arc=0, rot=0, idleY=0;
-    const pIn=seg(t,f.t0,0.85);
-    if(pIn>0&&t<outT0+0.9){
-      vis=1;
-      const land=eoe(clamp(pIn*1.3,0,1));
-      y=P.backY-170*(1-land);
-      if(pIn>0.62&&pIn<1){ arc=-16*Math.sin(Math.PI*seg(pIn,0.62,0.38)); }
-      if(t>f.t0+0.85&&t<f.t0+1.75){ lrot=Math.sin(seg(t,f.t0+0.85,0.9)*Math.PI*3)*7; }
-    }
-    if(t>=f.hopT0&&t<downT0){
-      const p=seg(t,f.hopT0,0.55);
-      y=lerp(P.backY,stepTop,eio(clamp(p*1.4,0,1)))+hopY(Math.min(p*1.5,1),64);
-    }else if(t>=downT0&&t<outT0){
-      const p=seg(t,downT0,0.55);
-      y=lerp(stepTop,P.backY,eio(clamp(p*1.4,0,1)))+hopY(Math.min(p*1.5,1),56);
-    }
-    if(t>=outT0&&t<outT0+1.0){
-      const p=seg(t,outT0,0.85);
-      x=lerp(fx,exitX,eio(p));
-      rot=(x-fx)/(d/2)*(180/Math.PI)*0.5;
-      vis=1-seg(t,outT0+0.55,0.4);
-    }else if(t>=inT0){
-      const p=seg(t,inT0,0.85);
-      x=lerp(inEdge,fx,eio(p));
-      rot=(x-fx)/(d/2)*(180/Math.PI)*0.5;
-      vis=seg(t,inT0+0.05,0.3);
-      if(t>inT0+0.9&&t<inT0+1.8){ lrot=Math.sin(seg(t,inT0+0.9,0.9)*Math.PI*3)*7; }
-    }
-    /* perayaan S5: semua melompat kecil serempak */
-    if(t>=49.0&&t<49.9){ arc+=-30*Math.sin(Math.PI*seg(t,49.0+i*0.06,0.55)); }
-    /* idle napas halus saat berdiri di posisi */
-    if(vis>0.9&&x===fx) idleY=-Math.abs(Math.sin(t*2.1+i*1.3))*3;
-    f.ball.el.style.opacity=String(clamp(vis,0,1));
-    f.ball.el.style.left=x.toFixed(1)+'px';
-    f.ball.el.style.top=(y-idleY+arc).toFixed(1)+'px';
-    f.ball.el.style.transform=`rotate(${(lrot+rot).toFixed(2)}deg)`;
-    f.sh.style.opacity=(clamp(vis,0,1)*0.5).toFixed(2);
-    f.sh.style.left=x.toFixed(1)+'px';
-    f.sh.style.top=(P.backY-8)+'px';
-    f.sh.style.transform=`scaleX(${clamp(1+(y-P.backY)*0.002,0.6,1.15).toFixed(3)})`;
-    /* piringan: muncul saat teman datang, ikut pamit, kembali saat S5 */
-    const pO=seg(t,f.t0+0.3,0.5)*(1-seg(t,33.6,0.5))+seg(t,40.9+i*0.1,0.4);
-    f.pl.style.opacity=clamp(pO,0,1).toFixed(3);
-    /* mata: menatap mentor, atau ke pemirsa saat jadi bintang */
-    const active=(t>=f.t0&&t<f.t0+2.4)||(t>=f.hopT0&&t<f.hopT0+1.3)||
-      (t>=inT0&&t<inT0+1.9)||(t>=48.9&&t<50.2);
-    const hx=x, hy=y-d*0.55;
-    if(active){ setEyes(f.ball,t,hx,hy-60,hx,hy); }
-    else{ setEyes(f.ball,t,mx,hMentor,hx,hy); }
-  });
+  /* ubin kelima kelompok (S2) & daftar keluarga (S3) */
+  for(const tl of TILES){ popA(tl.el,t,tl.t0,0.5,7,0,25.7); }
+  popA(famEl,t,25.9,0.55,5,0,33.0);
+  for(const r of FAM_ROWS){
+    r.el.style.opacity=seg(t,r.t0,0.45).toFixed(3);
+  }
 
   /* mentor: menggelinding di trotoar antar stasiun (tidak menembus apa pun) */
   let bx=WAY[WAY.length-1][1];
@@ -874,7 +774,7 @@ function renderFrame(t){
     const d2=t-gs;
     if(d2>=0&&d2<gd){
       const p=d2/gd, w=Math.sin(p*Math.PI);
-      if(gt==='tilt'||gt==='lean'){ lrot+=(gt==='lean'?ga:ga)*w; }
+      if(gt==='tilt'||gt==='lean'){ lrot+=ga*w; }
       else if(gt==='nod'){ lrot+=ga*Math.sin(p*2*Math.PI); }
       else if(gt==='spin'){ drot+=ga*eio(p); }
       else if(gt==='count'){ hy2-=ga*Math.abs(Math.sin(p*5*Math.PI))*(1-p*0.2); }
@@ -882,6 +782,7 @@ function renderFrame(t){
       else if(gt==='jump'){ hy2-=ga*4*p*(1-p); }
     }
   }
+  void ef;
   /* belah dua seragam (pizza 1/2 dan 1/2+1/2=1) */
   let bsa=1, bbo=0, bboff=0;
   for(const [s0,s1] of SPLIT){
@@ -893,14 +794,10 @@ function renderFrame(t){
       bboff=lerp(0,96,sp2);
     }
   }
-  const uni=1;
-  mx=bx;
-  hMentor=P.groundY-P.ballD*0.55;
   mentor.el.style.left=bx.toFixed(1)+'px';
   mentor.el.style.opacity=String(clamp(ep*3,0,1));
   mentor.el.style.top=(P.groundY-P.ballD+hy2).toFixed(1)+'px';
-  mentor.el.style.transform=`translateX(${txj.toFixed(1)}px) rotate(${(_roll+lrot+drot).toFixed(2)}deg) scale(${(uni*bsa).toFixed(3)})`;
-  setEyes(mentor,t,...lookAt(t),bx,P.groundY-P.ballD*0.55);
+  mentor.el.style.transform=`translateX(${txj.toFixed(1)}px) rotate(${(_roll+lrot+drot).toFixed(2)}deg) scale(${bsa.toFixed(3)})`;
   msh.style.left=bx.toFixed(1)+'px';
   msh.style.top=(P.groundY-10)+'px';
   msh.style.opacity=String(clamp(ep*3,0,1)*clamp(0.42+hy2*0.006,0.18,0.5)*bsa);
@@ -937,7 +834,7 @@ function renderFrame(t){
     o.el.style.transform=`scale(${sc.toFixed(3)})`;
   }
 
-  /* CTA: papan pengumuman; AKIOMIDA.COM hanya menyala di akhir, reveal tenang */
+  /* CTA: AKIOMIDA.COM hanya menyala di akhir, reveal tenang */
   popA(cta,t,40.9,0.7,6,0,51.6);
   const uo=seg(t,45.8,1.4);
   fUrl.style.opacity=uo.toFixed(3);
@@ -954,8 +851,6 @@ function renderFrame(t){
   flash.style.opacity=(im*0.07).toFixed(3);
   fade.style.opacity=String(clamp(1-seg(t,0.05,0.5),0,1)*0.96+clamp(seg(t,51.4,0.6),0,1));
 }
-/* state mentor lintas frame */
-let mx=WAY[0][1], hMentor=P.groundY-P.ballD*0.55, _mxPrev=null;
 renderFrame(0);
 window.__ready=true;
 </script>

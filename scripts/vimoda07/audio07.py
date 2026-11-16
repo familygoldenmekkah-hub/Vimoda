@@ -197,10 +197,6 @@ add(13.76, boom(0.08))                     # beat emas "jenis berbeda"
 add(14.6, whoosh(0.8, False, 0.04))        # mobil ketiga lewat
 add(17.0, tick(900, 0.05))                 # bab kelompok
 add(17.21, chime(587.33, 0.12))
-add(17.4, tick(600, 0.05))                 # teman bola pertama memantul mendarat
-add(17.44, tick(680, 0.045))
-add(18.0, tick(760, 0.045))
-add(18.6, tick(620, 0.05))                 # teman ketiga mendarat
 for i, tc in enumerate([18.4, 19.0, 19.6]):  # ubin asli, cacah, bulat
     add(tc, tick(640 + i * 90, 0.05))
 add(19.95, whoosh(0.3, True, 0.04))
@@ -213,7 +209,6 @@ add(23.5, chime(880.0, 0.08))
 add(23.5, boom(0.10))
 add(23.47, boom(0.06))                     # beat emas "irasional"
 add(23.5, noise_band(0.10, 1000, 3000) * 0.55, 0.0, 0.05)
-add(17.7, whoosh(0.5, False, 0.07))        # bola tenggelam di garis nol
 add(26.0, tick(900, 0.05))                 # panel keluarga
 add(26.3, chime(523.25, 0.12))
 add(27.0, tick(760, 0.045))
@@ -224,8 +219,6 @@ for ts in [27.0, 28.2, 29.4, 30.6, 31.8]:  # lima baris keluarga
     add(ts + 0.02, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
 add(29.7, boom(0.14))                      # beat emas "persoalan tidak selalu sama"
 add(32.0, tick(700, 0.045))
-add(33.3, tick(500, 0.05))                 # keluarga turun podium & pamit
-add(33.9, whoosh(0.5, False, 0.045))
 add(35.5, tick(760, 0.045))                # "matematika tumbuh mencari cara"
 add(36.7, whoosh(0.35, True, 0.05))        # panel persamaan 1/2+1/2=1
 add(36.7, tick(1200, 0.06))
@@ -235,9 +228,6 @@ add(38.95, tick(620, 0.05))
 add(39.3, chime(1318.5, 0.10))             # menyatu jadi satu
 add(39.4, boom(0.10))                      # "cara bebas, hasil sesuai aturan"
 add(40.9, tick(760, 0.045))                # panel toko CTA
-add(40.6, whoosh(0.6, True, 0.05))         # keluarga kembali menggelinding masuk
-add(41.0, tick(640, 0.045))
-add(41.4, tick(700, 0.04))
 add(44.2, boom(0.08))                      # pertanyaan besar
 add(44.3, tick(700, 0.045))
 add(45.8, chime(523.25, 0.06))             # AKIOMIDA.COM reveal tenang di akhir

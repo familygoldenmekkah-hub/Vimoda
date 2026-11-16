@@ -1,4 +1,4 @@
-# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Rombak Total Revisi 16)
+# Naskah Video 07 - Babopa: Bilangan Tidak Cuma 1, 2, 3? (Revisi 17)
 
 - Durasi: 52 detik | FPS: 30 | Musik & SFX: prosedural orisinal
 - Sumber materi: yuyanaka.blogspot.com/2026/11/babopa.html (artikel "Babopa", 14 Nov 2026)
@@ -39,6 +39,14 @@
 3. TIDAK PERNAH MENEMBUS OBJEK: lintasan mentor (tabel waypoint di trotoar) dihitung bebas dari semua elemen - jendela kedai berada di muka gedung DI ATAS kepala, papan tulis kafe berdiri di band depan kiri saat keluarga sudah pamit, teman-teman di band belakang, lampu jalan di sudut foreground bawah; bangku taman dihapus karena konflik lintasan.
 4. WATERMARK AKIOMIDA WAJIB SELALU TERLIHAT: pil gelap kecil di bawah layar sepanjang video, siang maupun senja; AKIOMIDA.COM tetap hanya menyala sekali di akhir dengan reveal tenang (45.8-47.2), pil TULIS DI KOMEN 47.5, bar gradien 48.6.
 5. NARASI TETAP: 16 beat subtitle, durasi baca, dan cue audio inti tidak berubah; yang diganti total adalah dunia, karakter, dan koreografinya.
+
+## Revisi 17 (mandat kreator: bola harus bulat bukan kotak, tanpa mata, karakter tambahan dihapus, label masuk zona aman sosmed)
+
+1. BOLA BULAT SEJATI: ditemukan bug class CSS yang membuat bola tampil sebagai kotak dengan mata lepas melayang di bawah badan (tangkapan layar kreator). Diperbaiki: bola mentor kini lingkaran sempurna (border-radius penuh) dengan kilau halus, TANPA mata dan tanpa pipi.
+2. KARAKTER TAMBAHAN DIHAPUS: lima teman bola dinilai tidak berguna sehingga dibuang seluruhnya (pantulan masuk, podium tangga, piringan angka di kaki, pamit-kembali). Kelompok bilangan kembali tampil sebagai LIMA UBIN PAPAN TOKO (ASLI/CACAH/BULAT/RASIONAL/IRASIONAL + contoh angka + label EN) di S2 (muncul 18.4/19.0/19.6/20.0/23.5 sesuai cue audio), dan keluarga bilangan sebagai PANEL DAFTAR 5 BARIS di S3 (baris muncul 27.0-31.8 sesuai tick audio). Mentor bola emas tetap satu-satunya karakter.
+3. ZONA AMAN SOSMED: subjudul naik dari 1272 ke 1170 (portrait) dan 830 ke 740 (landscape), lebar pil dipangkas (max 760/1300) agar jauh dari tepi; watermark AKIOMIDA naik dari dasar layar (1848/1016) ke 1345/920 sehingga tidak tertutup tombol/caption aplikasi sosmed; papan CTA dinaikkan (430/240).
+4. Aman dari saling tutup: bola mentor berdiri di groundY 1120/660 dengan jarak bebas di atas subjudul dan di bawah jendela kedai; ubin kelompok dan panel keluarga menempati zona tengah yang sama namun bergantian bab.
+5. Narasi 16 beat, durasi, dan dunia kota (kedai, mobil, senja) tetap dari rombak total revisi 16.
 
 ## Studi wawasan 13 skill motion GitHub (2026-11-15)
 
