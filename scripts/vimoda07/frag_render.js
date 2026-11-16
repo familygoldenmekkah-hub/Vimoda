@@ -15,7 +15,7 @@ const SUBS=[
   [40.19,'Jadi, cukup satu jenis bilangan untuk semua?','So, is one kind enough for all?','#FFFFFF'],
   [44.14,'Pilih satu, atau tiap persoalan beda?','One for all, or different tools?','#FFFFFF'],
   [47.52,'Tulis alasanmu di komentar.','Write your reason in the comments.','#FBBF24'],
-  [50.07,'Jangan cuma menebak.','Do not just guess.','#FFFFFF']
+  [50.07,'Terima kasih sudah menonton.','Thanks for watching.','#FFE9A8']
 ];
 let subIdx=-1;
 function renderSub(t){

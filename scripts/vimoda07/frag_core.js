@@ -23,7 +23,7 @@ const P = ORIENT==='portrait' ? {
   openFS:36, openEFS:16, urlFS:92,
   pillW:430, pillH:74, pillFS:32,
   subTop:1170, subId:50, subEn:24, subMax:760,
-  ballD:110, wmY:1345, wmFS:20,
+  ballD:110, wmY:1460, wmFS:20,
   treeX:[36,1060], treeS:1.0, lampX:[80,1000], lampH:210,
   carY:962, carW:210, carH:64, carH2:52,
   plazaY:1032
@@ -41,7 +41,7 @@ const P = ORIENT==='portrait' ? {
   openFS:30, openEFS:14, urlFS:80,
   pillW:400, pillH:66, pillFS:28,
   subTop:740, subId:50, subEn:24, subMax:1300,
-  ballD:96, wmY:920, wmFS:18,
+  ballD:96, wmY:950, wmFS:18,
   treeX:[110,1810], treeS:0.9, lampX:[120,1800], lampH:170,
   carY:442, carW:190, carH:56, carH2:46,
   plazaY:508
