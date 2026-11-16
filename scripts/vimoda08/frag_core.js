@@ -34,6 +34,7 @@ const P = ORIENT==='portrait' ? {
   ctaX:80, ctaY:430, ctaW:920, ctaH:540, ctaOff:[64,124,196], ctaPillB:44,
   openFS:36, openEFS:16, urlFS:92,
   pillW:430, pillH:74, pillFS:32,
+  ecY:830, barW:420,
   subTop:1170, subId:40, subEn:22, subMax:880,
   ballD:110, wmY:1800, wmFS:20,
   dustZone:[520,320,1000,880]
@@ -59,6 +60,7 @@ const P = ORIENT==='portrait' ? {
   ctaX:530, ctaY:240, ctaW:860, ctaH:320, ctaOff:[40,90,130], ctaPillB:30,
   openFS:30, openEFS:14, urlFS:80,
   pillW:400, pillH:66, pillFS:28,
+  ecY:400, barW:520,
   subTop:740, subId:38, subEn:20, subMax:1360,
   ballD:96, wmY:1010, wmFS:18,
   dustZone:[900,180,1700,480]
@@ -462,12 +464,16 @@ fOpen.style.cssText+=`position:absolute;left:40px;right:40px;top:${P.ctaOff[0]}p
 const fOpenE=document.getElementById('f_open_e');
 fOpenE.style.cssText+=`position:absolute;left:40px;right:40px;top:${P.ctaOff[1]}px;font-size:${P.openEFS}px;
   color:#B9C7DC;font-weight:600;text-align:center;`;
+/* ---------- endcard penutup bersih (aturan 28): AKIOMIDA.COM sendirian,
+   muncul SETELAH papan latihan keluar layar ---------- */
+const endcard=document.getElementById('endcard');
+endcard.style.cssText+=`top:${P.ecY}px;`;
 const fUrl=document.getElementById('f_url');
-fUrl.style.cssText+=`position:absolute;left:40px;right:40px;top:${P.ctaOff[2]}px;font-size:${P.urlFS}px;
+fUrl.style.cssText+=`font-size:${P.urlFS}px;
   background:linear-gradient(92deg,#2BB3A6 0%,#8A6FC6 52%,#E9B45C 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;`;
 const fBar=document.getElementById('f_bar');
-fBar.style.cssText+=`position:absolute;left:40px;top:${P.ctaOff[2]+Math.round(P.urlFS*1.32)}px;width:0;`;
+fBar.style.cssText+=`display:block;margin:16px auto 0;width:0;`;
 const fPill=document.getElementById('f_pill');
 fPill.style.cssText+=`left:${Math.round((P.ctaW-P.pillW)/2)}px;bottom:${P.ctaPillB}px;width:${P.pillW}px;height:${P.pillH}px;
   font-size:${P.pillFS}px;letter-spacing:.1em;`;

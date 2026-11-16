@@ -225,8 +225,8 @@ for i in range(8):                         # delapan kelereng muncul
 for i in range(8):                         # kelereng diberikan satu per satu
     add(45.55 + i * 0.15, whoosh(0.25, True, 0.035))
 add(47.3, tick(240, 0.06))                 # tanda tanya emas besar
-add(45.8, chime(523.25, 0.06))             # AKIOMIDA.COM reveal tenang
-add(45.8, whoosh(0.5, True, 0.03))
+add(50.35, chime(523.25, 0.10))            # AKIOMIDA.COM muncul sendirian (aturan 28)
+add(50.2, whoosh(0.5, True, 0.03))
 add(47.5, whoosh(0.6, True, 0.07))
 add(47.55, chime(880.0, 0.13))             # pil TULIS DI KOMEN
 add(48.2, chime(1318.5, 0.07))

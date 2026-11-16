@@ -45,7 +45,7 @@ TITLES.forEach((o,i)=>{
 
 /* ---------- beat, masterplan mentor (lantai depan, tak menembus properti) ---------- */
 const IMP=[0.6,6.6,17.0,25.9,32.9,40.2,13.76,29.65,44.14,49.0];
-const SPARKS=[[38.8,40.0],[47.3,51.2]];
+const SPARKS=[[38.8,40.0],[47.3,49.8]];
 const GESTS=[
   [1.3,0.8,'nod',3],
   [4.9,0.7,'shiver',5],
@@ -164,23 +164,24 @@ function renderFrame(t){
     m.el.style.opacity=op.toFixed(3);
     m.el.style.transform=`translate(${(320*eio(xp)).toFixed(1)}px,${(-40*xp).toFixed(1)}px) rotate(${(xp*160).toFixed(0)}deg) scale(${(0.7+0.3*inO).toFixed(3)})`;
   });
-  popA(qmark,t,47.3,0.5,8,0,51.6);
-  /* judul bab */
+  popA(qmark,t,47.3,0.5,8,0,49.8);
+  /* judul bab (judul terakhir ikut keluar saat penutup agar endcard sendirian) */
   for(let i=0;i<TITLES.length;i++){
     const o=TITLES[i];
-    const tEnd=i+1<TITLES.length?TITLES[i+1].t0:51.4;
+    const tEnd=i+1<TITLES.length?TITLES[i+1].t0:50.2;
     const oin=seg(t,o.t0,0.35)*(1-seg(t,tEnd-0.25,0.3));
     const sc=1+0.035*Math.sin(clamp(seg(t,o.t0,0.7),0,1)*Math.PI);
     o.el.style.opacity=oin.toFixed(3);
     o.el.style.transform=`scale(${sc.toFixed(3)})`;
   }
-  /* CTA poster: AKIOMIDA.COM reveal tenang */
-  popA(cta,t,40.9,0.7,6,0,51.6);
-  const uo=seg(t,45.8,1.4);
-  fUrl.style.opacity=uo.toFixed(3);
-  fUrl.style.transform=`translateY(${((1-eio(uo))*14).toFixed(1)}px)`;
-  fBar.style.width=(seg(t,48.6,1.8)*Math.max(0,P.ctaW-80)).toFixed(0)+'px';
-  popA(fPill,t,47.5,0.6,6,0,51.6);
+  /* papan latihan: konten selesai lalu keluar layar (aturan 28) */
+  popA(cta,t,40.9,0.7,6,0,49.8);
+  popA(fPill,t,47.5,0.6,6,0,49.8);
+  /* endcard penutup bersih: AKIOMIDA.COM muncul SENDIRIAN di layar yang tenang */
+  const eci=eio(seg(t,50.2,0.7));
+  endcard.style.opacity=eci.toFixed(3);
+  endcard.style.transform=`translateY(${((1-eci)*16).toFixed(1)}px) scale(${(0.94+0.06*eci).toFixed(3)})`;
+  fBar.style.width=(seg(t,50.9,0.5)*P.barW).toFixed(0)+'px';
   renderSub(t);
   /* kamera tenang */
   const im=imp(t);
