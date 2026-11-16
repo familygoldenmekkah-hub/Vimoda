@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+/*__FONTS__*/
+*{box-sizing:border-box}
+body{margin:0;background:#120C08;font-family:'Poppins','Noto Sans',sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:relative;overflow:hidden}
+#world{position:absolute;inset:0}
+#flash{position:absolute;inset:0;background:#FFFFFF;opacity:0;pointer-events:none}
+#fade{position:absolute;inset:0;background:#120C08;opacity:0;pointer-events:none}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+/* RUMAH PETA KARTIKA: ruang kartografi vintage - kertas peta tua krem dengan
+   grid tinta biru samar, meja mahoni dengan peta terbuka dan pita angka pi
+   yang digitnya muncul satu per satu, kompas kuningan raksasa di dinding,
+   lampu gantung ber-tudung hijau, lantai papan kayu dengan karpet marun,
+   rak kartu katalog, segel lilin merah.
+   Latar BERBEDA TOTAL dari Dapoer Posya, Menara Livo, dan semua episode lain
+   (aturan 26). Karakter: HANYA bola emas mentor, bulat sejati, tanpa mata
+   (aturan 23). Subjudul zona aman maksimal dua baris (aturan 27);
+   watermark AKIOMIDA di tepi paling bawah (aturan 24); penutup bersih
+   (aturan 28). */
+#mapwall{position:absolute;left:0;top:0;width:100%;
+  background:repeating-linear-gradient(0deg,rgba(44,74,110,.16) 0 2px,transparent 2px 96px),
+  repeating-linear-gradient(90deg,rgba(44,74,110,.16) 0 2px,transparent 2px 112px),
+  linear-gradient(180deg,#F2E9D2 0%,#E8DCC0 100%)}
+#tilesun{position:absolute;inset:0;background:rgba(58,38,26,0);will-change:background}
+#ceiling{position:absolute;left:0;top:0;width:100%}
+#ceiling .beam{position:absolute;background:linear-gradient(180deg,#6E4A32,#543622);border-radius:0 0 8px 8px;box-shadow:0 4px 10px rgba(20,10,4,.25)}
+.lampW{position:absolute;will-change:opacity}
+.lampW .cord{position:absolute;width:4px;background:#3A2C1E}
+.lampW .shade{position:absolute;border-radius:12px 12px 0 0;background:linear-gradient(180deg,#3E7A62,#2E5E4E);box-shadow:0 8px 18px rgba(30,16,6,.3)}
+.lampW .glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,236,180,.75),rgba(255,236,180,0) 70%)}
+#compass{position:absolute;will-change:opacity}
+#compass .rim{position:absolute;border-radius:50%;background:conic-gradient(#D9B36A,#A87E36,#D9B36A,#A87E36,#D9B36A);box-shadow:0 10px 24px rgba(30,16,6,.35)}
+#compass .face{position:absolute;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FBF3DC,#EFE2C0 72%)}
+#compass .needle{position:absolute;background:#B5432E;border-radius:3px}
+#compass .needle2{position:absolute;background:#3A2C1E;border-radius:3px}
+#compass .pip{position:absolute;border-radius:50%;background:#3A2C1E}
+#compass .nmark{position:absolute;font-weight:800;color:#B5432E}
+#floorplank{position:absolute;left:0;width:100%;
+  background:repeating-linear-gradient(0deg,#8A6A48 0 58px,#7A5C3E 58px 62px,#8A6A48 62px 120px)}
+#rug{position:absolute;border-radius:50%;background:radial-gradient(circle at 45% 35%,#8E3A38,#7A3030 62%,#632624 100%);border:8px solid #B98A3C;box-shadow:0 14px 30px rgba(30,16,6,.35);will-change:opacity}
+#baseboard{position:absolute;left:0;width:100%;background:#543622}
+#tableT{position:absolute;will-change:opacity}
+#tableT .slab{position:absolute;background:linear-gradient(180deg,#7A4E32,#5C3A28);border-radius:10px;box-shadow:0 10px 22px rgba(30,16,6,.35)}
+#tableT .leg{position:absolute;background:#4E3222;border-radius:4px;width:26px}
+#mapSheet{position:absolute;will-change:opacity}
+#mapSheet .paper{position:absolute;background:linear-gradient(180deg,#FBF3DC,#F2E6C6);border:3px solid #B98A3C;border-radius:6px;box-shadow:0 8px 20px rgba(30,16,6,.3)}
+#mapSheet .coast{position:absolute;border:3px solid rgba(44,74,110,.55);border-radius:46% 54% 58% 42%/52% 44% 56% 48%;background:rgba(44,74,110,.10)}
+#mapSheet .gr{position:absolute;background:repeating-linear-gradient(0deg,rgba(44,74,110,.14) 0 2px,transparent 2px 26px),repeating-linear-gradient(90deg,rgba(44,74,110,.14) 0 2px,transparent 2px 26px)}
+#mapSheet .wax{position:absolute;border-radius:50%;background:radial-gradient(circle at 38% 32%,#D2543E,#A83222 70%);box-shadow:0 4px 10px rgba(30,16,6,.3)}
+#mapSheet .mini{position:absolute;border-radius:50%;border:2px solid #B5432E}
+#mapSheet .mline{position:absolute;background:#B5432E;border-radius:2px}
+#ribbon{position:absolute;will-change:opacity}
+#ribbon .strip{position:absolute;background:linear-gradient(180deg,#FFFDF2,#F7EDD2);border:2px solid #B98A3C;border-radius:8px;box-shadow:0 6px 14px rgba(30,16,6,.25)}
+#ribbon .digits{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#2C4A6E;white-space:nowrap}
+#ribbon .dots{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#B5432E;opacity:0}
+.panelI{position:absolute;background:linear-gradient(180deg,#223A54,#1A2C42);border-radius:16px;border:4px solid #B98A3C;box-shadow:0 16px 38px rgba(20,10,4,.5);will-change:transform,opacity}
+.tapeC{position:absolute;background:rgba(185,138,60,.5);border-radius:3px;box-shadow:0 2px 5px rgba(20,10,4,.25)}
+.pHd{font-weight:800;color:#FFF6E6;letter-spacing:.10em;text-align:center}
+.pRow{display:flex;align-items:center;opacity:0}
+.pDot{border-radius:50%;flex:none}
+.pName{font-weight:800;color:#FFF6E6;flex:none}
+.pEx{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#F2E2C4}
+.pNote{display:flex;align-items:center;justify-content:center;background:rgba(185,138,60,.25);border:2px solid rgba(185,138,60,.6);border-radius:10px;color:#F2CE8E;font-weight:800;letter-spacing:.05em;text-align:center;opacity:0;will-change:opacity}
+.chipA{display:flex;align-items:center;justify-content:center;border-radius:12px;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#FFF6E6;background:#31506E;box-shadow:0 8px 18px rgba(20,10,4,.4);opacity:0;will-change:opacity}
+.stamp{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(92deg,#7FA6BF 0%,#B5432E 52%,#D98F2E 100%);color:#22160C;font-weight:800;letter-spacing:.06em;box-shadow:0 12px 26px rgba(20,10,4,.45);will-change:transform,opacity}
+.rootCard{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(180deg,#FFFDF6,#F2E6C6);border:3px solid #B98A3C;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;box-shadow:0 8px 18px rgba(20,10,4,.35);will-change:transform,opacity}
+.rootCard .val{line-height:1.05}
+.rootCard .tag{letter-spacing:.08em}
+.series{position:absolute;background:rgba(181,67,46,.14);border:2px solid rgba(181,67,46,.5);border-radius:8px;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#8A3A24;opacity:0;will-change:opacity}
+.kcol{position:absolute;border-radius:12px;border:3px solid;background:rgba(255,253,246,.06);opacity:0;will-change:opacity}
+.kcol .kh{font-weight:800;text-align:center;letter-spacing:.08em}
+.krow{display:flex;align-items:center;opacity:0}
+.krow .kd{border-radius:50%;flex:none}
+.krow .kt{font-weight:700;color:#FFF6E6}
+.formula{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#F2CE8E;opacity:0;will-change:opacity}
+.pcompass{position:absolute;will-change:opacity}
+.pcompass .rim{position:absolute;border-radius:50%;background:conic-gradient(#D9B36A,#A87E36,#D9B36A,#A87E36,#D9B36A)}
+.pcompass .face{position:absolute;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FBF3DC,#EFE2C0 72%)}
+.pcompass .rline{position:absolute;background:#B5432E;border-radius:2px}
+.pcompass .rc{position:absolute;border-radius:50%;background:#B5432E}
+.pcompass .rlab{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#B5432E}
+.cabinet{position:absolute;will-change:opacity}
+#cabinet .box{position:absolute;background:linear-gradient(180deg,#7A4E32,#5C3A28);border-radius:8px;box-shadow:0 12px 26px rgba(30,16,6,.4)}
+#cabinet .drawer{position:absolute;background:linear-gradient(180deg,#8A5C3C,#6E462C);border-radius:4px;border:2px solid #4E3222}
+#cabinet .handle{position:absolute;border-radius:50%;background:#D9B36A}
+.qmark{position:absolute;color:#D98F2E;font-weight:800;text-shadow:0 5px 0 rgba(0,0,0,.25);will-change:transform,opacity}
+.title{position:absolute;left:0;width:100%;text-align:center;font-weight:800;color:#3A2E20;letter-spacing:.04em;text-shadow:0 5px 0 rgba(255,255,255,.45),0 12px 26px rgba(60,30,10,.22);will-change:transform,opacity}
+#pil{position:absolute;border-radius:999px;background:linear-gradient(92deg,#7FA6BF 0%,#B5432E 52%,#D98F2E 100%);color:#22160C;font-weight:800;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;box-shadow:0 10px 24px rgba(20,10,4,.4)}
+#endcard{position:absolute;left:0;width:100%;opacity:0;will-change:transform,opacity}
+#fplate{background:rgba(26,16,10,.62);border-radius:28px;padding:14px 44px;width:max-content;margin:0 auto;box-shadow:0 14px 34px rgba(20,10,4,.4)}
+#f_url{font-weight:800;text-align:center}
+#f_bar{height:7px;border-radius:4px;background:linear-gradient(90deg,#7FA6BF,#B5432E,#D98F2E)}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(26,16,10,.86);border-radius:20px;padding:18px 32px;text-align:center;box-shadow:0 14px 34px rgba(20,10,4,.5);will-change:transform,opacity}
+#sub_id{font-weight:800;color:#FFFFFF;line-height:1.26}
+#sub_en{color:#D9C8B4;font-weight:600}
+#wm{position:absolute;font-weight:800;letter-spacing:.34em;color:#F6EFE2;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;border:1.5px solid rgba(246,239,226,.42);will-change:transform}
+.bchar{position:absolute;will-change:transform,opacity}
+.bchar .core{position:absolute;border-radius:100%}
+.bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px)}
+.bsh{position:absolute;border-radius:50%;background:rgba(20,10,4,.4);filter:blur(2px)}
+.spark{position:absolute;width:34px;height:34px;opacity:0}
+.spark .sa{position:absolute;background:#FFE9A8;border-radius:3px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="world">
+    <div id="mapwall"></div>
+    <div id="tilesun"></div>
+    <div id="ceiling"></div>
+    <div class="lampW"><div class="cord"></div><div class="shade"></div><div class="glow"></div></div>
+    <div class="lampW"><div class="cord"></div><div class="shade"></div><div class="glow"></div></div>
+    <div id="compass"><div class="rim"></div><div class="face"></div><div class="needle"></div><div class="needle2"></div><div class="pip"></div><div class="nmark">U</div></div>
+    <div id="floorplank"></div>
+    <div id="rug"></div>
+    <div id="baseboard"></div>
+    <div id="tableT"><div class="slab"></div><div class="leg"></div><div class="leg"></div></div>
+    <div id="mapSheet"><div class="paper"></div><div class="gr"></div><div class="coast"></div><div class="mini"></div><div class="mline"></div><div class="wax"></div></div>
+    <div id="ribbon"><div class="strip"></div><div class="digits"></div><div class="dots">...</div></div>
+    <div id="cabinet"><div class="box"></div></div>
+    <div id="props"></div>
+    <div id="chars"></div>
+  </div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+  <div id="pil">KELOMPOKKAN DI KOMEN</div>
+  <div id="endcard">
+    <div id="fplate"><div id="f_url">AKIOMIDA.COM</div></div>
+    <div id="f_bar"></div>
+  </div>
+  <div class="title" id="t0">KENAPA ADA TITIK?</div>
+  <div class="title" id="t1">APA ITU IRASIONAL</div>
+  <div class="title" id="t2">AKAR DUA, KENAPA?</div>
+  <div class="title" id="t3">LINGKARAN DAN PI</div>
+  <div class="title" id="t4">DUA KELUARGA</div>
+  <div class="title" id="t5">KELOMPOK MANA?</div>
+  <div id="subbar"><div id="sub_id"></div><div id="sub_en"></div></div>
+  <div id="wm">AKIOMIDA</div>
+</div>
+<script>
