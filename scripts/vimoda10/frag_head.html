@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+/*__FONTS__*/
+*{box-sizing:border-box}
+body{margin:0;background:#120C08;font-family:'Poppins','Noto Sans',sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:relative;overflow:hidden}
+#world{position:absolute;inset:0}
+#flash{position:absolute;inset:0;background:#FFFFFF;opacity:0;pointer-events:none}
+#fade{position:absolute;inset:0;background:#120C08;opacity:0;pointer-events:none}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+/* DAPOER POSYA: studio dapur roti bulat - dinding ubin mint dengan nat,
+   lantai kotak-kotak terrakota-krim, balok kayu di plafon, panci tembaga
+   gantung, jam dinding yang angka 12-nya diganti pi, meja kayu dengan
+   kue bulat yang dibagi dua lalu dibagi empat.
+   Latar BERBEDA TOTAL dari Menara Livo, Rumah Bulina, dan Kota Bilangan
+   (aturan 26). Karakter: HANYA bola emas mentor, bulat sejati, tanpa mata
+   (aturan 23). Subjudul zona aman maksimal dua baris (aturan 27);
+   watermark AKIOMIDA di tepi paling bawah (aturan 24); penutup bersih
+   (aturan 28). */
+#tilewall{position:absolute;left:0;top:0;width:100%;
+  background:repeating-linear-gradient(0deg,rgba(120,160,130,.28) 0 3px,transparent 3px 112px),
+  repeating-linear-gradient(90deg,rgba(120,160,130,.28) 0 3px,transparent 3px 118px),
+  linear-gradient(180deg,#EAF2E6 0%,#DFEBDA 100%)}
+#tilesun{position:absolute;inset:0;background:rgba(58,38,26,0);will-change:background}
+#ceiling{position:absolute;left:0;top:0;width:100%}
+#ceiling .beam{position:absolute;background:linear-gradient(180deg,#8A6142,#6E4A30);border-radius:0 0 8px 8px;box-shadow:0 4px 10px rgba(20,10,4,.25)}
+#ceiling .cord{position:absolute;width:4px;background:#4A3426}
+#pan{position:absolute;will-change:opacity,transform}
+#pan .panbody{position:absolute;border-radius:50%;background:radial-gradient(circle at 36% 30%,#D98F4A,#A85F28 62%,#7C451C 100%);box-shadow:0 8px 18px rgba(30,16,6,.3)}
+#pan .panhole{position:absolute;border-radius:50%;background:linear-gradient(180deg,#EAF2E6,#DFEBDA)}
+#clock{position:absolute;will-change:opacity}
+#clock .face{position:absolute;border-radius:50%;background:radial-gradient(circle at 40% 32%,#FFF8EA,#F2E2C4 70%);border:7px solid #7C451C;box-shadow:0 8px 18px rgba(30,16,6,.25)}
+#clock .pi{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#7C451C}
+#clock .hand{position:absolute;width:5px;background:#4A3426;border-radius:3px}
+#floorplank{position:absolute;left:0;width:100%;
+  background:repeating-conic-gradient(#9C6248 0% 25%,#EFE3CF 0% 50%);background-size:180px 180px}
+#floorshade{position:absolute;left:0;width:100%;background:linear-gradient(180deg,rgba(20,10,4,.22),rgba(20,10,4,.06) 40%,rgba(20,10,4,.28))}
+#baseboard{position:absolute;left:0;width:100%;background:#5C3F2E}
+#tableT{position:absolute;will-change:opacity}
+#tableT .slab{position:absolute;background:linear-gradient(180deg,#A26E45,#8A5A3A);border-radius:10px;box-shadow:0 10px 22px rgba(30,16,6,.35)}
+#tableT .leg{position:absolute;background:#6E4A30;border-radius:4px;width:26px}
+#pizzaC{position:absolute;border-radius:50%;overflow:hidden;will-change:opacity,transform}
+#pizzaC .dough{position:absolute;background:radial-gradient(circle at 35% 30%,#F4CB7A 0%,#E8B25C 58%,#C98A3B 100%);border-radius:50%}
+#pizzaC .pdot{position:absolute;border-radius:50%;background:#C4472E;box-shadow:inset 0 -3px 5px rgba(120,30,10,.45)}
+#pizzaC .cutline{position:absolute;background:repeating-linear-gradient(90deg,#7C451C 0 10px,transparent 10px 20px);opacity:0}
+#pizzaC .cutlineH{position:absolute;background:repeating-linear-gradient(0deg,#7C451C 0 10px,transparent 10px 20px);opacity:0}
+#pizzaC .wedge{position:absolute;background:rgba(242,178,74,0);will-change:background}
+.halfp{position:absolute;will-change:opacity,transform}
+.halfp .hdough{position:absolute;background:radial-gradient(circle at 50% 0%,#F4CB7A 0%,#E8B25C 58%,#C98A3B 100%)}
+.plateE{position:absolute;border-radius:50%;background:radial-gradient(circle at 45% 30%,#FFFDF6,#EDE4D2 70%);border:4px solid #C9BBA2;box-shadow:0 6px 14px rgba(30,16,6,.25);will-change:transform,opacity}
+.panelN{position:absolute;background:linear-gradient(180deg,#2E4638,#1F3226);border-radius:16px;box-shadow:0 16px 38px rgba(20,10,4,.5);will-change:transform,opacity}
+.menuP{position:absolute;background:linear-gradient(180deg,#2E4638,#1F3226);border-radius:14px;border:6px solid #7C451C;box-shadow:0 16px 38px rgba(20,10,4,.5);will-change:transform,opacity}
+.tapeC{position:absolute;background:rgba(242,178,74,.5);border-radius:3px;box-shadow:0 2px 5px rgba(20,10,4,.25)}
+.pHd{font-weight:800;color:#FFF6E6;letter-spacing:.10em;text-align:center}
+.pRow{display:flex;align-items:center;opacity:0}
+.pDot{border-radius:50%;flex:none}
+.pName{font-weight:800;color:#FFF6E6;flex:none}
+.pEx{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#F2E2C4}
+.pNote{display:flex;align-items:center;justify-content:center;background:rgba(242,178,74,.22);border:2px solid rgba(242,178,74,.55);border-radius:10px;color:#F6CE7E;font-weight:800;letter-spacing:.05em;text-align:center;opacity:0;will-change:opacity}
+.menuRow{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#F6F1E2;opacity:0;display:flex;justify-content:space-between}
+.pill2{display:flex;align-items:center;justify-content:center;border-radius:10px;font-weight:800;letter-spacing:.04em;opacity:0;will-change:opacity}
+.ckmark{position:absolute}
+.ckmark .a{position:absolute;background:#7FBF8E;border-radius:2px}
+.ckmark .b{position:absolute;background:#7FBF8E;border-radius:2px}
+.xxmark{position:absolute}
+.xxmark .a{position:absolute;background:#D96A5A;border-radius:2px}
+.xxmark .b{position:absolute;background:#D96A5A;border-radius:2px}
+.hookChip{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:14px;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#FFF6E6;box-shadow:0 10px 24px rgba(20,10,4,.45);will-change:transform,opacity}
+.stamp{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(92deg,#7FBF8E 0%,#E58BA5 52%,#F2C230 100%);color:#22160C;font-weight:800;letter-spacing:.06em;box-shadow:0 12px 26px rgba(20,10,4,.45);will-change:transform,opacity}
+.ujiCard{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(180deg,#FFFDF6,#EFE3CF);border:3px solid #C9BBA2;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#4A3426;box-shadow:0 10px 22px rgba(20,10,4,.4);will-change:transform,opacity}
+.qmark{position:absolute;color:#F2C230;font-weight:800;text-shadow:0 5px 0 rgba(0,0,0,.25);will-change:transform,opacity}
+.title{position:absolute;left:0;width:100%;text-align:center;font-weight:800;color:#4A3426;letter-spacing:.04em;text-shadow:0 5px 0 rgba(255,255,255,.42),0 12px 26px rgba(60,30,10,.22);will-change:transform,opacity}
+#pil{position:absolute;border-radius:999px;background:linear-gradient(92deg,#7FBF8E 0%,#E58BA5 52%,#F2C230 100%);color:#22160C;font-weight:800;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;box-shadow:0 10px 24px rgba(20,10,4,.4)}
+#endcard{position:absolute;left:0;width:100%;opacity:0;will-change:transform,opacity}
+#fplate{background:rgba(26,16,10,.62);border-radius:28px;padding:14px 44px;width:max-content;margin:0 auto;box-shadow:0 14px 34px rgba(20,10,4,.4)}
+#f_url{font-weight:800;text-align:center}
+#f_bar{height:7px;border-radius:4px;background:linear-gradient(90deg,#7FBF8E,#E58BA5,#F2C230)}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(26,16,10,.86);border-radius:20px;padding:18px 32px;text-align:center;box-shadow:0 14px 34px rgba(20,10,4,.5);will-change:transform,opacity}
+#sub_id{font-weight:800;color:#FFFFFF;line-height:1.26}
+#sub_en{color:#D9C8B4;font-weight:600}
+#wm{position:absolute;font-weight:800;letter-spacing:.34em;color:#F6EFE2;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;border:1.5px solid rgba(246,239,226,.42);will-change:transform}
+.bchar{position:absolute;will-change:transform,opacity}
+.bchar .core{position:absolute;border-radius:100%}
+.bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px)}
+.bsh{position:absolute;border-radius:50%;background:rgba(20,10,4,.4);filter:blur(2px)}
+.spark{position:absolute;width:34px;height:34px;opacity:0}
+.spark .sa{position:absolute;background:#FFE9A8;border-radius:3px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="world">
+    <div id="tilewall"></div>
+    <div id="tilesun"></div>
+    <div id="ceiling"></div>
+    <div id="pan"><div class="panbody"></div><div class="panhole"></div></div>
+    <div id="clock"><div class="face"></div><div class="pi">π</div><div class="hand"></div><div class="hand"></div></div>
+    <div id="floorplank"></div>
+    <div id="floorshade"></div>
+    <div id="baseboard"></div>
+    <div id="tableT"><div class="slab"></div><div class="leg"></div><div class="leg"></div></div>
+    <div id="pizzaC"><div class="dough"></div><div class="cutline"></div><div class="cutlineH"></div><div class="wedge"></div><div class="wedge"></div><div class="wedge"></div><div class="wedge"></div></div>
+    <div class="halfp"><div class="hdough"></div></div>
+    <div class="halfp"><div class="hdough"></div></div>
+    <div class="plateE"></div>
+    <div class="plateE"></div>
+    <div id="props"></div>
+    <div id="chars"></div>
+  </div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+  <div id="qchip" class="hookChip">1/2</div>
+  <div id="pil">PERIKSA DI KOMEN</div>
+  <div id="endcard">
+    <div id="fplate"><div id="f_url">AKIOMIDA.COM</div></div>
+    <div id="f_bar"></div>
+  </div>
+  <div class="title" id="t0">SETENGAH ITU APA?</div>
+  <div class="title" id="t1">BILANGAN RASIONAL</div>
+  <div class="title" id="t2">PEMBILANG &amp; PENYEBUT</div>
+  <div class="title" id="t3">BENTUK DESIMAL</div>
+  <div class="title" id="t4">MANA YANG BUKAN?</div>
+  <div class="title" id="t5">PERIKSA SATU-SATU</div>
+  <div id="subbar"><div id="sub_id"></div><div id="sub_en"></div></div>
+  <div id="wm">AKIOMIDA</div>
+</div>
+<script>
