@@ -12,6 +12,11 @@ Dunia BARU khusus episode ini: RUMAH BULINA, ruang bermain hangat (revisi 2; atu
 1. DUNIA DIROBAK TOTAL: Kota Bilangan (gedung, kedai, jalan raya, mobil) diganti Rumah Bulina karena tampilan antar episode terasa sama. Semua komponen latar baru; tidak ada satu pun aset kota yang tersisa.
 2. TEKS DIPERBAIKI: subjudul portrait pecah 3 baris dan landscape terpotong di tepi pil. Kini font subjudul 40 px (portrait) dan 38 px (landscape) dengan lebar pil 880/1360 px, diuji pada kalimat terpanjang 44 karakter: portrait maksimal dua baris rapi, landscape satu baris penuh.
 3. TATA LETAK: mentor kini berada di depan karpet (sempat tertutup lantai karena urutan lapisan); jendela, bingkai, chart, dan easel dipetakan ulang agar tidak satu pun menimpa judul bab atau satu sama lain; setiap elemen teks diaudit zoom pada frame terburuk sebelum render (aturan 27).
+## Revisi 3 (mandat kreator: jangan ada elemen yang saling balapan; kenyamanan penonton di atas patokan waktu)
+
+1. JUDUL BAB RATA TENGAH: sebelumnya "BILANGAN ASLI" dst. rata kiri sehingga huruf pertama tampak terpotong di tepi layar. Kini semua judul bab di tengah layar.
+2. PENUTUP BERSIH (aturan 28): sebelumnya AKIOMIDA.COM menyala DI DALAM papan latihan pada 45.8 sementara soal, kelereng, tanda tanya, dan pil masih tampil - semuanya balapan dalam satu layar. Kini papan latihan (soal, pil) dan tanda tanya keluar layar di 49.8; layar diam sejenak; AKIOMIDA.COM muncul SENDIRIAN di 50.2 sebagai endcard di ruangan senja yang tenang, bar gradien menyapu 50.9-51.4, fade 51.4.
+3. Audio reveal (chime AKIOMIDA.COM dan whoosh) digeser dari 45.8 ke 50.2-50.35 agar mengiringi endcard, bukan papan soal.
 
 ## Struktur enam bab
 
@@ -22,7 +27,7 @@ Dunia BARU khusus episode ini: RUMAH BULINA, ruang bermain hangat (revisi 2; atu
 | 2 Kenapa nol | 17.0-25.9 | KENAPA NOL? | Keranjang anyaman kosong dengan tag 0 (19.9); sticky notes 0 PESAN BARU dan 0 PESERTA (23.47); mentor berputar penuh |
 | 3 Cacah | 25.9-32.9 | BILANGAN CACAH | Chart kertas di dinding: baris ASLI (1 2 3 4 5 ...) titik biru muda, baris CACAH (0 1 2 3 4 5 ...) titik ungu; catatan stabilo menyala 29.65 lalu berganti teks di 32.86 |
 | 4 Peran nol | 32.9-40.2 | PERAN NOL | Papan kapur di kaki easel: angka 10 dengan label 1 PULUHAN + 0 SATUAN |
-| 5 Latihan | 40.2-52.0 | LATIHAN KELERENG | Poster latihan di dinding: 8 KELERENG, SEMUA DIBERIKAN.; delapan kelereng warna muncul di lantai 44.25 lalu meluncur keluar satu per satu 45.55-47.0; tanda tanya emas besar (47.3); AKIOMIDA.COM reveal 45.8, bar gradien 48.6, pil TULIS DI KOMEN 47.5; senja di jendela, lampu tidur dan debu cahaya menyala |
+| 5 Latihan | 40.2-52.0 | LATIHAN KELERENG | Papan latihan di dinding: 8 KELERENG, SEMUA DIBERIKAN.; delapan kelereng warna muncul di lantai 44.25 lalu meluncur keluar satu per satu 45.55-47.0; tanda tanya emas besar (47.3); pil TULIS DI KOMEN 47.5; seluruh papan dan tanda tanya keluar layar 49.8; AKIOMIDA.COM muncul SENDIRIAN 50.2 (endcard, aturan 28), bar gradien 50.9-51.4; senja di jendela, lampu tidur dan debu cahaya menyala |
 
 ## Narasi 16 beat (subjudul dua bahasa, soft selling)
 
@@ -61,5 +66,5 @@ Dunia BARU khusus episode ini: RUMAH BULINA, ruang bermain hangat (revisi 2; atu
 - Satu karakter: bola emas bulat sempurna tanpa mata (aturan 23); kelereng adalah properti latihan dengan fungsi naratif jelas, bukan karakter.
 - Soft selling penuh (aturan 25): semua kalimat berupa ajakan hangat; penutup "Terima kasih sudah menonton."; tidak ada kalimat menyuruh negatif.
 - Tanpa nama tokoh, tanpa squash-stretch, satu ide per layar, dunia memudar saat panel naik, kamera tenang dengan getar halus pada beat emas.
-- CTA: poster latihan di zona tengah dinding dengan selotip sudut; AKIOMIDA.COM hanya menyala di akhir dengan reveal lambat; bar gradien menyapu; pil ajakan TULIS DI KOMEN.
+- CTA dua fase (aturan 28): papan latihan (soal + pil TULIS DI KOMEN) berdiri sendiri sampai tuntas lalu keluar di 49.8; AKIOMIDA.COM muncul sendirian sebagai endcard 50.2 tanpa satu pun elemen lain yang balapan; bar gradien menyapu 50.9-51.4.
 - Audio: pad chord per bab, arpeggio, kick dan hat, tick menghitung (balok, apel, kelereng), whoosh perpindahan bab dan kelereng meluncur, boom pada beat emas 13.76/29.65/44.14, chime reveal.
