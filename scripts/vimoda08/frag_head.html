@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+/*__FONTS__*/
+*{box-sizing:border-box}
+body{margin:0;background:#0B1220;font-family:'Poppins','Noto Sans',sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:relative;overflow:hidden;background:linear-gradient(180deg,#7EC3EA 0%,#A8DCF2 46%,#DCEFF6 100%)}
+#world{position:absolute;inset:0}
+#flash{position:absolute;inset:0;background:#FFFFFF;opacity:0;pointer-events:none}
+#fade{position:absolute;inset:0;background:#0B1220;opacity:0;pointer-events:none}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+#skydusk{position:absolute;inset:0;background:linear-gradient(180deg,#232C63 0%,#5A3E7A 42%,#C05A72 72%,#E9975E 100%);opacity:0;will-change:opacity}
+#stars{position:absolute;inset:0}
+#stars i{position:absolute;border-radius:50%;background:#FFF7D6;box-shadow:0 0 6px rgba(255,247,214,.9)}
+.cloud{position:absolute;will-change:transform,opacity}
+.cloud b{position:absolute;border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 10px 30px rgba(120,160,200,.25)}
+#town{position:absolute;left:0;top:0;width:100%;will-change:opacity}
+.bld{position:absolute;border-radius:6px 6px 0 0}
+.win{position:absolute;border-radius:3px;background:#39638B;box-shadow:inset 0 3px 0 rgba(0,0,0,.18)}
+.plaque{position:absolute;border-radius:12px;background:#FFF9E8;border:3px solid #35507A;box-shadow:0 6px 0 rgba(0,0,0,.14);display:flex;align-items:center;justify-content:center;will-change:transform,opacity}
+.plaque b{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;color:#1B2437;font-weight:800}
+.shopwin{position:absolute;border-radius:12px;background:rgba(255,253,244,.96);box-shadow:0 12px 30px rgba(30,45,80,.25),inset 0 0 0 3px #E7D9B8;will-change:transform,opacity}
+.sit{position:absolute;inset:0}
+.awn{position:absolute;border-radius:10px 10px 0 0;background:repeating-linear-gradient(90deg,#E15B5B 0 24px,#FFFFFF 24px 48px);box-shadow:0 8px 18px rgba(30,45,80,.22);will-change:transform,opacity}
+.chip{position:absolute;border-radius:9px;background:rgba(20,28,48,.82);color:#FFFFFF;font-weight:800;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;will-change:transform,opacity;box-shadow:0 5px 14px rgba(0,0,0,.3);text-align:center}
+#road{position:absolute;left:0;width:100%;background:linear-gradient(180deg,#3A4656 0,#2E3847 100%)}
+#roadmark{position:absolute;left:0;width:100%;height:8px;background:repeating-linear-gradient(90deg,#F2D57E 0 70px,transparent 70px 130px);opacity:.75}
+#curb{position:absolute;left:0;width:100%;background:#C9D3DA;border-radius:4px}
+#walk{position:absolute;left:0;width:100%;background:linear-gradient(180deg,#D8CDB4 0,#CBBFA2 100%)}
+#plaza{position:absolute;left:0;width:100%;background:linear-gradient(180deg,#E4D9BC 0,#D8CCAB 100%);box-shadow:inset 0 10px 0 rgba(255,255,255,.35);will-change:opacity}
+#cars{position:absolute;inset:0}
+.car{position:absolute;will-change:transform,opacity}
+.car .body{position:absolute;inset:0;border-radius:10px 14px 6px 6px;box-shadow:inset 0 -8px 0 rgba(0,0,0,.18)}
+.car .top{position:absolute;border-radius:8px 10px 0 0}
+.car .wh{position:absolute;bottom:-6px;width:30px;height:30px;border-radius:50%;background:#1B2437;box-shadow:inset 0 0 0 6px #55627A}
+.tree{position:absolute;will-change:transform,opacity}
+.tree .trunk{position:absolute;left:50%;bottom:0;width:14px;margin-left:-7px;border-radius:6px;background:linear-gradient(180deg,#8B5A2B,#6E4420)}
+.tree .leaf{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7CC66B 0%,#3F9B4F 70%,#2E7A3C 100%);box-shadow:0 8px 18px rgba(30,80,40,.25)}
+.lamp{position:absolute;will-change:opacity}
+.lamp .pole{position:absolute;left:50%;bottom:0;width:10px;margin-left:-5px;border-radius:5px;background:linear-gradient(180deg,#39445A,#222C3D)}
+.lamp .head{position:absolute;left:50%;top:0;width:44px;height:16px;margin-left:-22px;border-radius:8px;background:#2E3847}
+.lamp .glow{position:absolute;left:50%;top:-70px;width:150px;height:110px;margin-left:-75px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,130,.55) 0%,rgba(255,214,130,0) 70%);opacity:0;will-change:opacity}
+.board{position:absolute;border-radius:16px;box-shadow:0 14px 36px rgba(0,0,0,.28)}
+.slate{background:linear-gradient(180deg,#20303F,#16222E);border:6px solid #6E4420;will-change:transform,opacity}
+.fam{position:absolute;border-radius:22px;background:rgba(13,20,38,.9);will-change:transform,opacity;box-shadow:0 14px 40px rgba(0,0,0,.4);padding:20px 30px}
+/* properti khusus bulina: keranjang nol, chip nol, kelereng, tanda tanya */
+.zchip{position:absolute;border-radius:10px;background:rgba(13,20,38,.88);color:#FFE9A8;font-weight:800;letter-spacing:.1em;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;box-shadow:0 8px 20px rgba(0,0,0,.32);text-align:center}
+.zpart{position:absolute}
+.marble{position:absolute;border-radius:50%;will-change:transform,opacity;box-shadow:0 4px 10px rgba(0,0,0,.28)}
+.qmark{position:absolute;color:#FCD34D;font-weight:800;text-shadow:0 6px 0 rgba(0,0,0,.25);will-change:transform,opacity}
+.bchar{position:absolute;will-change:transform,opacity}
+.bchar .core{position:absolute;border-radius:50%}
+.bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px)}
+.bsh{position:absolute;border-radius:50%;background:rgba(15,25,45,.28);filter:blur(2px)}
+#fireflies{position:absolute;inset:0}
+.title{position:absolute;left:0;width:100%;font-weight:800;color:#FFFFFF;letter-spacing:.04em;text-shadow:0 6px 0 rgba(0,0,0,.22),0 14px 30px rgba(0,0,0,.28);will-change:transform,opacity}
+#cta{position:absolute;border-radius:18px;background:linear-gradient(180deg,rgba(19,28,48,.96),rgba(14,22,40,.96));box-shadow:0 18px 44px rgba(0,0,0,.4);will-change:transform,opacity}
+#f_url{font-weight:800;text-align:center}
+#f_bar{height:7px;border-radius:4px;background:linear-gradient(90deg,#22D3EE,#A78BFA,#FBBF24)}
+#f_pill{position:absolute;border-radius:999px;background:linear-gradient(92deg,#22D3EE 0%,#A78BFA 52%,#FBBF24 100%);color:#0B1220;font-weight:800;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;box-shadow:0 10px 24px rgba(0,0,0,.35)}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(13,20,38,.86);border-radius:20px;padding:20px 34px;text-align:center;box-shadow:0 14px 34px rgba(0,0,0,.38);will-change:transform,opacity}
+#sub_id{font-weight:800;color:#FFFFFF;line-height:1.24}
+#sub_en{color:#B9C7DC;font-weight:600}
+#wm{position:absolute;font-weight:800;letter-spacing:.34em;color:#E7EDF6;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;border:1.5px solid rgba(231,237,246,.4);will-change:transform}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="world">
+    <div id="skydusk"></div>
+    <div id="stars"></div>
+    <div id="clouds"></div>
+    <div id="town"></div>
+    <div id="road"></div>
+    <div id="roadmark"></div>
+    <div id="curb"></div>
+    <div id="walk"></div>
+    <div id="plaza"></div>
+    <div id="cars"></div>
+    <div id="streetprops"></div>
+    <div id="fireflies"></div>
+    <div id="chars"></div>
+  </div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+  <div class="title" id="t0">MULAI DARI 1?</div>
+  <div class="title" id="t1">BILANGAN ASLI</div>
+  <div class="title" id="t2">KENAPA NOL?</div>
+  <div class="title" id="t3">BILANGAN CACAH</div>
+  <div class="title" id="t4">PERAN NOL</div>
+  <div class="title" id="t5">LATIHAN KELERENG</div>
+  <div id="cta">
+    <div id="f_open">8 KELERENG, SEMUA DIBERIKAN.</div>
+    <div id="f_open_e">All given away. How many are left? Comment your answer!</div>
+    <div id="f_url">AKIOMIDA.COM</div>
+    <div id="f_bar"></div>
+    <div id="f_pill">TULIS DI KOMEN</div>
+  </div>
+  <div id="subbar"><div id="sub_id"></div><div id="sub_en"></div></div>
+  <div id="wm">AKIOMIDA</div>
+</div>
+<script>
