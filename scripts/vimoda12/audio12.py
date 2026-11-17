@@ -194,6 +194,9 @@ for i, t0 in enumerate([33.4, 34.2, 35.0, 35.8, 36.6, 37.4]):  # enam titik gari
     add(t0, tick(600 + i * 52, 0.06))
 add(38.9, tick(760, 0.05))                 # catatan nilai tetap bisa ditentukan
 add(38.6, boom(0.14))                      # beat emas: posisi pasti akar dua dan pi
+add(13.0, tick(980, 0.05))               # sub: nilai sehari-hari 0,75 dan -2,5
+add(28.5, tick(640, 0.06))               # payoff: nggak ada yang nyangkut
+add(35.1, tick(720, 0.05))               # kursi: setengah dan akar 2
 for t0 in [41.4, 41.8, 42.2, 42.6]:        # empat baris nilai pengukuran
     add(t0, tick(900, 0.085))
     add(t0 + 0.02, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)

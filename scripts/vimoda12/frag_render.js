@@ -1,21 +1,21 @@
 /* ---------- narasi realino: 16 beat soft selling (aturan 25) ---------- */
 const SUBS=[
-  [0.50,'Enam bilangan, bentuknya beda semua.','Six numbers, all different in form.','#FFFFFF'],
-  [3.10,'Negatif, pecahan, desimal, sampai pi.','Negative, fraction, decimal, even pi.','#FFFFFF'],
-  [6.60,'Satu kesamaan: semuanya bilangan real.','One thing in common: all real numbers.','#FFFFFF'],
-  [9.60,'Bilangan real mencakup rasional dan irasional.','Real numbers include rational and irrational.','#FFFFFF'],
-  [13.00,'Dari bulat sampai desimal tak berulang.','From whole numbers to endless decimals.','#D97A2E'],
-  [16.40,'Dua kelompok besar: mari kita uraikan.','Two big groups: let us break them down.','#FFFFFF'],
-  [19.30,'Rasional bisa ditulis a per b, b bukan nol.','Rational: a over b, b not zero.','#FFFFFF'],
-  [22.50,'Irasional? Tidak bisa jadi pecahan bulat.','Irrational? No fraction of integers.','#FFFFFF'],
-  [25.50,'Dan keduanya tidak saling tumpang tindih.','And the two never overlap.','#D97A2E'],
-  [28.50,'Setiap bilangan real: rasional atau irasional saja.','Every real number is one or the other.','#D97A2E'],
-  [32.70,'Sekarang, garis bilangan real.','Now, the real number line.','#FFFFFF'],
-  [35.10,'Nol di pusat, tiga di kanan, setengah di antara.','Zero center, three right, one half between.','#FFFFFF'],
-  [38.60,'Akar dua dan pi? Posisinya pasti juga.','Root 2 and pi? Their spots are fixed.','#D97A2E'],
-  [41.50,'Itulah kenapa real penting: nilai kontinu.','That is why real matters: continuous values.','#D97A2E'],
-  [44.90,'Enam kartu, empat pertanyaan, jawab di komentar.','Six cards, four questions, answer below.','#FFFFFF'],
-  [50.07,'Terima kasih sudah menonton.','Thanks for watching.','#FFE9A8']
+  [0.5,'Coba deh lihat enam angka ini baik-baik.','Take a good look at these six numbers.','#FFFFFF'],
+  [3.1,'Bentuknya beda-beda. Tapi mereka satu keluarga.','Different shapes. But one family.','#FFFFFF'],
+  [6.6,'Keluarganya bernama: bilangan real.','The family name: real numbers.','#FFFFFF'],
+  [9.6,'Real artinya nyata: angka untuk nilai nyata.','Real means actual: numbers we truly use.','#FFFFFF'],
+  [13.0,'Nilai 0,75, suhu -2,5, semua nyata.','Values 0.75, minus 2.5, all real.','#FFFFFF'],
+  [16.4,'Kelompok pertama: yang bisa jadi pecahan.','First group: can be written as fractions.','#FFFFFF'],
+  [19.3,'Namanya rasional. Kayak 0,75 itu 3/4.','Rational. Like 0.75, that is 3 over 4.','#FFFFFF'],
+  [22.5,'Kelompok kedua: nggak mau jadi pecahan.','Second group: refuses to be a fraction.','#FFFFFF'],
+  [25.5,'Kayak pi dan akar 2. Namanya irasional.','Like pi and root 2. Called irrational.','#FFFFFF'],
+  [28.5,'Dan nggak ada yang nyangkut di antaranya.','And nothing hangs in between.','#D97A2E'],
+  [32.7,'Di garis bilangan, tiap angka punya kursi.','On the number line, each has its own seat.','#FFFFFF'],
+  [35.1,'Setengah di antara 0 dan 1. Akar 2 sebelum 2.','Half between 0 and 1. Root 2 before 2.','#FFFFFF'],
+  [38.6,'Pi? Angkanya nggak selesai, kursinya tetap pasti.','Pi never ends, yet its seat stays fixed.','#D97A2E'],
+  [41.5,'Makanya penting: ukuran nyata jarang pas bulat.','Real matters: real sizes are rarely whole.','#D97A2E'],
+  [44.9,'Enam kartu, tugas kecil: jawabnya di komentar.','Six cards, small homework: answer below.','#FFFFFF'],
+  [50.07,'Terima kasih sudah menonton.','Thanks for watching.','#FFE9A8'],
 ];
 let subIdx=-1;
 function renderSub(t){

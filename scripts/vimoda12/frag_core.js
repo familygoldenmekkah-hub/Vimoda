@@ -245,7 +245,7 @@ panel1.appendChild(p1Hd);
 const p1Big=document.createElement('div');
 p1Big.className='pBig';
 p1Big.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;height:${Math.round(P.panelH*0.14)}px;display:flex;align-items:center;justify-content:center;`;
-p1Big.textContent='RASIONAL + IRASIONAL';
+p1Big.textContent='REAL = NYATA';
 panel1.appendChild(p1Big);
 [['MENCakup RASIONAL DAN IRASIONAL',7.8],['DARI BULAT SAMPAI DESIMAL TAK BERULANG',8.8]].forEach(([tx,t0])=>{
   const r=document.createElement('div');
@@ -293,8 +293,8 @@ panel2.appendChild(p2Hd);
 const p2Cols=document.createElement('div');
 p2Cols.style.cssText+=`display:flex;gap:16px;height:${Math.round(P.panelH*0.56)}px;padding:6px ${Math.round(P.panelW*0.05)}px 0;position:relative;`;
 const KCOLS=[];
-[['RASIONAL','#4CAF7A','#8ED4A8','BISA DITULIS a/b, b TIDAK 0',['½','¾','-5','0,25','0,3333...'],17.8,19.0],
- ['IRASIONAL','#D97A2E','#E8A46E','TIDAK BISA DITULIS a/b',['√2','√3','π'],21.9,22.8]].forEach(([nm,col,bd,def,chips,t0,tc0],ci)=>{
+[['RASIONAL','#4CAF7A','#8ED4A8','BISA JADI PECAHAN a/b',['½','¾','-5','0,25','0,3333...'],17.8,19.0],
+ ['IRASIONAL','#D97A2E','#E8A46E','TIDAK BISA JADI PECAHAN',['√2','√3','π'],21.9,22.8]].forEach(([nm,col,bd,def,chips,t0,tc0],ci)=>{
   const colDiv=document.createElement('div');
   colDiv.className='kcol';
   colDiv.style.cssText+=`position:relative;flex:1;border-color:${bd};`;
@@ -391,7 +391,7 @@ panel3.appendChild(numline);
 const p3Note=document.createElement('div');
 p3Note.className='pNote';
 p3Note.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;margin:${ORIENT==='portrait'?14:8}px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?19:17}px;`;
-p3Note.textContent='NILAI TETAP BISA DITENTUKAN';
+p3Note.textContent='WALAU NGGAK SELESAI, POSISI PASTI';
 panel3.appendChild(p3Note);
 propsEl.appendChild(panel3);
 
