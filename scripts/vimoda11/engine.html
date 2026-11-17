@@ -564,7 +564,7 @@ const KCOLS=[];
  ['IRASIONAL','#8A3A24','#D98F7E',['TIDAK BISA DITULIS a/b','TIDAK BERHENTI, TIDAK BERPOLA','CONTOH: √2, π'],41.8]].forEach(([nm,col,bd,rows,t0],ci)=>{
   const colDiv=document.createElement('div');
   colDiv.className='kcol';
-  colDiv.style.cssText+=`flex:1;border-color:${bd};`;
+  colDiv.style.cssText+=`position:relative;flex:1;border-color:${bd};`;
   const kh=document.createElement('div');
   kh.className='kh';
   kh.style.cssText+=`color:${col};font-size:${ORIENT==='portrait'?20:18}px;padding-top:6px;`;
