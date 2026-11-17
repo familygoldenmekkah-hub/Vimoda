@@ -201,12 +201,12 @@ for t0 in [41.4, 41.8, 42.2, 42.6]:        # empat baris nilai pengukuran
     add(t0, tick(900, 0.085))
     add(t0 + 0.02, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
 add(43.0, tick(760, 0.045))                # catatan tidak selalu bilangan bulat
-for i in range(6):                         # enam kartu uji muncul
-    add(44.7 + i * 0.15, tick(480 + i * 40, 0.045))
-for i in range(6):                         # kartu dibalik satu per satu
-    add(44.9 + i * 0.42, tick(760 + i * 55, 0.06))
+for i in range(4):                         # empat soal bernomor muncul
+    add(44.6 + i * 0.15, tick(620 + i * 80, 0.05))
+for i in range(6):                         # enam kartu besar terurut nilai
+    add(45.4 + i * 0.13, tick(560 + i * 95, 0.05))
 add(47.7, whoosh(0.6, True, 0.07))
-add(47.75, chime(880.0, 0.12))             # pil JAWAB KEEMPATNYA
+add(47.75, chime(880.0, 0.12))             # pil TULIS JAWABANMU DI KOMENTAR YA
 add(49.8, whoosh(0.6, False, 0.06))        # konten keluar layar (aturan 28)
 add(50.15, chime(440.0, 0.09))             # terima kasih sudah menonton
 add(50.2, whoosh(0.5, True, 0.03))

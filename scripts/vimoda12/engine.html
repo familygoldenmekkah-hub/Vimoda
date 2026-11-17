@@ -120,7 +120,7 @@ body{margin:0;background:#120C08;font-family:'Poppins','Noto Sans',sans-serif;-w
   </div>
   <div id="flash"></div>
   <div id="fade"></div>
-  <div id="pil">JAWAB KEEMPATNYA</div>
+  <div id="pil">TULIS JAWABANMU DI KOMENTAR YA</div>
   <div id="endcard">
     <div id="fplate"><div id="f_url">AKIOMIDA.COM</div></div>
     <div id="f_bar"></div>
@@ -159,7 +159,7 @@ const P = ORIENT==='portrait' ? {
   rulerX:40, rulerY:424, rulerW:1000, rulerH:46, rulFS:14,
   stampX:470, stampY:690, stampW:480, stampH:60, stampFS:26,
   panelX:400, panelY:470, panelW:610, panelH:360,
-  pilX:305, pilY:758, pilW:470, pilH:68, pilFS:28,
+  pilX:260, pilY:850, pilW:560, pilH:64, pilFS:23,
   ecY:830, barW:420,
   titleY:300, titleS0:80, titleSN:74,
   subTop:1170, subId:40, subEn:22, subMax:880,
@@ -167,7 +167,7 @@ const P = ORIENT==='portrait' ? {
   lampsX:[340,700], lampsY:[168,150], lampsD:[74,62],
   markX:220, markY:1096, markW:640, markH:16,
   pegX:830, pegY:870, pegW:180, pegH:140,
-  cardW:76, cardH:52, cardFS:20
+  cardW:150, cardH:64, cardFS:26
 } : {
   floorY:508, bbY:494, ceilH:70,
   tableX:140, tableW:360, slabY:540, slabH:40, legBot:700,
@@ -175,7 +175,7 @@ const P = ORIENT==='portrait' ? {
   rulerX:140, rulerY:262, rulerW:600, rulerH:34, rulFS:12,
   stampX:960, stampY:440, stampW:560, stampH:56, stampFS:24,
   panelX:760, panelY:250, panelW:1020, panelH:290,
-  pilX:760, pilY:600, pilW:430, pilH:65, pilFS:26,
+  pilX:680, pilY:600, pilW:560, pilH:60, pilFS:22,
   ecY:400, barW:520,
   titleY:150, titleS0:88, titleSN:72,
   subTop:740, subId:38, subEn:20, subMax:1360,
@@ -183,7 +183,7 @@ const P = ORIENT==='portrait' ? {
   lampsX:[560,1000], lampsY:[112,100], lampsD:[62,52],
   markX:620, markY:672, markW:680, markH:14,
   pegX:1450, pegY:560, pegW:220, pegH:130,
-  cardW:96, cardH:60, cardFS:24
+  cardW:128, cardH:56, cardFS:24
 };
 const stage=document.getElementById('stage');
 stage.style.width=W+'px';stage.style.height=H+'px';
@@ -564,70 +564,69 @@ p4Note.textContent='TIDAK SELALU BILANGAN BULAT';
 panel4.appendChild(p4Note);
 propsEl.appendChild(panel4);
 
-/* kartu uji: enam bilangan dianotasi ke garis bilangan mini */
-const UJI=[['-8',-8],['⅗',0.6],['√7',2.646],['0',0],['π',3.142],['4,25',4.25]];
-const ux=(v)=>{ const zoneL=P.panelX+Math.round(P.panelW*0.03), zoneW=Math.round(P.panelW*0.94);
-  return zoneL+(v+9)/15*zoneW; };
-const lineY=ORIENT==='portrait'?740:470;
+/* ---------- papan tugas uji (aturan 30): soal tampil besar dan bernomor ---------- */
+const panelUji=document.createElement('div');
+panelUji.className='panelI';
+panelUji.style.cssText+=`left:${P.panelX}px;top:${ORIENT==='portrait'?400:250}px;width:${P.panelW}px;height:${ORIENT==='portrait'?410:310}px;`;
+const ujiHd=document.createElement('div');
+ujiHd.style.cssText+=`margin:12px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?42:34}px;font-size:${ORIENT==='portrait'?26:23}px;color:#F2C14E;font-weight:800;letter-spacing:.06em;opacity:0;`;
+ujiHd.textContent='TUGAS UNTUKMU:';
+panelUji.appendChild(ujiHd);
+const SOAL=[['1.','SEMUANYA REAL?'],['2.','MANA RASIONAL?'],['3.','MANA IRASIONAL?'],['4.','KENAPA √7 DAN ⅗ BEDA?']];
+const UJIS=[];
+SOAL.forEach(([n,q],i)=>{
+  const r=document.createElement('div');
+  r.style.cssText+=`margin:3px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?34:29}px;font-size:${ORIENT==='portrait'?21:19}px;color:#FFF6E8;font-weight:600;opacity:0;`;
+  r.innerHTML='<span style="color:#F2C14E">'+n+'</span> '+q;
+  panelUji.appendChild(r);
+  UJIS.push({el:r,t0:44.6+i*0.15});
+});
+const UJI=[['-8',-8],['0',0],['⅗',0.6],['√7',2.646],['π',3.142],['4,25',4.25]];
+const ujiGrid=document.createElement('div');
+ujiGrid.style.cssText+=`position:absolute;left:0;top:${ORIENT==='portrait'?218:182}px;width:100%;display:flex;flex-wrap:wrap;justify-content:center;gap:${ORIENT==='portrait'?12:10}px;`;
+const CARDS=UJI.map(([lab,v],i)=>{
+  const el=document.createElement('div');
+  el.className='valCard';
+  el.style.cssText+=`position:relative;width:${P.cardW}px;height:${P.cardH}px;font-size:${P.cardFS}px;opacity:0;`;
+  el.textContent=lab;
+  ujiGrid.appendChild(el);
+  return {el,lab,v,pop:45.4+i*0.13};
+});
+panelUji.appendChild(ujiGrid);
+const zoneW=P.panelW-Math.round(P.panelW*0.12);
 const lineDiv=document.createElement('div');
 lineDiv.className='numline';
-lineDiv.style.cssText+=`position:absolute;left:${P.panelX+Math.round(P.panelW*0.03)}px;top:${lineY}px;width:${Math.round(P.panelW*0.94)}px;height:0;`;
+lineDiv.style.cssText+=`left:${Math.round(P.panelW*0.06)}px;top:${ORIENT==='portrait'?378:268}px;width:${zoneW}px;height:0;`;
 {
   const bar=document.createElement('div');
   bar.className='bar';
   bar.style.cssText+=`left:0;top:-2px;width:100%;height:4px;`;
   lineDiv.appendChild(bar);
   for(let v=-9;v<=6;v++){
-    const fx=(v+9)/15*P.panelW*0.94;
+    const fx=(v+9)/15*zoneW;
     const tk=document.createElement('div');
     tk.className='tickm';
-    tk.style.cssText+=`left:${fx-1}px;top:4px;width:2px;height:8px;`;
+    tk.style.cssText+=`left:${fx-1}px;top:4px;width:2px;height:7px;`;
     lineDiv.appendChild(tk);
     if(v%3===0){
       const nm=document.createElement('div');
       nm.className='lab';
-      nm.style.cssText+=`left:${fx-10}px;top:14px;font-size:${ORIENT==='portrait'?12:12}px;width:20px;text-align:center;opacity:.9;`;
+      nm.style.cssText+=`left:${fx-10}px;top:13px;font-size:12px;width:20px;text-align:center;opacity:.9;`;
       nm.textContent=v;
       lineDiv.appendChild(nm);
     }
   }
-  const UJIPT=UJI.map(([lab,v])=>({lab,v,fx:(v+9)/15*P.panelW*0.94}));
-  window.__UJIPT=UJIPT;
 }
-propsEl.appendChild(lineDiv);
-/* kartu anotasi dua tingkat + garis penghubung ke titik di garis */
-const CARDPOS = ORIENT==='portrait'
-  ? {'-8':[470,540],'⅗':[710,540],'√7':[845,540],'0':[655,620],'π':[925,620],'4,25':[785,620]}
-  : {'-8':[880,300],'⅗':[1330,300],'√7':[1620,300],'0':[1300,368],'π':[1660,368],'4,25':[1500,368]};
-const CARDS=UJI.map(([lab,v],i)=>{
-  const c=document.createElement('div');
-  c.className='valCard';
-  const [cx,cy]=CARDPOS[lab];
-  c.style.cssText+=`left:${cx-Math.round(P.cardW/2)}px;top:${cy}px;width:${P.cardW}px;height:${P.cardH}px;font-size:${P.cardFS}px;opacity:0;`;
-  c.textContent='?';
-  propsEl.appendChild(c);
-  const pt=window.__UJIPT.find(p=>p.lab===lab);
-  const lead=document.createElement('div');
-  lead.className='lead';
-  const x1=cx, y1=cy+P.cardH, x2=P.panelX+Math.round(P.panelW*0.03)+pt.fx, y2=lineY;
-  const len=Math.max(Math.hypot(x2-x1,y2-y1),1);
-  const ang=Math.atan2(y2-y1,x2-x1)*180/Math.PI;
-  lead.style.cssText+=`left:${x1}px;top:${y1}px;width:${len}px;height:2px;transform:rotate(${ang.toFixed(1)}deg);transform-origin:0 0;`;
-  propsEl.appendChild(lead);
-  const dotm=document.createElement('div');
-  dotm.className='dot';
-  const dd=ORIENT==='portrait'?14:14;
-  dotm.style.cssText+=`left:${x2-dd/2}px;top:${lineY+2-dd/2}px;width:${dd}px;height:${dd}px;opacity:0;`;
-  propsEl.appendChild(dotm);
-  return {el:c,lead,dotm,lab,v,fx:pt.fx,pop:44.7+i*0.15,flip:44.9+i*0.42,ph:i*0.8};
+const DOTEL=UJI.map(([lab,v])=>{
+  const dm=document.createElement('div');
+  dm.className='dot';
+  const fx=(v+9)/15*zoneW;
+  dm.style.cssText+=`left:${fx-8}px;top:-8px;width:16px;height:16px;`;
+  lineDiv.appendChild(dm);
+  return dm;
 });
-/* tag pengingat di atas kartu */
-const tagUji=document.createElement('div');
-tagUji.className='pNote';
-tagUji.style.cssText+=`position:absolute;left:${P.panelX+Math.round(P.panelW*0.2)}px;top:${ORIENT==='portrait'?478:256}px;
-  width:${Math.round(P.panelW*0.6)}px;height:${ORIENT==='portrait'?44:34}px;font-size:${ORIENT==='portrait'?19:17}px;opacity:0;`;
-tagUji.textContent='REAL, LALU R ATAU I?';
-propsEl.appendChild(tagUji);
+panelUji.appendChild(lineDiv);
+propsEl.appendChild(panelUji);
 
 /* ---------- karakter: HANYA bola emas mentor, bulat sejati, tanpa mata ---------- */
 const charsEl=document.getElementById('chars');
@@ -712,7 +711,7 @@ const SUBS=[
   [35.1,'Setengah di antara 0 dan 1. Akar 2 sebelum 2.','Half between 0 and 1. Root 2 before 2.','#FFFFFF'],
   [38.6,'Pi? Angkanya nggak selesai, kursinya tetap pasti.','Pi never ends, yet its seat stays fixed.','#D97A2E'],
   [41.5,'Makanya penting: ukuran nyata jarang pas bulat.','Real matters: real sizes are rarely whole.','#D97A2E'],
-  [44.9,'Enam kartu, tugas kecil: jawabnya di komentar.','Six cards, small homework: answer below.','#FFFFFF'],
+  [44.9,'Empat soal, jawabnya di komentar ya.','Four questions, answer in the comments.','#FFFFFF'],
   [50.07,'Terima kasih sudah menonton.','Thanks for watching.','#FFE9A8'],
 ];
 let subIdx=-1;
@@ -829,22 +828,20 @@ function renderFrame(t){
   popA(panel4,t,40.9,0.55,5,0,44.3);
   for(const r of P4ROWS){ r.el.style.opacity=seg(t,r.t0,0.4).toFixed(3); }
   popA(p4Note,t,43.0,0.45,5,0,44.3);
-  /* kartu uji: anotasi ke garis bilangan mini, dibalik tanpa membocorkan kelompok */
-  tagUji.style.opacity=(seg(t,45.0,0.4)*exo).toFixed(3);
-  const zoneL=P.panelX+Math.round(P.panelW*0.03);
-  for(const c of CARDS){
-    const inA=clamp(seg(t,c.pop,0.3),0,1);
-    const fl=t>=c.flip;
-    if(c.el.textContent!==(fl?c.lab:'?'))c.el.textContent=fl?c.lab:'?';
-    const bounce=1+0.11*Math.sin(clamp(seg(t,c.flip,0.4),0,1)*Math.PI)*(fl?1:0);
-    c.el.style.opacity=(inA*exo).toFixed(3);
-    c.el.style.transform=`scale(${bounce.toFixed(3)})`;
-    c.el.style.borderColor=fl&&t<c.flip+0.5?'#E8B32E':'#C8A86E';
-    const lo=clamp(seg(t,c.pop+0.15,0.35),0,1)*(1-seg(t,49.8,0.5));
-    c.lead.style.opacity=lo.toFixed(3);
-    c.dotm.style.opacity=clamp(seg(t,c.pop+0.3,0.3),0,1).toFixed(3);
-    const ds=1+0.14*Math.sin(clamp(seg(t,c.pop+0.3,0.4),0,1)*Math.PI);
-    c.dotm.style.transform=`scale(${ds.toFixed(3)})`;
+  /* papan tugas uji (aturan 30): soal bernomor, kartu besar, titik garis */
+  popA(panelUji,t,44.4,0.55,5,0,49.8);
+  ujiHd.style.opacity=(seg(t,44.55,0.35)*exo).toFixed(3);
+  for(const rr of UJIS){ rr.el.style.opacity=seg(t,rr.t0,0.35).toFixed(3); }
+  for(let i=0;i<CARDS.length;i++){
+    const cc=CARDS[i];
+    const inA=clamp(seg(t,cc.pop,0.3),0,1);
+    cc.el.style.opacity=(inA*exo).toFixed(3);
+    const s2=1+0.09*Math.sin(clamp(seg(t,cc.pop,0.4),0,1)*Math.PI);
+    cc.el.style.transform=`scale(${s2.toFixed(3)})`;
+    cc.el.style.borderColor=inA>0.9&&t<cc.pop+0.45?'#E8B32E':'#C8A86E';
+    const dm=DOTEL[i];
+    dm.style.opacity=clamp(seg(t,cc.pop+0.12,0.3),0,1).toFixed(3);
+    dm.style.transform=`scale(${(1+0.14*Math.sin(clamp(seg(t,cc.pop+0.12,0.4),0,1)*Math.PI)).toFixed(3)})`;
   }
   popA(pil,t,47.7,0.6,6,0,49.8);
   /* penutup bersih (aturan 28): meja, proyek, pegboard keluar di 49.8 */

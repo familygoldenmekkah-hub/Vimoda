@@ -14,7 +14,7 @@ const SUBS=[
   [35.1,'Setengah di antara 0 dan 1. Akar 2 sebelum 2.','Half between 0 and 1. Root 2 before 2.','#FFFFFF'],
   [38.6,'Pi? Angkanya nggak selesai, kursinya tetap pasti.','Pi never ends, yet its seat stays fixed.','#D97A2E'],
   [41.5,'Makanya penting: ukuran nyata jarang pas bulat.','Real matters: real sizes are rarely whole.','#D97A2E'],
-  [44.9,'Enam kartu, tugas kecil: jawabnya di komentar.','Six cards, small homework: answer below.','#FFFFFF'],
+  [44.9,'Empat soal, jawabnya di komentar ya.','Four questions, answer in the comments.','#FFFFFF'],
   [50.07,'Terima kasih sudah menonton.','Thanks for watching.','#FFE9A8'],
 ];
 let subIdx=-1;
@@ -131,22 +131,20 @@ function renderFrame(t){
   popA(panel4,t,40.9,0.55,5,0,44.3);
   for(const r of P4ROWS){ r.el.style.opacity=seg(t,r.t0,0.4).toFixed(3); }
   popA(p4Note,t,43.0,0.45,5,0,44.3);
-  /* kartu uji: anotasi ke garis bilangan mini, dibalik tanpa membocorkan kelompok */
-  tagUji.style.opacity=(seg(t,45.0,0.4)*exo).toFixed(3);
-  const zoneL=P.panelX+Math.round(P.panelW*0.03);
-  for(const c of CARDS){
-    const inA=clamp(seg(t,c.pop,0.3),0,1);
-    const fl=t>=c.flip;
-    if(c.el.textContent!==(fl?c.lab:'?'))c.el.textContent=fl?c.lab:'?';
-    const bounce=1+0.11*Math.sin(clamp(seg(t,c.flip,0.4),0,1)*Math.PI)*(fl?1:0);
-    c.el.style.opacity=(inA*exo).toFixed(3);
-    c.el.style.transform=`scale(${bounce.toFixed(3)})`;
-    c.el.style.borderColor=fl&&t<c.flip+0.5?'#E8B32E':'#C8A86E';
-    const lo=clamp(seg(t,c.pop+0.15,0.35),0,1)*(1-seg(t,49.8,0.5));
-    c.lead.style.opacity=lo.toFixed(3);
-    c.dotm.style.opacity=clamp(seg(t,c.pop+0.3,0.3),0,1).toFixed(3);
-    const ds=1+0.14*Math.sin(clamp(seg(t,c.pop+0.3,0.4),0,1)*Math.PI);
-    c.dotm.style.transform=`scale(${ds.toFixed(3)})`;
+  /* papan tugas uji (aturan 30): soal bernomor, kartu besar, titik garis */
+  popA(panelUji,t,44.4,0.55,5,0,49.8);
+  ujiHd.style.opacity=(seg(t,44.55,0.35)*exo).toFixed(3);
+  for(const rr of UJIS){ rr.el.style.opacity=seg(t,rr.t0,0.35).toFixed(3); }
+  for(let i=0;i<CARDS.length;i++){
+    const cc=CARDS[i];
+    const inA=clamp(seg(t,cc.pop,0.3),0,1);
+    cc.el.style.opacity=(inA*exo).toFixed(3);
+    const s2=1+0.09*Math.sin(clamp(seg(t,cc.pop,0.4),0,1)*Math.PI);
+    cc.el.style.transform=`scale(${s2.toFixed(3)})`;
+    cc.el.style.borderColor=inA>0.9&&t<cc.pop+0.45?'#E8B32E':'#C8A86E';
+    const dm=DOTEL[i];
+    dm.style.opacity=clamp(seg(t,cc.pop+0.12,0.3),0,1).toFixed(3);
+    dm.style.transform=`scale(${(1+0.14*Math.sin(clamp(seg(t,cc.pop+0.12,0.4),0,1)*Math.PI)).toFixed(3)})`;
   }
   popA(pil,t,47.7,0.6,6,0,49.8);
   /* penutup bersih (aturan 28): meja, proyek, pegboard keluar di 49.8 */
