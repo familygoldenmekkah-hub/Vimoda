@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+/*__FONTS__*/
+*{box-sizing:border-box}
+body{margin:0;background:#120C08;font-family:'Poppins','Noto Sans',sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:relative;overflow:hidden}
+#world{position:absolute;inset:0}
+#flash{position:absolute;inset:0;background:#FFFFFF;opacity:0;pointer-events:none}
+#fade{position:absolute;inset:0;background:#120C08;opacity:0;pointer-events:none}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+/* PETAK TANAM: rumah tanam dinding kaca sage dengan rangka krem - rak pot
+   terracotta tiga tingkat di dinding (ikon dunia: pot tersusun rapi),
+   meja tanam kayu dengan baki semai hijau, tanda PETAK TANAM di dinding,
+   lampu tumbuh dome hangat, lantai paving terakota dengan marka safety
+   kuning di jalur mentor. Panel konten plum gelap berbingkai kuning safety
+   (aturan 26: latar BERBEDA TOTAL dari Gudang Papasan dan semua episode
+   lain). Karakter: HANYA bola emas mentor, bulat sejati, tanpa mata
+   (aturan 23). Pedagogi pemula aturan 29 dan papan tugas kuis aturan 30
+   dipatuhi sejak rendering pertama. Subjudul zona aman maksimal dua baris
+   (aturan 27); watermark AKIOMIDA di tepi paling bawah (aturan 24);
+   penutup bersih (aturan 28). */
+#shopwall{position:absolute;left:0;top:0;width:100%;
+  background:repeating-linear-gradient(90deg,rgba(255,253,246,.55) 0 5px,transparent 5px 128px),
+  repeating-linear-gradient(0deg,rgba(255,253,246,.35) 0 4px,transparent 4px 150px),
+  linear-gradient(180deg,#DCE8D6 0%,#C4D8B8 100%)}
+#tilesun{position:absolute;inset:0;background:rgba(58,38,26,0);will-change:background}
+#ceiling{position:absolute;left:0;top:0;width:100%}
+#ceiling .beam{position:absolute;background:linear-gradient(180deg,#E8E2D0,#C4BCA4);border-radius:0 0 8px 8px;box-shadow:0 4px 10px rgba(60,40,10,.22)}
+.lampW{position:absolute;will-change:opacity}
+.lampW .cord{position:absolute;width:4px;background:#3A2C1E}
+.lampW .dome{position:absolute;border-radius:50% 50% 12px 12px;background:linear-gradient(180deg,#F4F1E8,#CFC9B8);box-shadow:0 8px 18px rgba(60,40,10,.3)}
+.lampW .glow{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,244,200,.8),rgba(255,244,200,0) 70%)}
+/* penggaris raksasa: garis bilangan di dinding */
+#ruler{position:absolute;will-change:opacity}
+#ruler .body{position:absolute;background:linear-gradient(180deg,#C8A06A,#B08850);border:3px solid #8A6A44;border-radius:6px;box-shadow:0 8px 20px rgba(60,40,10,.28)}
+#ruler .axis{position:absolute;background:#6B4E2E}
+#ruler .tick{position:absolute;background:#6B4E2E}
+#ruler .num{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#6B4E2E}
+#ruler .hl{position:absolute;border-radius:4px;background:linear-gradient(90deg,#E8B32E,#D97A2E);opacity:0;box-shadow:0 0 16px rgba(232,179,46,.6)}
+#concrete{position:absolute;left:0;width:100%;background:linear-gradient(180deg,#D8A87A 0%,#C69064 100%)}
+#marker{position:absolute;border-radius:999px;background:repeating-linear-gradient(90deg,#E8B32E 0 46px,#3A2C1E 46px 58px);box-shadow:0 4px 10px rgba(60,40,10,.3);will-change:opacity}
+#baseboard{position:absolute;left:0;width:100%;background:#A87A52}
+#tableT{position:absolute;will-change:opacity}
+#tableT .slab{position:absolute;background:linear-gradient(180deg,#C8A06A,#B08850);border-radius:10px;box-shadow:0 10px 22px rgba(60,40,10,.32)}
+#tableT .leg{position:absolute;background:#8A6A44;border-radius:4px;width:26px}
+#boardSheet{position:absolute;will-change:opacity}
+#boardSheet .board{position:absolute;background:linear-gradient(180deg,#5E6E52,#4C5C42);border:3px solid #3E4C34;border-radius:6px;box-shadow:0 8px 20px rgba(60,40,10,.3)}
+#boardSheet .pline{position:absolute;background:#8AA07A;border-radius:2px}
+#boardSheet .plab{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#C8D8B0}
+#boardSheet .tri{position:absolute;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-bottom:22px solid #D08A50}
+#pegboard{position:absolute;will-change:opacity}
+#pegboard .board{position:absolute;background:#EFE8D0;border:3px solid #8A8A6E;border-radius:8px;
+  background-image:radial-gradient(circle,#C4C8AC 1.6px,transparent 1.8px);background-size:16px 16px;box-shadow:0 12px 26px rgba(60,40,10,.35)}
+#pegboard .tool .metal{position:absolute;background:linear-gradient(180deg,#9AA6B4,#6E7A8A);border-radius:3px}
+#pegboard .tool .wood{position:absolute;background:linear-gradient(180deg,#D9B87C,#B89456);border-radius:3px}
+.shelf{position:absolute;background:linear-gradient(180deg,#C8A06A,#B08850);border:3px solid #8A6A44;border-radius:6px;box-shadow:0 6px 14px rgba(30,18,4,.3);will-change:opacity}
+.pot{position:absolute;will-change:transform,opacity}
+.pot .pb{position:absolute;border-radius:6px 6px 10px 10px;background:linear-gradient(180deg,#D08A50,#B07038);box-shadow:0 6px 14px rgba(30,18,4,.35)}
+.pot .lf{position:absolute;border-radius:50% 50% 42% 42%;background:linear-gradient(180deg,#6EA85A,#4C8A40)}
+.pot.line .pb{background:linear-gradient(180deg,#9AA6B4,#6E7A8A)}
+.panelI{position:absolute;background:linear-gradient(180deg,#3A2A50,#2A1E38);border-radius:16px;border:4px solid #E8B32E;box-shadow:0 16px 38px rgba(30,18,4,.5);will-change:transform,opacity}
+.tapeC{position:absolute;background:rgba(232,179,46,.5);border-radius:3px;box-shadow:0 2px 5px rgba(30,18,4,.25)}
+.pHd{font-weight:800;color:#FFF6E6;letter-spacing:.10em;text-align:center}
+.pBig{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#F2CE8E;text-align:center;opacity:0;will-change:opacity}
+.pRow{display:flex;align-items:center;opacity:0}
+.pDot{border-radius:50%;flex:none}
+.pName{font-weight:800;color:#FFF6E6;flex:none}
+.pNote{display:flex;align-items:center;justify-content:center;background:rgba(232,179,46,.22);border:2px solid rgba(232,179,46,.6);border-radius:10px;color:#F2CE8E;font-weight:800;letter-spacing:.05em;text-align:center;opacity:0;will-change:opacity}
+.chipA{display:flex;align-items:center;justify-content:center;border-radius:12px;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#FFF6E6;background:#4A3A62;box-shadow:0 8px 18px rgba(30,18,4,.4);opacity:0;will-change:opacity}
+.stamp{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(92deg,#7FA6BF 0%,#D97A2E 52%,#E8B32E 100%);color:#22160C;font-weight:800;letter-spacing:.06em;box-shadow:0 12px 26px rgba(30,18,4,.45);will-change:transform,opacity}
+.kcol{position:absolute;border-radius:12px;border:3px solid;background:rgba(255,253,246,.06);opacity:0;will-change:opacity}
+.kcol .kh{font-weight:800;text-align:center;letter-spacing:.08em}
+.kcol .kd{font-weight:700;color:#FFF6E6;text-align:center}
+.kcol .cwrap{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.kcol .chipA{background:#4A3A62}
+#divider{position:absolute;background:linear-gradient(180deg,rgba(232,179,46,0),#E8B32E,rgba(232,179,46,0));opacity:0;will-change:opacity}
+.numline{position:absolute;will-change:opacity}
+.numline .bar{position:absolute;background:#F2CE8E;border-radius:3px}
+.numline .tickm{position:absolute;background:rgba(242,206,142,.7)}
+.numline .dot{position:absolute;border-radius:50%;background:#D97A2E;box-shadow:0 0 12px rgba(217,122,46,.7);opacity:0;will-change:opacity}
+.numline .lab{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#F2CE8E;opacity:0;will-change:opacity}
+.vrow{display:flex;align-items:center;opacity:0}
+.vrow .vd{border-radius:50%;flex:none}
+.vrow .vt{font-weight:700;color:#FFF6E6}
+.valCard{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(180deg,#FFFDF6,#F2E6C6);border:3px solid #C8A86E;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#3A2C1E;box-shadow:0 8px 18px rgba(30,18,4,.35);will-change:transform,opacity}
+.lead{position:absolute;background:#C8A86E;opacity:0;will-change:opacity}
+.qmark{position:absolute;color:#D97A2E;font-weight:800;text-shadow:0 5px 0 rgba(0,0,0,.25);will-change:transform,opacity}
+.title{position:absolute;left:0;width:100%;text-align:center;font-weight:800;color:#3A2E20;letter-spacing:.04em;text-shadow:0 5px 0 rgba(255,255,255,.45),0 12px 26px rgba(90,50,10,.22);will-change:transform,opacity}
+#pil{position:absolute;border-radius:999px;background:linear-gradient(92deg,#7FA6BF 0%,#D97A2E 52%,#E8B32E 100%);color:#22160C;font-weight:800;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;box-shadow:0 10px 24px rgba(30,18,4,.4)}
+#endcard{position:absolute;left:0;width:100%;opacity:0;will-change:transform,opacity}
+#fplate{background:rgba(26,16,10,.62);border-radius:28px;padding:14px 44px;width:max-content;margin:0 auto;box-shadow:0 14px 34px rgba(30,18,4,.4)}
+#f_url{font-weight:800;text-align:center}
+#f_bar{height:7px;border-radius:4px;background:linear-gradient(90deg,#7FA6BF,#D97A2E,#E8B32E)}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(26,16,10,.86);border-radius:20px;padding:18px 32px;text-align:center;box-shadow:0 14px 34px rgba(30,18,4,.5);will-change:transform,opacity}
+#sub_id{font-weight:800;color:#FFFFFF;line-height:1.26}
+#sub_en{color:#D9C8B4;font-weight:600}
+#wm{position:absolute;font-weight:800;letter-spacing:.34em;color:#F6EFE2;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;border:1.5px solid rgba(246,239,226,.42);will-change:transform}
+.bchar{position:absolute;will-change:transform,opacity}
+.bchar .core{position:absolute;border-radius:100%}
+.bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px)}
+.bsh{position:absolute;border-radius:50%;background:rgba(40,24,8,.4);filter:blur(2px)}
+.spark{position:absolute;width:34px;height:34px;opacity:0}
+.spark .sa{position:absolute;background:#FFE9A8;border-radius:3px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="world">
+    <div id="shopwall"></div>
+    <div id="tilesun"></div>
+    <div id="ceiling"></div>
+    <div class="lampW"><div class="cord"></div><div class="dome"></div><div class="glow"></div></div>
+    <div class="lampW"><div class="cord"></div><div class="dome"></div><div class="glow"></div></div>
+    <div id="ruler"><div class="body"></div><div class="hl"></div><div class="axis"></div></div>
+    <div id="concrete"></div>
+    <div id="marker"></div>
+    <div id="baseboard"></div>
+    <div id="tableT"><div class="slab"></div><div class="leg"></div><div class="leg"></div></div>
+    <div id="boardSheet"><div class="board"></div><div class="tri"></div></div>
+    <div id="pegboard"><div class="board"></div></div>
+    <div id="props"></div>
+    <div id="chars"></div>
+  </div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+  <div id="pil">JAWAB DI KOLOM KOMENTAR YA</div>
+  <div id="endcard">
+    <div id="fplate"><div id="f_url">AKIOMIDA.COM</div></div>
+    <div id="f_bar"></div>
+  </div>
+  <div class="title" id="t0">PRIMA DAN KOMPOSIT</div>
+  <div class="title" id="t1">APA ITU PRIMA?</div>
+  <div class="title" id="t2">APA ITU KOMPOSIT?</div>
+  <div class="title" id="t3">ISTIMEWANYA 2</div>
+  <div class="title" id="t4">FAKTORISASI PRIMA</div>
+  <div class="title" id="t5">PERIKSA FAKTOR!</div>
+  <div id="subbar"><div id="sub_id"></div><div id="sub_en"></div></div>
+  <div id="wm">AKIOMIDA</div>
+</div>
+<script>
