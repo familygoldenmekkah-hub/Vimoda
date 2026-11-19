@@ -174,7 +174,19 @@ const pegEl=document.getElementById('pegboard');
 
 /* ---------- panel-panel konten (satu ide per layar) ---------- */
 const propsEl=document.getElementById('props');
+const speedEl=document.getElementById('speedlines');
+const spotEl=document.getElementById('spotlight');
 const P1ROWS=[], P1CHIPS=[], P2ROWS=[], P2CHIPS=[], SROWS=[], P3ROWS=[], P3CHIPS=[], P4ROWS=[];
+/* chip episode ala kartu judul anime (muncul bersama judul hook) */
+const epchip=document.createElement('div');
+epchip.style.cssText+=`position:absolute;left:50%;transform:translateX(-50%);
+  top:${P.titleY-(ORIENT==='portrait'?66:54)}px;width:max-content;
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;
+  font-size:${ORIENT==='portrait'?22:20}px;letter-spacing:.22em;color:#3A2C1E;
+  background:rgba(255,253,246,.78);border:2.5px solid #D97A2E;border-radius:999px;
+  padding:7px 26px;box-shadow:0 8px 18px rgba(60,40,10,.28);opacity:0;`;
+epchip.textContent='EPISODE 14';
+stage.appendChild(epchip);
 /* stempel hook */
 const stamp=document.createElement('div');
 stamp.className='stamp';
@@ -439,6 +451,18 @@ p4Note2.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:4px ${Math.
 p4Note2.textContent='BASIS TEORI BILANGAN';
 panel4.appendChild(p4Note2);
 propsEl.appendChild(panel4);
+/* jurus bernama ala anime (aturan 34): stempel kecil miring di sudut panel,
+   pembungkus diputar statis agar popA (scale) tidak menimpa rotasi */
+const jurusWrap=document.createElement('div');
+jurusWrap.style.cssText+=`position:absolute;left:${P.panelX+P.panelW-(ORIENT==='portrait'?268:300)}px;
+  top:${P.panelY-(ORIENT==='portrait'?26:20)}px;width:${ORIENT==='portrait'?268:300}px;
+  height:${ORIENT==='portrait'?54:48}px;transform:rotate(-7deg);`;
+const jurus=document.createElement('div');
+jurus.className='stamp';
+jurus.style.cssText+=`left:0;top:0;width:100%;height:100%;font-size:${ORIENT==='portrait'?23:21}px;opacity:0;`;
+jurus.textContent='JURUS URAI PRIMA!';
+jurusWrap.appendChild(jurus);
+propsEl.appendChild(jurusWrap);
 
 /* ---------- papan tugas uji (aturan 30): soal tampil besar dan bernomor ---------- */
 const panelUji=document.createElement('div');
@@ -446,7 +470,7 @@ panelUji.className='panelI';
 panelUji.style.cssText+=`left:${P.panelX}px;top:${ORIENT==='portrait'?400:250}px;width:${P.panelW}px;height:${ORIENT==='portrait'?410:310}px;`;
 const ujiHd=document.createElement('div');
 ujiHd.style.cssText+=`margin:12px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?48:40}px;font-size:${ORIENT==='portrait'?30:27}px;color:#F2C14E;font-weight:800;letter-spacing:.06em;opacity:0;`;
-ujiHd.textContent='GILIRAN KAMU:';
+ujiHd.textContent='TANTANGAN UNTUKMU:';
 panelUji.appendChild(ujiHd);
 const SOAL=[['1.','PRIMA, KOMPOSIT, ATAU BUKAN?'],['2.','KENAPA 1 BUKAN PRIMA?'],['3.','KENAPA 2 GENAP TETAP PRIMA?'],['4.','URAIKAN 36 KE FAKTOR PRIMA']];
 const UJIS=[];
@@ -497,6 +521,7 @@ function makeBall(cols,d,glow){
   return {el,d};
 }
 const mentor=makeBall(['#FFF3C4','#FCD34D','#B45309'],P.ballD,true);
+const mentorCore=mentor.el.querySelector('.core');
 const msh=document.createElement('div');
 msh.className='bsh';
 msh.style.cssText+=`width:${P.ballD*0.8}px;height:15px;margin-left:${-P.ballD*0.4}px;top:-10px;`;

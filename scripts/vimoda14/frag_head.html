@@ -8,6 +8,12 @@
 body{margin:0;background:#120C08;font-family:'Poppins','Noto Sans',sans-serif;-webkit-font-smoothing:antialiased}
 #stage{position:relative;overflow:hidden}
 #world{position:absolute;inset:0}
+#speedlines{position:absolute;inset:0;opacity:0;pointer-events:none;will-change:opacity,transform;
+  background:repeating-conic-gradient(from 0deg at 50% 46%,rgba(255,244,214,.34) 0deg .5deg,transparent .5deg 2.6deg);
+  -webkit-mask-image:radial-gradient(circle at 50% 46%,transparent 30%,#000 72%);
+  mask-image:radial-gradient(circle at 50% 46%,transparent 30%,#000 72%)}
+#spotlight{position:absolute;inset:0;opacity:0;pointer-events:none;will-change:opacity;
+  background:radial-gradient(circle at 50% 42%,transparent 26%,rgba(16,10,4,.62) 78%)}
 #flash{position:absolute;inset:0;background:#FFFFFF;opacity:0;pointer-events:none}
 #fade{position:absolute;inset:0;background:#120C08;opacity:0;pointer-events:none}
 .center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
@@ -125,6 +131,8 @@ body{margin:0;background:#120C08;font-family:'Poppins','Noto Sans',sans-serif;-w
     <div id="props"></div>
     <div id="chars"></div>
   </div>
+  <div id="speedlines"></div>
+  <div id="spotlight"></div>
   <div id="flash"></div>
   <div id="fade"></div>
   <div id="pil">JAWAB DI KOLOM KOMENTAR YA</div>

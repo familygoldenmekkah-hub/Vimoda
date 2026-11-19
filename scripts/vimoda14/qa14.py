@@ -31,9 +31,17 @@ for o in ("portrait", "landscape"):
 #    dan tanpa kalimat intimidasi (aturan 25: soft selling wajib)
 txt = ENGINE.read_text()
 for bad in ("\u2014", "\u2013", "Kaisar", "KAISAR", "TODO", "undefined", "NaN",
-            "FOLLOW", "SUBSCRIBE", "IKUTI"):
+            "FOLLOW", "SUBSCRIBE", "IKUTI", "Kamu tahu harus ke mana",
+            "nemu aha lagi"):
     if bad in txt:
-        print(f"DILARANG ada di engine: {bad!r} (aturan 32 larang minta follow)")
+        print(f"DILARANG ada di engine: {bad!r} (aturan 32 rev3: ajakan tersisip, bukan promosi)")
+        ok = False
+# aturan 34 (dramaturgi anime) + aturan 32 rev3 (teaser tersisip): elemen wajib ada
+for need, label in (("JURUS URAI PRIMA", "aturan 34: jurus bernama"),
+                    ("EPISODE 14", "aturan 34: chip episode"),
+                    ("sudah disemai", "aturan 32 rev3: teaser petak berikutnya")):
+    if need not in txt:
+        print(f"WAJIB ada di engine ({label}): {need!r}")
         ok = False
 for old in ("BULINA", "KELERENG", "CACAH", "APEL", "BABOPA", "PARTOEN",
             "LIMPAI", "KOMPATI", "TULIS DI KOMEN", "JAWAB DI KOMEN",
@@ -73,14 +81,17 @@ print(f"engine: {len(strings)} string teks tampil, tanpa em dash, tanpa label la
 
 for f in ("caption14.txt", "naskah14.md"):
     t = (PKG / f).read_text()
-    for bad in ("\u2014", "\u2013", "Kaisar"):
+    for bad in ("\u2014", "\u2013", "Kaisar", "Kamu tahu harus ke mana", "nemu aha"):
         if bad in t:
-            print(f"DILARANG ada di {f}: {bad!r}")
+            print(f"DILARANG ada di {f}: {bad!r} (aturan 32 rev3)")
             ok = False
     if "Jangan" in t:
         print(f"ATURAN 25: kalimat intimidasi ('Jangan ...') ditemukan di {f}")
         ok = False
-    print(f"{f}: bersih tanpa em dash dan label lama ({len(t)} karakter)")
+    if f == "caption14.txt" and "sudah disemai" not in t:
+        print(f"ATURAN 32 rev3: teaser tersisip belum ada di {f}")
+        ok = False
+    print(f"{f}: bersih ({len(t)} karakter)")
 
 # 3) ffprobe kedua final (wajib ada; kosong = gagal)
 for o in ("portrait", "landscape"):

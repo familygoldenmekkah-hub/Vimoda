@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-"""Musik & SFX prosedural rev2 untuk video 14 "Petak Tanam: Bilangan Prima dan Komposit".
-Durasi 74.0 s mengikuti kebutuhan pemahaman (aturan 31: durasi tidak dipatok).
-Cue diselaraskan ke 19 beat narasi petak rev2; batas bab musik mengikuti enam judul.
-Output: /tmp/render/audio.wav (stereo 44100 Hz, 16-bit, 74.0 s)
+"""Musik & SFX prosedural rev3 untuk video 14 "Petak Tanam: Bilangan Prima dan Komposit".
+Dramaturgi anime diolah (aturan 34): pad per bab, JEDA DRAMATIS (ma) 33.4-34.2 tanpa musik
+sebelum twist angka 1, tremolo pra-climax 31.2-33.2 yang makin cepat, impact sting 34.2,
+run power-up saat jurus urai prima, kick formasi tantangan, fanfare kecil di endcard.
+Durasi 78.0 s mengikuti kebutuhan pemahaman (aturan 31). Cue mengikuti 21 beat narasi rev3.
+Output: /tmp/render/audio.wav (stereo 44100 Hz, 16-bit, 78.0 s)
 """
 import numpy as np
 import wave
 
 SR = 44100
-DUR = 74.0
+DUR = 78.0
 N = int(SR * DUR)
 OUT = "/tmp/render/audio.wav"
 
@@ -101,15 +103,17 @@ def chime(f=880.0, level=0.12):
     return sine(f, 1.6, a=0.002, d=0.5, harm=(1.0, 0.45, 0.18)) * level
 
 
-# ---------- PAD / chord progress (rasa rumah tanam teduh, E minor) ----------
+# ---------- PAD / chord progress (E minor; MA: 33.4-34.2 SENYAP - jeda dramatis) ----------
 E3, G3, B2, C3, G2, D3, Fs3, A2 = 164.81, 196.0, 123.47, 130.81, 98.0, 146.83, 185.0, 110.0
 SEG = [
-    (0.0, 9.6, (E3, G3, B2)),
-    (9.6, 22.4, (C3, E3, G2)),
-    (22.4, 38.0, (D3, Fs3, A2)),
-    (38.0, 47.0, (G2, B2, D3)),
-    (47.0, 53.0, (C3, E3, G3)),
-    (53.0, 74.0, (E3, G3, B2)),
+    (0.0, 9.8, (E3, G3, B2)),
+    (9.8, 22.8, (C3, E3, G2)),
+    (22.8, 33.4, (D3, Fs3, A2)),
+    # 33.4 - 34.2 : ma, hening total
+    (34.2, 40.2, (E3, G3, B2)),
+    (40.2, 49.4, (G2, B2, D3)),
+    (49.4, 56.0, (C3, E3, G3)),
+    (56.0, 78.0, (E3, G3, B2)),
 ]
 for (t0, t1, notes) in SEG:
     dur = t1 - t0 + 1.0
@@ -136,32 +140,36 @@ for (t0, t1, notes) in SEG:
     sub = np.sin(2 * np.pi * notes[0] / 2 * t) * e * 0.075
     add(t0, sub, 0.0)
 
-# ---------- arpeggio 9.6 - 60.0 ----------
+# ---------- arpeggio dua rentang (berhenti sebelum ma, lanjut setelahnya) ----------
 SCALE = [329.63, 392.0, 440.0, 493.88, 587.33, 659.26]
 step = 0.28
-tt = 9.6
 k = 0
-while tt < 60.0:
-    f = SCALE[(k * 2 + (k % 7)) % len(SCALE)]
-    s = sine(f, 0.28, a=0.004, d=0.15, harm=(1.0, 0.35))
-    pan = 0.35 * np.sin(k * 1.1)
-    add(tt, s, pan, 0.05)
-    k += 1
-    tt += step
+for (lo, hi) in ((9.8, 33.2), (34.4, 60.0)):
+    tt = lo
+    kk = k
+    while tt < hi:
+        f = SCALE[(kk * 2 + (kk % 7)) % len(SCALE)]
+        s = sine(f, 0.28, a=0.004, d=0.15, harm=(1.0, 0.35))
+        pan = 0.35 * np.sin(kk * 1.1)
+        add(tt, s, pan, 0.05)
+        kk += 1
+        tt += step
+    k = kk
 
-# ---------- kick & hat ----------
-tt = 9.6
-while tt < 60.0:
-    add(tt, kick(), 0.0)
-    add(tt + 0.28, noise_band(0.05, 5000, 9000) * 0.9, 0.15, 0.05)
-    tt += 0.56
+# ---------- kick & hat (juga berhenti saat ma) ----------
+for (lo, hi) in ((9.8, 33.2), (34.4, 60.0)):
+    tt = lo
+    while tt < hi:
+        add(tt, kick(), 0.0)
+        add(tt + 0.28, noise_band(0.05, 5000, 9000) * 0.9, 0.15, 0.05)
+        tt += 0.56
 tt = 60.0
-while tt < 72.8:
+while tt < 76.8:
     add(tt, kick(0.14), 0.0)
     tt += 1.3
 
-# ---------- momen kunci (diselaraskan 19 beat narasi petak rev2) ----------
-CUT_TRANSITIONS = [9.6, 22.4, 38.0, 47.0, 53.0]
+# ---------- momen kunci (diselaraskan 21 beat narasi petak rev3) ----------
+CUT_TRANSITIONS = [9.8, 22.8, 40.2, 49.4, 56.0]
 add(0.5, boom(0.24))                       # hook: rumah tanam menyala
 add(0.5, whoosh(0.5, True, 0.05))
 for i in range(8):                         # delapan pot muncul
@@ -174,59 +182,72 @@ for i in range(7):                         # tujuh pot baris bawah
 add(4.8, tick(760, 0.06))                  # tanda tanya: tujuh tak bisa petak
 add(5.2, boom(0.12))                       # beat emas: semua pot menyala
 add(5.25, chime(587.33, 0.11))
-add(6.2, chime(660.0, 0.10))               # stempel DELAPAN BISA, TUJUH TIDAK
-add(7.6, tick(1100, 0.06))                 # mentor mengangguk di hook
+add(6.4, chime(660.0, 0.10))               # stempel DELAPAN BISA, TUJUH TIDAK
+add(7.8, tick(1100, 0.06))                 # mentor mengangguk di hook
 for tw in CUT_TRANSITIONS:                 # perpindahan antar bab
     add(tw, whoosh(0.85, True, 0.12), 0.0)
-add(11.0, tick(800, 0.07))                 # baris besar: tepat 2 faktor
-add(11.8, tick(900, 0.085))                # baris faktor 1 dan dirinya
-add(11.82, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
+add(33.4, whoosh(0.5, False, 0.08))        # dunia memudar ke ma (hening)
+add(11.2, tick(800, 0.07))                 # baris besar: tepat 2 faktor
+add(12.0, tick(900, 0.085))                # baris faktor 1 dan dirinya
+add(12.02, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
 for i in range(8):                         # delapan chip deret prima
-    add(14.0 + i * 0.14, tick(540 + i * 38, 0.045))
-add(17.4, tick(880, 0.05))                 # cek bahan: faktor 5 hanya 1 dan 5
-add(17.8, tick(960, 0.05))                 # cek bahan: faktor 7 hanya 1 dan 7
-add(23.6, tick(880, 0.075))                # baris besar: lebih dari 2 faktor
-add(24.4, tick(900, 0.085))                # baris faktor lebih dari dua
-add(24.42, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
+    add(14.4 + i * 0.14, tick(540 + i * 38, 0.045))
+add(17.6, tick(880, 0.05))                 # cek bahan: faktor 5 hanya 1 dan 5
+add(18.0, tick(960, 0.05))                 # cek bahan: faktor 7 hanya 1 dan 7
+add(24.0, tick(880, 0.075))                # baris besar: lebih dari 2 faktor
+add(24.8, tick(900, 0.085))                # baris faktor lebih dari dua
+add(24.82, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
 for i in range(8):                         # delapan chip deret komposit
-    add(25.8 + i * 0.14, tick(540 + i * 38, 0.045))
+    add(26.2 + i * 0.14, tick(540 + i * 38, 0.045))
 for i in range(6):                         # enam faktor 12: 1, 2, 3, 4, 6, 12
-    add(28.6 + i * 0.08, tick(600 + i * 60, 0.05))
-add(30.6, tick(720, 0.05))                 # cek bahan: faktor 9 = 1, 3, 9
-add(32.6, boom(0.10))                      # beat emas: panel kejutan angka 1
-add(32.65, chime(523.25, 0.10))
-add(33.0, tick(660, 0.07))                 # baris besar: 1 = satu faktor
-add(33.9, tick(900, 0.075))                # baris: prima butuh tepat dua
-add(35.6, chime(659.26, 0.10))             # verdict: bukan prima, bukan komposit
-add(36.8, tick(760, 0.05))                 # catatan: bagian yang sering terlewat
-add(39.6, tick(900, 0.085))                # baris genap lebih dari 2
-add(39.62, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
-add(40.6, tick(860, 0.085))                # baris jadi komposit
-add(40.62, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
+    add(29.0 + i * 0.08, tick(600 + i * 60, 0.05))
+add(31.0, tick(720, 0.05))                 # cek bahan: faktor 9 = 1, 3, 9
+# tremolo pra-climax ala anime: tick makin cepat menuju ma
+for t0 in (31.6, 31.98, 32.34, 32.68, 33.0, 33.28):
+    add(t0, tick(1100, 0.06))
+add(34.2, boom(0.30))                      # TWIST: impact frame + speedlines
+add(34.25, chime(587.33, 0.13))
+add(34.2, whoosh(0.4, True, 0.05))
+add(34.8, tick(660, 0.075))                # baris besar: 1 = satu faktor
+add(35.7, tick(900, 0.075))                # baris: prima butuh tepat dua
+add(37.2, chime(659.26, 0.11))             # verdict: bukan prima, bukan komposit
+add(38.6, tick(760, 0.05))                 # catatan: bagian yang sering terlewat
+add(41.2, tick(900, 0.085))                # baris genap lebih dari 2
+add(41.22, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
+add(42.8, tick(860, 0.085))                # baris jadi komposit
+add(42.82, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
 for i in range(4):                         # empat chip genap komposit
-    add(41.8 + i * 0.2, tick(600 + i * 70, 0.055))
-add(44.0, tick(760, 0.05))                 # catatan: 2 cuma faktor 1 dan 2
-add(45.4, boom(0.14))                      # beat emas: 2 prima genap tunggal
-for t0 in [48.1, 48.7, 49.3]:              # tiga baris faktorisasi
+    add(44.0 + i * 0.2, tick(600 + i * 70, 0.055))
+add(46.2, tick(760, 0.05))                 # catatan: 2 cuma faktor 1 dan 2
+add(47.4, boom(0.14))                      # beat emas: 2 prima genap tunggal
+# power-up ala anime: run tangga nada menaik saat jurus (50.6-51.5)
+RUN = [523.25, 587.33, 659.26, 698.46, 783.99, 880.0, 987.77, 1046.5]
+for i, f in enumerate(RUN):
+    add(50.6 + i * 0.12, sine(f, 0.22, a=0.003, d=0.12) * 0.07, 0.1 * np.sin(i))
+for t0 in (51.0, 51.6, 52.2):              # tiga baris faktorisasi
     add(t0, tick(900, 0.085))
     add(t0 + 0.02, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
-add(50.8, tick(760, 0.045))                # catatan: hasilnya selalu unik
-add(51.4, tick(820, 0.045))                # catatan: basis teori bilangan
+add(51.8, whoosh(0.5, True, 0.07))         # stempel JURUS URAI PRIMA!
+add(51.85, chime(880.0, 0.11))
+add(53.8, tick(760, 0.045))                # catatan: hasilnya selalu unik
+add(54.4, tick(820, 0.045))                # catatan: basis teori bilangan
 for i in range(4):                         # empat soal bernomor muncul
-    add(53.6 + i * 0.18, tick(620 + i * 80, 0.05))
-for i in range(8):                         # delapan kartu besar terurut nilai
-    add(55.4 + i * 0.12, tick(560 + i * 70, 0.05))
-add(57.0, tick(760, 0.045))                # catatan: semuanya bilangan asli
-add(58.0, tick(880, 0.05))                 # sub: cek satu-satu, periksa faktornya
-add(58.6, whoosh(0.6, True, 0.07))
-add(58.65, chime(880.0, 0.12))             # pil JAWAB DI KOLOM KOMENTAR YA
-add(64.2, whoosh(0.5, True, 0.03))
-add(64.0, whoosh(0.6, False, 0.06))        # konten keluar layar (aturan 28)
-add(64.5, chime(440.0, 0.09))              # terima kasih sudah menonton
-add(64.9, chime(523.25, 0.10))             # AKIOMIDA.COM muncul sendirian (aturan 28)
-add(68.0, chime(587.33, 0.07))             # undangan lembut aturan 32 (rasa "aku yang mau")
-add(69.8, tick(700, 0.045))                # bar gradien menyapu
-add(69.9, chime(1318.5, 0.06))
+    add(57.2 + i * 0.18, tick(620 + i * 80, 0.05))
+add(59.2, kick(0.26))                      # formasi tantangan dimulai
+for i in range(8):                         # delapan kartu masuk dari kiri-kanan
+    add(59.4 + i * 0.12, tick(560 + i * 70, 0.05))
+add(61.0, tick(760, 0.045))                # catatan: semuanya bilangan asli
+add(62.6, whoosh(0.6, True, 0.07))
+add(62.65, chime(880.0, 0.12))             # pil JAWAB DI KOLOM KOMENTAR YA
+add(68.0, whoosh(0.6, False, 0.06))        # konten keluar layar (aturan 28)
+add(68.2, whoosh(0.5, True, 0.03))
+# fanfare kecil ala ending anime: C-E-G-C di endcard
+for f, dt in ((523.25, 0.0), (659.26, 0.25), (783.99, 0.5), (1046.5, 0.75)):
+    add(68.3 + dt, chime(f, 0.09))
+add(70.5, chime(440.0, 0.08))              # terima kasih sudah menonton
+add(73.4, chime(587.33, 0.08))             # teaser: benih petak berikutnya sudah disemai
+add(73.8, tick(700, 0.045))                # bar gradien menyapu
+add(73.9, chime(1318.5, 0.06))
 
 # ---------- master ----------
 mix = np.stack([mixL, mixR])
