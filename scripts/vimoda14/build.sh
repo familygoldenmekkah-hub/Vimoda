@@ -14,7 +14,7 @@ ffmpeg -y -framerate $FPS -i "$SRC/%05d.jpg" -i "$AUD" \
   -c:a aac -b:a 192k -shortest \
   "$OUT" 2>&1 | tail -3
 
-# thumbnail dari momen hook (t=4.0 -> frame 120)
-cp "$SRC/00120.jpg" "/tmp/render/$O/thumbnail.jpg"
+# thumbnail dari momen hook (t=5.4 -> frame 162 (beat emas glow rev2))
+cp "$SRC/00162.jpg" "/tmp/render/$O/thumbnail.jpg"
 echo "== $O =="
 ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_type,codec_name,width,height -of default=noprint_wrappers=1 "$OUT"

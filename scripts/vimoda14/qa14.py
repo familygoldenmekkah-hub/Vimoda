@@ -30,9 +30,10 @@ for o in ("portrait", "landscape"):
 # 2) teks engine: tanpa emdash/en-dash, tanpa KAISAR, tanpa label episode lama,
 #    dan tanpa kalimat intimidasi (aturan 25: soft selling wajib)
 txt = ENGINE.read_text()
-for bad in ("\u2014", "\u2013", "Kaisar", "KAISAR", "TODO", "undefined", "NaN"):
+for bad in ("\u2014", "\u2013", "Kaisar", "KAISAR", "TODO", "undefined", "NaN",
+            "FOLLOW", "SUBSCRIBE", "IKUTI"):
     if bad in txt:
-        print(f"DILARANG ada di engine: {bad!r}")
+        print(f"DILARANG ada di engine: {bad!r} (aturan 32 larang minta follow)")
         ok = False
 for old in ("BULINA", "KELERENG", "CACAH", "APEL", "BABOPA", "PARTOEN",
             "LIMPAI", "KOMPATI", "TULIS DI KOMEN", "JAWAB DI KOMEN",
@@ -98,6 +99,15 @@ for o in ("portrait", "landscape"):
         ok = False
     print(f"--- {o} ---")
     print(r.stdout.strip())
+    # aturan 31: durasi mengikuti kebutuhan pemahaman (74 s), bukan dipatok 52
+    m = re.search(r"duration=([\d.]+)", r.stdout)
+    if m:
+        dur = float(m.group(1))
+        if dur < 60 or dur > 90:
+            print(f"ATURAN 31: durasi {dur:.1f} s di luar rentang nyaman 60-90 s")
+            ok = False
+        else:
+            print(f"aturan 31 ok: durasi {dur:.1f} s (tempo longgar, bukan dipatok 52)")
 
 print("QA OK" if ok else "QA ADA MASALAH")
 sys.exit(0 if ok else 1)

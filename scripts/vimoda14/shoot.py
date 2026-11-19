@@ -46,7 +46,7 @@ def main():
     fps = float(sys.argv[2]) if len(sys.argv) > 2 else 30.0
     start = int(sys.argv[3]) if len(sys.argv) > 3 else 0
     end = int(sys.argv[4]) if len(sys.argv) > 4 else -1
-    dur = 52.0
+    dur = 74.0  # aturan 31: durasi mengikuti kebutuhan pemahaman, tidak dipatok
     total = int(round(dur * fps))
 
     html = ENGINE.read_text().replace("/*__FONTS__*/", font_css())

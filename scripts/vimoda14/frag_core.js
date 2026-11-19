@@ -7,33 +7,33 @@ const P = ORIENT==='portrait' ? {
   tableX:50, tableW:330, slabY:830, slabH:52, legBot:1080,
   bdW:300, bdH:96, bdCX:215, bdCY:778,
   rulerX:40, rulerY:120, rulerW:1000, rulerH:46, rulFS:14,
-  stampX:470, stampY:690, stampW:480, stampH:60, stampFS:26,
+  stampX:445, stampY:690, stampW:520, stampH:64, stampFS:28,
   panelX:400, panelY:470, panelW:610, panelH:360,
-  pilX:260, pilY:850, pilW:560, pilH:64, pilFS:23,
+  pilX:250, pilY:850, pilW:580, pilH:66, pilFS:26,
   ecY:830, barW:420,
   titleY:300, titleS0:80, titleSN:74,
-  subTop:1170, subId:40, subEn:22, subMax:880,
-  ballD:110, groundY:1120, wmY:1800, wmFS:20,
+  subTop:1170, subId:46, subEn:25, subMax:880,
+  ballD:110, groundY:1120, wmY:1800, wmFS:22,
   lampsX:[340,700], lampsY:[168,150], lampsD:[74,62],
   markX:220, markY:1096, markW:640, markH:16,
-  pegX:830, pegY:870, pegW:180, pegH:140,
-  cardW:126, cardH:56, cardFS:22
+  pegX:780, pegY:848, pegW:240, pegH:150,
+  cardW:142, cardH:62, cardFS:30
 } : {
   floorY:508, bbY:494, ceilH:70,
   tableX:140, tableW:360, slabY:540, slabH:40, legBot:700,
   bdW:340, bdH:82, bdCX:320, bdCY:494,
   rulerX:140, rulerY:78, rulerW:600, rulerH:34, rulFS:12,
-  stampX:960, stampY:440, stampW:560, stampH:56, stampFS:24,
+  stampX:940, stampY:440, stampW:600, stampH:58, stampFS:26,
   panelX:760, panelY:250, panelW:1020, panelH:290,
-  pilX:680, pilY:600, pilW:560, pilH:60, pilFS:22,
+  pilX:670, pilY:600, pilW:580, pilH:62, pilFS:25,
   ecY:400, barW:520,
   titleY:150, titleS0:88, titleSN:72,
-  subTop:740, subId:38, subEn:20, subMax:1360,
-  ballD:96, groundY:660, wmY:1010, wmFS:18,
+  subTop:740, subId:46, subEn:25, subMax:1360,
+  ballD:96, groundY:660, wmY:1010, wmFS:20,
   lampsX:[560,1000], lampsY:[112,100], lampsD:[62,52],
   markX:620, markY:672, markW:680, markH:14,
-  pegX:1450, pegY:560, pegW:220, pegH:130,
-  cardW:100, cardH:44, cardFS:20
+  pegX:1440, pegY:556, pegW:240, pegH:140,
+  cardW:112, cardH:50, cardFS:26
 };
 const stage=document.getElementById('stage');
 stage.style.width=W+'px';stage.style.height=H+'px';
@@ -154,7 +154,7 @@ const boardEl=document.getElementById('boardSheet');
   boardEl.appendChild(rim);
   const lb=document.createElement('div');
   lb.className='plab';
-  lb.style.cssText+=`left:${bwx}px;top:${bwy+Math.round(P.bdH*0.48)}px;width:${P.bdW}px;text-align:center;font-size:${ORIENT==='portrait'?17:15}px;letter-spacing:.2em;`;
+  lb.style.cssText+=`left:${bwx}px;top:${bwy+Math.round(P.bdH*0.48)}px;width:${P.bdW}px;text-align:center;font-size:${ORIENT==='portrait'?20:18}px;letter-spacing:.2em;`;
   lb.textContent='SEMAI';
   boardEl.appendChild(lb);
 }
@@ -167,7 +167,7 @@ const pegEl=document.getElementById('pegboard');
   const sgn=document.createElement('div');
   sgn.style.cssText+=`position:absolute;left:0;top:${Math.round(P.pegH*0.30)}px;width:100%;text-align:center;
     font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#6E7A5A;
-    font-size:${ORIENT==='portrait'?20:24}px;letter-spacing:.12em;`;
+    font-size:${ORIENT==='portrait'?24:28}px;letter-spacing:.12em;`;
   sgn.textContent='PETAK TANAM';
   board.appendChild(sgn);
 }
@@ -194,19 +194,19 @@ const QM={};
   const dxg=-(4*sp);
   for(let i=0;i<8;i++){
     const pr=makePot(propsEl,tx0+i*sp,ty0,HW,HH);
-    HOOKP.push({root:pr.root,pb:pr.pb,t0:1.0+i*0.125,dy:i>=4?dy:0,dx:i>=4?dxg:0});
+    HOOKP.push({root:pr.root,pb:pr.pb,t0:1.0+i*0.15,dy:i>=4?dy:0,dx:i>=4?dxg:0});
   }
   const botTotal=7*sp-12;
   const bx0=P.panelX+Math.round((P.panelW-botTotal)/2);
   const by0=ORIENT==='portrait'?620:400;
   for(let i=0;i<7;i++){
     const pr=makePot(propsEl,bx0+i*sp,by0,HW,HH);
-    HOOKP.push({root:pr.root,pb:pr.pb,t0:2.8+i*0.09,dy:0});
+    HOOKP.push({root:pr.root,pb:pr.pb,t0:3.7+i*0.12,dy:0,dx:0});
   }
   const lastX=bx0+6*sp;
   QM.el=document.createElement('div');
   QM.el.className='qmark';
-  QM.el.style.cssText+=`left:${lastX+HW/2-12}px;top:${by0-(ORIENT==='portrait'?50:40)}px;font-size:${ORIENT==='portrait'?36:30}px;opacity:0;`;
+  QM.el.style.cssText+=`left:${lastX+HW/2-14}px;top:${by0-(ORIENT==='portrait'?56:46)}px;font-size:${ORIENT==='portrait'?44:38}px;opacity:0;`;
   QM.el.textContent='?';
   propsEl.appendChild(QM.el);
 }
@@ -217,25 +217,25 @@ panel1.className='panelI';
 panel1.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
 const p1Hd=document.createElement('div');
 p1Hd.className='pHd';
-p1Hd.style.cssText+=`font-size:${ORIENT==='portrait'?24:22}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
+p1Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
 p1Hd.textContent='BILANGAN PRIMA';
 panel1.appendChild(p1Hd);
 const p1Big=document.createElement('div');
 p1Big.className='pBig';
-p1Big.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;height:${Math.round(P.panelH*0.14)}px;display:flex;align-items:center;justify-content:center;`;
+p1Big.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${Math.round(P.panelH*0.14)}px;display:flex;align-items:center;justify-content:center;`;
 p1Big.textContent='TEPAT 2 FAKTOR';
 panel1.appendChild(p1Big);
-[['FAKTOR: 1 DAN DIRINYA SAJA',7.9,'#4CAF7A']].forEach(([tx,t0,col])=>{
+[['FAKTOR: 1 DAN DIRINYA SAJA',11.8,'#4CAF7A']].forEach(([tx,t0,col])=>{
   const r=document.createElement('div');
   r.className='pRow';
-  r.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  r.style.cssText+=`height:${ORIENT==='portrait'?52:44}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
   const dot=document.createElement('div');
   dot.className='pDot';
-  dot.style.cssText+=`width:${ORIENT==='portrait'?18:15}px;height:${ORIENT==='portrait'?18:15}px;background:${col};margin-right:12px;`;
+  dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
   r.appendChild(dot);
   const n=document.createElement('div');
   n.className='pName';
-  n.style.cssText+=`font-size:${ORIENT==='portrait'?19:17}px;`;
+  n.style.cssText+=`font-size:${ORIENT==='portrait'?24:21}px;`;
   n.textContent=tx;
   r.appendChild(n);
   panel1.appendChild(r);
@@ -246,15 +246,15 @@ p1Chips.style.cssText+=`display:flex;align-items:center;justify-content:center;h
 ['2','3','5','7','11','13','17','19'].forEach((v,i)=>{
   const c=document.createElement('div');
   c.className='chipA';
-  c.style.cssText+=`width:${ORIENT==='portrait'?58:70}px;height:${ORIENT==='portrait'?40:36}px;font-size:${ORIENT==='portrait'?17:15}px;`;
+  c.style.cssText+=`width:${ORIENT==='portrait'?66:78}px;height:${ORIENT==='portrait'?48:44}px;font-size:${ORIENT==='portrait'?21:19}px;`;
   c.textContent=v;
   p1Chips.appendChild(c);
-  P1CHIPS.push({el:c,t0:9.9+i*0.12});
+  P1CHIPS.push({el:c,t0:14.0+i*0.14});
 });
 panel1.appendChild(p1Chips);
 const p1Note=document.createElement('div');
 p1Note.className='pNote';
-p1Note.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?19:17}px;`;
+p1Note.style.cssText+=`height:${ORIENT==='portrait'?50:44}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?23:21}px;`;
 p1Note.textContent='CEK 5: 1 × 5 · CEK 7: 1, 7';
 panel1.appendChild(p1Note);
 propsEl.appendChild(panel1);
@@ -265,73 +265,78 @@ panel2.className='panelI';
 panel2.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
 const p2Hd=document.createElement('div');
 p2Hd.className='pHd';
-p2Hd.style.cssText+=`font-size:${ORIENT==='portrait'?24:22}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
+p2Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
 p2Hd.textContent='BILANGAN KOMPOSIT';
 panel2.appendChild(p2Hd);
 const p2Big=document.createElement('div');
 p2Big.className='pBig';
-p2Big.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;height:${Math.round(P.panelH*0.14)}px;display:flex;align-items:center;justify-content:center;`;
+p2Big.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${Math.round(P.panelH*0.14)}px;display:flex;align-items:center;justify-content:center;`;
 p2Big.textContent='LEBIH DARI 2 FAKTOR';
 panel2.appendChild(p2Big);
-[['FAKTOR LEBIH DARI DUA BUAH',18.4,'#D97A2E']].forEach(([tx,t0,col])=>{
+[['FAKTOR LEBIH DARI DUA BUAH',24.4,'#D97A2E']].forEach(([tx,t0,col])=>{
   const r=document.createElement('div');
   r.className='pRow';
-  r.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  r.style.cssText+=`height:${ORIENT==='portrait'?48:40}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
   const dot=document.createElement('div');
   dot.className='pDot';
-  dot.style.cssText+=`width:${ORIENT==='portrait'?18:15}px;height:${ORIENT==='portrait'?18:15}px;background:${col};margin-right:12px;`;
+  dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
   r.appendChild(dot);
   const n=document.createElement('div');
   n.className='pName';
-  n.style.cssText+=`font-size:${ORIENT==='portrait'?19:17}px;`;
+  n.style.cssText+=`font-size:${ORIENT==='portrait'?24:21}px;`;
   n.textContent=tx;
   r.appendChild(n);
   panel2.appendChild(r);
   P2ROWS.push({el:r,t0});
 });
 const p2Chips=document.createElement('div');
-p2Chips.style.cssText+=`display:flex;align-items:center;justify-content:center;height:${Math.round(P.panelH*0.18)}px;gap:${ORIENT==='portrait'?8:10}px;`;
+p2Chips.style.cssText+=`display:flex;align-items:center;justify-content:center;height:${Math.round(P.panelH*0.16)}px;gap:${ORIENT==='portrait'?8:10}px;`;
 ['4','6','8','9','10','12','14','15'].forEach((v,i)=>{
   const c=document.createElement('div');
   c.className='chipA';
-  c.style.cssText+=`width:${ORIENT==='portrait'?58:70}px;height:${ORIENT==='portrait'?40:36}px;font-size:${ORIENT==='portrait'?17:15}px;`;
+  c.style.cssText+=`width:${ORIENT==='portrait'?66:78}px;height:${ORIENT==='portrait'?48:44}px;font-size:${ORIENT==='portrait'?21:19}px;`;
   c.textContent=v;
   p2Chips.appendChild(c);
-  P2CHIPS.push({el:c,t0:19.6+i*0.12});
+  P2CHIPS.push({el:c,t0:25.8+i*0.14});
 });
 panel2.appendChild(p2Chips);
 const p2Note=document.createElement('div');
 p2Note.className='pNote';
-p2Note.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?19:17}px;`;
+p2Note.style.cssText+=`height:${ORIENT==='portrait'?44:38}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?23:21}px;`;
 p2Note.textContent='12: FAKTOR 1, 2, 3, 4, 6, 12';
 panel2.appendChild(p2Note);
+const p2Note2=document.createElement('div');
+p2Note2.className='pNote';
+p2Note2.style.cssText+=`height:${ORIENT==='portrait'?44:38}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?23:21}px;`;
+p2Note2.textContent='9: FAKTOR 1, 3, 9';
+panel2.appendChild(p2Note2);
 propsEl.appendChild(panel2);
 
-/* panel kejutan: bagaimana dengan 1? (beat emas 26.0) */
+/* panel kejutan: bagaimana dengan 1? (beat emas 32.6) */
 const panelS=document.createElement('div');
 panelS.className='panelI';
 panelS.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
 const sHd=document.createElement('div');
 sHd.className='pHd';
-sHd.style.cssText+=`font-size:${ORIENT==='portrait'?24:22}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
+sHd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
 sHd.textContent='BAGAIMANA DENGAN 1?';
 panelS.appendChild(sHd);
 const sBig=document.createElement('div');
 sBig.className='pBig';
-sBig.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${Math.round(P.panelH*0.16)}px;display:flex;align-items:center;justify-content:center;`;
+sBig.style.cssText+=`font-size:${ORIENT==='portrait'?38:34}px;height:${Math.round(P.panelH*0.16)}px;display:flex;align-items:center;justify-content:center;`;
 sBig.textContent='1 = SATU FAKTOR';
 panelS.appendChild(sBig);
-[['PRIMA BUTUH TEPAT DUA',27.4,'#D97A2E'],['BUKAN PRIMA, BUKAN KOMPOSIT',28.5,'#4CAF7A']].forEach(([tx,t0,col])=>{
+[['PRIMA BUTUH TEPAT DUA',33.9,'#D97A2E'],['BUKAN PRIMA, BUKAN KOMPOSIT',35.6,'#4CAF7A']].forEach(([tx,t0,col])=>{
   const r=document.createElement('div');
   r.className='pRow';
-  r.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  r.style.cssText+=`height:${ORIENT==='portrait'?48:40}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
   const dot=document.createElement('div');
   dot.className='pDot';
-  dot.style.cssText+=`width:${ORIENT==='portrait'?18:15}px;height:${ORIENT==='portrait'?18:15}px;background:${col};margin-right:12px;`;
+  dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
   r.appendChild(dot);
   const n=document.createElement('div');
   n.className='pName';
-  n.style.cssText+=`font-size:${ORIENT==='portrait'?19:17}px;`;
+  n.style.cssText+=`font-size:${ORIENT==='portrait'?24:21}px;`;
   n.textContent=tx;
   r.appendChild(n);
   panelS.appendChild(r);
@@ -339,7 +344,7 @@ panelS.appendChild(sBig);
 });
 const sNote=document.createElement('div');
 sNote.className='pNote';
-sNote.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?19:17}px;`;
+sNote.style.cssText+=`height:${ORIENT==='portrait'?44:38}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?23:21}px;`;
 sNote.textContent='BAGIAN YANG SERING TERLEWAT';
 panelS.appendChild(sNote);
 propsEl.appendChild(panelS);
@@ -350,25 +355,25 @@ panel3.className='panelI';
 panel3.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
 const p3Hd=document.createElement('div');
 p3Hd.className='pHd';
-p3Hd.style.cssText+=`font-size:${ORIENT==='portrait'?24:22}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
+p3Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
 p3Hd.textContent='ISTIMEWANYA ANGKA 2';
 panel3.appendChild(p3Hd);
 const p3Big=document.createElement('div');
 p3Big.className='pBig';
-p3Big.style.cssText+=`font-size:${ORIENT==='portrait'?24:22}px;height:${Math.round(P.panelH*0.13)}px;display:flex;align-items:center;justify-content:center;`;
+p3Big.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;height:${Math.round(P.panelH*0.13)}px;display:flex;align-items:center;justify-content:center;`;
 p3Big.textContent='SATU-SATUNYA PRIMA GENAP';
 panel3.appendChild(p3Big);
-[['GENAP > 2: PASTI HABIS DIBAGI 2',33.5,'#D97A2E'],['JADI 4, 6, 8, 10 = KOMPOSIT',34.3,'#D97A2E']].forEach(([tx,t0,col])=>{
+[['GENAP > 2: PASTI HABIS DIBAGI 2',39.6,'#D97A2E'],['JADI 4, 6, 8, 10 = KOMPOSIT',40.6,'#D97A2E']].forEach(([tx,t0,col])=>{
   const r=document.createElement('div');
   r.className='pRow';
-  r.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  r.style.cssText+=`height:${ORIENT==='portrait'?46:38}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
   const dot=document.createElement('div');
   dot.className='pDot';
-  dot.style.cssText+=`width:${ORIENT==='portrait'?18:15}px;height:${ORIENT==='portrait'?18:15}px;background:${col};margin-right:12px;`;
+  dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
   r.appendChild(dot);
   const n=document.createElement('div');
   n.className='pName';
-  n.style.cssText+=`font-size:${ORIENT==='portrait'?19:17}px;`;
+  n.style.cssText+=`font-size:${ORIENT==='portrait'?23:21}px;`;
   n.textContent=tx;
   r.appendChild(n);
   panel3.appendChild(r);
@@ -376,10 +381,10 @@ panel3.appendChild(p3Big);
 });
 const p3Chips=document.createElement('div');
 p3Chips.style.cssText+=`display:flex;align-items:center;justify-content:center;height:${Math.round(P.panelH*0.20)}px;gap:${ORIENT==='portrait'?12:14}px;`;
-[['4',35.8],['6',35.98],['8',36.16],['10',36.34]].forEach(([v,t0])=>{
+[['4',41.8],['6',42.0],['8',42.2],['10',42.4]].forEach(([v,t0])=>{
   const c=document.createElement('div');
   c.className='chipA';
-  c.style.cssText+=`width:${ORIENT==='portrait'?70:84}px;height:${ORIENT==='portrait'?44:40}px;font-size:${ORIENT==='portrait'?20:18}px;
+  c.style.cssText+=`width:${ORIENT==='portrait'?86:96}px;height:${ORIENT==='portrait'?52:46}px;font-size:${ORIENT==='portrait'?24:22}px;
     border:3px solid #D97A2E;`;
   c.textContent=v;
   p3Chips.appendChild(c);
@@ -388,7 +393,7 @@ p3Chips.style.cssText+=`display:flex;align-items:center;justify-content:center;h
 panel3.appendChild(p3Chips);
 const p3Note=document.createElement('div');
 p3Note.className='pNote';
-p3Note.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:${ORIENT==='portrait'?8:6}px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?19:17}px;`;
+p3Note.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;margin:${ORIENT==='portrait'?8:6}px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?23:21}px;`;
 p3Note.textContent='2 CUMA PUNYA FAKTOR 1 DAN 2';
 panel3.appendChild(p3Note);
 propsEl.appendChild(panel3);
@@ -399,25 +404,25 @@ panel4.className='panelI';
 panel4.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
 const p4Hd=document.createElement('div');
 p4Hd.className='pHd';
-p4Hd.style.cssText+=`font-size:${ORIENT==='portrait'?24:22}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
+p4Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
 p4Hd.textContent='FAKTORISASI PRIMA';
 panel4.appendChild(p4Hd);
 const p4Big=document.createElement('div');
 p4Big.className='pBig';
-p4Big.style.cssText+=`font-size:${ORIENT==='portrait'?24:22}px;height:${Math.round(P.panelH*0.13)}px;display:flex;align-items:center;justify-content:center;`;
+p4Big.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;height:${Math.round(P.panelH*0.13)}px;display:flex;align-items:center;justify-content:center;`;
 p4Big.textContent='URAI JADI PERKALIAN PRIMA';
 panel4.appendChild(p4Big);
-[['12 = 2 × 2 × 3',41.1,'#4CAF7A'],['18 = 2 × 3 × 3',41.6,'#4CAF7A'],['30 = 2 × 3 × 5',42.1,'#4CAF7A']].forEach(([tx,t0,col])=>{
+[['12 = 2 × 2 × 3',48.1,'#4CAF7A'],['18 = 2 × 3 × 3',48.7,'#4CAF7A'],['30 = 2 × 3 × 5',49.3,'#4CAF7A']].forEach(([tx,t0,col])=>{
   const r=document.createElement('div');
   r.className='vrow';
-  r.style.cssText+=`height:${ORIENT==='portrait'?38:32}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  r.style.cssText+=`height:${ORIENT==='portrait'?44:36}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
   const d=document.createElement('div');
   d.className='vd';
-  d.style.cssText+=`width:${ORIENT==='portrait'?16:14}px;height:${ORIENT==='portrait'?16:14}px;background:${col};margin-right:12px;`;
+  d.style.cssText+=`width:${ORIENT==='portrait'?18:16}px;height:${ORIENT==='portrait'?18:16}px;background:${col};margin-right:14px;`;
   r.appendChild(d);
   const tt=document.createElement('div');
   tt.className='vt';
-  tt.style.cssText+=`font-size:${ORIENT==='portrait'?19:17}px;`;
+  tt.style.cssText+=`font-size:${ORIENT==='portrait'?23:21}px;`;
   tt.textContent=tx;
   r.appendChild(tt);
   panel4.appendChild(r);
@@ -425,12 +430,12 @@ panel4.appendChild(p4Big);
 });
 const p4Note=document.createElement('div');
 p4Note.className='pNote';
-p4Note.style.cssText+=`height:${ORIENT==='portrait'?36:30}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?18:16}px;`;
+p4Note.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
 p4Note.textContent='HASILNYA SELALU UNIK';
 panel4.appendChild(p4Note);
 const p4Note2=document.createElement('div');
 p4Note2.className='pNote';
-p4Note2.style.cssText+=`height:${ORIENT==='portrait'?36:30}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?18:16}px;`;
+p4Note2.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
 p4Note2.textContent='BASIS TEORI BILANGAN';
 panel4.appendChild(p4Note2);
 propsEl.appendChild(panel4);
@@ -440,34 +445,34 @@ const panelUji=document.createElement('div');
 panelUji.className='panelI';
 panelUji.style.cssText+=`left:${P.panelX}px;top:${ORIENT==='portrait'?400:250}px;width:${P.panelW}px;height:${ORIENT==='portrait'?410:310}px;`;
 const ujiHd=document.createElement('div');
-ujiHd.style.cssText+=`margin:12px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?42:34}px;font-size:${ORIENT==='portrait'?26:23}px;color:#F2C14E;font-weight:800;letter-spacing:.06em;opacity:0;`;
+ujiHd.style.cssText+=`margin:12px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?48:40}px;font-size:${ORIENT==='portrait'?30:27}px;color:#F2C14E;font-weight:800;letter-spacing:.06em;opacity:0;`;
 ujiHd.textContent='GILIRAN KAMU:';
 panelUji.appendChild(ujiHd);
 const SOAL=[['1.','PRIMA, KOMPOSIT, ATAU BUKAN?'],['2.','KENAPA 1 BUKAN PRIMA?'],['3.','KENAPA 2 GENAP TETAP PRIMA?'],['4.','URAIKAN 36 KE FAKTOR PRIMA']];
 const UJIS=[];
 SOAL.forEach(([n,q],i)=>{
   const r=document.createElement('div');
-  r.style.cssText+=`margin:3px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?34:29}px;font-size:${ORIENT==='portrait'?21:19}px;color:#FFF6E8;font-weight:600;opacity:0;`;
+  r.style.cssText+=`margin:3px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?38:32}px;font-size:${ORIENT==='portrait'?26:23}px;color:#FFF6E8;font-weight:600;opacity:0;`;
   r.innerHTML='<span style="color:#F2C14E">'+n+'</span> '+q;
   panelUji.appendChild(r);
-  UJIS.push({el:r,t0:44.6+i*0.15});
+  UJIS.push({el:r,t0:53.6+i*0.18});
 });
 const UJIVAL=['1','2','9','13','21','29','35','49'];
 const ujiGrid=document.createElement('div');
-ujiGrid.style.cssText+=`position:absolute;left:0;top:${ORIENT==='portrait'?218:182}px;width:100%;display:flex;flex-wrap:wrap;justify-content:center;gap:${ORIENT==='portrait'?12:10}px;`;
+ujiGrid.style.cssText+=`position:absolute;left:0;top:${ORIENT==='portrait'?232:200}px;width:100%;display:flex;flex-wrap:wrap;justify-content:center;gap:${ORIENT==='portrait'?12:10}px;`;
 const CARDS=UJIVAL.map((lab,i)=>{
   const el=document.createElement('div');
   el.className='valCard';
   el.style.cssText+=`position:relative;width:${P.cardW}px;height:${P.cardH}px;font-size:${P.cardFS}px;opacity:0;`;
   el.textContent=lab;
   ujiGrid.appendChild(el);
-  return {el,lab,pop:45.4+i*0.10};
+  return {el,lab,pop:55.4+i*0.12};
 });
 panelUji.appendChild(ujiGrid);
 const ujiNote=document.createElement('div');
 ujiNote.className='pNote';
-ujiNote.style.cssText+=`position:absolute;left:${Math.round(P.panelW*0.06)}px;top:${ORIENT==='portrait'?352:244}px;
-  width:${P.panelW-Math.round(P.panelW*0.12)}px;height:${ORIENT==='portrait'?34:28}px;font-size:${ORIENT==='portrait'?18:16}px;`;
+ujiNote.style.cssText+=`position:absolute;left:${Math.round(P.panelW*0.06)}px;top:${ORIENT==='portrait'?374:262}px;
+  width:${P.panelW-Math.round(P.panelW*0.12)}px;height:${ORIENT==='portrait'?34:28}px;font-size:${ORIENT==='portrait'?21:19}px;`;
 ujiNote.textContent='SEMUANYA BILANGAN ASLI';
 panelUji.appendChild(ujiNote);
 propsEl.appendChild(panelUji);
@@ -516,7 +521,7 @@ charsEl.appendChild(spark);
 
 /* ---------- pil dan endcard ---------- */
 const pil=document.getElementById('pil');
-pil.style.cssText+=`left:${P.pilX}px;top:${P.pilY}px;width:${P.pilW}px;height:${P.pilH}px;font-size:${P.pilFS}px;letter-spacing:.1em;`;
+pil.style.cssText+=`left:${P.pilX}px;top:${P.pilY}px;width:${P.pilW}px;height:${P.pilH}px;font-size:${P.pilFS}px;letter-spacing:.08em;`;
 const endcard=document.getElementById('endcard');
 endcard.style.cssText+=`top:${P.ecY}px;`;
 const fUrl=document.getElementById('f_url');
@@ -532,10 +537,10 @@ const subId=document.getElementById('sub_id');
 const subEn=document.getElementById('sub_en');
 subId.style.fontSize=P.subId+'px';
 subEn.style.fontSize=P.subEn+'px';
-subEn.style.marginTop='5px';
+subEn.style.marginTop='6px';
 subbar.style.top=P.subTop+'px';
 subbar.style.maxWidth=P.subMax+'px';
 subbar.style.width='max-content';
 const wm=document.getElementById('wm');
 wm.style.cssText+=`top:${P.wmY}px;font-size:${P.wmFS}px;left:50%;transform:translateX(-50%);
-  width:max-content;padding:9px 30px;background:rgba(26,16,10,.55);border-radius:999px;`;
+  width:max-content;padding:10px 32px;background:rgba(26,16,10,.55);border-radius:999px;`;
