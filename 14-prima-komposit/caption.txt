@@ -1,0 +1,10 @@
+Video 14 - Petak Tanam: Bilangan Prima dan Komposit
+
+Susun delapan pot: bisa jadi petak 2 × 4 yang rapi. Tujuh pot? Cuma satu baris! 🪴
+Itulah prima dan komposit. Prima: tepat dua faktor, 1 dan dirinya (2, 3, 5, 7, 11...). Komposit: faktornya lebih dari dua, kayak 12 yang punya faktor 1, 2, 3, 4, 6, 12.
+Ada dua kejutan: angka 1 bukan prima bukan komposit (cuma satu faktor), dan angka 2 satu-satunya prima genap karena genap lain pasti habis dibagi 2.
+Bonus: komposit bisa diurai jadi perkalian prima. 12 = 2 × 2 × 3, 18 = 2 × 3 × 3, 30 = 2 × 3 × 5. Hasilnya selalu unik, dan ini dasar teori bilangan yang dipakai sampai ke kriptografi!
+Uji pemahaman: perhatikan 1, 2, 9, 13, 21, 29, 35, 49. Mana prima? Mana komposit? Kenapa 1 bukan prima? Kenapa 2 genap tetap prima? Dan uraikan 36 ke faktor primanya. Menebak dari bentuk saja kurang, coba periksa faktornya! Jawab di kolom komentar ya.
+Pertanyaan diskusi: adakah prima terbesar, atau jumlah prima tak terbatas?
+
+#bilanganprima #bilangankomposit #prime #belajarmatematika #edukasi #akiomida
