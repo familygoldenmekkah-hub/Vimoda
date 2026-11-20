@@ -6,7 +6,7 @@ const P = ORIENT==='portrait' ? {
   floorY:1080, bbY:1064,
   tableX:50, tableW:330, slabY:830, slabH:52, legBot:1080,
   bdW:300, bdH:96, bdCX:215, bdCY:778,
-  shelfX:80, shelfW:920, shelfFS:14,
+  shelfX:80, shelfW:920,
   stampX:445, stampY:690, stampW:520, stampH:64, stampFS:26,
   panelX:400, panelY:470, panelW:610, panelH:360,
   pilX:250, pilY:850, pilW:580, pilH:66, pilFS:26,
@@ -18,14 +18,14 @@ const P = ORIENT==='portrait' ? {
   markX:220, markY:1096, markW:640, markH:16,
   signX:800, signY:848, signW:240, signH:150,
   cardW:142, cardH:62, cardFS:30,
-  jarW:120, jarH:150, jarFS:26, candyD:26,
+  jarW:120, jarH:150, candyD:26,
   bigJarX:620, bigJarY:830, bigJarW:170, bigJarH:200,
   plateX:420, plateY:850, plateW:320, plateH:170, plateD:14
 } : {
   floorY:508, bbY:494,
   tableX:140, tableW:360, slabY:540, slabH:40, legBot:700,
   bdW:340, bdH:82, bdCX:320, bdCY:494,
-  shelfX:140, shelfW:600, shelfFS:12,
+  shelfX:140, shelfW:600,
   stampX:940, stampY:440, stampW:600, stampH:58, stampFS:23,
   panelX:760, panelY:250, panelW:1020, panelH:290,
   pilX:670, pilY:600, pilW:580, pilH:62, pilFS:25,
@@ -37,7 +37,7 @@ const P = ORIENT==='portrait' ? {
   markX:620, markY:672, markW:680, markH:14,
   signX:1440, signY:556, signW:240, signH:140,
   cardW:112, cardH:50, cardFS:26,
-  jarW:100, jarH:115, jarFS:23, candyD:20,
+  jarW:100, jarH:115, candyD:20,
   bigJarX:940, bigJarY:560, bigJarW:140, bigJarH:135,
   plateX:860, plateY:555, plateW:260, plateH:110, plateD:11
 };
@@ -85,7 +85,7 @@ const CANDY=['#E85D5D','#F2A03D','#5CA85C','#5A8AD8','#C97BCA','#F2C14E'];
     awnEl.appendChild(sc);
   }
 }
-/* ---------- dua lampion kertas bulat hangat ---------- */
+/* ---------- dua lampion kertas bulat hangat (redup saat malam kasus) ---------- */
 const LAMPS=[];
 document.querySelectorAll('.lant').forEach((lw,i)=>{
   const lx=P.lampsX[i], ly=P.lampsY[i], ld=P.lampsD[i];
@@ -110,10 +110,9 @@ function makeJar(parent,x,y,w,h,small){
   glass.style.cssText+=`left:0;top:${Math.round(h*0.14)}px;width:${w}px;height:${Math.round(h*0.86)}px;`;
   root.appendChild(lid);root.appendChild(glass);
   parent.appendChild(root);
-  const candies=[];
   const cd=small?(ORIENT==='portrait'?18:15):P.candyD;
   const gx=Math.round(w*0.14), gy=Math.round(h*0.30);
-  return {root,candies,cd,gx,gy,gw:Math.round(w*0.72),gh:Math.round(h*0.62)};
+  return {root,cd,gx,gy};
 }
 const shelfEl=document.getElementById('shelf');
 {
@@ -183,43 +182,41 @@ const signEl=document.getElementById('sign');
 const markEl=document.getElementById('runner');
 markEl.style.cssText+=`left:${P.markX}px;top:${P.markY}px;width:${P.markW}px;height:${P.markH}px;`;
 
-/* ---------- panel-panel konten (satu ide per layar) ---------- */
+/* ---------- properti panggung ---------- */
 const propsEl=document.getElementById('props');
 const speedEl=document.getElementById('speedlines');
 const spotEl=document.getElementById('spotlight');
-const P1ROWS=[], P1CHIPS=[], P2ROWS=[], P2CHIPS=[], SROWS=[], P3ROWS=[], P4ROWS=[];
-/* chip episode ala kartu judul anime (aturan 34) */
-const epchip=document.createElement('div');
-epchip.style.cssText+=`position:absolute;left:50%;transform:translateX(-50%);
-  top:${P.titleY-(ORIENT==='portrait'?66:54)}px;width:max-content;
-  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;
-  font-size:${ORIENT==='portrait'?22:20}px;letter-spacing:.22em;color:#3A2C1E;
-  background:rgba(255,253,246,.78);border:2.5px solid #C9524A;border-radius:999px;
-  padding:7px 26px;box-shadow:0 8px 18px rgba(60,40,10,.28);opacity:0;`;
-epchip.textContent='EPISODE 15';
-stage.appendChild(epchip);
-/* stempel hook */
-const stamp=document.createElement('div');
-stamp.className='stamp';
-stamp.style.cssText+=`left:${P.stampX}px;top:${P.stampY}px;width:${P.stampW}px;height:${P.stampH}px;font-size:${P.stampFS}px;opacity:0;`;
-stamp.textContent='DUA BELAS RATA, TIGA BELAS SISA!';
-propsEl.appendChild(stamp);
-/* hook: 12 permen masuk tiga stoples rata (4-4-4), permen ke-13 ditolak: SISA */
+const P1ROWS=[], P1CHIPS=[], P2ROWS=[], P2CHIPS=[], SROWS=[], P4ROWS=[];
+const RING1={}, XBAR=[];
+/* tab bukti merah ala berkas kasus detektif */
+function addTab(panel,label,fs){
+  const tab=document.createElement('div');
+  tab.className='evtab';
+  tab.style.cssText+=`left:-14px;top:-16px;font-size:${fs}px;padding:5px 18px;`;
+  tab.textContent=label;
+  panel.appendChild(tab);
+}
+/* stempel bukti hook */
+const stampHook=document.createElement('div');
+stampHook.className='stamp';
+stampHook.style.cssText+=`left:${P.stampX}px;top:${P.stampY}px;width:${P.stampW}px;height:${P.stampH}px;font-size:${P.stampFS}px;opacity:0;`;
+stampHook.textContent='BUKTI 01: SISA SATU!';
+propsEl.appendChild(stampHook);
+/* stempel penutup kasus */
+const stampCatch=document.createElement('div');
+stampCatch.className='stamp';
+stampCatch.style.cssText+=`left:${P.stampX}px;top:${P.stampY}px;width:${P.stampW}px;height:${P.stampH+10}px;font-size:${P.stampFS+4}px;opacity:0;`;
+stampCatch.textContent='KASUS DITUTUP!';
+propsEl.appendChild(stampCatch);
+
+/* ---------- KASUS: tiga stoples kosong menunggu rekonstruksi ---------- */
 const HOOKJ=[];
 {
   const centers=ORIENT==='portrait'?[525,705,885]:[1050,1270,1490];
+  const jy=ORIENT==='portrait'?470:265;
   centers.forEach((cx,ji)=>{
-    const jr=makeJar(propsEl,cx-P.jarW/2,ORIENT==='portrait'?470:265,P.jarW,P.jarH,false);
-    const jt0=1.0+ji*0.12;
-    for(let k=0;k<4;k++){
-      const c=document.createElement('div');
-      c.className='candy';
-      c.style.cssText+=`left:${jr.gx+(k%2)*Math.round(jr.cd*1.3)}px;top:${jr.gy+Math.floor(k/2)*Math.round(jr.cd*1.2)}px;
-        width:${jr.cd}px;height:${jr.cd}px;background:${CANDY[(ji*2+k)%CANDY.length]};opacity:0;`;
-      jr.root.appendChild(c);
-      jr.candies.push({el:c,t0:1.3+ji*0.12+k*0.16});
-    }
-    HOOKJ.push({root:jr.root,t0:jt0,candies:jr.candies});
+    const jr=makeJar(propsEl,cx-P.jarW/2,jy,P.jarW,P.jarH,false);
+    HOOKJ.push({root:jr.root,t0:1.0+ji*0.12,jx:cx-P.jarW/2,jy:jy});
   });
 }
 const QUEUE=[], SISA={}, QM={};
@@ -248,128 +245,179 @@ const QUEUE=[], SISA={}, QM={};
   qm.textContent='?';
   propsEl.appendChild(qm);
   QM.el=qm;
+  /* lingkaran bukti merah ala anime detektif: melingkari permen sisa */
+  const ring=document.createElement('div');
+  ring.className='ringR';
+  ring.style.cssText+=`left:${SISA.hx-(ORIENT==='portrait'?52:44)}px;top:${sy-(ORIENT==='portrait'?42:36)}px;
+    width:${ORIENT==='portrait'?104:88}px;height:${ORIENT==='portrait'?78:64}px;opacity:0;`;
+  propsEl.appendChild(ring);
+  RING1.el=ring;
+}
+/* 12 permen terbang dari etalase ke tiga stoples (arc bebas, ala animasi) */
+const HK=[];
+{
+  const sx=P.bdCX, sy=P.bdCY;
+  for(let j=0;j<12;j++){
+    const ji=Math.floor(j/4), k=j%4;
+    const jj=HOOKJ[ji];
+    const ex=jj.jx+Math.round(P.jarW*0.14)+(k%2)*Math.round(P.candyD*1.3);
+    const ey=jj.jy+Math.round(P.jarH*0.30)+Math.floor(k/2)*Math.round(P.candyD*1.2);
+    const c=document.createElement('div');
+    c.className='cd';
+    c.style.cssText+=`left:${sx}px;top:${sy}px;width:${P.candyD}px;height:${P.candyD}px;background:${CANDY[(ji*2+k)%CANDY.length]};opacity:0;`;
+    propsEl.appendChild(c);
+    HK.push({el:c,sx,sy,ex,ey,t0:1.3+ji*0.12+k*0.16});
+  }
+}
+/* siluet pelaku (Pencuri Rapi) + tanda silang penangkapan */
+const SHADOW=document.createElement('div');
+SHADOW.className='sil';
+{
+  const sw=ORIENT==='portrait'?130:110, sh=ORIENT==='portrait'?160:135;
+  SHADOW.style.cssText+=`left:-100px;top:${P.groundY-sh-14}px;width:${sw}px;height:${sh}px;`;
+  const lid=document.createElement('div');
+  lid.className='lid2';
+  lid.style.cssText+=`left:${Math.round(sw*0.12)}px;top:0;width:${Math.round(sw*0.76)}px;height:${Math.round(sh*0.16)}px;`;
+  SHADOW.appendChild(lid);
+  propsEl.appendChild(SHADOW);
+  const xw=ORIENT==='portrait'?76:62;
+  for(let i=0;i<2;i++){
+    const xb=document.createElement('div');
+    xb.className='xbar';
+    xb.style.cssText+=`left:0;top:0;width:${xw}px;height:${Math.round(xw*0.16)}px;opacity:0;`;
+    propsEl.appendChild(xb);
+    XBAR.push({el:xb,rot:i===0?45:-45});
+  }
 }
 
-/* panel 1: faktor */
+/* panel 1: BUKTI 1 - faktor */
 const panel1=document.createElement('div');
 panel1.className='panelI';
 panel1.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
+addTab(panel1,'BUKTI 1',ORIENT==='portrait'?19:17);
 const p1Hd=document.createElement('div');
 p1Hd.className='pHd';
-p1Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
-p1Hd.textContent='FAKTOR ITU PEMBAGI HABIS';
+p1Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.045)}px;`;
+p1Hd.textContent='PEMBAGI HABIS TANPA SISA';
 panel1.appendChild(p1Hd);
 const p1Big=document.createElement('div');
 p1Big.className='pBig';
-p1Big.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${Math.round(P.panelH*0.14)}px;display:flex;align-items:center;justify-content:center;`;
+p1Big.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${ORIENT==='portrait'?50:40}px;display:flex;align-items:center;justify-content:center;`;
 p1Big.textContent='HABIS DIBAGI, NOL SISA';
 panel1.appendChild(p1Big);
-[['12 ÷ 3 = 4 · PAS TANPA SISA',12.0,'#4CAF7A'],['FAKTOR 12 ADA ENAM BUAH',12.5,'#F2C14E']].forEach(([tx,t0,col])=>{
+[['12 ÷ 3 = 4 · PAS TANPA SISA',12.6,'#4CAF7A'],['FAKTOR 12 ADA ENAM BUAH',13.2,'#F2C14E']].forEach(([tx,t0,col])=>{
   const r=document.createElement('div');
   r.className='pRow';
-  r.style.cssText+=`height:${ORIENT==='portrait'?48:44}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  r.style.cssText+=`height:${ORIENT==='portrait'?48:40}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
   const dot=document.createElement('div');
   dot.className='pDot';
   dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
   r.appendChild(dot);
   const n=document.createElement('div');
   n.className='pName';
-  n.style.cssText+=`font-size:${ORIENT==='portrait'?24:21}px;`;
+  n.style.cssText+=`font-size:${ORIENT==='portrait'?24:20}px;`;
   n.textContent=tx;
   r.appendChild(n);
   panel1.appendChild(r);
   P1ROWS.push({el:r,t0});
 });
 const p1Chips=document.createElement('div');
-p1Chips.style.cssText+=`display:flex;align-items:center;justify-content:center;height:${Math.round(P.panelH*0.17)}px;gap:${ORIENT==='portrait'?8:10}px;`;
+p1Chips.style.cssText+=`display:flex;align-items:center;justify-content:center;height:${ORIENT==='portrait'?58:46}px;gap:${ORIENT==='portrait'?8:10}px;`;
 ['1','2','3','4','6','12'].forEach((v,i)=>{
   const c=document.createElement('div');
   c.className='chipA';
-  c.style.cssText+=`width:${ORIENT==='portrait'?72:82}px;height:${ORIENT==='portrait'?48:44}px;font-size:${ORIENT==='portrait'?22:19}px;`;
+  c.style.cssText+=`width:${ORIENT==='portrait'?72:82}px;height:${ORIENT==='portrait'?48:40}px;font-size:${ORIENT==='portrait'?22:19}px;`;
   c.textContent=v;
   p1Chips.appendChild(c);
-  P1CHIPS.push({el:c,t0:13.6+i*0.14});
+  P1CHIPS.push({el:c,t0:14.4+i*0.14});
 });
 panel1.appendChild(p1Chips);
 const p1Note=document.createElement('div');
 p1Note.className='pNote';
-p1Note.style.cssText+=`height:${ORIENT==='portrait'?44:38}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+p1Note.style.cssText+=`height:${ORIENT==='portrait'?44:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
 p1Note.textContent='12 ÷ 5 = 2 SISA 2 · 5 GAGAL';
 panel1.appendChild(p1Note);
 const p1Note2=document.createElement('div');
 p1Note2.className='pNote';
-p1Note2.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
-p1Note2.textContent='13 BANDEL: CUMA 1 DAN 13';
+p1Note2.style.cssText+=`height:${ORIENT==='portrait'?40:30}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+p1Note2.textContent='13 ÷ 3 = 4 SISA 1 · DITINGGAL!';
 panel1.appendChild(p1Note2);
 propsEl.appendChild(panel1);
 
-/* panel 2: kelipatan */
+/* panel 2: BUKTI 2 - kelipatan (pola serangan) */
 const panel2=document.createElement('div');
 panel2.className='panelI';
 panel2.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
+addTab(panel2,'BUKTI 2',ORIENT==='portrait'?19:17);
 const p2Hd=document.createElement('div');
 p2Hd.className='pHd';
-p2Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
-p2Hd.textContent='KELIPATAN ITU HASIL KALI';
+p2Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.045)}px;`;
+p2Hd.textContent='POLA SERANGAN PENCURI';
 panel2.appendChild(p2Hd);
 const p2Big=document.createElement('div');
 p2Big.className='pBig';
-p2Big.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${Math.round(P.panelH*0.14)}px;display:flex;align-items:center;justify-content:center;`;
+p2Big.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${ORIENT==='portrait'?50:40}px;display:flex;align-items:center;justify-content:center;`;
 p2Big.textContent='4 × 1, 2, 3, 4, 5, ...';
 panel2.appendChild(p2Big);
-[['4, 8, 12, 16, 20, ... TERUS',24.8,'#4CAF7A'],['12 MASUK KARENA 4 × 3 = 12',25.4,'#F2C14E']].forEach(([tx,t0,col])=>{
+[['SERANGAN: 4, 8, 12, 16, 20',25.6,'#4CAF7A'],['12 MASUK KARENA 4 × 3 = 12',26.2,'#F2C14E']].forEach(([tx,t0,col])=>{
   const r=document.createElement('div');
   r.className='pRow';
-  r.style.cssText+=`height:${ORIENT==='portrait'?48:44}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  r.style.cssText+=`height:${ORIENT==='portrait'?44:40}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
   const dot=document.createElement('div');
   dot.className='pDot';
   dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
   r.appendChild(dot);
   const n=document.createElement('div');
   n.className='pName';
-  n.style.cssText+=`font-size:${ORIENT==='portrait'?24:21}px;`;
+  n.style.cssText+=`font-size:${ORIENT==='portrait'?24:20}px;`;
   n.textContent=tx;
   r.appendChild(n);
   panel2.appendChild(r);
   P2ROWS.push({el:r,t0});
 });
 const p2Chips=document.createElement('div');
-p2Chips.style.cssText+=`display:flex;align-items:center;justify-content:center;height:${Math.round(P.panelH*0.17)}px;gap:${ORIENT==='portrait'?8:10}px;`;
+p2Chips.style.cssText+=`display:flex;align-items:center;justify-content:center;height:${ORIENT==='portrait'?56:46}px;gap:${ORIENT==='portrait'?8:10}px;`;
 ['4','8','12','16','20','...'].forEach((v,k)=>{
   const c=document.createElement('div');
   c.className='chipA';
-  c.style.cssText+=`width:${ORIENT==='portrait'?72:82}px;height:${ORIENT==='portrait'?48:44}px;font-size:${ORIENT==='portrait'?22:19}px;
+  c.style.cssText+=`width:${ORIENT==='portrait'?72:82}px;height:${ORIENT==='portrait'?48:40}px;font-size:${ORIENT==='portrait'?22:19}px;
     ${k===5?'background:#3A2A50;border:2px solid #E8B32E;':''}`;
   c.textContent=v;
   p2Chips.appendChild(c);
-  P2CHIPS.push({el:c,t0:26.2+k*1.0});
+  P2CHIPS.push({el:c,t0:27.2+k*1.0,ev:k<5});
 });
 panel2.appendChild(p2Chips);
 const p2Note=document.createElement('div');
 p2Note.className='pNote';
-p2Note.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
-p2Note.textContent='TERUS TERUSAN, TANPA UJUNG';
+p2Note.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+p2Note.textContent='KELIPATAN 4 · TERUS TERUSAN';
 panel2.appendChild(p2Note);
+const p2Note2=document.createElement('div');
+p2Note2.className='pNote';
+p2Note2.style.cssText+=`height:${ORIENT==='portrait'?36:30}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?21:19}px;`;
+p2Note2.textContent='4 × 3 = 12: 4 FAKTOR 12 · 12 KELIPATAN 4';
+panel2.appendChild(p2Note2);
 propsEl.appendChild(panel2);
 
-/* panel kejutan twist: faktor 6 vs kelipatan 6 (beat emas 34.2) */
+/* panel kejutan twist: DEDUKSI - terbatas vs tanpa batas (beat 34.4) */
 const panelS=document.createElement('div');
 panelS.className='panelI';
 panelS.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
+addTab(panelS,'DEDUKSI',ORIENT==='portrait'?19:17);
 const sHd=document.createElement('div');
 sHd.className='pHd';
-sHd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
+sHd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.045)}px;`;
 sHd.textContent='FAKTOR 6 VS KELIPATAN 6';
 panelS.appendChild(sHd);
 const sBig=document.createElement('div');
 sBig.className='pBig';
-sBig.style.cssText+=`font-size:${ORIENT==='portrait'?36:32}px;height:${Math.round(P.panelH*0.16)}px;display:flex;align-items:center;justify-content:center;`;
+sBig.style.cssText+=`font-size:${ORIENT==='portrait'?36:32}px;height:${ORIENT==='portrait'?56:46}px;display:flex;align-items:center;justify-content:center;`;
 sBig.textContent='TERBATAS VS TANPA BATAS';
 panelS.appendChild(sBig);
-[['FAKTOR 6: 1, 2, 3, 6 · CUMA EMPAT',35.7,'#D97A2E'],['KELIPATAN 6: 6, 12, 18, 24, 30, ...',37.2,'#4CAF7A']].forEach(([tx,t0,col])=>{
+[['FAKTOR 6: 1, 2, 3, 6 · CUMA EMPAT',36.3,'#D97A2E'],['KELIPATAN 6: 6, 12, 18, 24, 30, ...',37.8,'#4CAF7A']].forEach(([tx,t0,col])=>{
   const r=document.createElement('div');
   r.className='pRow';
-  r.style.cssText+=`height:${ORIENT==='portrait'?48:40}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  r.style.cssText+=`height:${ORIENT==='portrait'?46:40}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
   const dot=document.createElement('div');
   dot.className='pDot';
   dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
@@ -384,78 +432,41 @@ panelS.appendChild(sBig);
 });
 const sNote=document.createElement('div');
 sNote.className='pNote';
-sNote.style.cssText+=`height:${ORIENT==='portrait'?44:38}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+sNote.style.cssText+=`height:${ORIENT==='portrait'?44:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
 sNote.textContent='FAKTOR BERHENTI · KELIPATAN TERUS';
 panelS.appendChild(sNote);
 propsEl.appendChild(panelS);
 
-/* panel 3: saling berkaitan (satu kali, dua peran) */
-const panel3=document.createElement('div');
-panel3.className='panelI';
-panel3.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
-const p3Hd=document.createElement('div');
-p3Hd.className='pHd';
-p3Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
-p3Hd.textContent='FAKTOR DAN KELIPATAN BERKAITAN';
-panel3.appendChild(p3Hd);
-const p3Big=document.createElement('div');
-p3Big.className='pBig';
-p3Big.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;height:${Math.round(P.panelH*0.12)}px;display:flex;align-items:center;justify-content:center;`;
-p3Big.textContent='SATU KALI, DUA PERAN';
-panel3.appendChild(p3Big);
-const kLine=document.createElement('div');
-kLine.className='pBig';
-kLine.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${Math.round(P.panelH*0.14)}px;display:flex;align-items:center;justify-content:center;color:#FFE9A8;`;
-kLine.textContent='4 × 3 = 12';
-panel3.appendChild(kLine);
-[['4 DAN 3: FAKTOR 12',42.8,'#D97A2E'],['12: KELIPATAN 4 DAN 3',43.6,'#4CAF7A']].forEach(([tx,t0,col])=>{
-  const r=document.createElement('div');
-  r.className='pRow';
-  r.style.cssText+=`height:${ORIENT==='portrait'?44:38}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
-  const dot=document.createElement('div');
-  dot.className='pDot';
-  dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
-  r.appendChild(dot);
-  const n=document.createElement('div');
-  n.className='pName';
-  n.style.cssText+=`font-size:${ORIENT==='portrait'?23:21}px;`;
-  n.textContent=tx;
-  r.appendChild(n);
-  panel3.appendChild(r);
-  P3ROWS.push({el:r,t0});
-});
-const p3Note=document.createElement('div');
-p3Note.className='pNote';
-p3Note.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
-p3Note.textContent='COBA CEK: 6 × 5 = 30';
-panel3.appendChild(p3Note);
-propsEl.appendChild(panel3);
-
-/* panel 4: jurus bagi rata (aplikasi faktor: 24 permen) */
+/* panel 4: RENCANA - prediksi detektif dan jebakan bagi rata */
 const panel4=document.createElement('div');
 panel4.className='panelI';
 panel4.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
+addTab(panel4,'RENCANA',ORIENT==='portrait'?19:17);
 const p4Hd=document.createElement('div');
 p4Hd.className='pHd';
-p4Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
-p4Hd.textContent='FAKTOR UNTUK MEMBAGI RATA';
+p4Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.045)}px;`;
+p4Hd.textContent='PREDIKSI DETEKTIF';
 panel4.appendChild(p4Hd);
 const p4Big=document.createElement('div');
 p4Big.className='pBig';
-p4Big.style.cssText+=`font-size:${ORIENT==='portrait'?30:27}px;height:${Math.round(P.panelH*0.13)}px;display:flex;align-items:center;justify-content:center;`;
-p4Big.textContent='24 PERMEN, PEMBAGI RATA';
+p4Big.style.cssText+=`font-size:${ORIENT==='portrait'?30:27}px;height:${ORIENT==='portrait'?46:40}px;display:flex;align-items:center;justify-content:center;`;
+p4Big.textContent='BERIKUTNYA: 24 PERMEN';
 panel4.appendChild(p4Big);
-[['2 TEMAN DAPAT 12 · 3 DAPAT 8',51.6],['4 DAPAT 6 · 6 DAPAT 4',53.4]].forEach(([tx,t0])=>{
+const ul24=document.createElement('div');
+ul24.className='uline';
+ul24.style.cssText+=`left:${Math.round(P.panelW/2-80)}px;top:${ORIENT==='portrait'?100:96}px;width:160px;opacity:0;`;
+panel4.appendChild(ul24);
+[['24: KELIPATAN 4 · PREDIKSI PAS',43.6],['2 DAPAT 12 · 3 DAPAT 8',45.0],['4 DAPAT 6 · 6 DAPAT 4',46.2]].forEach(([tx,t0])=>{
   const r=document.createElement('div');
   r.className='vrow';
-  r.style.cssText+=`height:${ORIENT==='portrait'?44:38}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  r.style.cssText+=`height:${ORIENT==='portrait'?44:40}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
   const d=document.createElement('div');
   d.className='vd';
   d.style.cssText+=`width:${ORIENT==='portrait'?18:16}px;height:${ORIENT==='portrait'?18:16}px;background:#4CAF7A;margin-right:14px;`;
   r.appendChild(d);
   const tt=document.createElement('div');
   tt.className='vt';
-  tt.style.cssText+=`font-size:${ORIENT==='portrait'?23:21}px;`;
+  tt.style.cssText+=`font-size:${ORIENT==='portrait'?23:20}px;`;
   tt.textContent=tx;
   r.appendChild(tt);
   panel4.appendChild(r);
@@ -464,15 +475,15 @@ panel4.appendChild(p4Big);
 const p4Note=document.createElement('div');
 p4Note.className='pNote';
 p4Note.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
-p4Note.textContent='SISA NOL · SEMUA SENANG';
+p4Note.textContent='SISA NOL · POS SIAP';
 panel4.appendChild(p4Note);
 const p4Note2=document.createElement('div');
 p4Note2.className='pNote';
-p4Note2.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+p4Note2.style.cssText+=`height:${ORIENT==='portrait'?36:30}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?21:19}px;`;
 p4Note2.textContent='FAKTOR 24: 1, 2, 3, 4, 6, 8, 12, 24';
 panel4.appendChild(p4Note2);
 propsEl.appendChild(panel4);
-/* jurus bernama ala anime (aturan 34): stempel miring di sudut panel */
+/* jurus bernama ala anime: stempel miring di sudut panel */
 const jurusWrap=document.createElement('div');
 jurusWrap.style.cssText+=`position:absolute;left:${P.panelX+P.panelW-(ORIENT==='portrait'?268:300)}px;
   top:${P.panelY-(ORIENT==='portrait'?26:20)}px;width:${ORIENT==='portrait'?268:300}px;
@@ -484,20 +495,19 @@ jurus.textContent='JURUS BAGI RATA!';
 jurusWrap.appendChild(jurus);
 propsEl.appendChild(jurusWrap);
 
-/* stoples besar kelipatan 4: hujan permen +4 tiap ronde */
+/* stoples besar: hujan permen merekonstruksi serangan kelipatan 4 */
 const JARBIG=makeJar(propsEl,P.bigJarX,P.bigJarY,P.bigJarW,P.bigJarH,false);
 JARBIG.root.style.opacity='0';
 const BIGC=[];
 for(let i=0;i<20;i++){
   const c=document.createElement('div');
   c.className='candy';
-  const cols=4, dx=Math.round((P.bigJarW-2*JARBIG.gx-JARBIG.cd)/(cols-1)||JARBIG.cd*1.3);
   c.style.cssText+=`left:${JARBIG.gx+(i%4)*Math.round(JARBIG.cd*1.3)}px;top:${JARBIG.gy+Math.floor(i/4)*Math.round(JARBIG.cd*1.25)}px;
     width:${JARBIG.cd}px;height:${JARBIG.cd}px;background:${CANDY[i%CANDY.length]};opacity:0;`;
   JARBIG.root.appendChild(c);
-  BIGC.push({el:c,t0:26.2+Math.floor(i/4)*1.0+(i%4)*0.12});
+  BIGC.push({el:c,slotTop:P.bigJarY+Math.round(P.bigJarH*0.30)+Math.floor(i/4)*Math.round(P.candyD*1.25),t0:27.2+Math.floor(i/4)*1.0+(i%4)*0.12});
 }
-/* piring jurus bagi rata: 24 permen tersusun ulang 2, 3, 4, 6 porsi */
+/* piring jebakan: 24 permen tersusun ulang 2, 3, 4, 6 pos penjagaan */
 const plateEl=document.createElement('div');
 plateEl.className='plate';
 plateEl.style.cssText+=`left:${P.plateX}px;top:${P.plateY}px;width:${P.plateW}px;height:${P.plateH}px;opacity:0;`;
@@ -517,14 +527,15 @@ for(let i=0;i<24;i++){
   c.style.cssText+=`left:${px-P.plateD/2}px;top:${py-P.plateD/2}px;width:${P.plateD}px;height:${P.plateD}px;
     background:${CANDY[i%CANDY.length]};opacity:0;`;
   propsEl.appendChild(c);
-  PLATED.push({el:c,t0:50.9+i*0.028});
+  PLATED.push({el:c,t0:43.3+i*0.028});
 }
-const PLATE_T=[51.8,52.8,53.8,54.8], PLATE_G=[2,3,4,6];
+const PLATE_T=[44.2,45.2,46.2,47.2], PLATE_G=[2,3,4,6];
 
-/* ---------- papan tugas uji (aturan 30): soal tampil besar dan bernomor ---------- */
+/* ---------- papan berkas kasus baru (aturan 30): soal utuh bernomor ---------- */
 const panelUji=document.createElement('div');
 panelUji.className='panelI';
 panelUji.style.cssText+=`left:${P.panelX}px;top:${ORIENT==='portrait'?400:250}px;width:${P.panelW}px;height:${ORIENT==='portrait'?410:310}px;`;
+addTab(panelUji,'KASUS BARU',ORIENT==='portrait'?19:17);
 const ujiHd=document.createElement('div');
 ujiHd.style.cssText+=`margin:12px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?48:40}px;font-size:${ORIENT==='portrait'?30:27}px;color:#F2C14E;font-weight:800;letter-spacing:.06em;opacity:0;`;
 ujiHd.textContent='TANTANGAN UNTUKMU:';
@@ -536,7 +547,7 @@ SOAL.forEach(([n,q],i)=>{
   r.style.cssText+=`margin:3px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?38:32}px;font-size:${ORIENT==='portrait'?26:23}px;color:#FFF6E8;font-weight:600;opacity:0;`;
   r.innerHTML='<span style="color:#F2C14E">'+n+'</span> '+q;
   panelUji.appendChild(r);
-  UJIS.push({el:r,t0:57.8+i*0.18});
+  UJIS.push({el:r,t0:62.6+i*0.18});
 });
 const UJIVAL=['1','2','3','4','5','8','10','20'];
 const ujiGrid=document.createElement('div');
@@ -547,14 +558,14 @@ const CARDS=UJIVAL.map((lab,i)=>{
   el.style.cssText+=`position:relative;width:${P.cardW}px;height:${P.cardH}px;font-size:${P.cardFS}px;opacity:0;`;
   el.textContent=lab;
   ujiGrid.appendChild(el);
-  return {el,lab,pop:59.8+i*0.12};
+  return {el,lab,pop:64.6+i*0.12};
 });
 panelUji.appendChild(ujiGrid);
 const ujiNote=document.createElement('div');
 ujiNote.className='pNote';
 ujiNote.style.cssText+=`position:absolute;left:${Math.round(P.panelW*0.06)}px;top:${ORIENT==='portrait'?374:262}px;
   width:${P.panelW-Math.round(P.panelW*0.12)}px;height:${ORIENT==='portrait'?34:28}px;font-size:${ORIENT==='portrait'?21:19}px;`;
-ujiNote.textContent='KARTU BANTU SOAL NOMOR SATU';
+ujiNote.textContent='KARTU BANTU KASUS NOMOR SATU';
 panelUji.appendChild(ujiNote);
 propsEl.appendChild(panelUji);
 

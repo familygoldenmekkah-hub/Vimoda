@@ -1,13 +1,14 @@
-Video 15 - Kios Permen: Faktor dan Kelipatan
+Video 15 - Kasus Pencuri Rapi: Faktor dan Kelipatan
 
-Bagi 12 permen ke 3 stoples: rata, 4-4-4. Tapi 13 permen? Sisa satu! 🍬
-Itulah faktor: pembagi habis tanpa sisa. Faktor 12 = 1, 2, 3, 4, 6, 12. Kelipatan itu arah sebaliknya: 4 × 1, 2, 3, 4, 5... jadi 4, 8, 12, 16, 20, terus tanpa ujung.
-Kejutannya: faktor jumlahnya TERBATAS (faktor 6 cuma 1, 2, 3, 6), kelipatan TANPA BATAS. Dan keduanya berkaitan: 4 × 3 = 12 artinya 4 dan 3 faktor 12, dan 12 kelipatan keduanya. Satu kali, dua peran!
-Jurus bagi rata: 24 permen, 2 teman dapat 12, 3 dapat 8, 4 dapat 6, 6 dapat 4. Sisa nol, semua senang.
-Uji pemahaman: 1) semua faktor dari 20? 2) lima kelipatan pertama dari 7? 3) kenapa 5 bukan faktor 12? 4) faktor atau kelipatan, mana yang tak terbatas? Delapan kartu bantu menunggu: 1, 2, 3, 4, 5, 8, 10, 20 (3 dan 8 sengaja jadi pengecoh). Jawab di kolom komentar ya.
-Refleksi: kenapa faktor dan kelipatan bisa saling berkaitan? Jelaskan dengan bahasamu sendiri.
+Malam ini Kios Permen menyimpan misteri: etalase tinggal 13 permen, dan satu permen ditinggal sendirian! 🕵️
+Bukti pertama: si pencuri selalu bagi habis rata. Faktor 12 = 1, 2, 3, 4, 6, 12. Enam cara rapi! Tapi 12 dibagi 5 sisanya 2, dan 13 dibagi 3 sisanya 1, makanya ada sisa yang terbuang malam ini.
+Bukti kedua: catatan malam serangan 4, 8, 12, 16, 20. Semuanya kelipatan 4! Dan 12 menarik: dia kelipatan 4 sekaligus faktor 12, karena 4 × 3 = 12.
+Deduksi: faktor jumlahnya terbatas, kelipatan tanpa batas, jadi pencuri itu bisa datang kapan saja. Prediksi detektif: stok diisi 24 (kelipatan 4 berikutnya), lalu disusun dengan jurus bagi rata: 2 teman dapat 12, 3 dapat 8, 4 dapat 6, 6 dapat 4. Sisa nol, pos siap!
+Kasus ditutup: Pencuri Rapi tertangkap! 💥
+Berkas kasus baru untukmu: 1) semua faktor dari 20? 2) lima kelipatan pertama dari 7? 3) kenapa 5 bukan faktor 12? 4) faktor atau kelipatan, mana yang tak terbatas? Delapan kartu bukti menunggu: 1, 2, 3, 4, 5, 8, 10, 20 (3 dan 8 sengaja pengecoh). Jawab di kolom komentar ya.
+Refleksi: pola pencuri terasa di kelipatan, jebakan tersusun di faktor. Menurutmu, kenapa keduanya selalu berkaitan? Jelaskan dengan bahasamu sendiri.
 Di kios sebelah sudah menunggu: faktor persekutuan, FPB, dan KPK, termasuk misteri dua lampu berkedip tiap 3 detik dan 4 detik yang bersamaan lagi setelah 12 detik.
 
-Kisah angka berikutnya sudah menunggu. 🍭
+Kisah angka berikutnya sudah menunggu. 🍬
 
-#faktor #kelipatan #FPB #KPK #belajarmatematika #edukasi #akiomida
+#faktor #kelipatan #kasusmatematika #detektifangka #FPB #KPK #belajarmatematika #akiomida
