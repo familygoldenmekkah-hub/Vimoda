@@ -187,7 +187,8 @@ const propsEl=document.getElementById('props');
 const speedEl=document.getElementById('speedlines');
 const spotEl=document.getElementById('spotlight');
 const P1ROWS=[], P1CHIPS=[], P2ROWS=[], P2CHIPS=[], SROWS=[], P4ROWS=[];
-const RING1={}, XBAR=[];
+const RING1={}, FF=[], POOLS=[], ORBS=[];
+function hdLine(){const d=document.createElement('div');d.className='hdLine';d.style.cssText+='width:64px;margin:5px auto 0;';return d;}
 /* tab bukti merah ala berkas kasus detektif */
 function addTab(panel,label,fs){
   const tab=document.createElement('div');
@@ -200,13 +201,13 @@ function addTab(panel,label,fs){
 const stampHook=document.createElement('div');
 stampHook.className='stamp';
 stampHook.style.cssText+=`left:${P.stampX}px;top:${P.stampY}px;width:${P.stampW}px;height:${P.stampH}px;font-size:${P.stampFS}px;opacity:0;`;
-stampHook.textContent='BUKTI 01: SISA SATU!';
+stampHook.textContent='PETUNJUK: SISA SATU!';
 propsEl.appendChild(stampHook);
 /* stempel penutup kasus */
 const stampCatch=document.createElement('div');
 stampCatch.className='stamp';
 stampCatch.style.cssText+=`left:${P.stampX}px;top:${P.stampY}px;width:${P.stampW}px;height:${P.stampH+10}px;font-size:${P.stampFS+4}px;opacity:0;`;
-stampCatch.textContent='KASUS DITUTUP!';
+stampCatch.textContent='TERIMA KASIH!';
 propsEl.appendChild(stampCatch);
 
 /* ---------- KASUS: tiga stoples kosong menunggu rekonstruksi ---------- */
@@ -269,37 +270,56 @@ const HK=[];
     HK.push({el:c,sx,sy,ex,ey,t0:1.3+ji*0.12+k*0.16});
   }
 }
-/* siluet pelaku (Pencuri Rapi) + tanda silang penangkapan */
-const SHADOW=document.createElement('div');
-SHADOW.className='sil';
+/* Pembagi Rapi: cahaya hangat yang bekerja diam-diam (positif, tanpa wajah) */
+const HELPER=document.createElement('div');
+HELPER.className='glowh';
 {
-  const sw=ORIENT==='portrait'?130:110, sh=ORIENT==='portrait'?160:135;
-  SHADOW.style.cssText+=`left:-100px;top:${P.groundY-sh-14}px;width:${sw}px;height:${sh}px;`;
-  const lid=document.createElement('div');
-  lid.className='lid2';
-  lid.style.cssText+=`left:${Math.round(sw*0.12)}px;top:0;width:${Math.round(sw*0.76)}px;height:${Math.round(sh*0.16)}px;`;
-  SHADOW.appendChild(lid);
-  propsEl.appendChild(SHADOW);
-  const xw=ORIENT==='portrait'?76:62;
-  for(let i=0;i<2;i++){
-    const xb=document.createElement('div');
-    xb.className='xbar';
-    xb.style.cssText+=`left:0;top:0;width:${xw}px;height:${Math.round(xw*0.16)}px;opacity:0;`;
-    propsEl.appendChild(xb);
-    XBAR.push({el:xb,rot:i===0?45:-45});
+  const gw=ORIENT==='portrait'?170:150;
+  HELPER.style.cssText+=`left:-260px;top:${P.groundY-gw-60}px;width:${gw}px;height:${gw}px;opacity:0;`;
+  propsEl.appendChild(HELPER);
+}
+for(let i=0;i<3;i++){
+  const o=document.createElement('div');
+  o.className='orb2';
+  const od=ORIENT==='portrait'?10:8;
+  o.style.cssText+=`left:0;top:0;width:${od}px;height:${od}px;opacity:0;`;
+  propsEl.appendChild(o);
+  ORBS.push({el:o,ph:i*2.094});
+}
+/* kunang-kunang emas dan genangan cahaya lampion (lapisan di bawah panel) */
+const FFEL=document.createElement('div');
+propsEl.appendChild(FFEL);
+{
+  const nn=14;
+  for(let i=0;i<nn;i++){
+    const f=document.createElement('div');
+    f.className='fire';
+    const fd=5+Math.round(rnd()*4);
+    f.style.cssText+=`width:${fd}px;height:${fd}px;opacity:0;`;
+    FFEL.appendChild(f);
+    FF.push({el:f,ph:i*1.7,bx:80+rnd()*(W-160),by:P.titleY+120+rnd()*(P.floorY-P.titleY-200)});
   }
+}
+for(let i=0;i<2;i++){
+  const pl=document.createElement('div');
+  pl.className='pool';
+  const pw=ORIENT==='portrait'?360:400, ph2=ORIENT==='portrait'?110:100;
+  pl.style.cssText+=`left:${P.lampsX[i]-pw/2}px;top:${P.groundY-30}px;width:${pw}px;height:${ph2}px;opacity:0;`;
+  FFEL.appendChild(pl);
+  POOLS.push({el:pl});
 }
 
 /* panel 1: BUKTI 1 - faktor */
 const panel1=document.createElement('div');
 panel1.className='panelI';
 panel1.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
-addTab(panel1,'BUKTI 1',ORIENT==='portrait'?19:17);
+addTab(panel1,'PETUNJUK 1',ORIENT==='portrait'?19:17);
 const p1Hd=document.createElement('div');
 p1Hd.className='pHd';
 p1Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.045)}px;`;
 p1Hd.textContent='PEMBAGI HABIS TANPA SISA';
 panel1.appendChild(p1Hd);
+panel1.appendChild(hdLine());
 const p1Big=document.createElement('div');
 p1Big.className='pBig';
 p1Big.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${ORIENT==='portrait'?50:40}px;display:flex;align-items:center;justify-content:center;`;
@@ -335,12 +355,12 @@ panel1.appendChild(p1Chips);
 const p1Note=document.createElement('div');
 p1Note.className='pNote';
 p1Note.style.cssText+=`height:${ORIENT==='portrait'?44:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
-p1Note.textContent='12 ÷ 5 = 2 SISA 2 · 5 GAGAL';
+p1Note.textContent='12 ÷ 5 = 2 SISA 2 · 5 TIDAK RAPI';
 panel1.appendChild(p1Note);
 const p1Note2=document.createElement('div');
 p1Note2.className='pNote';
 p1Note2.style.cssText+=`height:${ORIENT==='portrait'?40:30}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
-p1Note2.textContent='13 ÷ 3 = 4 SISA 1 · DITINGGAL!';
+p1Note2.textContent='13 ÷ 3 = 4 SISA 1 · JADI HADIAH!';
 panel1.appendChild(p1Note2);
 propsEl.appendChild(panel1);
 
@@ -348,18 +368,19 @@ propsEl.appendChild(panel1);
 const panel2=document.createElement('div');
 panel2.className='panelI';
 panel2.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
-addTab(panel2,'BUKTI 2',ORIENT==='portrait'?19:17);
+addTab(panel2,'PETUNJUK 2',ORIENT==='portrait'?19:17);
 const p2Hd=document.createElement('div');
 p2Hd.className='pHd';
 p2Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.045)}px;`;
-p2Hd.textContent='POLA SERANGAN PENCURI';
+p2Hd.textContent='POLA KUNJUNGAN RAHASIA';
 panel2.appendChild(p2Hd);
+panel2.appendChild(hdLine());
 const p2Big=document.createElement('div');
 p2Big.className='pBig';
 p2Big.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${ORIENT==='portrait'?50:40}px;display:flex;align-items:center;justify-content:center;`;
 p2Big.textContent='4 × 1, 2, 3, 4, 5, ...';
 panel2.appendChild(p2Big);
-[['SERANGAN: 4, 8, 12, 16, 20',25.6,'#4CAF7A'],['12 MASUK KARENA 4 × 3 = 12',26.2,'#F2C14E']].forEach(([tx,t0,col])=>{
+[['KUNJUNGAN: 4, 8, 12, 16, 20',25.6,'#4CAF7A'],['12 MASUK KARENA 4 × 3 = 12',26.2,'#F2C14E']].forEach(([tx,t0,col])=>{
   const r=document.createElement('div');
   r.className='pRow';
   r.style.cssText+=`height:${ORIENT==='portrait'?44:40}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
@@ -409,6 +430,7 @@ sHd.className='pHd';
 sHd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.045)}px;`;
 sHd.textContent='FAKTOR 6 VS KELIPATAN 6';
 panelS.appendChild(sHd);
+panelS.appendChild(hdLine());
 const sBig=document.createElement('div');
 sBig.className='pBig';
 sBig.style.cssText+=`font-size:${ORIENT==='portrait'?36:32}px;height:${ORIENT==='portrait'?56:46}px;display:flex;align-items:center;justify-content:center;`;
@@ -433,7 +455,7 @@ panelS.appendChild(sBig);
 const sNote=document.createElement('div');
 sNote.className='pNote';
 sNote.style.cssText+=`height:${ORIENT==='portrait'?44:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
-sNote.textContent='FAKTOR BERHENTI · KELIPATAN TERUS';
+sNote.textContent='CARA TERBATAS · PELUANG TANPA BATAS';
 panelS.appendChild(sNote);
 propsEl.appendChild(panelS);
 
@@ -445,8 +467,9 @@ addTab(panel4,'RENCANA',ORIENT==='portrait'?19:17);
 const p4Hd=document.createElement('div');
 p4Hd.className='pHd';
 p4Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.045)}px;`;
-p4Hd.textContent='PREDIKSI DETEKTIF';
+p4Hd.textContent='RENCANA TERIMA KASIH';
 panel4.appendChild(p4Hd);
+panel4.appendChild(hdLine());
 const p4Big=document.createElement('div');
 p4Big.className='pBig';
 p4Big.style.cssText+=`font-size:${ORIENT==='portrait'?30:27}px;height:${ORIENT==='portrait'?46:40}px;display:flex;align-items:center;justify-content:center;`;
@@ -475,7 +498,7 @@ panel4.appendChild(ul24);
 const p4Note=document.createElement('div');
 p4Note.className='pNote';
 p4Note.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
-p4Note.textContent='SISA NOL · POS SIAP';
+p4Note.textContent='SISA NOL · SEMUA DAPAT';
 panel4.appendChild(p4Note);
 const p4Note2=document.createElement('div');
 p4Note2.className='pNote';
@@ -535,11 +558,12 @@ const PLATE_T=[44.2,45.2,46.2,47.2], PLATE_G=[2,3,4,6];
 const panelUji=document.createElement('div');
 panelUji.className='panelI';
 panelUji.style.cssText+=`left:${P.panelX}px;top:${ORIENT==='portrait'?400:250}px;width:${P.panelW}px;height:${ORIENT==='portrait'?410:310}px;`;
-addTab(panelUji,'KASUS BARU',ORIENT==='portrait'?19:17);
+addTab(panelUji,'MISI BARU',ORIENT==='portrait'?19:17);
 const ujiHd=document.createElement('div');
 ujiHd.style.cssText+=`margin:12px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?48:40}px;font-size:${ORIENT==='portrait'?30:27}px;color:#F2C14E;font-weight:800;letter-spacing:.06em;opacity:0;`;
 ujiHd.textContent='TANTANGAN UNTUKMU:';
 panelUji.appendChild(ujiHd);
+panelUji.appendChild(hdLine());
 const SOAL=[['1.','TENTUKAN SEMUA FAKTOR DARI 20.'],['2.','LIMA KELIPATAN PERTAMA DARI 7.'],['3.','KENAPA 5 BUKAN FAKTOR DARI 12?'],['4.','FAKTOR ATAU KELIPATAN: TAK TERBATAS?']];
 const UJIS=[];
 SOAL.forEach(([n,q],i)=>{
@@ -565,7 +589,7 @@ const ujiNote=document.createElement('div');
 ujiNote.className='pNote';
 ujiNote.style.cssText+=`position:absolute;left:${Math.round(P.panelW*0.06)}px;top:${ORIENT==='portrait'?374:262}px;
   width:${P.panelW-Math.round(P.panelW*0.12)}px;height:${ORIENT==='portrait'?34:28}px;font-size:${ORIENT==='portrait'?21:19}px;`;
-ujiNote.textContent='KARTU BANTU KASUS NOMOR SATU';
+ujiNote.textContent='KARTU BANTU MISI NOMOR SATU';
 panelUji.appendChild(ujiNote);
 propsEl.appendChild(panelUji);
 

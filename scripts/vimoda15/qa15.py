@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""QA penuh Video 15 rev2 (Kasus Pencuri Rapi).
+"""QA penuh Video 15 rev3 (Misteri Pembagi Rapi).
 Cek: durasi, frame sampling tidak kosong, teks engine (larangan + wajib),
 23 beat narasi, papan soal, kartu bantu, caption, naskah, thumbnail."""
 import re
@@ -60,7 +60,9 @@ for bad in ("\u2014", "\u2013", "Kaisar", "KAISAR", "TODO", "undefined", "NaN",
             "FOLLOW", "SUBSCRIBE", "IKUTI", "Kamu tahu harus ke mana", "nemu aha",
             "PETAK TANAM", "JURUS URAI PRIMA", "sudah disemai", "BENIH PETAK",
             "FPB", "KPK", "PERSEKUTUAN", "URAI JADI PERKALIAN PRIMA",
-            "DELAPAN BISA", "EPISODE 15", "EPISODE 16", "EPISODE"):
+            "DELAPAN BISA", "EPISODE 15", "EPISODE 16", "EPISODE",
+    "PENCURI", "CURI", "SERANGAN", "JEBAKAN", "PENANGKAPAN", "TERTANGKAP",
+    "DICURI"):
     if bad in txt:
         fail(f"DILARANG ada di engine: {bad!r} (aturan 32 rev3 / jaga lingkup episode)")
 # 3b) elemen wajib aturan 34 + aturan 32
@@ -68,10 +70,11 @@ for need, label in (("JURUS BAGI RATA", "aturan 34: jurus bernama"),
                     ("sudah menunggu", "aturan 32: teaser tersisip"),
                     ("TANTANGAN UNTUKMU", "aturan 34: framing tantangan"),
                     ("JAWAB DI KOLOM KOMENTAR YA", "aturan 30: pil spesifik"),
-                    ("KARTU BANTU KASUS NOMOR SATU", "aturan 30: catatan kartu"),
-                    ("KASUS PENCURI RAPI", "judul kasus"),
-                    ("BUKTI 01: SISA SATU!", "stempel bukti"),
-                    ("KASUS DITUTUP!", "stempel penutup kasus"),
+                    ("KARTU BANTU MISI NOMOR SATU", "aturan 30: catatan kartu"),
+                    ("MISTERI PEMBAGI RAPI", "judul misteri positif"),
+                    ("PETUNJUK: SISA SATU!", "stempel petunjuk"),
+                    ("TERIMA KASIH!", "stempel ucapan"),
+                    ("berbagi", "moral berbagi"),
                     ("TERBATAS VS TANPA BATAS", "twist aturan 34")):
     if need not in txt:
         fail(f"WAJIB ada di engine ({label}): {need!r}")
@@ -92,8 +95,8 @@ else:
 # 5) narasi: 23 beat, jeda >= 2.7 s, panjang <= 49, sub terakhir sebelum 76
 subs = re.findall(r"\[(\d+\.?\d*),'([^']*)','([^']*)','#(?:[0-9A-F]{6})'\]",
                   (HERE / "frag_render.js").read_text())
-if len(subs) != 22:
-    fail(f"jumlah beat {len(subs)} != 22")
+if len(subs) != 23:
+    fail(f"jumlah beat {len(subs)} != 23")
 prev = -9.0
 for s in subs:
     t0 = float(s[0])
@@ -110,8 +113,11 @@ print(f"narasi: {len(subs)} beat, sub terakhir t={subs[-1][0]}, jeda >= 2.7 s ok
 pkg = HERE / "package"
 for name in ("caption15.txt", "naskah15.md"):
     t = (pkg / name).read_text()
-    for bad in ("\u2014", "\u2013", "Kaisar", "Kamu tahu harus ke mana", "nemu aha",
-                "Jangan"):
+    base_bad = ("\u2014", "\u2013", "Kaisar", "Kamu tahu harus ke mana", "nemu aha",
+                "Jangan")
+    cap_bad = base_bad + ("PENCURI", "CURI", "SERANGAN", "JEBAKAN", "PENANGKAPAN",
+                          "TERTANGKAP", "DICURI")
+    for bad in (cap_bad if name == "caption15.txt" else base_bad):
         if bad in t:
             fail(f"DILARANG ada di {name}: {bad!r} (aturan 25/32 rev3)")
     if name == "caption15.txt" and "sudah menunggu" not in t:

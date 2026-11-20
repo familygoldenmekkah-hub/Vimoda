@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Musik & SFX prosedural rev2 untuk video 15 "Kasus Pencuri Rapi".
-Alur detektif ala anime misteri dalam nada D MINOR noir (kasus, bukti,
-deduksi), berubah ke F MAJOR hangat tepat saat KASUS DITUTUP (56.4):
+"""Musik & SFX prosedural rev3 untuk video 15 "Misteri Pembagi Rapi".
+Alur detektif positif (tanpa kejahatan) dalam nada D MINOR malam ajaib
+(misteri, petunjuk, deduksi), berubah ke F MAJOR hangat saat TERIMA KASIH (56.4):
 pad per babak, JEDA DRAMATIS (ma) 33.6-34.4 tanpa musik sebelum deduksi,
 tremolo pra-climax 31.8-33.48, impact sting 34.4, run tangga F major saat
-menyusun jebakan, tick jam malam 52.2-55.8 (menunggu pencuri), boom
+menyiapkan kejutan, tick jam malam 52.2-55.8 (menunggu malam tiba), boom
 penangkapan + fanfare F-A-C-F, kick formasi kasus baru, fanfare endcard.
-Durasi 84.0 s (aturan 31). Cue mengikuti 22 beat narasi detektif.
+Durasi 84.0 s (aturan 31). Cue mengikuti 23 beat narasi misteri positif.
 Output: /tmp/render/audio.wav (stereo 44100 Hz, 16-bit, 84.0 s)
 """
 import numpy as np
@@ -172,7 +172,7 @@ while tt < 77.4:
     add(tt, kick(0.14), 0.0)
     tt += 1.3
 
-# ---------- momen kunci (diselaraskan 22 beat narasi detektif) ----------
+# ---------- momen kunci (diselaraskan 23 beat narasi misteri positif) ----------
 CUT_TRANSITIONS = [10.6, 23.6, 41.4, 61.4]
 add(0.5, boom(0.24))                       # kasus dibuka: kios malam
 add(0.5, whoosh(0.5, True, 0.05))
@@ -180,16 +180,16 @@ for i in range(3):                         # tiga stoples kosong muncul
     add(1.0 + i * 0.12, tick(560 + i * 40, 0.06))
 for j in range(12):                        # 12 permen terbang dari etalase
     add(1.3 + (j // 4) * 0.12 + (j % 4) * 0.16, tick(760 + (j % 4) * 70, 0.05))
-for i in range(12):                        # antrean 12 permen percobaan pencuri
+for i in range(12):                        # antrean 12 permen menunggu giliran
     add(3.4 + i * 0.05, tick(620 + i * 26, 0.04))
 add(4.0, tick(880, 0.06))                  # permen sisa muncul sendirian
 add(4.2, whoosh(0.4, True, 0.05))          # hop: ditolak
 add(4.8, tick(760, 0.06))                  # tanda tanya
-add(4.9, chime(880.0, 0.10))               # LINGKARAN BUKTI merah
+add(4.9, chime(880.0, 0.10))               # LINGKARAN PETUNJUK merah
 add(5.2, boom(0.12))                       # beat emas: sisa menyala
 add(5.25, chime(440.0, 0.11))
-add(7.0, chime(523.25, 0.10))              # stempel BUKTI 01: SISA SATU!
-add(7.6, whoosh(0.6, False, 0.06))         # siluet Pencuri Rapi mengintip
+add(7.0, chime(523.25, 0.10))              # stempel PETUNJUK: SISA SATU!
+add(7.6, whoosh(0.6, False, 0.06))         # cahaya Pembagi Rapi melintas
 add(7.62, tick(300, 0.05))
 add(7.9, tick(1100, 0.06))
 for tw in CUT_TRANSITIONS:                 # perpindahan babak
@@ -202,12 +202,12 @@ add(13.2, tick(860, 0.06))                 # baris: faktor 12 ada enam
 for i in range(6):                         # enam chip faktor 12
     add(14.4 + i * 0.14, tick(560 + i * 46, 0.05))
 add(17.8, tick(760, 0.05))                 # cek gagal: 12 dibagi 5 sisa 2
-add(19.6, chime(523.25, 0.11))             # DEDUKSI: 13 dibagi 3 sisa 1 ditinggal
+add(19.6, chime(523.25, 0.11))            # DEDUKSI: sisa satu jadi hadiah
 add(24.8, tick(880, 0.075))                # baris besar: 4 x 1, 2, 3, ...
 add(25.6, tick(900, 0.085))                # baris: serangan 4, 8, 12, 16, 20
 add(25.62, noise_band(0.10, 1200, 3800) * 0.6, 0.0, 0.05)
 add(26.2, tick(860, 0.06))                 # baris: 12 masuk karena 4 x 3
-for rd in range(5):                        # lima ronde permen jatuh +4 (rekonstruksi)
+for rd in range(5):                        # lima ronde permen jatuh +4 (kunjungan)
     add(27.2 + rd * 1.0, whoosh(0.3, True, 0.035))
     for j in range(4):
         add(27.2 + rd * 1.0 + j * 0.12, tick(700 + rd * 60 + j * 40, 0.05))
@@ -237,29 +237,29 @@ for k, tt2 in enumerate((44.2, 45.2, 46.2, 47.2)):
     add(tt2, tick(640 + k * 90, 0.055))
 add(46.4, whoosh(0.5, True, 0.07))         # stempel JURUS BAGI RATA!
 add(46.45, chime(698.46, 0.11))
-# power-up ala anime: run tangga F major menaik saat menyusun jebakan (45.6-46.5)
+# power-up ala anime: run tangga F major menaik saat menyiapkan kejutan (45.6-46.5)
 RUN = [349.23, 392.0, 440.0, 466.16, 523.25, 587.33, 659.26, 698.46]
 for i, f in enumerate(RUN):
     add(45.6 + i * 0.12, sine(f, 0.22, a=0.003, d=0.12) * 0.07, 0.1 * np.sin(i))
-add(49.0, tick(760, 0.045))                # catatan: sisa nol pos siap
+add(49.0, tick(760, 0.045))                # catatan: sisa nol semua dapat
 add(49.8, tick(820, 0.045))                # catatan: faktor 24 ada delapan
-for t0 in (52.2, 53.4, 54.6, 55.8):        # malam menunggu: tick jam low
+for t0 in (52.2, 53.4, 54.6, 55.8):        # malam tiba: tick jam lembut
     add(t0, tick(300, 0.05))
-add(56.4, boom(0.32))                      # PENANGKAPAN: flash + boom
-add(56.6, tick(500, 0.06))                 # siluet muncul di tengah
-add(57.0, chime(698.46, 0.11))             # stempel KASUS DITUTUP!
-add(57.2, whoosh(0.4, True, 0.05))         # tanda silang merah
-add(57.22, tick(700, 0.07))
+add(56.4, boom(0.32))                      # TERIMA KASIH: flash + boom
+add(56.6, tick(500, 0.06))                 # cahaya Pembagi Rapi muncul
+add(57.0, chime(698.46, 0.11))             # stempel TERIMA KASIH!
+add(57.4, chime(1046.5, 0.07))          # kilau terima kasih
 for f, dt in ((349.23, 0.0), (440.0, 0.25), (523.25, 0.5), (698.46, 0.75)):
-    add(56.9 + dt, chime(f, 0.09))         # fanfare F-A-C-F penangkapan
-add(57.6, tick(1100, 0.06))                # mentor berputar bangga
-add(62.4, tick(880, 0.07))                 # header berkas kasus baru
+    add(56.9 + dt, chime(f, 0.09))         # fanfare F-A-C-F terima kasih
+add(57.6, tick(1100, 0.06))                # mentor berputar gembira
+add(59.8, chime(523.25, 0.08))             # moral: berbagi rata itu seru dan baik
+add(62.4, tick(880, 0.07))                 # header misi baru
 for i in range(4):                         # empat soal bernomor muncul
     add(62.6 + i * 0.18, tick(640 + i * 80, 0.05))
 add(64.4, kick(0.26))                      # formasi kasus baru dimulai
 for i in range(8):                         # delapan kartu bukti masuk berselang
     add(64.6 + i * 0.12, tick(580 + i * 70, 0.05))
-add(66.2, tick(760, 0.045))                # catatan: kartu bantu kasus nomor satu
+add(66.2, tick(760, 0.045))                # catatan: kartu bantu misi nomor satu
 add(67.8, whoosh(0.6, True, 0.07))
 add(67.85, chime(880.0, 0.12))             # pil JAWAB DI KOLOM KOMENTAR YA
 add(71.6, whoosh(0.6, False, 0.06))        # konten keluar layar (aturan 28)
