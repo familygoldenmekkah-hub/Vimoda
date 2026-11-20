@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+/*__FONTS__*/
+*{box-sizing:border-box}
+body{margin:0;background:#1A0F0A;font-family:'Poppins','Noto Sans',sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:relative;overflow:hidden}
+#world{position:absolute;inset:0}
+#speedlines{position:absolute;inset:0;opacity:0;pointer-events:none;will-change:opacity,transform;
+  background:repeating-conic-gradient(from 0deg at 50% 46%,rgba(255,244,214,.34) 0deg .5deg,transparent .5deg 2.6deg);
+  -webkit-mask-image:radial-gradient(circle at 50% 46%,transparent 30%,#000 72%);
+  mask-image:radial-gradient(circle at 50% 46%,transparent 30%,#000 72%)}
+#spotlight{position:absolute;inset:0;opacity:0;pointer-events:none;will-change:opacity;
+  background:radial-gradient(circle at 50% 42%,transparent 26%,rgba(16,10,4,.62) 78%)}
+#flash{position:absolute;inset:0;background:#FFFFFF;opacity:0;pointer-events:none}
+#fade{position:absolute;inset:0;background:#1A0F0A;opacity:0;pointer-events:none}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+/* KIOS PERMEN: kios permen pesta malam - dinding krem pink lembut dengan
+   awning scallop merah-krem di tepi atas, dua lampion kertas bulat hangat,
+   rak kayu berisi stoples kaca berisi permen warna-warni (ikon dunia:
+   permen tersimpan rapi di stoples), meja kios kayu dengan etalase kaca
+   berisi deretan permen, tanda KIOS PERMEN di dinding, lantai papan kayu
+   hangat dengan karpet festival merah-krem di jalur mentor. Panel konten
+   plum gelap berbingkai kuning safety (aturan 26: latar BERBEDA TOTAL dari
+   Petak Tanam dan semua episode lain). Karakter: HANYA bola emas mentor,
+   bulat sejati, tanpa mata (aturan 23). Dramaturgi anime aturan 34 sejak
+   render pertama: chip episode, jeda ma, speedlines twist, jurus bernama,
+   kartu formasi. Subjudul zona aman maksimal dua baris (aturan 27);
+   watermark AKIOMIDA di tepi paling bawah (aturan 24); penutup bersih
+   (aturan 28). */
+#candywall{position:absolute;left:0;top:0;width:100%;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.38) 0 6px,transparent 6px 150px),
+  linear-gradient(180deg,#FBEFE0 0%,#F3D2B8 100%)}
+#tilesun{position:absolute;inset:0;background:rgba(58,38,26,0);will-change:background}
+#awning{position:absolute;left:0;top:0;width:100%;will-change:opacity}
+#awning .band{position:absolute;left:0;top:0;width:100%;
+  background:repeating-linear-gradient(90deg,#C9524A 0 64px,#FFF4E4 64px 128px);
+  box-shadow:0 6px 14px rgba(90,40,20,.28)}
+#awning .scal{position:absolute;border-radius:0 0 999px 999px}
+.lant{position:absolute;will-change:transform,opacity}
+.lant .cord{position:absolute;width:3px;background:#7A4A2E}
+.lant .body{position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 38% 30%,#FFE9C0,#F2B45C 62%,#D88A3A);
+  box-shadow:0 10px 24px rgba(90,40,20,.3)}
+.lant .glow{position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,224,160,.75),rgba(255,224,160,0) 70%)}
+#shelf{position:absolute;will-change:opacity}
+#shelf .plank{position:absolute;background:linear-gradient(180deg,#C9784A,#A85E38);border-radius:6px;box-shadow:0 6px 14px rgba(90,40,20,.3)}
+.jar{position:absolute;will-change:transform,opacity}
+.jar .glass{position:absolute;border-radius:10px 10px 14px 14px;
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.22));
+  border:3px solid rgba(150,96,60,.55);box-shadow:0 8px 18px rgba(90,40,20,.25)}
+.jar .lid{position:absolute;border-radius:8px;background:linear-gradient(180deg,#C9784A,#A85E38)}
+.jar .candy{position:absolute;border-radius:50%;will-change:transform,opacity}
+#floorwood{position:absolute;left:0;width:100%;
+  background:repeating-linear-gradient(180deg,rgba(90,50,20,.16) 0 3px,transparent 3px 72px),
+  linear-gradient(180deg,#C98A5A 0%,#B47044 100%)}
+#runner{position:absolute;border-radius:999px;
+  background:repeating-linear-gradient(90deg,#C9524A 0 44px,#F6E7D4 44px 70px);
+  box-shadow:0 4px 10px rgba(90,40,20,.3);will-change:opacity}
+#baseboard{position:absolute;left:0;width:100%;background:#8A5638}
+#counter{position:absolute;will-change:opacity}
+#counter .slab{position:absolute;background:linear-gradient(180deg,#C9784A,#A85E38);border-radius:10px;box-shadow:0 10px 22px rgba(90,40,20,.32)}
+#counter .leg{position:absolute;background:#8A5638;border-radius:4px;width:26px}
+#etalase{position:absolute;will-change:opacity}
+#etalase .box{position:absolute;border-radius:12px;
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.2));
+  border:3px solid rgba(150,96,60,.55);box-shadow:0 8px 18px rgba(90,40,20,.25)}
+#etalase .shelfL{position:absolute;background:rgba(150,96,60,.4);border-radius:2px}
+#sign{position:absolute;will-change:opacity}
+#sign .board{position:absolute;background:#EFE0C8;border:3px solid #A85E38;border-radius:8px;box-shadow:0 12px 26px rgba(90,40,20,.35)}
+#sign .lab{position:absolute;width:100%;text-align:center;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#A6394B}
+.panelI{position:absolute;background:linear-gradient(180deg,#3A2A50,#2A1E38);border-radius:16px;border:4px solid #E8B32E;box-shadow:0 16px 38px rgba(30,18,4,.5);will-change:transform,opacity}
+.tapeC{position:absolute;background:rgba(232,179,46,.5);border-radius:3px;box-shadow:0 2px 5px rgba(30,18,4,.25)}
+.pHd{font-weight:800;color:#FFF6E6;letter-spacing:.10em;text-align:center}
+.pBig{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#F2CE8E;text-align:center;opacity:0;will-change:opacity}
+.pRow{display:flex;align-items:center;opacity:0}
+.pDot{border-radius:50%;flex:none}
+.pName{font-weight:800;color:#FFF6E6;flex:none}
+.pNote{display:flex;align-items:center;justify-content:center;background:rgba(232,179,46,.22);border:2px solid rgba(232,179,46,.6);border-radius:10px;color:#F2CE8E;font-weight:800;letter-spacing:.05em;text-align:center;opacity:0;will-change:opacity}
+.chipA{display:flex;align-items:center;justify-content:center;border-radius:12px;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#FFF6E6;background:#4A3A62;box-shadow:0 8px 18px rgba(30,18,4,.4);opacity:0;will-change:opacity}
+.stamp{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(92deg,#7FA6BF 0%,#D97A2E 52%,#E8B32E 100%);color:#22160C;font-weight:800;letter-spacing:.06em;box-shadow:0 12px 26px rgba(30,18,4,.45);will-change:transform,opacity}
+.vrow{display:flex;align-items:center;opacity:0}
+.vrow .vd{border-radius:50%;flex:none}
+.vrow .vt{font-weight:700;color:#FFF6E6}
+.valCard{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(180deg,#FFFDF6,#F2E6C6);border:3px solid #C8A86E;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#3A2C1E;box-shadow:0 8px 18px rgba(30,18,4,.35);will-change:transform,opacity}
+.qmark{position:absolute;color:#C9524A;font-weight:800;text-shadow:0 5px 0 rgba(0,0,0,.25);will-change:transform,opacity}
+.plate{position:absolute;border-radius:50%;background:linear-gradient(180deg,#FFF6EA,#EFD9BC);border:4px solid #C9784A;box-shadow:0 12px 26px rgba(90,40,20,.3);will-change:opacity}
+.cd{position:absolute;border-radius:50%;will-change:transform,opacity;box-shadow:0 3px 8px rgba(90,40,20,.3)}
+.title{position:absolute;left:0;width:100%;text-align:center;font-weight:800;color:#3A2E20;letter-spacing:.04em;text-shadow:0 5px 0 rgba(255,255,255,.45),0 12px 26px rgba(90,40,10,.22);will-change:transform,opacity}
+#pil{position:absolute;border-radius:999px;background:linear-gradient(92deg,#7FA6BF 0%,#D97A2E 52%,#E8B32E 100%);color:#22160C;font-weight:800;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;box-shadow:0 10px 24px rgba(30,18,4,.4)}
+#endcard{position:absolute;left:0;width:100%;opacity:0;will-change:transform,opacity}
+#fplate{background:rgba(26,16,10,.62);border-radius:28px;padding:14px 44px;width:max-content;margin:0 auto;box-shadow:0 14px 34px rgba(30,18,4,.4)}
+#f_url{font-weight:800;text-align:center}
+#f_bar{height:7px;border-radius:4px;background:linear-gradient(90deg,#7FA6BF,#D97A2E,#E8B32E)}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(26,16,10,.86);border-radius:20px;padding:18px 32px;text-align:center;box-shadow:0 14px 34px rgba(30,18,4,.5);will-change:transform,opacity}
+#sub_id{font-weight:800;color:#FFFFFF;line-height:1.26}
+#sub_en{color:#D9C8B4;font-weight:600}
+#wm{position:absolute;font-weight:800;letter-spacing:.34em;color:#F6EFE2;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;border:1.5px solid rgba(246,239,226,.42);will-change:transform}
+.bchar{position:absolute;will-change:transform,opacity}
+.bchar .core{position:absolute;border-radius:100%}
+.bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px)}
+.bsh{position:absolute;border-radius:50%;background:rgba(40,24,8,.4);filter:blur(2px)}
+.spark{position:absolute;width:34px;height:34px;opacity:0}
+.spark .sa{position:absolute;background:#FFE9A8;border-radius:3px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="world">
+    <div id="candywall"></div>
+    <div id="tilesun"></div>
+    <div id="awning"><div class="band"></div></div>
+    <div class="lant"><div class="cord"></div><div class="body"></div><div class="glow"></div></div>
+    <div class="lant"><div class="cord"></div><div class="body"></div><div class="glow"></div></div>
+    <div id="shelf"></div>
+    <div id="floorwood"></div>
+    <div id="baseboard"></div>
+    <div id="runner"></div>
+    <div id="counter"><div class="slab"></div><div class="leg"></div><div class="leg"></div></div>
+    <div id="etalase"><div class="box"></div></div>
+    <div id="sign"><div class="board"></div></div>
+    <div id="props"></div>
+    <div id="chars"></div>
+  </div>
+  <div id="speedlines"></div>
+  <div id="spotlight"></div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+  <div id="pil">JAWAB DI KOLOM KOMENTAR YA</div>
+  <div id="endcard">
+    <div id="fplate"><div id="f_url">AKIOMIDA.COM</div></div>
+    <div id="f_bar"></div>
+  </div>
+  <div class="title" id="t0">FAKTOR DAN KELIPATAN</div>
+  <div class="title" id="t1">APA ITU FAKTOR?</div>
+  <div class="title" id="t2">APA ITU KELIPATAN?</div>
+  <div class="title" id="t3">SALING BERKAITAN</div>
+  <div class="title" id="t4">JURUS BAGI RATA</div>
+  <div class="title" id="t5">UJI PEMAHAMAN!</div>
+  <div id="subbar"><div id="sub_id"></div><div id="sub_en"></div></div>
+  <div id="wm">AKIOMIDA</div>
+</div>
+<script>
+
+const Q=new URLSearchParams(location.search);
+const ORIENT=Q.get('o')||'landscape';
+const W=ORIENT==='portrait'?1080:1920;
+const H=ORIENT==='portrait'?1920:1080;
+const P = ORIENT==='portrait' ? {
+  floorY:1080, bbY:1064,
+  tableX:50, tableW:330, slabY:830, slabH:52, legBot:1080,
+  bdW:300, bdH:96, bdCX:215, bdCY:778,
+  shelfX:80, shelfW:920, shelfFS:14,
+  stampX:445, stampY:690, stampW:520, stampH:64, stampFS:26,
+  panelX:400, panelY:470, panelW:610, panelH:360,
+  pilX:250, pilY:850, pilW:580, pilH:66, pilFS:26,
+  ecY:830, barW:420,
+  titleY:300, titleS0:80, titleSN:74,
+  subTop:1170, subId:46, subEn:25, subMax:880,
+  ballD:110, groundY:1120, wmY:1800, wmFS:22,
+  lampsX:[340,700], lampsY:[168,150], lampsD:[74,62],
+  markX:220, markY:1096, markW:640, markH:16,
+  signX:800, signY:848, signW:240, signH:150,
+  cardW:142, cardH:62, cardFS:30,
+  jarW:120, jarH:150, jarFS:26, candyD:26,
+  bigJarX:620, bigJarY:830, bigJarW:170, bigJarH:200,
+  plateX:420, plateY:850, plateW:320, plateH:170, plateD:14
+} : {
+  floorY:508, bbY:494,
+  tableX:140, tableW:360, slabY:540, slabH:40, legBot:700,
+  bdW:340, bdH:82, bdCX:320, bdCY:494,
+  shelfX:140, shelfW:600, shelfFS:12,
+  stampX:940, stampY:440, stampW:600, stampH:58, stampFS:23,
+  panelX:760, panelY:250, panelW:1020, panelH:290,
+  pilX:670, pilY:600, pilW:580, pilH:62, pilFS:25,
+  ecY:400, barW:520,
+  titleY:150, titleS0:88, titleSN:72,
+  subTop:740, subId:46, subEn:25, subMax:1360,
+  ballD:96, groundY:660, wmY:1010, wmFS:20,
+  lampsX:[560,1000], lampsY:[112,100], lampsD:[62,52],
+  markX:620, markY:672, markW:680, markH:14,
+  signX:1440, signY:556, signW:240, signH:140,
+  cardW:112, cardH:50, cardFS:26,
+  jarW:100, jarH:115, jarFS:23, candyD:20,
+  bigJarX:940, bigJarY:560, bigJarW:140, bigJarH:135,
+  plateX:860, plateY:555, plateW:260, plateH:110, plateD:11
+};
+const stage=document.getElementById('stage');
+stage.style.width=W+'px';stage.style.height=H+'px';
+
+/* ---------- util & easing ---------- */
+const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
+const lerp=(a,b,p)=>a+(b-a)*p;
+const seg=(t,a,d)=>clamp((t-a)/d,0,1);
+const eio=p=>p<0.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+const eoe=p=>1-Math.pow(1-p,3);
+const smz=(t,a,b,f)=>f?clamp((t-a)/f,0,1)*clamp((b-t)/f,0,1):(t>=a&&t<b?1:0);
+function popA(el,t,t0,d,ov,op0,op1){
+  const o=clamp(seg(t,t0,0.3)*(1-seg(t,op1,0.35)),0,1);
+  const s2=1+(ov/100)*Math.sin(clamp(seg(t,t0,d),0,1)*Math.PI)*(1-seg(t,op1,0.35));
+  el.style.opacity=String(o);
+  el.style.transform=`scale(${s2.toFixed(3)})`;
+}
+let _seed=20261122;
+const rnd=()=>{_seed|=0;_seed=_seed+0x6D2B79F5|0;let z=Math.imul(_seed^_seed>>>15,1|_seed);
+  z=z+Math.imul(z^z>>>7,61|z)^z;return((z^z>>>14)>>>0)/4294967296;};
+
+/* ---------- dinding kios krem pink, lantai papan kayu, baseboard ---------- */
+const wallEl=document.getElementById('candywall');
+wallEl.style.cssText+=`height:${P.floorY}px;`;
+const floorEl=document.getElementById('floorwood');
+floorEl.style.cssText+=`top:${P.floorY}px;height:${H-P.floorY}px;`;
+const bbEl=document.getElementById('baseboard');
+bbEl.style.cssText+=`top:${P.bbY}px;height:${P.floorY-P.bbY}px;`;
+
+/* ---------- awning scallop merah-krem di tepi atas ---------- */
+const awnEl=document.getElementById('awning');
+const CANDY=['#E85D5D','#F2A03D','#5CA85C','#5A8AD8','#C97BCA','#F2C14E'];
+{
+  const bh=ORIENT==='portrait'?52:36;
+  const band=awnEl.querySelector('.band');
+  band.style.cssText+=`height:${bh}px;`;
+  const n=Math.ceil(W/64)+1;
+  for(let i=0;i<n;i++){
+    const sc=document.createElement('div');
+    sc.className='scal';
+    sc.style.cssText+=`left:${i*64-8}px;top:${bh-13}px;width:80px;height:26px;
+      background:${i%2===0?'#C9524A':'#FFF4E4'};`;
+    awnEl.appendChild(sc);
+  }
+}
+/* ---------- dua lampion kertas bulat hangat ---------- */
+const LAMPS=[];
+document.querySelectorAll('.lant').forEach((lw,i)=>{
+  const lx=P.lampsX[i], ly=P.lampsY[i], ld=P.lampsD[i];
+  const cord=lw.querySelector('.cord');
+  cord.style.cssText+=`left:${lx-1.5}px;top:0;height:${ly}px;`;
+  const body=lw.querySelector('.body');
+  body.style.cssText+=`left:${lx-ld/2}px;top:${ly}px;width:${ld}px;height:${ld}px;`;
+  const glow=lw.querySelector('.glow');
+  glow.style.cssText+=`left:${lx-ld*0.9}px;top:${ly-ld*0.15}px;width:${ld*1.8}px;height:${ld*1.8}px;`;
+  LAMPS.push({lw,glow,ph:i*2.1,ly:ly});
+});
+/* ---------- rak kayu berisi stoples permen di dinding (ikon dunia) ---------- */
+function makeJar(parent,x,y,w,h,small){
+  const root=document.createElement('div');
+  root.className='jar';
+  root.style.cssText+=`left:${x}px;top:${y}px;width:${w}px;height:${h}px;`;
+  const lid=document.createElement('div');
+  lid.className='lid';
+  lid.style.cssText+=`left:${Math.round(w*0.12)}px;top:0;width:${Math.round(w*0.76)}px;height:${Math.round(h*0.16)}px;`;
+  const glass=document.createElement('div');
+  glass.className='glass';
+  glass.style.cssText+=`left:0;top:${Math.round(h*0.14)}px;width:${w}px;height:${Math.round(h*0.86)}px;`;
+  root.appendChild(lid);root.appendChild(glass);
+  parent.appendChild(root);
+  const candies=[];
+  const cd=small?(ORIENT==='portrait'?18:15):P.candyD;
+  const gx=Math.round(w*0.14), gy=Math.round(h*0.30);
+  return {root,candies,cd,gx,gy,gw:Math.round(w*0.72),gh:Math.round(h*0.62)};
+}
+const shelfEl=document.getElementById('shelf');
+{
+  const planks=ORIENT==='portrait'?[168,238]:[264,318];
+  planks.forEach(py=>{
+    const pk=document.createElement('div');
+    pk.className='plank';
+    pk.style.cssText+=`left:${P.shelfX}px;top:${py}px;width:${P.shelfW}px;height:14px;`;
+    shelfEl.appendChild(pk);
+  });
+  const JW=ORIENT==='portrait'?84:70, JH=ORIENT==='portrait'?76:62;
+  const spots=ORIENT==='portrait'
+    ? [[150,0],[260,0],[370,0],[480,0],[560,1],[670,1],[780,1],[890,1]]
+    : [[210,0],[300,0],[390,0],[250,1],[340,1],[430,1]];
+  spots.forEach(([sx,si])=>{
+    const jr=makeJar(shelfEl,sx,planks[si]-JH+2,JW,JH,true);
+    for(let k=0;k<3;k++){
+      const c=document.createElement('div');
+      c.className='candy';
+      c.style.cssText+=`left:${jr.gx+ (k%2)*Math.round(jr.cd*1.25)}px;top:${jr.gy+Math.floor(k/2)*Math.round(jr.cd*1.15)}px;
+        width:${jr.cd}px;height:${jr.cd}px;background:${CANDY[(si*3+k)%CANDY.length]};opacity:.9;`;
+      jr.root.appendChild(c);
+    }
+  });
+}
+/* ---------- meja kios dan etalase kaca ---------- */
+const counterEl=document.getElementById('counter');
+{
+  const slab=counterEl.querySelector('.slab');
+  slab.style.cssText+=`left:${P.tableX}px;top:${P.slabY}px;width:${P.tableW}px;height:${P.slabH}px;`;
+  const legs=counterEl.querySelectorAll('.leg');
+  legs[0].style.cssText+=`left:${P.tableX+26}px;top:${P.slabY+P.slabH}px;height:${P.legBot-P.slabY-P.slabH}px;`;
+  legs[1].style.cssText+=`left:${P.tableX+P.tableW-52}px;top:${P.slabY+P.slabH}px;height:${P.legBot-P.slabY-P.slabH}px;`;
+}
+const etalaseEl=document.getElementById('etalase');
+{
+  const box=etalaseEl.querySelector('.box');
+  box.style.cssText+=`left:${P.bdCX-P.bdW/2}px;top:${P.bdCY-Math.round(P.bdH*0.58)}px;width:${P.bdW}px;height:${P.bdH}px;`;
+  const nrow=3;
+  for(let r=0;r<nrow;r++){
+    const ln=document.createElement('div');
+    ln.className='shelfL';
+    ln.style.cssText+=`left:${P.bdCX-P.bdW/2+10}px;top:${P.bdCY-Math.round(P.bdH*0.58)+Math.round(P.bdH*(0.34+r*0.24))}px;width:${P.bdW-20}px;height:3px;`;
+    etalaseEl.appendChild(ln);
+    for(let k=0;k<5;k++){
+      const c=document.createElement('div');
+      c.className='cd';
+      const d=ORIENT==='portrait'?20:16;
+      c.style.cssText+=`left:${P.bdCX-P.bdW/2+18+k*Math.round((P.bdW-52)/4)}px;top:${P.bdCY-Math.round(P.bdH*0.58)+Math.round(P.bdH*(0.30+r*0.24))-d/2}px;
+        width:${d}px;height:${d}px;background:${CANDY[(r*2+k)%CANDY.length]};`;
+      etalaseEl.appendChild(c);
+    }
+  }
+}
+/* ---------- tanda KIOS PERMEN di dinding ---------- */
+const signEl=document.getElementById('sign');
+{
+  const board=signEl.querySelector('.board');
+  board.style.cssText+=`left:0;top:0;width:${P.signW}px;height:${P.signH}px;`;
+  const lab=document.createElement('div');
+  lab.className='lab';
+  lab.style.cssText+=`left:0;top:${Math.round(P.signH*0.36)}px;font-size:${ORIENT==='portrait'?24:26}px;letter-spacing:.10em;`;
+  lab.textContent='KIOS PERMEN';
+  signEl.appendChild(lab);
+}
+/* ---------- karpet festival merah-krem di jalur mentor ---------- */
+const markEl=document.getElementById('runner');
+markEl.style.cssText+=`left:${P.markX}px;top:${P.markY}px;width:${P.markW}px;height:${P.markH}px;`;
+
+/* ---------- panel-panel konten (satu ide per layar) ---------- */
+const propsEl=document.getElementById('props');
+const speedEl=document.getElementById('speedlines');
+const spotEl=document.getElementById('spotlight');
+const P1ROWS=[], P1CHIPS=[], P2ROWS=[], P2CHIPS=[], SROWS=[], P3ROWS=[], P4ROWS=[];
+/* chip episode ala kartu judul anime (aturan 34) */
+const epchip=document.createElement('div');
+epchip.style.cssText+=`position:absolute;left:50%;transform:translateX(-50%);
+  top:${P.titleY-(ORIENT==='portrait'?66:54)}px;width:max-content;
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;
+  font-size:${ORIENT==='portrait'?22:20}px;letter-spacing:.22em;color:#3A2C1E;
+  background:rgba(255,253,246,.78);border:2.5px solid #C9524A;border-radius:999px;
+  padding:7px 26px;box-shadow:0 8px 18px rgba(60,40,10,.28);opacity:0;`;
+epchip.textContent='EPISODE 15';
+stage.appendChild(epchip);
+/* stempel hook */
+const stamp=document.createElement('div');
+stamp.className='stamp';
+stamp.style.cssText+=`left:${P.stampX}px;top:${P.stampY}px;width:${P.stampW}px;height:${P.stampH}px;font-size:${P.stampFS}px;opacity:0;`;
+stamp.textContent='DUA BELAS RATA, TIGA BELAS SISA!';
+propsEl.appendChild(stamp);
+/* hook: 12 permen masuk tiga stoples rata (4-4-4), permen ke-13 ditolak: SISA */
+const HOOKJ=[];
+{
+  const centers=ORIENT==='portrait'?[525,705,885]:[1050,1270,1490];
+  centers.forEach((cx,ji)=>{
+    const jr=makeJar(propsEl,cx-P.jarW/2,ORIENT==='portrait'?470:265,P.jarW,P.jarH,false);
+    const jt0=1.0+ji*0.12;
+    for(let k=0;k<4;k++){
+      const c=document.createElement('div');
+      c.className='candy';
+      c.style.cssText+=`left:${jr.gx+(k%2)*Math.round(jr.cd*1.3)}px;top:${jr.gy+Math.floor(k/2)*Math.round(jr.cd*1.2)}px;
+        width:${jr.cd}px;height:${jr.cd}px;background:${CANDY[(ji*2+k)%CANDY.length]};opacity:0;`;
+      jr.root.appendChild(c);
+      jr.candies.push({el:c,t0:1.3+ji*0.12+k*0.16});
+    }
+    HOOKJ.push({root:jr.root,t0:jt0,candies:jr.candies});
+  });
+}
+const QUEUE=[], SISA={}, QM={};
+{
+  const n=12, sp=ORIENT==='portrait'?44:40, d=ORIENT==='portrait'?16:14;
+  const x0=(ORIENT==='portrait'?705:1270)-((n-1)*sp)/2;
+  const qy=ORIENT==='portrait'?660:415;
+  for(let i=0;i<n;i++){
+    const c=document.createElement('div');
+    c.className='cd';
+    c.style.cssText+=`left:${x0+i*sp-d/2}px;top:${qy-d/2}px;width:${d}px;height:${d}px;background:${CANDY[i%CANDY.length]};opacity:0;`;
+    propsEl.appendChild(c);
+    QUEUE.push({el:c,t0:3.4+i*0.05});
+  }
+  const sx0=x0+n*sp, sy=qy;
+  const s=document.createElement('div');
+  s.className='cd';
+  s.style.cssText+=`left:${sx0-(ORIENT==='portrait'?30:26)/2}px;top:${sy-(ORIENT==='portrait'?30:26)/2}px;
+    width:${ORIENT==='portrait'?30:26}px;height:${ORIENT==='portrait'?30:26}px;background:#E85D5D;opacity:0;`;
+  propsEl.appendChild(s);
+  SISA.el=s; SISA.x=sx0; SISA.y=sy; SISA.hx=sx0+(ORIENT==='portrait'?60:60);
+  const qm=document.createElement('div');
+  qm.className='qmark';
+  qm.style.cssText+=`left:${SISA.hx-(ORIENT==='portrait'?16:14)}px;top:${sy-(ORIENT==='portrait'?62:52)}px;
+    font-size:${ORIENT==='portrait'?44:38}px;opacity:0;`;
+  qm.textContent='?';
+  propsEl.appendChild(qm);
+  QM.el=qm;
+}
+
+/* panel 1: faktor */
+const panel1=document.createElement('div');
+panel1.className='panelI';
+panel1.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
+const p1Hd=document.createElement('div');
+p1Hd.className='pHd';
+p1Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
+p1Hd.textContent='FAKTOR ITU PEMBAGI HABIS';
+panel1.appendChild(p1Hd);
+const p1Big=document.createElement('div');
+p1Big.className='pBig';
+p1Big.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${Math.round(P.panelH*0.14)}px;display:flex;align-items:center;justify-content:center;`;
+p1Big.textContent='HABIS DIBAGI, NOL SISA';
+panel1.appendChild(p1Big);
+[['12 ÷ 3 = 4 · PAS TANPA SISA',12.0,'#4CAF7A'],['FAKTOR 12 ADA ENAM BUAH',12.5,'#F2C14E']].forEach(([tx,t0,col])=>{
+  const r=document.createElement('div');
+  r.className='pRow';
+  r.style.cssText+=`height:${ORIENT==='portrait'?48:44}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  const dot=document.createElement('div');
+  dot.className='pDot';
+  dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
+  r.appendChild(dot);
+  const n=document.createElement('div');
+  n.className='pName';
+  n.style.cssText+=`font-size:${ORIENT==='portrait'?24:21}px;`;
+  n.textContent=tx;
+  r.appendChild(n);
+  panel1.appendChild(r);
+  P1ROWS.push({el:r,t0});
+});
+const p1Chips=document.createElement('div');
+p1Chips.style.cssText+=`display:flex;align-items:center;justify-content:center;height:${Math.round(P.panelH*0.17)}px;gap:${ORIENT==='portrait'?8:10}px;`;
+['1','2','3','4','6','12'].forEach((v,i)=>{
+  const c=document.createElement('div');
+  c.className='chipA';
+  c.style.cssText+=`width:${ORIENT==='portrait'?72:82}px;height:${ORIENT==='portrait'?48:44}px;font-size:${ORIENT==='portrait'?22:19}px;`;
+  c.textContent=v;
+  p1Chips.appendChild(c);
+  P1CHIPS.push({el:c,t0:13.6+i*0.14});
+});
+panel1.appendChild(p1Chips);
+const p1Note=document.createElement('div');
+p1Note.className='pNote';
+p1Note.style.cssText+=`height:${ORIENT==='portrait'?44:38}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+p1Note.textContent='12 ÷ 5 = 2 SISA 2 · 5 GAGAL';
+panel1.appendChild(p1Note);
+const p1Note2=document.createElement('div');
+p1Note2.className='pNote';
+p1Note2.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+p1Note2.textContent='13 BANDEL: CUMA 1 DAN 13';
+panel1.appendChild(p1Note2);
+propsEl.appendChild(panel1);
+
+/* panel 2: kelipatan */
+const panel2=document.createElement('div');
+panel2.className='panelI';
+panel2.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
+const p2Hd=document.createElement('div');
+p2Hd.className='pHd';
+p2Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
+p2Hd.textContent='KELIPATAN ITU HASIL KALI';
+panel2.appendChild(p2Hd);
+const p2Big=document.createElement('div');
+p2Big.className='pBig';
+p2Big.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${Math.round(P.panelH*0.14)}px;display:flex;align-items:center;justify-content:center;`;
+p2Big.textContent='4 × 1, 2, 3, 4, 5, ...';
+panel2.appendChild(p2Big);
+[['4, 8, 12, 16, 20, ... TERUS',24.8,'#4CAF7A'],['12 MASUK KARENA 4 × 3 = 12',25.4,'#F2C14E']].forEach(([tx,t0,col])=>{
+  const r=document.createElement('div');
+  r.className='pRow';
+  r.style.cssText+=`height:${ORIENT==='portrait'?48:44}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  const dot=document.createElement('div');
+  dot.className='pDot';
+  dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
+  r.appendChild(dot);
+  const n=document.createElement('div');
+  n.className='pName';
+  n.style.cssText+=`font-size:${ORIENT==='portrait'?24:21}px;`;
+  n.textContent=tx;
+  r.appendChild(n);
+  panel2.appendChild(r);
+  P2ROWS.push({el:r,t0});
+});
+const p2Chips=document.createElement('div');
+p2Chips.style.cssText+=`display:flex;align-items:center;justify-content:center;height:${Math.round(P.panelH*0.17)}px;gap:${ORIENT==='portrait'?8:10}px;`;
+['4','8','12','16','20','...'].forEach((v,k)=>{
+  const c=document.createElement('div');
+  c.className='chipA';
+  c.style.cssText+=`width:${ORIENT==='portrait'?72:82}px;height:${ORIENT==='portrait'?48:44}px;font-size:${ORIENT==='portrait'?22:19}px;
+    ${k===5?'background:#3A2A50;border:2px solid #E8B32E;':''}`;
+  c.textContent=v;
+  p2Chips.appendChild(c);
+  P2CHIPS.push({el:c,t0:26.2+k*1.0});
+});
+panel2.appendChild(p2Chips);
+const p2Note=document.createElement('div');
+p2Note.className='pNote';
+p2Note.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+p2Note.textContent='TERUS TERUSAN, TANPA UJUNG';
+panel2.appendChild(p2Note);
+propsEl.appendChild(panel2);
+
+/* panel kejutan twist: faktor 6 vs kelipatan 6 (beat emas 34.2) */
+const panelS=document.createElement('div');
+panelS.className='panelI';
+panelS.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
+const sHd=document.createElement('div');
+sHd.className='pHd';
+sHd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
+sHd.textContent='FAKTOR 6 VS KELIPATAN 6';
+panelS.appendChild(sHd);
+const sBig=document.createElement('div');
+sBig.className='pBig';
+sBig.style.cssText+=`font-size:${ORIENT==='portrait'?36:32}px;height:${Math.round(P.panelH*0.16)}px;display:flex;align-items:center;justify-content:center;`;
+sBig.textContent='TERBATAS VS TANPA BATAS';
+panelS.appendChild(sBig);
+[['FAKTOR 6: 1, 2, 3, 6 · CUMA EMPAT',35.7,'#D97A2E'],['KELIPATAN 6: 6, 12, 18, 24, 30, ...',37.2,'#4CAF7A']].forEach(([tx,t0,col])=>{
+  const r=document.createElement('div');
+  r.className='pRow';
+  r.style.cssText+=`height:${ORIENT==='portrait'?48:40}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  const dot=document.createElement('div');
+  dot.className='pDot';
+  dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
+  r.appendChild(dot);
+  const n=document.createElement('div');
+  n.className='pName';
+  n.style.cssText+=`font-size:${ORIENT==='portrait'?23:20}px;`;
+  n.textContent=tx;
+  r.appendChild(n);
+  panelS.appendChild(r);
+  SROWS.push({el:r,t0});
+});
+const sNote=document.createElement('div');
+sNote.className='pNote';
+sNote.style.cssText+=`height:${ORIENT==='portrait'?44:38}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+sNote.textContent='FAKTOR BERHENTI · KELIPATAN TERUS';
+panelS.appendChild(sNote);
+propsEl.appendChild(panelS);
+
+/* panel 3: saling berkaitan (satu kali, dua peran) */
+const panel3=document.createElement('div');
+panel3.className='panelI';
+panel3.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
+const p3Hd=document.createElement('div');
+p3Hd.className='pHd';
+p3Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
+p3Hd.textContent='FAKTOR DAN KELIPATAN BERKAITAN';
+panel3.appendChild(p3Hd);
+const p3Big=document.createElement('div');
+p3Big.className='pBig';
+p3Big.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;height:${Math.round(P.panelH*0.12)}px;display:flex;align-items:center;justify-content:center;`;
+p3Big.textContent='SATU KALI, DUA PERAN';
+panel3.appendChild(p3Big);
+const kLine=document.createElement('div');
+kLine.className='pBig';
+kLine.style.cssText+=`font-size:${ORIENT==='portrait'?34:30}px;height:${Math.round(P.panelH*0.14)}px;display:flex;align-items:center;justify-content:center;color:#FFE9A8;`;
+kLine.textContent='4 × 3 = 12';
+panel3.appendChild(kLine);
+[['4 DAN 3: FAKTOR 12',42.8,'#D97A2E'],['12: KELIPATAN 4 DAN 3',43.6,'#4CAF7A']].forEach(([tx,t0,col])=>{
+  const r=document.createElement('div');
+  r.className='pRow';
+  r.style.cssText+=`height:${ORIENT==='portrait'?44:38}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  const dot=document.createElement('div');
+  dot.className='pDot';
+  dot.style.cssText+=`width:${ORIENT==='portrait'?20:18}px;height:${ORIENT==='portrait'?20:18}px;background:${col};margin-right:14px;`;
+  r.appendChild(dot);
+  const n=document.createElement('div');
+  n.className='pName';
+  n.style.cssText+=`font-size:${ORIENT==='portrait'?23:21}px;`;
+  n.textContent=tx;
+  r.appendChild(n);
+  panel3.appendChild(r);
+  P3ROWS.push({el:r,t0});
+});
+const p3Note=document.createElement('div');
+p3Note.className='pNote';
+p3Note.style.cssText+=`height:${ORIENT==='portrait'?42:36}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+p3Note.textContent='COBA CEK: 6 × 5 = 30';
+panel3.appendChild(p3Note);
+propsEl.appendChild(panel3);
+
+/* panel 4: jurus bagi rata (aplikasi faktor: 24 permen) */
+const panel4=document.createElement('div');
+panel4.className='panelI';
+panel4.style.cssText+=`left:${P.panelX}px;top:${P.panelY}px;width:${P.panelW}px;height:${P.panelH}px;opacity:0;`;
+const p4Hd=document.createElement('div');
+p4Hd.className='pHd';
+p4Hd.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;padding-top:${Math.round(P.panelH*0.04)}px;`;
+p4Hd.textContent='FAKTOR UNTUK MEMBAGI RATA';
+panel4.appendChild(p4Hd);
+const p4Big=document.createElement('div');
+p4Big.className='pBig';
+p4Big.style.cssText+=`font-size:${ORIENT==='portrait'?30:27}px;height:${Math.round(P.panelH*0.13)}px;display:flex;align-items:center;justify-content:center;`;
+p4Big.textContent='24 PERMEN, PEMBAGI RATA';
+panel4.appendChild(p4Big);
+[['2 TEMAN DAPAT 12 · 3 DAPAT 8',51.6],['4 DAPAT 6 · 6 DAPAT 4',53.4]].forEach(([tx,t0])=>{
+  const r=document.createElement('div');
+  r.className='vrow';
+  r.style.cssText+=`height:${ORIENT==='portrait'?44:38}px;padding-left:${Math.round(P.panelW*0.08)}px;opacity:0;`;
+  const d=document.createElement('div');
+  d.className='vd';
+  d.style.cssText+=`width:${ORIENT==='portrait'?18:16}px;height:${ORIENT==='portrait'?18:16}px;background:#4CAF7A;margin-right:14px;`;
+  r.appendChild(d);
+  const tt=document.createElement('div');
+  tt.className='vt';
+  tt.style.cssText+=`font-size:${ORIENT==='portrait'?23:21}px;`;
+  tt.textContent=tx;
+  r.appendChild(tt);
+  panel4.appendChild(r);
+  P4ROWS.push({el:r,t0});
+});
+const p4Note=document.createElement('div');
+p4Note.className='pNote';
+p4Note.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+p4Note.textContent='SISA NOL · SEMUA SENANG';
+panel4.appendChild(p4Note);
+const p4Note2=document.createElement('div');
+p4Note2.className='pNote';
+p4Note2.style.cssText+=`height:${ORIENT==='portrait'?40:34}px;margin:4px ${Math.round(P.panelW*0.07)}px 0;font-size:${ORIENT==='portrait'?22:20}px;`;
+p4Note2.textContent='FAKTOR 24: 1, 2, 3, 4, 6, 8, 12, 24';
+panel4.appendChild(p4Note2);
+propsEl.appendChild(panel4);
+/* jurus bernama ala anime (aturan 34): stempel miring di sudut panel */
+const jurusWrap=document.createElement('div');
+jurusWrap.style.cssText+=`position:absolute;left:${P.panelX+P.panelW-(ORIENT==='portrait'?268:300)}px;
+  top:${P.panelY-(ORIENT==='portrait'?26:20)}px;width:${ORIENT==='portrait'?268:300}px;
+  height:${ORIENT==='portrait'?54:48}px;transform:rotate(-7deg);`;
+const jurus=document.createElement('div');
+jurus.className='stamp';
+jurus.style.cssText+=`left:0;top:0;width:100%;height:100%;font-size:${ORIENT==='portrait'?23:21}px;opacity:0;`;
+jurus.textContent='JURUS BAGI RATA!';
+jurusWrap.appendChild(jurus);
+propsEl.appendChild(jurusWrap);
+
+/* stoples besar kelipatan 4: hujan permen +4 tiap ronde */
+const JARBIG=makeJar(propsEl,P.bigJarX,P.bigJarY,P.bigJarW,P.bigJarH,false);
+JARBIG.root.style.opacity='0';
+const BIGC=[];
+for(let i=0;i<20;i++){
+  const c=document.createElement('div');
+  c.className='candy';
+  const cols=4, dx=Math.round((P.bigJarW-2*JARBIG.gx-JARBIG.cd)/(cols-1)||JARBIG.cd*1.3);
+  c.style.cssText+=`left:${JARBIG.gx+(i%4)*Math.round(JARBIG.cd*1.3)}px;top:${JARBIG.gy+Math.floor(i/4)*Math.round(JARBIG.cd*1.25)}px;
+    width:${JARBIG.cd}px;height:${JARBIG.cd}px;background:${CANDY[i%CANDY.length]};opacity:0;`;
+  JARBIG.root.appendChild(c);
+  BIGC.push({el:c,t0:26.2+Math.floor(i/4)*1.0+(i%4)*0.12});
+}
+/* piring jurus bagi rata: 24 permen tersusun ulang 2, 3, 4, 6 porsi */
+const plateEl=document.createElement('div');
+plateEl.className='plate';
+plateEl.style.cssText+=`left:${P.plateX}px;top:${P.plateY}px;width:${P.plateW}px;height:${P.plateH}px;opacity:0;`;
+propsEl.appendChild(plateEl);
+const PLATED=[];
+function platePos(g,i){
+  const cols=Math.round(24/g), rows=g;
+  const dx=Math.min(ORIENT==='portrait'?30:24,(P.plateW-60)/cols);
+  const dy=Math.min(ORIENT==='portrait'?26:16,(P.plateH-56)/rows);
+  const cx=P.plateX+P.plateW/2, cy=P.plateY+P.plateH/2;
+  return [cx+(i%cols-(cols-1)/2)*dx, cy+(Math.floor(i/cols)-(rows-1)/2)*dy];
+}
+for(let i=0;i<24;i++){
+  const c=document.createElement('div');
+  c.className='cd';
+  const [px,py]=platePos(2,i);
+  c.style.cssText+=`left:${px-P.plateD/2}px;top:${py-P.plateD/2}px;width:${P.plateD}px;height:${P.plateD}px;
+    background:${CANDY[i%CANDY.length]};opacity:0;`;
+  propsEl.appendChild(c);
+  PLATED.push({el:c,t0:50.9+i*0.028});
+}
+const PLATE_T=[51.8,52.8,53.8,54.8], PLATE_G=[2,3,4,6];
+
+/* ---------- papan tugas uji (aturan 30): soal tampil besar dan bernomor ---------- */
+const panelUji=document.createElement('div');
+panelUji.className='panelI';
+panelUji.style.cssText+=`left:${P.panelX}px;top:${ORIENT==='portrait'?400:250}px;width:${P.panelW}px;height:${ORIENT==='portrait'?410:310}px;`;
+const ujiHd=document.createElement('div');
+ujiHd.style.cssText+=`margin:12px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?48:40}px;font-size:${ORIENT==='portrait'?30:27}px;color:#F2C14E;font-weight:800;letter-spacing:.06em;opacity:0;`;
+ujiHd.textContent='TANTANGAN UNTUKMU:';
+panelUji.appendChild(ujiHd);
+const SOAL=[['1.','TENTUKAN SEMUA FAKTOR DARI 20.'],['2.','LIMA KELIPATAN PERTAMA DARI 7.'],['3.','KENAPA 5 BUKAN FAKTOR DARI 12?'],['4.','FAKTOR ATAU KELIPATAN: TAK TERBATAS?']];
+const UJIS=[];
+SOAL.forEach(([n,q],i)=>{
+  const r=document.createElement('div');
+  r.style.cssText+=`margin:3px ${Math.round(P.panelW*0.06)}px 0;height:${ORIENT==='portrait'?38:32}px;font-size:${ORIENT==='portrait'?26:23}px;color:#FFF6E8;font-weight:600;opacity:0;`;
+  r.innerHTML='<span style="color:#F2C14E">'+n+'</span> '+q;
+  panelUji.appendChild(r);
+  UJIS.push({el:r,t0:57.8+i*0.18});
+});
+const UJIVAL=['1','2','3','4','5','8','10','20'];
+const ujiGrid=document.createElement('div');
+ujiGrid.style.cssText+=`position:absolute;left:0;top:${ORIENT==='portrait'?232:200}px;width:100%;display:flex;flex-wrap:wrap;justify-content:center;gap:${ORIENT==='portrait'?12:10}px;`;
+const CARDS=UJIVAL.map((lab,i)=>{
+  const el=document.createElement('div');
+  el.className='valCard';
+  el.style.cssText+=`position:relative;width:${P.cardW}px;height:${P.cardH}px;font-size:${P.cardFS}px;opacity:0;`;
+  el.textContent=lab;
+  ujiGrid.appendChild(el);
+  return {el,lab,pop:59.8+i*0.12};
+});
+panelUji.appendChild(ujiGrid);
+const ujiNote=document.createElement('div');
+ujiNote.className='pNote';
+ujiNote.style.cssText+=`position:absolute;left:${Math.round(P.panelW*0.06)}px;top:${ORIENT==='portrait'?374:262}px;
+  width:${P.panelW-Math.round(P.panelW*0.12)}px;height:${ORIENT==='portrait'?34:28}px;font-size:${ORIENT==='portrait'?21:19}px;`;
+ujiNote.textContent='KARTU BANTU SOAL NOMOR SATU';
+panelUji.appendChild(ujiNote);
+propsEl.appendChild(panelUji);
+
+/* ---------- karakter: HANYA bola emas mentor, bulat sejati, tanpa mata ---------- */
+const charsEl=document.getElementById('chars');
+function makeBall(cols,d,glow){
+  const el=document.createElement('div');
+  el.className='bchar';
+  el.style.cssText+=`width:${d}px;height:${d}px;margin-left:${-d/2}px;opacity:0;`;
+  const core=document.createElement('div');
+  core.className='core';
+  core.style.cssText+=`left:0;top:0;width:${d}px;height:${d}px;
+    background:radial-gradient(circle at 33% 27%, ${cols[0]} 0%, ${cols[1]} 42%, ${cols[2]} 100%);`;
+  if(glow)core.style.boxShadow=`0 0 ${Math.round(d*0.55)}px rgba(251,191,36,.5)`;
+  el.appendChild(core);
+  const shine=document.createElement('div');
+  shine.className='shine';
+  shine.style.cssText+=`left:${d*0.18}px;top:${d*0.1}px;width:${d*0.3}px;height:${d*0.17}px;transform:rotate(-24deg);`;
+  el.appendChild(shine);
+  charsEl.appendChild(el);
+  return {el,d};
+}
+const mentor=makeBall(['#FFF3C4','#FCD34D','#B45309'],P.ballD,true);
+const mentorCore=mentor.el.querySelector('.core');
+const msh=document.createElement('div');
+msh.className='bsh';
+msh.style.cssText+=`width:${P.ballD*0.8}px;height:15px;margin-left:${-P.ballD*0.4}px;top:-10px;`;
+charsEl.appendChild(msh);
+const spark=document.createElement('div');
+spark.className='spark';
+{
+  const sa=document.createElement('div');
+  sa.className='sa';
+  sa.style.cssText+=`left:13px;top:0;width:8px;height:34px;`;
+  spark.appendChild(sa);
+  const sb=document.createElement('div');
+  sb.className='sa';
+  sb.style.cssText+=`left:0;top:13px;width:34px;height:8px;`;
+  spark.appendChild(sb);
+  const sc=document.createElement('div');
+  sc.className='sa';
+  sc.style.cssText+=`left:13px;top:13px;width:8px;height:8px;`;
+  spark.appendChild(sc);
+}
+charsEl.appendChild(spark);
+
+/* ---------- pil dan endcard ---------- */
+const pil=document.getElementById('pil');
+pil.style.cssText+=`left:${P.pilX}px;top:${P.pilY}px;width:${P.pilW}px;height:${P.pilH}px;font-size:${P.pilFS}px;letter-spacing:.08em;`;
+const endcard=document.getElementById('endcard');
+endcard.style.cssText+=`top:${P.ecY}px;`;
+const fUrl=document.getElementById('f_url');
+fUrl.style.cssText+=`font-size:${ORIENT==='portrait'?92:80}px;
+  background:linear-gradient(92deg,#7FA6BF 0%,#D97A2E 52%,#E8B32E 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;`;
+const fBar=document.getElementById('f_bar');
+fBar.style.cssText+=`display:block;margin:16px auto 0;width:0;`;
+
+/* ---------- subjudul + watermark ---------- */
+const subbar=document.getElementById('subbar');
+const subId=document.getElementById('sub_id');
+const subEn=document.getElementById('sub_en');
+subId.style.fontSize=P.subId+'px';
+subEn.style.fontSize=P.subEn+'px';
+subEn.style.marginTop='6px';
+subbar.style.top=P.subTop+'px';
+subbar.style.maxWidth=P.subMax+'px';
+subbar.style.width='max-content';
+const wm=document.getElementById('wm');
+wm.style.cssText+=`top:${P.wmY}px;font-size:${P.wmFS}px;left:50%;transform:translateX(-50%);
+  width:max-content;padding:10px 32px;background:rgba(26,16,10,.55);border-radius:999px;`;
+
+/* ---------- narasi kios rev1: dramaturgi anime (aturan 34) - 23 beat
+   dalam 78 s (aturan 31: tempo nyaman, tiap sub tampil 2,7-5,6 detik),
+   arc kishotenketsu: misteri 12 vs 13, faktor, kelipatan, TWIST terbatas
+   vs tanpa batas, kaitan dua peran, jurus bagi rata, uji + teaser ---------- */
+const SUBS=[
+  [0.5,'Coba bagi dua belas permen ke tiga stoples.','Try sharing twelve candies into three jars.','#FFFFFF'],
+  [3.6,'Tapi tiga belas? Masih ada sisa satu!','But thirteen? One candy is left over!','#FFFFFF'],
+  [6.3,'Kenapa bisa begitu, ya?','Why does that happen, anyway?','#FFFFFF'],
+  [10.0,'Pembagi habis tanpa sisa itu namanya faktor.','A divisor that fits evenly: a factor.','#FFFFFF'],
+  [13.4,'Faktor 12: 1, 2, 3, 4, 6, 12.','Factors of 12: 1, 2, 3, 4, 6, 12.','#FFFFFF'],
+  [16.6,'Cek tiga: 12 dibagi 3, pas tanpa sisa.','Check three: 12 by 3 fits with no rest.','#FFFFFF'],
+  [19.8,'Tapi lima? Sisa dua. Gagal!','But five? Remainder 2. Fail!','#D97A2E'],
+  [23.0,'Sekarang arah sebaliknya: kelipatan.','Now the other direction: multiples.','#FFFFFF'],
+  [26.2,'Kelipatan 4: 4, 8, 12, 16, 20...','Multiples of 4: 4, 8, 12, 16, 20...','#FFFFFF'],
+  [29.4,'Lihat, 12 masuk lagi: 4 × 3 = 12!','Look, 12 is in: 4 × 3 = 12!','#FFFFFF'],
+  [32.2,'Kalau begitu... mana yang lebih banyak?','So then... which one has more?','#FFFFFF'],
+  [36.4,'Faktor 6 cuma empat: 1, 2, 3, 6.','Factors of 6: just four: 1, 2, 3, 6.','#FFFFFF'],
+  [39.4,'Kelipatan 6 jalan terus tanpa batas!','Multiples of 6 keep going endlessly!','#D97A2E'],
+  [42.6,'Hubungan keduanya: satu kali, dua peran.','Their link: one multiplication, two roles.','#FFFFFF'],
+  [45.8,'4 × 3 = 12: 4 dan 3 jadi faktor 12.','4 × 3 = 12: 4 and 3 are factors of 12.','#FFFFFF'],
+  [48.8,'Dan 12 jadi kelipatan keduanya.','And 12 is a multiple of both.','#FFFFFF'],
+  [52.2,'Saatnya jurus bagi rata. Coba 24 permen!','Time for the fair-share move. Try 24!','#FFFFFF'],
+  [55.0,'Dua dapat 12, tiga 8, empat 6, enam 4.','Two get 12, three 8, four 6, six 4.','#FFFFFF'],
+  [57.8,'Tantanganmu: empat soal menanti!','Your challenge: four questions await!','#FFFFFF'],
+  [61.0,'Delapan kartu bantu soal nomor satu.','Eight cards help with question one.','#FFFFFF'],
+  [64.4,'Coba kerjakan dengan bahasamu sendiri!','Try answering in your own words!','#FFFFFF'],
+  [67.8,'Terima kasih sudah menonton.','Thanks for watching.','#FFE9A8'],
+  [73.4,'Kisah angka berikutnya sudah menunggu.','The next number story already awaits.','#FFE9A8'],
+];
+let subIdx=-1;
+function renderSub(t){
+  let i=0;
+  for(let k=0;k<SUBS.length;k++){ if(t>=SUBS[k][0]-0.001) i=k; }
+  const nxt=i+1<SUBS.length?SUBS[i+1][0]:77.6;
+  const o=clamp(Math.min(seg(t,SUBS[i][0],0.3), 1-seg(t,nxt-0.16,0.16)),0,1);
+  if(i!==subIdx){
+    subIdx=i;
+    subId.textContent=SUBS[i][1];
+    subId.style.color=SUBS[i][3];
+    subEn.textContent=SUBS[i][2];
+  }
+  subbar.style.opacity=(o*0.98).toFixed(3);
+  const pop=1+0.018*Math.sin(clamp(seg(t,SUBS[i][0],0.5),0,1)*Math.PI);
+  subbar.style.transform=`translateX(-50%) scale(${pop.toFixed(3)})`;
+}
+
+/* ---------- judul bab (rata tengah, aturan 28) ---------- */
+const TITLES=[['t0',0.35],['t1',9.8],['t2',22.8],['t3',40.2],['t4',50.0],['t5',56.6]]
+  .map(([id,t0],i)=>({el:document.getElementById(id),t0:t0,i:i}));
+TITLES.forEach((o)=>{
+  o.el.style.top=(o.i===0?P.titleY:P.titleY+14)+'px';
+  o.el.style.fontSize=(o.i===0?P.titleS0:P.titleSN)+'px';
+  if(o.i===0||o.i===2||o.i===4)o.el.style.color='#A6394B';
+});
+
+/* ---------- beat, masterplan mentor (karpet festival, tak menembus properti) ---------- */
+const IMP=[0.7,5.2,9.8,34.2,40.2,47.4,50.0,59.8];
+const SPARKS=[[5.2,8.0],[51.4,53.6],[63.0,65.6]];
+const GESTS=[
+  [1.6,0.8,'nod',3],
+  [10.4,0.7,'tilt',5],
+  [15.4,0.7,'nod',3],
+  [25.2,0.7,'nod',3],
+  [28.6,0.7,'tilt',5],
+  [34.3,0.7,'hop',14],
+  [41.4,0.7,'tilt',5],
+  [44.8,0.7,'nod',3],
+  [52.0,1.2,'nod',4],
+  [58.0,0.8,'nod',3],
+  [62.8,0.9,'brace',1]
+];
+function imp(t){
+  let a=0;
+  for(const bt of IMP){
+    const d=t-bt;
+    if(d>=0&&d<0.5){ const p=d/0.5; a=Math.max(a,(1-p)*0.85); }
+  }
+  return a;
+}
+/* mentor jalan ke tengah panggung selama jeda dramatis (ma) 33.4-34.2 */
+const WAY = ORIENT==='portrait'
+  ? [[0.7,175],[9.8,640],[22.8,640],[33.4,705],[40.2,640],[50.0,705],[56.6,600]]
+  : [[0.7,260],[9.8,1200],[22.8,1200],[33.4,1270],[40.2,1200],[50.0,1270],[56.6,1100]];
+
+/* ---------- RENDER PER FRAME ---------- */
+const world=document.getElementById('world');
+const flash=document.getElementById('flash');
+const fade=document.getElementById('fade');
+const tilesun=document.getElementById('tilesun');
+let _roll=0,_mxPrev=null;
+function renderFrame(t){
+  /* kios makin hangat menjelang penutup: lampion makin terang */
+  const nk=seg(t,50.0,14.0);
+  tilesun.style.background=`rgba(58,38,26,${(nk*0.22).toFixed(3)})`;
+  for(const L of LAMPS){
+    const sw=Math.sin(t*0.8+L.ph)*1.8;
+    L.lw.style.transform=`rotate(${sw.toFixed(2)}deg)`;
+    L.glow.style.opacity=(0.55+0.35*nk).toFixed(3);
+  }
+  /* penutup bersih (aturan 28): konten keluar di 68.0 */
+  const exo=1-seg(t,68.0,0.5);
+  /* hook: 12 permen masuk tiga stoples rata, permen ke-13 ditolak */
+  for(const jj of HOOKJ){
+    const o=clamp(seg(t,jj.t0,0.35)*(1-seg(t,9.6,0.3)),0,1);
+    const burst=t>=5.2?1+0.07*Math.sin(clamp(seg(t,5.2,0.5),0,1)*Math.PI):1;
+    jj.root.style.opacity=o.toFixed(3);
+    jj.root.style.transform=`scale(${burst.toFixed(3)})`;
+    for(const cd of jj.candies){
+      const co=clamp(seg(t,cd.t0,0.3)*(1-seg(t,9.6,0.3)),0,1);
+      const cs=1+0.25*Math.sin(clamp(seg(t,cd.t0,0.3),0,1)*Math.PI);
+      cd.el.style.opacity=co.toFixed(3);
+      cd.el.style.transform=`scale(${cs.toFixed(3)})`;
+    }
+  }
+  for(const qd of QUEUE){
+    qd.el.style.opacity=(clamp(seg(t,qd.t0,0.25),0,1)*(1-seg(t,9.6,0.3))).toFixed(3);
+  }
+  {
+    const so=clamp(seg(t,4.0,0.25)*(1-seg(t,9.6,0.3)),0,1);
+    const hp=seg(t,4.2,0.4);
+    const px=lerp(SISA.x,SISA.hx,eio(hp));
+    const py=SISA.y-(ORIENT==='portrait'?62:52)*Math.sin(hp*Math.PI);
+    SISA.el.style.opacity=so.toFixed(3);
+    SISA.el.style.left=(px-SISA.el.offsetWidth/2)+'px';
+    SISA.el.style.top=(py-SISA.el.offsetHeight/2)+'px';
+    SISA.el.style.boxShadow=t>=5.2?'0 0 22px rgba(232,93,93,.8)':'0 3px 8px rgba(90,40,20,.3)';
+  }
+  {
+    const qo=clamp(seg(t,4.8,0.45)*(1-seg(t,9.6,0.3)),0,1);
+    QM.el.style.opacity=qo.toFixed(3);
+    QM.el.style.transform=`translateY(${(-6+6*Math.sin(t*3)).toFixed(1)}px)`;
+  }
+  popA(stamp,t,6.4,0.6,7,0,9.6);
+  popA(epchip,t,0.5,0.5,6,0,9.6);
+  /* panel 1: faktor */
+  popA(panel1,t,10.8,0.6,5,0,22.0);
+  popA(p1Big,t,11.2,0.5,5,0,22.0);
+  for(const r of P1ROWS){ r.el.style.opacity=seg(t,r.t0,0.45).toFixed(3); }
+  for(const c of P1CHIPS){
+    c.el.style.opacity=(clamp(seg(t,c.t0,0.35),0,1)*(1-seg(t,22.0,0.3))).toFixed(3);
+  }
+  popA(p1Note,t,17.6,0.5,5,0,22.0);
+  popA(p1Note2,t,18.8,0.5,5,0,22.0);
+  /* panel 2: kelipatan + stoples besar berisi hujan permen +4 */
+  popA(panel2,t,23.6,0.55,5,0,33.4);
+  popA(p2Big,t,24.0,0.5,5,0,33.4);
+  for(const r of P2ROWS){ r.el.style.opacity=seg(t,r.t0,0.45).toFixed(3); }
+  for(const c of P2CHIPS){
+    c.el.style.opacity=(clamp(seg(t,c.t0,0.35),0,1)*(1-seg(t,33.4,0.3))).toFixed(3);
+  }
+  popA(p2Note,t,31.2,0.5,5,0,33.4);
+  popA(JARBIG.root,t,23.8,0.55,5,0,33.4);
+  for(const bc of BIGC){
+    const bo=clamp(seg(t,bc.t0,0.28)*(1-seg(t,33.4,0.3)),0,1);
+    const bs=1+0.3*Math.sin(clamp(seg(t,bc.t0,0.3),0,1)*Math.PI);
+    bc.el.style.opacity=bo.toFixed(3);
+    bc.el.style.transform=`scale(${bs.toFixed(3)})`;
+  }
+  /* JEDA DRAMATIS (ma) 33.4-34.2: layar kosong, mentor ke tengah, audio hening */
+  /* TWIST: terbatas vs tanpa batas - beat emas 34.2 + speedlines anime */
+  popA(panelS,t,34.4,0.4,9,0,39.8);
+  popA(sBig,t,34.8,0.5,7,0,39.8);
+  for(const r of SROWS){ r.el.style.opacity=seg(t,r.t0,0.4).toFixed(3); }
+  popA(sNote,t,38.6,0.45,5,0,39.8);
+  /* panel 3: saling berkaitan - satu kali, dua peran */
+  popA(panel3,t,41.0,0.55,5,0,49.4);
+  popA(p3Big,t,41.2,0.5,5,0,49.4);
+  popA(kLine,t,41.8,0.5,7,0,49.4);
+  for(const r of P3ROWS){ r.el.style.opacity=seg(t,r.t0,0.45).toFixed(3); }
+  popA(p3Note,t,46.2,0.45,5,0,49.4);
+  /* panel 4: jurus bagi rata + piring 24 permen tersusun ulang 2-3-4-6 */
+  popA(panel4,t,50.8,0.55,5,0,56.2);
+  popA(p4Big,t,51.0,0.5,5,0,56.2);
+  for(const r of P4ROWS){ r.el.style.opacity=seg(t,r.t0,0.45).toFixed(3); }
+  popA(jurus,t,52.6,0.5,9,0,56.2);
+  popA(p4Note,t,54.0,0.45,5,0,56.2);
+  popA(p4Note2,t,54.6,0.45,5,0,56.2);
+  popA(plateEl,t,50.8,0.55,5,0,56.2);
+  for(let i=0;i<PLATED.length;i++){
+    const pd=PLATED[i];
+    let g=PLATE_G[0], prev=null;
+    for(let k=1;k<PLATE_G.length;k++){
+      if(t>=PLATE_T[k]){ prev=[PLATE_G[k-1],PLATE_T[k]]; g=PLATE_G[k]; }
+    }
+    let px,py;
+    if(prev){
+      const p2=eio(seg(t,prev[1],0.9));
+      const [ax,ay]=platePos(prev[0],i);
+      const [bx,by]=platePos(g,i);
+      px=lerp(ax,bx,p2); py=lerp(ay,by,p2);
+    }else{
+      const [ax,ay]=platePos(g,i);
+      px=ax; py=ay;
+    }
+    const po=clamp(seg(t,pd.t0,0.25)*(1-seg(t,56.2,0.3)),0,1);
+    pd.el.style.opacity=po.toFixed(3);
+    pd.el.style.left=(px-P.plateD/2)+'px';
+    pd.el.style.top=(py-P.plateD/2)+'px';
+  }
+  /* papan uji (aturan 30 + framing battle 34): soal bernomor, kartu formasi */
+  popA(panelUji,t,57.4,0.55,5,0,68.0);
+  ujiHd.style.opacity=(seg(t,57.6,0.35)*exo).toFixed(3);
+  for(const rr of UJIS){ rr.el.style.opacity=seg(t,rr.t0,0.35).toFixed(3); }
+  for(let i=0;i<CARDS.length;i++){
+    const cc=CARDS[i];
+    const inA=clamp(seg(t,cc.pop,0.35),0,1);
+    const dir=i%2===0?-1:1;
+    const off=(1-inA)*46*dir;
+    const rot=(1-inA)*10*dir;
+    const s2=1+0.09*Math.sin(clamp(seg(t,cc.pop,0.4),0,1)*Math.PI);
+    cc.el.style.opacity=(inA*exo).toFixed(3);
+    cc.el.style.transform=`translateX(${off.toFixed(1)}px) rotate(${rot.toFixed(2)}deg) scale(${s2.toFixed(3)})`;
+    cc.el.style.borderColor=inA>0.9&&t<cc.pop+0.45?'#E8B32E':'#C8A86E';
+  }
+  popA(ujiNote,t,61.4,0.45,5,0,68.0);
+  popA(pil,t,63.0,0.6,6,0,68.0);
+  /* penutup bersih (aturan 28): meja kios, etalase, tanda keluar di 68.0 */
+  counterEl.style.opacity=exo.toFixed(3);
+  etalaseEl.style.opacity=exo.toFixed(3);
+  signEl.style.opacity=exo.toFixed(3);
+  markEl.style.opacity=String(clamp(0.96*exo+0.04,0.04,1));
+  /* mentor menggelinding di karpet festival */
+  let bx=WAY[WAY.length-1][1];
+  for(let k=0;k<WAY.length-1;k++){
+    const [w0,x0]=WAY[k],[w1,x1]=WAY[k+1];
+    if(t>=w0&&t<w1){ bx=lerp(x0,x1,eio(seg(t,w0,w1-w0))); break; }
+  }
+  if(t>=WAY[WAY.length-1][0])bx=WAY[WAY.length-1][1];
+  if(_mxPrev===null)_mxPrev=bx;
+  _roll+=(bx-_mxPrev)/(P.ballD/2)*(180/Math.PI);
+  _mxPrev=bx;
+  const ep=seg(t,0.7,0.55);
+  let hy2=0, lrot=0, drot=0, txj=0;
+  for(const [gs,gd,gt,ga] of GESTS){
+    const d2=t-gs;
+    if(d2>=0&&d2<gd){
+      const p=d2/gd, w=Math.sin(p*Math.PI);
+      if(gt==='tilt'||gt==='lean'){ lrot+=ga*w; }
+      else if(gt==='nod'){ lrot+=ga*Math.sin(p*2*Math.PI); }
+      else if(gt==='shiver'){ txj=ga*Math.sin(p*40)*(1-p); }
+      else if(gt==='spin'){ drot+=ga*eio(p); }
+      else if(gt==='hop'){ hy2-=ga*Math.sin(p*Math.PI); }
+      else if(gt==='brace'){ lrot-=11*w; }
+    }
+  }
+  mentor.el.style.left=bx.toFixed(1)+'px';
+  mentor.el.style.opacity=String(clamp(ep*3,0,1)*exo);
+  mentor.el.style.top=(P.groundY-P.ballD+hy2).toFixed(1)+'px';
+  mentor.el.style.transform=`translateX(${txj.toFixed(1)}px) rotate(${(_roll+lrot+drot).toFixed(2)}deg) scale(1)`;
+  msh.style.left=bx.toFixed(1)+'px';
+  msh.style.top=(P.groundY-10)+'px';
+  msh.style.opacity=String(clamp(ep*3,0,1)*exo*clamp(0.42+hy2*0.006,0.18,0.5));
+  msh.style.transform=`scaleX(${clamp((1+hy2*0.004),0.4,1.08).toFixed(3)})`;
+  /* power-up ala anime saat jurus bagi rata (satu-satunya) */
+  const pu=smz(t,51.4,53.6,0.35);
+  const glowPx=P.ballD*0.55+pu*(30+18*Math.sin(t*10));
+  mentorCore.style.boxShadow=`0 0 ${glowPx.toFixed(0)}px rgba(251,191,36,${(0.5+0.3*pu).toFixed(2)})`;
+  /* percikan bintang */
+  let spo=0;
+  for(const [sa,sb] of SPARKS){
+    if(t>=sa&&t<sb) spo=smz(t,sa,sb,0.35)*(0.65+0.2*Math.sin(t*7));
+  }
+  spark.style.opacity=String(clamp(spo,0,1));
+  spark.style.left=(bx+62).toFixed(1)+'px';
+  spark.style.top=(P.groundY-150+Math.sin(t*2)*4).toFixed(1)+'px';
+  spark.style.transform=`rotate(${((t*28)%360).toFixed(0)}deg) scale(${(0.8+0.15*Math.sin(t*7)).toFixed(3)})`;
+  /* judul bab (judul terakhir ikut keluar saat penutup agar endcard sendirian) */
+  for(let i=0;i<TITLES.length;i++){
+    const o=TITLES[i];
+    const tEnd=i+1<TITLES.length?TITLES[i+1].t0:68.2;
+    const oin=seg(t,o.t0,0.35)*(1-seg(t,tEnd-0.25,0.3));
+    const sc2=1+0.035*Math.sin(clamp(seg(t,o.t0,0.7),0,1)*Math.PI);
+    o.el.style.opacity=oin.toFixed(3);
+    o.el.style.transform=`scale(${sc2.toFixed(3)})`;
+  }
+  /* TWIST anime (satu-satunya): speedlines 34.2 + spotlight, lalu reda */
+  {
+    const iv=Math.max(0,(1-seg(t,34.2,0.55))*clamp(seg(t,34.2,0.06),0,1));
+    speedEl.style.opacity=(iv*0.85).toFixed(3);
+    const isc=1+0.14*Math.sin(clamp(seg(t,34.2,0.5),0,1)*Math.PI);
+    speedEl.style.transform=`scale(${isc.toFixed(3)})`;
+    spotEl.style.opacity=(clamp(seg(t,34.4,0.3)*(1-seg(t,36.6,1.0)),0,1)*0.75).toFixed(3);
+  }
+  /* endcard penutup bersih + teaser tersisip (aturan 32): AKIOMIDA.COM
+     muncul SENDIRIAN 68.2, bar 73.8 */
+  const eci=eio(seg(t,68.2,0.8));
+  endcard.style.opacity=eci.toFixed(3);
+  endcard.style.transform=`translateY(${((1-eci)*16).toFixed(1)}px) scale(${(0.94+0.06*eci).toFixed(3)})`;
+  fBar.style.width=(seg(t,73.8,0.8)*P.barW).toFixed(0)+'px';
+  renderSub(t);
+  /* kamera tenang */
+  const im=imp(t);
+  const shx=Math.sin(t*47)*2.5*im, shy=Math.sin(t*39+1.7)*1.8*im;
+  world.style.transform=`translate(${shx.toFixed(2)}px,${(shy+Math.sin(t*0.35)*3).toFixed(2)}px)`;
+  flash.style.opacity=(im*0.07).toFixed(3);
+  fade.style.opacity=String(clamp(1-seg(t,0.05,0.5),0,1)*0.96+clamp(seg(t,76.2,0.8),0,1));
+}
+renderFrame(0);
+window.__ready=true;
+</script>
+</body>
+</html>

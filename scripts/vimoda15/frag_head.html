@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+/*__FONTS__*/
+*{box-sizing:border-box}
+body{margin:0;background:#1A0F0A;font-family:'Poppins','Noto Sans',sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:relative;overflow:hidden}
+#world{position:absolute;inset:0}
+#speedlines{position:absolute;inset:0;opacity:0;pointer-events:none;will-change:opacity,transform;
+  background:repeating-conic-gradient(from 0deg at 50% 46%,rgba(255,244,214,.34) 0deg .5deg,transparent .5deg 2.6deg);
+  -webkit-mask-image:radial-gradient(circle at 50% 46%,transparent 30%,#000 72%);
+  mask-image:radial-gradient(circle at 50% 46%,transparent 30%,#000 72%)}
+#spotlight{position:absolute;inset:0;opacity:0;pointer-events:none;will-change:opacity;
+  background:radial-gradient(circle at 50% 42%,transparent 26%,rgba(16,10,4,.62) 78%)}
+#flash{position:absolute;inset:0;background:#FFFFFF;opacity:0;pointer-events:none}
+#fade{position:absolute;inset:0;background:#1A0F0A;opacity:0;pointer-events:none}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.mono{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+/* KIOS PERMEN: kios permen pesta malam - dinding krem pink lembut dengan
+   awning scallop merah-krem di tepi atas, dua lampion kertas bulat hangat,
+   rak kayu berisi stoples kaca berisi permen warna-warni (ikon dunia:
+   permen tersimpan rapi di stoples), meja kios kayu dengan etalase kaca
+   berisi deretan permen, tanda KIOS PERMEN di dinding, lantai papan kayu
+   hangat dengan karpet festival merah-krem di jalur mentor. Panel konten
+   plum gelap berbingkai kuning safety (aturan 26: latar BERBEDA TOTAL dari
+   Petak Tanam dan semua episode lain). Karakter: HANYA bola emas mentor,
+   bulat sejati, tanpa mata (aturan 23). Dramaturgi anime aturan 34 sejak
+   render pertama: chip episode, jeda ma, speedlines twist, jurus bernama,
+   kartu formasi. Subjudul zona aman maksimal dua baris (aturan 27);
+   watermark AKIOMIDA di tepi paling bawah (aturan 24); penutup bersih
+   (aturan 28). */
+#candywall{position:absolute;left:0;top:0;width:100%;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.38) 0 6px,transparent 6px 150px),
+  linear-gradient(180deg,#FBEFE0 0%,#F3D2B8 100%)}
+#tilesun{position:absolute;inset:0;background:rgba(58,38,26,0);will-change:background}
+#awning{position:absolute;left:0;top:0;width:100%;will-change:opacity}
+#awning .band{position:absolute;left:0;top:0;width:100%;
+  background:repeating-linear-gradient(90deg,#C9524A 0 64px,#FFF4E4 64px 128px);
+  box-shadow:0 6px 14px rgba(90,40,20,.28)}
+#awning .scal{position:absolute;border-radius:0 0 999px 999px}
+.lant{position:absolute;will-change:transform,opacity}
+.lant .cord{position:absolute;width:3px;background:#7A4A2E}
+.lant .body{position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 38% 30%,#FFE9C0,#F2B45C 62%,#D88A3A);
+  box-shadow:0 10px 24px rgba(90,40,20,.3)}
+.lant .glow{position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,224,160,.75),rgba(255,224,160,0) 70%)}
+#shelf{position:absolute;will-change:opacity}
+#shelf .plank{position:absolute;background:linear-gradient(180deg,#C9784A,#A85E38);border-radius:6px;box-shadow:0 6px 14px rgba(90,40,20,.3)}
+.jar{position:absolute;will-change:transform,opacity}
+.jar .glass{position:absolute;border-radius:10px 10px 14px 14px;
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.22));
+  border:3px solid rgba(150,96,60,.55);box-shadow:0 8px 18px rgba(90,40,20,.25)}
+.jar .lid{position:absolute;border-radius:8px;background:linear-gradient(180deg,#C9784A,#A85E38)}
+.jar .candy{position:absolute;border-radius:50%;will-change:transform,opacity}
+#floorwood{position:absolute;left:0;width:100%;
+  background:repeating-linear-gradient(180deg,rgba(90,50,20,.16) 0 3px,transparent 3px 72px),
+  linear-gradient(180deg,#C98A5A 0%,#B47044 100%)}
+#runner{position:absolute;border-radius:999px;
+  background:repeating-linear-gradient(90deg,#C9524A 0 44px,#F6E7D4 44px 70px);
+  box-shadow:0 4px 10px rgba(90,40,20,.3);will-change:opacity}
+#baseboard{position:absolute;left:0;width:100%;background:#8A5638}
+#counter{position:absolute;will-change:opacity}
+#counter .slab{position:absolute;background:linear-gradient(180deg,#C9784A,#A85E38);border-radius:10px;box-shadow:0 10px 22px rgba(90,40,20,.32)}
+#counter .leg{position:absolute;background:#8A5638;border-radius:4px;width:26px}
+#etalase{position:absolute;will-change:opacity}
+#etalase .box{position:absolute;border-radius:12px;
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.2));
+  border:3px solid rgba(150,96,60,.55);box-shadow:0 8px 18px rgba(90,40,20,.25)}
+#etalase .shelfL{position:absolute;background:rgba(150,96,60,.4);border-radius:2px}
+#sign{position:absolute;will-change:opacity}
+#sign .board{position:absolute;background:#EFE0C8;border:3px solid #A85E38;border-radius:8px;box-shadow:0 12px 26px rgba(90,40,20,.35)}
+#sign .lab{position:absolute;width:100%;text-align:center;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#A6394B}
+.panelI{position:absolute;background:linear-gradient(180deg,#3A2A50,#2A1E38);border-radius:16px;border:4px solid #E8B32E;box-shadow:0 16px 38px rgba(30,18,4,.5);will-change:transform,opacity}
+.tapeC{position:absolute;background:rgba(232,179,46,.5);border-radius:3px;box-shadow:0 2px 5px rgba(30,18,4,.25)}
+.pHd{font-weight:800;color:#FFF6E6;letter-spacing:.10em;text-align:center}
+.pBig{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#F2CE8E;text-align:center;opacity:0;will-change:opacity}
+.pRow{display:flex;align-items:center;opacity:0}
+.pDot{border-radius:50%;flex:none}
+.pName{font-weight:800;color:#FFF6E6;flex:none}
+.pNote{display:flex;align-items:center;justify-content:center;background:rgba(232,179,46,.22);border:2px solid rgba(232,179,46,.6);border-radius:10px;color:#F2CE8E;font-weight:800;letter-spacing:.05em;text-align:center;opacity:0;will-change:opacity}
+.chipA{display:flex;align-items:center;justify-content:center;border-radius:12px;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#FFF6E6;background:#4A3A62;box-shadow:0 8px 18px rgba(30,18,4,.4);opacity:0;will-change:opacity}
+.stamp{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:999px;background:linear-gradient(92deg,#7FA6BF 0%,#D97A2E 52%,#E8B32E 100%);color:#22160C;font-weight:800;letter-spacing:.06em;box-shadow:0 12px 26px rgba(30,18,4,.45);will-change:transform,opacity}
+.vrow{display:flex;align-items:center;opacity:0}
+.vrow .vd{border-radius:50%;flex:none}
+.vrow .vt{font-weight:700;color:#FFF6E6}
+.valCard{position:absolute;display:flex;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(180deg,#FFFDF6,#F2E6C6);border:3px solid #C8A86E;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;color:#3A2C1E;box-shadow:0 8px 18px rgba(30,18,4,.35);will-change:transform,opacity}
+.qmark{position:absolute;color:#C9524A;font-weight:800;text-shadow:0 5px 0 rgba(0,0,0,.25);will-change:transform,opacity}
+.plate{position:absolute;border-radius:50%;background:linear-gradient(180deg,#FFF6EA,#EFD9BC);border:4px solid #C9784A;box-shadow:0 12px 26px rgba(90,40,20,.3);will-change:opacity}
+.cd{position:absolute;border-radius:50%;will-change:transform,opacity;box-shadow:0 3px 8px rgba(90,40,20,.3)}
+.title{position:absolute;left:0;width:100%;text-align:center;font-weight:800;color:#3A2E20;letter-spacing:.04em;text-shadow:0 5px 0 rgba(255,255,255,.45),0 12px 26px rgba(90,40,10,.22);will-change:transform,opacity}
+#pil{position:absolute;border-radius:999px;background:linear-gradient(92deg,#7FA6BF 0%,#D97A2E 52%,#E8B32E 100%);color:#22160C;font-weight:800;display:flex;align-items:center;justify-content:center;will-change:transform,opacity;box-shadow:0 10px 24px rgba(30,18,4,.4)}
+#endcard{position:absolute;left:0;width:100%;opacity:0;will-change:transform,opacity}
+#fplate{background:rgba(26,16,10,.62);border-radius:28px;padding:14px 44px;width:max-content;margin:0 auto;box-shadow:0 14px 34px rgba(30,18,4,.4)}
+#f_url{font-weight:800;text-align:center}
+#f_bar{height:7px;border-radius:4px;background:linear-gradient(90deg,#7FA6BF,#D97A2E,#E8B32E)}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(26,16,10,.86);border-radius:20px;padding:18px 32px;text-align:center;box-shadow:0 14px 34px rgba(30,18,4,.5);will-change:transform,opacity}
+#sub_id{font-weight:800;color:#FFFFFF;line-height:1.26}
+#sub_en{color:#D9C8B4;font-weight:600}
+#wm{position:absolute;font-weight:800;letter-spacing:.34em;color:#F6EFE2;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;border:1.5px solid rgba(246,239,226,.42);will-change:transform}
+.bchar{position:absolute;will-change:transform,opacity}
+.bchar .core{position:absolute;border-radius:100%}
+.bchar .shine{position:absolute;border-radius:50%;background:rgba(255,255,255,.72);filter:blur(2px)}
+.bsh{position:absolute;border-radius:50%;background:rgba(40,24,8,.4);filter:blur(2px)}
+.spark{position:absolute;width:34px;height:34px;opacity:0}
+.spark .sa{position:absolute;background:#FFE9A8;border-radius:3px}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="world">
+    <div id="candywall"></div>
+    <div id="tilesun"></div>
+    <div id="awning"><div class="band"></div></div>
+    <div class="lant"><div class="cord"></div><div class="body"></div><div class="glow"></div></div>
+    <div class="lant"><div class="cord"></div><div class="body"></div><div class="glow"></div></div>
+    <div id="shelf"></div>
+    <div id="floorwood"></div>
+    <div id="baseboard"></div>
+    <div id="runner"></div>
+    <div id="counter"><div class="slab"></div><div class="leg"></div><div class="leg"></div></div>
+    <div id="etalase"><div class="box"></div></div>
+    <div id="sign"><div class="board"></div></div>
+    <div id="props"></div>
+    <div id="chars"></div>
+  </div>
+  <div id="speedlines"></div>
+  <div id="spotlight"></div>
+  <div id="flash"></div>
+  <div id="fade"></div>
+  <div id="pil">JAWAB DI KOLOM KOMENTAR YA</div>
+  <div id="endcard">
+    <div id="fplate"><div id="f_url">AKIOMIDA.COM</div></div>
+    <div id="f_bar"></div>
+  </div>
+  <div class="title" id="t0">FAKTOR DAN KELIPATAN</div>
+  <div class="title" id="t1">APA ITU FAKTOR?</div>
+  <div class="title" id="t2">APA ITU KELIPATAN?</div>
+  <div class="title" id="t3">SALING BERKAITAN</div>
+  <div class="title" id="t4">JURUS BAGI RATA</div>
+  <div class="title" id="t5">UJI PEMAHAMAN!</div>
+  <div id="subbar"><div id="sub_id"></div><div id="sub_en"></div></div>
+  <div id="wm">AKIOMIDA</div>
+</div>
+<script>

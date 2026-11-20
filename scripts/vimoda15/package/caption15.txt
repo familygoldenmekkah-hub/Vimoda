@@ -1,0 +1,13 @@
+Video 15 - Kios Permen: Faktor dan Kelipatan
+
+Bagi 12 permen ke 3 stoples: rata, 4-4-4. Tapi 13 permen? Sisa satu! 🍬
+Itulah faktor: pembagi habis tanpa sisa. Faktor 12 = 1, 2, 3, 4, 6, 12. Kelipatan itu arah sebaliknya: 4 × 1, 2, 3, 4, 5... jadi 4, 8, 12, 16, 20, terus tanpa ujung.
+Kejutannya: faktor jumlahnya TERBATAS (faktor 6 cuma 1, 2, 3, 6), kelipatan TANPA BATAS. Dan keduanya berkaitan: 4 × 3 = 12 artinya 4 dan 3 faktor 12, dan 12 kelipatan keduanya. Satu kali, dua peran!
+Jurus bagi rata: 24 permen, 2 teman dapat 12, 3 dapat 8, 4 dapat 6, 6 dapat 4. Sisa nol, semua senang.
+Uji pemahaman: 1) semua faktor dari 20? 2) lima kelipatan pertama dari 7? 3) kenapa 5 bukan faktor 12? 4) faktor atau kelipatan, mana yang tak terbatas? Delapan kartu bantu menunggu: 1, 2, 3, 4, 5, 8, 10, 20 (3 dan 8 sengaja jadi pengecoh). Jawab di kolom komentar ya.
+Refleksi: kenapa faktor dan kelipatan bisa saling berkaitan? Jelaskan dengan bahasamu sendiri.
+Di kios sebelah sudah menunggu: faktor persekutuan, FPB, dan KPK, termasuk misteri dua lampu berkedip tiap 3 detik dan 4 detik yang bersamaan lagi setelah 12 detik.
+
+Kisah angka berikutnya sudah menunggu. 🍭
+
+#faktor #kelipatan #FPB #KPK #belajarmatematika #edukasi #akiomida
