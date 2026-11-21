@@ -636,7 +636,7 @@ const UJIS=SOAL.map((s,i)=>{
 });
 const UJIVAL=['1','2','3','4','5','8','10','20'];
 const qgridEl=document.getElementById('qgrid');
-qgridEl.style.cssText+=`top:${ORIENT==='portrait'?300:246}px;gap:${ORIENT==='portrait'?12:10}px;`;
+qgridEl.style.cssText+=`top:${ORIENT==='portrait'?300:276}px;gap:${ORIENT==='portrait'?12:10}px;`;
 const CARDS=UJIVAL.map((v,i)=>{
   const el=document.createElement('div');
   el.className='qcard';
@@ -646,10 +646,10 @@ const CARDS=UJIVAL.map((v,i)=>{
   return {el,v,pop:67.4+i*0.12};
 });
 const qnoteEl=document.getElementById('qnote');
-qnoteEl.style.cssText+=`top:${ORIENT==='portrait'?452:322}px;font-size:24px;`;
+qnoteEl.style.cssText+=`top:${ORIENT==='portrait'?452:350}px;font-size:24px;`;
 qnoteEl.textContent='KARTU BANTU MISI NOMOR SATU';
 const qctaEl=document.getElementById('qcta');
-qctaEl.style.cssText+=`top:${ORIENT==='portrait'?506:368}px;font-size:${ORIENT==='portrait'?28:26}px;`;
+qctaEl.style.cssText+=`top:${ORIENT==='portrait'?506:396}px;font-size:${ORIENT==='portrait'?28:26}px;`;
 
 /* ---------- subtitle EN (aturan 8 + 18: proporsional, min 1.7 s) ---------- */
 const SUBS=[
