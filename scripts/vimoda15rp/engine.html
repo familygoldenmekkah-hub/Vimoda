@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+/* RUANG SAPA rev5 - FORMAT RP GROUP CHAT (riset pola viral chat story:
+   bubble pop satu per satu, typing indicator, POV penonton sebagai
+   karakter, media campuran, emoji burst, mid-cliffhanger) dipadukan
+   momen DIAGRAM MENYALA ala anime sains favorit penonton (Dr Stone:
+   penjelasan sains meledak jadi diagram dramatis). Dunia: layar ponsel
+   grup chat fiksi SAPA di atas latar doodle angka-permen. Konten 100%
+   positif (misteri kebaikan Pembagi Rapi, tanpa kejahatan). Semua teks
+   minimal 22px (penonton menonton di layar kecil). Tanpa label episode.
+   Label peran menggantikan nama tokoh (KAMU, MENTOR, PEMILIK KIOS, ???).
+   Karakter avatar bulat tanpa wajah. Subtitle Inggris di pil bawah.
+   Watermark AKIOMIDA selalu terlihat. Dramaturgi anime kishotenketsu:
+   ma = typing indicator saat chat hening, twist = diagram flash +
+   speedlines, jurus bernama = stiker stempel, uji = overlay papan
+   misi. Penutup bersih dua fase (aturan 28). */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#140F26;
+  font-family:'Poppins','Noto Color Emoji','DejaVu Sans','Noto Sans SC',sans-serif;
+  -webkit-font-smoothing:antialiased}
+#bgdoodle{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 30%,#2A1E44 0%,#1A1330 55%,#120D22 100%)}
+.doodle{position:absolute;color:rgba(232,179,46,.16);font-weight:800;will-change:transform,opacity}
+.dperm{position:absolute;border-radius:50%;will-change:transform,opacity}
+#vig{position:absolute;inset:0;pointer-events:none;opacity:.6;
+  background:radial-gradient(ellipse at 50% 44%,transparent 55%,rgba(8,5,18,.5) 100%)}
+#phone{position:absolute;border-radius:34px;background:#221A38;overflow:hidden;
+  border:3px solid rgba(232,179,46,.35);
+  box-shadow:0 30px 80px rgba(5,3,14,.6),0 0 0 8px rgba(255,246,232,.04);
+  will-change:transform}
+#phead{position:absolute;left:0;right:0;top:0;height:150px;background:#2A2144;
+  border-bottom:2px solid rgba(232,179,46,.3);display:flex;align-items:center;
+  padding:0 30px;z-index:30}
+.havatar{position:relative;width:84px;height:84px;flex:0 0 84px;margin-right:24px}
+.havatar div{position:absolute;border-radius:50%;border:3px solid #2A2144}
+.havatar .a1{left:0;top:10px;width:54px;height:54px;background:radial-gradient(circle,#F7C948 62%,#E8B32E)}
+.havatar .a2{left:34px;top:0;width:50px;height:50px;background:radial-gradient(circle,#F26D6D 58%,#D93A5A)}
+.havatar .a3{left:20px;top:34px;width:44px;height:44px;background:radial-gradient(circle,#B9A6FF 55%,#8E7CD8)}
+#htitle{color:#FFF6E8;font-weight:800;letter-spacing:.02em;line-height:1.15}
+#hsub{color:rgba(255,246,232,.65);font-weight:600}
+#ptime{margin-left:auto;color:rgba(232,179,46,.8);font-weight:800;letter-spacing:.14em}
+#pchat{position:absolute;left:0;right:0;bottom:0;z-index:10;will-change:transform}
+.divider{display:flex;justify-content:center;margin:18px 0}
+.divider span{background:rgba(232,179,46,.16);color:#F2C14E;border:1.5px solid rgba(232,179,46,.4);
+  border-radius:999px;padding:8px 28px;font-weight:800;letter-spacing:.06em;
+  font-size:24px;opacity:0;will-change:transform,opacity}
+.msg{display:flex;margin:14px 28px;opacity:0;will-change:transform,opacity;align-items:flex-end}
+.msg.you{justify-content:flex-end}
+.avatar{width:58px;height:58px;border-radius:50%;flex:0 0 58px;margin-right:14px;
+  border:2.5px solid rgba(232,179,46,.5);display:flex;align-items:center;justify-content:center;
+  font-size:28px;color:#221A38;font-weight:800;will-change:box-shadow}
+.bwrap{max-width:660px}
+.mname{font-size:24px;font-weight:800;letter-spacing:.08em;margin:0 0 6px 6px;opacity:0;will-change:opacity}
+.bubble{position:relative;background:#3A3054;color:#FFF6E8;border:2px solid rgba(185,166,255,.35);
+  border-radius:6px 22px 22px 22px;padding:16px 22px;font-weight:600;line-height:1.34;
+  box-shadow:0 8px 20px rgba(10,6,24,.45);will-change:transform,opacity}
+.msg.you .bubble{background:linear-gradient(135deg,#A6394B,#8E2C40);border-color:rgba(255,246,232,.25);
+  border-radius:22px 6px 22px 22px}
+.bubble.photo{padding:14px;background:#322851;border-radius:20px}
+.psvg{display:block;width:100%;height:auto;border-radius:12px}
+/* bahasa RP: aksi dalam bintang = italic redup, chat KAMU punya status dibaca,
+   bubble ??? glow emas khas (tanda tangan karakter, gampang dijadikan fandom) */
+.act{font-style:italic;color:rgba(255,246,232,.75);font-weight:500}
+.say{font-weight:600}
+.ticks{display:block;text-align:right;font-size:24px;color:rgba(255,233,168,.6);
+  margin-top:4px;font-weight:600;letter-spacing:.04em}
+.msg.myst .bubble{border-color:rgba(255,233,168,.55);
+  box-shadow:0 8px 20px rgba(10,6,24,.45),0 0 22px rgba(232,179,46,.22)}
+.pcap{font-size:26px;color:rgba(255,246,232,.9);font-weight:600;padding:12px 8px 4px;line-height:1.3}
+.jars{display:flex;gap:12px;align-items:flex-end;justify-content:center;padding:8px 6px 2px}
+.jar{width:74px;height:96px;border-radius:10px 10px 16px 16px;background:rgba(185,166,255,.18);
+  border:2.5px solid rgba(232,179,46,.55);position:relative;overflow:hidden}
+.jar .lid{position:absolute;left:0;top:0;right:0;height:14px;background:rgba(232,179,46,.5)}
+.cnd{position:absolute;border-radius:50%}
+.plate{width:110px;height:44px;border-radius:50% 50% 46% 46%;background:rgba(255,246,232,.1);
+  border:2.5px solid rgba(232,179,46,.55);position:relative}
+.bubble.sticker{background:linear-gradient(135deg,#4A2A5E,#33204A);border:3px solid #E8B32E;
+  border-radius:22px;padding:18px 24px;text-align:center;max-width:640px;
+  box-shadow:0 14px 36px rgba(10,6,24,.55),0 0 26px rgba(232,179,46,.28)}
+.stk{font-size:32px;font-weight:800;color:#F2C14E;letter-spacing:.05em}
+.stks{font-size:26px;color:#FFF6E8;font-weight:600;margin-top:8px}
+#pma{position:absolute;left:34px;bottom:26px;z-index:25;display:flex;align-items:center;
+  gap:14px;background:#3A3054;border:2px solid rgba(185,166,255,.35);border-radius:999px;
+  padding:10px 24px 10px 12px;opacity:0;will-change:transform,opacity}
+#pma .avatar{width:44px;height:44px;flex:0 0 44px;margin:0;font-size:20px}
+#pma span{color:rgba(255,246,232,.8);font-weight:600;font-size:24px}
+#pma i{width:11px;height:11px;border-radius:50%;background:#F2C14E;display:inline-block;margin-left:7px}
+#pma .dots{display:flex;align-items:center}
+#pma .dots i{animation:none}
+#dim{position:absolute;inset:0;background:rgba(12,8,26,.78);opacity:0;z-index:40;will-change:opacity}
+#flash{position:absolute;inset:26px;z-index:50;border-radius:26px;background:#1C1640;opacity:0;
+  border:3px solid #E8B32E;box-shadow:0 24px 60px rgba(5,3,14,.7),0 0 40px rgba(232,179,46,.22);
+  overflow:hidden;will-change:transform,opacity}
+#flash .speed{position:absolute;inset:0;opacity:.5;
+  background:repeating-linear-gradient(115deg,transparent 0 26px,rgba(232,179,46,.09) 26px 30px)}
+.fkick{position:absolute;top:20px;left:50%;transform:translateX(-50%);background:#E8B32E;color:#221A38;
+  border-radius:999px;padding:6px 28px;font-weight:800;letter-spacing:.12em;font-size:24px}
+.ftitle{position:absolute;left:0;right:0;top:64px;text-align:center;color:#FFF6E8;font-weight:800;letter-spacing:.03em;
+  text-shadow:0 6px 22px rgba(232,179,46,.35)}
+.fen{position:absolute;left:0;right:0;text-align:center;color:rgba(255,246,232,.66);font-weight:600;font-size:24px}
+.fbody{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.fchips{display:flex;gap:14px}
+.fchip{min-width:78px;height:78px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#4A3A62,#3A2C50);border:2.5px solid #E8B32E;color:#FFF6E8;
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;font-size:32px;
+  box-shadow:0 8px 18px rgba(10,6,24,.4);opacity:0;will-change:transform,opacity}
+.fchip.hot{background:linear-gradient(180deg,#A6394B,#8E2C40);border-color:#FFF6E8}
+.fline{color:#FFF6E8;font-weight:600;opacity:0;will-change:opacity;display:flex;align-items:center;gap:12px}
+.fline .dot{width:16px;height:16px;border-radius:50%;flex:0 0 16px}
+.fnote{color:#F2C14E;font-weight:700;opacity:0;will-change:opacity}
+.fglow{position:absolute;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(232,179,46,.34) 0%,rgba(232,179,46,0) 70%);will-change:transform,opacity}
+#quiz{position:absolute;inset:20px;z-index:60;border-radius:26px;background:#2A2144;opacity:0;
+  border:3px solid #E8B32E;box-shadow:0 24px 60px rgba(5,3,14,.7);overflow:hidden;
+  will-change:transform,opacity}
+.qtab{position:absolute;left:24px;top:22px;background:#D93A5A;color:#FFF6E8;border-radius:8px;
+  padding:6px 20px;font-weight:800;letter-spacing:.08em;font-size:24px;z-index:5;
+  box-shadow:0 6px 14px rgba(10,6,24,.4)}
+.qhd{margin:56px 6% 0;color:#F2C14E;font-weight:800;letter-spacing:.06em;font-size:30px}
+.qline{height:4px;border-radius:2px;background:linear-gradient(90deg,transparent,#E8B32E,transparent);
+  width:120px;margin:8px auto 0}
+.qrow{margin:7px 6% 0;color:#FFF6E8;font-weight:600;display:flex;gap:12px;opacity:0;will-change:opacity}
+.qrow b{color:#F2C14E;flex:0 0 auto}
+.qgrid{position:absolute;left:0;right:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;will-change:opacity}
+.qcard{width:132px;height:62px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#FFFDF6,#F2E6C6);border:3px solid #C8A86E;color:#3A2C1E;
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;font-size:30px;
+  box-shadow:0 8px 18px rgba(10,6,24,.35);opacity:0;will-change:transform,opacity}
+.qnote{position:absolute;left:6%;right:6%;color:rgba(255,246,232,.8);font-weight:600;font-size:24px;
+  opacity:0;will-change:opacity}
+.qcta{position:absolute;left:0;right:0;text-align:center;color:#FFF6E8;background:linear-gradient(135deg,#A6394B,#8E2C40);
+  border-radius:999px;margin:0 10%;padding:14px 0;font-weight:800;letter-spacing:.06em;font-size:28px;
+  border:2.5px solid rgba(255,246,232,.3);opacity:0;will-change:transform,opacity;
+  box-shadow:0 10px 26px rgba(10,6,24,.4)}
+#burst{position:absolute;inset:0;z-index:70;pointer-events:none}
+.bp{position:absolute;font-size:30px;opacity:0;will-change:transform,opacity}
+.bdot{position:absolute;border-radius:50%;opacity:0;will-change:transform,opacity}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(26,16,10,.86);
+  border-radius:20px;padding:14px 30px;text-align:center;box-shadow:0 14px 34px rgba(30,18,4,.5);
+  will-change:transform,opacity;z-index:80}
+#sub_en{font-size:24px;color:#FFF6E8;font-weight:600;line-height:1.25}
+#mark{position:absolute;left:50%;transform:translateX(-50%);background:rgba(26,16,10,.8);color:rgba(255,246,232,.9);
+  border-radius:999px;padding:8px 28px;font-weight:800;letter-spacing:.18em;font-size:24px;z-index:80}
+#endcard{position:absolute;opacity:0;z-index:90;will-change:transform,opacity}
+#fplate{position:absolute;border-radius:24px;background:linear-gradient(160deg,#FFFDF6,#F2E6C6);
+  display:flex;align-items:center;justify-content:center;color:#3A2C1E;font-weight:800;letter-spacing:.06em;
+  border:3px solid #E8B32E;box-shadow:0 20px 50px rgba(5,3,14,.6);z-index:91}
+#f_url{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+#f_bar{position:absolute;border-radius:4px;background:linear-gradient(90deg,#E8B32E,#D93A5A);
+  opacity:0;z-index:92}
+#flashwhite{position:absolute;inset:0;background:#FFF9EA;opacity:0;pointer-events:none;z-index:95}
+#fade{position:absolute;inset:0;background:#0A0714;opacity:0;pointer-events:none;z-index:100}
+/*__FONTS__*/
+</style></head>
+<body>
+<div id="bgdoodle"></div>
+<div id="phone">
+  <div id="phead">
+    <div class="havatar"><div class="a1"></div><div class="a2"></div><div class="a3"></div></div>
+    <div><div id="htitle">KIOS PERMEN &#127850;</div><div id="hsub">4 anggota online</div></div>
+    <div id="ptime">SAPA</div>
+  </div>
+  <div id="pchat"></div>
+  <div id="pma"><div class="avatar" id="pmav"></div><span id="pmat">mengetik</span><div class="dots"><i></i><i></i><i></i></div></div>
+  <div id="dim"></div>
+  <div id="flash">
+    <div class="speed"></div>
+    <div class="fkick" id="fkick">MOMEN ANGKA</div>
+    <div class="ftitle" id="ftitle"></div>
+    <div class="fen" id="fen"></div>
+    <div class="fbody" id="fbody"></div>
+    <div class="fglow" id="fglow"></div>
+  </div>
+  <div id="quiz">
+    <div class="qtab">MISI BARU</div>
+    <div class="qhd" id="qhd">TANTANGAN UNTUKMU:</div>
+    <div class="qline"></div>
+    <div id="qrows"></div>
+    <div class="qgrid" id="qgrid"></div>
+    <div class="qnote" id="qnote"></div>
+    <div class="qcta" id="qcta">JAWAB DI KOLOM KOMENTAR YA</div>
+  </div>
+  <div id="burst"></div>
+</div>
+<div id="subbar"><div id="sub_en"></div></div>
+<div id="mark">AKIOMIDA</div>
+<div id="endcard"><div id="fplate"><div id="f_url">AKIOMIDA.COM</div></div><div id="f_bar"></div></div>
+<div id="flashwhite"></div>
+<div id="fade"></div>
+<script>
+/* ---------- RUANG SAPA rev6: data & elemen format RP group chat ----------
+   Revisi 6 atas laporan pemilik: (1) teks dialog DIBESARKAN ke 30px,
+   (2) gaya RP dibikin beneran terasa: aksi RP dalam bintang (budaya RP
+   TikTok/Character.ai), status Dibaca di chat KAMU, bubble ??? glow emas,
+   (3) bahasa obrolan harian yang natural - bukan kalimat iklan AI:
+   pesan pendek, CAPS kaget, emoji reaksi, nyela, dobel-chat, nyebut
+   aktivitas harian kios, (4) ilustrasi dunia digambar serius (SVG):
+   etalase malam, buku tamu, kejutan pagi - bukan kemasan generik. ---------- */
+const Q = new URLSearchParams(location.search);
+const ORIENT = Q.get('o') === 'landscape' ? 'landscape' : 'portrait';
+const W = ORIENT === 'portrait' ? 1080 : 1920;
+const H = ORIENT === 'portrait' ? 1920 : 1080;
+
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)|0;return((t^t>>>14)>>>0)/4294967296}}
+const rnd = mulberry32(150926);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const seg=(t,t0,d)=>clamp((t-t0)/d,0,1);
+const lerp=(a,b,p)=>a+(b-a)*p;
+const eio=p=>p<0.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+const eout=p=>1-Math.pow(1-p,3);
+const smz=(t,a,b,s)=>{const o=seg(t,a,s)*(1-seg(t,b,s));return o};
+
+const P = ORIENT==='portrait' ? {
+  phoneX:24, phoneY:40, phoneW:1032, phoneH:1060,
+  chatTop:210, chatBot:1046, bubW:680, bubS:30, nameS:24, photoW:620,
+  headT:32, headS:32, headSubS:24, timeS:24,
+  subTop:1170, subMax:880, wmY:1800,
+  ecW:760, ecH:130, ecY:700, barW:420, ecFS:56,
+  avS:62, avEmoji:28, stickW:640
+} : {
+  phoneX:460, phoneY:30, phoneW:1000, phoneH:660,
+  chatTop:196, chatBot:642, bubW:600, bubS:30, nameS:24, photoW:600,
+  headT:28, headS:28, headSubS:24, timeS:24,
+  subTop:740, subMax:1300, wmY:1010,
+  ecW:700, ecH:110, ecY:360, barW:460, ecFS:44,
+  avS:54, avEmoji:26, stickW:620
+};
+
+/* posisi phone + latar doodle */
+const phoneEl=document.getElementById('phone');
+phoneEl.style.cssText+=`left:${P.phoneX}px;top:${P.phoneY}px;width:${P.phoneW}px;height:${P.phoneH}px;`;
+document.getElementById('pchat').style.cssText+=`top:${P.chatTop}px;height:${P.chatBot-P.chatTop}px;`;
+{
+  const ht=document.getElementById('htitle');
+  ht.style.fontSize=P.headS+'px';
+  const hs=document.getElementById('hsub');
+  hs.style.fontSize=P.headSubS+'px';
+  const pt=document.getElementById('ptime');
+  pt.style.fontSize=P.timeS+'px';
+}
+/* doodle latar: angka dan permen melayang (bahasa visual materi) */
+const DOODLES=[];
+{
+  const b=document.getElementById('bgdoodle');
+  const chars=['1','2','3','4','6','12','8','24'];
+  for(let i=0;i<chars.length;i++){
+    const d=document.createElement('div');
+    d.className='doodle';
+    d.textContent=chars[i];
+    const fs=54+Math.round(rnd()*70);
+    d.style.cssText+=`left:${Math.round(rnd()*(W-140)+40)}px;top:${Math.round(rnd()*(H-260)+80)}px;font-size:${fs}px;opacity:0;`;
+    b.appendChild(d);
+    DOODLES.push({el:d,ph:i*1.13,fs});
+  }
+  for(let i=0;i<12;i++){
+    const d=document.createElement('div');
+    d.className='dperm';
+    const cd=16+Math.round(rnd()*26);
+    const cols=['#F26D6D','#F7C948','#8E7CD8','#4CAF7A'];
+    const col=cols[i%4];
+    d.style.cssText+=`left:${Math.round(rnd()*(W-80)+40)}px;top:${Math.round(rnd()*(H-220)+60)}px;width:${cd}px;height:${cd}px;background:${col};opacity:0;`;
+    b.appendChild(d);
+    DOODLES.push({el:d,ph:i*0.71,fs:cd,perm:true});
+  }
+}
+
+/* ---------- cast RP (label peran, tanpa nama pribadi; avatar bulat emoji tanpa wajah) ---------- */
+const CAST={
+  KIOS:{name:'PEMILIK KIOS',glyph:'🍬',bg:'radial-gradient(circle,#F26D6D 58%,#D93A5A)',col:'#FFB3B3'},
+  MENTOR:{name:'MENTOR',glyph:'🟡',bg:'radial-gradient(circle,#F7C948 62%,#E8B32E)',col:'#F2C14E'},
+  KAMU:{name:'KAMU',glyph:'🔍',bg:'radial-gradient(circle,#C9556B 55%,#A6394B)',col:'#D9C6FF'},
+  MYST:{name:'???',glyph:'🌙',bg:'radial-gradient(circle,#FFE9A8 40%,rgba(255,233,168,.12) 72%)',col:'#FFE9A8'}
+};
+
+/* ---------- ilustrasi dunia rev6 (SVG foto chat, digambar serius) ----------
+   Tiga foto "asli dari dunia RUANG SAPA": etalase malam saat misteri
+   (awning toko, lampu gantung, 3 stoples 4-4-4, satu permen di piring
+   menyala, papan TUTUP), buku tamu dengan pola kunjungan 4-8-12-16-20
+   (12 diclingkung merah), dan kejutan 24 saat pagi (bunting, 3 stoples
+   8-8-8, tag BUAT KAMU). Semua deterministik, tanpa gambar acak. ---------- */
+const PALS=['#F26D6D','#F7C948','#8E7CD8','#4CAF7A'];
+function dot(cx,cy,r,col){return '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="'+col+'"/>'}
+function jarSVG(cx,y,h,rows,r){
+  let s='<rect x="'+(cx-52)+'" y="'+y+'" width="104" height="'+h+'" rx="10" fill="rgba(185,166,255,.16)" stroke="#E8B32E" stroke-width="3"/>'
+       +'<rect x="'+(cx-56)+'" y="'+(y-12)+'" width="112" height="16" rx="8" fill="#C89A3C"/>';
+  rows.forEach((row,ri)=>{row.forEach((col,ci)=>{s+=dot(cx-39+ci*26,y+20+ri*30,r,col)})});
+  return s;
+}
+function svgEtalase(){
+  let s='<svg class="psvg" viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">'
+   +'<defs><linearGradient id="skyE" x1="0" y1="0" x2="0" y2="1">'
+   +'<stop offset="0" stop-color="#2A1E44"/><stop offset="1" stop-color="#181132"/></linearGradient>'
+   +'<radialGradient id="glowE" cx="0.5" cy="0.5" r="0.5">'
+   +'<stop offset="0" stop-color="rgba(247,201,72,.42)"/><stop offset="1" stop-color="rgba(247,201,72,0)"/></radialGradient></defs>'
+   +'<rect width="600" height="340" fill="url(#skyE)"/>';
+  [[80,44,2],[150,72,1.6],[250,30,2.2],[350,58,1.6],[430,36,2],[480,96,1.6]].forEach(p=>{s+=dot(p[0],p[1],p[2],'rgba(255,246,232,.55)')});
+  s+='<circle cx="532" cy="56" r="26" fill="#F7C948"/><circle cx="543" cy="47" r="22" fill="#2A1E44"/>';
+  s+='<rect x="16" y="14" width="568" height="42" fill="#A6394B"/>';
+  for(let i=0;i<5;i++){s+='<rect x="'+(72+i*112)+'" y="14" width="56" height="42" fill="#F7C948"/>'}
+  s+='<line x1="300" y1="56" x2="300" y2="102" stroke="#C89A3C" stroke-width="4"/>'
+   +'<path d="M272,102 L328,102 L344,130 L256,130 Z" fill="#E8B32E"/>'
+   +'<circle cx="300" cy="136" r="9" fill="#FFF3C4"/>'
+   +'<ellipse cx="300" cy="185" rx="130" ry="80" fill="url(#glowE)"/>';
+  s+=jarSVG(120,150,100,[[PALS[0],PALS[1]],[PALS[2],PALS[3]]],12);
+  s+=jarSVG(280,150,100,[[PALS[3],PALS[0]],[PALS[1],PALS[2]]],12);
+  s+=jarSVG(440,150,100,[[PALS[2],PALS[3]],[PALS[0],PALS[1]]],12);
+  s+='<rect x="0" y="250" width="600" height="16" rx="7" fill="#8A6A46"/>'
+   +'<rect x="0" y="266" width="600" height="74" fill="#3A2C50"/>';
+  for(let i=0;i<3;i++){s+='<line x1="0" y1="'+(284+i*16)+'" x2="600" y2="'+(284+i*16)+'" stroke="rgba(232,179,46,.1)" stroke-width="3"/>'}
+  s+='<ellipse cx="545" cy="242" rx="50" ry="12" fill="rgba(255,246,232,.14)" stroke="#E8B32E" stroke-width="2.5"/>'
+   +'<circle cx="545" cy="224" r="22" fill="rgba(232,179,46,.25)"/>'
+   +dot(545,224,12,'#E8B32E');
+  s+='<g transform="rotate(-5 130 100)">'
+   +'<line x1="95" y1="56" x2="95" y2="86" stroke="#C89A3C" stroke-width="3"/>'
+   +'<line x1="165" y1="56" x2="165" y2="86" stroke="#C89A3C" stroke-width="3"/>'
+   +'<rect x="70" y="86" width="120" height="48" rx="8" fill="#F2E6C6" stroke="#C8A86E" stroke-width="3"/>'
+   +'<text x="130" y="118" text-anchor="middle" font-size="26" font-weight="800" fill="#A6394B" letter-spacing="6">TUTUP</text></g>';
+  return s+'</svg>';
+}
+function svgBuku(){
+  let s='<svg class="psvg" viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">'
+   +'<defs><linearGradient id="wdB" x1="0" y1="0" x2="0" y2="1">'
+   +'<stop offset="0" stop-color="#6B4E34"/><stop offset="1" stop-color="#4A3624"/></linearGradient></defs>'
+   +'<rect width="600" height="340" fill="url(#wdB)"/>';
+  for(let i=0;i<4;i++){s+='<line x1="0" y1="'+(40+i*82)+'" x2="600" y2="'+(48+i*82)+'" stroke="rgba(0,0,0,.18)" stroke-width="3"/>'}
+  s+='<g transform="rotate(-2 300 170)">'
+   +'<rect x="98" y="66" width="416" height="222" rx="14" fill="rgba(0,0,0,.35)"/>'
+   +'<rect x="90" y="56" width="212" height="222" rx="12" fill="#FFFDF6"/>'
+   +'<rect x="298" y="56" width="212" height="222" rx="12" fill="#FFF9EE"/>'
+   +'<line x1="300" y1="58" x2="300" y2="276" stroke="#E4D5B0" stroke-width="3"/>'
+   +'<line x1="118" y1="70" x2="118" y2="266" stroke="rgba(217,58,90,.5)" stroke-width="2.5"/>';
+  for(let i=0;i<7;i++){s+='<line x1="140" y1="'+(100+i*26)+'" x2="286" y2="'+(100+i*26)+'" stroke="#D8CBB0" stroke-width="2"/>'}
+  s+='<text x="196" y="88" text-anchor="middle" font-size="26" font-weight="800" fill="#7A4A2A" letter-spacing="4">BUKU TAMU</text>';
+  [[4,'96','pagi'],[8,'132','pagi'],[12,'168','siang'],[16,'204','sore'],[20,'240','malam']].forEach(r=>{
+    s+='<text x="330" y="'+r[1]+'" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-size="28" font-weight="700" fill="#3A2C1E">'+r[0]+'</text>'
+     +'<text x="410" y="'+r[1]+'" font-size="24" fill="#8A6A46" font-weight="600">'+r[2]+'</text>';
+  });
+  s+='<ellipse cx="346" cy="160" rx="27" ry="20" fill="none" stroke="#D93A5A" stroke-width="3" transform="rotate(-6 346 160)"/>'
+   +'<g transform="rotate(-8 470 296)"><rect x="410" y="288" width="118" height="15" rx="7" fill="#E8B32E"/>'
+   +'<path d="M528,288 L546,295.5 L528,303 Z" fill="#C89A3C"/></g></g>';
+  return s+'</svg>';
+}
+function svgKejutan(){
+  let s='<svg class="psvg" viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">'
+   +'<defs><linearGradient id="skyK" x1="0" y1="0" x2="0" y2="1">'
+   +'<stop offset="0" stop-color="#FFE3A0"/><stop offset="1" stop-color="#F7B54A"/></linearGradient></defs>'
+   +'<rect width="600" height="340" fill="url(#skyK)"/>'
+   +'<circle cx="92" cy="74" r="40" fill="#FFF3C4"/>';
+  for(let i=0;i<8;i++){const a=i*Math.PI/4;
+    s+='<line x1="'+(92+Math.cos(a)*54).toFixed(1)+'" y1="'+(74+Math.sin(a)*54).toFixed(1)+'" x2="'+(92+Math.cos(a)*72).toFixed(1)+'" y2="'+(74+Math.sin(a)*72).toFixed(1)+'" stroke="#E8A63C" stroke-width="5" stroke-linecap="round"/>'}
+  [[0,170,70,60],[90,150,50,80],[160,180,80,50],[260,160,60,70],[340,175,70,55],[430,155,60,75],[510,180,90,50]].forEach(b=>{
+    s+='<rect x="'+b[0]+'" y="'+b[1]+'" width="'+b[2]+'" height="'+b[3]+'" fill="#8A5A78" opacity="0.4"/>'});
+  s+='<path d="M20,34 Q160,78 300,40 T580,36" fill="none" stroke="#7A4A2A" stroke-width="3"/>';
+  [[60,52],[110,62],[160,64],[210,56],[260,46],[310,42],[360,44],[410,50],[460,54],[510,50],[550,44]].forEach((p,i)=>{
+    s+='<path d="M'+(p[0]-14)+','+p[1]+' L'+(p[0]+14)+','+p[1]+' L'+p[0]+','+(p[1]+24)+' Z" fill="'+PALS[i%4]+'"/>'});
+  s+='<rect x="0" y="252" width="600" height="16" rx="7" fill="#A5814F"/>'
+   +'<rect x="0" y="268" width="600" height="72" fill="#7A5C3C"/>';
+  s+=jarSVG(130,146,106,[[PALS[0],PALS[1],PALS[2],PALS[3]],[PALS[1],PALS[2],PALS[3],PALS[0]]],11);
+  s+=jarSVG(300,146,106,[[PALS[2],PALS[3],PALS[0],PALS[1]],[PALS[3],PALS[0],PALS[1],PALS[2]]],11);
+  s+=jarSVG(470,146,106,[[PALS[0],PALS[2],PALS[3],PALS[1]],[PALS[2],PALS[0],PALS[1],PALS[3]]],11);
+  s+='<g transform="rotate(7 392 222)">'
+   +'<line x1="352" y1="140" x2="368" y2="200" stroke="#7A4A2A" stroke-width="2.5"/>'
+   +'<rect x="340" y="200" width="104" height="44" rx="10" fill="#FFFDF6" stroke="#C8A86E" stroke-width="3"/>'
+   +'<text x="392" y="229" text-anchor="middle" font-size="24" font-weight="800" fill="#A6394B" letter-spacing="1">BUAT KAMU</text></g>';
+  [[520,84],[70,150],[556,140],[240,96]].forEach(p=>{
+    s+='<path d="M'+p[0]+','+(p[1]-14)+' l4,10 10,4 -10,4 -4,10 -4,-10 -10,-4 10,-4 Z" fill="rgba(255,255,255,.8)"/>'});
+  [[180,120,'#D93A5A'],[420,110,'#4CAF7A'],[560,180,'#8E7CD8'],[30,210,'#F7C948']].forEach(p=>{
+    s+=dot(p[0],p[1],5,p[2])});
+  return s+'</svg>';
+}
+const SVGS={etalase:svgEtalase,buku:svgBuku,kejutan:svgKejutan};
+/* aksi RP dalam bintang = italic redup (budaya RP TikTok/Character.ai) */
+function richText(t){
+  const parts=t.split('*');
+  const out=[];
+  for(let i=0;i<parts.length;i++){
+    if(!parts[i]) continue;
+    out.push(i%2===1?'<span class="act">'+parts[i]+'</span>':'<span class="say">'+parts[i]+'</span>');
+  }
+  return out.join('&nbsp;');
+}
+
+/* ---------- pesan RP rev6 (t0, siapa, jenis, teks; bahasa obrolan harian) ---------- */
+const MSGS=[
+  {t0:1.2, who:'KIOS', kind:'photo', svg:'etalase', cap:'lihat etalaseku semalam 😳'},
+  {t0:3.5, who:'KIOS', text:'*buka tirai* TOKONYA TUTUP JAM DELAPAN. terus siapa yang rapikan??'},
+  {t0:5.6, who:'KAMU', text:'eh tunggu. ada satu permen sendirian di piring 👀'},
+  {t0:7.4, who:'KIOS', text:'IYA NIH kayak ditinggal sendiri 🥹'},
+  {t0:9.3, who:'MENTOR', text:'*njupuk kaca pembesar* kasus manis nih. gas, aku ikut'},
+  {t0:11.3, who:'MENTOR', text:'petunjuk satu: yang rapihin pasti bagi HABIS RATA. dia gak suka sisa'},
+  {t0:16.6, who:'KAMU', text:'berarti 12 bisa dibagi rata ke 1, 2, 3, 4, 6, atau 12 orang. PAS SEMUA!'},
+  {t0:18.5, who:'MENTOR', text:'petunjuk dua: buku tamu kios. kunjungannya 4, 8, 12, 16, 20...'},
+  {t0:24.2, who:'KAMU', text:'*manggut* KUNJUNGAN KE-12 MASUK POLA 😲 kelipatan 4, faktor 12 juga!'},
+  {t0:26.0, who:'KIOS', kind:'photo', svg:'buku', cap:'buku tamuku. cek sendiri kalau ragu 📒'},
+  {t0:28.2, who:'KIOS', text:'aku GAK PERNAH catat manual 😳 ini tangan siapa?!'},
+  {t0:30.0, who:'KAMU', text:'*cek piring dua kali* GILA DIA BENERAN ADA 😳'},
+  {t0:31.9, who:'MYST', text:'*muncul dari balik lampu* hadir 😊 pola rapi itu hadiah kecil dariku. besok isi 24 ya 🌙'},
+  {t0:38.8, who:'MENTOR', kind:'sticker', stk:'JURUS BAGI RATA!', stks:'2 dapat 12 · 3 dapat 8 · 4 dapat 6 · 6 dapat 4'},
+  {t0:42.0, who:'MENTOR', text:'24 permen, semua bagi rata, sisa NOL. aman banget.'},
+  {t0:44.2, who:'KIOS', text:'*hitung ulang* dua pembeli: 12-12... IYA BENER SEMUA 😂'},
+  {t0:46.4, who:'KAMU', text:'meja sambutan rata siap 😄 siapa dateng tinggal ambil'},
+  {t0:48.6, who:'KIOS', text:'malam ini stokku isi 24. buat tamu pertama kemarin juga ya 🍬'},
+  {t0:50.8, who:'MYST', text:'kalian... beneran mau nerima aku? 🥹'},
+  {t0:52.6, who:'KAMU', text:'jelas dong. bagi rata itu buat semua orang, kamu juga 😊'},
+  {t0:54.4, who:'KIOS', text:'*pasang lampu taman* gais, malam tiba. WAKTUNYA EKSEKUSI 🌚'},
+  {t0:56.2, who:'KIOS', kind:'photo', svg:'kejutan', cap:'KEJUTAN 24 TERPASANG. SISA: NOL ✨'},
+  {t0:58.2, who:'MYST', text:'*lambai dari seberang jalan* kalian keren banget 🥹✨'},
+  {t0:60.4, who:'MENTOR', text:'kasus ditutup. pembagi rapi itu siapa aja yang mau bagi rata 😌'},
+  {t0:62.8, who:'MYST', text:'berarti aku gak sendirian lagi ya 😊🌙'},
+  {t0:72.0, who:'MENTOR', text:'psst. kios sebelah nyimpen misteri baru: pembagian yang paling pas'}
+];
+
+/* divider bab gaya chat (judul bab rata tengah, aturan 28) */
+const DIVS=[
+  [0.4,'MISTERI PEMBAGI RAPI'],
+  [10.9,'PETUNJUK PERTAMA: FAKTOR'],
+  [18.4,'PETUNJUK KEDUA: KELIPATAN'],
+  [34.5,'TERBATAS VS TANPA BATAS'],
+  [38.6,'RENCANA TERIMA KASIH'],
+  [53.7,'TERIMA KASIH, SAHABAT RAPI!']
+];
+
+/* ---------- build bubbles ---------- */
+const chatEl=document.getElementById('pchat');
+const MSGE=[];
+function mkAvatar(who,cls){
+  const c=CAST[who];
+  const a=document.createElement('div');
+  a.className='avatar'+(cls?' '+cls:'');
+  a.style.cssText+=`width:${P.avS}px;height:${P.avS}px;flex:0 0 ${P.avS}px;background:${c.bg};font-size:${P.avEmoji}px;`;
+  a.textContent=c.glyph;
+  return a;
+}
+MSGS.forEach((m,mi)=>{
+  const row=document.createElement('div');
+  row.className='msg'+(m.who==='KAMU'?' you':'')+(m.who==='MYST'?' myst':'');
+  const c=CAST[m.who];
+  if(m.who!=='KAMU'){
+    row.appendChild(mkAvatar(m.who));
+    const bw=document.createElement('div');
+    bw.className='bwrap';
+    bw.style.cssText+=`max-width:${P.bubW}px;`;
+    const nm=document.createElement('div');
+    nm.className='mname';
+    nm.style.cssText+=`color:${c.col};font-size:${P.nameS}px;`;
+    nm.textContent=c.name;
+    bw.appendChild(nm);
+    const bub=document.createElement('div');
+    if(m.kind==='photo'){
+      bub.className='bubble photo';
+      bub.style.cssText+=`width:${P.photoW}px;`;
+      bub.innerHTML=SVGS[m.svg]();
+      const pc=document.createElement('div');
+      pc.className='pcap';
+      pc.textContent=m.cap;
+      bub.appendChild(pc);
+    }else if(m.kind==='sticker'){
+      bub.className='bubble sticker';
+      bub.style.cssText+=`max-width:${P.stickW}px;`;
+      const s1=document.createElement('div');
+      s1.className='stk';
+      s1.style.fontSize=(ORIENT==='portrait'?32:29)+'px';
+      s1.textContent=m.stk;
+      const s2=document.createElement('div');
+      s2.className='stks';
+      s2.style.cssText+='font-size:26px;';
+      s2.textContent=m.stks;
+      bub.appendChild(s1);
+      bub.appendChild(s2);
+    }else{
+      bub.className='bubble';
+      bub.style.cssText+=`max-width:${P.bubW}px;font-size:${P.bubS}px;`;
+      bub.innerHTML=richText(m.text);
+    }
+    bw.appendChild(bub);
+    row.appendChild(bw);
+  }else{
+    const bw=document.createElement('div');
+    bw.className='bwrap';
+    bw.style.cssText+=`max-width:${P.bubW}px;`;
+    const nm=document.createElement('div');
+    nm.className='mname';
+    nm.style.cssText+=`color:${c.col};font-size:${P.nameS}px;text-align:right;margin-right:6px;`;
+    nm.textContent=c.name;
+    bw.appendChild(nm);
+    const bub=document.createElement('div');
+    bub.className='bubble';
+    bub.style.cssText+=`max-width:${P.bubW}px;font-size:${P.bubS}px;`;
+    bub.innerHTML=richText(m.text)+'<span class="ticks">Dibaca ✓✓</span>';
+    bw.appendChild(bub);
+    row.appendChild(bw);
+    row.appendChild(mkAvatar(m.who));
+  }
+  row.dataset.t0=m.t0;
+  chatEl.appendChild(row);
+  MSGE.push({el:row,m:m,top:0,h:0});
+});
+/* sisipkan divider sesuai urutan t0 */
+const DIVEL=[];
+DIVS.forEach(([t0,txt])=>{
+  const dv=document.createElement('div');
+  dv.className='divider';
+  const sp=document.createElement('span');
+  sp.textContent=txt;
+  dv.appendChild(sp);
+  chatEl.appendChild(dv);
+  DIVEL.push({el:dv,sp,t0});
+});
+/* urutkan semua anak chat berdasar t0 lalu susun ulang DOM */
+{
+  const kids=[...chatEl.children];
+  const items=kids.map(k=>({k, t: k.classList.contains('divider')
+    ? (DIVEL.find(d=>d.el===k)||{t0:0}).t0 : (MSGE.find(x=>x.el===k)||{m:{t0:0}}).m.t0 }));
+  items.sort((a,b)=>a.t-b.t);
+  items.forEach(it=>chatEl.appendChild(it.k));
+}
+/* ukur posisi (setelah font siap, dipanggil ulang dari frag_render init) */
+function layoutChat(){
+  const curY=(()=>{const mm=/translateY\((-?[\d.]+)px\)/.exec(chatEl.style.transform);return mm?parseFloat(mm[1]):0})();
+  MSGE.forEach(x=>{
+    const r=x.el.getBoundingClientRect();
+    const c=chatEl.getBoundingClientRect();
+    x.top=r.top-c.top+curY;
+    x.h=r.height;
+  });
+  DIVEL.forEach(d=>{
+    const r=d.el.getBoundingClientRect();
+    const c=chatEl.getBoundingClientRect();
+    d.top=r.top-c.top+curY;
+    d.h=r.height;
+  });
+}
+
+/* ---------- tiga DIAGRAM MENYALA (momen ala anime sains) ---------- */
+const FLASHES=[
+  {t0:13.3,t1:16.4,kick:'MOMEN ANGKA',title:'FAKTOR 12',en:'Factors of 12: six neat ways to share!',
+   chips:['1','2','3','4','6','12'],hot:-1,
+   lines:['12 ÷ 1, 2, 3, 4, 6, 12 = PAS TANPA SISA'],
+   notes:['12 ÷ 5 = 2 SISA 2 · BELUM RAPI','13 ÷ 3 = 4 SISA 1 · JADI HADIAH!']},
+  {t0:20.8,t1:24.0,kick:'MOMEN ANGKA',title:'KELIPATAN 4',en:'Multiples of 4: 4, 8, 12, 16, 20, 24...',
+   chips:['4','8','12','16','20','24'],hot:2,
+   lines:['4 × 3 = 12 · KUNJUNGAN KE-12'],
+   notes:['12 KELIPATAN 4 · SEKALIGUS FAKTOR 12']},
+  {t0:34.6,t1:38.4,kick:'TWIST',title:'TERBATAS VS TANPA BATAS',en:'Ways are limited, chances never end!',
+   chips:['1','2','3','6'],hot:-1,two:'6, 12, 18, 24, 30, ...',
+   lines:['FAKTOR 6: CUMA EMPAT · KELIPATAN 6: TERUS'],
+   notes:['CARA TERBATAS · PELUANG TANPA BATAS']}
+];
+const flashEl=document.getElementById('flash');
+const dimEl=document.getElementById('dim');
+const fKick=document.getElementById('fkick');
+const fTitle=document.getElementById('ftitle');
+const fEn=document.getElementById('fen');
+const fBody=document.getElementById('fbody');
+const fGlow=document.getElementById('fglow');
+fTitle.style.fontSize=(ORIENT==='portrait'?34:30)+'px';
+fEn.style.cssText+=`top:${ORIENT==='portrait'?112:96}px;font-size:24px;`;
+fBody.style.cssText+=`top:50%;transform:translateY(-50%);gap:${ORIENT==='portrait'?16:12}px;`;
+const FLASHBODY=FLASHES.map(f=>{
+  const w=document.createElement('div');
+  w.style.cssText+='display:none;flex-direction:column;align-items:center;gap:inherit;width:100%;';
+  const chips=document.createElement('div');
+  chips.className='fchips';
+  const chEls=f.chips.map((cx,i)=>{
+    const ch=document.createElement('div');
+    ch.className='fchip'+(f.hot===i?' hot':'');
+    ch.textContent=cx;
+    chips.appendChild(ch);
+    return {el:ch,i};
+  });
+  w.appendChild(chips);
+  if(f.two){
+    const t2=document.createElement('div');
+    t2.className='fline';
+    t2.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;`;
+    t2.innerHTML='<span class="dot" style="background:#B9A6FF"></span><span>'+f.two+'</span>';
+    w.appendChild(t2);
+    f.twoEl=t2;
+  }
+  const lines=f.lines.map(tx=>{
+    const ln=document.createElement('div');
+    ln.className='fline';
+    ln.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;`;
+    ln.innerHTML='<span class="dot" style="background:#4CAF7A"></span><span>'+tx+'</span>';
+    w.appendChild(ln);
+    return {el:ln};
+  });
+  const notes=f.notes.map(tx=>{
+    const nn=document.createElement('div');
+    nn.className='fnote';
+    nn.style.cssText+=`font-size:${ORIENT==='portrait'?26:24}px;`;
+    nn.textContent=tx;
+    w.appendChild(nn);
+    return {el:nn};
+  });
+  fBody.appendChild(w);
+  return {w,chips:chEls,lines,notes,f};
+});
+
+/* ---------- emoji burst ala reaksi chat ---------- */
+const burstEl=document.getElementById('burst');
+const BURSTS=[
+  {t0:24.2,t1:26.6,who:'M9',emo:['😲','😲','😲','😲'],rad:130},
+  {t0:56.4,t1:59.4,who:'ALL',emo:['🎉','✨','🍬','🎉','✨'],rad:230,conf:true}
+];
+const BPARTS=[];
+BURSTS.forEach((b,bi)=>{
+  for(let i=0;i<b.emo.length+(b.conf?8:0);i++){
+    const isEmoji=i<b.emo.length;
+    const el=document.createElement('div');
+    el.className=isEmoji?'bp':'bdot';
+    if(isEmoji){ el.textContent=b.emo[i]; }
+    else{
+      const cols=['#F26D6D','#F7C948','#8E7CD8','#4CAF7A'];
+      el.style.cssText+=`width:${10+rnd()*10}px;height:${10+rnd()*10}px;background:${cols[i%4]};`;
+    }
+    burstEl.appendChild(el);
+    const a=(i/(b.emo.length+(b.conf?8:0)))*Math.PI*2+rnd()*0.5;
+    BPARTS.push({el,bi,a,d:0.6+rnd()*0.5,ph:rnd()*6});
+  }
+});
+
+/* ---------- overlay MISI BARU (aturan 30: empat soal utuh + kartu) ---------- */
+const quizEl=document.getElementById('quiz');
+document.getElementById('qhd').style.fontSize=(ORIENT==='portrait'?32:28)+'px';
+const SOAL=['TENTUKAN SEMUA FAKTOR DARI 20.','LIMA KELIPATAN PERTAMA DARI 7.','KENAPA 5 BUKAN FAKTOR DARI 12?','FAKTOR ATAU KELIPATAN: TAK TERBATAS?'];
+const qrowsEl=document.getElementById('qrows');
+const UJIS=SOAL.map((s,i)=>{
+  const r=document.createElement('div');
+  r.className='qrow';
+  r.style.cssText+=`font-size:${ORIENT==='portrait'?26:25}px;margin-top:${ORIENT==='portrait'?7:5}px;`;
+  r.innerHTML='<b>'+(i+1)+'.</b> '+s;
+  qrowsEl.appendChild(r);
+  return {el:r,t0:65.8+i*0.2};
+});
+const UJIVAL=['1','2','3','4','5','8','10','20'];
+const qgridEl=document.getElementById('qgrid');
+qgridEl.style.cssText+=`top:${ORIENT==='portrait'?300:246}px;gap:${ORIENT==='portrait'?12:10}px;`;
+const CARDS=UJIVAL.map((v,i)=>{
+  const el=document.createElement('div');
+  el.className='qcard';
+  el.style.cssText+=`width:${ORIENT==='portrait'?132:108}px;`;
+  el.textContent=v;
+  qgridEl.appendChild(el);
+  return {el,v,pop:67.4+i*0.12};
+});
+const qnoteEl=document.getElementById('qnote');
+qnoteEl.style.cssText+=`top:${ORIENT==='portrait'?452:322}px;font-size:24px;`;
+qnoteEl.textContent='KARTU BANTU MISI NOMOR SATU';
+const qctaEl=document.getElementById('qcta');
+qctaEl.style.cssText+=`top:${ORIENT==='portrait'?506:368}px;font-size:${ORIENT==='portrait'?28:26}px;`;
+
+/* ---------- subtitle EN (aturan 8 + 18: proporsional, min 1.7 s) ---------- */
+const SUBS=[
+  [1.2,'Look at my display this morning!'],
+  [3.5,'Closed at eight. Who tidied it??'],
+  [5.6,'One candy alone on a plate.'],
+  [7.4,'Left alone like a little guest.'],
+  [9.3,'Sweet case! Count me in.'],
+  [11.3,'Clue one: always shared evenly.'],
+  [13.3,'Factors of 12: six neat ways to share!'],
+  [16.6,'So 12 splits evenly six ways!'],
+  [18.5,'Clue two: guest visits 4, 8, 12, 16, 20'],
+  [20.8,'Multiples of 4: 4, 8, 12, 16, 20, 24...'],
+  [24.2,'Visit 12 fits the pattern!'],
+  [26.0,'My guest book. Check it yourself.'],
+  [28.2,'I never wrote these by hand!'],
+  [30.0,'Whoa. The helper is real!'],
+  [31.9,'My gift. Refill to 24 tomorrow!'],
+  [34.6,'Ways are limited, chances never end!'],
+  [38.8,'Jurus Bagi Rata! 2 get 12, 3 get 8, 4 get 6.'],
+  [42.0,'24 candies shared evenly, zero rest!'],
+  [46.4,'A fair table for whoever comes!'],
+  [48.6,'Stock set to 24 tonight. You too!'],
+  [50.8,'You really would accept me?'],
+  [52.6,'Fair sharing is for you too.'],
+  [54.4,'Night falls. Time to execute!'],
+  [56.2,'Surprise 24 in place. Zero rest!'],
+  [58.2,'I watched from across the road!'],
+  [60.4,'The Tidy Divider is everyone who shares.'],
+  [62.8,'So I am not alone anymore.'],
+  [65.4,'New mission: four questions for you!'],
+  [72.0,'Next door keeps a new mystery: the fairest sharing.'],
+  [76.0,'Thanks for watching.']
+];
+const subbar=document.getElementById('subbar');
+const subEn=document.getElementById('sub_en');
+subbar.style.cssText+=`top:${P.subTop}px;max-width:${P.subMax}px;`;
+subEn.style.fontSize='24px';
+
+/* watermark + endcard */
+const markEl=document.getElementById('mark');
+markEl.style.cssText+=`top:${P.wmY}px;font-size:24px;`;
+const endcard=document.getElementById('endcard');
+const fplate=document.getElementById('fplate');
+const fUrl=document.getElementById('f_url');
+const fBar=document.getElementById('f_bar');
+fplate.style.cssText+=`left:${P.phoneX+(P.phoneW-P.ecW)/2}px;top:${P.ecY}px;width:${P.ecW}px;height:${P.ecH}px;font-size:${P.ecFS}px;`;
+fBar.style.cssText+=`left:${P.phoneX+(P.phoneW-P.barW)/2}px;top:${P.ecY+P.ecH+26}px;width:0;height:10px;`;
+const flashwhite=document.getElementById('flashwhite');
+const fadeEl=document.getElementById('fade');
+const typingEl=document.getElementById('pma');
+const typingAv=document.getElementById('pmav');
+const typingTx=document.getElementById('pmat');
+typingTx.style.fontSize='24px';
+/* ---------- RUANG SAPA rev5: render per frame ----------
+   Semua gerak fungsi waktu (deterministik, aturan 20). Bahasa motion:
+   bubble pop dengan overshoot kecil (aturan 19), typing indicator
+   sebelum tiap pesan, scroll chat halus, diagram flash punch-in ala
+   anime sains, emoji burst, overlay misi slide-up, endcard tenang. ---------- */
+const SUBS2=SUBS;
+let subIdx=-1;
+let scrollCur=0;
+function renderSub(t){
+  let i=0;
+  for(let k=0;k<SUBS2.length;k++){ if(t>=SUBS2[k][0]-0.001) i=k; }
+  const nxt=i+1<SUBS2.length?SUBS2[i+1][0]:84.0;
+  const o=clamp(Math.min(seg(t,SUBS2[i][0],0.28), 1-seg(t,nxt-0.18,0.18)),0,1);
+  if(i!==subIdx){
+    subIdx=i;
+    subEn.textContent=SUBS2[i][1];
+  }
+  subbar.style.opacity=(o*0.97).toFixed(3);
+  const pop=1+0.014*Math.sin(clamp(seg(t,SUBS2[i][0],0.5),0,1)*Math.PI);
+  subbar.style.transform=`translateX(-50%) scale(${pop.toFixed(3)})`;
+}
+const IMPS=[[0.4,1.0],[12.9,13.7],[19.8,20.6],[34.6,35.4],[54.4,55.2],[64.6,65.4]];
+function imp(t){
+  let a=0;
+  for(const [s,e] of IMPS){
+    const d=t-s;
+    if(d>=0&&d<(e-s)*0.5){ const p=d/((e-s)*0.5); a=Math.max(a,(1-p)*0.8); }
+  }
+  return a;
+}
+/* typing indicator: siapa yang sedang mengetik */
+function typingInfo(t){
+  if(t>=33.5&&t<34.5) return {who:'MENTOR',txt:'menyusun jurus'};
+  for(const m of MSGS){
+    if(t<m.t0&&t>=m.t0-0.45) return {who:m.who,txt:'mengetik'};
+    if(t>=m.t0) continue;
+  }
+  return null;
+}
+function renderFrame(t){
+  /* latar doodle melayang pelan */
+  for(const d of DOODLES){
+    const fx=parseFloat(d.el.style.left);
+    const fy=parseFloat(d.el.style.top);
+    d.el.style.opacity=(0.5+0.3*Math.sin(t*0.4+d.ph)).toFixed(3);
+    d.el.style.transform=`translate(${(Math.sin(t*0.22+d.ph)*18).toFixed(1)}px,${(Math.cos(t*0.18+d.ph)*14).toFixed(1)}px)`;
+  }
+  /* napas phone + kamera hanyut + punch momen */
+  const im=imp(t);
+  const px=Math.sin(t*0.21)*5+Math.sin(t*47)*2.2*im;
+  const py=Math.cos(t*0.15)*4+Math.sin(t*39+1.7)*1.6*im;
+  let push=0;
+  for(const [s,e] of IMPS){ push+=0.028*smz(t,s,e,0.35); }
+  phoneEl.style.transform=`translate(${px.toFixed(2)}px,${py.toFixed(2)}px) scale(${(1+push).toFixed(4)})`;
+  /* divider bab pop + ikut memudar saat penutup bersih (aturan 28) */
+  const chFade2=1-seg(t,75.2,0.35);
+  for(const d of DIVEL){
+    const o=clamp(seg(t,d.t0,0.4),0,1)*chFade2;
+    d.sp.style.opacity=o.toFixed(3);
+    d.sp.style.transform=`translateY(${(12*(1-eio(seg(t,d.t0,0.4)))).toFixed(1)}px)`;
+  }
+  /* bubble pop + scroll target */
+  let lastBot=0;
+  for(const x of MSGE){
+    const on=t>=x.m.t0;
+    if(on){
+      const p=clamp(seg(t,x.m.t0,0.42),0,1);
+      const popS=1+0.05*Math.sin(p*Math.PI);
+      x.el.style.opacity=p.toFixed(3);
+      x.el.style.transform=`translateY(${(14*(1-eio(p))).toFixed(1)}px) scale(${popS.toFixed(3)})`;
+      lastBot=Math.max(lastBot,x.top+x.h);
+    }
+  }
+  for(const d of DIVEL){
+    if(t>=d.t0) lastBot=Math.max(lastBot,d.top+d.h);
+  }
+  const areaH=P.chatBot-P.chatTop;
+  const target=Math.max(0,lastBot-areaH+30);
+  if(Math.abs(target-scrollCur)>600)scrollCur=target;
+  scrollCur+=(target-scrollCur)*0.22;
+  chatEl.style.transform=`translateY(${(-scrollCur).toFixed(1)}px)`;
+  /* typing indicator */
+  const ti=typingInfo(t);
+  if(ti){
+    const c=CAST[ti.who];
+    typingAv.style.cssText+=`background:${c.bg};`;
+    typingAv.textContent=c.glyph;
+    typingTx.textContent=ti.txt;
+    typingEl.style.opacity='0.95';
+    typingEl.style.transform=`translateY(${(Math.sin(t*2.2)*2).toFixed(1)}px)`;
+  }else{
+    typingEl.style.opacity='0';
+  }
+  /* DIAGRAM MENYALA (tiga momen ala anime sains) */
+  let fOn=null;
+  for(const f of FLASHES){ if(t>=f.t0&&t<f.t1) fOn=f; }
+  if(fOn){
+    const fin=seg(t,fOn.t0,0.28), fout=1-seg(t,fOn.t1-0.32,0.32);
+    const o=clamp(Math.min(fin,fout),0,1);
+    dimEl.style.opacity=(o*0.78).toFixed(3);
+    flashEl.style.opacity=o.toFixed(3);
+    const sc=0.94+0.08*eout(fin)-0.03*seg(t,fOn.t1-0.32,0.32);
+    flashEl.style.transform=`scale(${sc.toFixed(4)})`;
+    fKick.textContent=fOn.kick;
+    fTitle.textContent=fOn.title;
+    fEn.textContent=fOn.en;
+    fKick.style.opacity=o.toFixed(3);
+    fTitle.style.opacity=o.toFixed(3);
+    fTitle.style.transform=`translateY(${(16*(1-eio(fin))).toFixed(1)}px) scale(${(1+0.03*Math.sin(clamp(fin,0,1)*Math.PI)).toFixed(3)})`;
+    fEn.style.opacity=(o*0.9).toFixed(3);
+    fGlow.style.opacity=(o*0.85).toFixed(3);
+    fGlow.style.transform=`translate(${(Math.sin(t*0.9)*60).toFixed(1)}px,${(Math.cos(t*0.7)*40).toFixed(1)}px)`;
+    const idx=FLASHES.indexOf(fOn);
+    const body=FLASHBODY[idx];
+    body.w.style.display='flex';
+    for(let j=0;j<FLASHBODY.length;j++){ if(j!==idx) FLASHBODY[j].w.style.display='none'; }
+    for(const ch of body.chips){
+      const ct=fOn.t0+0.14+ch.i*0.09;
+      const co=clamp(seg(t,ct,0.3),0,1);
+      ch.el.style.opacity=co.toFixed(3);
+      ch.el.style.transform=`translateY(${(18*(1-eio(co))).toFixed(1)}px) scale(${(1+0.1*Math.sin(clamp(seg(t,ct,0.45),0,1)*Math.PI)).toFixed(3)})`;
+    }
+    for(const ln of body.lines){
+      ln.el.style.opacity=clamp(seg(t,fOn.t0+0.75,0.4),0,1).toFixed(3);
+    }
+    if(fOn.twoEl){ fOn.twoEl.style.opacity=clamp(seg(t,fOn.t0+1.15,0.4),0,1).toFixed(3); }
+    for(let ni=0;ni<body.notes.length;ni++){
+      body.notes[ni].el.style.opacity=clamp(seg(t,fOn.t0+1.5+ni*0.35,0.4),0,1).toFixed(3);
+    }
+    flashwhite.style.opacity=clamp(smz(t,fOn.t0,fOn.t0+0.16,0.05)*0.16,0,1).toFixed(3);
+  }else{
+    dimEl.style.opacity='0';
+    flashEl.style.opacity='0';
+    flashwhite.style.opacity='0';
+    for(const b of FLASHBODY) b.w.style.display='none';
+  }
+  /* emoji burst */
+  for(const pt of BPARTS){
+    const b=BURSTS[pt.bi];
+    if(t>=b.t0&&t<b.t1){
+      const p=seg(t,b.t0,b.t1-b.t0);
+      const rise=Math.sin(p*Math.PI);
+      const ox=Math.cos(pt.a)*b.rad*(0.4+0.6*p)*pt.d;
+      const oy=Math.sin(pt.a)*b.rad*0.62*(0.4+0.6*p)*pt.d-p*40;
+      const cx=ORIENT==='portrait'?P.phoneX+P.phoneW/2:P.phoneX+P.phoneW/2;
+      const cy=ORIENT==='portrait'?P.phoneY+P.phoneH/2:P.phoneY+P.phoneH/2;
+      pt.el.style.opacity=(rise*0.95).toFixed(3);
+      pt.el.style.transform=`translate(${(cx+ox-30).toFixed(0)}px,${(cy+oy-30).toFixed(0)}px) scale(${(0.7+0.6*rise).toFixed(3)}) rotate(${(p*90*(pt.d>1?1:-1)).toFixed(0)}deg)`;
+    }else{
+      pt.el.style.opacity='0';
+    }
+  }
+  /* overlay MISI BARU (aturan 30) */
+  {
+    const qin=eio(seg(t,64.6,0.6));
+    const qout=1-seg(t,71.6,0.5);
+    const qo=clamp(Math.min(qin,qout),0,1);
+    quizEl.style.opacity=qo.toFixed(3);
+    quizEl.style.transform=`translateY(${((1-qin)*46-(1-qout)*40).toFixed(1)}px) scale(${(0.96+0.04*qin).toFixed(3)})`;
+    for(const r of UJIS){ r.el.style.opacity=seg(t,r.t0,0.35).toFixed(3); }
+    for(let i=0;i<CARDS.length;i++){
+      const cc=CARDS[i];
+      const inA=clamp(seg(t,cc.pop,0.35),0,1);
+      const dir=i%2===0?-1:1;
+      const s2=1+0.09*Math.sin(clamp(seg(t,cc.pop,0.4),0,1)*Math.PI);
+      cc.el.style.opacity=(inA*qo).toFixed(3);
+      cc.el.style.transform=`translateX(${((1-inA)*46*dir).toFixed(1)}px) rotate(${((1-inA)*10*dir).toFixed(2)}deg) scale(${s2.toFixed(3)})`;
+      cc.el.style.borderColor=inA>0.9&&t<cc.pop+0.45?'#E8B32E':'#C8A86E';
+    }
+    qnoteEl.style.opacity=(seg(t,66.4,0.4)*qo).toFixed(3);
+    const cpo=eio(seg(t,68.0,0.5));
+    qctaEl.style.opacity=(cpo*qo).toFixed(3);
+    qctaEl.style.transform=`translateX(${((1-cpo)*30).toFixed(1)}px) scale(${(1+0.02*Math.sin(clamp(seg(t,68.0,0.6),0,1)*Math.PI)).toFixed(3)})`;
+  }
+  /* penutup bersih (aturan 28): konten teaser keluar, endcard sendirian */
+  const chFade=1-seg(t,75.2,0.35);
+  document.getElementById('phead').style.opacity=String(clamp(1-seg(t,75.2,0.35),0,1));
+  for(const x of MSGE){ if(t>=75.2) x.el.style.opacity=String(clamp(1-seg(t,75.2,0.35),0,1)*parseFloat(x.el.style.opacity||'1')); }
+  typingEl.style.opacity=t>=75.2?'0':typingEl.style.opacity;
+  const eci=eio(seg(t,75.4,0.8));
+  endcard.style.opacity=eci.toFixed(3);
+  endcard.style.transform=`translateY(${((1-eci)*16).toFixed(1)}px) scale(${(0.94+0.06*eci).toFixed(3)})`;
+  fBar.style.width=(seg(t,78.4,0.8)*P.barW).toFixed(0)+'px';
+  renderSub(t);
+  fadeEl.style.opacity=String(clamp(1-seg(t,0.05,0.5),0,1)*0.96+clamp(seg(t,80.6,0.9),0,1));
+}
+/* layout akurat setelah font siap, lalu siap render */
+function boot(){
+  let booted=false;
+  const run=()=>{ if(booted)return; booted=true; layoutChat(); renderFrame(0); window.__ready=true; };
+  if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(run); setTimeout(run,2500); }
+  else run();
+}
+boot();
+window.__renderFrame=renderFrame;
+</script>
+</body>
+</html>
