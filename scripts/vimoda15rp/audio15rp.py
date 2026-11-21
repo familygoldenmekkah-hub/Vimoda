@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
-"""Musik & SFX prosedural rev5 untuk video 15 FORMAT RP "Misteri Pembagi Rapi".
+"""Musik & SFX prosedural rev7 untuk video 15 FORMAT RP "Misteri Pembagi Rapi".
 Bahasa audio chat story dari riset: pop bubble per karakter (pitch berbeda
 per peran), tick typing sebelum tiap pesan, whoosh diagram menyala ala
 anime sains, boom twist, shimmer emoji burst, fanfare endcard. Nada D MINOR
 malam ajaib saat misteri dan petunjuk, berubah F MAJOR hangat saat TERIMA
-KASIH (53.8). JEDA MA 33.5-34.5 hening total sebelum twist (typing indicator
-"menyusun jurus"). Durasi 84.0 s (aturan 31). Output: /tmp/render/audio.wav
+KASIH (75.3). JEDA MA 55.8-57.0 hening total sebelum twist (typing indicator
+"menyusun jurus"). Durasi 106.0 s: diperpanjang dari 84 s supaya tiap bubble
+sempat dibaca (keluhan pemilik rev7: bacaan belum kebaca sudah terganti).
+Output: /tmp/render/audio.wav
 """
 import numpy as np
 import wave
 
 SR = 44100
-DUR = 84.0
+DUR = 106.0
 N = int(SR * DUR)
 OUT = "/tmp/render/audio.wav"
 
@@ -118,11 +120,11 @@ def pop(f, level=0.11):
 D3, F3, A3, C4 = 146.83, 174.61, 220.0, 261.63
 Bb2, Bb3, G3, D4 = 116.54, 233.08, 196.0, 293.66
 SEG = [
-    (0.0, 11.0, (D3, F3, A3)),        # misteri dibuka
-    (11.0, 33.5, (Bb2, D3, F3)),      # petunjuk faktor dan kelipatan
-    # 33.5 - 34.5 : ma, hening total (typing menyusun jurus)
-    (34.5, 53.8, (G3, Bb3, D4)),      # twist dan rencana terima kasih
-    (53.8, 84.0, (F3, A3, C4)),       # TERIMA KASIH: hangat F major
+    (0.0, 19.0, (D3, F3, A3)),        # misteri dibuka
+    (19.0, 55.8, (Bb2, D3, F3)),      # petunjuk faktor dan kelipatan
+    # 55.8 - 57.0 : ma, hening total (typing menyusun jurus)
+    (57.0, 75.3, (G3, Bb3, D4)),      # twist dan rencana terima kasih
+    (75.3, 106.0, (F3, A3, C4)),      # TERIMA KASIH: hangat F major
 ]
 for (t0, t1, notes) in SEG:
     dur = t1 - t0 + 1.0
@@ -154,7 +156,7 @@ DM_SCALE = [293.66, 349.23, 392.0, 440.0, 523.25, 587.33]
 F_SCALE = [349.23, 440.0, 523.25, 587.33, 698.46, 783.99]
 step = 0.30
 kk = 0
-for (lo, hi, scale) in ((0.4, 33.4, DM_SCALE), (34.5, 53.6, DM_SCALE), (54.0, 71.4, F_SCALE)):
+for (lo, hi, scale) in ((0.4, 55.6, DM_SCALE), (57.0, 75.1, DM_SCALE), (75.5, 100.5, F_SCALE)):
     tt = lo
     while tt < hi:
         f = scale[(kk * 2 + (kk % 7)) % len(scale)]
@@ -164,29 +166,28 @@ for (lo, hi, scale) in ((0.4, 33.4, DM_SCALE), (34.5, 53.6, DM_SCALE), (54.0, 71
         tt += step
 
 # ---------- kick & hat (hening saat ma) ----------
-for (lo, hi) in ((0.4, 33.4), (34.5, 53.6)):
+for (lo, hi) in ((0.4, 55.6), (57.0, 75.1)):
     tt = lo
     while tt < hi:
         add(tt, kick(0.16), 0.0)
         add(tt + 0.30, noise_band(0.05, 5000, 9000) * 0.9, 0.15, 0.04)
         tt += 0.60
-tt = 54.0
-while tt < 77.0:
+tt = 75.4
+while tt < 101.0:
     add(tt, kick(0.12), 0.0)
     tt += 1.4
 
 # ---------- momen kunci RP ----------
 POP_F = {"KIOS": 523.0, "MENTOR": 659.0, "KAMU": 740.0, "MYST": 880.0}
 MSGS = [
-    (1.2, "KIOS", "photo"), (3.5, "KIOS", "text"), (5.6, "KAMU", "text"),
-    (7.4, "KIOS", "text"), (9.3, "MENTOR", "text"), (11.3, "MENTOR", "text"),
-    (16.6, "KAMU", "text"), (18.5, "MENTOR", "text"), (24.2, "KAMU", "text"),
-    (26.0, "KIOS", "photo"), (28.2, "KIOS", "text"), (30.0, "KAMU", "text"),
-    (31.9, "MYST", "text"), (38.8, "MENTOR", "sticker"),
-    (42.0, "MENTOR", "text"), (44.2, "KIOS", "text"), (46.4, "KAMU", "text"),
-    (48.6, "KIOS", "text"), (50.8, "MYST", "text"), (52.6, "KAMU", "text"),
-    (54.4, "KIOS", "text"), (56.2, "KIOS", "photo"), (58.2, "MYST", "text"),
-    (60.4, "MENTOR", "text"), (62.8, "MYST", "text"), (72.0, "MENTOR", "text"),
+    (1.4, "KIOS", "photo"), (5.2, "KIOS", "text"), (9.2, "KAMU", "text"),
+    (12.6, "KIOS", "text"), (16.0, "MENTOR", "text"), (19.2, "MENTOR", "text"),
+    (26.4, "KAMU", "text"), (30.6, "MENTOR", "text"), (34.0, "KIOS", "photo"),
+    (41.0, "KAMU", "text"), (45.0, "MENTOR", "text"), (48.8, "KIOS", "text"),
+    (52.2, "MYST", "text"), (61.5, "MENTOR", "sticker"),
+    (64.7, "MENTOR", "text"), (68.9, "KIOS", "text"), (72.3, "MYST", "text"),
+    (75.5, "KIOS", "photo"), (78.9, "MYST", "text"), (81.9, "MENTOR", "text"),
+    (85.3, "MYST", "text"), (97.3, "MENTOR", "text"),
 ]
 add(0.35, boom(0.20))                      # dunia RUANG SAPA menyala
 add(0.4, whoosh(0.5, True, 0.05))
@@ -205,70 +206,65 @@ for (t0, who, kind) in MSGS:
         add(t0, whoosh(0.5, True, 0.07))
         for f, dt in ((523.25, 0.0), (659.26, 0.12), (783.99, 0.24)):
             add(t0 + dt, chime(f, 0.09))   # stiker jurus bernama
-add(24.4, chime(1174.66, 0.06))            # burst reaksi kagum
-add(56.5, chime(1046.5, 0.07))             # foto kejutan 24: burst konfeti
+add(41.1, chime(1174.66, 0.06))            # burst reaksi kagum (pola kelipatan)
+add(75.8, chime(1046.5, 0.07))             # foto kejutan 24: burst konfeti
 for f, dt in ((1318.5, 0.10), (1568.0, 0.20), (1046.5, 0.30)):
-    add(56.6 + dt, chime(f, 0.05))
-add(58.4, chime(880.0, 0.05))              # MYST melambai terima kasih
+    add(75.9 + dt, chime(f, 0.05))
+add(79.1, chime(880.0, 0.05))              # MYST melambai terima kasih
 # divider bab
-for (t0, _txt) in ((0.4, "x"), (10.9, "x"), (18.4, "x"), (34.5, "x"), (38.6, "x"), (53.7, "x")):
+for (t0, _txt) in ((0.4, "x"), (19.0, "x"), (30.4, "x"), (61.3, "x"), (75.3, "x")):
     add(t0, tick(880, 0.05))
-# DIAGRAM MENYALA 1: FAKTOR 12 (12.9-16.2)
-add(13.3, whoosh(0.5, True, 0.10))
-add(13.35, chime(440.0, 0.11))
+# DIAGRAM MENYALA 1: FAKTOR 12 (22.8-26.2)
+add(22.8, whoosh(0.5, True, 0.10))
+add(22.85, chime(440.0, 0.11))
 for i in range(6):
-    add(13.5 + i * 0.09, tick(560 + i * 46, 0.05))
-add(14.05, tick(900, 0.06))
-add(14.8, chime(523.25, 0.08))             # 13 dibagi 3 sisa 1 jadi hadiah
-add(16.2, whoosh(0.35, False, 0.05))
-# DIAGRAM MENYALA 2: KELIPATAN 4 (19.8-23.2)
-add(20.8, whoosh(0.5, True, 0.10))
-add(20.85, chime(494.0, 0.10))
+    add(23.0 + i * 0.12, tick(560 + i * 46, 0.05))
+add(23.8, tick(900, 0.06))
+add(24.6, chime(523.25, 0.08))             # 13 dibagi 3 sisa 1 jadi hadiah
+add(26.0, whoosh(0.35, False, 0.05))
+# DIAGRAM MENYALA 2: KELIPATAN 4 (37.4-40.8)
+add(37.4, whoosh(0.5, True, 0.10))
+add(37.45, chime(494.0, 0.10))
 for i in range(6):
-    add(20.95 + i * 0.09, tick(620 + i * 42, 0.05))
-add(21.45, tick(920, 0.06))
-add(21.8, chime(587.33, 0.09))             # 12 kelipatan 4 sekaligus faktor 12
-add(23.8, whoosh(0.35, False, 0.05))
-# MA 33.5-34.5: hening (typing menyusun jurus)
-add(33.5, whoosh(0.5, False, 0.07))
-for t0 in (32.9, 33.24, 33.58, 33.92, 34.26):   # tremolo pra-twist
+    add(37.6 + i * 0.12, tick(620 + i * 42, 0.05))
+add(38.4, tick(920, 0.06))
+add(38.8, chime(587.33, 0.09))             # 12 kelipatan 4 sekaligus faktor 12
+add(40.6, whoosh(0.35, False, 0.05))
+# MA 55.8-57.0: hening (typing menyusun jurus)
+add(55.8, whoosh(0.5, False, 0.07))
+for t0 in (55.2, 55.54, 55.88, 56.22, 56.56):   # tremolo pra-twist
     add(t0, tick(1100, 0.055))
-# DIAGRAM TWIST: TERBATAS VS TANPA BATAS (34.6-38.4)
-add(34.6, boom(0.30))
-add(34.62, chime(440.0, 0.13))
-add(34.6, whoosh(0.4, True, 0.05))
+# DIAGRAM TWIST: TERBATAS VS TANPA BATAS (57.1-61.1, chip slow-motion)
+add(57.1, boom(0.30))
+add(57.12, chime(440.0, 0.13))
+add(57.1, whoosh(0.4, True, 0.05))
 for i in range(4):
-    add(34.75 + i * 0.09, tick(600 + i * 40, 0.05))
-add(35.35, tick(900, 0.06))
-add(35.75, tick(980, 0.06))
-add(36.1, chime(523.25, 0.10))             # cara terbatas peluang tanpa batas
-add(38.2, whoosh(0.35, False, 0.05))
-add(48.7, tick(760, 0.05))                 # stokku isi 24 malam ini
-add(51.0, tick(820, 0.05))                 # kalian beneran mau nerima aku
-add(52.8, chime(659.26, 0.07))             # bagi rata itu buat semua orang
-add(54.6, tick(300, 0.05))                 # malam tiba, waktunya eksekusi
-add(56.6, tick(340, 0.05))
-add(60.6, chime(523.25, 0.10))             # kasus ditutup: pembagi rapi semua orang
-add(63.0, tick(880, 0.06))                 # aku gak sendirian lagi
-add(64.7, tick(740, 0.05))                 # papan misi menyala
+    add(57.35 + i * 0.24, tick(600 + i * 40, 0.05))
+add(58.4, tick(900, 0.06))
+add(58.9, tick(980, 0.06))
+add(59.4, chime(523.25, 0.10))             # cara terbatas peluang tanpa batas
+add(60.9, whoosh(0.35, False, 0.05))
+add(69.0, tick(760, 0.05))                 # stokku isi 24 malam ini
+add(82.1, chime(523.25, 0.10))             # kasus selesai: pembagi rapi semua orang
+add(85.5, tick(880, 0.06))                 # aku gak sendirian lagi
 # OVERLAY MISI BARU
-add(65.4, whoosh(0.6, True, 0.08))
-add(65.45, tick(880, 0.07))
+add(88.35, whoosh(0.6, True, 0.08))
+add(88.4, tick(880, 0.07))
 for i in range(4):
-    add(65.8 + i * 0.2, tick(640 + i * 80, 0.05))
-add(67.4, kick(0.26))
+    add(90.6 + i * 0.16, tick(640 + i * 80, 0.05))
+add(92.2, kick(0.26))
 for i in range(8):
-    add(67.4 + i * 0.12, tick(580 + i * 70, 0.05))
-add(69.2, tick(760, 0.045))                # catatan kartu bantu misi nomor satu
-add(69.9, whoosh(0.6, True, 0.07))
-add(69.95, chime(880.0, 0.12))             # pil JAWAB DI KOLOM KOMENTAR YA
-add(71.6, whoosh(0.6, False, 0.06))        # papan misi keluar (aturan 28)
-add(72.0, chime(392.0, 0.09))              # teaser: kios sebelah
-add(75.4, whoosh(0.5, True, 0.03))
+    add(92.6 + i * 0.1, tick(580 + i * 70, 0.05))
+add(94.2, tick(760, 0.045))                # catatan kartu bantu misi nomor satu
+add(94.05, whoosh(0.6, True, 0.07))
+add(94.1, chime(880.0, 0.12))              # pil JAWAB DI KOLOM KOMENTAR YA
+add(96.6, whoosh(0.6, False, 0.06))        # papan misi keluar (aturan 28)
+add(97.3, chime(392.0, 0.09))              # teaser: kios sebelah
+add(101.15, whoosh(0.5, True, 0.03))
 for f, dt in ((349.23, 0.0), (440.0, 0.25), (523.25, 0.5), (698.46, 0.75)):
-    add(75.5 + dt, chime(f, 0.09))         # fanfare endcard
-add(78.4, tick(700, 0.045))                # bar gradien menyapu
-add(78.5, chime(1046.5, 0.06))
+    add(101.3 + dt, chime(f, 0.09))        # fanfare endcard
+add(103.7, tick(700, 0.045))               # bar gradien menyapu
+add(103.8, chime(1046.5, 0.06))
 
 # ---------- master ----------
 mix = np.stack([mixL, mixR])
