@@ -124,6 +124,14 @@ for name in ("caption15.txt", "naskah15.md"):
         fail("teaser tersisip belum ada di caption")
     print(f"{name}: bersih ({len(t)} karakter)")
 
+# 6b) SEMUA teks minimal 22px (keluhan penonton: teks kecil tidak terbaca)
+import subprocess
+r = subprocess.run([sys.executable, str(HERE / "fontcheck15.py")],
+                   capture_output=True, text=True, timeout=120)
+print(r.stdout.strip())
+if r.returncode != 0:
+    fail("ada teks dengan ukuran font di bawah 22px (fontcheck)")
+
 # 7) thumbnail kedua orientasi ada dan tidak kosong
 for o in ("portrait", "landscape"):
     fp = OUT / o / "thumbnail.jpg"

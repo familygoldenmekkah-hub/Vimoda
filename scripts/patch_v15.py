@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Perbarui baris katalog 15 ke rev3 (Misteri Pembagi Rapi) di README katalog.
+"""Perbarui baris katalog 15 ke rev4 (Misteri Pembagi Rapi + tipografi 22px) di README katalog.
 Jika baris 15 belum ada, sisipkan setelah baris 14."""
 import pathlib
 
@@ -8,8 +8,8 @@ lines = R.read_text().split("\n")
 
 row15 = (
     "| 15 | Misteri Pembagi Rapi: Faktor dan Kelipatan | Blog Yuyanaka - artikel \"Kapoka\" (19 Nov 2026) | "
-    "`15-faktor-kelipatan/` (REVISI 3 atas laporan penonton yang menilai rev2 mengajarkan keburuukan mencuri, "
-    "alur melompat bukan mengalir, dan visual 2/10 - rombak total: (1) KONTEN 100% POSITIF, arc kejahatan dihapus "
+    "`15-faktor-kelipatan/` (REVISI 4 atas laporan penonton yang menilai rev2 mengajarkan keburuukan mencuri, "
+    "alur melompat bukan mengalir, visual 2/10, dan teks kecil tak terbaca - rombak total: (1) KONTEN 100% POSITIF, arc kejahatan dihapus "
     "sepenuhnya dan diganti MISTERI PEMBAGI RAPI: seseorang diam-diam menata permen Kios Permen rata empat per "
     "stoples di malam hari dan menyisakan satu permen jadi hadiah tamu pertama; detektif angka menyusuri PETUNJUK 1 "
     "FAKTOR (enam cara rapi 1, 2, 3, 4, 6, 12; cek 12 dibagi 5 sisa 2 belum rapi; deduksi 13 dibagi 3 sisa 1 jadi "
@@ -31,13 +31,21 @@ row15 = (
     "hanyut sinusoidal terus di luar tiga push-in; (3) VISUAL NAIK KELAS: malam ajaib dengan kunang-kunang emas 14 "
     "titik berkedip, genangan cahaya lampion di lantai, vignette sinematik permanen, garis aksen emas di bawah "
     "tiap header panel, stroke dalam halus di panel, dunia KIOS PERMEN (dinding krem pink, awning scallop merah-"
-    "krem, lampion berayun, rak stoples kaca, etalase, tanda KIOS PERMEN, karpet festival); KEPUTUSAN PRODUKSI: "
+        "krem, lampion berayun, rak stoples kaca, etalase, tanda KIOS PERMEN, karpet festival); (4) TIPOGRAFI MINIMAL "
+"22px: keluhan penonton bahwa teks kecil tidak terbaca dijawab dengan menaikkan SEMUA teks (label tab "
+"PETUNJUK/MISI 17-19 ke 22, baris panel dan catatan landscape 19-21 ke 22, catatan sekunder 21 ke 22, "
+"watermark 20 ke 22, soal papan misi 26 ke 24 agar tidak wrap, kartu bantu diperbesar dengan box-sizing "
+"border-box 4 per baris, chip landscape diperbesar) tanpa merusak layout: papan misi ditinggi-kan, kartu "
+"disusun ulang 2 baris 4+4, catatan dan pil digeser, terukur via computed style; pengaman permanen baru: "
+"QA kini menjalankan fontcheck (scan computed style semua elemen berteks di kedua orientasi) dan GAGAL jika "
+"ada teks di bawah 22px - tidak bisa terulang; KEPUTUSAN PRODUKSI: "
     "FPB/KPK/persekutuan dan lampu berkedip (bagian 4-5 bahan) disiapkan episode 16 dan diblokir QA, soal 1-2 "
     "bahan utuh, reflektif ke caption, CTA yang meminta ikut tidak disalin - teaser tersisip aturan 32 rev3: Kisah "
     "angka berikutnya sudah menunggu; TANPA LABEL EPISODE (kata EPISODE diblokir QA); audio D minor malam ajaib "
     "berubah F major saat terima kasih; durasi 84 s (aturan 31), narasi 23 beat jeda minimal 2,7 s tervalidasi, QA "
     "lolos penuh: 2520 frame kedua orientasi tidak kosong, durasi 84.0 s, papan soal utuh, teks bersih dari kata "
-    "terlarang dan label episode, thumbnail baru. Naskah rev3 mendokumentasikan ketiga respons laporan penonton "
+    "terlarang dan label episode, semua teks terverifikasi minimal 22px via fontcheck di kedua orientasi, "
+"thumbnail baru. Naskah rev3-rev4 mendokumentasikan respons laporan penonton "
     "dan pemetaan kalimat bahan menjadi misteri positif; baris katalog 15 di README diperbarui) |"
 )
 
