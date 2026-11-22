@@ -28,28 +28,33 @@ banned = ("Jangan", "FOLLOW", "SUBSCRIBE", "IKUTI", "Kaisar", "\u2014", "\u2013"
           "Kamu tahu harus ke mana", "nemu aha", "XXX", "TODO", "undefined",
           "NaN", "FPB", "KPK", "persekutuan", "KEKUNGAN", "EPISODE",
           "PENCURI", "CURI", "SERANGAN", "JEBAKAN", "PENANGKAPAN",
-          "TERTANGKAP", "DICURI", "mengetik", "menyusun jurus", "typing")
+          "TERTANGKAP", "DICURI", "mengetik", "menyusun jurus", "typing",
+          "Pembagi Rapi", "kasus ditutup", "ternyata", "diukur",
+          "tamu pertama", "CARA BAGI RATA")
 for b in banned:
     if b in eng:
         fail(f"DILARANG ada di engine: {b!r}")
 requires = ("TADI MALAM", "MENIT BERIKUTNYA", "MEJA DEPAN", "BESOK PAGI",
-            "CARA BAGI RATA", "Pembagi Rapi cuma pengen ikut rame",
-            "mau isi 12 apa 24", "pilih dong", "boleh aku ikut?",
-            "kayak bagi jajan waktu SD", "kayak naik tangga",
-            "INI BENERAN ETALASEKU", "kunjungan ke-12",
-            "stoples depan ada 12 permen",
+            "AWAS KEBAGIAN", "AKU GAK NGERAPIIN INI", "HAAA KOK BISA",
+            "buat siapa itu", "aku lewat depan", "kucoba bagi",
+            "jaman SD bagi jajan", "kayak naik tangga",
+            "pas ke-12 dia balik", "cuma pengen ikut aja",
+            "yang tadi itu aku", "muncul dari balik lampu",
+            "12 atau 24? kamu pilih", "biar yang laper banyak juga kebagian",
+            "ngintip dari dalam", "lari karena malu", "jangan sembunyi lagi",
+            "kedip beda ritme",
             "AKU TINGGAL SOAL INI", "PAPAN ???",
             "JAWAB SOAL ??? DI KOMENTAR YA", "KARTU BANTU DARI ???",
             "KAMU", "MENTOR", "PEMILIK KIOS", "AKIOMIDA",
             "TENTUKAN SEMUA FAKTOR DARI 20", "LIMA KELIPATAN PERTAMA DARI 7",
             "KENAPA 5 BUKAN FAKTOR DARI 12", "FAKTOR ATAU KELIPATAN",
             "FAKTOR 12", "KELIPATAN 4", "TERBATAS VS TANPA BATAS",
-            "dua lampu kedip", "SAPA", "TENTUKAN SEMUA", "buku tamu",
-            "muncul dari balik lampu", "yang rapikan itu aku", "4 × 3 = 12")
+            "SAPA", "TENTUKAN SEMUA", "BUKU TAMU")
 for r in requires:
     if r not in eng:
         fail(f"WAJIB ada di engine: {r!r}")
-# label pelajaran terlarang sejak rev8; indikator pengetikan terlarang rev9
+# label pelajaran terlarang sejak rev8; pengetikan terlarang rev9;
+# kalimat tema dan simile terpaksa terlarang rev10 (bicara robotik)
 for bad_les in ("PETUNJUK PERTAMA", "PETUNJUK KEDUA", "TANTANGAN UNTUKMU",
                 "JAWAB DI KOLOM KOMENTAR YA", "MOMEN ANGKA", "pmat", "pmav"):
     if bad_les in eng:

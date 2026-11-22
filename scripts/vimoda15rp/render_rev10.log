@@ -1,0 +1,78 @@
+[portrait] 120/3180 frame, 5.9s, avg 50 ms/frame
+[portrait] 240/3180 frame, 12.5s, avg 52 ms/frame
+[portrait] 360/3180 frame, 19.0s, avg 53 ms/frame
+[portrait] 480/3180 frame, 25.2s, avg 52 ms/frame
+[portrait] 600/3180 frame, 32.0s, avg 53 ms/frame
+[portrait] 720/3180 frame, 39.0s, avg 54 ms/frame
+[portrait] 840/3180 frame, 46.5s, avg 55 ms/frame
+[portrait] 960/3180 frame, 53.3s, avg 56 ms/frame
+[portrait] 1080/3180 frame, 60.5s, avg 56 ms/frame
+[portrait] 1200/3180 frame, 68.9s, avg 57 ms/frame
+[portrait] 1320/3180 frame, 76.2s, avg 58 ms/frame
+[portrait] 1440/3180 frame, 82.9s, avg 58 ms/frame
+[portrait] 1560/3180 frame, 89.6s, avg 57 ms/frame
+[portrait] 1680/3180 frame, 96.0s, avg 57 ms/frame
+[portrait] 1800/3180 frame, 104.2s, avg 58 ms/frame
+[portrait] 1920/3180 frame, 111.5s, avg 58 ms/frame
+[portrait] 2040/3180 frame, 117.9s, avg 58 ms/frame
+[portrait] 2160/3180 frame, 124.3s, avg 58 ms/frame
+[portrait] 2280/3180 frame, 131.2s, avg 58 ms/frame
+[portrait] 2400/3180 frame, 137.8s, avg 57 ms/frame
+[portrait] 2520/3180 frame, 144.2s, avg 57 ms/frame
+[portrait] 2640/3180 frame, 150.5s, avg 57 ms/frame
+[portrait] 2760/3180 frame, 157.3s, avg 57 ms/frame
+[portrait] 2880/3180 frame, 165.6s, avg 58 ms/frame
+[portrait] 3000/3180 frame, 172.9s, avg 58 ms/frame
+[portrait] 3120/3180 frame, 179.3s, avg 57 ms/frame
+[portrait] SELESAI 3180 frame (0..3179) dalam 182.2s = 57 ms/frame
+[landscape] 120/3180 frame, 5.8s, avg 49 ms/frame
+[landscape] 240/3180 frame, 12.0s, avg 50 ms/frame
+[landscape] 360/3180 frame, 18.1s, avg 50 ms/frame
+[landscape] 480/3180 frame, 24.2s, avg 50 ms/frame
+[landscape] 600/3180 frame, 30.4s, avg 51 ms/frame
+[landscape] 720/3180 frame, 36.6s, avg 51 ms/frame
+[landscape] 840/3180 frame, 43.2s, avg 51 ms/frame
+[landscape] 960/3180 frame, 49.4s, avg 51 ms/frame
+[landscape] 1080/3180 frame, 55.8s, avg 52 ms/frame
+[landscape] 1200/3180 frame, 62.3s, avg 52 ms/frame
+[landscape] 1320/3180 frame, 68.6s, avg 52 ms/frame
+[landscape] 1440/3180 frame, 74.7s, avg 52 ms/frame
+[landscape] 1560/3180 frame, 80.9s, avg 52 ms/frame
+[landscape] 1680/3180 frame, 87.2s, avg 52 ms/frame
+[landscape] 1800/3180 frame, 94.4s, avg 52 ms/frame
+[landscape] 1920/3180 frame, 101.0s, avg 53 ms/frame
+[landscape] 2040/3180 frame, 107.2s, avg 53 ms/frame
+[landscape] 2160/3180 frame, 113.3s, avg 52 ms/frame
+[landscape] 2280/3180 frame, 119.6s, avg 52 ms/frame
+[landscape] 2400/3180 frame, 126.0s, avg 53 ms/frame
+[landscape] 2520/3180 frame, 132.2s, avg 52 ms/frame
+[landscape] 2640/3180 frame, 138.3s, avg 52 ms/frame
+[landscape] 2760/3180 frame, 144.7s, avg 52 ms/frame
+[landscape] 2880/3180 frame, 151.0s, avg 52 ms/frame
+[landscape] 3000/3180 frame, 157.3s, avg 52 ms/frame
+[landscape] 3120/3180 frame, 162.3s, avg 52 ms/frame
+[landscape] SELESAI 3180 frame (0..3179) dalam 164.8s = 52 ms/frame
+[libx264 @ 0x55b0e1bce140] ref B L1: 94.1%  5.9%
+[libx264 @ 0x55b0e1bce140] kb/s:3528.32
+[aac @ 0x55b0e1d0d700] Qavg: 510.465
+== portrait ==
+codec_name=h264
+codec_type=video
+width=1080
+height=1920
+codec_name=aac
+codec_type=audio
+duration=106.000000
+size=49491768
+[libx264 @ 0x5647b3276140] ref B L1: 94.3%  5.7%
+[libx264 @ 0x5647b3276140] kb/s:2316.76
+[aac @ 0x5647b33e1b40] Qavg: 510.465
+== landscape ==
+codec_name=h264
+codec_type=video
+width=1920
+height=1080
+codec_name=aac
+codec_type=audio
+duration=106.000000
+size=33440267

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <style>
-/* RUANG SAPA rev9 - FORMAT RP GROUP CHAT. Atas laporan pemilik:
-   (1) TANPA indikator pengetikan sama sekali (elemen, suara, dan teksnya
-   dihapus total - dianggap ganggu), (2) dialog dirombak total jadi
-   obrolan manusiawi relatable: pesan lebih jarang tapi utuh (20 pesan,
-   jeda 3.0-6.3 s), bahasa awam yang jelas lewat analogi keseharian
-   (bagi jajan SD, naik tangga), (3) warisan rev8: dialog 60px, kartu
-   waktu RP, momen memilih, papan milik ???. */
+/* RUANG SAPA rev10 - FORMAT RP GROUP CHAT. Atas laporan pemilik
+   (dialog masih terasa robot ala story edukasi, ada kalimat tema dan
+   simile terpaksa): dialog ditulis ulang TOTOL ala chat fiction
+   sosmed/manhwa - tanpa kalimat tema, tanpa label misteri disebut di
+   ucapan (karakter bilang "dia"), reaksi kasat mata dan lucu, kehadiran
+   fisik, malu yang jujur. Warisan rev9: TANPA indikator pengetikan
+   sama sekali (elemen, suara, QA banned), 20 pesan utuh jeda lega,
+   dialog 60px, kartu waktu RP, momen memilih, papan milik ???. */
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:100%;height:100%;overflow:hidden;background:#140F26;
   font-family:'Poppins','Noto Color Emoji','DejaVu Sans','Noto Sans SC',sans-serif;
@@ -173,15 +174,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:#140F26;
 <div id="flashwhite"></div>
 <div id="fade"></div>
 <script>
-/* ---------- RUANG SAPA rev9: data & elemen format RP group chat ----------
-   Rombak total atas laporan pemilik: (1) TANPA indikator pengetikan sama
-   sekali (elemen, teks, dan suara kliknya dihapus total - ganggu),
-   (2) dialog rombak total jadi obrolan MANUSIAWI & RELATABLE: 20 pesan
-   yang lebih jarang tapi utuh (jeda 3.0-6.3 s, bukan nyambung terus),
-   bahasa awam yang jelas lewat analogi keseharian (bagi jajan waktu SD,
-   naik tangga untuk kelipatan), (3) warisan rev8 tetap: dialog 60px,
-   kartu waktu RP, momen memilih 12/24 dari penonton, papan soal milik
-   ???, diagram menyala, sinematik. ---------- */
+/* ---------- RUANG SAPA rev10: data & elemen format RP group chat ----------
+   rev10 atas laporan pemilik (dialog masih terasa robot ala story
+   edukasi, kalimat tema seperti pengakuan yang dihafal, simile terpaksa):
+   dialog ditulis ulang TOTOL ala chat fiction sosmed/manhwa - NOL kalimat
+   tema, NOL label misteri disebut dalam ucapan (karakter bilang "dia"),
+   reaksi kasat mata dan lucu (HAAA KOK BISA, buat siapa itu???), kehadiran
+   fisik (aku lewat depan), malu yang jujur (lari karena malu). Warisan
+   rev9 tetap: tanpa indikator pengetikan sama sekali (visual, suara, QA
+   banned), 20 pesan utuh jeda lega, dialog 60px, kartu waktu RP, momen
+   memilih, papan soal milik ???, diagram menyala, sinematik. ---------- */
 const Q = new URLSearchParams(location.search);
 const ORIENT = Q.get('o') === 'landscape' ? 'landscape' : 'portrait';
 const W = ORIENT === 'portrait' ? 1080 : 1920;
@@ -379,30 +381,31 @@ function richText(t){
   return out.join('&nbsp;');
 }
 
-/* ---------- pesan RP rev9 (obrolan manusiawi & relatable: pesan utuh
-   dengan jeda lega, bahasa awam yang jelas lewat analogi keseharian;
-   KIOS panik lucu, KAMU teringat bagi jajan SD, ??? jujur pengen ikut) ---------- */
+/* ---------- pesan RP rev10 (ala chat fiction sosmed: NOL kalimat tema,
+   NOL label misteri di dalam ucapan - karakter bicara tentang "dia",
+   reaksi kasat mata, lucu, jujur; matematika cuma lewat aksi yang
+   dilakukan dan diagram, bukan lewat pengakuan yang dihafal) ---------- */
 const MSGS=[
-  {t0:1.4, who:'KIOS', kind:'photo', svg:'etalase', cap:'INI BENERAN ETALASEKU?? 😳'},
-  {t0:6.5, who:'KIOS', text:'toko tutup jam 8, aku lupa ambil kunci. barusan balik: SEMUA RAPI 😳'},
-  {t0:11.8, who:'KAMU', text:'kok bisa sih?? garis permennya lurus semua kayak diukur 👀'},
-  {t0:16.2, who:'KIOS', text:'plus piring itu: SATU permen sendirian. kayak buat tamu pertama 🥹'},
-  {t0:20.5, who:'MENTOR', text:'menarik nih. aku ikut cek bareng ya. stoples depan ada 12 permen'},
-  {t0:26.8, who:'KIOS', text:'OHA! 12 bisa dibagi rata ke 1, 2, 3, 4, 6, sama 12 orang. nol sisa 😳'},
-  {t0:31.0, who:'KAMU', text:'kayak bagi jajan waktu SD. berapa orang pun semua kebagian pas'},
-  {t0:34.0, who:'KIOS', kind:'photo', svg:'buku', cap:'dan ada bukti kedua: buku tamuku 😳'},
-  {t0:41.4, who:'KIOS', text:'aku gak pernah nulis ini. angkanya nambah terus: 4, 8, 12, 16, 20'},
-  {t0:45.6, who:'KAMU', text:'ohh kayak naik tangga, nambah 4 terus. itu kelipatan 4 kan?'},
-  {t0:49.2, who:'MENTOR', text:'tepat. 4 × 3 = 12, jadi dia balik pas kunjungan ke-12 🌙'},
-  {t0:53.4, who:'MYST', text:'*muncul dari balik lampu* halo 😊 yang rapikan itu aku. boleh aku ikut?'},
-  {t0:61.5, who:'MENTOR', kind:'sticker', stk:'CARA BAGI RATA!', stks:'2 dapat 12 · 3 dapat 8 · 4 dapat 6 · 6 dapat 4'},
-  {t0:64.8, who:'MYST', text:'eh, kalau kamu yang punya kios: mau isi 12 apa 24? pilih dong 😊'},
-  {t0:69.4, who:'KAMU', text:'24! biar bisa dibagi ke 2, 3, 4, sampe 6 orang. semua pas'},
-  {t0:72.5, who:'KIOS', text:'deal! malam ini aku isi 24. besok pagi kalian lihat sendiri 🍬'},
-  {t0:75.5, who:'KIOS', kind:'photo', svg:'kejutan', cap:'KEJUTAN 24 TERPASANG. SISA: NOL ✨'},
-  {t0:79.8, who:'MYST', text:'aku pasang semuanya jam 6 terus sembunyi 😊 lain kali aku nyapa langsung'},
-  {t0:84.2, who:'MENTOR', text:'kasus ditutup. ternyata Pembagi Rapi cuma pengen ikut rame 😌'},
-  {t0:97.3, who:'MENTOR', text:'oh iya, kios sebelah ada dua lampu kedip aneh. lain kali kita cek 👀'}
+  {t0:1.4, who:'KIOS', kind:'photo', svg:'etalase', cap:'TOKOKU SEMALAM. AKU GAK NGERAPIIN INI 😳'},
+  {t0:6.5, who:'KIOS', text:'serius, aku tutup jam 8 langsung pulang. balik jam 8.30 udah begini 😭'},
+  {t0:11.8, who:'KAMU', text:'HAAA KOK BISA SIH. permen berbaris rapi semua 😨'},
+  {t0:16.2, who:'KIOS', text:'lagi: di piring ada SATU permen doang. buat siapa itu???'},
+  {t0:20.5, who:'MENTOR', text:'wih ada aja ya. tunggu, aku lewat depan. mau ikut lihat langsung'},
+  {t0:26.8, who:'KIOS', text:'kucoba bagi: 1, 2, 3, 4, 6, sama 12 orang. PAS SEMUA 😳'},
+  {t0:31.0, who:'KAMU', text:'jaman SD bagi jajan begini banget. berapa orang aja kebagian pas'},
+  {t0:34.0, who:'KIOS', kind:'photo', svg:'buku', cap:'BUKU TAMU KUBUKA. ada catatan yang bukan tulisanku 😳'},
+  {t0:41.4, who:'KIOS', text:'bukan tulisanku. 4, 8, 12, 16, 20. angkanya nambah terus'},
+  {t0:45.6, who:'KAMU', text:'oh nambah 4 terus kayak naik tangga. tunggu, 12 ada di barisan?!'},
+  {t0:49.2, who:'MENTOR', text:'kunjugannya tiap 4 kan. nah pas ke-12 dia balik. sengaja banget'},
+  {t0:53.4, who:'MYST', text:'*muncul dari balik lampu* halo 😊 yang tadi itu aku. gak nyolong, cuma pengen ikut aja'},
+  {t0:61.5, who:'MENTOR', kind:'sticker', stk:'AWAS KEBAGIAN!', stks:'2 dapat 12 · 3 dapat 8 · 4 dapat 6 · 6 dapat 4'},
+  {t0:64.8, who:'MYST', text:'besok mau aku isi ulang. 12 atau 24? kamu pilih 😊'},
+  {t0:69.4, who:'KAMU', text:'24 dong. biar yang laper banyak juga kebagian'},
+  {t0:72.5, who:'KIOS', text:'deal, 24 ya! besok pagi aku mau ngintip dari dalam. gila penasaran'},
+  {t0:75.5, who:'KIOS', kind:'photo', svg:'kejutan', cap:'BUKA PAGI: 24 PERMEN RAPI. SISA NOL ✨'},
+  {t0:79.8, who:'MYST', text:'aku dateng jam 6, atur semuanya, terus lari karena malu 😊'},
+  {t0:84.2, who:'MENTOR', text:'ada aja. besok jangan sembunyi lagi ya. nanti kamu kebagian permen'},
+  {t0:97.3, who:'MENTOR', text:'oh iya: dua lampu di kios sebelah kedip beda ritme. misteri baru 👀'}
 ];
 
 /* divider bab gaya kartu waktu RP (bukan label pelajaran) */
@@ -647,31 +650,31 @@ qctaEl.style.cssText+=`top:${ORIENT==='portrait'?736:525}px;font-size:${ORIENT==
 
 /* ---------- subtitle EN (aturan 8 + 18: proporsional, min 1.7 s) ---------- */
 const SUBS=[
-  [1.4,'Is this really my display??'],
-  [6.5,'Closed at 8. Came back: ALL tidied!'],
-  [11.8,'How?? The rows look measured!'],
-  [16.2,'One candy alone. For a first guest!'],
-  [20.5,'Fun! Front jar has 12 candies.'],
+  [1.4,'This is my shop. I did NOT tidy it!'],
+  [6.5,'Closed at 8. Back at 8.30: like this!'],
+  [11.8,'HOW?? The candies are lined up neat!'],
+  [16.2,'And ONE candy on the plate. For whom?'],
+  [20.5,'I am right outside. Let me look too!'],
   [22.8,'Factors of 12: six neat ways!'],
-  [26.8,'12 shares evenly to 1, 2, 3, 4, 6, 12!'],
-  [31.0,'Like sharing snacks at school!'],
-  [34.0,'Proof two: my guest book.'],
+  [26.8,'I tried: 1, 2, 3, 4, 6, 12. All fit!'],
+  [31.0,'Just like sharing snacks back at school!'],
+  [34.0,'Guest book: notes that are NOT mine!'],
   [37.4,'Multiples of 4: 4, 8, 12, 16, 20...'],
-  [41.4,'I NEVER wrote these. It climbs by 4!'],
-  [45.6,'Like stairs. That is multiples of 4!'],
-  [49.2,'4 × 3 = 12. They returned on visit 12.'],
-  [53.4,'Hello. That was me. Can I join?'],
+  [41.4,'Not my handwriting. It climbs by 4!'],
+  [45.6,'Like climbing stairs. Wait, 12 is on it!'],
+  [49.2,'Every 4th visit. Visit 12: back again!'],
+  [53.4,'Hello. That was me. Just wanted to join.'],
   [57.1,'Ways are limited, chances never end!'],
-  [61.5,'Cara Bagi Rata! 2 get 12, 3 get 8, 4 get 6.'],
-  [64.8,'If it were your kiosk: 12 or 24? Pick!'],
-  [69.4,'24! Fits 2, 3, 4, up to 6 people.'],
-  [72.5,'Deal! 24 tonight. See tomorrow!'],
-  [75.5,'Surprise 24 in place. Zero rest!'],
-  [79.8,'I set it at six, then hid to watch.'],
-  [84.2,'Case closed. They just wanted in.'],
+  [61.5,'Watch out! 24: 2 get 12, 3 get 8, 4 get 6.'],
+  [64.8,'Tomorrow I refill. 12 or 24? You pick!'],
+  [69.4,'24! So the hungry ones get a share too.'],
+  [72.5,'Deal! I will peek from inside. So curious!'],
+  [75.5,'Morning: 24 candies placed. Zero rest!'],
+  [79.8,'I came at six, tidied, then ran. So shy!'],
+  [84.2,'No hiding tomorrow. You get candy too!'],
   [88.3,'The mystery left four questions!'],
   [93.0,'Eight helper cards are waiting.'],
-  [97.3,'Next door: two blinking lamps. Soon.'],
+  [97.3,'Next door: two lamps blink offbeat. Soon.'],
   [102.2,'Thanks for watching.']
 ];
 const subbar=document.getElementById('subbar');
@@ -690,12 +693,12 @@ fplate.style.cssText+=`left:${P.phoneX+(P.phoneW-P.ecW)/2}px;top:${P.ecY}px;widt
 fBar.style.cssText+=`left:${P.phoneX+(P.phoneW-P.barW)/2}px;top:${P.ecY+P.ecH+26}px;width:0;height:10px;`;
 const flashwhite=document.getElementById('flashwhite');
 const fadeEl=document.getElementById('fade');
-/* ---------- RUANG SAPA rev9: render per frame ----------
-   Semua gerak fungsi waktu (deterministik, aturan 20). Warisan rev7/8:
+/* ---------- RUANG SAPA rev10: render per frame ----------
+   Semua gerak fungsi waktu (deterministik, aturan 20). Warisan rev7-9:
    bubble pop terbaca, reveal ??? slow-motion, dolly zoom foto, punch
    zoom diagram, fade antar bab, scroll pelan, papan slide-up, endcard
-   tenang. rev9: tanpa indikator pengetikan sama sekali (dihapus total
-   atas laporan pemilik), jeda antar pesan lebih lega. ---------- */
+   tenang, tanpa indikator pengetikan sama sekali. rev10: teks dialog
+   ditulis ulang ala chat fiction sosmed, gerakan tetap. ---------- */
 const SUBS2=SUBS;
 let subIdx=-1;
 let scrollCur=0;

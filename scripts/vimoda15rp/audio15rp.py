@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Musik & SFX prosedural rev9 untuk video 15 FORMAT RP "Misteri Pembagi Rapi".
+"""Musik & SFX prosedural rev10 untuk video 15 FORMAT RP "Misteri Pembagi Rapi".
 Bahasa audio chat story dari riset: pop bubble per karakter (pitch berbeda
 per peran), whoosh diagram menyala ala anime sains, boom twist, shimmer
 emoji burst, fanfare endcard. rev9: suara klik indikator pengetikan
 DIHAPUS TOTAL (elemen visualnya juga dihapus - laporan pemilik: ganggu).
+rev10: dialog ditulis ulang ala chat fiction sosmed (tanpa kalimat tema,
+tanpa label misteri di ucapan); timeline pop tidak berubah.
 Nada D MINOR malam ajaib saat misteri, berubah F MAJOR hangat saat
 BESOK PAGI (75.3). JEDA MA 56.0-57.0 hening total sebelum twist.
 Durasi 106.0 s supaya tiap bubble sempat dibaca (20 pesan, jeda lega).
@@ -242,9 +244,9 @@ add(58.4, tick(900, 0.06))
 add(58.9, tick(980, 0.06))
 add(59.4, chime(523.25, 0.10))             # cara terbatas peluang tanpa batas
 add(60.9, whoosh(0.35, False, 0.05))
-add(69.5, tick(760, 0.05))                 # pilihan penonton: isi 24
-add(84.3, chime(523.25, 0.10))             # kasus ditutup: cuma pengen ikut rame
-add(79.9, chime(880.0, 0.05))              # MYST cerita sembunyi jam 6
+add(69.5, tick(760, 0.05))                 # pilihan penonton: 24 dong
+add(84.3, chime(523.25, 0.10))             # MENTOR: besok jangan sembunyi lagi ya
+add(79.9, chime(880.0, 0.05))              # MYST: lari karena malu
 # OVERLAY MISI BARU
 add(88.35, whoosh(0.6, True, 0.08))
 add(88.4, tick(880, 0.07))

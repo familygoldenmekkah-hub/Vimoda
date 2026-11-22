@@ -1,9 +1,9 @@
-/* ---------- RUANG SAPA rev9: render per frame ----------
-   Semua gerak fungsi waktu (deterministik, aturan 20). Warisan rev7/8:
+/* ---------- RUANG SAPA rev10: render per frame ----------
+   Semua gerak fungsi waktu (deterministik, aturan 20). Warisan rev7-9:
    bubble pop terbaca, reveal ??? slow-motion, dolly zoom foto, punch
    zoom diagram, fade antar bab, scroll pelan, papan slide-up, endcard
-   tenang. rev9: tanpa indikator pengetikan sama sekali (dihapus total
-   atas laporan pemilik), jeda antar pesan lebih lega. ---------- */
+   tenang, tanpa indikator pengetikan sama sekali. rev10: teks dialog
+   ditulis ulang ala chat fiction sosmed, gerakan tetap. ---------- */
 const SUBS2=SUBS;
 let subIdx=-1;
 let scrollCur=0;
