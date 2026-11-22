@@ -28,33 +28,35 @@ banned = ("Jangan", "FOLLOW", "SUBSCRIBE", "IKUTI", "Kaisar", "\u2014", "\u2013"
           "Kamu tahu harus ke mana", "nemu aha", "XXX", "TODO", "undefined",
           "NaN", "FPB", "KPK", "persekutuan", "KEKUNGAN", "EPISODE",
           "PENCURI", "CURI", "SERANGAN", "JEBAKAN", "PENANGKAPAN",
-          "TERTANGKAP", "DICURI")
+          "TERTANGKAP", "DICURI", "mengetik", "menyusun jurus", "typing")
 for b in banned:
     if b in eng:
         fail(f"DILARANG ada di engine: {b!r}")
 requires = ("TADI MALAM", "MENIT BERIKUTNYA", "MEJA DEPAN", "BESOK PAGI",
-            "CARA BAGI RATA", "pembagi rapinya cuma pengen ikut rame",
-            "mau isi 12 atau 24", "AKU TINGGAL SOAL INI", "PAPAN ???",
+            "CARA BAGI RATA", "Pembagi Rapi cuma pengen ikut rame",
+            "mau isi 12 apa 24", "pilih dong", "boleh aku ikut?",
+            "kayak bagi jajan waktu SD", "kayak naik tangga",
+            "INI BENERAN ETALASEKU", "kunjungan ke-12",
+            "stoples depan ada 12 permen",
+            "AKU TINGGAL SOAL INI", "PAPAN ???",
             "JAWAB SOAL ??? DI KOMENTAR YA", "KARTU BANTU DARI ???",
-            "mengetik", "KAMU", "MENTOR", "PEMILIK KIOS", "AKIOMIDA",
+            "KAMU", "MENTOR", "PEMILIK KIOS", "AKIOMIDA",
             "TENTUKAN SEMUA FAKTOR DARI 20", "LIMA KELIPATAN PERTAMA DARI 7",
             "KENAPA 5 BUKAN FAKTOR DARI 12", "FAKTOR ATAU KELIPATAN",
             "FAKTOR 12", "KELIPATAN 4", "TERBATAS VS TANPA BATAS",
-            "dua lampu kedip", "SAPA",
-            "TENTUKAN SEMUA", "menyusun jurus", "buku tamu",
-            "muncul dari balik lampu", "yang rapikan itu aku",
-            "bisa dibagi rata ke berapa", "4 × 3 = 12")
+            "dua lampu kedip", "SAPA", "TENTUKAN SEMUA", "buku tamu",
+            "muncul dari balik lampu", "yang rapikan itu aku", "4 × 3 = 12")
 for r in requires:
     if r not in eng:
         fail(f"WAJIB ada di engine: {r!r}")
-# label pelajaran terlarang sejak rev8 (RP sungguhan, bukan buku pelajaran)
+# label pelajaran terlarang sejak rev8; indikator pengetikan terlarang rev9
 for bad_les in ("PETUNJUK PERTAMA", "PETUNJUK KEDUA", "TANTANGAN UNTUKMU",
-                "JAWAB DI KOLOM KOMENTAR YA", "MOMEN ANGKA"):
+                "JAWAB DI KOLOM KOMENTAR YA", "MOMEN ANGKA", "pmat", "pmav"):
     if bad_les in eng:
-        fail(f"LABEL PELAJARAN terlarang sejak rev8: {bad_les!r}")
+        fail(f"LABEL TERLARANG sejak rev8/rev9: {bad_les!r}")
 n_msg = len(re.findall(r"\{t0:[\d.]+, who:", eng))
-if n_msg != 22:
-    fail(f"jumlah bubble {n_msg} != 22")
+if n_msg != 20:
+    fail(f"jumlah bubble {n_msg} != 20")
 n_flash = eng.count("kick:'")
 if n_flash != 3:
     fail(f"jumlah diagram menyala {n_flash} != 3")
@@ -88,8 +90,8 @@ else:
 # ---------- 2) subtitle EN: tempo proporsional (aturan 18) ----------
 m_sub = re.search(r"const SUBS=\[(.*?)\];", eng, re.S)
 subs = re.findall(r"\[(\d+\.?\d*),'([^']*)'\]", m_sub.group(1)) if m_sub else []
-if len(subs) != 28:
-    fail(f"jumlah beat subtitle {len(subs)} != 28")
+if len(subs) != 26:
+    fail(f"jumlah beat subtitle {len(subs)} != 26")
 prev = -99.0
 ok_tempo = True
 for s in subs:

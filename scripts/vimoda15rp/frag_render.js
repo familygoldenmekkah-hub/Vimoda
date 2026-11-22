@@ -1,9 +1,9 @@
-/* ---------- RUANG SAPA rev7: render per frame ----------
-   Semua gerak fungsi waktu (deterministik, aturan 20). Bahasa motion
-   sinematik rev7: bubble pop lebih lambat (baca dulu, bukan di-skip),
-   reveal ??? pop slow-motion, dolly zoom saat foto muncul, punch zoom
-   diagram lebih besar, fade transisi antar bab, scroll chat pelan,
-   overlay misi slide-up, endcard tenang. ---------- */
+/* ---------- RUANG SAPA rev9: render per frame ----------
+   Semua gerak fungsi waktu (deterministik, aturan 20). Warisan rev7/8:
+   bubble pop terbaca, reveal ??? slow-motion, dolly zoom foto, punch
+   zoom diagram, fade antar bab, scroll pelan, papan slide-up, endcard
+   tenang. rev9: tanpa indikator pengetikan sama sekali (dihapus total
+   atas laporan pemilik), jeda antar pesan lebih lega. ---------- */
 const SUBS2=SUBS;
 let subIdx=-1;
 let scrollCur=0;
@@ -29,17 +29,8 @@ function imp(t){
   }
   return a;
 }
-/* typing indicator: siapa yang sedang mengetik */
-function typingInfo(t){
-  if(t>=55.8&&t<57.0) return {who:'MENTOR',txt:'menyusun jurus'};
-  for(const m of MSGS){
-    if(t<m.t0&&t>=m.t0-0.55) return {who:m.who,txt:'mengetik'};
-    if(t>=m.t0) continue;
-  }
-  return null;
-}
 /* momen dolly zoom sinematik: foto muncul dan reveal ??? */
-const DOLLYS=MSGS.filter(m=>m.kind==='photo').map(m=>[m.t0,m.t0+3.4,0.024]).concat([[52.2,55.6,0.02],[57.1,60.9,0.022]]);
+const DOLLYS=MSGS.filter(m=>m.kind==='photo').map(m=>[m.t0,m.t0+3.4,0.024]).concat([[53.4,56.0,0.02],[57.1,60.9,0.022]]);
 function renderFrame(t){
   /* latar doodle melayang pelan */
   for(const d of DOODLES){
@@ -90,18 +81,6 @@ function renderFrame(t){
   if(Math.abs(target-scrollCur)>500)scrollCur=target;
   scrollCur+=(target-scrollCur)*0.1;
   chatEl.style.transform=`translateY(${(-scrollCur).toFixed(1)}px)`;
-  /* typing indicator */
-  const ti=typingInfo(t);
-  if(ti){
-    const c=CAST[ti.who];
-    typingAv.style.cssText+=`background:${c.bg};`;
-    typingAv.textContent=c.glyph;
-    typingTx.textContent=ti.txt;
-    typingEl.style.opacity='0.95';
-    typingEl.style.transform=`translateY(${(Math.sin(t*2.2)*2).toFixed(1)}px)`;
-  }else{
-    typingEl.style.opacity='0';
-  }
   /* DIAGRAM MENYALA (tiga momen ala anime sains) */
   let fOn=null;
   for(const f of FLASHES){ if(t>=f.t0&&t<f.t1) fOn=f; }
@@ -190,7 +169,6 @@ function renderFrame(t){
   const chFade=1-seg(t,100.9,0.35);
   document.getElementById('phead').style.opacity=String(clamp(1-seg(t,100.9,0.35),0,1));
   for(const x of MSGE){ if(t>=100.9) x.el.style.opacity=String(clamp(1-seg(t,100.9,0.35),0,1)*parseFloat(x.el.style.opacity||'1')); }
-  typingEl.style.opacity=t>=100.9?'0':typingEl.style.opacity;
   const eci=eio(seg(t,101.1,0.8));
   endcard.style.opacity=eci.toFixed(3);
   endcard.style.transform=`translateY(${((1-eci)*16).toFixed(1)}px) scale(${(0.94+0.06*eci).toFixed(3)})`;

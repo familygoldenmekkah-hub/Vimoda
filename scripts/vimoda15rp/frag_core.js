@@ -1,14 +1,12 @@
-/* ---------- RUANG SAPA rev8: data & elemen format RP group chat ----------
-   Rombak besar atas laporan pemilik: (1) UKURAN TEKS DUA KALI LIPAT:
-   dialog 30 -> 60px kedua orientasi, teks lain naik proporsional,
-   (2) RP SUNGGUHAN BUKAN SKRIP BUKU PELAJARAN: label "Petunjuk
-   pertama/kedua" dihapus, divider jadi kartu waktu (TADI MALAM 20.30,
-   MENIT BERIKUTNYA, BESOK PAGI 07.00), matematika muncul dari reaksi
-   dan kesadaran karakter (KIOS menyadari sendiri setelah diagram,
-   KAMU berkomentar santai), penonton dapat MOMEN MEMILIH (???: mau
-   isi 12 atau 24?), papan soal jadi milik ??? (diegetik), pil ajakan
-   menyebut bantu ??? bukan perintah guru, (3) tempo baca, sinematik,
-   dan ilustrasi v2 warisan rev7 tetap. ---------- */
+/* ---------- RUANG SAPA rev9: data & elemen format RP group chat ----------
+   Rombak total atas laporan pemilik: (1) TANPA indikator pengetikan sama
+   sekali (elemen, teks, dan suara kliknya dihapus total - ganggu),
+   (2) dialog rombak total jadi obrolan MANUSIAWI & RELATABLE: 20 pesan
+   yang lebih jarang tapi utuh (jeda 3.0-6.3 s, bukan nyambung terus),
+   bahasa awam yang jelas lewat analogi keseharian (bagi jajan waktu SD,
+   naik tangga untuk kelipatan), (3) warisan rev8 tetap: dialog 60px,
+   kartu waktu RP, momen memilih 12/24 dari penonton, papan soal milik
+   ???, diagram menyala, sinematik. ---------- */
 const Q = new URLSearchParams(location.search);
 const ORIENT = Q.get('o') === 'landscape' ? 'landscape' : 'portrait';
 const W = ORIENT === 'portrait' ? 1080 : 1920;
@@ -206,32 +204,30 @@ function richText(t){
   return out.join('&nbsp;');
 }
 
-/* ---------- pesan RP rev8 (RP sungguhan: reaksi dulu, materi ikut muncul;
-   KIOS panik dan menyadari sendiri, KAMU berkomentar santai,
-   ??? memberi penonton MOMEN MEMILIH) ---------- */
+/* ---------- pesan RP rev9 (obrolan manusiawi & relatable: pesan utuh
+   dengan jeda lega, bahasa awam yang jelas lewat analogi keseharian;
+   KIOS panik lucu, KAMU teringat bagi jajan SD, ??? jujur pengen ikut) ---------- */
 const MSGS=[
-  {t0:1.4, who:'KIOS', kind:'photo', svg:'etalase', cap:'KO PANIK. ETALASEKU RAPI SEMUA 😳'},
-  {t0:5.2, who:'KIOS', text:'toko tutup jam 8. jam 8.30 aku balik, RAPI SEMUA. siapa ini??'},
-  {t0:9.2, who:'KAMU', text:'garis permennya lurus semua kayak pake penggaris 👀'},
-  {t0:12.6, who:'KIOS', text:'IYA. dan tinggal SATU permen di piring. satu doang'},
-  {t0:16.0, who:'MENTOR', text:'oke, kasus menarik. aku masuk. kita bedah pelan-pelan'},
-  {t0:19.2, who:'MENTOR', text:'stoples depan ada 12. kita cek: bisa dibagi rata ke berapa?'},
-  {t0:26.4, who:'KIOS', text:'JADI BISA KE 1, 2, 3, 4, 6, ATAU 12 ORANG. PAS SEMUA??'},
-  {t0:30.6, who:'KAMU', text:'fleksibel banget. mau bagi ke 3 orang pun bisa 😳'},
-  {t0:34.0, who:'KIOS', kind:'photo', svg:'buku', cap:'BUKTI KEDUA. buku tamuku, lihat sendiri'},
-  {t0:41.0, who:'KIOS', text:'AKU GAK PERNAH NULIS INI. catatannya kayak di-print 😱'},
-  {t0:45.0, who:'KAMU', text:'polanya nambah 4 terus: 4, 8, 12, 16, 20'},
-  {t0:48.8, who:'MENTOR', text:'dan 12 ada di daftar: 4 × 3 = 12. dia balik pas kunjungan ke-12'},
-  {t0:52.2, who:'MYST', text:'*muncul dari balik lampu* halo 😊 yang rapikan itu aku. besok aku ikut 🌙'},
+  {t0:1.4, who:'KIOS', kind:'photo', svg:'etalase', cap:'INI BENERAN ETALASEKU?? 😳'},
+  {t0:6.5, who:'KIOS', text:'toko tutup jam 8, aku lupa ambil kunci. barusan balik: SEMUA RAPI 😳'},
+  {t0:11.8, who:'KAMU', text:'kok bisa sih?? garis permennya lurus semua kayak diukur 👀'},
+  {t0:16.2, who:'KIOS', text:'plus piring itu: SATU permen sendirian. kayak buat tamu pertama 🥹'},
+  {t0:20.5, who:'MENTOR', text:'menarik nih. aku ikut cek bareng ya. stoples depan ada 12 permen'},
+  {t0:26.8, who:'KIOS', text:'OHA! 12 bisa dibagi rata ke 1, 2, 3, 4, 6, sama 12 orang. nol sisa 😳'},
+  {t0:31.0, who:'KAMU', text:'kayak bagi jajan waktu SD. berapa orang pun semua kebagian pas'},
+  {t0:34.0, who:'KIOS', kind:'photo', svg:'buku', cap:'dan ada bukti kedua: buku tamuku 😳'},
+  {t0:41.4, who:'KIOS', text:'aku gak pernah nulis ini. angkanya nambah terus: 4, 8, 12, 16, 20'},
+  {t0:45.6, who:'KAMU', text:'ohh kayak naik tangga, nambah 4 terus. itu kelipatan 4 kan?'},
+  {t0:49.2, who:'MENTOR', text:'tepat. 4 × 3 = 12, jadi dia balik pas kunjungan ke-12 🌙'},
+  {t0:53.4, who:'MYST', text:'*muncul dari balik lampu* halo 😊 yang rapikan itu aku. boleh aku ikut?'},
   {t0:61.5, who:'MENTOR', kind:'sticker', stk:'CARA BAGI RATA!', stks:'2 dapat 12 · 3 dapat 8 · 4 dapat 6 · 6 dapat 4'},
-  {t0:64.7, who:'MYST', text:'kalau kamu yang pegang kios: mau isi 12 atau 24?'},
-  {t0:68.9, who:'KAMU', text:'24! bisa dibagi ke 2, 3, 4, atau 6 orang. semua pas'},
-  {t0:72.3, who:'KIOS', text:'deal! malam ini aku isi 24. besok pagi kalian cek 🍬'},
+  {t0:64.8, who:'MYST', text:'eh, kalau kamu yang punya kios: mau isi 12 apa 24? pilih dong 😊'},
+  {t0:69.4, who:'KAMU', text:'24! biar bisa dibagi ke 2, 3, 4, sampe 6 orang. semua pas'},
+  {t0:72.5, who:'KIOS', text:'deal! malam ini aku isi 24. besok pagi kalian lihat sendiri 🍬'},
   {t0:75.5, who:'KIOS', kind:'photo', svg:'kejutan', cap:'KEJUTAN 24 TERPASANG. SISA: NOL ✨'},
-  {t0:78.9, who:'MYST', text:'aku dateng jam 6, terus sembunyi lihat kalian 😊✨'},
-  {t0:81.9, who:'MENTOR', text:'kasus ditutup. ternyata pembagi rapinya cuma pengen ikut rame'},
-  {t0:85.3, who:'MYST', text:'iya 😊 next time aku nyapa langsung ya'},
-  {t0:97.3, who:'MENTOR', text:'kios sebelah ada dua lampu kedip aneh. lain kali kita cek 👀'}
+  {t0:79.8, who:'MYST', text:'aku pasang semuanya jam 6 terus sembunyi 😊 lain kali aku nyapa langsung'},
+  {t0:84.2, who:'MENTOR', text:'kasus ditutup. ternyata Pembagi Rapi cuma pengen ikut rame 😌'},
+  {t0:97.3, who:'MENTOR', text:'oh iya, kios sebelah ada dua lampu kedip aneh. lain kali kita cek 👀'}
 ];
 
 /* divider bab gaya kartu waktu RP (bukan label pelajaran) */
@@ -424,7 +420,7 @@ const FLASHBODY=FLASHES.map(f=>{
 /* ---------- emoji burst ala reaksi chat ---------- */
 const burstEl=document.getElementById('burst');
 const BURSTS=[
-  {t0:41.0,t1:43.2,who:'M9',emo:['😲','😲','😲','😲'],rad:130},
+  {t0:41.4,t1:43.6,who:'M9',emo:['😲','😲','😲','😲'],rad:130},
   {t0:75.7,t1:78.7,who:'ALL',emo:['🎉','✨','🍬','🎉','✨'],rad:230,conf:true}
 ];
 const BPARTS=[];
@@ -476,30 +472,28 @@ qctaEl.style.cssText+=`top:${ORIENT==='portrait'?736:525}px;font-size:${ORIENT==
 
 /* ---------- subtitle EN (aturan 8 + 18: proporsional, min 1.7 s) ---------- */
 const SUBS=[
-  [1.4,'Panicking. My display is all neat!'],
-  [5.2,'Shop closed. I came back: ALL tidied!'],
-  [9.2,'The candy rows are ruler straight.'],
-  [12.6,'And one candy left on a plate.'],
-  [16.0,'Fun case. Count me in, slow mode.'],
-  [19.2,'Front jar has 12. Share evenly how?'],
+  [1.4,'Is this really my display??'],
+  [6.5,'Closed at 8. Came back: ALL tidied!'],
+  [11.8,'How?? The rows look measured!'],
+  [16.2,'One candy alone. For a first guest!'],
+  [20.5,'Fun! Front jar has 12 candies.'],
   [22.8,'Factors of 12: six neat ways!'],
-  [26.4,'So 1, 2, 3, 4, 6, or 12 people!'],
-  [30.6,'So flexible. Even 3 people works.'],
+  [26.8,'12 shares evenly to 1, 2, 3, 4, 6, 12!'],
+  [31.0,'Like sharing snacks at school!'],
   [34.0,'Proof two: my guest book.'],
   [37.4,'Multiples of 4: 4, 8, 12, 16, 20...'],
-  [41.0,'I NEVER wrote these. Looks printed!'],
-  [45.0,'The pattern adds 4 every time.'],
-  [48.8,'4 × 3 = 12. They returned on visit 12.'],
-  [52.2,'Hello. That was me. I join tomorrow!'],
+  [41.4,'I NEVER wrote these. It climbs by 4!'],
+  [45.6,'Like stairs. That is multiples of 4!'],
+  [49.2,'4 × 3 = 12. They returned on visit 12.'],
+  [53.4,'Hello. That was me. Can I join?'],
   [57.1,'Ways are limited, chances never end!'],
   [61.5,'Cara Bagi Rata! 2 get 12, 3 get 8, 4 get 6.'],
-  [64.7,'If you ran the kiosk: fill 12 or 24?'],
-  [68.9,'24! Fits 2, 3, 4, or 6 people. Zero rest.'],
-  [72.3,'Deal! 24 tonight. Check tomorrow!'],
+  [64.8,'If it were your kiosk: 12 or 24? Pick!'],
+  [69.4,'24! Fits 2, 3, 4, up to 6 people.'],
+  [72.5,'Deal! 24 tonight. See tomorrow!'],
   [75.5,'Surprise 24 in place. Zero rest!'],
-  [78.9,'I came at six and hid to watch.'],
-  [81.9,'Case closed. We just wanted in.'],
-  [85.3,'Next time I say hi first.'],
+  [79.8,'I set it at six, then hid to watch.'],
+  [84.2,'Case closed. They just wanted in.'],
   [88.3,'The mystery left four questions!'],
   [93.0,'Eight helper cards are waiting.'],
   [97.3,'Next door: two blinking lamps. Soon.'],
@@ -521,7 +515,3 @@ fplate.style.cssText+=`left:${P.phoneX+(P.phoneW-P.ecW)/2}px;top:${P.ecY}px;widt
 fBar.style.cssText+=`left:${P.phoneX+(P.phoneW-P.barW)/2}px;top:${P.ecY+P.ecH+26}px;width:0;height:10px;`;
 const flashwhite=document.getElementById('flashwhite');
 const fadeEl=document.getElementById('fade');
-const typingEl=document.getElementById('pma');
-const typingAv=document.getElementById('pmav');
-const typingTx=document.getElementById('pmat');
-typingTx.style.fontSize='32px';

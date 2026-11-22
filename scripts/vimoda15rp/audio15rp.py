@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Musik & SFX prosedural rev7 untuk video 15 FORMAT RP "Misteri Pembagi Rapi".
+"""Musik & SFX prosedural rev9 untuk video 15 FORMAT RP "Misteri Pembagi Rapi".
 Bahasa audio chat story dari riset: pop bubble per karakter (pitch berbeda
-per peran), tick typing sebelum tiap pesan, whoosh diagram menyala ala
-anime sains, boom twist, shimmer emoji burst, fanfare endcard. Nada D MINOR
-malam ajaib saat misteri dan petunjuk, berubah F MAJOR hangat saat TERIMA
-KASIH (75.3). JEDA MA 55.8-57.0 hening total sebelum twist (typing indicator
-"menyusun jurus"). Durasi 106.0 s: diperpanjang dari 84 s supaya tiap bubble
-sempat dibaca (keluhan pemilik rev7: bacaan belum kebaca sudah terganti).
+per peran), whoosh diagram menyala ala anime sains, boom twist, shimmer
+emoji burst, fanfare endcard. rev9: suara klik indikator pengetikan
+DIHAPUS TOTAL (elemen visualnya juga dihapus - laporan pemilik: ganggu).
+Nada D MINOR malam ajaib saat misteri, berubah F MAJOR hangat saat
+BESOK PAGI (75.3). JEDA MA 56.0-57.0 hening total sebelum twist.
+Durasi 106.0 s supaya tiap bubble sempat dibaca (20 pesan, jeda lega).
 Output: /tmp/render/audio.wav
 """
 import numpy as np
@@ -121,10 +121,10 @@ D3, F3, A3, C4 = 146.83, 174.61, 220.0, 261.63
 Bb2, Bb3, G3, D4 = 116.54, 233.08, 196.0, 293.66
 SEG = [
     (0.0, 19.0, (D3, F3, A3)),        # misteri dibuka
-    (19.0, 55.8, (Bb2, D3, F3)),      # petunjuk faktor dan kelipatan
-    # 55.8 - 57.0 : ma, hening total (typing menyusun jurus)
+    (19.0, 56.0, (Bb2, D3, F3)),      # cek stoples dan buku tamu
+    # 56.0 - 57.0 : ma, hening total sebelum twist
     (57.0, 75.3, (G3, Bb3, D4)),      # twist dan rencana terima kasih
-    (75.3, 106.0, (F3, A3, C4)),      # TERIMA KASIH: hangat F major
+    (75.3, 106.0, (F3, A3, C4)),      # BESOK PAGI: hangat F major
 ]
 for (t0, t1, notes) in SEG:
     dur = t1 - t0 + 1.0
@@ -156,7 +156,7 @@ DM_SCALE = [293.66, 349.23, 392.0, 440.0, 523.25, 587.33]
 F_SCALE = [349.23, 440.0, 523.25, 587.33, 698.46, 783.99]
 step = 0.30
 kk = 0
-for (lo, hi, scale) in ((0.4, 55.6, DM_SCALE), (57.0, 75.1, DM_SCALE), (75.5, 100.5, F_SCALE)):
+for (lo, hi, scale) in ((0.4, 55.8, DM_SCALE), (57.0, 75.1, DM_SCALE), (75.5, 100.5, F_SCALE)):
     tt = lo
     while tt < hi:
         f = scale[(kk * 2 + (kk % 7)) % len(scale)]
@@ -166,7 +166,7 @@ for (lo, hi, scale) in ((0.4, 55.6, DM_SCALE), (57.0, 75.1, DM_SCALE), (75.5, 10
         tt += step
 
 # ---------- kick & hat (hening saat ma) ----------
-for (lo, hi) in ((0.4, 55.6), (57.0, 75.1)):
+for (lo, hi) in ((0.4, 55.8), (57.0, 75.1)):
     tt = lo
     while tt < hi:
         add(tt, kick(0.16), 0.0)
@@ -180,22 +180,20 @@ while tt < 101.0:
 # ---------- momen kunci RP ----------
 POP_F = {"KIOS": 523.0, "MENTOR": 659.0, "KAMU": 740.0, "MYST": 880.0}
 MSGS = [
-    (1.4, "KIOS", "photo"), (5.2, "KIOS", "text"), (9.2, "KAMU", "text"),
-    (12.6, "KIOS", "text"), (16.0, "MENTOR", "text"), (19.2, "MENTOR", "text"),
-    (26.4, "KIOS", "text"), (30.6, "KAMU", "text"), (34.0, "KIOS", "photo"),
-    (41.0, "KIOS", "text"), (45.0, "KAMU", "text"), (48.8, "MENTOR", "text"),
-    (52.2, "MYST", "text"), (61.5, "MENTOR", "sticker"),
-    (64.7, "MYST", "text"), (68.9, "KAMU", "text"), (72.3, "KIOS", "text"),
-    (75.5, "KIOS", "photo"), (78.9, "MYST", "text"), (81.9, "MENTOR", "text"),
-    (85.3, "MYST", "text"), (97.3, "MENTOR", "text"),
+    (1.4, "KIOS", "photo"), (6.5, "KIOS", "text"), (11.8, "KAMU", "text"),
+    (16.2, "KIOS", "text"), (20.5, "MENTOR", "text"), (26.8, "KIOS", "text"),
+    (31.0, "KAMU", "text"), (34.0, "KIOS", "photo"), (41.4, "KIOS", "text"),
+    (45.6, "KAMU", "text"), (49.2, "MENTOR", "text"), (53.4, "MYST", "text"),
+    (61.5, "MENTOR", "sticker"),
+    (64.8, "MYST", "text"), (69.4, "KAMU", "text"), (72.5, "KIOS", "text"),
+    (75.5, "KIOS", "photo"), (79.8, "MYST", "text"), (84.2, "MENTOR", "text"),
+    (97.3, "MENTOR", "text"),
 ]
 add(0.35, boom(0.20))                      # dunia RUANG SAPA menyala
 add(0.4, whoosh(0.5, True, 0.05))
 for i, f in enumerate((392.0, 494.0, 587.0)):   # avatar grup terbentuk
     add(0.5 + i * 0.10, tick(f, 0.05))
 for (t0, who, kind) in MSGS:
-    add(t0 - 0.42, tick(980, 0.045))       # typing indicator menyala
-    add(t0 - 0.20, tick(1040, 0.035))
     add(t0, pop(POP_F[who], 0.10 if kind == "text" else 0.12))
     if who == "MYST":
         add(t0 + 0.05, chime(1046.5, 0.05))  # pesan misteri berkilau lembut
@@ -206,7 +204,7 @@ for (t0, who, kind) in MSGS:
         add(t0, whoosh(0.5, True, 0.07))
         for f, dt in ((523.25, 0.0), (659.26, 0.12), (783.99, 0.24)):
             add(t0 + dt, chime(f, 0.09))   # stiker jurus bernama
-add(41.1, chime(1174.66, 0.06))            # burst reaksi kagum (pola kelipatan)
+add(41.5, chime(1174.66, 0.06))            # burst reaksi kagum (pola kelipatan)
 add(75.8, chime(1046.5, 0.07))             # foto kejutan 24: burst konfeti
 for f, dt in ((1318.5, 0.10), (1568.0, 0.20), (1046.5, 0.30)):
     add(75.9 + dt, chime(f, 0.05))
@@ -230,9 +228,9 @@ for i in range(6):
 add(38.4, tick(920, 0.06))
 add(38.8, chime(587.33, 0.09))             # 12 kelipatan 4 sekaligus faktor 12
 add(40.6, whoosh(0.35, False, 0.05))
-# MA 55.8-57.0: hening (typing menyusun jurus)
-add(55.8, whoosh(0.5, False, 0.07))
-for t0 in (55.2, 55.54, 55.88, 56.22, 56.56):   # tremolo pra-twist
+# MA 56.0-57.0: hening sebelum twist (tanpa indikator pengetikan)
+add(56.0, whoosh(0.5, False, 0.07))
+for t0 in (55.5, 55.85, 56.2, 56.55):      # tremolo pra-twist
     add(t0, tick(1100, 0.055))
 # DIAGRAM TWIST: TERBATAS VS TANPA BATAS (57.1-61.1, chip slow-motion)
 add(57.1, boom(0.30))
@@ -244,9 +242,9 @@ add(58.4, tick(900, 0.06))
 add(58.9, tick(980, 0.06))
 add(59.4, chime(523.25, 0.10))             # cara terbatas peluang tanpa batas
 add(60.9, whoosh(0.35, False, 0.05))
-add(69.0, tick(760, 0.05))                 # stokku isi 24 malam ini
-add(82.1, chime(523.25, 0.10))             # kasus selesai: pembagi rapi semua orang
-add(85.5, tick(880, 0.06))                 # aku gak sendirian lagi
+add(69.5, tick(760, 0.05))                 # pilihan penonton: isi 24
+add(84.3, chime(523.25, 0.10))             # kasus ditutup: cuma pengen ikut rame
+add(79.9, chime(880.0, 0.05))              # MYST cerita sembunyi jam 6
 # OVERLAY MISI BARU
 add(88.35, whoosh(0.6, True, 0.08))
 add(88.4, tick(880, 0.07))
@@ -255,9 +253,9 @@ for i in range(4):
 add(92.2, kick(0.26))
 for i in range(8):
     add(92.6 + i * 0.1, tick(580 + i * 70, 0.05))
-add(94.2, tick(760, 0.045))                # catatan kartu bantu misi nomor satu
+add(94.2, tick(760, 0.045))                # catatan kartu bantu dari ???
 add(94.05, whoosh(0.6, True, 0.07))
-add(94.1, chime(880.0, 0.12))              # pil JAWAB DI KOLOM KOMENTAR YA
+add(94.1, chime(880.0, 0.12))              # pil JAWAB SOAL ??? DI KOMENTAR YA
 add(96.6, whoosh(0.6, False, 0.06))        # papan misi keluar (aturan 28)
 add(97.3, chime(392.0, 0.09))              # teaser: kios sebelah
 add(101.15, whoosh(0.5, True, 0.03))
