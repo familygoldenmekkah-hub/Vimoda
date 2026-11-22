@@ -182,10 +182,10 @@ POP_F = {"KIOS": 523.0, "MENTOR": 659.0, "KAMU": 740.0, "MYST": 880.0}
 MSGS = [
     (1.4, "KIOS", "photo"), (5.2, "KIOS", "text"), (9.2, "KAMU", "text"),
     (12.6, "KIOS", "text"), (16.0, "MENTOR", "text"), (19.2, "MENTOR", "text"),
-    (26.4, "KAMU", "text"), (30.6, "MENTOR", "text"), (34.0, "KIOS", "photo"),
-    (41.0, "KAMU", "text"), (45.0, "MENTOR", "text"), (48.8, "KIOS", "text"),
+    (26.4, "KIOS", "text"), (30.6, "KAMU", "text"), (34.0, "KIOS", "photo"),
+    (41.0, "KIOS", "text"), (45.0, "KAMU", "text"), (48.8, "MENTOR", "text"),
     (52.2, "MYST", "text"), (61.5, "MENTOR", "sticker"),
-    (64.7, "MENTOR", "text"), (68.9, "KIOS", "text"), (72.3, "MYST", "text"),
+    (64.7, "MYST", "text"), (68.9, "KAMU", "text"), (72.3, "KIOS", "text"),
     (75.5, "KIOS", "photo"), (78.9, "MYST", "text"), (81.9, "MENTOR", "text"),
     (85.3, "MYST", "text"), (97.3, "MENTOR", "text"),
 ]

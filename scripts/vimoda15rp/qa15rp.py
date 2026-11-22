@@ -32,19 +32,26 @@ banned = ("Jangan", "FOLLOW", "SUBSCRIBE", "IKUTI", "Kaisar", "\u2014", "\u2013"
 for b in banned:
     if b in eng:
         fail(f"DILARANG ada di engine: {b!r}")
-requires = ("MISTERI PEMBAGI RAPI", "PEMBAGI RAPI", "pembagi rapi itu semua orang yang mau bagi rata",
-            "CARA BAGI RATA", "TANTANGAN UNTUKMU", "JAWAB DI KOLOM KOMENTAR YA",
+requires = ("TADI MALAM", "MENIT BERIKUTNYA", "MEJA DEPAN", "BESOK PAGI",
+            "CARA BAGI RATA", "pembagi rapinya cuma pengen ikut rame",
+            "mau isi 12 atau 24", "AKU TINGGAL SOAL INI", "PAPAN ???",
+            "JAWAB SOAL ??? DI KOMENTAR YA", "KARTU BANTU DARI ???",
             "mengetik", "KAMU", "MENTOR", "PEMILIK KIOS", "AKIOMIDA",
             "TENTUKAN SEMUA FAKTOR DARI 20", "LIMA KELIPATAN PERTAMA DARI 7",
             "KENAPA 5 BUKAN FAKTOR DARI 12", "FAKTOR ATAU KELIPATAN",
             "FAKTOR 12", "KELIPATAN 4", "TERBATAS VS TANPA BATAS",
-            "kios sebelah simpan misteri baru", "SAPA",
+            "dua lampu kedip", "SAPA",
             "TENTUKAN SEMUA", "menyusun jurus", "buku tamu",
-            "muncul dari balik lampu", "yang merapikan itu aku",
-            "dibagi habis, tanpa sisa", "jaraknya selalu 4")
+            "muncul dari balik lampu", "yang rapikan itu aku",
+            "bisa dibagi rata ke berapa", "4 × 3 = 12")
 for r in requires:
     if r not in eng:
         fail(f"WAJIB ada di engine: {r!r}")
+# label pelajaran terlarang sejak rev8 (RP sungguhan, bukan buku pelajaran)
+for bad_les in ("PETUNJUK PERTAMA", "PETUNJUK KEDUA", "TANTANGAN UNTUKMU",
+                "JAWAB DI KOLOM KOMENTAR YA", "MOMEN ANGKA"):
+    if bad_les in eng:
+        fail(f"LABEL PELAJARAN terlarang sejak rev8: {bad_les!r}")
 n_msg = len(re.findall(r"\{t0:[\d.]+, who:", eng))
 if n_msg != 22:
     fail(f"jumlah bubble {n_msg} != 22")
@@ -54,11 +61,11 @@ if n_flash != 3:
 n_svg = eng.count('viewBox="0 0 600 340"')
 if n_svg != 3:
     fail(f"jumlah ilustrasi SVG dunia {n_svg} != 3")
-n_bub30 = eng.count("bubS:30")
-if n_bub30 != 2:
-    fail(f"teks dialog bukan 30px di kedua orientasi ({n_bub30})")
+n_bub60 = eng.count("bubS:60")
+if n_bub60 != 2:
+    fail(f"teks dialog bukan 60px (2x lipat) di kedua orientasi ({n_bub60})")
 else:
-    print("teks dialog 30px kedua orientasi ok")
+    print("teks dialog 60px (2x lipat dari 30px) kedua orientasi ok")
 m_div = re.search(r"const DIVS=\[(.*?)\];", eng, re.S)
 n_div = len(re.findall(r"\[\d+\.?\d*,'", m_div.group(1))) if m_div else 0
 if n_div != 5:

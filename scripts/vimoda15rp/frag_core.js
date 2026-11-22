@@ -1,12 +1,14 @@
-/* ---------- RUANG SAPA rev7: data & elemen format RP group chat ----------
-   Revisi 7 atas laporan pemilik: (1) obrolan dibuat JELAS - metafora
-   dikurangi, setiap istilah dijelaskan langsung di chat (12 dibagi habis
-   = faktor; 4, 8, 12 = kelipatan; 4 x 3 = 12 keduanya), (2) TEMPO BACA:
-   pesan lebih sedikit (22) dengan jeda 2.8-4.2 s per bubble, durasi
-   84 -> 106 detik, scroll lebih pelan, (3) SINEMATIK: dolly zoom saat
-   foto muncul, punch zoom diagram lebih besar, reveal ??? pop slow-motion,
-   fade transisi antar bab, (4) ILUSTRASI SVG dirapikan: piring tak
-   terpotong, label jam pada buku tamu, tag tidak menimpa stoples. ---------- */
+/* ---------- RUANG SAPA rev8: data & elemen format RP group chat ----------
+   Rombak besar atas laporan pemilik: (1) UKURAN TEKS DUA KALI LIPAT:
+   dialog 30 -> 60px kedua orientasi, teks lain naik proporsional,
+   (2) RP SUNGGUHAN BUKAN SKRIP BUKU PELAJARAN: label "Petunjuk
+   pertama/kedua" dihapus, divider jadi kartu waktu (TADI MALAM 20.30,
+   MENIT BERIKUTNYA, BESOK PAGI 07.00), matematika muncul dari reaksi
+   dan kesadaran karakter (KIOS menyadari sendiri setelah diagram,
+   KAMU berkomentar santai), penonton dapat MOMEN MEMILIH (???: mau
+   isi 12 atau 24?), papan soal jadi milik ??? (diegetik), pil ajakan
+   menyebut bantu ??? bukan perintah guru, (3) tempo baca, sinematik,
+   dan ilustrasi v2 warisan rev7 tetap. ---------- */
 const Q = new URLSearchParams(location.search);
 const ORIENT = Q.get('o') === 'landscape' ? 'landscape' : 'portrait';
 const W = ORIENT === 'portrait' ? 1080 : 1920;
@@ -23,18 +25,18 @@ const smz=(t,a,b,s)=>{const o=seg(t,a,s)*(1-seg(t,b,s));return o};
 
 const P = ORIENT==='portrait' ? {
   phoneX:24, phoneY:40, phoneW:1032, phoneH:1060,
-  chatTop:210, chatBot:1046, bubW:680, bubS:30, nameS:24, photoW:620,
-  headT:32, headS:32, headSubS:24, timeS:24,
-  subTop:1170, subMax:880, wmY:1800,
-  ecW:760, ecH:130, ecY:700, barW:420, ecFS:56,
-  avS:62, avEmoji:28, stickW:640
+  chatTop:210, chatBot:1046, bubW:860, bubS:60, nameS:36, photoW:780,
+  headT:34, headS:44, headSubS:30, timeS:28,
+  subTop:1180, subMax:900, wmY:1800,
+  ecW:880, ecH:156, ecY:690, barW:480, ecFS:72,
+  avS:74, avEmoji:34, stickW:800
 } : {
   phoneX:460, phoneY:30, phoneW:1000, phoneH:660,
-  chatTop:196, chatBot:642, bubW:600, bubS:30, nameS:24, photoW:600,
-  headT:28, headS:28, headSubS:24, timeS:24,
+  chatTop:196, chatBot:642, bubW:720, bubS:60, nameS:36, photoW:660,
+  headT:28, headS:40, headSubS:30, timeS:28,
   subTop:740, subMax:1300, wmY:1010,
-  ecW:700, ecH:110, ecY:360, barW:460, ecFS:44,
-  avS:54, avEmoji:26, stickW:620
+  ecW:760, ecH:132, ecY:350, barW:460, ecFS:60,
+  avS:62, avEmoji:32, stickW:760
 };
 
 /* posisi phone + latar doodle */
@@ -204,39 +206,41 @@ function richText(t){
   return out.join('&nbsp;');
 }
 
-/* ---------- pesan RP rev7 (jelas dulu, metafora minimal, tempo baca 2.8-4.2 s) ---------- */
+/* ---------- pesan RP rev8 (RP sungguhan: reaksi dulu, materi ikut muncul;
+   KIOS panik dan menyadari sendiri, KAMU berkomentar santai,
+   ??? memberi penonton MOMEN MEMILIH) ---------- */
 const MSGS=[
-  {t0:1.4, who:'KIOS', kind:'photo', svg:'etalase', cap:'ini etalaseku tadi malam 😳'},
-  {t0:5.2, who:'KIOS', text:'toko udah tutup jam 8. tapi tadi malam etalaseku dirapikan rapi banget.'},
-  {t0:9.2, who:'KAMU', text:'tunggu. ada satu permen sendirian di piring 👀'},
-  {t0:12.6, who:'KIOS', text:'iya. kayak sengaja ditinggal buat tamu pertama 🥹'},
-  {t0:16.0, who:'MENTOR', text:'oke, aku ikut bantu cari tahu. kita cek satu-satu ya.'},
-  {t0:19.2, who:'MENTOR', text:'petunjuk satu: 12 permen di stoples dibagi habis, tanpa sisa.'},
-  {t0:26.4, who:'KAMU', text:'berarti 12 bisa dibagi rata ke 1, 2, 3, 4, 6, atau 12 orang. semua habis!'},
-  {t0:30.6, who:'MENTOR', text:'petunjuk dua: catatan kunjungan di buku tamu kios.'},
-  {t0:34.0, who:'KIOS', kind:'photo', svg:'buku', cap:'ini buku tamuku 📒'},
-  {t0:41.0, who:'KAMU', text:'kunjungannya 4, 8, 12, 16, 20. jaraknya selalu 4. itu kelipatan 4!'},
-  {t0:45.0, who:'MENTOR', text:'betul. 4 × 3 = 12, jadi 12 kelipatan 4, sekaligus faktor 12.'},
-  {t0:48.8, who:'KIOS', text:'kunjungan ke-12 terus tercatat. siapa sih ini 😳'},
-  {t0:52.2, who:'MYST', text:'*muncul dari balik lampu* halo 😊 yang merapikan itu aku. besok isi 24 ya.'},
+  {t0:1.4, who:'KIOS', kind:'photo', svg:'etalase', cap:'KO PANIK. ETALASEKU RAPI SEMUA 😳'},
+  {t0:5.2, who:'KIOS', text:'toko tutup jam 8. jam 8.30 aku balik, RAPI SEMUA. siapa ini??'},
+  {t0:9.2, who:'KAMU', text:'garis permennya lurus semua kayak pake penggaris 👀'},
+  {t0:12.6, who:'KIOS', text:'IYA. dan tinggal SATU permen di piring. satu doang'},
+  {t0:16.0, who:'MENTOR', text:'oke, kasus menarik. aku masuk. kita bedah pelan-pelan'},
+  {t0:19.2, who:'MENTOR', text:'stoples depan ada 12. kita cek: bisa dibagi rata ke berapa?'},
+  {t0:26.4, who:'KIOS', text:'JADI BISA KE 1, 2, 3, 4, 6, ATAU 12 ORANG. PAS SEMUA??'},
+  {t0:30.6, who:'KAMU', text:'fleksibel banget. mau bagi ke 3 orang pun bisa 😳'},
+  {t0:34.0, who:'KIOS', kind:'photo', svg:'buku', cap:'BUKTI KEDUA. buku tamuku, lihat sendiri'},
+  {t0:41.0, who:'KIOS', text:'AKU GAK PERNAH NULIS INI. catatannya kayak di-print 😱'},
+  {t0:45.0, who:'KAMU', text:'polanya nambah 4 terus: 4, 8, 12, 16, 20'},
+  {t0:48.8, who:'MENTOR', text:'dan 12 ada di daftar: 4 × 3 = 12. dia balik pas kunjungan ke-12'},
+  {t0:52.2, who:'MYST', text:'*muncul dari balik lampu* halo 😊 yang rapikan itu aku. besok aku ikut 🌙'},
   {t0:61.5, who:'MENTOR', kind:'sticker', stk:'CARA BAGI RATA!', stks:'2 dapat 12 · 3 dapat 8 · 4 dapat 6 · 6 dapat 4'},
-  {t0:64.7, who:'MENTOR', text:'24 permen: 2 orang dapat 12, 3 orang dapat 8, 4 orang dapat 6, 6 orang dapat 4. sisa nol.'},
-  {t0:68.9, who:'KIOS', text:'oke gais, malam ini aku isi 24. besok pagi meja sambutan siap 🍬'},
-  {t0:72.3, who:'MYST', text:'besok aku mampir ya 😊🌙'},
+  {t0:64.7, who:'MYST', text:'kalau kamu yang pegang kios: mau isi 12 atau 24?'},
+  {t0:68.9, who:'KAMU', text:'24! bisa dibagi ke 2, 3, 4, atau 6 orang. semua pas'},
+  {t0:72.3, who:'KIOS', text:'deal! malam ini aku isi 24. besok pagi kalian cek 🍬'},
   {t0:75.5, who:'KIOS', kind:'photo', svg:'kejutan', cap:'KEJUTAN 24 TERPASANG. SISA: NOL ✨'},
-  {t0:78.9, who:'MYST', text:'aku lihat dari depan tadi. kalian keren 🥹✨'},
-  {t0:81.9, who:'MENTOR', text:'kasus selesai. pembagi rapi itu semua orang yang mau bagi rata.'},
-  {t0:85.3, who:'MYST', text:'berarti aku gak sendirian lagi ya 😊'},
-  {t0:97.3, who:'MENTOR', text:'psst, kios sebelah simpan misteri baru: pembagian yang paling pas'}
+  {t0:78.9, who:'MYST', text:'aku dateng jam 6, terus sembunyi lihat kalian 😊✨'},
+  {t0:81.9, who:'MENTOR', text:'kasus ditutup. ternyata pembagi rapinya cuma pengen ikut rame'},
+  {t0:85.3, who:'MYST', text:'iya 😊 next time aku nyapa langsung ya'},
+  {t0:97.3, who:'MENTOR', text:'kios sebelah ada dua lampu kedip aneh. lain kali kita cek 👀'}
 ];
 
-/* divider bab gaya chat (judul bab rata tengah, aturan 28) */
+/* divider bab gaya kartu waktu RP (bukan label pelajaran) */
 const DIVS=[
-  [0.4,'MISTERI PEMBAGI RAPI'],
-  [19.0,'PETUNJUK PERTAMA: FAKTOR'],
-  [30.4,'PETUNJUK KEDUA: KELIPATAN'],
-  [61.3,'RENCANA TERIMA KASIH'],
-  [75.3,'TERIMA KASIH, SAHABAT RAPI!']
+  [0.4,'TADI MALAM · 20.30'],
+  [19.0,'MENIT BERIKUTNYA'],
+  [30.4,'MEJA DEPAN · BUKU TAMU'],
+  [61.3,'MALAM INI · JAM 9'],
+  [75.3,'BESOK PAGI · 07.00']
 ];
 
 /* ---------- build bubbles ---------- */
@@ -279,11 +283,11 @@ MSGS.forEach((m,mi)=>{
       bub.style.cssText+=`max-width:${P.stickW}px;`;
       const s1=document.createElement('div');
       s1.className='stk';
-      s1.style.fontSize=(ORIENT==='portrait'?32:29)+'px';
+      s1.style.fontSize=(ORIENT==='portrait'?54:48)+'px';
       s1.textContent=m.stk;
       const s2=document.createElement('div');
       s2.className='stks';
-      s2.style.cssText+='font-size:26px;';
+      s2.style.cssText+='font-size:'+(ORIENT==='portrait'?38:34)+'px;';
       s2.textContent=m.stks;
       bub.appendChild(s1);
       bub.appendChild(s2);
@@ -353,11 +357,11 @@ function layoutChat(){
 
 /* ---------- tiga DIAGRAM MENYALA (momen ala anime sains) ---------- */
 const FLASHES=[
-  {t0:22.8,t1:26.2,kick:'MOMEN ANGKA',title:'FAKTOR 12',en:'Factors of 12: six neat ways to share!',
+  {t0:22.8,t1:26.2,kick:'HITUNGAN STOPLES',title:'FAKTOR 12',en:'Factors of 12: six neat ways to share!',
    chips:['1','2','3','4','6','12'],hot:-1,
    lines:['12 ÷ 1, 2, 3, 4, 6, 12 = PAS TANPA SISA'],
    notes:['12 ÷ 5 = 2 SISA 2 · BELUM RAPI','13 ÷ 3 = 4 SISA 1 · JADI HADIAH!']},
-  {t0:37.4,t1:40.8,kick:'MOMEN ANGKA',title:'KELIPATAN 4',en:'Multiples of 4: 4, 8, 12, 16, 20, 24...',
+  {t0:37.4,t1:40.8,kick:'POLA BUKU TAMU',title:'KELIPATAN 4',en:'Multiples of 4: 4, 8, 12, 16, 20, 24...',
    chips:['4','8','12','16','20','24'],hot:2,
    lines:['4 × 3 = 12 · KUNJUNGAN KE-12'],
    notes:['12 KELIPATAN 4 · SEKALIGUS FAKTOR 12']},
@@ -373,8 +377,8 @@ const fTitle=document.getElementById('ftitle');
 const fEn=document.getElementById('fen');
 const fBody=document.getElementById('fbody');
 const fGlow=document.getElementById('fglow');
-fTitle.style.fontSize=(ORIENT==='portrait'?34:30)+'px';
-fEn.style.cssText+=`top:${ORIENT==='portrait'?112:96}px;font-size:24px;`;
+fTitle.style.fontSize=(ORIENT==='portrait'?54:46)+'px';
+fEn.style.cssText+=`top:${ORIENT==='portrait'?124:108}px;font-size:34px;`;
 fBody.style.cssText+=`top:50%;transform:translateY(-50%);gap:${ORIENT==='portrait'?16:12}px;`;
 const FLASHBODY=FLASHES.map(f=>{
   const w=document.createElement('div');
@@ -392,7 +396,7 @@ const FLASHBODY=FLASHES.map(f=>{
   if(f.two){
     const t2=document.createElement('div');
     t2.className='fline';
-    t2.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;`;
+    t2.style.cssText+=`font-size:${ORIENT==='portrait'?38:34}px;`;
     t2.innerHTML='<span class="dot" style="background:#B9A6FF"></span><span>'+f.two+'</span>';
     w.appendChild(t2);
     f.twoEl=t2;
@@ -400,7 +404,7 @@ const FLASHBODY=FLASHES.map(f=>{
   const lines=f.lines.map(tx=>{
     const ln=document.createElement('div');
     ln.className='fline';
-    ln.style.cssText+=`font-size:${ORIENT==='portrait'?28:26}px;`;
+    ln.style.cssText+=`font-size:${ORIENT==='portrait'?38:34}px;`;
     ln.innerHTML='<span class="dot" style="background:#4CAF7A"></span><span>'+tx+'</span>';
     w.appendChild(ln);
     return {el:ln};
@@ -408,7 +412,7 @@ const FLASHBODY=FLASHES.map(f=>{
   const notes=f.notes.map(tx=>{
     const nn=document.createElement('div');
     nn.className='fnote';
-    nn.style.cssText+=`font-size:${ORIENT==='portrait'?26:24}px;`;
+    nn.style.cssText+=`font-size:${ORIENT==='portrait'?32:28}px;`;
     nn.textContent=tx;
     w.appendChild(nn);
     return {el:nn};
@@ -442,20 +446,20 @@ BURSTS.forEach((b,bi)=>{
 
 /* ---------- overlay MISI BARU (aturan 30: empat soal utuh + kartu) ---------- */
 const quizEl=document.getElementById('quiz');
-document.getElementById('qhd').style.fontSize=(ORIENT==='portrait'?32:28)+'px';
+document.getElementById('qhd').style.fontSize=(ORIENT==='portrait'?46:40)+'px';
 const SOAL=['TENTUKAN SEMUA FAKTOR DARI 20.','LIMA KELIPATAN PERTAMA DARI 7.','KENAPA 5 BUKAN FAKTOR DARI 12?','FAKTOR ATAU KELIPATAN: TAK TERBATAS?'];
 const qrowsEl=document.getElementById('qrows');
 const UJIS=SOAL.map((s,i)=>{
   const r=document.createElement('div');
   r.className='qrow';
-  r.style.cssText+=`font-size:${ORIENT==='portrait'?26:25}px;margin-top:${ORIENT==='portrait'?7:5}px;`;
+  r.style.cssText+=`font-size:${ORIENT==='portrait'?40:34}px;margin-top:${ORIENT==='portrait'?10:6}px;`;
   r.innerHTML='<b>'+(i+1)+'.</b> '+s;
   qrowsEl.appendChild(r);
   return {el:r,t0:90.6+i*0.16};
 });
 const UJIVAL=['1','2','3','4','5','8','10','20'];
 const qgridEl=document.getElementById('qgrid');
-qgridEl.style.cssText+=`top:${ORIENT==='portrait'?300:276}px;gap:${ORIENT==='portrait'?12:10}px;`;
+qgridEl.style.cssText+=`top:${ORIENT==='portrait'?480:378}px;gap:${ORIENT==='portrait'?12:10}px;`;
 const CARDS=UJIVAL.map((v,i)=>{
   const el=document.createElement('div');
   el.className='qcard';
@@ -465,50 +469,50 @@ const CARDS=UJIVAL.map((v,i)=>{
   return {el,v,pop:92.6+i*0.1};
 });
 const qnoteEl=document.getElementById('qnote');
-qnoteEl.style.cssText+=`top:${ORIENT==='portrait'?452:350}px;font-size:24px;`;
-qnoteEl.textContent='KARTU BANTU MISI NOMOR SATU';
+qnoteEl.style.cssText+=`top:${ORIENT==='portrait'?686:478}px;font-size:32px;`;
+qnoteEl.textContent='KARTU BANTU DARI ???';
 const qctaEl=document.getElementById('qcta');
-qctaEl.style.cssText+=`top:${ORIENT==='portrait'?506:396}px;font-size:${ORIENT==='portrait'?28:26}px;`;
+qctaEl.style.cssText+=`top:${ORIENT==='portrait'?736:525}px;font-size:${ORIENT==='portrait'?42:38}px;`;
 
 /* ---------- subtitle EN (aturan 8 + 18: proporsional, min 1.7 s) ---------- */
 const SUBS=[
-  [1.4,'Look at my display this morning!'],
-  [5.2,'Closed at eight. Who tidied it up??'],
-  [9.2,'Wait. One candy alone on a plate.'],
-  [12.6,'Left there for the first guest.'],
-  [16.0,'Count me in. Let us check step by step.'],
-  [19.2,'Clue one: 12 candies shared with no rest.'],
-  [22.8,'Factors of 12: six neat ways to share!'],
-  [26.4,'So 12 splits evenly to 1, 2, 3, 4, 6, 12!'],
-  [30.6,'Clue two: the visit notes in the guest book.'],
-  [34.0,'Here is my guest book.'],
-  [37.4,'Multiples of 4: 4, 8, 12, 16, 20, 24...'],
-  [41.0,'Visits step by 4 every time!'],
-  [45.0,'4 × 3 = 12: multiple of 4, factor of 12.'],
-  [48.8,'Visit 12 keeps showing up. Who?!'],
-  [52.2,'Hello. I tidied it. Refill to 24 tomorrow!'],
+  [1.4,'Panicking. My display is all neat!'],
+  [5.2,'Shop closed. I came back: ALL tidied!'],
+  [9.2,'The candy rows are ruler straight.'],
+  [12.6,'And one candy left on a plate.'],
+  [16.0,'Fun case. Count me in, slow mode.'],
+  [19.2,'Front jar has 12. Share evenly how?'],
+  [22.8,'Factors of 12: six neat ways!'],
+  [26.4,'So 1, 2, 3, 4, 6, or 12 people!'],
+  [30.6,'So flexible. Even 3 people works.'],
+  [34.0,'Proof two: my guest book.'],
+  [37.4,'Multiples of 4: 4, 8, 12, 16, 20...'],
+  [41.0,'I NEVER wrote these. Looks printed!'],
+  [45.0,'The pattern adds 4 every time.'],
+  [48.8,'4 × 3 = 12. They returned on visit 12.'],
+  [52.2,'Hello. That was me. I join tomorrow!'],
   [57.1,'Ways are limited, chances never end!'],
   [61.5,'Cara Bagi Rata! 2 get 12, 3 get 8, 4 get 6.'],
-  [64.7,'24 candies: 2 get 12, 3 get 8, 4 get 6, 6 get 4.'],
-  [68.9,'Stock set to 24 tonight. Table ready!'],
-  [72.3,'I will drop by tomorrow!'],
+  [64.7,'If you ran the kiosk: fill 12 or 24?'],
+  [68.9,'24! Fits 2, 3, 4, or 6 people. Zero rest.'],
+  [72.3,'Deal! 24 tonight. Check tomorrow!'],
   [75.5,'Surprise 24 in place. Zero rest!'],
-  [78.9,'I watched from the front. So proud!'],
-  [81.9,'Case closed: the Tidy Divider is everyone.'],
-  [85.3,'So I am not alone anymore.'],
-  [88.3,'New mission: four questions for you!'],
+  [78.9,'I came at six and hid to watch.'],
+  [81.9,'Case closed. We just wanted in.'],
+  [85.3,'Next time I say hi first.'],
+  [88.3,'The mystery left four questions!'],
   [93.0,'Eight helper cards are waiting.'],
-  [97.3,'Next door keeps a new mystery: the fairest sharing.'],
+  [97.3,'Next door: two blinking lamps. Soon.'],
   [102.2,'Thanks for watching.']
 ];
 const subbar=document.getElementById('subbar');
 const subEn=document.getElementById('sub_en');
 subbar.style.cssText+=`top:${P.subTop}px;max-width:${P.subMax}px;`;
-subEn.style.fontSize='24px';
+subEn.style.fontSize='34px';
 
 /* watermark + endcard */
 const markEl=document.getElementById('mark');
-markEl.style.cssText+=`top:${P.wmY}px;font-size:24px;`;
+markEl.style.cssText+=`top:${P.wmY}px;font-size:30px;`;
 const endcard=document.getElementById('endcard');
 const fplate=document.getElementById('fplate');
 const fUrl=document.getElementById('f_url');
@@ -520,4 +524,4 @@ const fadeEl=document.getElementById('fade');
 const typingEl=document.getElementById('pma');
 const typingAv=document.getElementById('pmav');
 const typingTx=document.getElementById('pmat');
-typingTx.style.fontSize='24px';
+typingTx.style.fontSize='32px';
