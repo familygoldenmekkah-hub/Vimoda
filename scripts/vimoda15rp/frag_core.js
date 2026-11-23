@@ -1,13 +1,17 @@
-/* ---------- RUANG SAPA rev10: data & elemen format RP group chat ----------
-   rev10 atas laporan pemilik (dialog masih terasa robot ala story
-   edukasi, kalimat tema seperti pengakuan yang dihafal, simile terpaksa):
-   dialog ditulis ulang TOTOL ala chat fiction sosmed/manhwa - NOL kalimat
-   tema, NOL label misteri disebut dalam ucapan (karakter bilang "dia"),
-   reaksi kasat mata dan lucu (HAAA KOK BISA, buat siapa itu???), kehadiran
-   fisik (aku lewat depan), malu yang jujur (lari karena malu). Warisan
-   rev9 tetap: tanpa indikator pengetikan sama sekali (visual, suara, QA
-   banned), 20 pesan utuh jeda lega, dialog 60px, kartu waktu RP, momen
-   memilih, papan soal milik ???, diagram menyala, sinematik. ---------- */
+/* ---------- RUANG SAPA rev11: data & elemen format RP group chat ----------
+   rev11 atas laporan pemilik (ALUR CACAT: jawaban dijawab orang yang
+   salah, orang muncul di tempat mustahil tanpa penjelasan, pengakuan
+   pembelaan tanpa tuduhan, loncat adegan - cerita terasa rusak):
+   ALUR DIBANGUN ULANG sebagai rantai sebab-akibat tertutup. Kejadian
+   ke-5 berulang -> bukti susunan 12 dan buku tamu berisi 4, 8, 12,
+   16, 20 -> KAMU memprediksi 24 -> grup MENYAMBUT dengan menaruh 24
+   permen -> ternata semua (jawaban dalam bahasa angka) -> anggota
+   pendiam akhirnya bicara. Rantai tanya-jawab benar (KIOS bertanya,
+   grup menjawab, KIOS memutuskan), lapak depan rumah bisa disentuh
+   dari jalan, tidak ada kehadiran mustahil, tidak ada pembelaan tanpa
+   tuduhan. Warisan rev9/10: tanpa indikator pengetikan, 20 pesan jeda
+   lega, dialog 60px, kartu waktu RP, dialog manusiawi tanpa kalimat
+   tema, diagram menyala, sinematik. ---------- */
 const Q = new URLSearchParams(location.search);
 const ORIENT = Q.get('o') === 'landscape' ? 'landscape' : 'portrait';
 const W = ORIENT === 'portrait' ? 1080 : 1920;
@@ -85,11 +89,11 @@ const CAST={
 };
 
 /* ---------- ilustrasi dunia rev6 (SVG foto chat, digambar serius) ----------
-   Tiga foto "asli dari dunia RUANG SAPA": etalase malam saat misteri
-   (awning toko, lampu gantung, 3 stoples 4-4-4, satu permen di piring
-   menyala, papan TUTUP), buku tamu dengan pola kunjungan 4-8-12-16-20
-   (12 diclingkung merah), dan kejutan 24 saat pagi (bunting, 3 stoples
-   8-8-8, tag BUAT KAMU). Semua deterministik, tanpa gambar acak. ---------- */
+   Tiga foto "asli dari dunia RUANG SAPA": etalase pagi kejadian ke-5
+   (awning toko, matahari terbit, 3 stoples rapi, papan BUKA), buku
+   tamu dengan pola nata 4-8-12-16-20 (12 diclingkung merah), dan
+   kejutan 24 saat pagi berikutnya (bunting, 3 stoples 8-8-8, tag
+   BUAT KAMU). Semua deterministik, tanpa gambar acak. ---------- */
 const PALS=['#F26D6D','#F7C948','#8E7CD8','#4CAF7A'];
 function dot(cx,cy,r,col){return '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="'+col+'"/>'}
 /* stoples generik: badan kaca + tutup emas; cand = daftar [dx,dy,r,warna] */
@@ -116,14 +120,22 @@ function svgEtalase(){
    +'<stop offset="0" stop-color="rgba(247,201,72,.42)"/><stop offset="1" stop-color="rgba(247,201,72,0)"/></radialGradient></defs>'
    +'<rect width="600" height="340" fill="url(#skyE)"/>';
   [[120,66,2],[170,88,1.6],[240,62,2.2],[330,92,1.6],[380,64,2],[60,148,1.6]].forEach(p=>{s+=dot(p[0],p[1],p[2],'rgba(255,246,232,.55)')});
-  s+='<circle cx="64" cy="88" r="22" fill="#F7C948"/><circle cx="73" cy="81" r="19" fill="#2A1E44"/>';
+  s+='<circle cx="64" cy="88" r="20" fill="#F7C948"/>'
+   +'<line x1="64" y1="52" x2="64" y2="60" stroke="#F7C948" stroke-width="5" stroke-linecap="round"/>'
+   +'<line x1="64" y1="116" x2="64" y2="124" stroke="#F7C948" stroke-width="5" stroke-linecap="round"/>'
+   +'<line x1="26" y1="88" x2="34" y2="88" stroke="#F7C948" stroke-width="5" stroke-linecap="round"/>'
+   +'<line x1="94" y1="88" x2="102" y2="88" stroke="#F7C948" stroke-width="5" stroke-linecap="round"/>'
+   +'<line x1="83.8" y1="68.2" x2="89.5" y2="62.5" stroke="#F7C948" stroke-width="5" stroke-linecap="round"/>'
+   +'<line x1="83.8" y1="107.8" x2="89.5" y2="113.5" stroke="#F7C948" stroke-width="5" stroke-linecap="round"/>'
+   +'<line x1="44.2" y1="107.8" x2="38.5" y2="113.5" stroke="#F7C948" stroke-width="5" stroke-linecap="round"/>'
+   +'<line x1="44.2" y1="68.2" x2="38.5" y2="62.5" stroke="#F7C948" stroke-width="5" stroke-linecap="round"/>';
   s+='<rect x="16" y="12" width="568" height="42" fill="#A6394B"/>';
   for(let i=0;i<5;i++){s+='<rect x="'+(72+i*112)+'" y="12" width="56" height="42" fill="#F7C948"/>'}
   s+='<g transform="rotate(-4 493 100)">'
    +'<line x1="460" y1="54" x2="460" y2="80" stroke="#C89A3C" stroke-width="3"/>'
    +'<line x1="526" y1="54" x2="526" y2="80" stroke="#C89A3C" stroke-width="3"/>'
    +'<rect x="433" y="80" width="120" height="48" rx="8" fill="#F2E6C6" stroke="#C8A86E" stroke-width="3"/>'
-   +'<text x="493" y="112" text-anchor="middle" font-size="26" font-weight="800" fill="#A6394B" letter-spacing="6">TUTUP</text></g>';
+   +'<text x="493" y="112" text-anchor="middle" font-size="26" font-weight="800" fill="#4CAF7A" letter-spacing="6">BUKA</text></g>';
   s+='<line x1="300" y1="54" x2="300" y2="92" stroke="#C89A3C" stroke-width="4"/>'
    +'<path d="M270,92 L330,92 L346,118 L254,118 Z" fill="#E8B32E"/>'
    +'<circle cx="300" cy="124" r="9" fill="#FFF3C4"/>'
@@ -205,36 +217,41 @@ function richText(t){
   return out.join('&nbsp;');
 }
 
-/* ---------- pesan RP rev10 (ala chat fiction sosmed: NOL kalimat tema,
-   NOL label misteri di dalam ucapan - karakter bicara tentang "dia",
-   reaksi kasat mata, lucu, jujur; matematika cuma lewat aksi yang
-   dilakukan dan diagram, bukan lewat pengakuan yang dihafal) ---------- */
+/* ---------- pesan RP rev11 (ALUR LOGIS tertutup, atas laporan pemilik:
+   jawaban dijawab orang yang salah, kehadiran tak masuk nalar, pengakuan
+   tanpa tuduhan, loncat adegan). Kini rantai sebab-akibat utuh:
+   kejadian ke-5 berulang -> bukti stoples 12 dan buku tamu berisi
+   4, 8, 12, 16, 20 -> KAMU memprediksi 24 -> grup MENYAMBUT dengan
+   24 permen -> ternata semua -> anggota pendiam akhirnya bicara.
+   Rantai tanya-jawab benar: KIOS (pemilik) bertanya, grup menjawab,
+   KIOS memutuskan. Tanpa kehadiran fisik mustahil, tanpa pembelaan
+   tak diminta. ---------- */
 const MSGS=[
-  {t0:1.4, who:'KIOS', kind:'photo', svg:'etalase', cap:'TOKOKU SEMALAM. AKU GAK NGERAPIIN INI 😳'},
-  {t0:6.5, who:'KIOS', text:'serius, aku tutup jam 8 langsung pulang. balik jam 8.30 udah begini 😭'},
-  {t0:11.8, who:'KAMU', text:'HAAA KOK BISA SIH. permen berbaris rapi semua 😨'},
-  {t0:16.2, who:'KIOS', text:'lagi: di piring ada SATU permen doang. buat siapa itu???'},
-  {t0:20.5, who:'MENTOR', text:'wih ada aja ya. tunggu, aku lewat depan. mau ikut lihat langsung'},
-  {t0:26.8, who:'KIOS', text:'kucoba bagi: 1, 2, 3, 4, 6, sama 12 orang. PAS SEMUA 😳'},
-  {t0:31.0, who:'KAMU', text:'jaman SD bagi jajan begini banget. berapa orang aja kebagian pas'},
-  {t0:34.0, who:'KIOS', kind:'photo', svg:'buku', cap:'BUKU TAMU KUBUKA. ada catatan yang bukan tulisanku 😳'},
-  {t0:41.4, who:'KIOS', text:'bukan tulisanku. 4, 8, 12, 16, 20. angkanya nambah terus'},
-  {t0:45.6, who:'KAMU', text:'oh nambah 4 terus kayak naik tangga. tunggu, 12 ada di barisan?!'},
-  {t0:49.2, who:'MENTOR', text:'kunjugannya tiap 4 kan. nah pas ke-12 dia balik. sengaja banget'},
-  {t0:53.4, who:'MYST', text:'*muncul dari balik lampu* halo 😊 yang tadi itu aku. gak nyolong, cuma pengen ikut aja'},
+  {t0:1.4, who:'KIOS', kind:'photo', svg:'etalase', cap:'KEJADIAN KE-5. LAGI-LAGI ETALASEKU RAPI PAS KUBUKA 😳'},
+  {t0:6.5, who:'KIOS', text:'gak ada yang ilang kok, cuman dipindah rapi semua. gila sih 😭'},
+  {t0:11.8, who:'KAMU', text:'HAAA KOK ADA AJA. berarti dia buka kain lapaknya, nata, tutup lagi?? 😨'},
+  {t0:16.2, who:'KIOS', text:'dan paling gila: stoples depan. permen 12-nya nata baris sempurna 😳'},
+  {t0:20.5, who:'MENTOR', text:'wih, ada-ada aja. tunggu, aku hitung dulu dari foto'},
+  {t0:26.8, who:'KIOS', text:'BENER. barisnya cocok semua: 1, 2, 3, 4, 6, sama 12. PAS 😳'},
+  {t0:31.0, who:'KAMU', text:'12 emang angka enak buat bagi-bagi. jaman SD bagi jajan gini banget'},
+  {t0:34.0, who:'KIOS', kind:'photo', svg:'buku', cap:'INI PALING MISTERIUS: buku tamuku ditulis dia. angka doang'},
+  {t0:41.4, who:'KIOS', text:'lima kejadian: 4, 8, 12, 16, 20. jumlah permen yang dia nata'},
+  {t0:45.6, who:'KAMU', text:'tunggu, 4, 8, 12, 16, 20... nambah 4 terus. berarti ke-6: 24?!'},
+  {t0:49.2, who:'MENTOR', text:'tepat 24. kalau deretnya lanjut, besok kejadian ke-6. kita sambut aja'},
+  {t0:53.4, who:'KIOS', text:'gas! besok pagi kita intip. tapi kita bales dia pakai apa ya'},
   {t0:61.5, who:'MENTOR', kind:'sticker', stk:'AWAS KEBAGIAN!', stks:'2 dapat 12 · 3 dapat 8 · 4 dapat 6 · 6 dapat 4'},
-  {t0:64.8, who:'MYST', text:'besok mau aku isi ulang. 12 atau 24? kamu pilih 😊'},
-  {t0:69.4, who:'KAMU', text:'24 dong. biar yang laper banyak juga kebagian'},
-  {t0:72.5, who:'KIOS', text:'deal, 24 ya! besok pagi aku mau ngintip dari dalam. gila penasaran'},
-  {t0:75.5, who:'KIOS', kind:'photo', svg:'kejutan', cap:'BUKA PAGI: 24 PERMEN RAPI. SISA NOL ✨'},
-  {t0:79.8, who:'MYST', text:'aku dateng jam 6, atur semuanya, terus lari karena malu 😊'},
-  {t0:84.2, who:'MENTOR', text:'ada aja. besok jangan sembunyi lagi ya. nanti kamu kebagian permen'},
+  {t0:64.8, who:'KIOS', text:'usul mantap. ada tambahan? syaratnya gampang: harus kebagi rata semua'},
+  {t0:69.4, who:'KAMU', text:'24 lanjut deret dia. bagi 3 stoples, isi 8 semua. pas!'},
+  {t0:72.5, who:'KIOS', text:'deal! 24 permen renggang di lapak. gila deg-degan 😬'},
+  {t0:75.5, who:'KIOS', kind:'photo', svg:'kejutan', cap:'DIA DATENG. 24 KEBAGI 3 STOPLES ISI 8. SISA NOL ✨'},
+  {t0:79.8, who:'MYST', text:'halo 😊 aku yang dari dulu cuma baca. nata permen itu caraku nyapa'},
+  {t0:84.2, who:'KIOS', text:'isi 8 semua, persis usul KAMU. kalian satu bahasa 😄 besok mampir ya!'},
   {t0:97.3, who:'MENTOR', text:'oh iya: dua lampu di kios sebelah kedip beda ritme. misteri baru 👀'}
 ];
 
 /* divider bab gaya kartu waktu RP (bukan label pelajaran) */
 const DIVS=[
-  [0.4,'TADI MALAM · 20.30'],
+  [0.4,'PAGI INI · 06.50'],
   [19.0,'MENIT BERIKUTNYA'],
   [30.4,'MEJA DEPAN · BUKU TAMU'],
   [61.3,'MALAM INI · JAM 9'],
@@ -474,28 +491,28 @@ qctaEl.style.cssText+=`top:${ORIENT==='portrait'?736:525}px;font-size:${ORIENT==
 
 /* ---------- subtitle EN (aturan 8 + 18: proporsional, min 1.7 s) ---------- */
 const SUBS=[
-  [1.4,'This is my shop. I did NOT tidy it!'],
-  [6.5,'Closed at 8. Back at 8.30: like this!'],
-  [11.8,'HOW?? The candies are lined up neat!'],
-  [16.2,'And ONE candy on the plate. For whom?'],
-  [20.5,'I am right outside. Let me look too!'],
+  [1.4,'Fifth time! Tidy again this morning!'],
+  [6.5,'Nothing taken. Just arranged all neat!'],
+  [11.8,'They lift the cloth, tidy, re-cover??'],
+  [16.2,'Wildest part: the front jar. Perfect rows!'],
+  [20.5,'Wow. Let me count from the photo.'],
   [22.8,'Factors of 12: six neat ways!'],
-  [26.8,'I tried: 1, 2, 3, 4, 6, 12. All fit!'],
-  [31.0,'Just like sharing snacks back at school!'],
-  [34.0,'Guest book: notes that are NOT mine!'],
+  [26.8,'True! 12 fits rows of 1, 2, 3, 4, 6, 12!'],
+  [31.0,'12 is great for sharing. Like snack time!'],
+  [34.0,'Strangest clue: guest book. Numbers only!'],
   [37.4,'Multiples of 4: 4, 8, 12, 16, 20...'],
-  [41.4,'Not my handwriting. It climbs by 4!'],
-  [45.6,'Like climbing stairs. Wait, 12 is on it!'],
-  [49.2,'Every 4th visit. Visit 12: back again!'],
-  [53.4,'Hello. That was me. Just wanted to join.'],
+  [41.4,'Five events: 4, 8, 12, 16, 20. No name!'],
+  [45.6,'Wait, it adds 4 each time. Next: 24?!'],
+  [49.2,'Right. If it continues, tomorrow is 6th.'],
+  [53.4,'Tonight we greet them properly!'],
   [57.1,'Ways are limited, chances never end!'],
-  [61.5,'Watch out! 24: 2 get 12, 3 get 8, 4 get 6.'],
-  [64.8,'Tomorrow I refill. 12 or 24? You pick!'],
-  [69.4,'24! So the hungry ones get a share too.'],
-  [72.5,'Deal! I will peek from inside. So curious!'],
-  [75.5,'Morning: 24 candies placed. Zero rest!'],
-  [79.8,'I came at six, tidied, then ran. So shy!'],
-  [84.2,'No hiding tomorrow. You get candy too!'],
+  [61.5,'Reply in their language: 24 fits any group!'],
+  [64.8,'Great idea. More? It must share fair.'],
+  [69.4,'24! Keep the series. Three jars of eight!'],
+  [72.5,'Placed! 24 candies out. So nervous!'],
+  [75.5,'They came! 24 split into 3 jars of 8!'],
+  [79.8,'Hello. I only read here. Tidying is my hi!'],
+  [84.2,'Exactly your idea! Come by tomorrow!'],
   [88.3,'The mystery left four questions!'],
   [93.0,'Eight helper cards are waiting.'],
   [97.3,'Next door: two lamps blink offbeat. Soon.'],

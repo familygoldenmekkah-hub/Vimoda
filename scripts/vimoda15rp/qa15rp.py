@@ -30,19 +30,20 @@ banned = ("Jangan", "FOLLOW", "SUBSCRIBE", "IKUTI", "Kaisar", "\u2014", "\u2013"
           "PENCURI", "CURI", "SERANGAN", "JEBAKAN", "PENANGKAPAN",
           "TERTANGKAP", "DICURI", "mengetik", "menyusun jurus", "typing",
           "Pembagi Rapi", "kasus ditutup", "ternyata", "diukur",
-          "tamu pertama", "CARA BAGI RATA")
+          "tamu pertama", "CARA BAGI RATA", "balik lampu", "nyolong")
 for b in banned:
     if b in eng:
         fail(f"DILARANG ada di engine: {b!r}")
-requires = ("TADI MALAM", "MENIT BERIKUTNYA", "MEJA DEPAN", "BESOK PAGI",
-            "AWAS KEBAGIAN", "AKU GAK NGERAPIIN INI", "HAAA KOK BISA",
-            "buat siapa itu", "aku lewat depan", "kucoba bagi",
-            "jaman SD bagi jajan", "kayak naik tangga",
-            "pas ke-12 dia balik", "cuma pengen ikut aja",
-            "yang tadi itu aku", "muncul dari balik lampu",
-            "12 atau 24? kamu pilih", "biar yang laper banyak juga kebagian",
-            "ngintip dari dalam", "lari karena malu", "jangan sembunyi lagi",
-            "kedip beda ritme",
+requires = ("PAGI INI", "MENIT BERIKUTNYA", "MEJA DEPAN", "BESOK PAGI",
+            "AWAS KEBAGIAN", "KEJADIAN KE-5", "gak ada yang ilang",
+            "buka kain lapaknya", "nata baris sempurna",
+            "aku hitung dulu dari foto", "1, 2, 3, 4, 6, sama 12",
+            "jaman SD bagi jajan", "angka doang", "4, 8, 12, 16, 20",
+            "berarti ke-6: 24", "kita sambut aja",
+            "kita bales dia pakai apa ya", "harus kebagi rata semua",
+            "bagi 3 stoples, isi 8 semua", "gila deg-degan",
+            "DIA DATENG", "cuma baca", "caraku nyapa",
+            "kalian satu bahasa", "besok mampir ya", "kedip beda ritme",
             "AKU TINGGAL SOAL INI", "PAPAN ???",
             "JAWAB SOAL ??? DI KOMENTAR YA", "KARTU BANTU DARI ???",
             "KAMU", "MENTOR", "PEMILIK KIOS", "AKIOMIDA",
@@ -53,8 +54,9 @@ requires = ("TADI MALAM", "MENIT BERIKUTNYA", "MEJA DEPAN", "BESOK PAGI",
 for r in requires:
     if r not in eng:
         fail(f"WAJIB ada di engine: {r!r}")
-# label pelajaran terlarang sejak rev8; pengetikan terlarang rev9;
-# kalimat tema dan simile terpaksa terlarang rev10 (bicara robotik)
+# label pelajaran terlarang sejak rev8; pengetikan rev9; kalimat tema
+# dan simile terpaksa rev10; lubang alur (kehadiran mustahil, pembelaan
+# tanpa tuduhan) terlarang rev11
 for bad_les in ("PETUNJUK PERTAMA", "PETUNJUK KEDUA", "TANTANGAN UNTUKMU",
                 "JAWAB DI KOLOM KOMENTAR YA", "MOMEN ANGKA", "pmat", "pmav"):
     if bad_les in eng:

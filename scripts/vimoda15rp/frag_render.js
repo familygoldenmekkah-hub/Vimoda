@@ -30,7 +30,7 @@ function imp(t){
   return a;
 }
 /* momen dolly zoom sinematik: foto muncul dan reveal ??? */
-const DOLLYS=MSGS.filter(m=>m.kind==='photo').map(m=>[m.t0,m.t0+3.4,0.024]).concat([[53.4,56.0,0.02],[57.1,60.9,0.022]]);
+const DOLLYS=MSGS.filter(m=>m.kind==='photo').map(m=>[m.t0,m.t0+3.4,0.024]).concat([[57.1,60.9,0.022],[79.8,82.6,0.02]]);
 function renderFrame(t){
   /* latar doodle melayang pelan */
   for(const d of DOODLES){

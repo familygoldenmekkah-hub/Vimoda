@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Musik & SFX prosedural rev10 untuk video 15 FORMAT RP "Misteri Pembagi Rapi".
+"""Musik & SFX prosedural rev11 untuk video 15 FORMAT RP "Misteri Pembagi Rapi".
 Bahasa audio chat story dari riset: pop bubble per karakter (pitch berbeda
 per peran), whoosh diagram menyala ala anime sains, boom twist, shimmer
 emoji burst, fanfare endcard. rev9: suara klik indikator pengetikan
-DIHAPUS TOTAL (elemen visualnya juga dihapus - laporan pemilik: ganggu).
-rev10: dialog ditulis ulang ala chat fiction sosmed (tanpa kalimat tema,
-tanpa label misteri di ucapan); timeline pop tidak berubah.
+DIHAPUS TOTAL. rev10: dialog manusiawi tanpa kalimat tema.
+rev11: alur dibangun ulang logis (kejadian ke-5 berulang, prediksi 24,
+grup menyambut, jawaban dalam bahasa angka, reveal bermotif); timeline
+pop tetap, pitch ikut peran yang benar.
 Nada D MINOR malam ajaib saat misteri, berubah F MAJOR hangat saat
 BESOK PAGI (75.3). JEDA MA 56.0-57.0 hening total sebelum twist.
 Durasi 106.0 s supaya tiap bubble sempat dibaca (20 pesan, jeda lega).
@@ -185,10 +186,10 @@ MSGS = [
     (1.4, "KIOS", "photo"), (6.5, "KIOS", "text"), (11.8, "KAMU", "text"),
     (16.2, "KIOS", "text"), (20.5, "MENTOR", "text"), (26.8, "KIOS", "text"),
     (31.0, "KAMU", "text"), (34.0, "KIOS", "photo"), (41.4, "KIOS", "text"),
-    (45.6, "KAMU", "text"), (49.2, "MENTOR", "text"), (53.4, "MYST", "text"),
+    (45.6, "KAMU", "text"), (49.2, "MENTOR", "text"), (53.4, "KIOS", "text"),
     (61.5, "MENTOR", "sticker"),
-    (64.8, "MYST", "text"), (69.4, "KAMU", "text"), (72.5, "KIOS", "text"),
-    (75.5, "KIOS", "photo"), (79.8, "MYST", "text"), (84.2, "MENTOR", "text"),
+    (64.8, "KIOS", "text"), (69.4, "KAMU", "text"), (72.5, "KIOS", "text"),
+    (75.5, "KIOS", "photo"), (79.8, "MYST", "text"), (84.2, "KIOS", "text"),
     (97.3, "MENTOR", "text"),
 ]
 add(0.35, boom(0.20))                      # dunia RUANG SAPA menyala
@@ -206,7 +207,7 @@ for (t0, who, kind) in MSGS:
         add(t0, whoosh(0.5, True, 0.07))
         for f, dt in ((523.25, 0.0), (659.26, 0.12), (783.99, 0.24)):
             add(t0 + dt, chime(f, 0.09))   # stiker jurus bernama
-add(41.5, chime(1174.66, 0.06))            # burst reaksi kagum (pola kelipatan)
+add(41.5, chime(1174.66, 0.06))            # burst reaksi kagum (deret buku tamu)
 add(75.8, chime(1046.5, 0.07))             # foto kejutan 24: burst konfeti
 for f, dt in ((1318.5, 0.10), (1568.0, 0.20), (1046.5, 0.30)):
     add(75.9 + dt, chime(f, 0.05))
@@ -244,9 +245,9 @@ add(58.4, tick(900, 0.06))
 add(58.9, tick(980, 0.06))
 add(59.4, chime(523.25, 0.10))             # cara terbatas peluang tanpa batas
 add(60.9, whoosh(0.35, False, 0.05))
-add(69.5, tick(760, 0.05))                 # pilihan penonton: 24 dong
-add(84.3, chime(523.25, 0.10))             # MENTOR: besok jangan sembunyi lagi ya
-add(79.9, chime(880.0, 0.05))              # MYST: lari karena malu
+add(69.5, tick(760, 0.05))                 # KAMU: 24 lanjut deret dia
+add(84.3, chime(523.25, 0.10))             # KIOS: kalian satu bahasa
+add(79.9, chime(880.0, 0.05))              # MYST: akhirnya nyapa
 # OVERLAY MISI BARU
 add(88.35, whoosh(0.6, True, 0.08))
 add(88.4, tick(880, 0.07))
