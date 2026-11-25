@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+/* GRUP JAGA GUDANG - VIDEO 18, MODEL FOKUS ala referensi chat story (rev13)
+   Pemilik upload referensi TikTok chat story: latar hitam pekat, SATU
+   bubble besar di tengah per saat (fokus penuh ke pesan), bubble gaya
+   WhatsApp (putih untuk anggota, hijau untuk KAMU, waktu + Dibaca v-v
+   DI DALAM bubble), dan sisipan reaksi meme (hard cut, zoom lambat,
+   mata menyala, shake) di antara babak. Model ini jadi hukum seri baru:
+   MODEL FOKUS. Warisan terkunci tetap jalan: tanpa indikator pengetikan,
+   pesan utuh jeda lega, dialog 60px, dialog manusiawi tanpa kalimat
+   tema dan tanpa label di ucapan, alur rantai sebab-akibat tertutup,
+   diagram menyala, papan misi milik akun resmi, teaser lanjutan. Materi:
+   BILANGAN (blog Yuyanaka, Nov 2026) - jumlah, pembagian, minus, dan
+   pertanyaan diciptakan atau ditemukan. Dunia baru: gudang malam.
+   Watermark AKIOMIDA tetap di posisi tinggi permintaan pemilik. */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#050308;
+  font-family:'Poppins','Noto Color Emoji','DejaVu Sans','Noto Sans SC',sans-serif;
+  -webkit-font-smoothing:antialiased}
+#bgdoodle{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 34%,#14101F 0%,#0B0813 55%,#050308 100%)}
+.doodle{position:absolute;color:rgba(232,179,46,.10);font-weight:800;will-change:transform,opacity}
+.dperm{position:absolute;border-radius:50%;will-change:transform,opacity}
+#vig{position:absolute;inset:0;pointer-events:none;opacity:.7;
+  background:radial-gradient(ellipse at 50% 44%,transparent 52%,rgba(0,0,0,.62) 100%)}
+#rig{position:absolute;inset:0;will-change:transform}
+#phead{position:absolute;left:0;right:0;top:0;height:118px;background:transparent;
+  border-bottom:2px solid rgba(232,179,46,.22);display:flex;align-items:center;
+  padding:0 44px;z-index:30}
+.havatar{position:relative;width:74px;height:74px;flex:0 0 74px;margin-right:24px}
+.havatar div{position:absolute;border-radius:50%;border:3px solid #050308}
+.havatar .a1{left:0;top:8px;width:48px;height:48px;background:radial-gradient(circle,#F7C948 62%,#E8B32E)}
+.havatar .a2{left:30px;top:0;width:44px;height:44px;background:radial-gradient(circle,#F26D6D 58%,#D93A5A)}
+.havatar .a3{left:18px;top:30px;width:38px;height:38px;background:radial-gradient(circle,#B9A6FF 55%,#8E7CD8)}
+#htitle{color:#FFF6E8;font-weight:800;letter-spacing:.02em;
+  text-shadow:0 4px 18px rgba(232,179,46,.25)}
+#chatwrap{position:absolute;left:0;right:0;top:118px;bottom:0;overflow:hidden}
+#pchat{position:absolute;left:0;right:0;top:0;will-change:transform}
+/* bubble gaya referensi: putih besar teks gelap, nama DI DALAM bubble */
+.msg{display:flex;margin:18px 44px;opacity:0;will-change:transform,opacity;align-items:flex-end}
+.msg.you{justify-content:flex-end}
+.avatar{width:64px;height:64px;border-radius:50%;flex:0 0 64px;margin-right:16px;
+  border:2.5px solid rgba(232,179,46,.4);display:flex;align-items:center;justify-content:center;
+  font-size:32px;color:#14100C;font-weight:800;will-change:box-shadow}
+.bwrap{max-width:880px}
+.bubble{position:relative;background:#FFFDF6;color:#14100C;border:none;
+  border-radius:8px 26px 26px 26px;padding:20px 28px 16px;font-weight:700;line-height:1.24;
+  box-shadow:0 14px 40px rgba(0,0,0,.55);will-change:transform,opacity}
+.mname{font-size:31px;font-weight:800;letter-spacing:.08em;margin:0 0 6px 2px}
+.act{font-style:italic;color:#8E857A;font-weight:600}
+.say{font-weight:700}
+.meta{display:flex;justify-content:flex-end;align-items:baseline;gap:12px;margin-top:6px}
+.mtime{font-size:26px;color:#9A9284;font-weight:700;letter-spacing:.04em}
+.ticks{font-size:27px;color:#1E8A5B;font-weight:800;letter-spacing:.04em}
+.msg.you .bubble{background:#D9FDD3;border-radius:26px 8px 26px 26px;
+  box-shadow:0 14px 40px rgba(0,0,0,.55),0 0 0 2px rgba(30,138,91,.18)}
+.msg.you .act{color:#6E8A5F}
+.msg.myst .bubble{background:#241A3E;color:#FFF6E8;border-radius:26px;
+  box-shadow:0 14px 40px rgba(0,0,0,.6),0 0 34px rgba(232,179,46,.3),0 0 0 2px rgba(255,233,168,.4)}
+.msg.myst .mtime{color:rgba(255,233,168,.6)}
+.msg.myst .act{color:rgba(255,246,232,.72)}
+.bubble.photo{padding:14px;background:#FFFDF6;border-radius:20px}
+.psvg{display:block;width:100%;height:auto;border-radius:12px}
+.pcap{font-size:40px;color:#14100C;font-weight:700;padding:12px 8px 4px;line-height:1.25}
+.bubble.sticker{background:#17102E;color:#FFF6E8;border:3px solid #E8B32E;
+  border-radius:26px;padding:22px 30px;text-align:center;
+  box-shadow:0 18px 46px rgba(0,0,0,.6),0 0 30px rgba(232,179,46,.3)}
+.stk{font-size:52px;font-weight:800;color:#F2C14E;letter-spacing:.05em}
+.stks{font-size:36px;color:#FFF6E8;font-weight:600;margin-top:10px}
+/* sisipan reaksi meme ala referensi: hard cut full-screen hitam,
+   glyph besar zoom lambat, mata menyala, shake masuk */
+#memewrap{position:absolute;inset:0;z-index:45;pointer-events:none}
+.meme{position:absolute;inset:0;background:#020103;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;opacity:0;will-change:transform,opacity}
+.mstage{position:relative;display:inline-block;line-height:0;will-change:transform}
+.mglyph{border-radius:30px;overflow:hidden;will-change:transform;
+  box-shadow:0 0 0 2.5px rgba(232,179,46,.4),0 24px 70px rgba(232,179,46,.25)}
+.mglyph img{display:block;width:100%;height:100%;object-fit:cover}
+.meyes{position:absolute;left:0;top:0;pointer-events:none}
+.meyes i{position:absolute;width:15%;height:10%;border-radius:12px;opacity:0;
+  background:#FF4D5E;box-shadow:0 0 26px 10px rgba(255,77,94,.75);
+  will-change:opacity,transform}
+.meyes i:nth-child(1){left:25%;top:41%}
+.meyes i:nth-child(2){left:60%;top:41%}
+.mdigits{position:absolute;inset:0;pointer-events:none}
+.mdigit{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
+  font-weight:800;color:rgba(232,179,46,.5);opacity:0;will-change:transform,opacity}
+.mtext{margin-top:34px;color:#F2C14E;font-weight:800;letter-spacing:.08em;
+  text-align:center;padding:0 40px;opacity:0;will-change:opacity,transform}
+.msub{margin-top:14px;color:rgba(255,246,232,.62);font-weight:600;text-align:center;
+  opacity:0;will-change:opacity}
+#dim{position:absolute;inset:0;background:rgba(2,1,6,.8);opacity:0;z-index:40;will-change:opacity}
+#flash{position:absolute;inset:26px;z-index:55;border-radius:26px;background:#14102A;opacity:0;
+  border:3px solid #E8B32E;box-shadow:0 24px 60px rgba(0,0,0,.8),0 0 40px rgba(232,179,46,.22);
+  overflow:hidden;will-change:transform,opacity}
+#flash .speed{position:absolute;inset:0;opacity:.5;
+  background:repeating-linear-gradient(115deg,transparent 0 26px,rgba(232,179,46,.09) 26px 30px)}
+.fkick{position:absolute;top:22px;left:50%;transform:translateX(-50%);background:#E8B32E;color:#14100C;
+  border-radius:999px;padding:8px 32px;font-weight:800;letter-spacing:.12em;font-size:32px}
+.ftitle{position:absolute;left:0;right:0;top:74px;text-align:center;color:#FFF6E8;font-weight:800;letter-spacing:.03em;
+  text-shadow:0 6px 22px rgba(232,179,46,.35)}
+.fen{position:absolute;left:0;right:0;text-align:center;color:rgba(255,246,232,.66);font-weight:600;font-size:34px}
+.fbody{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.fchips{display:flex;gap:14px}
+.fchip{min-width:108px;height:104px;border-radius:20px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#4A3A62,#3A2C50);border:2.5px solid #E8B32E;color:#FFF6E8;
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;font-size:48px;
+  box-shadow:0 8px 18px rgba(0,0,0,.5);opacity:0;will-change:transform,opacity}
+.fchip.hot{background:linear-gradient(180deg,#A6394B,#8E2C40);border-color:#FFF6E8}
+.fline{color:#FFF6E8;font-weight:600;opacity:0;will-change:opacity;display:flex;align-items:center;gap:12px}
+.fline .dot{width:18px;height:18px;border-radius:50%;flex:0 0 18px}
+.fnote{color:#F2C14E;font-weight:700;opacity:0;will-change:opacity}
+.fglow{position:absolute;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(232,179,46,.34) 0%,rgba(232,179,46,0) 70%);will-change:transform,opacity}
+#quiz{position:absolute;inset:20px;z-index:60;border-radius:26px;background:#17102E;opacity:0;
+  border:3px solid #E8B32E;box-shadow:0 24px 60px rgba(0,0,0,.8);overflow:hidden;
+  will-change:transform,opacity}
+.qhd{margin:48px 6% 0;color:#F2C14E;font-weight:800;letter-spacing:.06em;font-size:44px}
+.qline{height:4px;border-radius:2px;background:linear-gradient(90deg,transparent,#E8B32E,transparent);
+  width:120px;margin:8px auto 0}
+.qrow{margin:10px 6% 0;color:#FFF6E8;font-weight:600;display:flex;gap:12px;opacity:0;will-change:opacity}
+.qrow b{color:#F2C14E;flex:0 0 auto}
+.qgrid{position:absolute;left:0;right:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;will-change:opacity}
+.qcard{width:132px;height:84px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#FFFDF6,#F2E6C6);border:3px solid #C8A86E;color:#14100C;
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;font-size:44px;
+  box-shadow:0 8px 18px rgba(0,0,0,.45);opacity:0;will-change:transform,opacity}
+.qnote{position:absolute;left:6%;right:6%;color:rgba(255,246,232,.8);font-weight:600;font-size:32px;
+  opacity:0;will-change:opacity}
+.qcta{position:absolute;left:0;right:0;text-align:center;color:#FFF6E8;background:linear-gradient(135deg,#A6394B,#8E2C40);
+  border-radius:999px;margin:0 10%;padding:16px 0;font-weight:800;letter-spacing:.06em;font-size:40px;
+  border:2.5px solid rgba(255,246,232,.3);opacity:0;will-change:transform,opacity;
+  box-shadow:0 10px 26px rgba(0,0,0,.5)}
+#burst{position:absolute;inset:0;z-index:70;pointer-events:none}
+.bp{position:absolute;font-size:44px;opacity:0;will-change:transform,opacity}
+.bdot{position:absolute;border-radius:50%;opacity:0;will-change:transform,opacity}
+.bsq{position:absolute;border-radius:3px;opacity:0;will-change:transform,opacity}
+.rise{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;
+  color:rgba(232,179,46,.4);opacity:0;will-change:transform,opacity}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(10,7,4,.88);
+  border-radius:20px;padding:14px 34px;text-align:center;box-shadow:0 14px 34px rgba(0,0,0,.6);
+  will-change:transform,opacity;z-index:80}
+#sub_en{font-size:34px;color:#FFF6E8;font-weight:600;line-height:1.25}
+#mark{position:absolute;left:50%;transform:translateX(-50%);background:rgba(10,7,4,.82);color:rgba(255,246,232,.9);
+  border-radius:999px;padding:8px 28px;font-weight:800;letter-spacing:.18em;font-size:30px;z-index:80}
+#endcard{position:absolute;opacity:0;z-index:90;will-change:transform,opacity}
+#fplate{position:absolute;border-radius:24px;background:linear-gradient(160deg,#FFFDF6,#F2E6C6);
+  display:flex;align-items:center;justify-content:center;color:#14100C;font-weight:800;letter-spacing:.06em;
+  border:3px solid #E8B32E;box-shadow:0 20px 50px rgba(0,0,0,.7);z-index:91}
+#f_url{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+#f_bar{position:absolute;border-radius:4px;background:linear-gradient(90deg,#E8B32E,#D93A5A);
+  opacity:0;z-index:92}
+#flashwhite{position:absolute;inset:0;background:#FFF9EA;opacity:0;pointer-events:none;z-index:95}
+#fade{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:100}
+/* INTRO FILM rev18 (permintaan pemilik): buka ala produksi film berkelas -
+   kartu judul full-bleed (ilustrasi penuh layar + label grup saja, tanpa
+   label waktu) lalu kartu produksi "dipersembahkan akiomida.com" dengan
+   teks emas naik + shimmer sweep, baru cerita dimulai */
+#intro1{position:absolute;inset:0;z-index:85;background:#050308;opacity:0;will-change:opacity}
+#introimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}
+#introshade{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(5,3,8,.30) 0%,rgba(5,3,8,.08) 42%,rgba(5,3,8,.82) 100%)}
+#introtitle{position:absolute;left:0;right:0;bottom:11%;text-align:center;color:#F2C14E;
+  font-weight:800;letter-spacing:.14em;padding:0 30px;line-height:1.2;
+  text-shadow:0 6px 30px rgba(0,0,0,.85),0 0 46px rgba(232,179,46,.38);
+  will-change:opacity,transform}
+#introrule{position:absolute;left:50%;bottom:calc(11% - 30px);transform:translateX(-50%);
+  width:0;height:3px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,#E8B32E,#D93A5A,transparent);will-change:width}
+#intro2{position:absolute;inset:0;z-index:85;display:none;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  background:radial-gradient(ellipse at 50% 42%,#17102E 0%,#0A0718 62%,#050308 100%);
+  opacity:0;will-change:opacity}
+#intro2kick{color:rgba(255,246,232,.72);font-weight:700;letter-spacing:.42em;text-indent:.42em;
+  will-change:opacity,transform}
+#intro2name{margin-top:18px;color:#FFF6E8;font-weight:800;letter-spacing:.08em;
+  text-shadow:0 8px 44px rgba(232,179,46,.42),0 4px 18px rgba(0,0,0,.6);
+  will-change:opacity,transform}
+#intro2line{margin-top:28px;width:0;height:3px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,#E8B32E,#D93A5A,transparent);will-change:width}
+#intro2tag{margin-top:28px;color:#F2C14E;font-weight:700;letter-spacing:.05em;padding:0 34px;
+  will-change:opacity,transform}
+#intro2shim{position:absolute;left:0;top:-20%;width:16%;height:140%;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,243,196,.10),transparent);
+  will-change:transform}
+/* GARIS BILANGAN rev21: band diagram pengganti chips */
+.rband{position:relative;height:30px;border-radius:9px;
+  background:linear-gradient(180deg,#241A3E,#17102E);
+  border:2.5px solid rgba(232,179,46,.65);box-shadow:0 10px 26px rgba(0,0,0,.5)}
+.rtick{position:absolute;bottom:0;width:2.5px;border-radius:1px;background:rgba(255,246,232,.28)}
+.rfill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:7px;
+  background:linear-gradient(90deg,#D93A5A,#E8B32E);
+  box-shadow:0 0 18px rgba(232,179,46,.5);will-change:width}
+.rmark{position:absolute;top:-7px;bottom:-7px;width:3.5px;border-radius:2px;
+  background:#FF6B6B;box-shadow:0 0 10px rgba(255,107,107,.8);opacity:0;will-change:left,opacity}
+.rpin{position:absolute;top:-16px;width:6px;height:62px;margin-left:-3px;border-radius:3px;
+  background:#FFF6E8;box-shadow:0 0 16px rgba(255,243,196,.8);will-change:left}
+.rlbl{position:absolute;bottom:calc(100% + 24px);transform:translateX(-50%);
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;
+  color:#F2C14E;text-shadow:0 4px 14px rgba(0,0,0,.6);white-space:nowrap;
+  opacity:0;will-change:left,color,opacity}
+.rnums{position:relative;height:36px;margin-top:8px;
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:700;
+  font-size:28px;color:rgba(255,246,232,.55)}
+/*__FONTS__*/
+</style></head>
+<body>
+<div id="bgdoodle"></div>
+<div id="rig">
+  <div id="phead">
+    <div class="havatar"><div class="a1"></div><div class="a2"></div><div class="a3"></div></div>
+    <div id="htitle">KUASAI MATEMATIKA DI AKIOMIDA.COM</div>
+  </div>
+  <div id="chatwrap"><div id="pchat"></div></div>
+</div>
+<div id="memewrap"></div>
+<div id="dim"></div>
+<div id="flash">
+  <div class="speed"></div>
+  <div class="fkick" id="fkick">GARIS BILANGAN</div>
+  <div class="ftitle" id="ftitle"></div>
+  <div class="fen" id="fen"></div>
+  <div class="fbody" id="fbody"></div>
+  <div class="fglow" id="fglow"></div>
+</div>
+<div id="quiz">
+  <div class="qhd" id="qhd">MISI DARI GUDANG PUSAT</div>
+  <div class="qline"></div>
+  <div id="qrows"></div>
+  <div class="qgrid" id="qgrid"></div>
+  <div class="qnote" id="qnote"></div>
+  <div class="qcta" id="qcta">TULIS JAWABANMU DI KOMENTAR YA!</div>
+</div>
+<div id="intro1">
+  <img id="introimg" alt="ilustrasi">
+  <div id="introshade"></div>
+  <div id="introtitle">GRUP JAGA GUDANG</div>
+  <div id="introrule"></div>
+</div>
+<div id="intro2">
+  <div id="intro2kick">DIPERSEMBAHKAN</div>
+  <div id="intro2name">AKIOMIDA.COM</div>
+  <div id="intro2line"></div>
+  <div id="intro2tag">KUASAI MATEMATIKA JADI LEBIH MUDAH..</div>
+  <div id="intro2shim"></div>
+</div>
+<div id="burst"></div>
+<div id="subbar"><div id="sub_en"></div></div>
+<div id="mark">AKIOMIDA</div>
+<div id="endcard"><div id="fplate"><div id="f_url">AKIOMIDA.COM</div></div><div id="f_bar"></div></div>
+<div id="flashwhite"></div>
+<div id="fade"></div>
+<script>

@@ -1,0 +1,357 @@
+{
+ "dur": 349.72,
+ "wins": [
+  3.8,
+  1.8,
+  1.8,
+  1.8,
+  1.8
+ ],
+ "m": [
+  8.2,
+  21.59,
+  30.9,
+  41.65,
+  56.58,
+  74.77,
+  85.6,
+  96.04,
+  110.82,
+  121.67,
+  129.86,
+  144.0,
+  155.59,
+  168.84,
+  180.84,
+  190.3,
+  214.12,
+  222.5,
+  237.07,
+  258.5,
+  268.03,
+  281.35,
+  311.82,
+  328.74
+ ],
+ "div": [
+  [
+   0.4,
+   "GRUP JAGA GUDANG"
+  ],
+  [
+   53.98,
+   "GILIRAN RAK · 23.45"
+  ],
+  [
+   108.22,
+   "BAGI RATA · 23.52"
+  ],
+  [
+   166.24,
+   "JAM 12 MALAM · 00.00"
+  ],
+  [
+   234.47,
+   "PERTANYAAN PUSAT · 00.12"
+  ]
+ ],
+ "flash": [
+  [
+   209.22,
+   212.62
+  ],
+  [
+   253.4,
+   257.0
+  ],
+  [
+   306.32,
+   310.32
+  ]
+ ],
+ "subs": [
+  [
+   8.2,
+   "Warehouse night: every count must be honest!"
+  ],
+  [
+   21.59,
+   "Gilang: 12 boxes in, stock is surely right!"
+  ],
+  [
+   30.9,
+   "Counts cannot be guessed. Count, then sign!"
+  ],
+  [
+   35.46,
+   "The sheet says 96. Racks must reach 96!"
+  ],
+  [
+   41.65,
+   "Rack by rack. The tick waits for numbers!"
+  ],
+  [
+   56.58,
+   "24+24+24+24: total 96! I swore it was 100!"
+  ],
+  [
+   64.71,
+   "Rack one to four: twenty-four each. 96!"
+  ],
+  [
+   74.77,
+   "12 in, 4 out. The sheet was updated to 96!"
+  ],
+  [
+   79.37,
+   "Counted, not remembered. That is the rule!"
+  ],
+  [
+   85.6,
+   "So the in-out log is not just a formality!"
+  ],
+  [
+   96.04,
+   "96 is 96, on any label, at any hour!"
+  ],
+  [
+   110.82,
+   "Omak: 30 cakes for 6 vendors. Fair share!"
+  ],
+  [
+   121.67,
+   "30 / 6 = 5 each. Even, no leftovers!"
+  ],
+  [
+   129.86,
+   "If 7 people? 30 / 7 is 4.25. Cannot cut cake!"
+  ],
+  [
+   136.05,
+   "30 / 7 is 4.25. You cannot cut cake like that!"
+  ],
+  [
+   144.0,
+   "7 x 4 = 28. Two left. Leftovers have owners!"
+  ],
+  [
+   155.59,
+   "Omak wonders: where do numbers come from?"
+  ],
+  [
+   168.84,
+   "Night report: the meat freezer reads -5!"
+  ],
+  [
+   180.84,
+   "Minus is an address below zero!"
+  ],
+  [
+   190.3,
+   "On the number line, zero is the middle!"
+  ],
+  [
+   198.66,
+   "The seat of -5: five steps below zero!"
+  ],
+  [
+   209.22,
+   "-5 lives below zero on the line!"
+  ],
+  [
+   214.12,
+   "Minus is not decoration. It is an address!"
+  ],
+  [
+   222.5,
+   "Sticker: the honest count. Read minus slowly!"
+  ],
+  [
+   237.07,
+   "Midnight question: is 2+2 still 4 alone?"
+  ],
+  [
+   244.19,
+   "Created by humans, or already there?"
+  ],
+  [
+   253.4,
+   "Is 2+2 still 4 when nobody watches?"
+  ],
+  [
+   258.5,
+   "Gilang: made! No humans, no writing!"
+  ],
+  [
+   268.03,
+   "But the freezer stays -5 unseen. Cold waits!"
+  ],
+  [
+   281.35,
+   "Symbols are made. The values were there first!"
+  ],
+  [
+   292.62,
+   "30 boxes do not become 29 by relabeling!"
+  ],
+  [
+   306.32,
+   "Symbols are made. Values are found!"
+  ],
+  [
+   311.82,
+   "Night vote: 52% found it, 48% made it!"
+  ],
+  [
+   321.24,
+   "The warehouse left a night mission!"
+  ],
+  [
+   324.44,
+   "Eight helper cards are waiting."
+  ],
+  [
+   328.74,
+   "Voting closed. The warehouse stays honest!"
+  ],
+  [
+   335.64,
+   "Tomorrow: the natural numbers rack!"
+  ],
+  [
+   345.32,
+   "Thanks for watching."
+  ]
+ ],
+ "bursts": [
+  [
+   144.1,
+   146.3,
+   10,
+   130,
+   0
+  ],
+  [
+   312.02,
+   315.02,
+   18,
+   230,
+   1
+  ]
+ ],
+ "rises": [
+  121.67,
+  128.67
+ ],
+ "quiz": [
+  320.04,
+  328.04
+ ],
+ "end": [
+  344.72,
+  344.92,
+  347.22,
+  348.22
+ ],
+ "imps": [
+  [
+   0.4,
+   2.0
+  ],
+  [
+   210.02,
+   211.62
+  ],
+  [
+   254.2,
+   255.8
+  ],
+  [
+   307.32,
+   309.32
+  ],
+  [
+   234.47,
+   236.07
+  ],
+  [
+   320.04,
+   321.64
+  ]
+ ],
+ "dollys": [
+  [
+   8.2,
+   11.6,
+   0.024
+  ],
+  [
+   168.84,
+   172.24,
+   0.024
+  ],
+  [
+   311.82,
+   315.22,
+   0.024
+  ],
+  [
+   306.32,
+   310.12,
+   0.022
+  ],
+  [
+   237.07,
+   239.87,
+   0.02
+  ]
+ ],
+ "dips": [
+  53.98,
+  108.22,
+  166.24,
+  234.47,
+  320.04
+ ],
+ "ma": [
+  252.4,
+  253.4
+ ],
+ "voff": 0.42,
+ "d": [
+  12.144,
+  8.064,
+  9.504,
+  11.328,
+  16.944,
+  9.576,
+  9.192,
+  11.184,
+  9.6,
+  6.936,
+  12.888,
+  10.344,
+  9.648,
+  10.752,
+  8.208,
+  17.424,
+  7.128,
+  10.968,
+  14.832,
+  8.28,
+  12.072,
+  23.472,
+  6.816,
+  14.376
+ ],
+ "intro": [
+  [
+   0.4,
+   4.2
+  ],
+  [
+   4.5,
+   7.6
+  ]
+ ]
+}
