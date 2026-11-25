@@ -1,0 +1,306 @@
+{
+ "dur": 269.38,
+ "wins": [
+  2.0,
+  1.8,
+  1.8,
+  1.8,
+  1.8
+ ],
+ "m": [
+  2.8,
+  14.08,
+  23.49,
+  35.97,
+  48.45,
+  67.86,
+  79.62,
+  90.13,
+  105.7,
+  119.43,
+  130.26,
+  140.03,
+  156.53,
+  173.4,
+  185.86,
+  192.46,
+  204.22,
+  217.69,
+  232.81,
+  252.27
+ ],
+ "div": [
+  [
+   0.4,
+   [
+    0.4,
+    "GRUP BAHAS FYP \u00b7 00.31"
+   ]
+  ],
+  [
+   45.85,
+   "MENIT BERIKUTNYA"
+  ],
+  [
+   87.53,
+   "KALKULATOR \u00b7 TANGGA DOBEL"
+  ],
+  [
+   153.93,
+   "JAM 1 PAGI \u00b7 MASIH GAS"
+  ],
+  [
+   201.62,
+   "JAM 2 PAGI \u00b7 DIA NGEPOST"
+  ]
+ ],
+ "flash": [
+  [
+   62.96,
+   66.36
+  ],
+  [
+   100.8,
+   104.2
+  ],
+  [
+   148.73,
+   152.73
+  ]
+ ],
+ "subs": [
+  [
+   2.8,
+   "FYP claim: fold paper 42 times, reach the Moon!"
+  ],
+  [
+   14.08,
+   "No way. Doubled 42 times is still thin paper!"
+  ],
+  [
+   23.49,
+   "But it is specific: 2^42. Doubled 42 times!"
+  ],
+  [
+   35.97,
+   "The caption says 2 to the 42. Let us check!"
+  ],
+  [
+   48.45,
+   "Wait. 2^3 is not 2 times 3!"
+  ],
+  [
+   62.96,
+   "Exponents: repeated times, written short!"
+  ],
+  [
+   67.86,
+   "2^3 = 2 x 2 x 2 = 8. I always said 6. Oops!"
+  ],
+  [
+   79.62,
+   "Many get it wrong. Power = how many times!"
+  ],
+  [
+   90.13,
+   "Counting sheet: 2^2 up to 2^10 collected!"
+  ],
+  [
+   100.8,
+   "2 cubed = 8. 2 times 3 = 6. Different!"
+  ],
+  [
+   105.7,
+   "2^10 = 1024 folds. Already 10 cm thick!"
+  ],
+  [
+   119.43,
+   "Moon is 384,000 km away. Very far!"
+  ],
+  [
+   130.26,
+   "But each fold doubles. 2^20 = 105 meters?!"
+  ],
+  [
+   140.03,
+   "We count to 42 tonight. Settle the debate!"
+  ],
+  [
+   148.73,
+   "Each double, the distance explodes!"
+  ],
+  [
+   156.53,
+   "The doubling ladder, check this out!"
+  ],
+  [
+   164.03,
+   "10 cm, 105 m, 107 km, 439,804 km!"
+  ],
+  [
+   173.4,
+   "439 thousand km. The Moon is 384,400. I lose!"
+  ],
+  [
+   185.86,
+   "Impossible claims can be true. Math separates them!"
+  ],
+  [
+   192.46,
+   "He posted again! Full proof tonight, he said!"
+  ],
+  [
+   204.22,
+   "New post: 439,804 km past the Moon!"
+  ],
+  [
+   210.08,
+   "Moon: 384,400 km. It wins!"
+  ],
+  [
+   217.69,
+   "Hi. That video is mine. I only read here."
+  ],
+  [
+   224.35,
+   "You love debates, so I made something true and wild!"
+  ],
+  [
+   232.81,
+   "Nice. Count first, then comment. Deal?"
+  ],
+  [
+   245.37,
+   "The mystery left four questions!"
+  ],
+  [
+   249.07,
+   "Eight helper cards are waiting."
+  ],
+  [
+   252.27,
+   "Someone asked 2^-1. Negative? Tomorrow!"
+  ],
+  [
+   264.98,
+   "Thanks for watching."
+  ]
+ ],
+ "bursts": [
+  [
+   105.8,
+   108.0,
+   10,
+   130,
+   0
+  ],
+  [
+   204.42,
+   207.42,
+   18,
+   230,
+   1
+  ]
+ ],
+ "rises": [
+  119.43,
+  126.43
+ ],
+ "quiz": [
+  242.97,
+  251.57
+ ],
+ "end": [
+  264.38,
+  264.58,
+  266.88,
+  267.88
+ ],
+ "imps": [
+  [
+   0.4,
+   2.0
+  ],
+  [
+   63.76,
+   65.36
+  ],
+  [
+   101.6,
+   103.2
+  ],
+  [
+   149.73,
+   151.73
+  ],
+  [
+   201.62,
+   203.22
+  ],
+  [
+   242.97,
+   244.57
+  ]
+ ],
+ "dollys": [
+  [
+   2.8,
+   6.2,
+   0.024
+  ],
+  [
+   90.13,
+   93.53,
+   0.024
+  ],
+  [
+   204.22,
+   207.62,
+   0.024
+  ],
+  [
+   148.73,
+   152.53,
+   0.022
+  ],
+  [
+   217.69,
+   220.49,
+   0.02
+  ]
+ ],
+ "dips": [
+  45.85,
+  87.53,
+  153.93,
+  201.62,
+  242.97
+ ],
+ "ma": [
+  147.73,
+  148.73
+ ],
+ "voff": 0.42,
+ "d": [
+  10.032,
+  8.16,
+  11.232,
+  8.88,
+  13.008,
+  10.512,
+  6.912,
+  9.168,
+  12.48,
+  9.576,
+  8.52,
+  7.2,
+  15.624,
+  11.208,
+  5.352,
+  8.16,
+  12.216,
+  13.872,
+  8.76,
+  10.512
+ ]
+}

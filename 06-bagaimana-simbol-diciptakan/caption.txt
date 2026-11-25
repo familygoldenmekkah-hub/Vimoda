@@ -1,0 +1,17 @@
+Kenapa satu ditulis 1, bukan segitiga atau lengkungan? Dan siapa yang menentukan bentuk angka 7?
+
+Dulu, manusia mencatat jumlah dengan goresan di tulang dan kayu. Tapi coba bayangkan mencatat 347 dengan goresan satu per satu. Semakin besar jumlahnya, semakin rumit cara menulisnya.
+
+Solusinya: sistem desimal. Cuma sepuluh simbol, 0 sampai 9, plus aturan nilai tempat. Angka 5 tetap lima, tapi jadi lima puluh di 50 dan lima ratus di 500. Simbolnya sama, posisinya yang mengubah nilai.
+
+Terus, simbol angka itu bukan bilangannya sendiri. Tujuh bisa ditulis 7, VII, atau kata tujuh. Bentuknya beda, nilai yang dimaksud tetap sama.
+
+Kita bahkan boleh ganti 7 jadi lambang bintang. Asalkan bintang itu tetap mewakili tujuh, maka bintang + 2 tetap harus sembilan. Lambang bebas diganti, hasil hitung tidak boleh sembarangan diubah.
+
+Nah, pertanyaan pamungkas: kalau seluruh manusia sepakat bahwa 7 + 2 = 10, apakah kesepakatan itu otomatis membuatnya benar dalam sistem desimal?
+
+Ingat, kebenaran butuh dasar dan alasan yang bisa dipertanggungjawabkan. Tulis pendapatmu di komentar, ya.
+
+Buka browser kamu dan mampir ke AKIOMIDA.COM buat petualangan matematika yang makin seru.
+
+#matematika #angka #nilaitempat #desimal #edukasi #belajarmatematika #akiomida

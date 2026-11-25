@@ -1,0 +1,147 @@
+[portrait] 120/7279 frame, 5.1s, avg 42 ms/frame
+[portrait] 240/7279 frame, 9.3s, avg 39 ms/frame
+[portrait] 360/7279 frame, 14.0s, avg 39 ms/frame
+[portrait] 480/7279 frame, 18.3s, avg 38 ms/frame
+[portrait] 600/7279 frame, 22.7s, avg 38 ms/frame
+[portrait] 720/7279 frame, 27.8s, avg 39 ms/frame
+[portrait] 840/7279 frame, 32.3s, avg 38 ms/frame
+[portrait] 960/7279 frame, 36.7s, avg 38 ms/frame
+[portrait] 1080/7279 frame, 40.9s, avg 38 ms/frame
+[portrait] 1200/7279 frame, 46.1s, avg 38 ms/frame
+[portrait] 1320/7279 frame, 50.8s, avg 38 ms/frame
+[portrait] 1440/7279 frame, 55.2s, avg 38 ms/frame
+[portrait] 1560/7279 frame, 59.2s, avg 38 ms/frame
+[portrait] 1680/7279 frame, 65.6s, avg 39 ms/frame
+[portrait] 1800/7279 frame, 70.7s, avg 39 ms/frame
+[portrait] 1920/7279 frame, 75.1s, avg 39 ms/frame
+[portrait] 2040/7279 frame, 79.3s, avg 39 ms/frame
+[portrait] 2160/7279 frame, 83.6s, avg 39 ms/frame
+[portrait] 2280/7279 frame, 87.7s, avg 38 ms/frame
+[portrait] 2400/7279 frame, 92.9s, avg 39 ms/frame
+[portrait] 2520/7279 frame, 97.1s, avg 39 ms/frame
+[portrait] 2640/7279 frame, 101.6s, avg 38 ms/frame
+[portrait] 2760/7279 frame, 109.5s, avg 40 ms/frame
+[portrait] 2880/7279 frame, 114.6s, avg 40 ms/frame
+[portrait] 3000/7279 frame, 119.0s, avg 40 ms/frame
+[portrait] 3120/7279 frame, 123.3s, avg 40 ms/frame
+[portrait] 3240/7279 frame, 127.4s, avg 39 ms/frame
+[portrait] 3360/7279 frame, 131.9s, avg 39 ms/frame
+[portrait] 3480/7279 frame, 136.9s, avg 39 ms/frame
+[portrait] 3600/7279 frame, 142.2s, avg 39 ms/frame
+[portrait] 3720/7279 frame, 146.6s, avg 39 ms/frame
+[portrait] 3840/7279 frame, 150.8s, avg 39 ms/frame
+[portrait] 3960/7279 frame, 155.5s, avg 39 ms/frame
+[portrait] 4080/7279 frame, 163.6s, avg 40 ms/frame
+[portrait] 4200/7279 frame, 168.5s, avg 40 ms/frame
+[portrait] 4320/7279 frame, 173.2s, avg 40 ms/frame
+[portrait] 4440/7279 frame, 177.4s, avg 40 ms/frame
+[portrait] 4560/7279 frame, 181.7s, avg 40 ms/frame
+[portrait] 4680/7279 frame, 186.3s, avg 40 ms/frame
+[portrait] 4800/7279 frame, 190.6s, avg 40 ms/frame
+[portrait] 4920/7279 frame, 195.1s, avg 40 ms/frame
+[portrait] 5040/7279 frame, 200.0s, avg 40 ms/frame
+[portrait] 5160/7279 frame, 204.7s, avg 40 ms/frame
+[portrait] 5280/7279 frame, 209.5s, avg 40 ms/frame
+[portrait] 5400/7279 frame, 214.6s, avg 40 ms/frame
+[portrait] 5520/7279 frame, 219.6s, avg 40 ms/frame
+[portrait] 5640/7279 frame, 224.1s, avg 40 ms/frame
+[portrait] 5760/7279 frame, 228.4s, avg 40 ms/frame
+[portrait] 5880/7279 frame, 233.1s, avg 40 ms/frame
+[portrait] 6000/7279 frame, 237.5s, avg 40 ms/frame
+[portrait] 6120/7279 frame, 241.7s, avg 40 ms/frame
+[portrait] 6240/7279 frame, 246.5s, avg 39 ms/frame
+[portrait] 6360/7279 frame, 250.7s, avg 39 ms/frame
+[portrait] 6480/7279 frame, 255.0s, avg 39 ms/frame
+[portrait] 6600/7279 frame, 260.7s, avg 39 ms/frame
+[portrait] 6720/7279 frame, 266.8s, avg 40 ms/frame
+[portrait] 6840/7279 frame, 272.9s, avg 40 ms/frame
+[portrait] 6960/7279 frame, 277.2s, avg 40 ms/frame
+[portrait] 7080/7279 frame, 281.3s, avg 40 ms/frame
+[portrait] 7200/7279 frame, 286.1s, avg 40 ms/frame
+[portrait] SELESAI 7279 frame (0..7278) dalam 288.9s = 40 ms/frame
+[landscape] 120/7279 frame, 4.4s, avg 36 ms/frame
+[landscape] 240/7279 frame, 8.5s, avg 36 ms/frame
+[landscape] 360/7279 frame, 12.9s, avg 36 ms/frame
+[landscape] 480/7279 frame, 17.1s, avg 36 ms/frame
+[landscape] 600/7279 frame, 21.2s, avg 35 ms/frame
+[landscape] 720/7279 frame, 25.5s, avg 35 ms/frame
+[landscape] 840/7279 frame, 29.6s, avg 35 ms/frame
+[landscape] 960/7279 frame, 33.9s, avg 35 ms/frame
+[landscape] 1080/7279 frame, 38.0s, avg 35 ms/frame
+[landscape] 1200/7279 frame, 42.6s, avg 36 ms/frame
+[landscape] 1320/7279 frame, 47.5s, avg 36 ms/frame
+[landscape] 1440/7279 frame, 51.8s, avg 36 ms/frame
+[landscape] 1560/7279 frame, 56.0s, avg 36 ms/frame
+[landscape] 1680/7279 frame, 62.0s, avg 37 ms/frame
+[landscape] 1800/7279 frame, 67.4s, avg 37 ms/frame
+[landscape] 1920/7279 frame, 72.2s, avg 38 ms/frame
+[landscape] 2040/7279 frame, 76.7s, avg 38 ms/frame
+[landscape] 2160/7279 frame, 81.2s, avg 38 ms/frame
+[landscape] 2280/7279 frame, 85.4s, avg 37 ms/frame
+[landscape] 2400/7279 frame, 90.1s, avg 38 ms/frame
+[landscape] 2520/7279 frame, 94.5s, avg 38 ms/frame
+[landscape] 2640/7279 frame, 98.9s, avg 37 ms/frame
+[landscape] 2760/7279 frame, 106.3s, avg 38 ms/frame
+[landscape] 2880/7279 frame, 110.5s, avg 38 ms/frame
+[landscape] 3000/7279 frame, 114.7s, avg 38 ms/frame
+[landscape] 3120/7279 frame, 118.8s, avg 38 ms/frame
+[landscape] 3240/7279 frame, 123.0s, avg 38 ms/frame
+[landscape] 3360/7279 frame, 127.2s, avg 38 ms/frame
+[landscape] 3480/7279 frame, 131.4s, avg 38 ms/frame
+[landscape] 3600/7279 frame, 135.9s, avg 38 ms/frame
+[landscape] 3720/7279 frame, 140.6s, avg 38 ms/frame
+[landscape] 3840/7279 frame, 144.9s, avg 38 ms/frame
+[landscape] 3960/7279 frame, 149.0s, avg 38 ms/frame
+[landscape] 4080/7279 frame, 156.8s, avg 38 ms/frame
+[landscape] 4200/7279 frame, 161.5s, avg 38 ms/frame
+[landscape] 4320/7279 frame, 165.8s, avg 38 ms/frame
+[landscape] 4440/7279 frame, 170.0s, avg 38 ms/frame
+[landscape] 4560/7279 frame, 174.5s, avg 38 ms/frame
+[landscape] 4680/7279 frame, 179.0s, avg 38 ms/frame
+[landscape] 4800/7279 frame, 183.5s, avg 38 ms/frame
+[landscape] 4920/7279 frame, 187.7s, avg 38 ms/frame
+[landscape] 5040/7279 frame, 192.3s, avg 38 ms/frame
+[landscape] 5160/7279 frame, 196.7s, avg 38 ms/frame
+[landscape] 5280/7279 frame, 201.0s, avg 38 ms/frame
+[landscape] 5400/7279 frame, 205.5s, avg 38 ms/frame
+[landscape] 5520/7279 frame, 209.9s, avg 38 ms/frame
+[landscape] 5640/7279 frame, 214.1s, avg 38 ms/frame
+[landscape] 5760/7279 frame, 218.2s, avg 38 ms/frame
+[landscape] 5880/7279 frame, 222.5s, avg 38 ms/frame
+[landscape] 6000/7279 frame, 226.7s, avg 38 ms/frame
+[landscape] 6120/7279 frame, 231.0s, avg 38 ms/frame
+[landscape] 6240/7279 frame, 235.7s, avg 38 ms/frame
+[landscape] 6360/7279 frame, 240.5s, avg 38 ms/frame
+[landscape] 6480/7279 frame, 245.3s, avg 38 ms/frame
+[landscape] 6600/7279 frame, 250.6s, avg 38 ms/frame
+[landscape] 6720/7279 frame, 256.6s, avg 38 ms/frame
+[landscape] 6840/7279 frame, 262.8s, avg 38 ms/frame
+[landscape] 6960/7279 frame, 267.1s, avg 38 ms/frame
+[landscape] 7080/7279 frame, 271.4s, avg 38 ms/frame
+[landscape] 7200/7279 frame, 276.1s, avg 38 ms/frame
+[landscape] SELESAI 7279 frame (0..7278) dalam 279.1s = 38 ms/frame
+[libx264 @ 0x55afbd02a140] ref B L1: 95.5%  4.5%
+[libx264 @ 0x55afbd02a140] kb/s:685.16
+[aac @ 0x55afbd25a5c0] Qavg: 503.042
+== portrait ==
+codec_name=h264
+codec_type=video
+width=1080
+height=1920
+codec_name=aac
+codec_type=audio
+duration=242.633333
+size=27157934
+[libx264 @ 0x558464790140] ref B L1: 95.1%  4.9%
+[libx264 @ 0x558464790140] kb/s:635.26
+[aac @ 0x558464973500] Qavg: 503.042
+== landscape ==
+codec_name=h264
+codec_type=video
+width=1920
+height=1080
+codec_name=aac
+codec_type=audio
+duration=242.633333
+size=25644511
+EXIT=0

@@ -1,0 +1,34 @@
+🚀 Initializing Z-AI SDK...
+🎨 Generating image: "three rounded chat speech bubbles floating above an open smartphone with a warm recipe app glowing, group chat opened, flat vector illustration, deep midnight purple background, warm golden amber accents, soft magenta glow, cozy rounded shapes, subtle tiny stars, minimal, centered composition, high quality, no text, no letters, no numbers, no watermark"
+📐 Size: 1024x1024
+✅ File saved to: /tmp/gen17/m0.png
+🎉 Image generation completed!
+🚀 Initializing Z-AI SDK...
+🎨 Generating image: "black digital kitchen scale silhouette front view, matte dark body, subtle golden rim light, slightly skeptical mood, flat vector illustration, deep midnight purple background, warm golden amber accents, soft magenta glow, cozy rounded shapes, subtle tiny stars, minimal, centered composition, high quality, no text, no letters, no numbers, no watermark"
+📐 Size: 1024x1024
+✅ File saved to: /tmp/gen17/m1.png
+🎉 Image generation completed!
+🚀 Initializing Z-AI SDK...
+🎨 Generating image: "a cute measuring cup and a digital scale side by side, golden sparkles and glowing rounded bars rising upward like rising dough, flat vector illustration, deep midnight purple background, warm golden amber accents, soft magenta glow, cozy rounded shapes, subtle tiny stars, minimal, centered composition, high quality, no text, no letters, no numbers, no watermark"
+📐 Size: 1024x1024
+✅ File saved to: /tmp/gen17/m2.png
+🎉 Image generation completed!
+🚀 Initializing Z-AI SDK...
+🎨 Generating image: "an open envelope with a recipe paper flying toward a glowing spiral of endless numbers in the night sky leaving a dotted golden trail, flat vector illustration, deep midnight purple background, warm golden amber accents, soft magenta glow, cozy rounded shapes, subtle tiny stars, minimal, centered composition, high quality, no text, no letters, no numbers, no watermark"
+📐 Size: 1024x1024
+✅ File saved to: /tmp/gen17/m3.png
+🎉 Image generation completed!
+🚀 Initializing Z-AI SDK...
+🎨 Generating image: "mysterious hooded pastry chef holding a glowing smartphone with a whisk silhouette, face hidden in shadow, warm golden light from the phone screen, night mood, flat vector illustration, deep midnight purple background, warm golden amber accents, soft magenta glow, cozy rounded shapes, subtle tiny stars, minimal, centered composition, high quality, no text, no letters, no numbers, no watermark"
+📐 Size: 1024x1024
+✅ File saved to: /tmp/gen17/m4.png
+🎉 Image generation completed!
+total 340
+drwxr-xr-x 2 z    z      4096 Nov 24 00:45 .
+drwxrwxrwt 1 root root   4096 Nov 24 00:44 ..
+-rw-r--r-- 1 z    z     63365 Nov 24 00:43 m0.png
+-rw-r--r-- 1 z    z     39785 Nov 24 00:43 m1.png
+-rw-r--r-- 1 z    z     60326 Nov 24 00:44 m2.png
+-rw-r--r-- 1 z    z    110781 Nov 24 00:44 m3.png
+-rw-r--r-- 1 z    z     52377 Nov 24 00:45 m4.png
+EXIT=0

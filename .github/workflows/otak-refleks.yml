@@ -1,0 +1,41 @@
+name: otak-refleks
+
+# REFLEKS OTOMATIS — tubuh kedua otak yang hidup DI DALAM repo.
+# Berjalan di infrastruktur GitHub (bukan platform sandbox), sehingga:
+#  - merespons hitungan detik setelah commit perintah masuk (push trigger)
+#  - denyut cadangan tiap 2 jam memakai scheduler GitHub (tanpa batas 3/hari)
+#  - ikut tersimpan & hidup selama repo ada — melewati recycle sandbox apa pun
+# Tugasnya: ACK instan "⏳ DITERIMA" untuk setiap perintah baru di otak/INBOX/.
+# Eksekusi penuh tetap di layer sadar (agent), yang menimpa balasan dengan
+# hasil + ✅ SELESAI sesuai protokol otak/README.md.
+
+on:
+  push:
+    paths:
+      - 'otak/INBOX/**'
+  schedule:
+    - cron: '17 */2 * * *'   # denyut cadangan tiap 2 jam
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: otak-refleks
+  cancel-in-progress: false
+
+jobs:
+  refleks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ambil repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Refleks ACK perintah baru
+        run: bash scripts/otak_refleks.sh
+        env:
+          OTAK_ACTOR: otak-refleks[bot]

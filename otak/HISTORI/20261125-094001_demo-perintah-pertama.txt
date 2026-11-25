@@ -1,0 +1,3 @@
+Pengujian pertama: tuliskan di jawabanmu waktu server saat ini, branch git
+yang aktif, dan hash commit terakhir, supaya aku tahu otak ini benar-benar
+hidup dan protokolnya bekerja.

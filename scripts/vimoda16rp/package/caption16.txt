@@ -1,0 +1,21 @@
+Video 16 - LIPATAN KE-42 RP: Bilangan Berpangkat (grup chat BAHAS FYP, sekarang dengan VOICE ACTING 5 karakter)
+
+Dunia BARU, grup BARU. Masuk ke chat "GRUP BAHAS FYP" - anggotanya lagi rame gara-gara satu post viral: "lipat 42 kali sampe bulan??" (@batangkertas, 2,1 jt nonton). RAYA bawa kabar: "FYP LAGI RAME: KERTAS DILIPAT DOBEL 42 KALI SAMPAI BULAN??" BIMO langsung menolak: "*bacain hp* GAK MUNGKIN DEH. dobel 42 kali ya tetep kertas tipis. klaim fyp bebas banget"
+
+DILA (kalkulator grup) ngegas dari miskonsepsi paling umum: "tunggu, 2^3 itu bukan 2×3 ya" - dan pas BIMO ngaku "ohhh jadi 2^3 = 2×2×2 = 8. gue dari dulu kira 2×3 = 6. aduh, malu banget" kalian bakal relate. Pangkat itu perkalian berulang yang ditulis singkat: 2^3 = 2×2×2 = 8. Pangkat = jumlah kali lipatnya, bukan angka yang dikali.
+
+Terus grupnya bedah klaimnya bareng-bareng: 2^10 = 1.024 lipatan, tebelnya udah 10 cm. 2^20 = 1 juta kali lipat = 105 METER?! Diagram twist-nya seru: LIPATAN KE-42 = 439.804 KM. Bulan cuma 384.400 KM. TEMBUS. BIMO mengaku kalah dengan manis: "439 RIBU KM?? bulan 384 ribu. GUE KALAH. oke, gak semua klaim fyp hoax" - dan KAMU nyantol: "klaim mustahil kadang bener, kadang hoax. bedanya di hitungan"
+
+Plot twist-nya? Akun misterius ngepost bukti lengkap tepat jam 02.00. Ternyata dia moot kita sendiri yang dari dulu CUMA BACA: "halo. video itu punyaku. aku cuma baca di grup ini. kalian suka debat, jadi kubuat yang mustahil tapi bener" BIMO: "mantap, makasih bestie. mulai sekarang hitung dulu baru komen. deal semua?"
+
+Semua hitungan di video ini dicek beneran: 0,1 mm × 2^42 = 439.804 km - lebih jauh dari bulan. Pangkat itu bukan hiasan angka kecil, itu mesin dobel yang jalannya cepet banget.
+
+Di akhir, ??? naruh papan soal: 1) HITUNG 3^4? 2) HITUNG 5^3? 3) HITUNG 7^0? 4) HITUNG 2^-3? Delapan kartu bantu nunggu: 81, 125, 1, 64, 8, 27, 15, 12 (ada pengecoh jahil: 64, 8, 27 - jangan asal kali ya!). Jawab di komentar, bantu ??? ya!
+
+Refleksi: pernah gak kamu bedah klaim viral tapi lupa ngecek hitungannya dulu? Kasih satu contoh klaim FYP yang menurutmu perlu dihitung ulang.
+
+Oh iya: ada yang nanya 2^-1 di komentar. Minus?? Pangkat negatif dan pecahan nunggu di video berikutnya.
+
+Kisah angka berikutnya sudah menunggu. Kuasai matematika di akiomida.com.
+
+#pangkat #bilanganberpangkat #eksponen #rp #roleplay #chatstory #misterimatematika #lipat42kali #perkalianberulang #matematika #belajarmatematika #akiomida
