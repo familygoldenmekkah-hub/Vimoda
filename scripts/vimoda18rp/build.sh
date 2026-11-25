@@ -1,5 +1,5 @@
 #!/bin/bash
-# Kaisar Motion - encode final video + thumbnail
+# encode final video + thumbnail (crf 19: muat batas 100MB GitHub utk durasi 350 s)
 # Pemakaian: bash build.sh <portrait|landscape>
 set -e
 O="$1"
@@ -9,7 +9,7 @@ AUD="/tmp/render/audio.wav"
 OUT="/tmp/render/$O/final.mp4"
 
 ffmpeg -y -framerate $FPS -i "$SRC/%05d.jpg" -i "$AUD" \
-  -c:v libx264 -preset medium -crf 17 -profile:v high -level 4.1 \
+  -c:v libx264 -preset medium -crf 19 -profile:v high -level 4.1 \
   -pix_fmt yuv420p -movflags +faststart \
   -c:a aac -b:a 256k -shortest \
   "$OUT" 2>&1 | tail -3

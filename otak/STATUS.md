@@ -9,8 +9,8 @@
 - **Sistem saraf dua lapis**: refleks GitHub Actions (ACK hitungan detik,
   hidup di repo, kuota GitHub) + sadar agent (3 giliran/hari platform batch,
   instan via pesan chat) — lihat otak/README.md
-- **Kondisi saat ini**: PRODUKSI video 18 (GRUP JAGA GUDANG, bahan blog
-  "Bilangan") - render dua orientasi berjalan; cek terakhir 2026-11-25 13:00 UTC
+- **Kondisi saat ini**: SIAP — video 18 tayang; menunggu perintah di
+  `otak/INBOX/` (cek terakhir: 2026-11-25 14:00 UTC)
 
 ## Peta ruang kerja (satu kesatuan)
 
@@ -30,6 +30,7 @@
 | Kesatuan repo-otak | ✅ SELESAI | 2026-11-25 10:00 — README root, peta ruang kerja, protokol batch + tag prioritas, otak_push.sh, otak_setup.sh, .env dilindungi dari push |
 | Sinkronisasi GitHub | ✅ SELESAI | 2026-11-25 13:00 — merge unrelated-histories dengan studio Vimoda, push 1.4 GB ruang kerja ke main (043dc6c), refleks Actions ikut aktif |
 | Hukum L1+L2 | ✅ SELESAI | 2026-11-25 — otak/HUKUM.md: dua orientasi wajib + zona aman portrait, rujukan lawbook studio |
+| Video 18 MALAM INVENTARIS | ✅ SELESAI | 2026-11-25 14:00 — dunia baru GRUP JAGA GUDANG dari bahan blog "Bilangan"; 349.7 s, 24 pesan, 6 suara, dua orientasi 88.4/83.3 MB, QA OK, tersimpan di download/ dan push ke GitHub |
 
 ## Riwayat ringkas
 
