@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+/* GRUP PANITIA LARI PAGI - VIDEO 20, MODEL FOKUS ala referensi chat story
+   (rev13) dengan SISTEM DESAIN BARU "PAGI CERIA" (otak/DESAIN-PAGI.md,
+   perintah pemilik 2026-11-28: hanya 9:16 portrait + desain CERAH - gak
+   suka gelap-gelapan, harus cantik dan aestetik, penonton betah). Latar
+   krem hangat pagi hari, bubble putih/mint/kuning, pil subtitle krem,
+   diagram kartu krem dengan aksen coral-mint-langit-ungu, fade ke krem -
+   NOL panel gelap pekat. MODEL FOKUS tetap: SATU bubble besar di tengah
+   per saat, gaya chat asli (nama + waktu + Dibaca v-v DI DALAM bubble),
+   sisipan meme ilustrasi AI bingkai putih di sela babak. Materi:
+   BILANGAN ASLI (lanjutan teaser episode sebelumnya, dunia ganti
+   total): kartu peserta 1-40, juara 1-2-3, nomor 13, tanpa
+   bolong. Formula v1 F1-F8. Produksi 9:16 SAJA (L1 revisi). */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#FFF7EA;
+  font-family:'Poppins','Noto Color Emoji','DejaVu Sans','Noto Sans SC',sans-serif;
+  -webkit-font-smoothing:antialiased}
+#bgdoodle{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 24%,#FFFDF7 0%,#FFF3DC 52%,#FFE7C2 100%)}
+.doodle{position:absolute;color:rgba(232,146,46,.16);font-weight:800;will-change:transform,opacity}
+.dperm{position:absolute;border-radius:50%;will-change:transform,opacity}
+#vig{position:absolute;inset:0;pointer-events:none;opacity:.8;
+  background:radial-gradient(ellipse at 50% 40%,transparent 58%,rgba(255,196,120,.20) 100%)}
+#rig{position:absolute;inset:0;will-change:transform}
+#phead{position:absolute;left:0;right:0;top:0;height:118px;background:rgba(255,252,245,.94);
+  border-bottom:2px solid rgba(255,192,120,.55);display:flex;align-items:center;
+  padding:0 44px;z-index:30;box-shadow:0 6px 22px rgba(190,120,30,.10)}
+.havatar{position:relative;width:74px;height:74px;flex:0 0 74px;margin-right:24px}
+.havatar div{position:absolute;border-radius:50%;border:3px solid #FFF7EA}
+.havatar .a1{left:0;top:8px;width:48px;height:48px;background:radial-gradient(circle,#FFD43B 62%,#FFC078)}
+.havatar .a2{left:30px;top:0;width:44px;height:44px;background:radial-gradient(circle,#FF8787 58%,#FA5252)}
+.havatar .a3{left:18px;top:30px;width:38px;height:38px;background:radial-gradient(circle,#B197FC 55%,#845EF7)}
+#htitle{color:#6B4A26;font-weight:800;letter-spacing:.02em;
+  text-shadow:0 2px 10px rgba(255,196,120,.35)}
+#chatwrap{position:absolute;left:0;right:0;top:118px;bottom:0;overflow:hidden}
+#pchat{position:absolute;left:0;right:0;top:0;will-change:transform}
+/* bubble gaya chat asli, tema PAGI CERIA: putih besar teks cokelat,
+   nama DI DALAM bubble, KAMU mint, akun resmi kuning */
+.msg{display:flex;margin:18px 44px;opacity:0;will-change:transform,opacity;align-items:flex-end}
+.msg.you{justify-content:flex-end}
+.avatar{width:64px;height:64px;border-radius:50%;flex:0 0 64px;margin-right:16px;
+  border:2.5px solid rgba(255,192,120,.55);display:flex;align-items:center;justify-content:center;
+  font-size:32px;color:#33261B;font-weight:800;will-change:box-shadow}
+.bwrap{max-width:880px}
+.bubble{position:relative;background:#FFFFFF;color:#33261B;border:none;
+  border-radius:8px 26px 26px 26px;padding:20px 28px 16px;font-weight:700;line-height:1.24;
+  box-shadow:0 14px 34px rgba(190,120,30,.18);will-change:transform,opacity}
+.mname{font-size:31px;font-weight:800;letter-spacing:.08em;margin:0 0 6px 2px}
+.act{font-style:italic;color:#9A8468;font-weight:600}
+.say{font-weight:700}
+.meta{display:flex;justify-content:flex-end;align-items:baseline;gap:12px;margin-top:6px}
+.mtime{font-size:26px;color:#A08C76;font-weight:700;letter-spacing:.04em}
+.ticks{font-size:27px;color:#0CA678;font-weight:800;letter-spacing:.04em}
+.msg.you .bubble{background:#D3F9D8;color:#2B4A32;border-radius:26px 8px 26px 26px;
+  box-shadow:0 14px 34px rgba(60,150,90,.16),0 0 0 2px rgba(12,166,120,.14)}
+.msg.you .act{color:#5C9366}
+.msg.you .mtime{color:#74A086}
+.msg.myst .bubble{background:#FFF9DB;color:#5C4A1E;border-radius:26px;
+  box-shadow:0 14px 34px rgba(190,120,30,.18),0 0 0 2px rgba(255,212,59,.45)}
+.msg.myst .mtime{color:#B99B4F}
+.msg.myst .act{color:#A08A50}
+.bubble.photo{padding:14px;background:#FFFFFF;border-radius:20px}
+.psvg{display:block;width:100%;height:auto;border-radius:12px}
+.pcap{font-size:40px;color:#33261B;font-weight:700;padding:12px 8px 4px;line-height:1.25}
+.bubble.sticker{background:#FFFFFF;color:#5C4A1E;border:3px solid #FFD43B;
+  border-radius:26px;padding:22px 30px;text-align:center;
+  box-shadow:0 18px 44px rgba(255,170,60,.28),0 0 0 2px rgba(255,192,120,.35)}
+.stk{font-size:52px;font-weight:800;color:#E8590C;letter-spacing:.05em}
+.stks{font-size:36px;color:#5C4A1E;font-weight:600;margin-top:10px}
+/* sisipan reaksi meme ala referensi: hard cut full-screen KREM (PAGI
+   CERIA), ilustrasi bingkai putih tebal, mata menyala coral saat kejutan */
+#memewrap{position:absolute;inset:0;z-index:45;pointer-events:none}
+.meme{position:absolute;inset:0;background:#FFF4E0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;opacity:0;will-change:transform,opacity}
+.mstage{position:relative;display:inline-block;line-height:0;will-change:transform}
+.mglyph{border-radius:30px;overflow:hidden;will-change:transform;
+  box-shadow:0 0 0 6px #FFFFFF,0 24px 60px rgba(190,120,30,.35)}
+.mglyph img{display:block;width:100%;height:100%;object-fit:cover}
+.meyes{position:absolute;left:0;top:0;pointer-events:none}
+.meyes i{position:absolute;width:15%;height:10%;border-radius:12px;opacity:0;
+  background:#FF5C5C;box-shadow:0 0 26px 10px rgba(255,92,92,.65);
+  will-change:opacity,transform}
+.meyes i:nth-child(1){left:25%;top:41%}
+.meyes i:nth-child(2){left:60%;top:41%}
+.mdigits{position:absolute;inset:0;pointer-events:none}
+.mdigit{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
+  font-weight:800;color:rgba(232,146,46,.45);opacity:0;will-change:transform,opacity}
+.mtext{margin-top:34px;color:#E8590C;font-weight:800;letter-spacing:.08em;
+  text-align:center;padding:0 40px;opacity:0;will-change:opacity,transform}
+.msub{margin-top:14px;color:rgba(90,62,30,.75);font-weight:600;text-align:center;
+  opacity:0;will-change:opacity}
+#dim{position:absolute;inset:0;background:rgba(120,80,25,.32);opacity:0;z-index:40;will-change:opacity}
+#flash{position:absolute;inset:26px;z-index:55;border-radius:26px;background:#FFFBF2;opacity:0;
+  border:3px solid #FFC078;box-shadow:0 24px 60px rgba(190,120,30,.30);
+  overflow:hidden;will-change:transform,opacity}
+#flash .speed{position:absolute;inset:0;opacity:.5;
+  background:repeating-linear-gradient(115deg,transparent 0 26px,rgba(255,192,120,.10) 26px 30px)}
+.fkick{position:absolute;top:22px;left:50%;transform:translateX(-50%);background:#FFC078;color:#4A2E12;
+  border-radius:999px;padding:8px 32px;font-weight:800;letter-spacing:.12em;font-size:32px}
+.ftitle{position:absolute;left:0;right:0;top:74px;text-align:center;color:#4A3728;font-weight:800;letter-spacing:.03em;
+  text-shadow:0 4px 16px rgba(255,196,120,.35)}
+.fen{position:absolute;left:0;right:0;text-align:center;color:rgba(90,62,30,.66);font-weight:600;font-size:34px}
+.fbody{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.fline{color:#4A3728;font-weight:600;opacity:0;will-change:opacity;display:flex;align-items:center;gap:12px}
+.fline .dot{width:18px;height:18px;border-radius:50%;flex:0 0 18px}
+.fnote{color:#E8590C;font-weight:700;opacity:0;will-change:opacity}
+.fglow{position:absolute;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,170,80,.30) 0%,rgba(255,170,80,0) 70%);will-change:transform,opacity}
+#quiz{position:absolute;inset:20px;z-index:60;border-radius:26px;background:#FFFBF2;opacity:0;
+  border:3px solid #FFC078;box-shadow:0 24px 60px rgba(190,120,30,.30);overflow:hidden;
+  will-change:transform,opacity}
+.qhd{margin:48px 6% 0;color:#E8590C;font-weight:800;letter-spacing:.06em;font-size:44px}
+.qline{height:4px;border-radius:2px;background:linear-gradient(90deg,transparent,#FF8787,transparent);
+  width:120px;margin:8px auto 0}
+.qrow{margin:10px 6% 0;color:#4A3728;font-weight:600;display:flex;gap:12px;opacity:0;will-change:opacity}
+.qrow b{color:#E8590C;flex:0 0 auto}
+.qgrid{position:absolute;left:0;right:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;will-change:opacity}
+.qcard{width:132px;height:84px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,#FFFFFF,#FFF3DC);border:3px solid #FFC078;color:#4A3728;
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;font-size:44px;
+  box-shadow:0 8px 18px rgba(190,120,30,.22);opacity:0;will-change:transform,opacity}
+.qnote{position:absolute;left:6%;right:6%;color:rgba(90,62,30,.85);font-weight:600;font-size:32px;
+  opacity:0;will-change:opacity}
+.qcta{position:absolute;left:0;right:0;text-align:center;color:#FFFFFF;background:linear-gradient(135deg,#FA5252,#E8590C);
+  border-radius:999px;margin:0 10%;padding:16px 0;font-weight:800;letter-spacing:.06em;font-size:40px;
+  border:2.5px solid rgba(255,255,255,.5);opacity:0;will-change:transform,opacity;
+  box-shadow:0 10px 26px rgba(232,89,12,.35)}
+#burst{position:absolute;inset:0;z-index:70;pointer-events:none}
+.bp{position:absolute;font-size:44px;opacity:0;will-change:transform,opacity}
+.bdot{position:absolute;border-radius:50%;opacity:0;will-change:transform,opacity}
+.bsq{position:absolute;border-radius:3px;opacity:0;will-change:transform,opacity}
+.rise{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;
+  color:rgba(232,146,46,.4);opacity:0;will-change:transform,opacity}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(255,251,240,.95);
+  border-radius:20px;padding:14px 34px;text-align:center;box-shadow:0 14px 34px rgba(190,120,30,.25);
+  will-change:transform,opacity;z-index:80}
+#sub_en{font-size:34px;color:#4A3728;font-weight:600;line-height:1.25}
+#mark{position:absolute;left:50%;transform:translateX(-50%);background:rgba(255,253,248,.92);color:#6B4A26;
+  border-radius:999px;padding:8px 28px;font-weight:800;letter-spacing:.18em;font-size:30px;z-index:80;
+  box-shadow:0 8px 20px rgba(190,120,30,.22)}
+#endcard{position:absolute;opacity:0;z-index:90;will-change:transform,opacity}
+#fplate{position:absolute;border-radius:24px;background:linear-gradient(160deg,#FFFFFF,#FFF3DC);
+  display:flex;align-items:center;justify-content:center;color:#4A3728;font-weight:800;letter-spacing:.06em;
+  border:3px solid #FFC078;box-shadow:0 20px 50px rgba(190,120,30,.35);z-index:91}
+#f_url{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
+#f_bar{position:absolute;border-radius:4px;background:linear-gradient(90deg,#FF8787,#FFD43B);
+  opacity:0;z-index:92}
+#flashwhite{position:absolute;inset:0;background:#FFFDF6;opacity:0;pointer-events:none;z-index:95}
+#fade{position:absolute;inset:0;background:#FFF7EA;opacity:0;pointer-events:none;z-index:100}
+/* INTRO FILM rev18 (permintaan pemilik): buka ala produksi film berkelas -
+   kartu judul full-bleed (ilustrasi pagi penuh layar + label grup saja)
+   lalu kartu produksi "dipersembahkan akiomida.com" krem ceria */
+#intro1{position:absolute;inset:0;z-index:85;background:#FFF7EA;opacity:0;will-change:opacity}
+#introimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}
+#introshade{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(120,80,20,.16) 0%,rgba(120,80,20,.04) 42%,rgba(120,80,20,.58) 100%)}
+#introtitle{position:absolute;left:0;right:0;bottom:11%;text-align:center;color:#FFFFFF;
+  font-weight:800;letter-spacing:.14em;padding:0 30px;line-height:1.2;
+  text-shadow:0 6px 30px rgba(120,70,10,.65),0 2px 12px rgba(120,70,10,.5);
+  will-change:opacity,transform}
+#introrule{position:absolute;left:50%;bottom:calc(11% - 30px);transform:translateX(-50%);
+  width:0;height:3px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,#FFD43B,#FA5252,transparent);will-change:width}
+#intro2{position:absolute;inset:0;z-index:85;display:none;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  background:radial-gradient(ellipse at 50% 40%,#FFF8EC 0%,#FFEBC9 58%,#FFDFB0 100%);
+  opacity:0;will-change:opacity}
+#intro2kick{color:rgba(90,62,30,.72);font-weight:700;letter-spacing:.42em;text-indent:.42em;
+  will-change:opacity,transform}
+#intro2name{margin-top:18px;color:#E8590C;font-weight:800;letter-spacing:.08em;
+  text-shadow:0 8px 40px rgba(255,170,80,.45),0 3px 14px rgba(190,120,30,.25);
+  will-change:opacity,transform}
+#intro2line{margin-top:28px;width:0;height:3px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,#FF8787,#FFD43B,transparent);will-change:width}
+#intro2tag{margin-top:28px;color:#B4630E;font-weight:700;letter-spacing:.05em;padding:0 34px;
+  will-change:opacity,transform}
+#intro2shim{position:absolute;left:0;top:-20%;width:16%;height:140%;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  will-change:transform}
+/* DIAGRAM rev23: band krem + fill cerah (PAGI CERIA) */
+.rband{position:relative;height:30px;border-radius:9px;
+  background:linear-gradient(180deg,#FFF1DE,#FFE8C8);
+  border:2.5px solid rgba(255,170,80,.8);box-shadow:0 10px 26px rgba(190,120,30,.16)}
+.rtick{position:absolute;bottom:0;width:2.5px;border-radius:1px;background:rgba(190,120,30,.25)}
+.rfill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:7px;
+  background:linear-gradient(90deg,#38D9A9,#12B886);
+  box-shadow:0 0 18px rgba(56,217,169,.4);will-change:width}
+.rmark{position:absolute;top:-7px;bottom:-7px;width:3.5px;border-radius:2px;
+  background:#FA5252;box-shadow:0 0 10px rgba(250,82,82,.7);opacity:0;will-change:left,opacity}
+.rpin{position:absolute;top:-16px;width:6px;height:62px;margin-left:-3px;border-radius:3px;
+  background:#FFFFFF;box-shadow:0 0 16px rgba(255,170,80,.8);will-change:left}
+.rlbl{position:absolute;bottom:calc(100% + 24px);transform:translateX(-50%);
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;
+  color:#E8590C;text-shadow:0 3px 10px rgba(255,196,120,.6);white-space:nowrap;
+  opacity:0;will-change:left,color,opacity}
+.rnums{position:relative;height:36px;margin-top:8px;
+  font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:700;
+  font-size:28px;color:rgba(90,62,30,.55)}
+/*__FONTS__*/
+</style></head>
+<body>
+<div id="bgdoodle"></div>
+<div id="rig">
+  <div id="phead">
+    <div class="havatar"><div class="a1"></div><div class="a2"></div><div class="a3"></div></div>
+    <div id="htitle">KUASAI MATEMATIKA DI AKIOMIDA.COM</div>
+  </div>
+  <div id="chatwrap"><div id="pchat"></div></div>
+</div>
+<div id="memewrap"></div>
+<div id="dim"></div>
+<div id="flash">
+  <div class="speed"></div>
+  <div class="fkick" id="fkick">ANGKA MENGHITUNG</div>
+  <div class="ftitle" id="ftitle"></div>
+  <div class="fen" id="fen"></div>
+  <div class="fbody" id="fbody"></div>
+  <div class="fglow" id="fglow"></div>
+</div>
+<div id="quiz">
+  <div class="qhd" id="qhd">MISI DARI PANITIA PUSAT</div>
+  <div class="qline"></div>
+  <div id="qrows"></div>
+  <div class="qgrid" id="qgrid"></div>
+  <div class="qnote" id="qnote"></div>
+  <div class="qcta" id="qcta">TULIS JAWABANMU DI KOMENTAR YA!</div>
+</div>
+<div id="intro1">
+  <img id="introimg" alt="ilustrasi">
+  <div id="introshade"></div>
+  <div id="introtitle">GRUP PANITIA LARI PAGI</div>
+  <div id="introrule"></div>
+</div>
+<div id="intro2">
+  <div id="intro2kick">DIPERSEMBAHKAN</div>
+  <div id="intro2name">AKIOMIDA.COM</div>
+  <div id="intro2line"></div>
+  <div id="intro2tag">KUASAI MATEMATIKA JADI LEBIH MUDAH..</div>
+  <div id="intro2shim"></div>
+</div>
+<div id="burst"></div>
+<div id="subbar"><div id="sub_en"></div></div>
+<div id="mark">AKIOMIDA</div>
+<div id="endcard"><div id="fplate"><div id="f_url">AKIOMIDA.COM</div></div><div id="f_bar"></div></div>
+<div id="flashwhite"></div>
+<div id="fade"></div>
+<script>

@@ -24,13 +24,14 @@ deskripsi/tombol/UI media sosial saat diposting:
 
 Verifikasi visual smoke frame wajib sebelum render penuh.
 
-## L4 - DESAIN CERAH WAJIB (perintah pemilik 2026-11-28)
+## L4 - DESAIN GLOW v3 WAJIB (rombak total per penolakan pemilik 2026-11-28)
 
-Pemilik: "gak suka desain gelap-gelapan, gak cantik dan gak aestetik" -
-wajib bikin penonton betah. Semua episode baru memakai sistem desain
-PAGI CERIA (`otak/DESAIN-PAGI.md`): latar krem hangat, bubble putih/mint/
-kuning, pil subtitle krem, diagram kartu krem, fade ke krem - NOL panel
-gelap pekat. QA visual memverifikasi latar cerah tiap episode baru.
+Pemilik menilai desain PAGI CERIA 1/10 dan memerintahkan rombak total.
+Hukum baru: semua episode memakai sistem desain GLOW v3
+(`otak/DESAIN-GLOW.md`) - gradien hidup + blob bokeh, bubble glassmorphism,
+4 hero scene sinematik AI, bar progres cerita, palet plum-coral-mint-emas.
+Larangan: permukaan datar membosankan, panel gelap pekat. Tolakan desain
+pemilik = rombak total bahasa visual, bukan perbaikan permukaan.
 
 ## Hukum pendukung yang aktif otomatis
 
