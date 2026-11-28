@@ -1,0 +1,19 @@
+Bilangan asli itu mulai dari 1, dan juara lomba juga. Pernah kepikiran kenapa gak ada juara nomor 0?
+
+Minggu ini kita jadi panitia lari pagi. Kartu peserta dicetak 40 lembar, nomor 1 sampai 40, buat 40 pelari. Satu nomor, satu pelari. Terus ada drama: peserta nomor 13 dicap sial dan minta dibuang, ganti jadi 41. Katanya biar aman.
+
+Tapi petugas garis start langsung nolak: kalau 13 dibuang, kartu tinggal 39 label berurutan dan satu label nongol sendiri. Pelari tetep 40 orang, tapi urutannya bolong di tengah. Catatan finis langsung gak nyambung. Nomor 13 itu cuma urutan ke-13: ada 12 di depannya, 14 di belakangnya. Aman.
+
+Nah, di sinilah bilangan asli kelihatan punya dua peran sekaligus. Peran pertama: menghitung banyaknya. 40 pelari, 40 kartu, satu nomor satu orang. Peran kedua: mengurutkan. Yang pertama datang di garis finis itu juara 1, yang kedua juara 2, yang ketiga juara 3. Angkanya sama, perannya beda.
+
+Dan bedanya sama kemarin: penumpang nol boleh ada di terminal, tapi juara ke-0 gak ada. Finis nol orang artinya belum ada yang sampai, tapi begitu ada yang datang, dia langsung juara 1. Gak ada urutan sebelum pertama.
+
+Pertanyaan panitia: kalau pelari baru daftar, dia dapat kartu 41. Bilangan asli habis di mana? Jawabannya: gak pernah habis. Setiap bilangan asli punya pengikut, setelah 40 ada 41, urutannya gak pernah putus. Peserta nomor 13 akhirnya tetep pakai kartunya juga, dan pencatat finis mencatat momen itu: jam 5.40.
+
+Voting panitia: 64% bilang bilangan asli itu tentang menghitung, 36% bilang tentang mengurutkan. Dua peran, satu keluarga angka.
+
+Sekarang giliranmu: menurutmu, memisahkan nomor 13 dari urutan itu membantu atau malah merusak hitungan? Ceritain alasanmu di komentar, ya.
+
+Jumlah 1 sampai 100 sudah menunggu untuk besok malam, dan ada jalan pintasnya. Buka browser kamu dan mampir ke AKIOMIDA.COM buat petualangan matematika yang makin seru.
+
+#matematika #bilanganasli #bilangan #laripagi #edukasi #belajarmatematika #akiomida
