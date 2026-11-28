@@ -45,6 +45,6 @@ def check(orient):
     return True
 
 ok = True
-for o in ("portrait", "landscape"):
+for o in ("portrait",):
     ok = check(o) and ok
 sys.exit(0 if ok else 1)

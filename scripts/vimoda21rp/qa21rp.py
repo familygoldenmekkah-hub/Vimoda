@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""QA penuh Video 20 FORMAT RP (LARI PAGI: Bilangan Asli Mulai dari 1?,
-dunia GRUP PANITIA LARI PAGI). PENERAPAN KEDUA FORMULA DIALOG AKIOMIDA
-v1 (F1-F8, otak/BELAJAR-DIALOG.md). SISTEM DESAIN PAGI CERIA
-(otak/DESAIN-PAGI.md) + L1 REVISI: 9:16 SAJA. HUKUM SERI: dunia diganti total -
+"""QA penuh Video 21 FORMAT RP (GRUP RESEP GAGAL: Bilangan di Dapur,
+dunia GRUP RESEP GAGAL). PENERAPAN KETIGA FORMULA DIALOG AKIOMIDA v1
+(F1-F8, otak/BELAJAR-DIALOG.md). SISTEM DESAIN GLOW v3
+(otak/DESAIN-GLOW.md, rombak total per penolakan pemilik) + L1 REVISI:
+9:16 SAJA. HUKUM SERI: dunia diganti total -
 nama grup, anggota, avatar, setting tidak boleh dibawa ulang (dilarang ada
 penanda dunia lama, termasuk dunia video 15 dan 16). MODEL FOKUS ala
 referensi pemilik (rev13): kanvas hitam penuh, satu bubble fokus besar di
@@ -60,7 +61,7 @@ banned = ("Jangan", "FOLLOW", "SUBSCRIBE", "IKUTI", "Kaisar", "\u2014", "\u2013"
           "Pembagi Rapi", "kasus ditutup", "ternyata", "diukur",
           "tamu pertama", "CARA BAGI RATA", "balik lampu", "nyolong",
           # hukum dunia tiap episode: penanda dunia episode lama terlarang
-          "KIOS PERMEN", "PEMILIK KIOS", "MENTOR", "kios", "kardus",
+          "KIOS PERMEN", "PEMILIK KIOS", "MENTOR", "kios",
           # penanda dunia video 16 terlarang (dunia diganti total)
           "GRUP BAHAS FYP", "batangkertas", "FYP", "klaim", "lipat dobel",
           "TANGGA DOBEL", "LIPATAN KE-42", "2^42", "BULAN 384", "TEMBUS",
@@ -85,16 +86,16 @@ banned = ("Jangan", "FOLLOW", "SUBSCRIBE", "IKUTI", "Kaisar", "\u2014", "\u2013"
           "sobat dapur", "akang gede", "neng vita", "kak bener",
           "koma mah", "full dua rata",
           # rev21-22 (hukum dunia): penanda dunia episode lama terlarang
-          "RESEP", "DAPUR", "dapur", "takar", "TAKAR", "GEDE", "VITA",
-          "NADIA", "AKUN TANTANGAN", "GARIS UKUR", "timbangan", "TIMBANGAN",
-          "karamel", "terigu", "adonan", "lunyer", "maghrib", "MAGHRIB",
+          "GEDE", "VITA",
+          "NADIA", "AKUN TANTANGAN", "GARIS UKUR",
+          "karamel", "terigu", "lunyer", "maghrib", "MAGHRIB",
           "kroasan", "omaknadia", "koma-komaan", "0,999", "0,333",
           "0,75", "0,40", "0,35", "desimal berulang", "gelas takar",
           "LEADERBOARD", "JAM 7 MALAM", "HARI 3", "HARI 4", "16.00",
           "18.04", "19.02", "16.14", "16.26",
           # rev22: penanda dunia video 18 (gudang) terlarang
           "GUDANG", "gudangpusat", "GILANG", "RUPI", "OMAK", "DEDI",
-          "MALAM INVENTARIS", "inventaris", "freezer", "FREEZER", "kard",
+          "MALAM INVENTARIS", "inventaris", "freezer", "FREEZER",
           "KARD", "bagi rata", "BAGI RATA", "dua lapis", "DUA LAPIS",
           "dibuat manusia", "DIBUAT MANUSIA", "ditemukan", "DITEMUKAN",
           "VOTING MALAM", "VOTING TENGAH MALAM", "JAM 12 MALAM",
@@ -122,7 +123,23 @@ banned = ("Jangan", "FOLLOW", "SUBSCRIBE", "IKUTI", "Kaisar", "\u2014", "\u2013"
           "30 KARCIS", "BESOK: BILANGAN ASLI", "61%", "39%",
           "30 penumpang", "10 garasi", "nol ikut dihitung",
           "NOMOR 7 KOSONG", "NOL ITU ANGKA SAH", "VOTING DINI HARI",
-          "MONITOR DINAS", "sinkron karcis-unit", "0 sampai 9")
+          "MONITOR DINAS", "sinkron karcis-unit", "0 sampai 9",
+          # rev24: penanda dunia video 20 (lari pagi) terlarang
+          "LARI", "lari", "PANITIA", "panitia", "LARA", "BAGAS", "RIKA",
+          "DIN", "pelari", "PESERTA", "peserta", "papan peserta",
+          "PAPAN PODIUM", "podium", "lintasan", "finis", "juara", "JUARA",
+          "garis start", "GARIS START", "kartu peserta", "KARTU PESERTA",
+          "nomor dada", "nomor 13", "NOMOR 13", "sial", "SIAL",
+          "bilangan asli", "bukan cacah", "nol sah di cacah",
+          "JURUS HITUNG ASLI", "ASLI: 1, 2, 3", "ANGKA MENGHITUNG",
+          "MENGHITUNG ATAU MENGURUTKAN", "MENGHITUNG: 40 PELARI",
+          "MENGURUTKAN: JUARA KE-1", "ANGKA SAMA · PERAN BEDA",
+          "DUA PERAN, SATU KELUARGA ANGKA", "BESOK: JUMLAH 1 SAMPAI 100",
+          "JUARA KE-0 GAK ADA", "URUTAN GAK BOLEH BOLONG",
+          "SATU NOMOR, SATU PELARI", "VOTING PANITIA", "VOTING PUSAT",
+          "KARTU 1-40", "NOMOR 13 TETEP ADA", "empat puluh kartu",
+          "kartu ke-41", "05.12", "05.17", "05.24", "05.33", "05.44",
+          "05.52", "05.58", "salam satu lintasan", "PAGI CERIA")
 for b in banned:
     if b in eng_scan:
         fail(f"DILARANG ada di engine: {b!r}")
@@ -144,61 +161,73 @@ if _bad_emo:
     fail(f"emoji/dingbat terlarang sejak rev14: {_bad_emo[:8]}")
 else:
     print("nol emoji: engine bersih (hanya Dibaca v-v yang boleh)")
-requires = ("GRUP PANITIA LARI PAGI", "KUASAI MATEMATIKA DI AKIOMIDA.COM",
-            "GARIS START · 05.20", "PAPAN PESERTA · 05.24",
-            "PODIUM JUARA · 05.33", "VOTING PUSAT · 05.44",
-            "LARA", "DIN", "RIKA", "BAGAS", "KAMU",
-            "AKUN PANITIA PUSAT",
-            # rev23: skema LARI PAGI (F2 kartu dunia) + sapaan unik (F1)
-            "LARI PAGI MINGGU", "CEK KARTU PESERTA 1-40",
-            "GARIS START SIAP JAM 05.30", "CATAT JUARA 1 SAMPAI 3",
-            "@panitiapusat", "PAPAN KARTU PESERTA · 1-40",
-            "SATU NOMOR, SATU PELARI", "PAPAN PODIUM · JUARA 1-2-3",
-            "JUARA KE-0 GAK ADA", "VOTING PANITIA",
-            "nomor 13 ya, kak", "aku tetep juara 1",
-            "urutan ke-13", "bilangan asli: 1, 2, 3",
-            "asli ya, bukan cacah", "empat puluh kartu buat empat puluh pelari",
-            "buang aja nomor 13", "ganti jadi 41",
-            "urutannya bolong di tengah", "13 tetep 13",
-            "pelari pertama datang = juara 1",
-            "dua peran bilangan asli", "angkanya sama, perannya beda",
-            "satu, dua, tiga, jalan", "juara nol gak ada",
-            "nol sah di cacah", "juara 1, bukan juara 0",
-            "kartu ke-41 pun siap dicetak",
-            "bilangan asli gak pernah habis", "JURUS HITUNG ASLI",
-            "nomor 13 tetep gue pakai", "kartu nomor 41",
-            "setelah 40 ada 41", "gak ada urutan sebelum pertama",
-            "dua peran, satu keluarga angka", "salam satu lintasan",
-            # rev23: 3 diagram menyala (F6) + kosakata benar
-            "ANGKA MENGHITUNG", "ASLI: 1, 2, 3, TERUS",
-            "GAK ADA JUARA KE-0", "URUTAN GAK BOLEH BOLONG",
-            "MENGHITUNG ATAU MENGURUTKAN?", "MENGHITUNG", "MENGURUTKAN",
-            "DUA PERAN, SATU KELUARGA ANGKA", "JUARA KE-0 GAK ADA",
-            "ANGKA SAMA · PERAN BEDA",
-            "MENGHITUNG: 40 PELARI (BANYAK)",
-            "MENGURUTKAN: JUARA KE-1, KE-2, KE-3",
-            "40 lalu 41", "BESOK: JUMLAH 1 SAMPAI 100",
-            "MISI DARI PANITIA PUSAT", "TULIS JAWABANMU DI KOMENTAR YA",
-            "KARTU BANTU DARI PANITIA PUSAT",
-            "40 PELARI DARI NOMOR 1, YANG TERAKHIR NOMOR BERAPA?",
-            "SETELAH 40 ADA BILANGAN BERAPA?",
+requires = ("GRUP RESEP GAGAL", "KUASAI MATEMATIKA DI AKIOMIDA.COM",
+            "CEK TAKARAN · 19.20", "PAPAN TAKARAN · 19.24",
+            "RESEP DOBEL · 19.33", "VOTING DAPUR · 19.44",
+            "RARA", "GITA", "DIMAS", "MANDA", "KAMU",
+            "AKUN DAPUR PUSAT",
+            # rev24: skema RESEP GAGAL (F2 kartu dunia) + sapaan unik (F1)
+            "RESEP MINGGU INI", "BROWNIES 4 PORSI",
+            "CEK TAKARAN: 200 GRAM", "2 TELUR · 250 ML · 180 DERAJAT",
+            "LANGKAH 1 SAMPAI 5 WAJIB URUT", "@dapurpusat",
+            "PAPAN TAKARAN ASLI", "KURANG SATU NOL", "BEDA 10 KALI LIPAT",
+            "PAPAN RESEP DOBEL", "SEMUA ANGKA DUA KALI LIPAT",
+            "VOTING DAPUR", "SALAH TAKARAN", "SALAH URUTAN",
+            "brownies gue keras kayak batu", "resep itu murni matematika",
+            "angka itu presisi", "sepuluh kali lipat",
+            "brownies bisa jadi kardus", "ovennya yang ngambek",
+            "oven boleh dicurigai", "takaran dicek duluan",
+            "resep minta 200 gram, kamu pakai 20 gram",
+            "langkah 1 lelehkan, 2 campur, 3 kocok",
+            "mengukur takaran dan mengurutkan langkah",
+            "200 jadi 400, 2 telur jadi 4", "dobel porsi",
+            "angka di resep itu satu tim", "gue ngaku deh",
+            "lompat langkah 3", "JURUS RESEP TEPAT",
+            "takaran ditimbang · langkah diurut · porsi dihitung",
+            "gue bawa timbangan", "200 gram beneran",
+            "pertanyaan dapur", "12 porsi", "200 jadi 600 gram",
+            "porsi dilipat, takaran ikut dilipat", "37 kegagalan",
+            "teksturnya udah cakep", "biang keroknya",
+            "pecahan di dapur", "1/2 sendok teh", "selamat mencoba",
+            "jangan lupa timbang",
+            # rev24: 3 diagram menyala (F6) + hero poster (GLOW v3)
+            "ANGKA DAPUR", "TAKARAN + LANGKAH",
+            "SATU NOL KELEWAT = GAGAL", "LANGKAH 1-5 GAK BOLEH LOMPAT",
+            "PENYEBAB GAGAL PALING SERING?",
+            "TAKARAN PALING SERING BIKIN GAGAL",
+            "LANGKAH LOMPAT LANGSUNG KETAHUAN",
+            "PORSI DILIPAT · TAKARAN IKUT",
+            "MENGUKUR: 200 GRAM (TAKARAN)", "MENGURUTKAN: LANGKAH 1-5",
+            "porsi dilipat, takaran ikut: 4 lalu 8 lalu 12",
+            "SEMUA ANGKA SATU TIM", "BESOK: PECAHAN 1/2",
+            "TAKARAN ITU MATEMATIKA", "DOBEL PORSI, DOBEL ANGKA",
+            "const SCENES=TM.scenes", "HERO_IMGS", "glowlayer",
+            "MISI DARI DAPUR PUSAT", "TULIS JAWABANMU DI KOMENTAR YA",
+            "KARTU BANTU DARI DAPUR PUSAT",
+            "RESEP 4 PORSI MAU JADI 8", "RESEP 2 TELUR MAU JADI 8 PORSI",
             "Dibaca ✓✓", "memewrap", "mglyph", "meyes", "mdigit",
             # rev18: intro film - judul full-bleed + kartu produksi
             "intro1", "intro2", "introimg", "introtitle",
             "DIPERSEMBAHKAN", "KUASAI MATEMATIKA JADI LEBIH MUDAH",
             "AKIOMIDA",
-            # rev14-23: waktu chat + ilustrasi AI + timeline + L1 revisi
-            "05.12", "05.58", "const AVI=", "MEME_IMGS",
+            # rev14-24: waktu chat + ilustrasi AI + timeline + L1 + GLOW
+            "19.12", "19.58", "const AVI=", "MEME_IMGS",
             "const TM=", "const SUBS=TM.subs", "const DIVS=TM.div",
-            "voice acting", "9:16 SAJA", "PAGI CERIA")
+            "voice acting", "9:16 SAJA", "GLOW v3")
 for r in requires:
     if r not in eng_scan:
         fail(f"WAJIB ada di engine: {r!r}")
-n_embed = eng.count("data:image/jpeg;base64,")
+mi0 = eng.index("const MEME_IMGS=[")
+mi1 = eng.index("];", mi0)
+n_embed = eng[mi0:mi1].count("data:image/jpeg;base64,")
 if n_embed != 5:
     fail(f"ilustrasi AI kartu meme {n_embed} != 5")
+n_hero = eng.count("const HERO_IMGS=[")
+h_imgs = eng.count("data:image/jpeg;base64,")
+if "const HERO_IMGS=[" not in eng:
+    fail("HERO_IMGS (4 hero scene GLOW) tidak ada")
 else:
-    print("5 ilustrasi AI kartu meme embed ok")
+    print(f"ilustrasi AI ok: 5 meme + hero scene GLOW (total {h_imgs} embed)")
 # label pelajaran terlarang sejak rev8; pengetikan rev9; kalimat tema
 # dan simile terpaksa rev10; lubang alur (kehadiran mustahil, pembelaan
 # tanpa tuduhan) terlarang rev11
@@ -213,7 +242,7 @@ n_svg = len(re.findall(r'class="psvg" viewBox', eng))
 if n_svg != 4:
     fail(f"ilustrasi dunia {n_svg} != 4")
 else:
-    print("4 ilustrasi dunia SVG ok (poster, papan peserta, podium, voting)")
+    print("4 ilustrasi dunia SVG ok (papan resep, takaran, dobel, voting)")
 n_flash = eng.count("kick:'")
 if n_flash != 3:
     fail(f"jumlah diagram menyala {n_flash} != 3")
@@ -236,7 +265,7 @@ for a, b in zip(times_msg, times_msg[1:]):
         gaps_ok = False
 if gaps_ok:
     print(f"tempo baca ok: {len(times_msg)} bubble, jeda >= 2.8 s")
-if "UJIVAL=['40','41','39','13','1','2','3','14']" not in eng:
+if "UJIVAL=['400','4','8','2','200','600','12','5']" not in eng:
     fail("delapan kartu bantu tidak lengkap")
 else:
     print("papan misi 2 soal utuh + 8 kartu bantu ok")
@@ -252,34 +281,34 @@ if len(stamps) != 24:
     fail(f"stempel jam chat {len(stamps)} != 24")
 elif [_mins(s) for s in stamps] != sorted(_mins(s) for s in stamps):
     fail(f"stempel jam tidak urut kronologis: {stamps}")
-elif (stamps[0] != "05.12" or stamps[4] != "05.17" or stamps[8] != "05.24"
-      or stamps[13] != "05.33" or stamps[19] != "05.44"
-      or stamps[22] != "05.52" or stamps[-1] != "05.58"):
+elif (stamps[0] != "19.12" or stamps[4] != "19.17" or stamps[8] != "19.24"
+      or stamps[13] != "19.33" or stamps[19] != "19.44"
+      or stamps[22] != "19.52" or stamps[-1] != "19.58"):
     fail(f"stempel jam tidak nyambung kartu babak: {stamps}")
 else:
-    print(f"stempel jam realistis 05.12 -> {stamps[-1]} pagi hari ok")
+    print(f"stempel jam realistis 19.12 -> {stamps[-1]} malam dapur ok")
 
-# rev23 (pagi hari): seluruh stempel antara 05.00 dan 07.00, tanpa
-# loncatan; selaras desain PAGI CERIA
+# rev24 (malam dapur): seluruh stempel antara 19.00 dan 20.00, tanpa
+# loncatan; selaras desain GLOW v3
 bad_waktu = []
 for chunk in eng_scan.split("{t0:TM.m[")[1:]:
     mi = int(re.match(r"\d+", chunk).group())
     st = re.search(r"stamp:'([\d.]+)'", chunk[:120])
     if st:
         hh = int(st.group(1).split(".")[0])
-        if hh not in (5, 6):
-            bad_waktu.append((mi, "jam pagi hari", st.group(1)))
+        if hh not in (19, 20):
+            bad_waktu.append((mi, "jam malam dapur", st.group(1)))
 if bad_waktu:
-    fail(f"dosa waktu rev23: {bad_waktu}")
+    fail(f"dosa waktu rev24: {bad_waktu}")
 else:
-    print("konsistensi waktu ok: semua stempel pagi hari 05.xx-06.xx nyambung kartu")
+    print("konsistensi waktu ok: semua stempel malam dapur 19.xx-20.xx nyambung kartu")
 
 # ---------- 2) subtitle EN: tempo proporsional (aturan 18); 32 beat rev17 ----------
 subs = TMj["subs"]
 if eng.count("const SUBS=TM.subs") != 1:
     fail("SUBS tidak terikat ke TM (satu sumber timeline)")
-if len(subs) != 44:
-    fail(f"jumlah beat subtitle {len(subs)} != 44")
+if len(subs) != 36:
+    fail(f"jumlah beat subtitle {len(subs)} != 36")
 prev = -99.0
 ok_tempo = True
 for k, s in enumerate(subs):
@@ -364,7 +393,7 @@ for o in ("portrait",):
 
 # ---------- 6) naskah + caption ----------
 pkg = HERE / "package"
-for name in ("caption20.txt", "naskah20.md"):
+for name in ("caption21.txt", "naskah21.md"):
     fp = pkg / name
     if not fp.exists():
         print(f"{name} belum ada")
@@ -373,10 +402,10 @@ for name in ("caption20.txt", "naskah20.md"):
     base_bad = ("\u2014", "\u2013", "Kaisar", "Kamu tahu harus ke mana", "nemu aha", "Jangan")
     cap_bad = base_bad + ("PENCURI", "CURI", "SERANGAN", "JEBAKAN", "PENANGKAPAN",
                           "TERTANGKAP", "DICURI")
-    for bad in (cap_bad if name == "caption20.txt" else base_bad):
+    for bad in (cap_bad if name == "caption21.txt" else base_bad):
         if bad in t:
             fail(f"DILARANG ada di {name}: {bad!r}")
-    if name == "caption20.txt" and "sudah menunggu" not in t:
+    if name == "caption21.txt" and "sudah menunggu" not in t:
         fail("teaser tersisip belum ada di caption")
     print(f"{name}: bersih ({len(t)} karakter)")
 

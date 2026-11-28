@@ -1,5 +1,5 @@
-/* ---------- LARI PAGI rev23: render per frame, MODEL FOKUS, desain
-   PAGI CERIA (otak/DESAIN-PAGI.md), produksi 9:16 SAJA
+/* ---------- RESEP GAGAL rev24: render per frame, MODEL FOKUS, desain
+   GLOW v3 (otak/DESAIN-GLOW.md), produksi 9:16 SAJA
    ala referensi chat story yang diupload pemilik: SATU bubble fokus
    besar di tengah layar hitam (pesan lama memudar begitu balasan datang),
    kartu ilustrasi hard-cut di sela babak, kamera hanyut di #rig, punch
@@ -53,6 +53,8 @@ function renderFrame(t){
     d.el.style.opacity=(0.24+0.14*Math.sin(t*0.4+d.ph)).toFixed(3);
     d.el.style.transform=`translate(${(Math.sin(t*0.22+d.ph)*18).toFixed(1)}px,${(Math.cos(t*0.18+d.ph)*14).toFixed(1)}px)`;
   }
+  /* GLOW v3: lapisan scene (blob, sparkle, progres, hero poster) */
+  if(window.__updateScene)window.__updateScene(t);
   /* kamera: napas + punch momen + dolly zoom + shake sisipan */
   const im=imp(t);
   const shk=memeShake(t);
@@ -106,7 +108,7 @@ function renderFrame(t){
   }
   /* fokus ke tengah layar: scroll pelan mengunci bubble terbaru */
   if(focus){
-    const target=focus.top+focus.h/2+P.headH-P.focusY;
+    const target=focus.top+focus.h/2+P.headH+34-P.focusY;
     if(Math.abs(target-scrollCur)>600)scrollCur=target;
     scrollCur+=(target-scrollCur)*0.14;
     chatEl.style.transform=`translateY(${(-scrollCur).toFixed(1)}px)`;
@@ -246,7 +248,7 @@ function renderFrame(t){
       const s2=1+0.09*Math.sin(clamp(seg(t,cc.pop,0.4),0,1)*Math.PI);
       cc.el.style.opacity=(inA*qo).toFixed(3);
       cc.el.style.transform=`translateX(${((1-inA)*46*dir).toFixed(1)}px) rotate(${((1-inA)*10*dir).toFixed(2)}deg) scale(${s2.toFixed(3)})`;
-      cc.el.style.borderColor=inA>0.9&&t<cc.pop+0.45?'#E8B32E':'#C8A86E';
+      cc.el.style.borderColor=inA>0.9&&t<cc.pop+0.45?'#FF6B8A':'#FFC94D';
     }
     qnoteEl.style.opacity=(seg(t,TM.quiz[0]+3.9,0.4)*qo).toFixed(3);
     const cpo=eio(seg(t,TM.quiz[0]+5.7,0.5));

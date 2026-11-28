@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Musik, SFX & VOICE ACTING rev23 - VIDEO 20 "LARI PAGI: Bilangan Asli
-Mulai dari 1" (dunia GRUP PANITIA LARI PAGI), desain PAGI CERIA. Semua waktu dari timing.json (TM,
+"""Musik, SFX & VOICE ACTING rev24 - VIDEO 21 "GRUP RESEP GAGAL:
+Bilangan di Dapur" (dunia GRUP RESEP GAGAL), desain GLOW v3. Semua waktu dari timing.json (TM,
 dihitung timeline17rp.py dari durasi voice) - satu sumber kebenaran.
 
-RESEP rev14-16 (hukum #42): palet malam lofi hangat - pad D MINOR malam,
-arpeggio lembut pagi hari, pop notifikasi bernada per chara (LARA 523,
-RIKA 740, DIN 660, BAGAS 392, KAMU 587, PUSAT 880), swell hangat di kartu
+RESEP rev14-16 (hukum #42): palet dapur malam hangat - pad F MAJOR,
+arpeggio marimba dapur lembut, pop notifikasi bernada per chara (GITA 523,
+RARA 740, DIMAS 660, MANDA 392, KAMU 587, PUSAT 880), swell hangat di kartu
 babak
 (bukan boom trailer), karpet tape noise sangat pelan, TANPA kick+hat ala
 klub. 24 klip VOICE dimix di t0 tiap pesan + ducking otomatis: bed
 diturunkan 55% selama voice berbicara. Hening total 1.0 s sebelum
-pertanyaan PUSAT (MA), hangat F MAJOR sejak resolusi dua peran angka +
+pertanyaan PUSAT (MA), hangat F MAJOR sejak resolusi porsi dilipat +
 voting.
 Output: /tmp/render/audio.wav (durasi = TM.dur)
 """
@@ -146,11 +146,11 @@ card2 = DIV[2]
 f2t0 = FLASH[1][0]
 f3t0 = FLASH[2][0]
 SEG = [
-    (0.0, card2, (F3, A3, C4)),        # pagi ceria: kartu peserta 1-40
-    (card2, MA[0], (D3, F3, A3)),      # nomor 13, menghitung vs mengurutkan
+    (0.0, card2, (F3, A3, C4)),        # dapur hangat: papan resep 4 porsi
+    (card2, MA[0], (D3, F3, A3)),      # takaran 200 vs 20, presisi, dobel
     # MA: hening total 1.0 s sebelum pertanyaan PUSAT
-    (f2t0, f3t0, (G3, Bb3, D4)),       # debat juara 1 dan successor 41
-    (f3t0, DUR, (F3, A3, C4)),         # dua peran satu keluarga: hangat
+    (f2t0, f3t0, (G3, Bb3, D4)),       # debat 12 porsi dan penyebab gagal
+    (f3t0, DUR, (F3, A3, C4)),         # porsi dilipat takaran ikut: hangat
 ]
 for (t0, t1, notes) in SEG:
     dur = max(t1 - t0 + 1.0, 1.5)
@@ -212,11 +212,11 @@ mixL += bed * 0.011
 mixR += np.roll(bed, 900) * 0.011
 
 # ---------- momen kunci ----------
-WHO = ("PUSAT", "BAGAS", "RIKA", "KAMU", "LARA", "KAMU", "BAGAS",
-       "DIN", "PUSAT", "KAMU", "RIKA", "LARA", "DIN", "PUSAT", "KAMU",
-       "RIKA", "LARA", "RIKA", "BAGAS", "PUSAT", "DIN", "RIKA",
+WHO = ("PUSAT", "RARA", "GITA", "KAMU", "DIMAS", "MANDA", "RARA",
+       "GITA", "PUSAT", "KAMU", "DIMAS", "GITA", "MANDA", "PUSAT", "KAMU",
+       "RARA", "GITA", "DIMAS", "RARA", "PUSAT", "DIMAS", "GITA",
        "PUSAT", "PUSAT")
-POP_F = {"LARA": 523.0, "RIKA": 740.0, "DIN": 660.0, "BAGAS": 392.0,
+POP_F = {"GITA": 523.0, "RARA": 740.0, "DIMAS": 660.0, "MANDA": 392.0,
          "KAMU": 587.0, "PUSAT": 880.0}
 add(0.35, swell(65.4, 0.12))               # dunia GRUP RESEP GAGAL menyala
 add(0.4, whoosh(0.5, True, 0.035))
@@ -240,7 +240,7 @@ for i, t0 in enumerate(M):
     if photo:
         for j in range(4):                 # foto: elemen post menempel
             add(t0 + 0.12 + j * 0.10, tick(700 + j * 60, 0.03))
-    if i == 17:                            # stiker JURUS HITUNG ASLI
+    if i == 16:                            # stiker JURUS RESEP TEPAT
         add(t0, whoosh(0.5, True, 0.05))
         for f, dt in ((523.25, 0.0), (659.26, 0.12), (783.99, 0.24)):
             add(t0 + dt, chime(f, 0.07))
@@ -265,8 +265,13 @@ for i in range(4):
     add(MA[0] + i * 0.22, tick(1100, 0.04))
 for (t0, t1, _n, _rad, _conf) in TM["bursts"]:
     add(t0 + 0.1, chime(1174.66 if t1 - t0 < 3 else 1046.5, 0.05))
-add(M[19] + 0.4, chime(880.0, 0.04))       # PUSAT: pertanyaan panitia
-add(M[21] + 0.35, chime(523.25, 0.08))     # RIKA: dua peran satu keluarga
+add(M[19] + 0.4, chime(880.0, 0.04))       # PUSAT: pertanyaan dapur
+add(M[21] + 0.35, chime(523.25, 0.08))     # GITA: data 37 kegagalan + empati
+# HERO POSTER sinematik (GLOW v3): masuk dan keluar poster
+for sc in TM["scenes"]:
+    add(sc[0], whoosh(0.5, True, 0.05))
+    add(sc[0] + 0.05, chime(659.26, 0.07))
+    add(sc[1] - 0.45, whoosh(0.4, False, 0.04))
 # OVERLAY MISI BARU
 add(QUIZ[0], whoosh(0.6, True, 0.05))
 add(QUIZ[0] + 0.05, tick(880, 0.05))

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""VOICE ACTING rev23 VIDEO 20 - generator suara 6 chara (24 klip).
+"""VOICE ACTING rev24 VIDEO 21 - generator suara 6 chara (24 klip).
 Formula Dialog AKIOMIDA v1 (F1-F8) diterapkan pada LINES. Produksi
 9:16 SAJA (L1 revisi 2026-11-28).
 
@@ -32,99 +32,99 @@ from pathlib import Path
 
 OUT = Path("/tmp/voice21")
 
-# (who, teks lisan) - rev23: skema LARI PAGI (bahan bilangan asli),
-# sapaan unik per chara (F1), arc tsun-dere BAGAS (F4), cermin fakta
-# lawan (F5), empati RIKA (F8). Angka dilisankan; tetap sopan (#39).
+# (who, teks lisan) - rev24: skema RESEP GAGAL (bahan bilangan di
+# dapur), sapaan unik per chara (F1), arc tsun-dere RARA (F4), cermin
+# fakta lawan (F5), empati GITA (F8). Angka dilisankan; sopan (#39).
 LINES = [
-    ("PUSAT", "Perhatian, panitia! Lari pagi minggu... resmi "
-              "disiapkan! Empat puluh kartu peserta, nomor satu sampai "
-              "empat puluh. Cek papan... cek garis finis!"),
-    ("BAGAS", "Pasang nomor dada. Nomor 13 ya, kak. Kata orang sial "
-              "banget. Tapi gak usah drama... aku tetep juara satu. "
-              "Yang lain mah rebutan posisi dua sama tiga aja."),
-    ("RIKA", "Kasihan nomor 13, bang Bagus, baru nempel langsung dicap "
-             "sial. Di lembar finis, 13 itu cuma urutan ke-13. Ada 12 "
-             "di depannya... 14 di belakangnya. Aman."),
-    ("KAMU", "Bener, kak Rika. Nomor peserta itu bilangan asli: satu, "
-             "dua, tiga, terus naik sampai empat puluh. Gak ada yang "
-             "loncat... gak ada yang sial."),
-    ("LARA", "Asli ya, bukan cacah. Bilangan asli mulai dari satu: "
-             "angka untuk menghitung. Nol gak termasuk... karena nol "
-             "artinya belum ada yang dihitung."),
-    ("KAMU", "Berarti kartu peserta kita satu sampai empat puluh ya, "
-             "bu Lara? Empat puluh kartu... buat empat puluh pelari."),
-    ("BAGAS", "Hmph, buang aja nomor 13-nya, kak! Ganti jadi 41. Jadi "
-              "jumlahnya tetep empat puluh kartu... tapi gak ada yang "
-              "sial. Untung-untungan."),
-    ("DIN", "Eh, gak boleh gitu, bang. Kalau 13 dibuang, kartu tinggal "
-            "39 label: satu sampai 12, lalu 14 sampai 41. Pelari tetep "
-            "empat puluh... tapi urutannya bolong di tengah."),
-    ("PUSAT", "Papan kartu peserta terkirim. Satu sampai empat puluh... "
-              "satu nomor, satu pelari."),
-    ("KAMU", "Liat papan, bang Bagus: tiap pelari satu nomor, nggak "
-             "bolong. 13 tetep 13. Kalau digeser-geser... catatan finis "
-             "malah gak nyambung."),
-    ("RIKA", "Di lembar finis juga: yang dicatat itu urutan datangnya. "
-             "Pelari pertama datang = juara satu. Kedua = juara dua. "
-             "Ketiga = juara tiga. Itu bilangan asli juga... tapi "
-             "perannya mengurutkan."),
-    ("LARA", "Nah, dua peran bilangan asli: menghitung banyaknya, empat "
-             "puluh pelari. Dan mengurutkan: juara ke-satu, ke-dua, "
-             "ke-tiga. Angkanya sama... perannya beda."),
-    ("DIN", "Pasang bendera di garis start. Dari sononya start selalu "
-            "nomor satu dulu: pelari nomor satu di lajur satu, nomor "
-            "dua di lajur dua. Kaya hitung kelas: satu, dua, tiga... "
-            "jalan!"),
-    ("PUSAT", "Papan podium terkirim. Juara satu, dua, tiga... juara "
-              "ke-nol tidak ada."),
-    ("KAMU", "Ini bedanya sama tugas kemarin, ya: penumpang nol boleh "
-             "ada, tapi juara nol gak ada. Nol sah di cacah... bilangan "
-             "asli memang mulai dari satu."),
-    ("RIKA", "Finis nol orang juga boleh: artinya belum ada yang "
-             "sampai. Tapi begitu ada yang datang... dia langsung "
-             "juara satu, bukan juara nol."),
-    ("LARA", "Empat puluh kartu, empat puluh pelari, satu nomor satu "
-             "orang. Kalau daftar nambah jadi 41 orang... kartu ke-41 "
-             "pun siap dicetak. Bilangan asli gak pernah habis: selalu "
-             "ada berikutnya."),
-    ("RIKA", "Buat panitia baru: jurus hitung asli. Menghitung satu "
-             "sampai empat puluh... mengurutkan juara satu, dua, "
-             "tiga... dan gak boleh bolong."),
-    ("BAGAS", "Pegang kartu 13 di dada. Hmph. Oke, oke. Nomor 13 tetep "
-              "gue pakai. Tapi tetep... juara satu punya gue. Nomor "
-              "sial mah cuma omongan orang aja."),
-    ("PUSAT", "Pertanyaan panitia. Kalau pelari baru daftar, dia dapat "
-              "kartu nomor 41. Bilangan asli itu habis di mana? Dan "
-              "kenapa juara mulai dari satu... bukan dari nol?"),
-    ("DIN", "Gak habis, kak. 41, 42, 43, terus naik. Setiap bilangan "
-            "asli punya pengikut: setelah satu ada dua... setelah empat "
-            "puluh ada 41. Urutannya gak pernah putus."),
-    ("RIKA", "Dan juara mulai dari satu karena mengurutkan itu butuh "
-             "yang datang duluan. Yang pertama datang itu juara satu. "
-             "Juara ke-nol gak punya makna: gak ada urutan sebelum "
-             "pertama. Eh, gue catat juga... jam 5.40 bang Bagus "
-             "akhirnya pakai nomor 13."),
-    ("PUSAT", "Voting panitia: enam empat persen bilang asli itu "
-              "menghitung... tiga enam persen bilang mengurutkan."),
-    ("PUSAT", "Voting ditutup: dua peran, satu keluarga angka. Besok "
-              "malam: jumlah satu sampai seratus... ada jalan pintasnya. "
-              "Salam satu lintasan... anak-anak."),
+    ("PUSAT", "Perhatian, anak dapur! Papan resep minggu ini sudah "
+              "terpasang. Brownies empat porsi: dua ratus gram cokelat, "
+              "dua telur, dua ratus lima puluh mililiter susu... dan "
+              "lima langkah wajib urut!"),
+    ("RARA", "Duh, malu, kak. Brownies gue keras kayak batu! Padahal "
+             "gue ikutin semua. Gak mungkin salah gue... pasti "
+             "resepnya yang bohong."),
+    ("GITA", "Santai, Rara, kita cek pelan-pelan ya. Resep itu murni "
+             "matematika: tiap angka punya tugas. Salah satu angka "
+             "aja... teksturnya berubah total."),
+    ("KAMU", "Coba hitung ulang, kak Rara. Cokelatnya berapa gram "
+             "yang kamu pakai tadi?"),
+    ("DIMAS", "Ini kunci dapur: angka itu presisi. Dua ratus gram dan "
+              "dua puluh gram beda sepuluh kali lipat. Satu nol aja "
+              "kelewat... brownies bisa jadi kardus."),
+    ("MANDA", "Makanya gue beli jadi, gak perlu mikir angka. Tapi oke "
+              "deh, gue ikut nyimak... penasaran juga."),
+    ("RARA", "Hmph, jelas ini ovennya yang ngambek! Suhunya gue pasang "
+             "seratus delapan puluh kaya resep. Eh, tunggu... "
+             "termometer oven gue mati sejak ludes bikin bakwan "
+             "kemarin?"),
+    ("GITA", "Oven boleh dicurigai, tapi takaran dicek duluan ya, Rar. "
+             "Kalau angkanya salah... oven sebagus apa pun tetap gagal. "
+             "Resepnya minta dua ratus gram, bukan dua puluh."),
+    ("PUSAT", "Papan takaran terkirim. Dua ratus gram, dua telur, dua "
+              "ratus lima puluh mililiter... yang kurang cuma satu "
+              "nol."),
+    ("KAMU", "Liat papan, kak Rara: resep minta dua ratus gram... kamu "
+             "pakai dua puluh gram. Sepuluh kali lebih sedikit! "
+             "Makanya adonannya gak nempel apa-apa."),
+    ("DIMAS", "Dan urutan langkah juga angka: langkah satu lelehkan, "
+              "dua campur, tiga kocok, empat tuang, lima panggang. "
+              "Lompat satu langkah aja... hasilnya beda."),
+    ("GITA", "Nah, di resep, angka kerja dua shift: mengukur takaran "
+             "dan mengurutkan langkah. Dua-duanya wajib tepat... gak "
+             "boleh ketuker."),
+    ("MANDA", "Berarti kalau gue mau bikin delapan porsi dari resep "
+              "empat porsi... tinggal dobel semua angkanya? Dua ratus "
+              "jadi empat ratus, dua telur jadi empat?"),
+    ("PUSAT", "Papan resep dobel terkirim. Empat porsi ke delapan "
+              "porsi... semua angka dua kali lipat."),
+    ("KAMU", "Betul, kak Manda! Dobel porsi artinya dobel semua "
+             "takaran. Gak boleh dobel satu, dobel lain gak. Angka di "
+             "resep itu satu tim."),
+    ("RARA", "Oke, gue ngaku deh. Takaran gue salah baca. Dan bukan "
+             "cuma itu: gue juga lompat langkah tiga. Makanya "
+             "teksturnya hancur."),
+    ("GITA", "Buat yang baru gabung: jurus resep tepat. Takaran "
+             "ditimbang... langkah diurut... porsi dihitung."),
+    ("DIMAS", "Minggu depan kita praktik bareng. Gue bawa timbangan... "
+              "kak Rara bawa kesabaran. Semua angka gue cocokin dua "
+              "kali."),
+    ("RARA", "Hmph, oke oke. Gue ulang sekarang: dua ratus gram "
+             "beneran... dan lima langkah gak ada yang dilompati. "
+             "Kalau gagal lagi, gue pindah ke grup Manda."),
+    ("PUSAT", "Pertanyaan dapur. Kalau resep empat porsi mau dijadikan "
+              "dua belas porsi, dua ratus gram jadi berapa? Dan mana "
+              "yang lebih sering bikin gagal: salah takaran atau "
+              "salah urutan?"),
+    ("DIMAS", "Dua belas porsi berarti tiga kali lipat: dua ratus jadi "
+              "enam ratus gram. Gampangnya: porsi dilipat... takaran "
+              "ikut dilipat."),
+    ("GITA", "Dari tiga puluh tujuh kegagalan yang tercatat di grup "
+             "ini, paling sering penyebabnya salah takaran. Yang salah "
+             "urutan biasanya langsung ketahuan di langkah kedua. Eh, "
+             "gue catat juga... jam tujuh empat puluh, Rara kirim foto "
+             "brownies baru, teksturnya udah cakep."),
+    ("PUSAT", "Voting dapur: lima delapan persen bilang salah "
+              "takaran... empat dua persen bilang salah urutan."),
+    ("PUSAT", "Voting ditutup: dua-duanya berbahaya, tapi salah "
+              "takaran lebih sering jadi biang keroknya. Besok: "
+              "pecahan di dapur, setengah sendok teh. Selamat "
+              "mencoba... jangan lupa timbang!"),
 ]
 
 # profil suara per chara per engine - rev16: TANPA pitch shift (pitch hack
 # bikin robotik = keluhan pemilik); cukup rate lembut + volume. MYST pelan
 # dan suaranya sedikit dipelanakan untuk rasa misterius.
 EDGE_VOICE = {
-    "LARA": dict(voice="id-ID-GadisNeural", rate="-8%"),
-    "RIKA": dict(voice="id-ID-GadisNeural", rate="+12%"),
-    "DIN": dict(voice="id-ID-ArdiNeural", rate="+4%"),
-    "BAGAS": dict(voice="id-ID-ArdiNeural", rate="+6%"),
+    "GITA": dict(voice="id-ID-GadisNeural", rate="-10%"),
+    "RARA": dict(voice="id-ID-GadisNeural", rate="+8%"),
+    "MANDA": dict(voice="id-ID-GadisNeural", rate="+14%"),
+    "DIMAS": dict(voice="id-ID-ArdiNeural", rate="+4%"),
     "KAMU": dict(voice="id-ID-ArdiNeural", rate="+12%"),
     "PUSAT": dict(voice="id-ID-ArdiNeural", rate="-16%", volume="-8%"),
 }
-ZAI_VOICE = {"LARA": "tongtong", "RIKA": "xiaochen", "DIN": "jam",
-             "BAGAS": "kazi", "KAMU": "kago", "PUSAT": "senja"}
-ZAI_SPEED = {"LARA": 0.92, "RIKA": 1.15, "DIN": 1.1, "BAGAS": 1.05,
+ZAI_VOICE = {"GITA": "tongtong", "RARA": "kazi", "MANDA": "xiaochen",
+             "DIMAS": "jam", "KAMU": "kago", "PUSAT": "senja"}
+ZAI_SPEED = {"GITA": 0.9, "RARA": 1.1, "MANDA": 1.12, "DIMAS": 1.08,
              "KAMU": 1.0, "PUSAT": 0.8}
 
 

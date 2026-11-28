@@ -1,207 +1,265 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <style>
-/* GRUP PANITIA LARI PAGI - VIDEO 20, MODEL FOKUS ala referensi chat story
-   (rev13) dengan SISTEM DESAIN BARU "PAGI CERIA" (otak/DESAIN-PAGI.md,
-   perintah pemilik 2026-11-28: hanya 9:16 portrait + desain CERAH - gak
-   suka gelap-gelapan, harus cantik dan aestetik, penonton betah). Latar
-   krem hangat pagi hari, bubble putih/mint/kuning, pil subtitle krem,
-   diagram kartu krem dengan aksen coral-mint-langit-ungu, fade ke krem -
-   NOL panel gelap pekat. MODEL FOKUS tetap: SATU bubble besar di tengah
-   per saat, gaya chat asli (nama + waktu + Dibaca v-v DI DALAM bubble),
-   sisipan meme ilustrasi AI bingkai putih di sela babak. Materi:
-   BILANGAN ASLI (lanjutan teaser episode sebelumnya, dunia ganti
-   total): kartu peserta 1-40, juara 1-2-3, nomor 13, tanpa
-   bolong. Formula v1 F1-F8. Produksi 9:16 SAJA (L1 revisi). */
+/* GRUP RESEP GAGAL - VIDEO 21, MODEL FOKUS + SISTEM DESAIN GLOW v3
+   (otak/DESAIN-GLOW.md) - ROMBAK TOTAL per penolakan pemilik (nilai 1/10
+   untuk sistem sebelumnya). Bahasa visual baru: gradien pastel HIDUP (blob bokeh
+   coral-rose-lilac-aqua drift + sparkle), permukaan KACA buram
+   (glassmorphism) dengan ring gradien + glow warna karakter, 4 HERO SCENE
+   sinematik ilustrasi AI (buka judul + 2 poster materi + CTA penutup)
+   dengan Ken Burns + judul display, bar progres cerita 5 segmen, teks
+   plum #43304F (bukan hitam pekat), fade ke gradien terang. NOL permukaan
+   datar membosankan, NOL panel gelap. MODEL FOKUS tetap: SATU bubble
+   besar di tengah (pesan lama memudar), sisipan meme hard-cut. Materi:
+   BILANGAN di dapur (presisi takaran 200 vs 20 gram, urutan langkah 1-5,
+   dobel porsi 4->8). Formula v1 F1-F8. Produksi 9:16 SAJA (L1 revisi). */
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;overflow:hidden;background:#FFF7EA;
+html,body{width:100%;height:100%;overflow:hidden;
   font-family:'Poppins','Noto Color Emoji','DejaVu Sans','Noto Sans SC',sans-serif;
   -webkit-font-smoothing:antialiased}
-#bgdoodle{position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 24%,#FFFDF7 0%,#FFF3DC 52%,#FFE7C2 100%)}
-.doodle{position:absolute;color:rgba(232,146,46,.16);font-weight:800;will-change:transform,opacity}
+body{background:linear-gradient(160deg,#FFEDD9 0%,#FFD9E8 34%,#E8DCFF 68%,#D6F1FF 100%)}
+/* lapisan GLOW: blob bokeh + sparkle (diisi frag_scene.js) */
+#glowlayer{position:absolute;inset:0;overflow:hidden;z-index:0}
+.blob{position:absolute;border-radius:50%;filter:blur(72px);opacity:.5;will-change:transform}
+.spark{position:absolute;border-radius:50%;will-change:transform,opacity}
+.glownum{position:absolute;font-weight:800;color:rgba(255,255,255,.5);
+  will-change:transform,opacity;text-shadow:0 2px 18px rgba(255,150,180,.35)}
+#bgdoodle{position:absolute;inset:0;z-index:0}
+.doodle{position:absolute;color:rgba(255,255,255,.42);font-weight:800;will-change:transform,opacity}
 .dperm{position:absolute;border-radius:50%;will-change:transform,opacity}
-#vig{position:absolute;inset:0;pointer-events:none;opacity:.8;
-  background:radial-gradient(ellipse at 50% 40%,transparent 58%,rgba(255,196,120,.20) 100%)}
-#rig{position:absolute;inset:0;will-change:transform}
-#phead{position:absolute;left:0;right:0;top:0;height:118px;background:rgba(255,252,245,.94);
-  border-bottom:2px solid rgba(255,192,120,.55);display:flex;align-items:center;
-  padding:0 44px;z-index:30;box-shadow:0 6px 22px rgba(190,120,30,.10)}
+#vig{position:absolute;inset:0;pointer-events:none;opacity:.55;z-index:1;
+  background:radial-gradient(ellipse at 50% 42%,transparent 55%,rgba(150,100,180,.14) 100%)}
+#rig{position:absolute;inset:0;z-index:2;will-change:transform}
+/* header kaca + bar progres cerita */
+#phead{position:absolute;left:0;right:0;top:0;height:118px;
+  background:rgba(255,255,255,.52);backdrop-filter:blur(18px) saturate(1.25);
+  border-bottom:1.5px solid rgba(255,255,255,.75);display:flex;align-items:center;
+  padding:0 44px;z-index:30;box-shadow:0 10px 30px rgba(150,90,160,.14)}
 .havatar{position:relative;width:74px;height:74px;flex:0 0 74px;margin-right:24px}
-.havatar div{position:absolute;border-radius:50%;border:3px solid #FFF7EA}
-.havatar .a1{left:0;top:8px;width:48px;height:48px;background:radial-gradient(circle,#FFD43B 62%,#FFC078)}
-.havatar .a2{left:30px;top:0;width:44px;height:44px;background:radial-gradient(circle,#FF8787 58%,#FA5252)}
-.havatar .a3{left:18px;top:30px;width:38px;height:38px;background:radial-gradient(circle,#B197FC 55%,#845EF7)}
-#htitle{color:#6B4A26;font-weight:800;letter-spacing:.02em;
-  text-shadow:0 2px 10px rgba(255,196,120,.35)}
+.havatar div{position:absolute;border-radius:50%;border:3px solid rgba(255,255,255,.95);
+  box-shadow:0 6px 16px rgba(150,90,160,.25)}
+.havatar .a1{left:0;top:8px;width:48px;height:48px;background:linear-gradient(135deg,#FFC94D,#FF6B8A)}
+.havatar .a2{left:30px;top:0;width:44px;height:44px;background:linear-gradient(135deg,#FF6B8A,#B79CFF)}
+.havatar .a3{left:18px;top:30px;width:38px;height:38px;background:linear-gradient(135deg,#4DD6A8,#5BA8F5)}
+#htitle{color:#43304F;font-weight:800;letter-spacing:.02em}
+#prog{position:absolute;left:44px;right:44px;top:132px;height:7px;z-index:30;
+  display:flex;gap:9px}
+.pseg{flex:1;border-radius:5px;background:rgba(255,255,255,.55);
+  box-shadow:0 2px 8px rgba(150,90,160,.14);overflow:hidden}
+.pfill{height:100%;width:0;border-radius:5px;
+  background:linear-gradient(90deg,#FF6B8A,#FFC94D);
+  box-shadow:0 0 12px rgba(255,140,110,.55);will-change:width}
 #chatwrap{position:absolute;left:0;right:0;top:118px;bottom:0;overflow:hidden}
 #pchat{position:absolute;left:0;right:0;top:0;will-change:transform}
-/* bubble gaya chat asli, tema PAGI CERIA: putih besar teks cokelat,
-   nama DI DALAM bubble, KAMU mint, akun resmi kuning */
+/* bubble KACA gaya chat asli: nama + waktu + Dibaca v-v DI DALAM bubble;
+   warna karakter = ring + glow; teks plum */
 .msg{display:flex;margin:18px 44px;opacity:0;will-change:transform,opacity;align-items:flex-end}
 .msg.you{justify-content:flex-end}
 .avatar{width:64px;height:64px;border-radius:50%;flex:0 0 64px;margin-right:16px;
-  border:2.5px solid rgba(255,192,120,.55);display:flex;align-items:center;justify-content:center;
-  font-size:32px;color:#33261B;font-weight:800;will-change:box-shadow}
+  border:3px solid rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;
+  font-size:32px;color:#43304F;font-weight:800;will-change:box-shadow;
+  box-shadow:0 10px 24px rgba(150,90,160,.28)}
 .bwrap{max-width:880px}
-.bubble{position:relative;background:#FFFFFF;color:#33261B;border:none;
-  border-radius:8px 26px 26px 26px;padding:20px 28px 16px;font-weight:700;line-height:1.24;
-  box-shadow:0 14px 34px rgba(190,120,30,.18);will-change:transform,opacity}
+.bubble{position:relative;background:rgba(255,255,255,.74);
+  backdrop-filter:blur(18px) saturate(1.3);color:#43304F;border:none;
+  border-radius:10px 28px 28px 28px;padding:20px 28px 16px;font-weight:700;line-height:1.24;
+  border-left:4px solid rgba(255,255,255,.9);
+  box-shadow:0 18px 44px rgba(150,90,160,.18);will-change:transform,opacity}
 .mname{font-size:31px;font-weight:800;letter-spacing:.08em;margin:0 0 6px 2px}
-.act{font-style:italic;color:#9A8468;font-weight:600}
+.act{font-style:italic;color:#A08FB8;font-weight:600}
 .say{font-weight:700}
 .meta{display:flex;justify-content:flex-end;align-items:baseline;gap:12px;margin-top:6px}
-.mtime{font-size:26px;color:#A08C76;font-weight:700;letter-spacing:.04em}
-.ticks{font-size:27px;color:#0CA678;font-weight:800;letter-spacing:.04em}
-.msg.you .bubble{background:#D3F9D8;color:#2B4A32;border-radius:26px 8px 26px 26px;
-  box-shadow:0 14px 34px rgba(60,150,90,.16),0 0 0 2px rgba(12,166,120,.14)}
-.msg.you .act{color:#5C9366}
-.msg.you .mtime{color:#74A086}
-.msg.myst .bubble{background:#FFF9DB;color:#5C4A1E;border-radius:26px;
-  box-shadow:0 14px 34px rgba(190,120,30,.18),0 0 0 2px rgba(255,212,59,.45)}
-.msg.myst .mtime{color:#B99B4F}
-.msg.myst .act{color:#A08A50}
-.bubble.photo{padding:14px;background:#FFFFFF;border-radius:20px}
-.psvg{display:block;width:100%;height:auto;border-radius:12px}
-.pcap{font-size:40px;color:#33261B;font-weight:700;padding:12px 8px 4px;line-height:1.25}
-.bubble.sticker{background:#FFFFFF;color:#5C4A1E;border:3px solid #FFD43B;
-  border-radius:26px;padding:22px 30px;text-align:center;
-  box-shadow:0 18px 44px rgba(255,170,60,.28),0 0 0 2px rgba(255,192,120,.35)}
-.stk{font-size:52px;font-weight:800;color:#E8590C;letter-spacing:.05em}
-.stks{font-size:36px;color:#5C4A1E;font-weight:600;margin-top:10px}
-/* sisipan reaksi meme ala referensi: hard cut full-screen KREM (PAGI
-   CERIA), ilustrasi bingkai putih tebal, mata menyala coral saat kejutan */
+.mtime{font-size:26px;color:#8A7BA0;font-weight:700;letter-spacing:.04em}
+.ticks{font-size:27px;color:#12A57E;font-weight:800;letter-spacing:.04em}
+.msg.you .bubble{background:linear-gradient(135deg,rgba(255,158,94,.88),rgba(255,107,138,.85));
+  color:#FFFFFF;border-radius:28px 10px 28px 28px;border-left:none;border-right:4px solid rgba(255,255,255,.85);
+  box-shadow:0 18px 44px rgba(255,120,120,.32),0 0 0 1.5px rgba(255,255,255,.5) inset}
+.msg.you .act{color:rgba(255,255,255,.85)}
+.msg.you .mtime{color:rgba(255,255,255,.8)}
+.msg.myst .bubble{background:linear-gradient(135deg,rgba(255,222,89,.9),rgba(255,201,77,.86));
+  color:#5C3A12;border-radius:28px;border-left:none;
+  box-shadow:0 18px 44px rgba(255,180,70,.35),0 0 0 1.5px rgba(255,255,255,.6) inset}
+.msg.myst .mtime{color:#A67C2E}
+.msg.myst .act{color:#B08A3E}
+.bubble.photo{padding:14px;background:rgba(255,255,255,.82);border-radius:22px;border-left:none}
+.psvg{display:block;width:100%;height:auto;border-radius:14px}
+.pcap{font-size:40px;color:#43304F;font-weight:700;padding:12px 8px 4px;line-height:1.25}
+.bubble.sticker{background:rgba(255,255,255,.8);color:#7A4A12;border:3px solid #FFC94D;
+  border-radius:28px;padding:22px 30px;text-align:center;border-left:none;
+  box-shadow:0 20px 48px rgba(255,158,94,.38),0 0 0 2px rgba(255,255,255,.55) inset}
+.stk{font-size:52px;font-weight:800;letter-spacing:.05em;
+  background:linear-gradient(120deg,#F0417C,#FF9E5E);-webkit-background-clip:text;
+  background-clip:text;color:transparent}
+.stks{font-size:36px;color:#7A4A12;font-weight:600;margin-top:10px}
+/* sisipan meme GLOW: hard cut full-screen gradien, ilustrasi bingkai
+   putih glow, mata menyala coral saat kejutan */
 #memewrap{position:absolute;inset:0;z-index:45;pointer-events:none}
-.meme{position:absolute;inset:0;background:#FFF4E0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;opacity:0;will-change:transform,opacity}
+.meme{position:absolute;inset:0;background:linear-gradient(160deg,#FFEDD9,#FFD9E8 45%,#E8DCFF);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;will-change:transform,opacity}
 .mstage{position:relative;display:inline-block;line-height:0;will-change:transform}
-.mglyph{border-radius:30px;overflow:hidden;will-change:transform;
-  box-shadow:0 0 0 6px #FFFFFF,0 24px 60px rgba(190,120,30,.35)}
+.mglyph{border-radius:34px;overflow:hidden;will-change:transform;
+  box-shadow:0 0 0 7px #FFFFFF,0 30px 70px rgba(150,90,160,.4),0 0 60px rgba(255,140,110,.35)}
 .mglyph img{display:block;width:100%;height:100%;object-fit:cover}
 .meyes{position:absolute;left:0;top:0;pointer-events:none}
 .meyes i{position:absolute;width:15%;height:10%;border-radius:12px;opacity:0;
-  background:#FF5C5C;box-shadow:0 0 26px 10px rgba(255,92,92,.65);
+  background:#FF5C7A;box-shadow:0 0 26px 10px rgba(255,92,122,.7);
   will-change:opacity,transform}
 .meyes i:nth-child(1){left:25%;top:41%}
 .meyes i:nth-child(2){left:60%;top:41%}
 .mdigits{position:absolute;inset:0;pointer-events:none}
 .mdigit{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;
-  font-weight:800;color:rgba(232,146,46,.45);opacity:0;will-change:transform,opacity}
-.mtext{margin-top:34px;color:#E8590C;font-weight:800;letter-spacing:.08em;
-  text-align:center;padding:0 40px;opacity:0;will-change:opacity,transform}
-.msub{margin-top:14px;color:rgba(90,62,30,.75);font-weight:600;text-align:center;
+  font-weight:800;color:rgba(240,65,124,.5);opacity:0;will-change:transform,opacity}
+.mtext{margin-top:34px;font-weight:800;letter-spacing:.08em;text-align:center;padding:0 40px;
+  opacity:0;will-change:opacity,transform;
+  background:linear-gradient(120deg,#F0417C,#FF9E5E,#9B7BF5);-webkit-background-clip:text;
+  background-clip:text;color:transparent}
+.msub{margin-top:14px;color:rgba(90,60,110,.72);font-weight:600;text-align:center;
   opacity:0;will-change:opacity}
-#dim{position:absolute;inset:0;background:rgba(120,80,25,.32);opacity:0;z-index:40;will-change:opacity}
-#flash{position:absolute;inset:26px;z-index:55;border-radius:26px;background:#FFFBF2;opacity:0;
-  border:3px solid #FFC078;box-shadow:0 24px 60px rgba(190,120,30,.30);
-  overflow:hidden;will-change:transform,opacity}
-#flash .speed{position:absolute;inset:0;opacity:.5;
-  background:repeating-linear-gradient(115deg,transparent 0 26px,rgba(255,192,120,.10) 26px 30px)}
-.fkick{position:absolute;top:22px;left:50%;transform:translateX(-50%);background:#FFC078;color:#4A2E12;
-  border-radius:999px;padding:8px 32px;font-weight:800;letter-spacing:.12em;font-size:32px}
-.ftitle{position:absolute;left:0;right:0;top:74px;text-align:center;color:#4A3728;font-weight:800;letter-spacing:.03em;
-  text-shadow:0 4px 16px rgba(255,196,120,.35)}
-.fen{position:absolute;left:0;right:0;text-align:center;color:rgba(90,62,30,.66);font-weight:600;font-size:34px}
+#dim{position:absolute;inset:0;background:rgba(90,50,110,.34);opacity:0;z-index:40;will-change:opacity}
+/* diagram menyala: kartu kaca besar */
+#flash{position:absolute;inset:26px;z-index:55;border-radius:30px;
+  background:rgba(255,255,255,.8);backdrop-filter:blur(20px) saturate(1.3);
+  opacity:0;border:1.5px solid rgba(255,255,255,.95);
+  box-shadow:0 26px 66px rgba(150,90,160,.3);overflow:hidden;will-change:transform,opacity}
+#flash .speed{position:absolute;inset:0;opacity:.6;
+  background:repeating-linear-gradient(115deg,transparent 0 26px,rgba(255,140,110,.08) 26px 30px)}
+.fkick{position:absolute;top:22px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(120deg,#FF6B8A,#FF9E5E,#FFC94D);color:#FFFFFF;
+  border-radius:999px;padding:8px 34px;font-weight:800;letter-spacing:.12em;font-size:32px;
+  box-shadow:0 10px 26px rgba(255,120,120,.4)}
+.ftitle{position:absolute;left:0;right:0;top:74px;text-align:center;font-weight:800;letter-spacing:.03em;
+  background:linear-gradient(120deg,#F0417C,#9B7BF5);-webkit-background-clip:text;
+  background-clip:text;color:transparent}
+.fen{position:absolute;left:0;right:0;text-align:center;color:rgba(90,60,110,.62);font-weight:600;font-size:34px}
 .fbody{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:12px}
-.fline{color:#4A3728;font-weight:600;opacity:0;will-change:opacity;display:flex;align-items:center;gap:12px}
-.fline .dot{width:18px;height:18px;border-radius:50%;flex:0 0 18px}
-.fnote{color:#E8590C;font-weight:700;opacity:0;will-change:opacity}
+.fline{color:#43304F;font-weight:600;opacity:0;will-change:opacity;display:flex;align-items:center;gap:12px}
+.fline .dot{width:18px;height:18px;border-radius:50%;flex:0 0 18px;
+  background:linear-gradient(135deg,#4DD6A8,#5BA8F5);box-shadow:0 4px 12px rgba(77,214,168,.5)}
+.fnote{color:#E8506E;font-weight:700;opacity:0;will-change:opacity}
 .fglow{position:absolute;border-radius:50%;pointer-events:none;
-  background:radial-gradient(circle,rgba(255,170,80,.30) 0%,rgba(255,170,80,0) 70%);will-change:transform,opacity}
-#quiz{position:absolute;inset:20px;z-index:60;border-radius:26px;background:#FFFBF2;opacity:0;
-  border:3px solid #FFC078;box-shadow:0 24px 60px rgba(190,120,30,.30);overflow:hidden;
-  will-change:transform,opacity}
-.qhd{margin:48px 6% 0;color:#E8590C;font-weight:800;letter-spacing:.06em;font-size:44px}
-.qline{height:4px;border-radius:2px;background:linear-gradient(90deg,transparent,#FF8787,transparent);
-  width:120px;margin:8px auto 0}
-.qrow{margin:10px 6% 0;color:#4A3728;font-weight:600;display:flex;gap:12px;opacity:0;will-change:opacity}
-.qrow b{color:#E8590C;flex:0 0 auto}
+  background:radial-gradient(circle,rgba(255,140,110,.3) 0%,rgba(255,140,110,0) 70%);will-change:transform,opacity}
+/* papan misi: kartu kaca besar */
+#quiz{position:absolute;inset:20px;z-index:60;border-radius:30px;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(20px) saturate(1.3);
+  opacity:0;border:1.5px solid rgba(255,255,255,.95);
+  box-shadow:0 26px 66px rgba(150,90,160,.3);overflow:hidden;will-change:transform,opacity}
+.qhd{margin:48px 6% 0;font-weight:800;letter-spacing:.06em;font-size:44px;
+  background:linear-gradient(120deg,#F0417C,#9B7BF5);-webkit-background-clip:text;
+  background-clip:text;color:transparent}
+.qline{height:4px;border-radius:2px;background:linear-gradient(90deg,transparent,#FF6B8A,#FFC94D,transparent);
+  width:150px;margin:8px auto 0}
+.qrow{margin:10px 6% 0;color:#43304F;font-weight:600;display:flex;gap:12px;opacity:0;will-change:opacity}
+.qrow b{color:#E8506E;flex:0 0 auto}
 .qgrid{position:absolute;left:0;right:0;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;will-change:opacity}
-.qcard{width:132px;height:84px;border-radius:14px;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(180deg,#FFFFFF,#FFF3DC);border:3px solid #FFC078;color:#4A3728;
+.qcard{width:132px;height:84px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.9);border:3px solid #FFC94D;color:#43304F;
   font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;font-size:44px;
-  box-shadow:0 8px 18px rgba(190,120,30,.22);opacity:0;will-change:transform,opacity}
-.qnote{position:absolute;left:6%;right:6%;color:rgba(90,62,30,.85);font-weight:600;font-size:32px;
+  box-shadow:0 10px 24px rgba(255,158,94,.3);opacity:0;will-change:transform,opacity}
+.qnote{position:absolute;left:6%;right:6%;color:rgba(90,60,110,.85);font-weight:600;font-size:32px;
   opacity:0;will-change:opacity}
-.qcta{position:absolute;left:0;right:0;text-align:center;color:#FFFFFF;background:linear-gradient(135deg,#FA5252,#E8590C);
-  border-radius:999px;margin:0 10%;padding:16px 0;font-weight:800;letter-spacing:.06em;font-size:40px;
-  border:2.5px solid rgba(255,255,255,.5);opacity:0;will-change:transform,opacity;
-  box-shadow:0 10px 26px rgba(232,89,12,.35)}
+.qcta{position:absolute;left:0;right:0;text-align:center;color:#FFFFFF;
+  background:linear-gradient(120deg,#FF6B8A,#FF9E5E);border-radius:999px;margin:0 10%;
+  padding:16px 0;font-weight:800;letter-spacing:.06em;font-size:40px;
+  border:2px solid rgba(255,255,255,.55);opacity:0;will-change:transform,opacity;
+  box-shadow:0 12px 30px rgba(255,110,120,.4)}
 #burst{position:absolute;inset:0;z-index:70;pointer-events:none}
 .bp{position:absolute;font-size:44px;opacity:0;will-change:transform,opacity}
 .bdot{position:absolute;border-radius:50%;opacity:0;will-change:transform,opacity}
-.bsq{position:absolute;border-radius:3px;opacity:0;will-change:transform,opacity}
+.bsq{position:absolute;border-radius:4px;opacity:0;will-change:transform,opacity}
 .rise{position:absolute;font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;
-  color:rgba(232,146,46,.4);opacity:0;will-change:transform,opacity}
-#subbar{position:absolute;left:50%;transform:translateX(-50%);background:rgba(255,251,240,.95);
-  border-radius:20px;padding:14px 34px;text-align:center;box-shadow:0 14px 34px rgba(190,120,30,.25);
-  will-change:transform,opacity;z-index:80}
-#sub_en{font-size:34px;color:#4A3728;font-weight:600;line-height:1.25}
-#mark{position:absolute;left:50%;transform:translateX(-50%);background:rgba(255,253,248,.92);color:#6B4A26;
+  color:rgba(240,65,124,.4);opacity:0;will-change:transform,opacity}
+/* subtitle + watermark: pil kaca */
+body.sceneon #subbar{visibility:hidden}
+#subbar{position:absolute;left:50%;transform:translateX(-50%);
+  background:rgba(255,255,255,.72);backdrop-filter:blur(16px) saturate(1.2);
+  border:1.5px solid rgba(255,255,255,.85);border-radius:22px;padding:14px 34px;text-align:center;
+  box-shadow:0 16px 38px rgba(150,90,160,.24);will-change:transform,opacity;z-index:80}
+#sub_en{font-size:34px;color:#43304F;font-weight:600;line-height:1.25}
+#mark{position:absolute;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.72);
+  backdrop-filter:blur(14px);color:#43304F;border:1.5px solid rgba(255,255,255,.9);
   border-radius:999px;padding:8px 28px;font-weight:800;letter-spacing:.18em;font-size:30px;z-index:80;
-  box-shadow:0 8px 20px rgba(190,120,30,.22)}
+  box-shadow:0 10px 24px rgba(150,90,160,.24)}
 #endcard{position:absolute;opacity:0;z-index:90;will-change:transform,opacity}
-#fplate{position:absolute;border-radius:24px;background:linear-gradient(160deg,#FFFFFF,#FFF3DC);
-  display:flex;align-items:center;justify-content:center;color:#4A3728;font-weight:800;letter-spacing:.06em;
-  border:3px solid #FFC078;box-shadow:0 20px 50px rgba(190,120,30,.35);z-index:91}
+#fplate{position:absolute;border-radius:26px;background:rgba(255,255,255,.78);
+  backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;color:#43304F;
+  font-weight:800;letter-spacing:.06em;border:1.5px solid rgba(255,255,255,.95);
+  box-shadow:0 22px 54px rgba(150,90,160,.4);z-index:91}
 #f_url{font-family:'JetBrains Mono','DejaVu Sans Mono',monospace}
-#f_bar{position:absolute;border-radius:4px;background:linear-gradient(90deg,#FF8787,#FFD43B);
+#f_bar{position:absolute;border-radius:5px;background:linear-gradient(90deg,#FF6B8A,#FFC94D,#4DD6A8);
   opacity:0;z-index:92}
-#flashwhite{position:absolute;inset:0;background:#FFFDF6;opacity:0;pointer-events:none;z-index:95}
-#fade{position:absolute;inset:0;background:#FFF7EA;opacity:0;pointer-events:none;z-index:100}
-/* INTRO FILM rev18 (permintaan pemilik): buka ala produksi film berkelas -
-   kartu judul full-bleed (ilustrasi pagi penuh layar + label grup saja)
-   lalu kartu produksi "dipersembahkan akiomida.com" krem ceria */
-#intro1{position:absolute;inset:0;z-index:85;background:#FFF7EA;opacity:0;will-change:opacity}
+#flashwhite{position:absolute;inset:0;background:#FFF8F0;opacity:0;pointer-events:none;z-index:95}
+#fade{position:absolute;inset:0;background:linear-gradient(160deg,#FFEDD9,#E8DCFF);
+  opacity:0;pointer-events:none;z-index:100}
+/* HERO SCENE sinematik (diisi frag_scene.js): poster materi full-bleed
+   dengan Ken Burns + scrim plum + judul display + garis gradien */
+#herol{position:absolute;inset:0;z-index:35;pointer-events:none}
+.hero{position:absolute;inset:0;opacity:0;will-change:opacity}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}
+.hero .hs{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(67,48,79,.30) 0%,rgba(67,48,79,.05) 42%,rgba(67,48,79,.58) 100%)}
+.hero .ht{position:absolute;left:0;right:0;bottom:14%;text-align:center;color:#FFFFFF;
+  font-weight:800;letter-spacing:.08em;padding:0 44px;line-height:1.22;
+  text-shadow:0 8px 34px rgba(60,30,80,.7),0 3px 14px rgba(60,30,80,.5);
+  will-change:opacity,transform}
+.hero .hr{position:absolute;left:50%;bottom:calc(14% - 28px);transform:translateX(-50%);
+  width:0;height:4px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,#FF6B8A,#FFC94D,transparent);will-change:width}
+/* INTRO FILM GLOW: kartu judul full-bleed (hero AI) lalu kartu produksi
+   kaca "dipersembahkan akiomida.com" */
+#intro1{position:absolute;inset:0;z-index:85;opacity:0;will-change:opacity}
 #introimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}
 #introshade{position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(120,80,20,.16) 0%,rgba(120,80,20,.04) 42%,rgba(120,80,20,.58) 100%)}
-#introtitle{position:absolute;left:0;right:0;bottom:11%;text-align:center;color:#FFFFFF;
-  font-weight:800;letter-spacing:.14em;padding:0 30px;line-height:1.2;
-  text-shadow:0 6px 30px rgba(120,70,10,.65),0 2px 12px rgba(120,70,10,.5);
+  background:linear-gradient(180deg,rgba(67,48,79,.28) 0%,rgba(67,48,79,.05) 42%,rgba(67,48,79,.62) 100%)}
+#introtitle{position:absolute;left:0;right:0;bottom:12%;text-align:center;color:#FFFFFF;
+  font-weight:800;letter-spacing:.12em;padding:0 34px;line-height:1.2;
+  text-shadow:0 8px 36px rgba(60,30,80,.72),0 3px 14px rgba(60,30,80,.5);
   will-change:opacity,transform}
-#introrule{position:absolute;left:50%;bottom:calc(11% - 30px);transform:translateX(-50%);
-  width:0;height:3px;border-radius:2px;
-  background:linear-gradient(90deg,transparent,#FFD43B,#FA5252,transparent);will-change:width}
+#introrule{position:absolute;left:50%;bottom:calc(12% - 30px);transform:translateX(-50%);
+  width:0;height:4px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,#FF6B8A,#FFC94D,transparent);will-change:width}
 #intro2{position:absolute;inset:0;z-index:85;display:none;flex-direction:column;
   align-items:center;justify-content:center;text-align:center;
-  background:radial-gradient(ellipse at 50% 40%,#FFF8EC 0%,#FFEBC9 58%,#FFDFB0 100%);
+  background:radial-gradient(ellipse at 50% 42%,rgba(255,255,255,.94) 0%,rgba(255,237,217,.9) 52%,rgba(232,220,255,.9) 100%);
   opacity:0;will-change:opacity}
-#intro2kick{color:rgba(90,62,30,.72);font-weight:700;letter-spacing:.42em;text-indent:.42em;
+#intro2kick{color:rgba(90,60,110,.72);font-weight:700;letter-spacing:.42em;text-indent:.42em;
   will-change:opacity,transform}
-#intro2name{margin-top:18px;color:#E8590C;font-weight:800;letter-spacing:.08em;
-  text-shadow:0 8px 40px rgba(255,170,80,.45),0 3px 14px rgba(190,120,30,.25);
-  will-change:opacity,transform}
-#intro2line{margin-top:28px;width:0;height:3px;border-radius:2px;
-  background:linear-gradient(90deg,transparent,#FF8787,#FFD43B,transparent);will-change:width}
-#intro2tag{margin-top:28px;color:#B4630E;font-weight:700;letter-spacing:.05em;padding:0 34px;
+#intro2name{margin-top:18px;font-weight:800;letter-spacing:.08em;
+  background:linear-gradient(120deg,#F0417C,#FF9E5E,#9B7BF5);-webkit-background-clip:text;
+  background-clip:text;color:transparent;
+  filter:drop-shadow(0 8px 24px rgba(255,140,110,.4));will-change:opacity,transform}
+#intro2line{margin-top:28px;width:0;height:4px;border-radius:2px;
+  background:linear-gradient(90deg,transparent,#FF6B8A,#FFC94D,transparent);will-change:width}
+#intro2tag{margin-top:28px;color:#7A4A9E;font-weight:700;letter-spacing:.05em;padding:0 34px;
   will-change:opacity,transform}
 #intro2shim{position:absolute;left:0;top:-20%;width:16%;height:140%;pointer-events:none;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
   will-change:transform}
-/* DIAGRAM rev23: band krem + fill cerah (PAGI CERIA) */
-.rband{position:relative;height:30px;border-radius:9px;
-  background:linear-gradient(180deg,#FFF1DE,#FFE8C8);
-  border:2.5px solid rgba(255,170,80,.8);box-shadow:0 10px 26px rgba(190,120,30,.16)}
-.rtick{position:absolute;bottom:0;width:2.5px;border-radius:1px;background:rgba(190,120,30,.25)}
-.rfill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:7px;
-  background:linear-gradient(90deg,#38D9A9,#12B886);
-  box-shadow:0 0 18px rgba(56,217,169,.4);will-change:width}
+/* DIAGRAM rev24: band kaca + fill gradien */
+.rband{position:relative;height:30px;border-radius:10px;
+  background:rgba(255,255,255,.62);border:1.5px solid rgba(255,255,255,.9);
+  box-shadow:0 10px 26px rgba(150,90,160,.18)}
+.rtick{position:absolute;bottom:0;width:2.5px;border-radius:1px;background:rgba(150,90,160,.22)}
+.rfill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:8px;
+  background:linear-gradient(90deg,#FF6B8A,#FF9E5E);
+  box-shadow:0 0 18px rgba(255,120,130,.45);will-change:width}
 .rmark{position:absolute;top:-7px;bottom:-7px;width:3.5px;border-radius:2px;
-  background:#FA5252;box-shadow:0 0 10px rgba(250,82,82,.7);opacity:0;will-change:left,opacity}
+  background:#F0417C;box-shadow:0 0 10px rgba(240,65,124,.7);opacity:0;will-change:left,opacity}
 .rpin{position:absolute;top:-16px;width:6px;height:62px;margin-left:-3px;border-radius:3px;
-  background:#FFFFFF;box-shadow:0 0 16px rgba(255,170,80,.8);will-change:left}
+  background:#FFFFFF;box-shadow:0 0 16px rgba(255,140,110,.8);will-change:left}
 .rlbl{position:absolute;bottom:calc(100% + 24px);transform:translateX(-50%);
   font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:800;
-  color:#E8590C;text-shadow:0 3px 10px rgba(255,196,120,.6);white-space:nowrap;
+  color:#E8506E;text-shadow:0 3px 10px rgba(255,255,255,.9);white-space:nowrap;
   opacity:0;will-change:left,color,opacity}
 .rnums{position:relative;height:36px;margin-top:8px;
   font-family:'JetBrains Mono','DejaVu Sans Mono',monospace;font-weight:700;
-  font-size:28px;color:rgba(90,62,30,.55)}
+  font-size:28px;color:rgba(90,60,110,.55)}
 /*__FONTS__*/
 </style></head>
 <body>
+<div id="glowlayer"></div>
 <div id="bgdoodle"></div>
+<div id="vig"></div>
 <div id="rig">
   <div id="phead">
     <div class="havatar"><div class="a1"></div><div class="a2"></div><div class="a3"></div></div>
@@ -213,24 +271,25 @@ html,body{width:100%;height:100%;overflow:hidden;background:#FFF7EA;
 <div id="dim"></div>
 <div id="flash">
   <div class="speed"></div>
-  <div class="fkick" id="fkick">ANGKA MENGHITUNG</div>
+  <div class="fkick" id="fkick">ANGKA DAPUR</div>
   <div class="ftitle" id="ftitle"></div>
   <div class="fen" id="fen"></div>
   <div class="fbody" id="fbody"></div>
   <div class="fglow" id="fglow"></div>
 </div>
 <div id="quiz">
-  <div class="qhd" id="qhd">MISI DARI PANITIA PUSAT</div>
+  <div class="qhd" id="qhd">MISI DARI DAPUR PUSAT</div>
   <div class="qline"></div>
   <div id="qrows"></div>
   <div class="qgrid" id="qgrid"></div>
   <div class="qnote" id="qnote"></div>
   <div class="qcta" id="qcta">TULIS JAWABANMU DI KOMENTAR YA!</div>
 </div>
+<div id="herol"></div>
 <div id="intro1">
   <img id="introimg" alt="ilustrasi">
   <div id="introshade"></div>
-  <div id="introtitle">GRUP PANITIA LARI PAGI</div>
+  <div id="introtitle">GRUP RESEP GAGAL</div>
   <div id="introrule"></div>
 </div>
 <div id="intro2">

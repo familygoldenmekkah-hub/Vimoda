@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""TIMELINE rev23 VIDEO 20: satu sumber kebenaran untuk semua waktu.
+"""TIMELINE rev24 VIDEO 21: satu sumber kebenaran untuk semua waktu.
 Membaca durasi 24 klip voice (/tmp/voice21/durations.json), slot kartu
-babak, diagram menyala, hening pra-twist, papan misi, endcard, burst,
-IMPS, dolly, dips, subtitle EN (38 beat). Output: timing.json +
-frag_time.js (const TM). Produksi 9:16 SAJA (L1 revisi)."""
+babak, diagram menyala, 2 HERO POSTER sinematik, hening pra-twist, papan
+misi, endcard, burst, IMPS, dolly, dips, subtitle EN. Output: timing.json
++ frag_time.js (const TM). Produksi 9:16 SAJA (L1 revisi)."""
 import json
 from pathlib import Path
 
@@ -19,11 +19,12 @@ FLASH_PAD = 1.5
 CARD_WIN = 1.8
 CARD_PAD = 2.6
 QUIZ_DUR = 8.0
+SCENE_DUR = 3.0
 
-DIV_TEXT = ["GRUP PANITIA LARI PAGI", "GARIS START · 05.20",
-            "PAPAN PESERTA · 05.24", "PODIUM JUARA · 05.33",
-            "VOTING PUSAT · 05.44"]
-DIV_LABEL = ["GRUP PANITIA LARI PAGI", None, None, None, None]
+DIV_TEXT = ["GRUP RESEP GAGAL", "CEK TAKARAN · 19.20",
+            "PAPAN TAKARAN · 19.24", "RESEP DOBEL · 19.33",
+            "VOTING DAPUR · 19.44"]
+DIV_LABEL = ["GRUP RESEP GAGAL", None, None, None, None]
 
 INTRO1 = [0.4, 4.2]
 INTRO2 = [4.5, 7.6]
@@ -31,11 +32,15 @@ INTRO2 = [4.5, 7.6]
 t0 = [0.0] * 24
 cards = [[0.0] for _ in range(5)]
 flash = [[0.0, 0.0] for _ in range(3)]
+scenes = []
 t0[0] = 8.2
 cards[0] = [0.4]
 
 DIV_BEFORE = {4: 1, 8: 2, 13: 3, 19: 4}
 FLASH_AFTER = {11: 0, 19: 1, 21: 2}
+SCENE_AFTER = {0: (1, "TAKARAN ITU MATEMATIKA"),
+               2: (2, "DOBEL PORSI, DOBEL ANGKA")}
+dip_scene = []
 
 for i in range(23):
     gap = max(GAP_MIN, d[i] + GAP_PAD)
@@ -45,9 +50,15 @@ for i in range(23):
         ft = t0[i] + d[i] + FLASH_PAD
         flash[fi] = [round(ft, 2), round(ft + FLASH_DUR[fi], 2)]
         nxt = flash[fi][1] + 1.5
+        if fi in SCENE_AFTER:
+            hi, title = SCENE_AFTER[fi]
+            st = flash[fi][1] + 0.5
+            scenes.append([round(st, 2), round(st + SCENE_DUR, 2), hi, title])
+            dip_scene.append(scenes[-1][1])
+            nxt = scenes[-1][1] + 1.4
     if (i + 1) in DIV_BEFORE:
         ci = DIV_BEFORE[i + 1]
-        ct = t0[i] + d[i] + 1.0 if i not in FLASH_AFTER else flash[fi][1] + 1.2
+        ct = t0[i] + d[i] + 1.0 if i not in FLASH_AFTER else nxt + 0.4
         cards[ci] = [round(ct, 2)]
         nxt = ct + CARD_PAD
     if i == 22:  # papan misi antara pesan 22 (voting) dan 23 (penutup)
@@ -67,46 +78,38 @@ for ci in range(5):
     DIVS.append([cards[ci][0], txt])
 
 MSG_BASE = [
-    "Race day at 6 AM: 40 bibs, numbers 1 to 40!",
-    "Bagas wears bib 13. His target: first place!",
-    "Rika: 13 is just the 13th in order. Safe!",
-    "Runner numbers are natural numbers: 1 to 40!",
-    "Natural numbers start at 1. Zero is not counted!",
-    "So 40 bibs for 40 runners!",
-    "Hmph! Just drop 13 and use 41!",
-    "Din: that leaves 39 labels. The order gets a hole!",
-    "The bib board: every runner gets one number!",
-    "13 stays 13. No shifting the order!",
-    "Finishing order: first in = champion 1!",
-    "Two jobs of natural numbers: count and order!",
-    "The start line always begins at 1!",
-    "Podium: champions 1, 2, 3. No champion zero!",
-    "Zero passengers were okay. Champion zero is not!",
-    "Zero finishers is fine. First one in is champion 1!",
-    "If a 41st runner joins, bib 41 is ready!",
-    "Sticker: the natural count. 1-40, no holes!",
-    "Hmph. Fine. Bib 13 stays on my chest!",
-    "Morning question: where do natural numbers end?",
-    "After 40 comes 41. The chain never breaks!",
-    "Champion starts at 1: no order before first!",
-    "Dawn vote: 64% count, 36% order!",
-    "Tomorrow: the sum of 1 to 100!",
+    "This week's recipe: brownies for 4. Numbers matter!",
+    "Rara's brownies came out rock hard!",
+    "Gita: recipes are pure math. Every number has a job!",
+    "Rara, how much chocolate did you actually use?",
+    "Precision: 200g vs 20g is ten times less!",
+    "Manda buys ready-made. But she's watching now!",
+    "Hmph! The oven is sulking... or is it?",
+    "Check the numbers first: it asked for 200g, not 20!",
+    "The measuring board: one zero missing, ten times off!",
+    "Ten times less chocolate! No wonder it crumbled.",
+    "Steps are numbers too: step 1 to 5, in order!",
+    "Numbers work two shifts: measure and order!",
+    "8 servings from 4? Just double every number!",
+    "Double the recipe: every number gets doubled!",
+    "Double everything. Recipe numbers are one team!",
+    "Okay... I misread the amount AND skipped step 3!",
+    "Sticker: the exact recipe. Weigh, order, count!",
+    "Next week: I bring the scale, you bring patience!",
+    "Hmph, fine. 200 grams for real, all 5 steps!",
+    "Kitchen question: 12 servings. What is 200g become?",
+    "Triple it: 200 becomes 600 grams!",
+    "Noted: 37 fails. And at 7.40 Rara's cake looked great!",
+    "Kitchen vote: 58% wrong amounts, 42% wrong order!",
+    "Tomorrow: fractions, half a teaspoon. Weigh it!",
 ]
 SPLIT2 = {
-    0: "Race day prep: bibs 1 to 40 are ready!",
-    2: "Twelve before it, fourteen after it!",
-    4: "Counting starts at one!",
-    7: "39 labels. The order gets a hole!",
-    9: "One number, one runner!",
-    10: "Second in = champion 2. Third = champion 3!",
-    11: "Same numbers, different jobs!",
-    12: "Runner 1 in lane 1, runner 2 in lane 2!",
-    16: "Natural numbers never run out. 41 is ready!",
-    18: "Superstition is just talk. I keep it on!",
-    19: "Champions start at 1. Why not 0?",
-    20: "After 1 comes 2. After 40 comes 41!",
-    21: "Noted: at 5.40 Bagas kept bib 13!",
-    23: "Two roles, one family of numbers!",
+    0: "Brownies for four: 200 grams, 2 eggs, 180 degrees!",
+    2: "Recipes are pure math. Every number has a job!",
+    7: "It asked for 200 grams. You used 20!",
+    18: "Hmph, fine. 200 grams for real, all 5 steps!",
+    21: "Noted: at 7.40 Rara's new brownies looked great!",
+    23: "Tomorrow: fractions, half a teaspoon!",
 }
 subs = []
 for i in range(24):
@@ -114,10 +117,10 @@ for i in range(24):
     if i in SPLIT2:
         subs.append([round(t0[i] + d[i] * 0.48, 2), SPLIT2[i]])
 subs += [
-    [flash[0][0], "Natural numbers: 1 to 40 and forever!"],
-    [flash[1][0], "Counting or ordering? Both are natural!"],
-    [flash[2][0], "Same numbers, different jobs!"],
-    [round(quiz[0] + 1.2, 2), "The committee left a morning mission!"],
+    [flash[0][0], "Recipes live on two number jobs!"],
+    [flash[1][0], "Wrong amounts or wrong order?"],
+    [flash[2][0], "Double servings, double numbers!"],
+    [round(quiz[0] + 1.2, 2), "The kitchen left a night mission!"],
     [round(quiz[0] + 4.4, 2), "Eight helper cards are waiting."],
     [round(end[0] + 0.6, 2), "Thanks for watching."],
 ]
@@ -131,8 +134,9 @@ rises = [round(t0[9], 2), round(min(flash[2][0] - 0.6, t0[9] + 7.0), 2)]
 imps = [
     [0.4, 2.0],
     [round(flash[0][0] + 0.8, 2), round(flash[0][0] + 2.4, 2)],
+    [round(scenes[0][0] + 0.6, 2), round(scenes[0][0] + 2.4, 2)],
     [round(flash[1][0] + 0.8, 2), round(flash[1][0] + 2.4, 2)],
-    [round(flash[2][0] + 1.0, 2), round(flash[2][0] + 3.0, 2)],
+    [round(scenes[1][0] + 0.6, 2), round(scenes[1][0] + 2.4, 2)],
     [cards[4][0], round(cards[4][0] + 1.6, 2)],
     [quiz[0], round(quiz[0] + 1.6, 2)],
 ]
@@ -140,12 +144,12 @@ photos = [i for i in range(24) if i in (0, 8, 13, 22)]
 dollys = [[t0[i], round(t0[i] + 3.4, 2), 0.024] for i in photos]
 dollys += [[flash[2][0], round(flash[2][1] - 0.2, 2), 0.022],
            [t0[19], round(t0[19] + 2.8, 2), 0.02]]
-dips = [round(c[0], 2) for c in cards[1:5]] + [quiz[0]]
+dips = [round(c[0], 2) for c in cards[1:5]] + [quiz[0]] + [round(s[1], 2) for s in scenes]
 
 TM = dict(dur=DUR, wins=[3.8, CARD_WIN, CARD_WIN, CARD_WIN, CARD_WIN],
-          m=t0, div=DIVS, flash=flash, subs=subs, bursts=bursts,
-          rises=rises, quiz=quiz, end=end, imps=imps, dollys=dollys,
-          dips=dips, ma=ma, voff=VOFF, d=d, intro=[INTRO1, INTRO2])
+          m=t0, div=DIVS, flash=flash, scenes=scenes, subs=subs,
+          bursts=bursts, rises=rises, quiz=quiz, end=end, imps=imps,
+          dollys=dollys, dips=dips, ma=ma, voff=VOFF, d=d, intro=[INTRO1, INTRO2])
 
 for i in range(23):
     gap = t0[i + 1] - t0[i]
@@ -162,11 +166,12 @@ for k in range(len(subs) - 1):
             print(f"  sub[{j}] t={subs[j][0]:7.2f} {subs[j][1][:44]!r}")
         raise AssertionError(f"sub {k} menggantung {hang:.2f}s: {subs[k][1]!r}")
 print(f"DUR={DUR}s  sub={len(subs)} beat  hang_max={max(hangs):.1f}s  msg0={t0[0]}")
+print("scenes:", scenes)
 print("t0:", [round(x, 1) for x in t0])
 
 (HERE / "timing.json").write_text(json.dumps(TM, indent=1, ensure_ascii=False))
-frag = ("/* ---------- TIMING rev23 (single source of truth): dihitung dari "
-        "durasi voice 24 klip oleh timeline20rp.py ---------- */\n"
+frag = ("/* ---------- TIMING rev24 (single source of truth): dihitung dari "
+        "durasi voice 24 klip oleh timeline21rp.py ---------- */\n"
         "const TM=" + json.dumps(TM, separators=(",", ":"), ensure_ascii=False) + ";\n")
 (HERE / "frag_time.js").write_text(frag)
 print(f"timing.json + frag_time.js ok ({(HERE / 'frag_time.js').stat().st_size // 1024} KB)")
