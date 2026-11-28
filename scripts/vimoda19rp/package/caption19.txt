@@ -1,0 +1,17 @@
+Pernah kepikiran gak, kenapa nomor antrean mulai dari 1 tapi nomor garasi mulai dari 0?
+
+Malam ini kita jagain terminal bus tipe B jam 3 dini hari. Bayu sombong: unit 09 juaranya terminal, yang lain pelengkap. Faktanya: 30 karcis tercetak nomor 1 sampai 30, artinya 30 penumpang utuh. Gak ada penumpang setengah orang di terminal ini.
+
+Terus debat paling seru malam ini: garasi 0 sampai 9 itu ada 10 garasi, dan nol ikut dihitung. Bayu protes: nol kan garasi kosong. Tapi laporan malam ini jelas: garasi nomor 7 kosong, isi NOL unit, dan garasinya tetap sah. Nol itu angka sah, bukan tanda lupa nulis.
+
+Petugas karcis nambahin: kursi nomor 0 memang gak ada, penumpang nol artinya belum ada yang jalan. Nol menyimbolkan kosong, bukan musnahkan nomor. Satpam senior yang jagain terminal 30 tahun bahkan baru sadar: selama ini dia manggil garasi paling depan "garasi 1", padahal itu garasi 0. Nomor itu aturan, posisi itu kenyataan.
+
+Nah, pertanyaan dini harinya: bilangan cacah itu mulai dari 0 atau dari 1? Jawaban terminal ini dua lapis: dua-duanya sah, tergantung buku yang dipakai. Yang gak boleh cuma satu: campur dua aturan di satu lembar. Aturan boleh beda, hitungannya harus jujur. 30 karcis tetep 30 penumpang, 3 unit tetep 3 unit.
+
+Voting dini hari: 61% bilang mulai dari 0, 39% bilang mulai dari 1. Kubu kecil juga keluarga terminal.
+
+Sekarang giliranmu: menurutmu bilangan cacah mulai dari 0 atau 1? Ceritain alasanmu di komentar, ya.
+
+Bilangan asli sudah menunggu untuk besok malam. Buka browser kamu dan mampir ke AKIOMIDA.COM buat petualangan matematika yang makin seru.
+
+#matematika #bilangancacah #bilangan #terminal #edukasi #belajarmatematika #akiomida
