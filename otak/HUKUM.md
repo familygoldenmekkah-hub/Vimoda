@@ -3,15 +3,12 @@
 > Sumber induk: lawbook studio (`README.md` di root repo, 43 aturan permanen).
 > File ini menegaskan aturan yang diminta pemilik ditambahkan secara eksplisit.
 
-## L1 - DUA ORIENTASI WAJIB (aturan studio 1)
+## L1 - FORMAT 9:16 SAJA (revisi perintah pemilik 2026-11-28)
 
-Setiap judul video SENANTIASA dibuat dalam dua format sekaligus:
-
-- `landscape.mp4` (1920x1080, 16:9) - komposisi sinematik standar
-- `portrait.mp4` (1080x1920, 9:16)
-
-Satu judul tanpa pasangannya = proyek BELUM SELESAI. QA memverifikasi kedua
-berkas + dua thumbnail sebelum sync ke `download/` dan push ke GitHub.
+Setiap judul video dibuat dalam SATU format: portrait 1080x1920 (9:16).
+Landscape diarsipkan (perintah pemilik: "sekarang hanya pakai format 916").
+QA memverifikasi `*_916.mp4` + thumbnail 9:16 sebelum sync ke `download/`
+dan push ke GitHub.
 
 ## L2 - ZONA AMAN PORTRAIT (aturan studio 2, 18, 24, 38)
 
@@ -26,6 +23,14 @@ deskripsi/tombol/UI media sosial saat diposting:
 - Landscape: komposisi sinematik standar (subtitle y 855, watermark 965)
 
 Verifikasi visual smoke frame wajib sebelum render penuh.
+
+## L4 - DESAIN CERAH WAJIB (perintah pemilik 2026-11-28)
+
+Pemilik: "gak suka desain gelap-gelapan, gak cantik dan gak aestetik" -
+wajib bikin penonton betah. Semua episode baru memakai sistem desain
+PAGI CERIA (`otak/DESAIN-PAGI.md`): latar krem hangat, bubble putih/mint/
+kuning, pil subtitle krem, diagram kartu krem, fade ke krem - NOL panel
+gelap pekat. QA visual memverifikasi latar cerah tiap episode baru.
 
 ## Hukum pendukung yang aktif otomatis
 
